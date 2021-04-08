@@ -1,0 +1,6 @@
+.DS_Store
+slides/incide
+slides/incide.sh
+slides/Makefile.remote
+refs
+**.swp

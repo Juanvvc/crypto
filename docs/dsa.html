@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Elgamal y DSA</title>
+
+        <meta name="description" content="Introducción a los algoritmos Elgamal y DSA">
+        <meta name="author" content="Jordi Íñigo Griera">
+        <!-- Implementat amb revealjs: https://github.com/hakimel/reveal.js -->
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+                    var link = document.createElement( 'link' );
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                    document.getElementsByTagName( 'head' )[0].appendChild( link );
+                </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+
+            <section>
+                <h1>Elgamal, DSA</h1>
+                <small><em><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
+
+				<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">
+					&ldquo;Curso de Introducción a la Criptografía&rdquo;
+				</span>
+
+                    by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/jig" property="cc:attributionName" rel="cc:attributionURL">Jordi Íñigo Griera</a> is licensed under a<br/>
+
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+                    <br />Project hosted at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/jig/crypto" rel="dct:source">github.com/jig/crypto</a></em></small>
+            </section>
+
+            <section id="elgamal">
+                <h2>Elgamal en combinación de firma</h2>
+                <p>{&#1591;&#1575;&#1607;&#1585; &#1575;&#1604;&#1580;&#1605;&#1604; (Taher Elgamal), 1985}</p>
+                <p>Basado sobre el algoritmo
+                    <a href="dh.html">DH</a>, y es base para el
+                    <a href="#dsa">DSA</a> y
+                    el <a href="ecdsa.html">ECDSA</a>
+                    <br>
+                    (Elgamal se puede combinar para implementar firma o cifrado; veremos sólo la combinación de firma que es
+                    de la que partiremos para ver el DSA y el ECDSA)
+                </p>
+                <p>Todos estos algoritmos se basan en<br/>los problemas
+                    <a title="Hipótesis computacional DH" href="dh.html#cdh">CDH</a> y
+                    <a title="Hipótesis de indistingibilidad (decisional) DH" href="dh.html#ddh">DDH</a>
+                    (y estos, del <a title="Problema del Logaritmo Discreto" href="dh.html#dlp">DLP</a>)</p>
+                <!-- scheme: arranjament, disposició o combinació-->
+            </section>
+
+            <section id="dlp">
+                <h3>Recordemos la hipótesis <a href="dh.html#dlp">DLP</a>:</h3>
+                <p>Dados $\mathbb{Z}_{p}^{*}$ ($p$ primo), y $\alpha$ un generador (por tanto
+                    $\mathbb{Z}_{p}^{*}$ es <a href="number-theory.html#cyclic">cíclico</a>)</p>
+                <p>$x \equiv \log_{\alpha} \beta \pmod p$</p>
+                <p>es computacionalmente difícil</p>
+                <p>$\Downarrow$</p>
+                <p>utilizaremos este hecho para generar las claves:
+                <br/>la privada será el logaritmo (modular) de la pública
+                </p>
+            </section>
+
+            <section id="elgamal-domain-parameters">
+                <h2>Creación de los parámetros comunes</h2>
+                <p>Todos los usuarios pueden compartir los parámetros básicos:
+                <br/>el grupo cíclico $\mathbb{Z}_{p}^{*}$ y un generador $\alpha$</br>
+                <p class="fragment">Las mismas consideraciones de <a href="dh.html#parameter-selection">DH</a> para
+                    <a href="number-theory.html#generator-quantity">$p$</a> y
+                    <a href="number-theory.html#generator-selection">$\alpha$</a> aplican aquí</p>
+            </section>
+
+            <section  id="elgamal-key-generation" style="text-align: left;">
+                <h2>Generación de claves</h2>
+                <p>Cada usuario $\text{u}$ debe generar:</p>
+                <ul>
+                    <li>$a_\text{u}$: seleccionamos un valor aleatorio $1 \leq a_\text{u} \leq p-1$</li>
+                    <li>$y_\text{u}$: calculamos $y_\text{u} = \alpha^{a_\text{u}} \pmod p$</li>
+                </ul>
+                <p>Gestión:</p>
+                <ul>
+                    <li>Publicamos $y_\text{u}$ ya que nuestra clave pública será
+                        <br/>la tupla $(p, \alpha, y_\text{u})$ (o simplemente $y_\text{u}$)</li>
+                    <li>Guardamos $a_\text{u}$ ya que nuestra clave secreta será
+                        <br/>la tupla $(a_\text{u}, (p, \alpha, y_\text{u}))$ (o simplemente $a_\text{u}$)</li>
+                </ul>
+                <p class="fragment"><em>
+                    Nota: comparemos el coste de generación de claves
+                        <br/>de Elgamal (1 random + 1 exp) con la de RSA (2 primos)
+                </em></p>
+            </section>
+
+            <section id="elgamal-signature" style="text-align: left;">
+                <h2>Firma</h2>
+                <ol>
+                    <li>calcula el hash del mensaje $h(m)$</li>
+                    <li>generamos un random $k$, tal que $1 \leq k \leq p-1$ con $\text{mcd}(k, p-1)=1$; $\,k$ debe ser <u>privado y único</u></li>
+                    <br/>
+                    <li>$r = \alpha^k \bmod p$</li>
+                    <br/>
+                    <li>$s = \dfrac{h(m)-a_\text{u}r}{k} \bmod {(p-1)}\quad$ (apunte: <a href="number-theory.html#/fermat-generalized">Fermat pequeño</a>)</li>
+                </ol>
+                <br/>
+                <p>La firma de $m$ es la tupla $(r, s)$</p>
+            </section>
+
+                <section style="text-align: left;" id="elgamal-verification">
+                    <h2>Verificación</h2>
+                    <p>A partir de la recepción del mensaje $m$ y la firma $(r,s)$</p>
+                    <ol>
+                        <li>previo: calculamos el hash del mensaje $m \rightarrow h(m)$</li>
+                        <li>previo: verificamos que $r$ y $s$ son válidos: $\left\{ 
+                                \begin{aligned}
+                                1 & \leq r \leq p-1 \\
+                                1 & \leq s \leq p-1
+                                \end{aligned}
+                                \right.$
+                        </li>
+                        <li>$v_2 = \alpha^{h(m)} \bmod p$</li>
+                        <li>$v_1 = (y_\text{u})^{r} r^s \bmod p$</li>
+                        <li>sii $v_1$ y $v_2$ son iguales la firma es válida</li>
+                    </ol>
+                
+                </section>
+                <section style="text-align: left;">
+                    <p style="color:grey;">Firma:
+                        
+                        $\begin{aligned}
+                        r &= \alpha^k \bmod p \\
+                        s &= \dfrac{h(m)-a_\text{u}r}{k} \bmod {(p-1)} \\
+                        \end{aligned}$
+                    </p>
+                    <p>Verificación:
+                        $\begin{aligned}
+                        v_2 &= \alpha^{h(m)} \bmod p \\
+                        v_1 &= (y_\text{u})^{r} r^s \bmod p
+                        \end{aligned}\longrightarrow$
+                       
+                        $\left\{
+                            \begin{eqnarray}
+                        v_2 &=& \alpha^{h(m)} \bmod p \\
+                        &=& \alpha^{a_\text{u}r+ks \bmod{(p-1)}} \bmod p \\
+                        &=& \color{blue}{\alpha^{a_\text{u}r+ks} \bmod{p}} \\
+                        v_1 &=& (y_\text{u})^{r} r^s \bmod p \\
+                        &=& \alpha^{a_\text{u}r} \alpha^{ks} \bmod{p} \\
+                        &=& \color{blue}{\alpha^{a_\text{u}r+ks} \bmod{p}}
+                        \end{eqnarray}
+                        \right.$
+                    </p>
+                </section>
+            
+            <!--&=& \alpha^{a_\text{u}r} r^{(\frac{h(m)-a_\text{u}r}{k} \bmod{p-1})} \bmod{p} = \\-->
+            <section id="elgamal-vs-rsa-benchmark">
+                <h3>Rendimiento: Elgamal <span style="text-transform:none;">vs</span> RSA</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>Generación</td>
+                            <td>Firma</td>
+                            <td>Validación</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RSA</td>
+                            <td>muy lento</td>
+                            <td>medio</td>
+                            <td>rápido</td>
+                        </tr>
+                        <tr>
+                            <td>Elgamal</td>
+                            <td>muy rápido</td>
+                            <td>medio</td>
+                            <td>medio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="threats">
+                    <h3>debilidades $\rightarrow$ contramedidas</h3>
+                    <ul>
+                        <li>sobre la predictibilidad del aleatorio $k$ &nbsp; ($r = \alpha^k \bmod p$)</li>
+                        <span style="color:grey;">
+                            <li>Ataques de tiempo $\rightarrow$ randomización en la ejecución</li>
+                            <li>Ataques sobre el consumo, la radiación, etc.</li>
+                            <li>compromiso de clave: acceso software o físico al sistema</li>
+                            <li>calidad de los números aleatorios</li>
+                            <li>a futuro: <a href="threats.html#/asymmetric-crypto" style="color:grey;">computación cuántica</a></li>
+                            <li>...</li>
+                        </span>
+                    </ul>
+            </section>
+            <section>
+                <h3>Ataque sobre sobre $k$ conocido</h3>
+                <p>Es <u>fundamental</u> mantener $k$ secreto, ya que si conocemos $k$&hellip;<br/> 
+                    conoceremos la clave privada $a_\text{u}$, así:</p>
+                <p>$\begin{aligned}
+                    s &= \dfrac{h(m)-a_\text{u}r}{k} \bmod {(p-1)} \\
+                    s k &= (h(m)-a_\text{u}r) \bmod {(p-1)} \\
+                    a_\text{u}r &= (h(m)-sk) \bmod {(p-1)} \\
+                    a_\text{u} &= \dfrac{h(m)-sk}{r} \bmod {(p-1)} \\
+                    \end{aligned}$</p>
+            </section>
+            <section>
+                <h3>Ataque sobre el reúso de $k$</h3>
+                <p>Es <u>fundamental</u> no reutilizar $k$, ya que un atacante que viera dos firmas:</p>
+                <p>
+                    $s_1 = \dfrac{h(m_1)-a_\text{u}\color{red}{r}}{\color{red}{k}} \bmod {(p-1)} \text{ y } s_2 = \dfrac{h(m_2)-a_\text{u}\color{red}{r}}{\color{red}{k}} \bmod {(p-1)}$
+                    </p>
+                    <p>
+                    $\begin{aligned}
+                    s_2 - s_1 &= \dfrac{h(m_2)-h(m_1)}{\color{red}{k}} \bmod {(p-1)} \\
+                    \color{red}{k} &= \dfrac{h(m_2)-h(m_1)}{s_2-s_1} \bmod {(p-1)}
+                    \end{aligned}$
+                </p>
+                <p>Descubriría $k$&hellip; y por tanto nuestra clave privada $a_\text{u}$ (página anterior)</p>
+                <p class="fragment">En general los distintos $k$ no deben tener ninguna relación entre ellos (deben ser aleatorios)</p>
+            </section>
+
+            <section id="elgamalkeysize">
+                    <h3>Longitud de clave</h3>
+                    <p>los ataques sobre Elgamal son los algoritmos para calcular el logaritmo discreto</p>
+                    <table>
+                            <tr>
+                                <td style="text-align: right;">$p$</td>
+                                <td></td>
+                                <td>(bits de seguridad)</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$1024$</td>
+                                <td>$\leftrightarrow$</td>
+                                <td>$80$</td>
+                            </tr>
+                            <tr>
+                                <td>$2048$</td>
+                                <td>$\leftrightarrow$</td>
+                                <td>$112$</td>
+                            </tr>
+                            <tr>
+                                <td>$3072$</td>
+                                <td>$\leftrightarrow$</td>
+                                <td>$128$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            <!--
+            <section data-background="#FF8888">
+                <h2>debilitats $\rightarrow$ contramesures</h2>
+            </section>
+            -->
+
+            <section id="dsa">
+                <h2>DSA</h2>
+                <p>{NIST, 1991}</p>
+                <p>Directamente basado en<br/>el algoritmo Elgamal en combinación de firma</p>
+                <p>DSA (<em>Digital Signature Algorithm</em>) actualmente está siendo desplazado por la variante
+                    sobre curvas elípticas (<a href="ecdsa.html">ECDSA</a>)
+                </p>
+            </section>
+
+            <section style="text-align: left;">
+                <h2>DSA vs Elgamal</h2>
+                <p>DSA tiene una seguridad equivalente a Elgamal pero:</p>
+                <ul>
+                    <li>Con mayor velocidad de proceso</li>
+                    <li>Con un tamaño de las firmas inferior (de hecho, inferior a RSA de seguridad equivalente)</li>
+                </ul>
+                <p>Estos dos hechos hacen que Elgamal no se use para firma, en favor del equivalente DSA</p>
+                <!-- <p>Després veurem que al DSA li passa el mateix respecte l'ECDSA</p> -->
+            </section>
+
+            <section id="elgamal-vs-dsa">
+                <p><span style="color:grey;">Elgamal</span> $\rightarrow$ DSA: reducimos $r$ y $s$ módulo $\color{red}{q}$, donde $\color{red}{q | (p-1)}$:</p>
+                <p style="color:grey;">\[\begin{eqnarray}
+                    \text{random }k &\rightarrow& 1 \leq k \leq p-1 \\
+                    r &=& \alpha^k \bmod p \\
+                    s &=& \dfrac{h(m)-a_\text{u}r}{k} \bmod{(p-1)}\quad \\
+                    \end{eqnarray}\]</p>
+                <p>$\downarrow$</p>
+                <p>\[\begin{eqnarray}
+                    &&\color{red}{q | (p-1)} \\
+                    \text{random }k &\rightarrow& 1 \leq k \leq \color{red}{q} \\
+                    r &=& (\alpha^k \bmod p) \color{red}{\bmod q} \qquad\\
+                    s &=& \dfrac{h(m)+a_\text{u}r}{k} \color{grey}{\bmod{(p-1)}} \color{red}{\bmod{q}}\quad
+                    \end{eqnarray}\]</p>
+            </section>
+
+            <section>
+                <p>Cuando veamos como dimensionar los parámetros para los diferentes
+                    algoritmos, veremos que el tamaño recomendado en bits es:
+                    <br/>$\|q\| \approx \dfrac{1}{6}\|p\|$</p>
+            </section>
+
+            <section id="dsa-domain-parameters" style="text-align: left;">
+                <h2>DSA</h2>
+                <p>&nbsp;&nbsp;&nbsp;Parámetros: $p$, $q$, $\alpha$</p>
+                <p>&nbsp;&nbsp;&nbsp;Clave privada: $a$ (un número aleatorio $1 \leq a \leq q-1$)
+                <p>&nbsp;&nbsp;&nbsp;Clave pública: $\alpha^a \bmod p$</p>
+                <span class="fragment" style="text-align: center;">
+                <hr/>
+                    <p>Como Elgamal, todos los usuarios pueden<br/>compartir los parámetros básicos:
+                        <br/>el grupo cíclico $\mathbb{Z}_{p}^{*}$, el generador $\alpha$, y además $q$
+                    <p>Las mismas consideraciones de <a href="dh.html#parameter-selection">DH</a> y Elgamal para
+                        <a href="number-theory.html#generator-quantity">$p$</a> aplican aquí</p>
+                    <p>En cambio en DSA, $\alpha$ no ha de ser <a href="number-theory.html#generator">generador</a>
+                        de $\mathbb{Z}_p^*$
+                        <br/>(no debe tener $\text{ord}{(\alpha)} = \phi(p) = p -1$),
+                        <br/>si no que $\text{ord}{(\alpha)} = q$ y $q|(p-1)$</p>
+                </span>
+            </section>
+
+            <section id="dsa-vs-rsa-benchmark">
+                <h3>Rendimiento: DSA <span style="text-transform:none;">vs</span> RSA</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>Generación</td>
+                        <td>Firma</td>
+                        <td>Validación</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>RSA</td>
+                        <td>muy lento</td>
+                        <td>medio</td>
+                        <td>rápido</td>
+                    </tr>
+                    <tr>
+                        <td>DSA</td>
+                        <td>muy rápido</td>
+                        <td>medio</td>
+                        <td>medio</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h3>debilidades $\rightarrow$ contramedidas</h3>
+                <p>ídem Elgamal</p>
+            </section>
+
+            <section id="keysize">
+                <h3>Longitud de clave</h3>
+                <p>los ataques sobre DSA son los algoritmos para calcular el logaritmo discreto</p>
+				<p>el NIST 
+					<a href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar1.pdf">recomienda</a> 
+					$\|p\| \geq 2048$ bit y $\|q\| \geq 224$ hasta el 2030
+                    <thead>
+				</p>
+				<table>
+                        <tr>
+                            <td style="text-align: right;">$p$</td>
+                            <td style="text-align: right;">$q$</td>
+							<td></td>
+							<td>(bits de seguridad)</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>$1024$</td>
+							<td>$160$</td>
+							<td>$\leftrightarrow$</td>
+                            <td>$80$</td>
+                        </tr>
+                        <tr>
+                            <td>$2048$</td>
+                            <td>$224$</td>
+							<td>$\leftrightarrow$</td>
+                            <td>$112$</td>
+                        </tr>
+                        <tr>
+                            <td>$3072$</td>
+                            <td>$256$</td>
+							<td>$\leftrightarrow$</td>
+                            <td>$128$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h3><a href="ecc.html">(Criptografía de Curva Elíptica) $\rightarrow$</a></h3>
+            </section>
+        </div>
+
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72628059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- <script type="text/javascript" src="js/svg_mathjax.js"></script> -->
+    <!-- <script type="text/javascript">new Svg_MathJax().install();</script> -->
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
+    <script type="text/javascript" src="js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: 'c/t',
+            // history: false,
+            // fragments: true,
+            // help: true,
+            // previewLinks: false,
+            width: 1280,
+            height: 720,
+
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            math: {
+                mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Introducción a la Criptografía</title>
+
+        <meta name="description" content="Introducción a la Criptografía">
+        <meta name="author" content="Jordi Íñigo Griera">
+        <!-- Implementat amb revealjs: https://github.com/hakimel/reveal.js -->
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+                    var link = document.createElement( 'link' );
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                    document.getElementsByTagName( 'head' )[0].appendChild( link );
+                </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+			<section>
+				<h1>Introducción a la Criptografía</h1>
+
+				<small><em><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
+				
+				<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">
+					&ldquo;Curso de Introducción a la Criptografía&rdquo;
+				</span> 
+				
+				by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/jig" property="cc:attributionName" rel="cc:attributionURL">Jordi Íñigo Griera</a> is licensed under a<br/>
+
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+				
+				<br/>Project hosted at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/jig/crypto" rel="dct:source">github.com/jig/crypto</a></em></small>
+			</section>
+            <section>
+                <h3>Introducción a la Criptografía (i/iii)</h3>
+                <ul>
+                    <li><a href="objectives.html">Criptografía: objetivos, primitivas y aplicación</a></li>
+                    <li><a href="intro.html">Introducción (historia)</a></li>
+                    <!--:<li>
+                        <a href="intro.html">Base matemàtica</a>
+                        funcions,
+                        probabilitat,
+                        grans nombres,
+                        classes de complexitat
+                    </li>-->
+                    <li><a href="symmetric.html">Criptografía simétrica</a> o de clave secreta</li>
+                    <ul>
+                        <li><a href="symmetric.html#stream-cipher">Cifrado de flujo</a></li>
+                        <li><a href="symmetric.html#block-cipher">Cifrado de bloque</a></li>
+                        <li><a href="hash.html">Resumen</a> (<em>hash</em>)</li>
+                        <li><a href="ecbc-mac.html">Firma simétrica</a> (<em>MAC</em>)</li>
+                    </ul>
+                    . . .
+                </ul>
+            </section>
+            <section>
+                <h3>Introducción a la Criptografía  (ii/iii)</h3>
+                <ul>
+                    . . .
+                    <li>Criptografía asimétrica o de clave pública</li>
+                    <ul>
+                        <li><a href="number-theory.html">Teoría de números (aritmética modular)</a></li>
+                        <li><a href="rsa.html">RSA</a> (en disposición de firma y de cifrado)</li>
+                        <li><a href="dh.html">Diffie-Hellman</a> (acuerdo de claves)</li>
+                        <li><a href="dsa.html">Elgamal (en disposición de firma), DSA</a></li>
+                        <li><a href="ecc.html"><!-- style="color:#C33" -->Criptografía de Curva elíptica</a>: ECDSA y ECDH</li>
+                        <li><a href="complexity.html">Parametritzación</a> recomendada</li>
+                    </ul>
+                    . . .
+                </ul>
+            </section>
+            <section>
+                <h3>Introducción a la Criptografía  (iii/iii)</h3>
+                <ul>
+                    . . .
+                    <ul>
+                        <li><a href="threats.html">Amenazas</a>: computación cuántica, Snowden y implementaciones</li>
+                        <li><a href="hsm.html">Aleatoriedad, HSM</a>  (<em>Hardware Secure Modules</em>)</li>
+                    </ul>
+                    <li>Protocolos</li>
+                    <ul>
+                        <li>Conexiones (<a href="tls.html">TLS</a>)</li>
+                        <li>Infraestructura de Clave Pública (<a href="pki.html">PKI</a>)</li>
+                        <!-- <li>Firma avanzada (<a href="ades.html">AdES</a>)</li> -->
+                    </ul>
+                </ul>
+            </section>
+            <section style="text-align: left;">
+                <h3>Enlaces: Bibliografía</h3>
+                <ul>
+                    <li><a href="http://cacr.uwaterloo.ca/hac/">Handbook of Applied Cryptography</a>; Menezes, van Oorschot, Vanstone</li>
+                    <li><a href="http://cs.ucsb.edu/~koc/ccs130h/notes/ecdsa-cert.pdf">The Elliptic Curve Digital
+                        Signature Algorithm (ECDSA)</a>; Johnson, Menezes, Vanstone</li>
+                    <li><a href="http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">FIPS PUB 186-4</a>; NIST</li>
+                    <li>Suite-A y <a href="https://www.nsa.gov/ia/programs/suiteb_cryptography/"><del>Suite-B</del></a>; NIST 
+                        $\rightarrow$ 
+                        <a href="https://www.iad.gov/iad/programs/iad-initiatives/cnsa-suite.cfm" title="Commercial National Security Algorithm Suite; IA; NSA">CNSA Suite</a> <a href="http://eprint.iacr.org/2015/1018.pdf" title="A RIDDLE WRAPPED IN AN ENIGMA; Koblitz, Menezes">${}^{\dagger}$</a></li>
+                    <li><a href="http://www.emc.com/emc-plus/rsa-labs/standards-initiatives/public-key-cryptography-standards.htm">
+                        Public-Key Cryptography Standards
+                    </a> (PKCS); RSA labs</li>
+                </ul>
+                <p/>
+                <h3>Enlaces: implementación</h3>
+                <ul>
+                    <li>Implementación de referencia:
+                        <a href="https://wiki.openssl.org/index.php/Command_Line_Utilities">OpenSSL</a>
+                    </li>
+                </ul>
+            </section>
+            <section style="text-align: left;">
+                <h3>Enlaces: Uso, Vulnerabilidades</h3>
+                <ul>
+                    <li><a href="https://www.schneier.com/">Schneier on Security</a>; Bruce Schneier</li>
+                    <li><a href="http://safecurves.cr.yp.to/">cr.yp.to</a> sobre elección de parámetros; Daniel Bernstein</li>
+                    <li><a href="http://pqcrypto.org/">Post-quantum cryptography</a>; Bernstein, Lange</li>
+                    <li><span style="color:#C33">Post-Snowden cryptography</span></li>
+                    <!-- http://blog.cryptographyengineering.com/ , Matthew Green-->
+                </ul>
+                <p/>
+                <h3>Enlaces: Rendimiento</h3>
+                <ul>
+                    <li><a href="https://www.cryptopp.com">Crypto C++ lib</a>, benchmarks de (todos?) los algoritmos; Wei Dai</li>
+                </ul>
+            </section>
+            <section style="text-align: left;">
+                <h3>Enlaces: Cursos</h3>
+                <ul>
+                    <li>(<a href="https://www.coursera.org/course/cryptography">Crypto</a>) Universidad de Maryland; Jonathan Katz</li>
+                    <li>(<a href="https://www.coursera.org/course/crypto">Crypto I</a>,
+                        <a href="https://www.coursera.org/course/crypto2">Crypto II</a>) Universidad de Standford; Dan Boneh</li>
+                </ul>
+            </section>
+            <section>
+                <h3><a href="objectives.html">(Objetivos) $\rightarrow$</a></h3>
+                <!-- <h3><a href="intro.html">(Introducción/Historia) $\rightarrow$</a></h3> -->
+            </section>            
+        </div>
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72628059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- <script type="text/javascript" src="js/svg_mathjax.js"></script> -->
+    <!-- <script type="text/javascript">new Svg_MathJax().install();</script> -->
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
+    <script type="text/javascript" src="js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: 'c/t',
+            // history: false,
+            // fragments: true,
+            // help: true,
+            // previewLinks: false,
+            width: 1280,
+            height: 720,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            math: {
+                mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+
+    </body>
+</html>

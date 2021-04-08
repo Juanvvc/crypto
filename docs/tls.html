@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>TLS</title>
+
+    <meta name="description" content="Transport Layer Security">
+    <meta name="author" content="Jordi Íñigo Griera">
+    <!-- Implementat amb revealjs: https://github.com/hakimel/reveal.js -->
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+                    var link = document.createElement( 'link' );
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                    document.getElementsByTagName( 'head' )[0].appendChild( link );
+                </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h1>TLS</h1>
+            <p><em>(Transport Layer Security/<a href="https://tools.ietf.org/html/rfc8446">rfc8446</a>)</em></p>
+            <p><em>(antes de TLS 1.0 $\rightarrow$ SSL, Secure Sockets Layer)  </em></p>
+
+            <small><em><a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+            </a><br />
+
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">
+                &ldquo;Curso de Introducción a la Criptografía&rdquo;
+            </span>
+
+            by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/jig" property="cc:attributionName" rel="cc:attributionURL">Jordi Íñigo Griera</a> is licensed under a<br/>
+
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+            <br />Project hosted at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/jig/crypto" rel="dct:source">github.com/jig/crypto</a></em></small>
+        </section>
+
+        <section>
+            <h3>red</h3>
+            <p>Ubicación de TLS dentro de la pila TCP/IP en aplicaciones HTTPS</p>
+            <svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+                <g>
+                    <title>Layer 1</title>
+                    <rect stroke="#000000" fill="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0" x="51.5" y="51" width="293.5" height="73.84644" id="svg_7"/>
+                    <text transform="matrix(2.3959183692932124,0,0,2.5032691955566406,-505.55102086067194,-79.16999816894531) " stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="294" y="74.5" id="svg_8" font-size="24" font-family="sans-serif" text-anchor="middle" xml:space="preserve">HTTP</text>
+                    <rect stroke="#000000" fill="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0" x="51.5" y="125.09677" width="293.5" height="73.84644" id="svg_9"/>
+                    <text transform="matrix(2.3959183692932124,0,0,2.5032691955566406,-505.55102086067194,-79.16999816894531) " stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="294.05" y="104.1" font-size="24" font-family="sans-serif" text-anchor="middle" xml:space="preserve" id="svg_10">TLS</text>
+                    <rect stroke="#000000" fill="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0" x="51.5" y="199.3187" width="293.5" height="73.84644" id="svg_11"/>
+                    <text transform="matrix(2.3959183692932124,0,0,2.5032691955566406,-505.55102086067194,-79.16999816894531) " stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="293.975" y="133.75" font-size="24" font-family="sans-serif" text-anchor="middle" xml:space="preserve" id="svg_12">TCP</text>
+                    <rect stroke="#000000" fill="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0" x="51.5" y="272.91481" width="293.5" height="73.84644" id="svg_13"/>
+                    <text transform="matrix(2.3959183692932124,0,0,2.5032691955566406,-505.55102086067194,-79.16999816894531) " stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="294.025" y="163.15" font-size="24" font-family="sans-serif" text-anchor="middle" xml:space="preserve" id="svg_14">IP</text>
+                    <rect stroke="#000000" fill="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0" x="51.5" y="346.83167" width="293.5" height="73.84644" id="svg_15"/>
+                    <text transform="matrix(2.3959183692932124,0,0,2.5032691955566406,-505.55102086067194,-79.16999816894531) " stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="294.03126" y="192.67813" font-size="24" font-family="sans-serif" text-anchor="middle" xml:space="preserve" id="svg_16">Ethernet</text>
+                    <path stroke="#000000" fill-opacity="0" id="svg_18" d="m389.3035,125.36674l-33.16089,-52.73679l21.83911,0l33.16086,52.73679l-33.16086,52.7368l-21.83911,0l33.16089,-52.7368z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000000"/>
+                    <text id="svg_20" transform="matrix(2.3959183692932124,0,0,2.5032691955566406,-505.55102086067194,-79.16999816894531) " stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="426.3792" y="90.52775" font-size="24" font-family="sans-serif" text-anchor="middle" xml:space="preserve">HTTPS</text>
+                </g>
+            </svg>
+        </section>
+
+        <section>
+            <h3>TLS: funciones</h3>
+            <p>Funcionalmente equivalente a un socket
+                <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a>
+                aportándole:
+            </p>
+            <ul>
+                <li>autenticidad: Clave pública
+                    <ul>
+                        <li><u>autenticación mutua</u>: cliente y servidor tienen certificado${}^\dagger$/<code title="Private Key">PVK</code></li>
+                        <li><u>autenticación de servidor</u>: el cliente no precisa certificado/<code title="Private Key">PVK</code></li>
+                    </ul>
+                </li>
+                <li>integridad: <a href="hmac.html">HMAC</a>/<a href="ecbc-mac.html">MAC</a></li>
+                <li>confidencialidad: cifrado asimétrico de claves + cifrado simétrico</li>
+                <li>confidencialidad persistente${}^\ddagger$: acuerdo de claves + cifrado simétrico</li>
+            </ul>
+            <p><br/></p>
+            <p>$\dagger$) el certificado es una <code title="Public Key">PBK</code> (veremos certificados en detalle en <a href="pki.html">PKI</a>)</p>
+            <p>$\ddagger$) PFS: <em>Perfect Forward Secrecy</em> implica no usar cifrado asimétrico</p>
+        </section>
+
+        <section>
+            <h3>TLS: autenticación</h3>
+            <p>
+            <ul style="color:grey;">
+                <li><u>autenticación mutua</u>: cliente y servidor tienen certificado/<code>PVK</code></li>
+                <li><u>autenticación de servidor</u>: el cliente no precisa certificado/<code>PVK</code></li>
+            </ul></p>
+            <ul>
+                <li>servidor: clave privada habitualmente en fichero en claro protegido únicamente por el
+                    <span title="Sistema Operativo">SO</span>
+                    (<span title="Access Conrol List">ACL</span>)
+                    o en <a title="Hardware Secure Module" href="hsm.html">HSM</a>
+                    con activación automática</li>
+                <li>cliente:
+                    <ul>
+                        <li>sin autenticación de cliente: anónimo, usuario y contraseña, etc.</li>
+                        <li>con autenticación de cliente: fichero <a href="pki.html#pkcs">PKCS #12</a>,
+                            o accediendo a un HSM en forma de <a href="hsm.html#smartcard">SmartCard</a>
+                            o de <a href="hsm.html#usb">token</a> USB vía librería <a href="hsm.html#pkcs11">PKCS #11</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>TLS: historia</h3>
+            <p>TLS es el succesor del SSL y ha ido evolucionando por diferentes versiones en respuesta a los diferentes ataques
+                teóricos y prácticos que han ido surgiendo</p>
+            <p>los clientes cuando se conectan acuerdan utilizar la versión más moderna que soporten ambos extremos:</p> 
+            <ul>
+                <li>SSL 3.0 $\rightarrow$ <u>obsoleto</u></li>
+                <li>TLS 1.0 $\rightarrow$ mínima versión del protocolo utilizable; <u>fin de vida en 2020</u></li>
+                <li>TLS 1.1 $\rightarrow$ <u>fin de vida en 2020</u></li>
+                <li>TLS 1.2 $\rightarrow$ <u>versión recomendada</u></li>
+                <li>TLS 1.3 $\rightarrow$ <u>publicada en 2018</u>; fuerza a utilizar <span title="Diffie-Hellman Efímero (Modular)">DHE</span>/<span title="Diffie-Hellman Efímero (Curva Elíptica)">ECDHE</span> para acuerdo de claves</li>
+            </ul>
+        </section>
+        <!-- <section>
+            <h3>Protocol: inicialització <em>(handshake)</em></h3>
+            <p>Protocol en una connexió amb autenticació mútua, estructures de dades enviades després de la inicialització TCP:</p>
+            <pre>
+              Client                                               Server
+
+              ClientHello                  -------- >
+                                                              ServerHello
+                                                             Certificate*
+                                                       ServerKeyExchange*
+                                                      CertificateRequest*
+                                           < --------      ServerHelloDone
+              Certificate*
+              ClientKeyExchange
+              CertificateVerify*
+             -- a partir de aquí se inicia el intercambio de datos protegido --
+            </pre>
+        </section> -->
+        <section>
+            <small>
+            <h3>inicialización (resumen; suponiendo caché TLS vacía) <a title="TLS-1.3: Protocol Overview" href="https://tools.ietf.org/html/rfc8446#section-2">*</a></h3>
+            <p style="text-align: left;"><code>ClientHello</code> $\longrightarrow$<br/>contiene un random, cipher-suites soportados, versión</p>
+                <p/>
+            <p style="text-align: right;">$\longleftarrow$ <code>ServerHello</code><br/>contiene un random, session-ID, y la versión de TLS y el cipher-suite usado<!-- extensions --></p>
+            <p style="text-align: right;">$\longleftarrow$ <code>Certificate</code><br/>cadena de certificados incluyendo el del servidor</p>
+            <p style="text-align: right;">$\longleftarrow$ <code>ServerKeyExchange</code><br/>(si DHE) parámetros DH y su clave pública (efímera: <u>InputSecret</u>)</p>
+            <p style="text-align: right;">$\longleftarrow$ <span title="Caso que el servidor requiera autenticación de cliente"><code>CertificateRequest</code>$\dagger$</span>
+                <br/>(si el servidor requiere autenticación de cliente) DN's de las CA aceptadas</p>
+            <p style="text-align: right;">$\longleftarrow$ <code>CertificateVerify</code><br/>firma de los mensajes anteriores</p>
+
+            <p style="text-align: left;"><code>Certificate</code> $\longrightarrow$
+                <br/>(si el servidor requiere autenticación de cliente) cadena de certificados incluyendo la del cliente
+            </p>
+            <p style="text-align: left;"><code>ClientKeyExchange</code> $\longrightarrow$<br/>(si DHE) clave pública DH (efímera: <u>InputSecret</u>)</p>
+            <p style="text-align: left;"><span title="Caso que el servidor requiera autenticación de cliente"><code>CertificateVerify</code>$\dagger$</span>
+                $\longrightarrow$<br/>(si el servidor requiere autenticación de cliente) firma de los mensajes anteriores</p>
+            </small>
+        </section>
+
+        <section>
+            <h3>Protocol: inicialización (caso PFS)</h3>
+            <p>a partir de los dos <code>InputSecret</code> se genera el <code>MasterSecret</code></p>
+            <p>del <code>MasterSecret</code> se derivan 4 claves y 2 IV:</p>
+            <ul>
+                <li>clave de cifrado de cliente a servidor (y viceversa)</li>
+                <li>IV, para el cifrado de cliente a servidor (y viceversa)</li>
+                <li>clave HMAC de cliente a servidor (y viceversa)</li>
+            </ul>
+            <p>
+                <code>InputSecret<sub>cliente</sub></code>: $\alpha^i$
+                <br/>
+                <code>InputSecret<sub>servidor</sub></code>: $\alpha^j$
+                <br/>
+                <code>MasterSecret</code>: $ = \alpha^{ij}$
+            </p>
+        </section>
+        
+        <section>
+            <h3>Protocol: inicialización (caso no-PFS)</h3>
+            <p>En el caso de no usar DHE (ni ECDHE) el cliente debe enviar el <code>MasterSecret</code> al servidor cifrándolo con la clave del servidor:</p>
+            <p>
+                <code>MasterSecret: PBK<sub>servidor</sub>(MasterSecret<sub>cliente</sub>)</code> 
+            </p>
+            <p class="fragment">
+                En este caso (no-PFS) una revelación de la clave privada del servidor en cualquier momento, permite descifrar el tráfico futuro y también el tráfico pasado. Con PFS esto no sucede ya que las claves de efímeras (EDH ó ECDHE) cambian en cada acuerdo y no se almacenan nunca
+            </p>
+        </section>
+        
+        <section>
+            <h3>protocolo: transporte <em>(record)</em></h3>
+            <p>los datos se fragmentan en bloques de hasta 16 kB</p>
+            <p>cada bloque está protegido por algoritmos simétricos acordados durante la inicialización y las claves y IV's
+            derivados de la <code>MasterKey</code>...</p>
+            <p>y por un número de secuencia</p>
+        </section>
+        <section>
+            <h3><em>Cipher suites</em></h3>
+            <p>Se identifican (aprox) con la cadena <code><span style="color:blue;">KEA</span>_<span style="color:green;">SIGN</span>_WITH_<span style="color:red;">CIPHER</span>_<span style="color:orange;">HASH</span></code></p>
+            <table>
+                <thead>
+                <tr>
+                    <td>Componente</td>
+                    <td>Contenido</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td><span style="color:blue;">KEA</span></td><td>algoritmo de acuerdo de claves</td></tr>
+                <tr><td><span style="color:green;">SIGN</span></td><td>algoritmo de firma</td></tr>
+                <tr><td><span style="color:red;">CIPHER</span></td><td>algoritmo de cifrado simétrico</td></tr>
+                <tr><td><span style="color:orange;">HASH</span></td><td>algoritmo de hash</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section style="text-align: left;">
+            <h3>Algoritmos en TLS v1.3</h3>
+            <p>los siguientes <em>cipher-suites</em> son de obligada implementación (<a title="MUST ⇒ OBLIGATORIO" href="https://tools.ietf.org/html/rfc2119">MUST</a>):
+            <br/><code>
+                {DHE|ECDHE}_ECDSA_WITH_AES_128_GCM_SHA256
+                <br/>{DHE|ECDHE}_RSA_WITH_AES_128_GCM_SHA256
+            </code></p>
+            <p>y se recomienda la implementación de estos (<a title="SHOULD ⇒ OPCIONAL RECOMENDADO" href="https://tools.ietf.org/html/rfc2119">SHOULD</a>):
+            <br/><code>
+                {DHE|ECDHE}_ECDSA_WITH_AES_256_GCM_SHA384
+                <br/>{DHE|ECDHE}_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+                <br/>{DHE|ECDHE}_RSA_WITH_AES_256_GCM_SHA384
+                <br/>{DHE|ECDHE}_RSA_WITH_CHACHA20_POLY1305_SHA256
+            </code></p>
+            <p>Notas:
+                <ul>
+                    <li>claves de sesión establecidas por acuerdo de claves (PFS)</li>
+                    <li><code>DH-2048</code>, <code>ECDH-256</code>, <code>X25519</code>: longitudes mínimas para acuerdo de claves</li>
+                    <li><code>RSA-2048</code>, <code>ECDSA-256</code>, <code>EdDSA25519</code>: longitudes mínimas para firma</li>
+                    <li>desaparecen <code>DSA</code>, <code>SHA-1</code>, <code>SHA-224</code>, <code>3DES</code></li>
+                </ul>
+            </p>
+        </section>
+
+        <section>
+            <h3><em>Cipher suites</em></h3>
+            <p>Valores previstos para cada campo de <code><span style="color:blue;">KEA</span>_<span style="color:green;">SIGN</span>_WITH_<span style="color:red;">CIPHER</span>_<span style="color:orange;">HASH</span></code>
+            <br/>aunque pueden cambiar</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>Componente</td>
+                    <td>Contenido</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td><span style="color:blue;">KEA</span></td><td>DHE, ECDHE
+                    <br/>$\quad \Rightarrow$ sólo variantes efímeras DH</td></tr>
+                <tr><td><span style="color:green;">SIGN</span></td><td>RSA, ECDSA
+                    <br/>$\quad \Rightarrow$ desaparece DSA</td></tr>
+                <tr><td><span style="color:red;">CIPHER</span></td><td>AES-128, AES-256, ChaCha20
+                    <br/>$\quad \Rightarrow$ desaparecen 3DES, RC4, </td></tr>
+                <tr><td><span style="color:orange;">HASH</span></td><td>SHA-2, Poly1305
+                    <br/>$\quad \Rightarrow$ desaparecen MD5, SHA-1, SHA-2/224</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Seguridad</h2>
+            <ul>
+            <li><strong>Algoritmos</strong>: TLS hasta la versión v1.2 permite configurar algoritmos (<em>cipher suites</em>) que actualmente son obsoletos</li>
+            <li><strong>Protocolo</strong>: versiones antiguas, mecanismos de renegociación (para bajar a versiones antiguas)&hellip;</li>
+            <li><strong>Implementaciones</strong>: limitación de parámetros, uso de PRNG de baja calidad</li>
+            <li><strong>Condiciones de uso</strong>: gestión del servidor (o el cliente)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Seguridad: Algoritmos</h2>
+            <p>TLS hasta la versión v1.2 permite configurar algoritmos obsoletos (v1.3 lo impide pero su publicación es muy reciente como para que todos los componentes lo hayan adoptado)</p>
+            <p>TLS hasta la versión v1.2 renegocia el mejor protocolo entre cliente y servidor. Un cliente "antiguo" puede forzar a usar o bien un cipher suite obsoleto o bien no dejarlo conectar</p>
+        </section>
+
+        <section>
+            <h3>cipher-suites TLS v1.2...</h3>
+            <table>
+                <tr>
+                    <td>
+                        <small>
+                            <code title="cipher suites definidos en rfc 5246">
+TLS_RSA_WITH_NULL_MD5              
+TLS_RSA_WITH_NULL_SHA              
+TLS_RSA_WITH_NULL_SHA256           
+TLS_RSA_WITH_RC4_128_MD5           
+TLS_RSA_WITH_RC4_128_SHA           
+TLS_RSA_WITH_3DES_EDE_CBC_SHA      
+TLS_RSA_WITH_AES_128_CBC_SHA       
+TLS_RSA_WITH_AES_256_CBC_SHA       
+TLS_RSA_WITH_AES_128_CBC_SHA256    
+TLS_RSA_WITH_AES_256_CBC_SHA256    
+TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA   
+TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA   
+TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA  
+TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA  
+TLS_DH_anon_WITH_RC4_128_MD5       
+TLS_DH_anon_WITH_3DES_EDE_CBC_SHA  
+TLS_DH_DSS_WITH_AES_128_CBC_SHA    
+TLS_DH_RSA_WITH_AES_128_CBC_SHA    
+TLS_DHE_DSS_WITH_AES_128_CBC_SHA   
+TLS_DHE_RSA_WITH_AES_128_CBC_SHA   
+TLS_DH_anon_WITH_AES_128_CBC_SHA   
+TLS_DH_DSS_WITH_AES_256_CBC_SHA    
+TLS_DH_RSA_WITH_AES_256_CBC_SHA    
+TLS_DHE_DSS_WITH_AES_256_CBC_SHA   
+TLS_DHE_RSA_WITH_AES_256_CBC_SHA   
+TLS_DH_anon_WITH_AES_256_CBC_SHA   
+TLS_DH_DSS_WITH_AES_128_CBC_SHA256 
+TLS_DH_RSA_WITH_AES_128_CBC_SHA256 
+TLS_DHE_DSS_WITH_AES_128_CBC_SHA256
+TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
+TLS_DH_anon_WITH_AES_128_CBC_SHA256
+TLS_DH_DSS_WITH_AES_256_CBC_SHA256 
+TLS_DH_RSA_WITH_AES_256_CBC_SHA256 
+TLS_DHE_DSS_WITH_AES_256_CBC_SHA256
+TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+TLS_DH_anon_WITH_AES_256_CBC_SHA256
+                            </code>
+                        </small>
+                    </td>
+                    <td>
+                        <small>
+                            <code title="cipher suites definidos en rfc 4492">
+TLS_ECDH_ECDSA_WITH_NULL_SHA         
+TLS_ECDH_ECDSA_WITH_RC4_128_SHA      
+TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA 
+TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA  
+TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA  
+TLS_ECDHE_ECDSA_WITH_NULL_SHA       
+TLS_ECDHE_ECDSA_WITH_RC4_128_SHA     
+TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA 
+TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA 
+TLS_ECDH_RSA_WITH_NULL_SHA          
+TLS_ECDH_RSA_WITH_RC4_128_SHA        
+TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA   
+TLS_ECDH_RSA_WITH_AES_128_CBC_SHA    
+TLS_ECDH_RSA_WITH_AES_256_CBC_SHA    
+TLS_ECDHE_RSA_WITH_NULL_SHA         
+TLS_ECDHE_RSA_WITH_RC4_128_SHA       
+TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA  
+TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA   
+TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA   
+TLS_ECDH_anon_WITH_NULL_SHA         
+TLS_ECDH_anon_WITH_RC4_128_SHA       
+TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA  
+TLS_ECDH_anon_WITH_AES_128_CBC_SHA   
+TLS_ECDH_anon_WITH_AES_256_CBC_SHA
+                            </code>
+                            <code title="cipher suites definidos en rfc 5289">
+TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256 
+TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384 
+TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256  
+TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384  
+TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256   
+TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384   
+TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256 
+TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384 
+TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256  
+TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384  
+TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256   
+TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384   
+                            </code>
+                        </small>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Seguridad: Algoritmos (TLS v1.3)</h2>
+            <p>en la versión v1.3 se han eliminado cualquier algoritmo que resulte en un cipher-suite inseguro, facilitando la configuración segura de los servidores</p>           
+            <p>⇒ eliminados NULL, ANON, sin acuerdo de claves, con acuerdo de claves no efímero, SHA-1, 3DES, DSS (DSA)</p>
+            <p>la lista de cipher-suites que se mantiene en v1.3 es:</p>
+            <table>
+                <tr>
+                    <td>
+                        <small>
+                            <code title="cipher suites definidos en rfc 5246">
+TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
+TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+                            </code>
+                        </small>
+                        <p></p>
+                        <small>
+                        <code title="cipher suites definidos en rfc 4492">
+                                TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA 
+                                TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA 
+                                TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA   
+                                TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA   
+                                                            </code>
+                                                        </small>
+                    </td>
+                    <td>
+                        <small>
+                            
+                            
+                            <code title="cipher suites definidos en rfc 5246">
+TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256  
+TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384  
+TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256  
+TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384  
+                            </code>
+                        </small>
+                    </td>
+                </tr>
+            </table>       
+            <p>se debe vigilar que RSA y <a href="threats.html#countermeasures">DHE</a> sean de 2048 bit o más, y que ECDSA y ECDH usen P-256, P-384, P-521, Curve25519 ó Curve448</p>  
+            <p class="fragment">problema: S.O. antiguos no podrán conectarse</p> 
+        </section>
+
+        <section>
+            <h2>Seguridad &laquo;a futuro&raquo;:<br/><em><a href="threats.html#countermeasures">Perfect Forward Secrecy</a></em></h2>       
+            <p>un ataque que revele una clave privada implica que se debe cambiar la clave privada</p>
+            <p>pero si no se usa <code>_DHE_</code> ó <code>_ECDHE_</code> el revelado de la clave privada permite el descifrado de tráfico pasado</p>
+        </section>
+
+
+        <section>
+            <h2>Seguridad: Protocolo</h2>
+            <ul>
+                <li>versiones antiguas</li>
+                <li>versiones nuevas pero con soporte de mecanismos de renegoaciación de <u>versión TLS</u> (para bajar a versiones antiguas);
+                    <br/>TLS 1.0 debe ser la versión mínima soportada
+                    <br/>(las anteriores (SSL v3) están rotas)</li>
+                <li>versiones nuevas pero con soporte de mecanismos de renegoaciación de <u>algoritmos antiguos</u> (algoritmos <em>export grade</em>)</li>
+            </ul>
+            <p class="fragment">problema: S.O. antiguos no podrán conectarse</p> 
+        </section>
+
+        <section>
+            <h2>Seguridad: Implementaciones</h2>
+            <p>hay muchas implementaciones de TLS: es recomendable usar implementaciones abiertas y ampliamente usadas (e.g. OpenSSL); pero también esto implica hay más difusión de herramientas para explotar las vulnerabilidades cuando las haya</p>
+            <ul>
+                <li>generación de claves (debilidad en el RNG Debian/Ubuntu)</li>
+                <li>explotación de buffer overflows</li>
+                <li>&hellip;</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Seguridad: condiciones de uso</h2>
+            <ul>
+                <li>claves protegidas (sólo) por el <span title="Sistema Operativo">S.O.</span></li>
+                <li>las claves en claro están expuestas (ataques, aparición en backups, scripts de despliegue)</li>
+                <li>(históricamente) los certificados han sido caros (<span title="reúso incluso después de haber perdido confindencialidad, gestión de backup, etc.">&hellip;</span>)</li>
+                <li>(actualmente) deben regenerarse frecuentemente (certificados de corta duración)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Confianza</h3>
+            <p>los datos se protegen con <code><span style="color:red;">CIPHER</span>_<span style="color:orange;">HASH</span></code></p>
+            <p>$\downarrow$</p>
+            <p>derivadas con <code><span style="color:blue;">KEA</span></code></p>
+            <p>$\downarrow$</p>
+            <p>autenticadas (los secretos) con <code><span style="color:green;">SIGN</span></code></p>
+            <p>$\downarrow$</p>
+            <p>Claves públicas de servidor y cliente (opcionalmente)
+            <br/><a href="pki.html">?</a></p>
+        </section>
+    </div>
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72628059-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- <script type="text/javascript" src="js/svg_mathjax.js"></script> -->
+<!-- <script type="text/javascript">new Svg_MathJax().install();</script> -->
+<script type="text/javascript" src="lib/js/head.min.js"></script>
+<script type="text/javascript" src="js/reveal.js"></script>
+
+<script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: 'c/t',
+            // history: false,
+            // fragments: true,
+            // help: true,
+            // previewLinks: false,
+            width: 1280,
+            height: 720,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            math: {
+                mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+
+</body>
+</html>

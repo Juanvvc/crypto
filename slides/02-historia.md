@@ -1,0 +1,668 @@
+---
+marp: true
+title: Criptografía - Historia de la criptografía
+paginate: true
+footer: '[Inicio](index.html)'
+headingDivider: 2
+theme: marp-viu
+---
+
+<style>
+    /* You can add custom style here. VSCode supports this.
+    Other editor might need these custom code in
+    the YAML header: section: | */
+</style>
+
+# Criptografía y Teoría de Códigos
+<!-- _class: first-slide -->
+
+**Tema 2: Historia de la criptografía**
+
+Juan Vera del Campo
+juan.vera@campusviu.es
+
+# Hoy hablamos de...
+
+- [Criptografía clásica](#3)
+- [Cifrado César](#8): fuerza bruta y análisis frecuencial.
+- [Mejoras al cifrado César](#23): Vigenère y Enigma
+- [Confidencialidad perfecta](#38): Vernam
+- [Conclusiones](#48): resumen y referencias
+
+# Criptografía clásica
+<!-- _class: lead -->
+
+
+## Criptografía = cifrado
+
+En "la antigüedad" (¡años 70!), la criptografía servía exclusivamente para dificultar que un tercero pudiera discernir lo que se envía (**confidencialidad**) 
+
+Un mensaje $m$ (*plain-text*) se cifra con la función de cifrado $e()$, que se le pasa junto a una clave $k$ para dar el mensaje cifrado $c$
+
+$c = e(k, m)$
+
+Para descifrar hace falta la clave $k$ y el mensaje cifrado $c$, que se le pasa a la función de descifrado $d()$
+
+$m'=d(k, c)$
+
+El resultado $m'$ debería ser el mensaje en claro original $m$.
+
+<!--
+
+Conceptos para recordar que aún usamos.
+
+- **texto en claro**: mensaje original sin cifrar
+- **texto cifrado**: mensaje cifrado
+- **algoritmos de cifrado y descifrado**: pueden ser el mismo
+
+¿Recordáis la máxima de Shanon y los principios de Kerckhoffs? "El adversario conoce el sistema". Es decir: los único que debe ser secreto (a parte del mensaje, claro) es la clave de cifrado/descifrado. Se tiene que asumir que el adversario conoce las funciones e() y d()
+
+Aún no estaban preocupados de identificar con quién estaban hablando: "si conoce la clave, será un interlocutor legítimo".
+
+Nota: ¿Cifrar o encriptar?
+-->
+
+## Mecanismos clásicos de cifrado
+
+- Cifrados por **transposición**: mover letras de sitio.
+- Cifrados por **sustitución**: una letra por otra.
+    - Monoalfabéticos: mismo algoritmo para toda las letras
+    - Polialfabéticos: algoritmos diferentes para cada letra
+
+Con "clásicos" queremos decir que se usaban desde tiempos del imperio egipcio, pasando por hebreos, griegos, romanos, edad media, edad moderna (incluidas las guerras mundiales)... es decir, desde que se inventó la escritura hasta ayer mismo.
+
+<!-- Estos dos métodos de cifrado se han utilizado durante miles de años, y nuestros algoritmos de cifrado simétrico actual aún los tienen como parte de sus pasos -->
+
+## Transposición: escítala griega
+<!-- _class: two-columns -->
+
+![Escítala](https://upload.wikimedia.org/wikipedia/commons/5/51/Skytale.png)
+
+- Dos varas del mismo grosor
+- Envío: se enrolla una cinta de forma espiral a uno de los bastones y se escribía el mensaje longitudinalmente.
+- Recepción: se enrollaba la cinta en la vara gemela para leer el mensaje original.
+
+<!-- 
+Recordad: la criptografía quiere mejorar la dispersión y la difusión del mensaje original. La transposición simple como la de la escítala ayuda en ambos casos.
+
+Prácticamente todos los algoritmos actuales de cifrado simétrico utilizan sistemas de transposición como uno de los pasos del cifrado.
+-->
+
+## Sustitución: cifrado César
+<!-- _class: two-columns -->
+
+![](https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg)
+
+- Es un cifrado **monoalfabético**: "sustituimos una letra por otra que viene $k$ posiciones detrás"
+- Es más antiguo que los romanos: incluso la Biblia hebrea incluye palabras con cifrado de sustitución y evitar así escribir la palabra real.
+
+<!-- Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los '70  ha sido algún tipo de cifrado por sustitución más o menos complejo. Los estudiaremos a continuación con más detalle en el resto de capítulos -->
+
+# Cifrado César (en detalle)
+<!-- _class: lead -->
+
+## Historia
+
+- Leyenda: Julio César lo usaba para comunicarse con sus generales
+- Como todos los cifrados de sustitución monalfabética, se descifra con facilidad y en la práctica no ofrece apenas seguridad en la comunicación.
+- El cifrado César forma parte de sistemas más complejos de codificación, como el cifrado Vigenère, e incluso tiene aplicación en el sistema ROT13, y su estudio sirve para entender por qué los cifrados fallan.
+
+![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/8/8f/Gaius_Iulius_Caesar_%28Vatican_Museum%29.jpg)
+
+<!--
+Es muy posible que César utilizase sistemas más complejos de cifrado que no conocemos:
+
+"There is even a rather ingeniously written treatise by the grammarian Probus concerning the secret meaning of letters in the composition of Caesar's epistles."
+— Aulus Gellius, Attic Nights 17.9.1–5
+-->
+
+## Cifrado
+
+![bg w:100% right:50%](https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg)
+
+$c = e(k, m) = m + k \mod {26}$
+
+Por ejemplo, clave $k=3$
+
+$X 	\rightarrow A$
+$Y 	\rightarrow B$
+$Z 	\rightarrow	C$
+$A 	\rightarrow	D$
+$B 	\rightarrow	E$
+
+<!-- En las transparencias que siguen, asumimos que el alfabeto es el latino y solo hay 26 posibles letras-->
+
+## (recordatorio: aritmética del resto)
+<!-- _class: extra-slide -->
+
+Aritmética del resto (módulo): "7 entre 4 son 1 y **de resto 3**": $\ 7 \mod 4 = 3$
+
+Ejemplos:
+
+$1 \mod 4 = 1$
+$2 \mod 4 = 2$
+$3 \mod 4 = 3$
+$4 \mod 4 = 0$
+$5 \mod 4 = 1$
+$6 \mod 4 = 2$
+...
+$13 \mod 4 = 1$
+
+<!-- La aritmética del módulo produce ciclos: 012301230123
+
+Si hacemos loquesea módulo N, el resultado estará entre 0 y N-1. Es decir, hay N posible resultados
+
+-->
+
+## Descifrado
+<!-- _class: center -->
+
+$m' = d(k, d) = c - k \mod {26} = e(26 - k \mod 26, c)$
+
+Giramos la tabla. Para $k=3$, el descifrado es como cifrar con $k'=26-3=23$:
+
+$A 	\rightarrow X$
+$B 	\rightarrow Y$
+$C 	\rightarrow	Z$
+$D 	\rightarrow	A$
+$E 	\rightarrow	B$
+
+## Seguridad del cifrado del César: fuerza bruta
+
+`HOLAMUNDO`
+`ELIXJRKAL`
+
+¿qué podemos hacer si solo tenemos el texto cifrado `ELIXJRKAL`?
+
+$0\leq k < 26$ , así que podemos probar las 26 claves una a una.
+
+## Ataque de fuerza bruta
+
+Un ataque de fuerza bruta implica probar sobre el mensaje cifrado $c$ todas las posibles claves $k_i$ hasta que encontremos la "buena":
+
+- descifrar con la clave $m^?=d(c,k_i)$
+- y validar si $m^?$ es válido. Es decir, si $m=m^?$
+
+<!-- Observación: de media, tenemos que probar 13 claves: ¡la mitad! -->
+
+---
+
+![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg)
+
+El segundo paso no siempre es posible
+
+- El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado. Suponiendo que use César, no se sabe en qué lengua está escrito originalmente.
+- [Código navajo](https://es.wikipedia.org/wiki/Locutor_de_claves) durante la segunda guerra mundial
+- ¿Y si un mismo texto puede descifrarse a varios mensajes en claro dependiendo de qué clave utilices? Entonces el atacante no puede distinguir la clave "buena"
+
+<!--
+
+El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos parecen hacer descartado que el manuscrito Voynich tenga un cifrado simple como el César. Aún así, han analizado los textos y han encontrado que siguen pautas estadísticas de un lenguaje real. El misterio sigue abierto.
+
+-->
+
+## Contramedidas
+
+Las contramedidas contra los ataques de fuerza bruta son:
+
+- que la operación de descifrado sea costosa
+- que haga falta realizar muchas operaciones de descifrado
+
+Que la operación sea costosa tiene el problema que quien descifra lícitamente tiene un coste innecesario: actualmente esto no se recomienda
+
+Queda por tanto "que el adversario tenga que hacer muchas operaciones de descifrado". Es decir: probar muchas claves.
+
+## Muchas claves
+
+* En una CPU "estándar" se prueban 1.000.000 clave/CPU/s
+* es decir: $10^6$ clave/CPU/s
+* es decir: se prueban $10^9$ claves/s en 1000 CPU
+* es decir: se prueban 3.6 * $10^{12}$ claves/h en 1000 CPU
+* en AWS EC2 una *c4.large* cuesta 10 céntimos/h
+* es decir $3.6\ 10^{11}$ claves/€
+
+Si tenemos capacidad de diseñar/fabricar d() en hardware ([ASIC](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)) los costes bajan después de un periodo de amortización
+
+<!-- Estos cálculos están desactualizados y son más rápidos cada año. En cualquier caso sirven para hacernos una idea de lo rápido que pueden hacer fuerza bruta los ordenadores actuales -->
+
+---
+
+$10^{11}$ claves/€ en números redondos
+
+e.g. si nuestro "secreto" tiene un coste de 1000 €,
+
+Nos hacen falta un sistema que permita $2·10^{14}$ claves diferentes ($\approx 2^{48}$)
+
+Definimos: **la fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
+
+## Seguridad del cifrado del César: análisis de frecuencias
+
+`HOLAMUNDO`
+`ELIXJRKAL`
+
+¿qué podemos hacer si tenemos acceso al texto cifrado `ELIXJRKAL`?
+
+Sistema de escritura chino: el espacio de claves tiene miles decenas de miles de caracteres. Imaginemos que es suficiente para impedir fuerza bruta... (no lo es).
+
+Si el mensaje es suficientemente largo, podemos analizar la frecuencia de aparición de los carácteres
+
+## Análisis de frecuencias
+
+![w:18em](images/el_quijote.freqs.png) ![w:18em](images/el_quijote.caesar.freqs.png)
+
+¡La estadística se mantiene igual (pero movida) después del cifrado César!
+
+---
+<!-- _class: with-success -->
+
+**Hq** fulswrjudild, ho fliudgr Fhvdu, wdpelhq frqrflgr frpr fliudgr sru
+ghvsodcdplhqwr, frgljr **gh** Fhvdu **r** ghvsodcdplhqwr **gh** Fhvdu, hv xqd gh
+odv whfqlfdv gh fliudgr pdv vlpsohv b pdv xvdgdv. **Hv** xq wlsr gh
+fliudgr sru vxvwlwxflrq hq ho txh xqd ohwud **hq** ho whawr ruljlqdo hv
+uhhpsodcdgd sru rwud ohwud 
+
+https://www.dcode.fr/caesar-cipher
+
+**La información de contexto nos ayuda a descifrar (espacios, lenguaje...)**. Eso también pasa en una web actual: ¿qué es lo que tiene un mensaje cifrado a un banco inmediatamente después de visitar una tienda?
+
+<!-- No recuerdo qué cifré aquí, ni con que clave,pero no parece difícil descubrirlo.
+
+- Hay letras solas, que en castellano solo pueden ser a, y, o. También e, u, pero es muy improbable. Cualquier otra letra será aún más improbable. Por eso la criptografía clásica en realidad nunca ha usado espacios: da mucha información al adversario
+- Haciendo análisis de frecuencias, la h aparece muchas veces: es muy probable que sea a ó e
+- Los dígrafos hv gh (varias veces...) podrían ser es, el, me, le ó se -->
+
+## Rotura de algoritmos criptográficos
+
+Definimos: **un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la mera fuerza bruta**.
+
+El cifrado César lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez conocida el análisis de frecuencia contra el cifrado César.
+
+
+# Mejoras al cifrado César
+<!-- _class: lead -->
+
+
+## Transponer y sustituir
+<!-- _class: smaller-font -->
+
+Podemos añadir una transposición a la vez de una substitución:
+
+![center](https://i1.wp.com/nozdr.ru/_media/games/quest/for/cipher/marshrut.png)
+
+Podemos mapear cualquier letra a cualquier otra letra, o osar cifrado afín:
+
+$e(k=\{a,b\}, m) = a · m + b \mod 26$
+
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+XZCTEROSIULKWNGYQFHDJVMAPB
+```
+
+Aumenta el espacio de claves ($26! \approx 4·10^{26} \approx 2^{88}$), pero sigue siendo vulnerable a análisis de frecuencia.
+
+<!-- En vez de usar un movimiento en el alfabeto, podemos cambiar totalmente el alfabeto. Eso aumenta espectacularmente el espacio de claves, hasta el punto de que no es posible para un humano hacer fuerza bruta...
+
+... pero no impide hacer análisis frecuencial. Cualquiera de estas propuestas está tan rota como el cifrado César. -->
+
+## Tabula recta
+
+![bg left:50% w:90%](https://upload.wikimedia.org/wikipedia/commons/9/9a/Vigen%C3%A8re_square_shading.svg)
+
+Johannes Trithemius en 1508, con el primer libro conocido dedicado a la criptografía, inició el sistema de cifrados polialfabéticos...
+
+...al principio sin clave.
+
+<!-- La primetra letra del mensaje se cifra con la primera columna, la segunda con la segunda... y así. ¡El texto ya no es analizable por frecuencias!
+
+Pero no comple la máxima de Shanon: el sistema es seguro solo mientras que la table se mantenga en secreto.
+
+La tabula recta abrió el camino de los cifrados polialfabéticos. Solo unos 20 años después, Battista Bellaso añadió una clave al sistema -->
+
+## Cifrado de Vigenère
+
+Cifrado polialfabético de Giovan Battista Bellaso en 1553, pero atribuido a Vigenère
+
+![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/1/1a/Vigenere.jpg)
+
+$k$ ahora será una secuencia de números.
+
+$k=\{23,8,3\}$
+
+Habitualmente se escriben las letras que cifran el texto "AAA":
+
+$k=XID$
+
+Fíjate: el "tabula recta" es un Vigenère con $K=ABCD...WXYZ$
+
+---
+
+$c_i = e(k, m_i) = m_i + k_{(i \mod ||k||)} \mod 26$
+
+$m'_i = d(k, d_i) = c_i - k_{(i \mod ||k||)} \mod 26$
+
+Siendo $||k||$ la longitud de la clave
+
+
+Ejemplo. $k=XID=\{23,8,3\}$
+
+```
+HOL AMU NDO
+||| ||| |||
+XID XID XID
+||| ||| |||
+EWO XUX KLR 
+```
+
+---
+
+![h:18em](https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-front.jpg) ![h:18em](https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-back.jpg) 
+
+"*Le chiffre indéchiffrable*" se utilizó desde el siglo XVI hasta bien entrado el siglo XX.
+
+...aunque ya había expertos en romperlo en el siglo XIX.
+## Ejemplo
+
+**W**r urutlsyrmjae, **w**l omxvsda Gwwsr, feefaez ggrgcuhg ggma gajjaps hsj dqwhpszmqaifta, gghaga hw Gwsmv g hwsbpsdsmuifxg dq Gwwsr, qw mrs dq psw leoragss pi umxrmhg qss emetdee c eek ueevek. Ee yf xapa hw gafdevs hod wmwlifyumgn qr wp iuq yfe defvs if ex xwblo avakanmp **ww** jeqqhpszmhs tgr axje defvs
+
+https://www.dcode.fr/vigenere-cipher
+
+<!-- clave: SESAME
+
+Ahora el análisis frecuencil es mucho más complejo... ¡pero podemos agrupar los textos en grupos de 6 y aplicar freciencias a cada columna!
+
+¿Por qué 6? No lo sabemos. Podemos probar, o buscar ciclos (que son comunes) y estimar la longitud de la clabe. En ejemplo, la w está muchas veces en grupos de palabras solos: ¿quizá es la E cifrada con una de esas S de la clave?
+
+-->
+
+## Seguridad de Vigenére
+
+Ahora el espacio de claves es (clave de 3 carácteres):
+
+$0<k<26^3$
+$0<k<17576$
+
+Se puede aumentar el espacio de claves indefinidamente con contraseñas más largas.
+
+Para contraseñas de $n$ carácteres:
+
+$0<k<26^n$
+
+ejemplo :
+
+$n=8 \rightarrow 26^8 = 2·10^{11}$ (0,5 €)
+$n=16 \rightarrow 26^{16} = 4·10^{22}$ (0,1 B€)
+
+---
+<!-- _class: with-success -->
+
+Vulnerabilidad: la repetición de la clave, que además es de longitud adivinable y normalmente corta.
+
+Si segmentamos el texto cifrado de acuerdo a la longitud de la contraseña, cada fragmento de texto mostrará las mismas estadísticas del idioma (cifrado César)...
+
+Sólo hace falta saber o adivinar la longitud de la "contraseña" o...
+
+...como el espacio de longitudes será probablemente limitado, podemos probarlos uno por uno hasta que tenemos una estadística reconocible.
+
+Vigenère está también roto. Su análisis es más laborioso que César, pero no es necesaria la fuerza bruta sobre todo el espacio de claves.
+
+**Un espacio de claves grande no es suficiente**
+**No se debe cifrar dos trozos del mensaje con la misma clave**
+
+## Máquina Enigma
+<!-- _class: two-columns -->
+
+![h:18em](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg/800px-Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg)
+
+- Inventada por Arthur Scherbius y usada a partir de los años 20 del siglo XX
+- Existía versión comercial y versión militar
+- Finalmente "vencida" por Alan Turing.
+- [Ejemplo de uso](https://www.101computing.net/enigma-machine-emulator/)
+
+![bg right:25%](https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_Scherbius_1.jpg)
+
+
+<!--
+Entreguerras, guerra civil española, ejército alemán. En la guerra civil española, el bando sublevado utilizaba la versión comercial (que los ingleses sabían leer)
+
+Fijate:
+
+- Los rotores podían extraerse e intercambiar sus posiciones
+- Los rotores podían empezar en cualquier letra
+- El panel conectada (o no) pares de letra entre sí. Al principio tenía 4 cables, luego aumentó a 6. El panel era exclusivo de la versión militar.
+
+La clave era: posición de los rotores, letras iniciales en los rotores, posición de los cables. Todo esto cambiaba cada día.
+
+Además, para evitar que todos los alemanes usasen cada día la misma clave en todos sus mensajes, había al inicio un pequeño paso adicional de anuncio de "clave de sesión".
+
+-->
+---
+
+![w:20em](https://upload.wikimedia.org/wikipedia/commons/7/7b/Bundesarchiv_Bild_183-2007-0705-502%2C_Chiffriermaschine_%22Enigma%22.jpg) ![h:20em](https://upload.wikimedia.org/wikipedia/commons/6/6c/Enigma-action.svg)
+
+<!-- 
+
+https://res.cloudinary.com/practicaldev/image/fetch/s--2qwhwBZd--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://raw.githubusercontent.com/maxime1992/my-dev.to/master/blog-posts/enigma-part-1/assets/enigma-schema.jpg
+
+El ejemplo de la derecha solo muestra la versión comercial sin el panel frontal de cables.
+
+Los aliados tenían copias de la versión comercial pero no la versión militar. No sabían, entre otros detalles, cómo estaban cableados los rotores por dentro. Además, la versión militar tenía 5 rotores disponibles, de los que cada día se usaban tres.
+
+-->
+
+## Máquina Enigma: seguridad
+
+- Sistema polialfabético como Vigenère, con una clave muy larga que se define con la posición inicial de los rotores
+- Con la tecnología de la época no era posible hacer fuerza bruta antes de que cambiase la clave (cada día)
+- "Indescifrable" según casi todos los expertos.
+
+> Información adicional: <https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma>
+
+---
+
+Protocolo alemán de uso:
+
+![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/8/82/Kenngruppenheft.jpg)
+
+- La posición de los rotores se cambiaba cada día
+- Parte de la clave la escogían los operadores de radio y se enviaba por las ondas al inicio
+- El texto era natural
+
+---
+<!-- _class: smaller-font -->
+
+
+Se rompió más "por mal protocolo" que porque el sistema fuese defectuoso
+
+- Los rotores se cambiaban cada día para que no coincidiesen las letras: A no podía cifrarse como A, ni igual que ayer. Eso limitaba el espacio de claves: ya no hay que probar nada que se parezca a la configuración de ayer.
+- Parte de la clave la escogían los operadores de radio:
+    - se enviaba por ondas radio al inicio... **dos veces** (aunque esto cambió en 1940)
+    - Los operadores en medio de una guerra no siempre escogían claves perfectamente aleatorias. A veces era AAA, ó ABC...
+- El texto era natural: *nada que reportar*, *hitler*, *meteorología*... aparecían con mucha frecuencia
+
+![bg left:30%](https://upload.wikimedia.org/wikipedia/commons/f/f5/Turing-statue-Bletchley_14.jpg)
+
+---
+![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/5/5c/Bombe-rebuild.jpg)
+
+Una vez reducido el espacio de clave, identificados qué textos es probable que apareciesen y otros atajos...
+
+...el cifrado del día se podía romper por fuerza bruta en 20 minutos, cada mañana, utilizando una batería de máquinas llamada "Bombe"
+
+La "Bombe" fue una de las primeras máquinas de procesado binario.
+
+El descifrado de Enigma fue una de las claves que permitió a los aliados ganar la Segunda Guerra Mundial
+# Confidencialidad perfecta
+<!-- _class: lead -->
+
+## Cifrado Vernam
+
+![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/0/06/USpatent1310719.fig1.png)
+
+Se define **la seguridad perfecta o incondicional** como aquella con la que, a partir únicamente del texto cifrado, no se puede deducir ninguna propiedad del texto original en claro, incluso aunque el atacante tenga capacidad computacional infinita.
+
+- Gilbert Sandford Vernam inventó y patentó una máquina de cifrado en 1917
+- Shannon demostró en 1945 que esa máquina tenía cifrado perfecto
+
+<!-- 
+excepto la longitud... y el momento de enviarlo, ...y el número de mensajes
+
+La seguridad perfecta es una definición matemática. 
+
+ -->
+
+---
+
+Definición exacta:
+
+**Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribición de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de m dada c y la probabilidad de m coinciden
+
+$$
+P[m|c] = P[m]
+$$
+
+<!-- Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano
+
+Cosas que implica:
+
+- Lo que dijimos antes: dado un texto cifrado, no conocemos nada de su texto en claro
+- Dado un texto cifrado, el mensaje en claro podría ser cualquiera:
+
+Si el cifrado es XHAJSJXXNFHFDOIOJUMNFNNNF existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE", así que un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles.
+
+Es decir: ni siquiera por fuerza bruta podemos atacar el sistema de cifrado, porque no sabremos si el mensaje que hemos obtenido es el bueno
+-->
+
+---
+
+El cifrado de Vigenère sufría un problema similar al del César (aunque camuflado): manifestaba la estadística del mensaje en claro en el mensaje cifrado
+
+Podemos evitar que se manifieste la estadística en el texto cifrado si utilizamos cada letra de la contraseña una sola vez
+
+**Tenemos confidencialidad perfecta si y solo sí usamos Vigenère**:
+
+- con una contraseña tan larga como el mensaje
+- no conocida por el atacante (es decir: totalmente aleatoria)
+- la clave no se usa nunca más
+
+<!--
+En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
+
+Fíjate: ni siquiera es posible atacar el sistema por fuerza bruta. La clave es completamente aleatorio.
+
+Dado un mensaje cifrado, puedes encontrar una clave que dé absolutamente cualquier mensaje en claro, y no sabrás cuál de todos los mensajes "descifrados" es el verdadero.
+
+-->
+
+---
+<!-- _class: smaller-font -->
+
+Vernam patentó el *one-time-pad* de una manera similar pero equivalente:
+
+$c = e(k,m)=k \otimes m$
+$m' = d(k,c) = e(k,c)=k \otimes c$
+
+La longitud en bytes de $k$ es igual que la longitud en bytes de $m$.
+
+Las claves se guardaban en hojas de papel de un solo uso. Las dos partes tenían una colección de estas hojas y se destruía en cuanto se usaba.
+
+La NSA tenía 86.000 *one-time-pads* solo para el año 1972.
+
+![bg left:50%](https://www.cryptomuseum.com/spy/r353/img/300148/191/full.jpg)
+
+## (recordatorio: XOR)
+<!-- _class: extra-slide -->
+
+
+$...00000...\otimes...00000...=...00000...$
+
+$...10010...\otimes...11000...=...01010...$
+
+$...11111...\otimes...11000...=...00111...$
+
+$...00011...\otimes...11100...=...11111...$
+
+$...10101...\otimes...00000...=...10101...$
+
+<!-- Fíjate: una series de ceros XOR una clave ¡es la clave!
+
+Eso es lo que nos permitió romper el sistema de los Cuentacuentos en la primera sesión
+
+El problema del algoritmo del Cuentacuentos es que estábamos repitiendo la clave: con la misma clave cifrábamos una zona de ceros y todo lo demás.
+
+-->
+---
+
+El teléfono rojo entre Washington y Moscú fue en realidad un teletipo que usaba cifrado de bloque de un solo uso
+
+La clave $k$ se intercambiaba por valija diplomática en cinta perforada que se entregaba en ambos sentidos. Mientras no hacía falta, se guardaba protegida y  se destruía después de ser usada
+
+Además, el *one-time-pad* permitía trabajar de forma segura sin intercambiar ningún algoritmo secreto que diera ventaja técnica al enemigo
+
+Para poder usar un *one-time-pad*, la clave se prepara por adelantado para cuando haga falta enviar algún mensaje inmediatamente.
+
+## Vulnerabilidades
+
+Ninguna. Ni siquiera por fuerza bruta: si pruebas claves, puedes "descifrar" el texto cifrado y conseguir cualquier mensaje que se te ocurra...
+
+...mientras se cumplan las hipótesis de trabajo para la clave $k$:
+
+- tan larga como el mensaje
+- sólo un solo uso
+- aleatoria (i.e. uniformemente distribuida)
+
+Los humanos somos muy malos para distinguir qué es y qué no es aleatorio
+
+---
+
+Pero el principal problema es que la longitud en bytes de $k$ es igual a la longitud en bytes de $m$.
+
+Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro por el mismo canal seguro
+
+![bg right:60%](https://www.cryptomuseum.com/covert/deaddrop/img/302193/011/full.jpg)
+
+---
+
+- Al final de la segunda guerra mundial, EEUU descifró el *one-time-pad* usado por los diplomáticos alemanes porque utilizaban contraseñas no totalmente aleatorias y podían adivinarse.
+- 1944: EEUU descifró mensajes de la URSS a Australia... porque utilizaban el mismo *one-time-pad* que la URSS usaba con EEUU.
+- 1962 (ataque canal lateral): las máquinas usadas para cifrar eran eléctricas y emitían un campo magnético, que Japón podría haber aprovechado para captar qué cifraba la embajada de EEUU: [TEMPEST](https://www.governmentattic.org/18docs/Hist_US_COMSEC_Boak_NSA_1973u.pdf)
+
+
+# Conclusiones
+<!-- _class: lead -->
+
+---
+
+![](images/esquema-clasica.png)
+
+---
+
+- La información de contexto puede ayudar a descifrar un mensaje
+- Definimos la fortaleza de un algoritmo como el tamaño de la clave en bits, si no se puede romper más que por fuerza bruta
+- Un algoritmo se considera bueno mientras no se conozca ningún otro ataque aparte de la fuerza bruta
+- La criptografía perfecta es posible, pero no práctica
+- El mejor sistema de cifrado puede caer si se usa de forma incorrecta:
+    - no hay que reutilizar claves
+    - la fuente de aletoriedad tiene que ser realmente aleatoria
+    - el diseño de buenos protocolos no es evidente
+- Hasta los '70 la criptografía o era "insegura" (cifrados César, Vigenere, Enigma) o no era "práctica" (*one-time-pad*)
+
+## 1976, el año que empezó todo...
+
+La NSA selecciona un algoritmo de cifrado simétrico de IBM para comunicaciones de la administración: DES (Data Encryption Standard), que es "casi" perfecto.
+
+Whitfield Diffie y Martin Hellman generan el primer algoritmo práctico de criptografía asimétrica, que permite distribuir fácilmente claves seguras.
+
+<!-- La criptografía actual empezó en 1976: se escogió un algoritmo de cifrado simétrico que es casi perfecto y además práctico, y se
+descubrió la criptogradía asimétrica que permitía publicar parte de la clave. -->
+## Referencias
+
+- <https://www.youtube.com/watch?v=ncL2Fl6prH8>: resumen de criptografía clásica y máquina Enigma.
+- <https://www.bbvaopenmind.com/tecnologia/innovacion/los-fallos-humanos-que-derrotaron-a-enigma/>
+- <https://www.ugr.es/~aquiran/cripto/enigma/boletin_enigma_18.htm#1>, y siguientes, con la historia de la criptografía en la Segunda Guerra Mundial.
+- https://www.cryptomuseum.com/, con fotografías de aparatos criptográficos históricos.
+- Película: <https://en.wikipedia.org/wiki/The_Imitation_Game>
+
+---
+<!-- _class: center -->
+
+Continúa en: [Criptografía simétrica](03-simetrica.html)

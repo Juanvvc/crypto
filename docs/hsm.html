@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>HSM</title>
+
+        <meta name="description" content="Hardware Secure Module">
+        <meta name="author" content="Jordi Íñigo Griera">
+        <!-- Implementat amb revealjs: https://github.com/hakimel/reveal.js -->
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+                    var link = document.createElement( 'link' );
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                    document.getElementsByTagName( 'head' )[0].appendChild( link );
+                </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+
+            <section>
+                <h2>Generación de Números Aleatorios
+                    <br/><span style="text-transform:none;">y</span> HSM</h2>
+                <small><em><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
+
+				<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">
+					&ldquo;Curso de Introducción a la Criptografía&rdquo;
+				</span>
+
+                    by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/jig" property="cc:attributionName" rel="cc:attributionURL">Jordi Íñigo Griera</a> is licensed under a<br/>
+
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+                    <br />Project hosted at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/jig/crypto" rel="dct:source">github.com/jig/crypto</a></em></small>
+            </section>
+
+
+            <!-- TRNG TRNG TRNG TRNG TRNG TRNG TRNG TRNG TRNG TRNG TRNG -->
+
+
+            <section id="rng">
+                <h1>RNG</h1>
+                <p>o TRNG (<em>True Random Number Generation</em>)</p>
+            </section>
+
+            <section>
+                <h3>RNG</h3>
+                <p>La generación de números aleatorios (RNG) no se puede implementar con un algoritmo, a diferencia de PRNG que precisamente eran algoritmos con un parámetro o semilla que les permitía generar secuencias impredecibles<br/>(impredecibles a condición de que no se conozca la semilla)</p>
+            </section>
+
+            <section>
+                <h3>RNG: generación</h3>
+                <p>¿Cómo implementamos un RNG si no es algorítmico?</p>
+                <ul>
+                    <li>Recopilando eventos de entrada (I/O) y acumulando sus parámetros (habitualmente las cifras menos significativas de la hora en ns ó μs)</li>
+                    <li>Mediante dispositivos especializados (<a href="#hsm">HSM</a>*)</p>
+                        <p><br/></p>
+                        <p>*) HSM: Hardware Secure Module</p>
+            </section>
+
+                <!--
+            <section>
+                <h3>RNG: acumulación de aleatoriedad</h3>
+                <p>las distintas fuentes que usaremos para generar la secuencia del RNG
+                    &mdash;ya sea de I/O, o de dispositivos hardware especializados&mdash;
+                    las podemos acumular de diferentes fuentes individuales mediante $\oplus$
+                </p>
+                <p>en el caso de que una de las fuentes no sea del todo uniformes, esto no empeora la calidad final del RNG
+                    a condición de que al menos una de ellas si que lo sea</p>
+            </section>
+
+            <section>
+                <h3>RNG: acumulación de aleatoriedad</h3>
+                <p>se ha de vigilar que la acumulación garantice que:</p>
+                <ul>
+                    <li>RNG tenga una distribución uniforme</li>
+                    <li>después de $n$ no se debe poder predecir el $n+1$ con una probabilidad diferente de $1/2$</li>
+                </ul>
+            </section>
+            <section>
+                <h3>RNG: entropía</h3>
+                <p>lo que podemos hacer es marcar cada fuente individual de aleatoriedad con una <em>entropía</em></p>
+                <ul>
+                    <li>para fuentes perfectas tenemos 1 bit de entropía per a cada bit generado</li>
+                    <li>para fuentes menos perfectas podemos necesitar varios bits para generar un bit de aleatoriedad</li>
+                </ul>
+            </section>
+            <section>
+                <h3>RNG: entropía</h3>
+                <ul>
+                    <li>es importante "etiquetar" bien nuestras fuentes (entropía)</li>
+                    <li>debemos reducir los bits recibidos a bits con entropía 1</li>
+                    <li>los bps del RNG (antes y sobretodo después de reducir) pueden ser pocos (lentitud)</li>
+                </ul>
+            </section>
+        -->
+            <section>
+                <h3>RNG: fuentes</h3>
+                <p><span title="User Interface">UI</span> ($\ll 1$ kbps después de reducción)</p>
+                <p>latencia disco duro ($\ll 1$ kbps después de reducción)</p>
+                <p>red ($\approx 1$ kbps después de reducción)</p>
+                <p>funciones de procesador (Intel: $\gg$ Mbps)</p>
+            </section>
+            <section>
+                <h3>RNG: distribución uniforme</h3>
+                <p>Los RNG deben tener unas propiedades</p>
+                <p>estas propiedades no aplican al número generado (o el bit) en sí, si no a las secuencias de números generados</p>
+                <p>la secuencia de números (o de bits) debe tener una <em>distribución uniforme</em></p>
+            </section>
+            <section>
+                <h3>RNG: distribución uniforme</h3>
+                <p>para $n$ bits generados, la probabilidad de una secuencia dada es la misma de la de cualquier otra ($2^{-n}$)</p>
+                <p>ningún algoritmo puede predecir el seguiente bit conocidos los anteriores (y además, la probabilidad de acierto debe ser $p \approx 1/2$)</p>
+            </section>
+            <section>
+                <h3>RNG: validación</h3>
+                <p>para secuencias suficientemente largas el número de '$1$'s y '$0$'s tiende a ser el mismo</p>
+                <p>para secuencias suficientemente largas el número de grupos ${00, 01, 10, 11}$ tiende a ser el mismo</p>
+                <p>etc.</p>
+                <p class="fragment">estos tipos de test permiten saber que mi fuente no tiene problemas obvios, pero no es suficiente contra un
+                    atacante capaz de modificar conveniente el sistema RNG</p>
+            </section>
+            <section>
+                <h3>RNG: ¿validación?</h3>
+                <p>un RNG sólo se puede considerar seguro si sabemos como lo generamos, y lo generamos de forma segura</p>
+            </section>
+
+            <section>
+                <h3>RNG: vulnerabilidades</h3>
+                <p><a href="https://en.wikipedia.org/wiki/Random_number_generator_attack">Wikipedia: Random number generator atack</a></p>
+                <p class="fragment">Cloud: random... con poca entropía por poca I/O</p>
+                <p class="fragment">Debian (Ubuntu): random... <a href="https://www.schneier.com/blog/archives/2008/05/random_number_b.html">con poca entropía por errores de código</a></p>
+                <p class="fragment">Intel: random... <a href="https://en.wikipedia.org/wiki/RdRand#Reception">implementación cerrada</a>
+                    (<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.473.8078&rep=rep1&type=pdf">...</a>)</p>
+                <p class="fragment">PlayStation 3: random...
+                    <a href="http://www.engadget.com/2010/12/29/hackers-obtain-ps3-private-cryptography-key-due-to-epic-programm/">constante</a></p>
+            </section>
+
+            <section>
+                <h3>RNG: vulnerabilidades</h3>
+                <p>la criptografía es segura siempre que las hipótesis de funcionamiento se cumplan</p>
+                <p>la aleatoriedad suficiente de la fuente RNG (o PRNG) es una de ellas</p>
+                <p class="fragment"><img data-src="img/random_number.png"/>
+                    <br/><small>(de <a href="https://xkcd.com/221/">xkcd.com/221</a>)</small></p>
+            </section>
+
+            <section>
+                <h3>RNG <span style="text-transform:none;">ó</span> PRNG</h3>
+                <p>¿para generar claves hemos de utilizar PRNG o RNG?</p>
+                <span class="fragment">
+                    <p>podemos usar PRNG a condición que:</p>
+                    <ol>
+                        <li>el PRNG se alimente de una semilla RNG</li>
+                        <li>que el PRNG sea de calidad criptográfica (hacer servir un
+                            <code>AES-CTR</code>
+                            cifrando una secuencia constante es una buena opción)
+                        </li>
+                        <li>que la semilla tenga suficiente entropía para cubrir el nivel de seguridad
+                        requerido (i.e. $128$ b de entropía para claves de seguridad $128$ b equivalente
+                            como <code>AES-128</code> ó <code>RSA-3072</code>)</li>
+                        <li>y que se mantengan las hipótesis de seguridad: no reutilizar bajo ningún concepto una secuencia de bits
+                        (ja sea RNG ó PRNG) y que las fuentes físicas RNG tengan una entropía bien estimada y acondicionada,
+                        y que los generadoros PRNG sean de buena calidad y cubran un espacio de posibilidades suficiente (i.e.
+                            hace falta usar <code>AES-256-CTR</code> si queremos generar claves con $256$ b de seguridad con una única
+                            secuencia)</li>
+                    </ol>
+                </span>
+            </section>
+
+            <section>
+                <h1>dispositivos<br/> ad-hoc para<br/> RNG</h1>
+                <p>(<em>usados en HSM, SmartCards, algunas CPUs, etc.</em>)</p>
+            </section>
+
+            <section>
+                <h3>RNG: ruido térmico</h3>
+                <p><img data-src="img/sorolltermic.png" width="480"/></p>
+                <p>una resistencia a temperatura ambiente, tiene electrones libres que se mueven aleatoriamente (carga negativa)
+                    y podemos medir el desequilibrio momentáneo con un conversor Analógico/Digital</p>
+                <p>el conversor dará una secuencia indefinida de bits aleatorios</p>
+            </section>
+
+            <section>
+                <h3>RNG: ruido térmico</h3>
+                <p>el ruido térmico es el resultado de un fenómeno caótico (no estrictamente aleatorio)</p>
+                <p>(&hellip;)</p>
+            </section>
+
+            <section id="quantum-rng">
+                <h3>RNG: indeterminación cuántica</h3>
+                <p><img data-src="img/randomquantic.png" width="480"/></p>
+                <p>con una fuente (tenue) apuntamos a un espejo semireflectante; dos fotodetectores detectan uno u otro el fotón
+                de forma totalment aleatoria</p>
+            </section>
+
+            <section>
+                <h3>generador random cuántico</h3>
+                <p><img data-src="img/idquantiquerng.png" width="480"/>
+                    <br/><small>(d'<a href="http://www.idquantique.com/random-number-generation/quantis-rng-oem-component/">idquantique.com</a>)</small></p>
+            </section>
+
+            <section>
+                <h3>¿RNG?</h3>
+                <p>las dos familias de dispositivos generan números aleatorios&hellip; pero no uniformes</p>
+                <ul>
+                    <li>RNG térmico: limitado por el ancho de banda (señal)</li>
+                    <li>RNG cuántico: limitado por la precisión del espejo (semireflectancia del 50,000&hellip;%)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Reducción/acondicionado</h3>
+                <p>el flujo en crudo se debe processar siempre, típicamente:</p>
+                <ul>
+                    <li>se descartan las secuencias de '1' y de '0' y sólo se genera un bit random en los cambios</li>
+                    <p><img data-src="img/condicionatrng.png" width="480"/>
+                        <br/>esto reduce los bps per "uniformiza" la secuencia
+                    </p>
+                    <li>se aplica una PRF/PRP sobre el flujo anterior (e.g. las CPU's Intel cifran la secuencia con AES-128 y la clav 0x00..00)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>RNG en Linux</h3>
+                <p>en Linux (Ubuntu) tenemos dos fuentes random:</p>
+                <ul>
+                    <li><code>/dev/random</code>: salida RNG basada en I/O ($\approx$ bps)</li>
+                    <li><code>/dev/urandom</code>: <em>unblocking random</em>, salida PRNG enriquecida con <code>/dev/random</code>; ($\approx$ Mbps)</li>
+                </ul>
+                <p>en otros Linux tenemos diferentes combinaciones de <code>/dev/random</code> y con aleatoriedad obtenida de diferentes fuentes</p>
+            </section>
+
+
+            <!-- HSM  HSM  HSM  HSM  HSM  HSM  HSM  HSM  HSM  HSM  HSM -->
+
+
+            <section id="hsm">
+                <h1>HSM</h1>
+                <p><em>(Hardware Secure Module)</em></p>
+            </section>
+
+            <section>
+                <h3>HSM</h3>
+                <p><em>(Hardware Secure Module)</em></p>
+                <p>las funciones de un HSM son:</p>
+                <ul>
+                    <li>generar claves "de calidad"</li>
+                    <li>custodiarlas de forma segura</li>
+                    <li>protegerlas contra uso ilegítimo</li>
+                    <li>asegurar su correcto uso</li>
+                    <li>secundarias: <ul>
+                        <li>velocidad (TPS, aceleración TLS)</li>
+                        <li>volumen (cantidad de claves)</li>
+                        <li>portabilidad (movilidad física)</li>
+                        <li>clave compartida (N/M); backup compartido (N/M)</li>
+                    </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="smartcard">
+                <h3>Ejemplos: portabilidad</h3>
+                <p>
+                    <img src="img/dni30xip.png"/>
+                    <br/><small>(fuente
+                        <a href="http://www.dnielectronico.es/PDFs/Guia_de_Referencia_DNIe_con_NFC.pdf">DGP</a>)
+                    </small>
+                </p>
+            </section>
+
+            <section id="usb">
+                <h3>Ejemplos: portabilidad</h3>
+                <img src="img/jig-yubikey4nano.png"/>
+            </section>
+
+            <section id="pci">
+                <h3>Ejemplos: servidores</h3>
+                <img src="img/ncipher-pci.png"/>
+            </section>
+
+            <section id="rack-thales">
+                <h3>Ejemplos: servicio en red</h3>
+                <img src="img/ncipher-xarxa.png"/>
+            </section>
+
+            <section id="rack-safenet">
+                <h3>Ejemplos: servicio en red</h3>
+                <img src="img/safenet.png"/>
+            </section>
+
+            <section>
+                <h3>subsistemas</h3>
+                <p>para implementar las funciones anteriores hace falta:</p>
+                <ul>
+                    <li>generador de claves aleatories (RNG)</li>
+                    <li>uso controlado verificable
+                        <ul>
+                            <li>protección física (no se puede leer el sistema de ficheros, o modificar el software
+                                sin "estropear" el HSM)</li>
+                            <li>protección software (API con control de acceso)</li>
+                        </ul>
+                    </li>
+                    <li>área de ataque mínima (API "minimalista", hace más improbable los <em>bugs</em> o los <em>security flaws</em>)</li>
+                </ul>
+            </section>
+
+            <section>
+                <img src="img/esquemahsm.png"/>
+            </section>
+
+            <section>
+                <h3>FIPS 140-2</h3>
+                <p>los HSM pueden ser certificados según
+                    <a href="https://web.archive.org/web/20070817151620/http://csrc.nist.gov/publications/fips/fips140-2/fips1402.pdf">FIPS 140-2</a>
+                    <br/>en diferentes niveles:
+                </p>
+                <p>este estándar define los requisitos de seguredad que deben seguir los HSM (certificados):</p>
+                <p><em>
+                    The security requirements cover areas related to the secure design and implementation of a
+                    cryptographic module. These areas include cryptographic module specification; cryptographic module
+                    ports and interfaces; roles, services, and authentication; finite state model; physical security;
+                    operational environment; cryptographic key management; electromagnetic interference/electromagnetic
+                    compatibility (EMI/EMC); self-tests; design assurance; and mitigation of other attacks.
+                </em></p>
+            </section>
+            <section>
+               <h3>FIPS 140-2</h3>
+                <ul>
+                    <li>FIPS 140-2 <strong>nivel 1</strong>: sin contramedidas físicas (son librerías); análisis lógico y de algoritmos</li>
+                    <li>FIPS 140-2 <strong>nivel 2</strong>: nivel 1, y debe disponer de contramedidas pasivas para detectar el acceso físico (sellos, evidencias)</li>
+                    <li>FIPS 140-2 <strong>nivel 3</strong>: nivel 2, y debe disponer de contramedidas activas para contrarrestar el acceso físico (ceroización)
+                    y sólo permite exportar las claves cifradas</li>
+                    <li>FIPS 140-2 <strong>nivel 4</strong>: nivel 3, y debe disponer de validación formal del funcionamento</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>FIPS 140-2</h3>
+                <p>para gestionar claves de usuarios para firma avanzada habitualmente se<br/>requiere FIPS 140-2 <strong>nivel 2</strong></p>
+                <p>para autoridades de validación o de sello de tiempo, habitualmente se<br/>requiere FIPS 140-2 <strong>nivel 2</strong></p>
+                <p>para autoridades de certificación habitualmente se<br/>require FIPS 140-2 <strong>nivel 3</strong></p>
+            </section>
+
+            <section id="pkcs11">
+                <h3>PKCS #11</h3>
+                <p><a href="https://www.emc.com/emc-plus/rsa-labs/standards-initiatives/pkcs-11-cryptographic-token-interface-standard.htm">PKCS #11</a>
+                    es una especificación de la API de los HSM en lenguaje C (literalmente un <code>.h</code>)</p>
+                <p><br/></p>
+                <p>PKCS: <em>Public Key Cryptographic Standard</em>. Estándares de facto publicados por RSA Labs. Inc. (ahora EMC<sup>2</sup> (ahora Dell Technologies));
+                    <br/>actualmente la gestión del estándar ha pasado a
+                    <a href="https://www.oasis-open.org/committees/documents.php?wg_abbrev=pkcs11">OASIS</a>
+                </p>
+            </section>
+
+            <section>
+                <h3>PKCS #11: operaciones</h3>
+                <ul>
+                    <li>login, gestión de sesión</li>
+                    <li>generación de claves simétricas/asimétricas</li>
+                    <li>cifrado/descifrado simétrica</li>
+                    <li>firma/verificación simétrica</li>
+                    <li>descifrado/firma asimétrica</li>
+                    <li>operaciones para acuerdo de claves (TLS)</li>
+                    <li>RNG</li>
+                    <li>des/ensobrado de claves (<em>key un/wrap</em>)</li>
+                    <li>gestión de objetos</li>
+                </ul>
+            </section>
+
+            <!-- Shamir Shamir Shamir Shamir -->
+
+            <section id="secret-split">
+                <h3>Partición de Secretos</h3>
+                <p>en claves importantes (e.g. la de una CA raíz) un HSM puede no ser suficiente (¿y si lo roban?)</p>
+                <p>en estos casos podemos dividir la clave en trozos:</p>
+                <ul>
+                    <li>dividir la cadena de bits en trozos $\Rightarrow$ disminuye la seguridad</li>
+                    <li>$\oplus$ entre las claves $\Rightarrow$
+                        <a href="intro.html#perfect-secrecy" title="confidencialidad perfecta">seguro incondicionalmente</a>,
+                        pero frágil</li>
+                    <li>algoritmo de Shamir $\Rightarrow$
+                        <a href="intro.html#perfect-secrecy" title="confidencialidad perfecta">seguro incondicionalmente</a>,
+                        y robusto</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Partición de secretos</h3>
+                <p>¿lo podemos hacer "por software"?</p>
+                <span class="fragment">
+                <p>sí, pero el secreto ha estado "en claro" en la RAM del ordenador por tanto una vez recuperado
+                el secreto su exposición ha aumentado notablemente</p>
+                <p>pero en HSM es una propiedad habitual</p>
+                </span>
+            </section>
+
+            <section id="xor-split">
+	      <h3>$\oplus$ (<code><a href="intro.html#/xor">XOR</a></code>) entre los trozos de clave</h3>
+	      <p>$n$ custodios se reparten la clave = $\{0,1\}^{\|n\|}$</p>
+	      <div class="fragment">
+		<p>partición${}_1$ = secuencia aleatoria de $n$ bits</p>
+		<p>partición${}_2$ = secuencia aleatoria de $n$ bits</p>
+		<p>&hellip;</p>
+		<p>partición${}_{n-1}$ = secuencia aleatoria de $n$ bits</p>
+		<p>partición${}_n$ = partición${}_1 \oplus \cdots \oplus$ partición${}_{n-1} \oplus$ clave</p>
+	      </div>
+	      <p class="fragment">Es incondicionalmente seguro (criptográficamente hablando) pero "muy inseguro" desde el punto de vista de robustez funcional:<br/> si se pierde un trozo/partición se pierde la clave sin remedio</p>
+	    </section>
+	    
+            <section id="shamir-split">
+                <h3>Algoritmo de Shamir</h3>
+                <p><img src="img/shamir-secret-sharing.png"/>
+                <br/>permite dividir el secreto en $M$ trozos, de los cuales nos hacen falta $N$ para recuperarlos</p>
+            </section>
+
+            <section>
+                <h3>Algoritmo de Shamir</h3>
+                <p>definido sobre $(x \in \mathbb{Z}_{p}^{*}, y \in \mathbb{Z}_{p}^{*})$ (no sobre $(x \in \mathbb{R}, y \in \mathbb{R})$ como en el dibujo anterior)</p>
+                <p>si en lugar de utilizar una recta (polinomio de grado $1$),
+                    usamos un polinomio de grado $M-1$ podemos ajustar cuantos trozos
+                    se deben recuperar ($M$)</p>
+                <p>podemos dividirlo en tantos trozos ($N$) como haga falta ($N | N \geq M$)</p>
+            </section>
+            <section>
+                <h3>Algoritmo de Shamir</h3>
+                <ul>
+                <li>es robusto: mientras tengamos $M$ fragmentos (de los $N$ totales), podemos recuperar el secreto</li>
+                <li>es seguro: hace falta robar/extorsionar/presionar/&hellip; $M$ participantes para obtener el secreto</li>
+                <li class="fragment">es seguro: sobre $\mathbb{Z}_p^*$
+                    es <a href="intro.html#perfect-secrecy">incondicionalmente segura</a></li>
+                <li class="fragment">es seguro: a condición que se cumpla la hipótesis que el HSM es impenetrable</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3><a href="tls.html">(TLS) $\rightarrow$</a></h3>
+            </section>
+        </div>
+
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72628059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- <script type="text/javascript" src="js/svg_mathjax.js"></script> -->
+    <!-- <script type="text/javascript">new Svg_MathJax().install();</script> -->
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
+    <script type="text/javascript" src="js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: 'c/t',
+            // history: false,
+            // fragments: true,
+            // help: true,
+            // previewLinks: false,
+            width: 1280,
+            height: 720,
+
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            math: {
+                mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+
+    </body>
+</html>

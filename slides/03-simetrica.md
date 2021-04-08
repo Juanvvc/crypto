@@ -1,0 +1,1155 @@
+---
+marp: true
+title: Criptografía - Cifrado simétrico
+paginate: true
+footer: '[Inicio](index.html)'
+headingDivider: 2
+theme: marp-viu
+---
+
+<style>
+    /* You can add custom style here. VSCode supports this.
+    Other editor might need these custom code in
+    the YAML header: section: | */
+	/* section header { display: none; } */
+	/* section footer { display: none; } */
+</style>
+
+# Criptografía y Teoría de Códigos
+<!-- _class: first-slide -->
+
+**Tema 3: Cifrado simétrico**
+
+Juan Vera del Campo
+
+juan.vera@campusviu.es
+
+# Como decíamos ayer...
+
+Confidencialidad perfecta implica $\|k\|=\|m\|$
+
+Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica"
+
+A partir de 1976:
+
+- **Criptografía simétrica**: es "casi perfecta" con claves cortas
+- **Criptografía asimétrica**: distribución de claves de cualquier tamaño
+
+# Hoy hablamos de...
+
+- [Confidencialidad computacional](#4)
+- [Cifrado simétrico de flujo](#16)
+- [Cifrado Salsa20](#34): detalles y prácticas
+- Anexo recomendado: [RNG](A2-rng.html)
+- Ejercicios: [Tema 3 (1)](../scripts/03)
+- [Cifrado simétrico de bloque](#46)
+- [Cifrado AES](#60): detalles del algoritmo de cifrado de bloques AES y modos de operación.
+- [Protocolo Bcrypt](#84)
+- [Resumen](#91), conclusiones y referencias
+- Ejercicios: [Tema 3 (2)](../scripts/03)
+
+# Confidencialidad computacional
+<!-- _class: lead
+header: Confidencialidad computacional -->
+
+## Relajando la perfección
+
+- **Confidencialidad perfecta**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional infinita**
+- **Confidencialidad computacional**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional razonable**
+
+---
+<!-- _class: extra-slide -->
+
+**Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribución de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de m dada c y la probabilidad de m coinciden
+
+$$
+P[m|c] = P[m]
+$$
+
+<!--
+Transparencia recordatorio
+
+Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano
+
+Cosas que implica:
+
+- Dado un texto cifrado, no conocemos nada de su texto en claro
+- Dado un texto cifrado, el mensaje en claro podría ser cualquiera:
+
+Si el cifrado es XHAJSJXXNFHFDOIOJUMNFNNNF existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE", así que un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles.
+
+Es decir: ni siquiera por fuerza bruta podemos atacar el sistema de cifrado, porque no sabremos si el mensaje que hemos obtenido es el bueno
+-->
+
+---
+
+**Seguridad computacional**: un sistema es seguro computacionalmente si cualquier algoritmo probabilístico en tiempo polinomial solo puede romper el algoritmo con probabilidad negligible en $\|n\|$
+
+Informalmente: un atacante no puede descifrar el mensaje:
+- en un tiempo razonable y
+- con la tecnología actual.
+
+<!-- Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano
+
+Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante pueda descifrar el mensaje -->
+
+## Ataques de fuerza bruta
+<!-- _class: with-success -->
+
+La criptografía computacionalmente segura permite $\|k\| \ll \|m\|$
+
+- Es práctico
+- Pero los ataques de fuerza bruta son posibles
+
+**Conclusión**: hay que hace un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
+
+<!-- Recordad: en el cifrado de Verman no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
+
+Ahora no sucede así: si al descifrar por fuerza bruta encontramos algo con sentido, con gran probabilidad hemos encontrado la clave y el mensaje es el original-->
+
+
+---
+<!-- _class: with-info -->
+
+- podemos probar $10^6$ clave/CPU/s $\approx 2^{20}$ clave/CPU/s
+- ó $10^{13}$ clave/CPU/año $\approx 2^{43}$ clave/CPU/año
+- ó $10^{16}$ clave/año con $1000$ CPU ≈$\approx 2^{53}$ clave/CPU·año
+- ó $10^{19}$ clave/año con $10^6$ CPU $\approx 2^{63}$ clave/año
+- ó $10^{25}$ claves con $10^6$ CPU un millón de años $\approx 2^{83}$ 
+- ó $10^{29}$ claves con $10^6$ CPU desde el Big Bang $\approx 2^{96}$ 
+
+Si tengo una "suerte media" sólo nos hará falta la mitad de las pruebas
+
+Con hardware ad-hoc podemos llegar a multiplicar por $10^4$ ó $10^5$ veces
+($2^{13}$ ó $2^{17}$ veces). Ejemplo: Bitcoin
+
+Fortaleza de un sistema criptográfico: número de claves que hay que probar por fuerza bruta (en bits)
+
+---
+
+![center h:22em](images/hitchhikers_guide.jpg)
+
+<!-- Recordad: los ordenadores mejoran constantemente.
+
+Los algoritmos se diseñan para que, con la tecnología actual, se tarde miles de años en hacer fuerza bruta. Pero la tecnología mejora con el tiempo, y eso también se tiene en cuenta: aunque "se venda" que un cifrado "no puede romperse en miles de años", en realidad eso es relativo a la tecnología actual y el algoritmo tiene una caducidad de unas pocas décadas.
+
+La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenador que haga esa misma fuerza bruta de forma instantánea
+
+-->
+
+## Tamaños recomendados de clave
+
+[El NIST recomienda](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final) (2020, sección 5.6.3) claves en las que un atacante
+tenga que hacer $2^{112}$ pruebas.
+
+Es decir, según el NIST antes de 2030 las claves han de tener una longitud mínima de $\|k\|=112$ bits
+
+A partir del 2030 prevé recomendar $\|k\|=128$ bits
+
+En cifrado simétrico, el tamaño en bits de su clave es igual a la **fortaleza** del sistema
+
+<!-- algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
+
+---
+
+NIST: *The  most  important  approach  is  to  be  flexible;  the  use  of  implementations  and  applications  that  can  most  easily  be  adapted  to  the  cryptographic  security  offerings  and  a  plan  for  transitioning  to  them  offer  the  best  solution*
+
+![w:22em center](images/nist-usage.png)
+
+La amenaza conocida que puede modificar el calendario es la **computación cuántica**
+
+<!-- ¿Qué pasa con la criptografía cuántica? El cifrado asimétrico se verá más afectado que el simétrico
+
+
+https://csrc.nist.gov/projects/post-quantum-cryptography
+
+-->
+
+## Rompiendo algoritmos
+
+Recuerda: definimos un que un algoritmo está **criptográficamente roto** si se conoce un ataque más eficiente que la fuerza bruta
+
+Para la criptografía simétrica, buscaremos **algoritmos computacionalmente seguros y que no estén rotos**
+
+Cuando la comunidad criptográfica rompe un algoritmo, se sustituye por otro
+
+... pero es mejor prevenir: los algoritmos caducan y se cambian antes de que estén rotos
+
+## Criptografía simétrica: tipos
+
+- **Cifrado de flujo**. Heredero de "la idea" *one-time-pad*: el mensaje llega como un flujo de bytes que se cifra según va llegando.
+- **Cifrado de bloque**. Heredero de "la tradición" Vigenère: el mensaje se divide en bloques que se cifran por separado
+
+
+---
+<!-- _class: center -->
+
+Flujo|Bloque
+--|--
+Más rápido|Más lento (a menos que exista ayuda del hardware)
+Fácil de programar: pequeños dispositivos|Más complejo
+Implementado en hardware|Implementado en software
+RC4, **ChaCha20**|3DES, **AES**
+
+<!--
+Nosotros veremos en detalle los algoritmos ChaCha20 y AES, que los dos más utilizados actualmente
+-->
+
+# Cifrado de flujo
+<!-- _class: lead
+header: Cifrado de flujo -->
+
+---
+<!-- _class: center -->
+
+Es una implementación práctica de los bloques de una solo uso (*one-time-pad*)
+
+Recuerda: con *one-time-pad* necesitábamos una clave tan larga como el mensaje
+
+$$\|k\|=\|m\|$$
+
+Para después hacer:
+
+$$c=e(k,m) = k \otimes m$$
+
+---
+<!-- _class: center -->
+
+En cifrado de flujo lo que haremos es generar una $k_{\text{generada}}$
+
+$\|k_{\text{generada}}\| = \|m\|$
+
+...a partir de una clave $k$ de longitud corta...
+
+$k \overset{PRNG}{\longrightarrow} k_{\text{generada}}$
+
+para después hacer:
+
+$c = k_{\text{generada}} \oplus m$
+
+## Cifrado de flujo: algoritmo
+
+![w:25em center](images/symmetric-example.png)
+
+<!--
+Recordatorio: este es el esquema para hacer un cifrador de flujo.
+-->
+
+## Generadores de números aleatorios
+
+La función *PRNG* (*Pseudo Random Number Generator*) es un generador de bits que tiene como entrada una **semilla** (que será la clave de cifrado $k$) y tiene como salida el flujo de bits que aplicaremos sobre el mensaje para cifrarlo con *XOR*
+
+La velocidad del cifrado depende totalmente de la velocidad del PRNG, porque el XOR es instantáneo
+
+![bg right:50%](https://upload.wikimedia.org/wikipedia/commons/1/1c/6sided_dice_%28cropped%29.jpg)
+
+---
+
+Un PRNG es un algoritmo determinista que extiende una semilla realmente aleatoria, resultando en una secuencia que parece ser uniformemente aleatoria.
+
+Definición formal:
+
+**PRNG**: Dado $G$, un algoritmo determinista en tiempo polinomial que toma una semilla $s \in \{0,1\}^n$ y da como salida una cadena $G(s) \in \{0,1\}^{l(n)}$, donde $l()$ es un polinomio y $l(n) > n$ para todo $n \in \N$. $G$ es un PRGN si su salida no puede distinguirse de una función aleatoria uniforme en tiempo polinomial.
+
+<!-- Een lenguage comprensible: simplemente por inspección de la salida no podríamos saber si es un salida realmente al azar o fruto de un algoritmo determinista
+
+Fíjate que "en tiempo polinomial" siempre lo entendemos como "en un tiempo razonable"
+
+La confidencialidad perfecta decía que el algoritmo era seguro aunque el adversario tuviese recursos infonitos. La seguridad computacional, era segura ante adversarios con recursos limitados (de tiempo o de computación o de ambas). Ese requisito "recursos limitados" en matemática forma se exprea como "en tiempo polinomial" 
+
+-->
+
+## PRNG: seguridad
+
+Una función PRNG es realmente PRNG (es decir, útil en criptografía) si ningún atacante puede distingir entre las secuencia generada y una fuente aleatoria aleatoria uniforme RNG con una probabilidad diferente de $0.5$
+
+
+![center](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)
+
+Fuente aleatorio uniforme RNG: medios físicos, no algorítmicos. Por ejemplo, [generadores cuánticos](https://physicsworld.com/a/fast-quantum-random-number-generator-could-advance-cryptography-on-the-cheap/). Encontrarás más información en el [Anexo 2](A2-rng.html)
+
+> Información adicional: https://www.incibe-cert.es/blog/comprobando-aleatoriedad
+
+<!--
+Curiosidad: "un atacante no puede distinguir... con una probabilidad..." En análisis criptográfico, se analiza el protocolo como un juego. Los atacantes o los usuarios plantean un juego e intentan adivinar algo. Aquí el usuario le da al atacante un número y le pregunta "¿esto lo he sacado de un RNG o de un PRNG?". La pregunta se hace muchas veces. El atacante gana si puede adivinarlo más de la mitad de las veces.
+
+Seguimos.
+
+Los ordenadores no pueden generar números realmente aleatorios ya que solo usan algoritmos. Para generar números realmente aleatorios es necesaria ayuda externa: pulsaciones de teclado, movimiento de ratón...
+
+Fíjate que incluso las pulsaciones de teclado no son del todo aleatorias: después de una vocal es posible que venta una consonante. Por la noche habrá menos pulsaciones que durante el día... Son fuentes mejores de aletoriedad, pero no perfectas
+
+-->
+
+---
+
+* Distribución uniforme: debe tender a tener el mismo número de 1's que de 0's, tender al mismo número de 00's, que de 01's, 10's...
+* Despúes de $n$ un atacante no debe poder predecir el $n+1$
+
+Con la semilla (la clave), la secuencia queda determinada en su totalidad, que es lo que nos interesa.
+
+---
+
+![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/4/4d/Lorenz-SZ42-2.jpg)
+
+La seguridad del cifrado depende del generador PRNG utilizado...
+
+...**y de que nunca se envíen dos mensajes cifrados con la misma clave**
+
+(vamos a repetir esto muchas veces en el curso)
+
+[Lorenz SZ](https://en.wikipedia.org/wiki/Lorenz_cipher#Cryptanalysis) fue una máquina alemana de cifrado de flujo, rota porque un operador envió dos mensajes diferentes seguidos sin cambiar la clave.
+
+## Cifrado de flujo: algoritmo
+<!-- _class: extra-slide -->
+
+![w:25em center](images/symmetric-example.png)
+
+<!--
+Recordatorio: este es el esquema para hacer un cifrador de flujo.
+-->
+
+## Intento 1
+<!-- _class: smaller-font -->
+
+Supongamos que tenemos una función PRNG, y usamos una clave k como semilla del PRNG para cifrar un flujo de datos en una conexión
+
+Si ciframos dos mensajes con la misma clave (semilla), un atacante puede :
+
+$$
+\begin{aligned}
+c_1 \oplus c_2  &= (k_{\text{g}} \oplus m_1) \oplus (k_{\text{g}} \oplus m_2) \\
+                &= k_{\text{g}} \oplus m_1 \oplus k_{\text{g}} \oplus m_2 \\
+                &= k_{\text{g}} \oplus k_{\text{g}} \oplus m_1 \oplus m_2 \\
+                &= (k_{\text{g}} \oplus k_{\text{g}}) \oplus (m_1 \oplus m_2) \\
+                &= (\{000\cdots000\}) \oplus (m_1 \oplus m_2) \\
+                &= m_1 \oplus m_2
+\end{aligned}
+$$
+
+¡Un atacante puede hacer XOR de los dos textos cifrados y el XOR de los textos en claro!
+
+> Información adicional: [Chosen plaintext attacks](https://en.wikipedia.org/wiki/Chosen-plaintext_attack)
+
+<!--
+Qué puede hacer un atacante con el xor de los textos en claro:
+
+- Análisis frecuencia: La "clave para cifrar m2" es m1, que ya no es aleatorio y permite el análisis de frcuencuas.
+- Si partes de m1 son conocidas, es aún más sencillo descifrar partes de m2
+
+Es decir, este esquema falla ante ataques de "chosen plaintext attacks": si el enemigo puede forzarnos a cifrar algo, el sistema está roto.
+
+Los algotitmos se diseñan para ser resistenentes a ciertos problemas. Por ejemplo, ese "chosen plantext attack", que es un juego como el que hemos visto antes. Puedes encontrar otros ataques en: https://en.wikipedia.org/wiki/Attack_model
+
+Mira el ejemplo de ataque japonés en el Pacífico de wikipedia
+-->
+
+## Intento 2
+
+Cambiamos la clave (la semilla del PRNG) en cada transmisión
+
+Esto es correcto pero costoso, y volvemos a los problemas de la confidencilidad perfecta: distribución de claves
+
+## Intento 3
+
+Generar variaciones de las claves en cada transmisión
+
+Supongamos que la semilla no es directamente la clave, sino una función de la clave y otro parámetro $r$
+
+$k_{generada} = PRNG(f(k, r))$
+
+Y $r$ lo enviamos con cada transmisión: $c' = c \| r$
+
+Ahora la semilla "es diferente" con cada tranmisión
+
+Pero tenemos que asumir que un atacante conoce $r$ porque monitoriza nuestras comunicaciones
+
+## *Nonce*: *number used only once*
+
+Curiosamente: **¡esto es correcto!**
+
+Que el atacante conozca la $r$ reduce la fortaleza del algoritmo en los bits de $r$, pero es puede ser perfectamente adecuado (si el PRNG está bien diseñado)
+
+Este elemento se conoce como *nonce* y forma parte de muchos algoritmos criptográficos.
+
+![bg w:90% right:50%](https://upload.wikimedia.org/wikipedia/commons/4/4f/Nonce-cnonce-uml.svg)
+
+## Seguridad de los algoritmos de flujo
+
+Debemos generar un $r$ (*nonce*) diferente para cada mensaje
+
+Si tenemos una comunicación bidireccional como HTTPS (TLS) hace falta:
+
+- o bien generar un *nonce* diferente para cada sentido
+- o bien generar una clave $k$ diferente para cada sentido
+- o ambas, que es lo mejor
+
+---
+
+El cifrado de flujo es tan seguro como:
+
+- La corrección de la hipótesis de que la función PRNG sea realmente PRNG
+- El espacio de claves (de semillas) sea tan grande que sea improbable que un ataque de fuerza bruta sea factible
+- Que se cumplan las hipótesis de uso:
+	- clave diferente en cada comunicación
+	- *nonce* y $k$ escogidos totalmente el azar.
+
+<!--
+
+**Nota**: hasta hace poco, un buen algoritmo PRNG no es sencillo de hacer, o no es rápido. Hasta la aparición de Salsa20, la falta de buenos algoritmos PRNG hacían preferir el cifrado simétrico de bloque que veremos en un momento.
+
+-->
+
+## Ejemplos
+
+- RC4 (histórico): obsoleto
+- ChaCha: derivado del Salsa20 y probablemente la única alternativa al AES en TLS 1.3
+    - $\|k\|=256\ bits$
+    - $\|nonce\|=64\ bits$
+
+![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/4/47/Salsa_round_function.svg)
+
+## RC4
+
+Un comentario rápido sobre [RC4/ARC4/RCFOUR](https://en.wikipedia.org/wiki/RC4):
+
+- Ron Rivest de RSA en 1987 (volveremos a hablar de Ron Rivest y de RSA)
+- Secreto comercial hasta 1994
+- Muy rápido y simple de implementar
+- Muy utilizado hasta 2015: WEP, WPA, SSL, TLS...
+- Claves de 40 a 2048 bits
+- Hoy en día considerado roto y no se recomienda su uso.
+
+![bg left:30%](https://upload.wikimedia.org/wikipedia/commons/7/79/Ronald_L_Rivest_photo.jpg)
+
+# ChaCha20
+<!-- _class: lead
+header: ChaCha20 -->
+
+## ChaCha20: características
+
+Basado en [Salsa20 (2017)](https://cr.yp.to/snuffle/spec.pdf), de Daniel J. Bernstein
+
+[ChaCha20 (RFC 8439, 2018)](https://tools.ietf.org/html/rfc8439), es la variante estandarizada
+
+Cifrado simétrico de flujos de bytes. Claves de 256 bits.
+
+Sustituto "de facto" para el antes ubicuo RC4. Se usa en:
+
+- TLS (en Android) ya que es más rápido que AES en hardware no especializado
+- El `/dev/urandom` de Linux
+- Varias VPNs
+
+![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/1/1a/Dan_Bernstein_27C3.jpg)
+
+<!-- ChaCha20 es muy nuevo, pero ha tenido un éxito rápido.
+
+Es especialmente interesante en móviles, que tienen procesaror ARM y no están optimizados para otros cifradores como AES -->
+
+## Cifrado con Python
+
+```python
+import json
+from base64 import b64encode
+from Crypto.Cipher import ChaCha20
+from Crypto.Random import get_random_bytes
+
+# Configuración
+plaintext = b'Attack at dawn'
+key = get_random_bytes(32)
+cipher = ChaCha20.new(key=key)
+nonce = b64encode(cipher.nonce).decode('utf-8')
+
+# Cifrado
+ciphertext = cipher.encrypt(plaintext)
+ct = b64encode(ciphertext).decode('utf-8')
+result = json.dumps({'nonce':nonce, 'ciphertext':ct})
+
+# Mensaje
+{"nonce": "IZScZh28fDo=", "ciphertext": "ZatgU1f30WDHriaN8ts="}
+```
+
+<!-- Cosas para fijarse: la salida se codifica en Base64 y el nonce se envía con la comunicación -->
+
+## (inciso: Base64 no es un cifrado)
+<!-- _class: extra-slide smaller-font -->
+
+[Base64](https://es.wikipedia.org/wiki/Base64) se utiliza para representar información binaria como cadena imprimible
+
+```bas
+> echo '¡Qué tal estás!' | base64
+wqFRdcOpIHRhbCBlc3TDoXMhCg==
+> dd count=1 bs=16 if=/dev/random 2>/dev/null 
+???n??????;N%  
+> dd count=1 bs=16 if=/dev/random 2>/dev/null 
+D87WM0+4j5vYzLpHhJFMTA==
+```
+
+Base64 **NO ES UN CIFRADO**. Es una **CODIFICACIÓN** para representar cadenas binarias como texto. A veces se usa también para representar texto (ej: correos electrónicos) y ahorrar problemas con letras acentuadas.
+
+Recuerda:
+
+- Encontrar Base64 no significa que algo esté cifrado
+- Pero es común cifrar algo y después enviarlo codificado como Base64
+
+## Descifrado con Python
+
+``` python 
+# La clave key se tiene por canal seguro
+# el receptor recibe el mensaje anterior {nonce, ciphertext}
+nonce = b64decode(received['nonce'])
+ciphertext = b64decode(received['ciphertext'])
+
+cipher = ChaCha20.new(key=key, nonce=nonce)
+plaintext = cipher.decrypt(ciphertext)
+print("The message was " + plaintext)
+```
+
+## Diagrama de flujo
+
+![w:25em center](images/ChaCha20.png)
+
+<!--
+
+
+ChaCha20 es el algoritmo generador PRNG, y su dalida después hace XOR con el mensaje
+
+El algorutmos es así:
+
+- Creación de una matriz de 512 bits: clave, nonce, pos=0
+- 10 veces:
+	- QR(columnas)
+	- QR(filas)
+- La salida es la matriz de 512 bist (con un paso previo y sencillo de difusion)
+
+Cada ejecución de ChaCha20 genera un flujo de 512 bits. El primero con pos=0. Si se necesita un nuevo flujo porque el mensaje es más largo, entonces se genera otra matriz con pos=1 y se generan otros 512 bits. Y después pos=2, pos=3....
+
+Los bits que no hemos usado pueden descartarse.
+-->
+
+## Estado inicial
+<!-- _class: two-columns with-header -->
+
+.|.|.|.
+--|--|--|--
+"expa"|"nd 3"|"2-by"|"te k"
+Key|Key|Key|Key
+Key|Key|Key|Key
+Pos.|Pos.|Nonce|Nonce
+
+- Matriz 4x4 de 16 palabras de 32 bits
+- **Key**: 256 bits
+- **Pos**: contador de 0 hasta $2^{64}$ Es decir, 64 bits (en la RFC, 32 bits)
+- **Nonce**: valor aleatorio de 64 bits (en la RFC, 96 bits)
+- "expand 32-byte k" = `0x657870616e642033322d62797465206b` es [un número "*no llevo nada en la manga*"](https://es.wikipedia.org/wiki/N%C3%BAmeros_sin-nada-sacado-de-la-manga)
+
+## Función quarter round QR
+
+![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/9/99/ChaCha_Cipher_Quarter_Round_Function.svg)
+
+Aplicada sobre 4 palabras de 32 bits, las difunde:
+
+```
+QR(a, b, c, d)
+a += b; d ^= a; d <<<= 16;
+c += d; b ^= c; b <<<= 12;
+a += b; d ^= a; d <<<= 8;
+c += d; b ^= c; b <<<= 7;
+```
+
+Solo tiene sumas, rotaciones y XOR: es una [función ARX](https://en.wikipedia.org/wiki/Block_cipher#Operations), que impide ataques de canal lateral por *timing*.
+
+---
+
+```c
+#define ROTL(a,b) (((a) << (b)) | ((a) >> (32 - (b))))
+#define QR(a, b, c, d) (			\
+	a += b,  d ^= a,  d = ROTL(d,16),	\
+	c += d,  b ^= c,  b = ROTL(b,12),	\
+	a += b,  d ^= a,  d = ROTL(d, 8),	\
+	c += d,  b ^= c,  b = ROTL(b, 7))
+#define ROUNDS 20
+ 
+void chacha_block(uint32_t out[16], uint32_t const in[16])
+{
+	int i;
+	uint32_t x[16];
+
+	for (i = 0; i < 16; ++i)	
+		x[i] = in[i];
+	// 10 loops × 2 rounds/loop = 20 rounds
+	for (i = 0; i < ROUNDS; i += 2) {
+		// Odd round
+		QR(x[0], x[4], x[ 8], x[12]); // column 0
+		QR(x[1], x[5], x[ 9], x[13]); // column 1
+		QR(x[2], x[6], x[10], x[14]); // column 2
+		QR(x[3], x[7], x[11], x[15]); // column 3
+		// Even round
+		QR(x[0], x[5], x[10], x[15]); // diagonal 1 (main diagonal)
+		QR(x[1], x[6], x[11], x[12]); // diagonal 2
+		QR(x[2], x[7], x[ 8], x[13]); // diagonal 3
+		QR(x[3], x[4], x[ 9], x[14]); // diagonal 4
+	}
+	for (i = 0; i < 16; ++i)
+		out[i] = x[i] + in[i];
+}
+```
+
+> Fuente: [Wikipedia](https://en.wikipedia.org/wiki/Salsa20#ChaCha_variant))
+
+## Variantes
+
+... la comunidad aún no está segura de cómo usarlo ...
+
+Nonce length|Description|Max data|If random nonce and same key
+--|--|--|--
+8 bytes (default)|The original ChaCha20 designed by Bernstein.|No limitations|Max 200 000 mensajes, el contador limita
+12 bytes|The TLS ChaCha20 as defined in RFC7539.|256 GB|Max 13 billions messages
+24 bytes|XChaCha20, still in draft stage.|256 GB|No limitations
+
+> [The Salsa20 family of stream ciphers](https://cr.yp.to/snuffle/salsafamily-20071225.pdf), Daniel J. Bernstein, 2007
+
+## Vulnerabilidades
+
+Ninguna conocida, siempre que se cumplan las condiciones de uso: no se puede repetir clave y nonce.
+
+---
+<!-- _class: extra-slide -->
+
+Anexo recomendado: [RNG y HSM](A1-rng.html)
+
+# Cifrado de bloque
+<!-- _class: lead
+header: Cifrado de bloque -->
+
+---
+<!-- _class: smaller-font -->
+
+El cifrado de bloque es lo que hacía el cifrado Vignère: cortar el texto en claro en bloques de la misma longitud de la clave y cifrar cada uno de los bloques
+
+Si tenemos mensajes más largos que $n$ deberemos de segmentarlos en bloques de tamaño $n$
+
+![center w:30em](https://upload.wikimedia.org/wikipedia/commons/d/d6/ECB_encryption.svg)
+
+El cifrado de bloque es el más utilizado con el cifrado simétrico: es rápido y no necesita exigentes o lentos algoritmos PRNG.
+
+<!--
+Nota importante: la figura muestra un confrado de bloque totalmente inseguro, como veremos en un momento
+
+Fíjate: los bloques no tienen memoria, al contrario de lo que pasaba en el cifrado de flujo. Veremos que esto es una de sus debilidades.
+-->
+
+El cifrado de bloque se suele definir como una **serie de permutaciones**.
+
+## Permutaciones (P)
+
+![w:28em center](https://upload.wikimedia.org/wikipedia/commons/4/43/Injective%2C_Surjective%2C_Bijective.svg)
+
+Una permutación es una función biyectiva de un conjunto sobre sí mismo
+
+$$
+X = \{ a,b,c \} \\
+f : X \rightarrow X
+$$
+
+---
+
+Podemos representar el cifrado de bloque de tamaño $n$ con una permutación $f$, que es la clave de cifrado.
+
+$$f : X\rightarrow X$$
+
+
+Donde $X$ es el conjunto de posibles bloques tanto de texto en claro como de texto cifrado
+
+La función de descifrado como su inversa $f^{-1}$
+
+$$f^{-1} : X\rightarrow X$$
+
+Es decir:
+
+$$
+\begin{aligned}
+    c &= e(k, m) = f(m) \\
+    m &= d(k, c) = f^{-1}(c)
+\end{aligned}
+$$
+
+## Permutación aleatoria (RP)
+
+La permutación se puede ver como una tabla de $2^n$ entradas, con $n$ el tamaño de bloque
+
+$$f : X\rightarrow X$$
+$$f : \{0,1\}^n\rightarrow \{0,1\}^n$$
+
+$$
+00000000 \rightarrow 01010011\\
+00000001 \rightarrow 11000110\\
+00000010 \rightarrow 01010100\\
+...
+$$
+
+Estas $2^n$ entradas de longitud $n$ las deberemos escoger **de forma aleatoria** de forma que no podremos conocer $f$ sin conocer la tabla
+
+---
+
+En realidad para que el cifrado sea seguro necesitaremos una "familia" de funciones equivalentes pero diferentes. Las indexaremos en función de la clave, $k$
+
+$$\begin{aligned}
+f_k &: X \rightarrow X \\
+f_k &: \{0,1\}^n \rightarrow \{0,1\}^n
+\end{aligned}$$
+
+O también, podemos redefinir $f$ y añadirle $k$ como parámetro:
+
+$$\begin{aligned}
+f &: K \times X \rightarrow X \\
+f &: \{0,1\}^{\|k\|} \times \{0,1\}^n \rightarrow \{0,1\}^n
+\end{aligned}$$
+
+donde $K$ es el espacio de claves $k$, es decir, el conjunto de claves
+
+---
+
+Por ejemplo, para DES que tiene un tamaño de bloque de $n=64$ bits
+
+hace falta guardar:
+
+$$64·2^{64} b=2^{70} b=2^{67} B=2^{27} TB$$
+
+... para cada una de las posibles claves $k$
+
+Obviamente no es factible implementar los cifrados modernos directamente con una tabla indexada.
+
+
+## Permutación pseudoaleatoria (PRP)
+
+Igual que para el cifrado de flujo nos hacía falta un flujo de bits aparentemente aleatorio para quien no tuviera la semilla (la clave $k$)...
+
+...para cifrado de bloque utilizaremos permutaciones pseudoaleatorias (PRP, *Pseudo Random Permutation*) en las que la permutación será aparentemente aleatoria para alguien que no conozca la clave
+
+Esto nos permitirá realizar cifrados de bloque factibles, intercambiando una cantidad inmensa de memoria por una computación abordable
+
+Como en el caso de PRNG, hace falta que las PRP sean indistinguibles de las RP
+
+Además, hace falta que tanto $f_k$ como $f`{−1}_k$ se puedan calcular de forma eficiente
+
+## Construcción de cifrados de bloque
+
+Hay dos clases de cifrado de bloque. Es decir, dos maneras de implementar PRP:
+
+- cifrado de sustitución: monoalfabéticos y polialfabéticos
+- cifrados de transposición
+
+Fijate: igual que los cifrados clásicos.
+
+Por si solas, las 2 clases básicas de cifrado de bloque son inseguras pero combinándolas podemos obtener seguridad creciente.
+
+A partir de ahora utilizaremos $e()$ y $d()$ en lugar de las $f$ y $f^{−1}$ utilizadas hasta ahora
+
+## Sustitución polialfabética
+<!-- _class: center -->
+
+Para un bloque de longitud $t$ elementos, usamos $t$ permutaciones diferentes.
+
+m | c $=e(k, m)$
+--|--
+$pos_1$|$f_a(pos_1)$
+$pos_2$|$f_b(pos_2)$
+$pos_3$|$f_c(pos_3)$
+$pos_4$|$f_d(pos_4)$
+
+Igual que en Vigenère, podríamos recuperar el texto con análisis frecuencial
+
+## Transposición
+
+Para un bloque de longitud $t$ elementos, intercambiamos los elementos entre sí.
+
+m | c $=e(k, m)$
+--|--
+$pos_1$|$pos_2$
+$pos_2$|$pos_4$
+$pos_3$|$pos_3$
+$pos_4$|$pos_1)$
+
+No solo la frecuencia de los símbolos de entrada se mantiene, si no que los propios símbolos se mantiene (aunque en posiciones diferentes)
+
+## Composición
+
+Si componemos el cifrado total como una serie de $n$ cifrados de bloque, podemos escribir:
+
+$$
+\begin{aligned}
+c_1 &= e_1(k_1, m)\\
+c_2 &= e_2(k_2, c_1)\\
+...\\
+c_n &= e_n(k_n, c_{n-1})\\
+\end{aligned}
+$$
+
+Cada clave $k_i$ podría ser independiente, pero habitalmente se genera mediante un proceso llamado **expansión de clave**
+
+$$
+k \xrightarrow{\text{PRNG}} \{k_1, k_2, \dotsc, k_n\}
+$$
+
+---
+
+
+- **Substitución**: da **confusión**, que permite dificultar la obtención de la clave a partir del texto cifrado.
+- **Transposición**: da **difusión**, que permite difundir las redundancias del texto en claro, de forma que no aparezca en el cifrado.
+
+Etapas o rounds: los cifrados de **sustitución** y **transposición** se agrupan en parejas y se aplican varias veces (con diferentes claves) hasta obtener un cifrado seguro
+
+$$
+c_i = e_i(k_i, c_{i-1})
+$$
+
+El objetivo de la criptografía moderna es maximizar la difusión y la confusión (según Shannon)
+
+
+## Cifrado TES / 3DES
+<!-- _class: smaller-font -->
+
+Unas palabras sobre [TDES (NIST SP 800-67, 2017)](https://csrc.nist.gov/publications/detail/sp/800-67/rev-2/final)
+
+- Publicado en 1995.
+- Es un [DES (FIPS 46-3, 1999, retirado)](https://csrc.nist.gov/publications/detail/fips/46/3/archive/1999-10-25) aplicado tres veces, con tres claves diferentes:
+
+$$
+c = DES(k_3, DES'(k_2, DES(k_1, m)))
+$$
+
+- DES tiene claves de 56 bits, pero al aplicarlo tres veces subimos la longitud de la clave hasta que alcanzamos una fortaleza válida de 112 bits (nota que no es $3*52$ bits: ataque [Meet in the middle](https://en.wikipedia.org/wiki/Meet-in-the-middle_attack))
+- Claves más cortas, y por tanto más débil que AES
+- Se usa poder aprovechar todo el hardware DES que ya existía desde 1976
+
+
+![bg right:30% w:90%](https://upload.wikimedia.org/wikipedia/commons/2/25/Data_Encription_Standard_Flow_Diagram.svg)
+
+<!--
+DES es un algoritmo de IBM que lo empezó todo: probó que era posible la confidencialidad computacional, es decir, conseguir un sistema que un atacante no pudiese romper en un tiempo razonable.
+
+DES ha quedadado obsoleto no porque esté roto, sino porque su espacio de claves es muy pequeño: se pueden probar todas las claves de 56 bits en pocas horas.
+
+Pero al combinarlo tres veces, con tres claves diferentes, y aumentar su espacio de claves hasta 112 bits, el sistema 3DES es seguro hasta el 2030, según la opinión del NIST
+-->
+
+# Cifrado AES
+<!-- _class: lead
+header: AES -->
+
+## Advanced Encryption System (AES)
+
+Desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001.
+
+[AES (FIPS 197, 2001)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf) es un cifrado de bloque:
+
+- longitud de bloque: 128 bits (16 Bytes)
+- longitud de clave: 128, 192 ó 256 bits
+
+![bg left:40%](https://whatsupcourtney.com/wp-content/uploads/2017/10/Things-to-do-in-Leuven-52-e1560945504897.jpeg)
+
+<!--
+AES fue desarrollado por Vincent Rijmen y Joan Daemen en el COSIC de la KU Leuven, Bélgica.
+
+Es totalmente ubicuo en la seguridad actual: se usa para todo, en todos lados. ChaCha20 es el único algoritmo que puee hacerle sombra.
+
+Hay hardware especializado en cifrar y descifrar AES, entre ellas las CPUs de computadora de sobremesa.
+-->
+
+## Algoritmo
+
+Parte de una matriz de estado que se va modificando durante 10, 12 o 14 rondas según sea el tamaño de clave. Inicialmente: la matriz de estado es el texto en claro.
+
+1. `KeyExpansion`: se derivan *round keys* a partir de la clave de cifrado usando el algoritmo *AES key schedule*. Necesarias: una por etapa, y una más.
+1. `AddRoundKey`:  $bloque \otimes k_i$
+1. Cada etapa:
+	- `SubBytes`: sustitución de bytes en función de una tabla fija de 256 entradas
+	- `ShiftRows`: transposición de bytes fija
+	- `MixColumns`: 4 multiplicaciones modulares de 4 Bytes, valores fijos
+	- `AddRoundKey`: $bloque \otimes k_i$ (subclave $k_i$ )
+
+---
+
+![center](images/aes-algorithm.png)
+
+<!--
+Fíjate:
+
+- el algoritmo de cifrado es diferente el algoritmo de descifrado. Se diseñó para optimizar el cifrado.
+- Hay una etapa de expación de clave: de una clave con un tamaño determinado sacamos "subclaves" para cada una de las etapas.
+-->
+
+## SubBytes
+
+![center Wikipedia](images/AES-SubBytes.svg)
+
+"sustitución de bytes en función de una tabla fija de 256 entradas"
+
+## ShiftRows
+
+![center Wikipedia](images/AES-ShiftRows.svg)
+
+"transposición de bytes fija"
+
+<!--
+Añade **difusión**: los bits de salida dependerán de varios bits de entrada.
+-->
+
+## MixColumns
+
+![center Wikipedia](images/AES-MixColumns.svg)
+
+"4 multiplicaciones modulares de 4 Byte, valores fijos"
+
+## AddRoundKey
+
+![center w:20em Wikipedia](images/AES-AddRoundKey.svg)
+
+"$\text{bloque} \oplus k_{i}$ (subclave $k_{i}$)"
+
+<!--
+Aquí es donde entran las subclaves, diferentes en cada una de las etapas, y la operación XOR que finalmente cifra el bloque. El nuevo estado se pasa entonces a la siguiente etapa.
+-->
+
+## Expansión de clave
+
+Cada una de las etapas (*rounds*) utiliza una subclave $k_i$ diferente
+
+Cada una de les subclaves $k_i$ [se deriva](https://en.wikipedia.org/wiki/Rijndael_key_schedule) de la clave $k$
+
+
+Nota 1: las subclaves se aplican ($\otimes$) "alrededor" de las etapas por tanto hace falta una subclave más que etapas hay (11|13|15)
+
+Nota 2: hacen falta más etapas en los AES de clave larga para "aplicar" el mayor espacio de claves sobre el mensaje en claro
+
+---
+
+![center w:35em](images/aes-keyexpansion.png)
+
+## Vulnerabilidades
+
+La estadística del mensaje en claro aparece en el texto cifrado.
+
+Ahora los bloques son de 16 B, no de 1 B por tanto la estadística es menos importante
+(|bloque|=$2^{128}$), pero en secuencias constantes (por ejemplo, como las de un gráfico) se pueden dar bloques enteros idénticos
+
+![center](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg)
+
+---
+<!-- _class: center -->
+
+Un cifrado debe parecerse a esto:
+
+![center](images/gimp/bio-c.png)
+
+## Modos de operación
+
+Esta "vulnerabilidad" es una propiedad de todos los cifrados de bloque
+
+La contramedida es la misma para todos: no cifrar nunca bloque a bloque, sino cifrar parte del bloque anterior en el bloque actual.
+
+Este encadenamiento se denomina modo de operación **y no es opcional**
+
+---
+
+Si acumulamos estado durante el cifrado, podemos utilizar este estado sobre el cifrado del siguiente bloque:
+
+- **ECB**: *Electronic Code-Book*,
+    - no-op
+- **CBC**: *Cipher Block Chaining*
+    - el bloque $i−1$ se aplica $\otimes$ sobre el bloque en claro $i$
+- **OFB**: *Output Feedback*
+    - cifras el cifrado anterior, y el resultado $\otimes$ del mensaje en claro
+- **CTR**: *Counter*
+    - cifras un contador, y el resultado $\otimes$ del mensaje en claro
+
+## ECB: Electronic Code-Book
+
+![center Wikipedia w:35em](images/ECB_encryption.svg)
+
+---
+<!-- _class: center -->
+
+Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
+
+**Eso nunca se puede hacer.**
+
+![](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg) ![](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg)
+
+**No se puede usar AES en modo ECB**
+
+## CBC: Cipher Block Chaining
+
+![center Wikipedia w:35em](images/CBC_encryption.svg)
+
+## OFB: Output Feedback
+
+![center Wikipedia w:35em](images/OFB_encryption.svg)
+
+## CTR: Counter
+
+![center Wikipedia w:35em](images/CTR_encryption.svg)
+
+## Vector de Inicialización (IV)
+
+Los distintos encadenados requieren de una semilla inicial para empezar el encadenado: vector de inicialización (IV), que cumple la misma función que un *nonce*.
+
+Esto hace que en lugar de transmitir $n$ bloques como en ECB, haga falta transmitir $n+1$
+
+- IV en CBC: es el hipotético bloque cifrado $−1$
+- IV en OFB: es el bloque que se cifra constantmente $e(e(e(...e(IV))))$ y se aplica sobre los bloques en claro (con $\otimes$)
+- IV en CTR: es el valor inicial del contador que se cifra ECB, y se aplica sobre los bloques en claro (con $\otimes$)
+
+`AES_128_CTR` es efectivamente un cifrado de flujo, siendo $k$ la semilla, y el IV el *nonce*
+
+## Otros modos
+
+AES puede usarse también con "modos autenticados":
+
+- [OCB](https://en.wikipedia.org/wiki/OCB_mode)
+- [GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
+- Y otros
+
+> Información adicional, de la librería que usamos en los ejercicios: https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
+
+<!--
+La autenticación es un servicio que aún no hemos visto, pero tenemos casi toda la segunda parte de la asignatura para ello.
+
+Hasta ahora solo nos preocupábamos de mantener la información secreta, pero no hemos comprobado la identidad de la persona que está hablando. AES tiene algunos modos de uso avanzados que permiten también comprobar esta identidad. Pero aún necesitamos un poco de teoría.
+-->
+
+## Vulnerabilidades
+
+Hay distintos ataques que permiten realizar búsquedas de forma más rápida que un ataque de fuerza bruta
+
+- AES-128/192/256: recuperación de clave en una quarta parte del tiempo que fuerza bruta. Se pierden 2 bits
+- AES-192/256: si las claves están relacionadas, complejidad $2^{119}$. Contramedida: claves aleatorias
+- el bloque de 128b limita el uso del cifrado hasta $2^{64}$ bloques (268 B) a causa de la paradoja del cumpleaños. Contramedida: cambiar la clave cuando se haya usado para cifrar $2^{68}$ bytes
+
+AES ha perdido fortaleza pero aún está aguantando.
+
+## Rendimiento
+
+
+- AES-128: 1,1 Gbps (seguridad 128 bit)
+- AES-192: 0,9 Gbps (seguridad 192 bit)
+- AES-256: 0,7 Gbps (seguridad 256 bit)
+- Salsa20: 3,2 Gbps (seguridad 256 bit)
+- ChaCha20: 3,2 Gbps (seguridad 256 bit)
+- AES "hardware": ~8 veces más rápido (Intel, 2011)
+- DES: 250 Mbps (seguridad 56 bit)
+- 3DES: 100 Mbps (seguridad 112 bit)
+
+## Computación cuántica
+
+
+- los computadores cuánticos actuales no tienen aplicación práctica: a parte de romper claves sirven para simular... fenómenos de física cuántica
+- se cree que no habrá computación cuántica práctica antes del ~2030
+- Se conoce un algoritmo óptimo para compuración cuántica (Grover) que permite romper el cifrado simétrico, pero para ser robustos a este algoritmo sólo hemos de doblar la longitud de claves. Por ejemplo pasar a AES-256 daría una fortaleza equivalente de 128 bits
+
+Por tanto, se considera que la criptografía simétrica es robusta ante la computación cuántica
+
+# Protocolo Bcrypt
+<!-- _class: lead
+header: bcrypt
+-->
+
+---
+
+[Bcrypt (1999)](https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html), de Niels Provos y David Mazieres, es un sistema para proteger contraseñas en bases de datos.
+
+- Basado en el cifrado por bloques de [Blowfish (1994)](https://www.schneier.com/academic/archives/1994/09/description_of_a_new.html) de Bruce Schneier (en la foto)
+- Se aprovecha de que Blowfish es muy lento durante la fase de expansión de claves
+
+![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/f/fc/Bruce_Schneier_at_CoPS2013-IMG_9174.jpg)
+
+<!--
+En la fotografía no está el creador de bcrypt sino el creador de Blowfish: Bruce Schneier
+
+El blog y los libros de Bruce Schneier son un imprescidible para estar en el mundo de la criptografía y la seguridad operacional. Es un divulgador nada técnico y accesible a personas con cualquier conocimiento.
+
+https://www.schneier.com/
+-->
+
+## Escenario: usuarios de una página web
+
+¿Cómo puede guardar una web las contraseñas de sus usuarios?
+
+* *En claro*: un atacante podría robarlas
+* *Cifradas con una clave conocida por la web*: un atacante podría robar la clave, y después las contraseñas
+* *Bcrypt*: cifradas, con *nonce*.
+
+## Cifrado como "hash", nonce como "salt
+
+![center w:35em](https://upload.wikimedia.org/wikipedia/commons/3/32/Bcrypt.png)
+
+## Algoritmo
+
+- Entrada:
+	- `password`
+	- `cost`, 10 ó 12 es usual son valores usuales
+	- `salt`, que se se escoge automáticamente. La *salt* es otro nombre para el *nonce*, veremos su uso más adelante.
+- Derivación de clave, que es el proceso lento de Blowfish, $2^{cost}$ veces.
+- Cifrar con la clave derivada *OrpheanBeholderScryDoubt* 64 veces.
+
+---
+
+![center w:32em](https://i.stack.imgur.com/Z63W8.png)
+
+## Ejemplos
+<!-- _class: smaller-font -->
+
+PWD|Bcrypt
+--|--
+abracadabra|`$2a$12$sWfsiB42yT.LvoyCqAHURujcDUTmEHVUjQHqTP4kL1Zs1p.j4G6Lu`
+sesamo|`$2a$12$kWTGyiUbTha.bKpGXyz8ieRIYMAVNaO7gvrZMZ86DKZNgpiJzh49u`
+sesamo|`$2a$12$LQbVUSGksM2vCoZiBhmKCerSTe/Uq7BWVgbxFAe8eY/9y3y1P8dzS`
+
+```python
+from Crypto.Protocol.KDF import bcrypt, bcrypt_check
+
+password = 'sesamo'
+
+hpwd = bcrypt(password, 12)
+# $2a$12$kWTGyiUbTha.bKpGXyz8ieRIYMAVNaO7gvrZMZ86DKZNgpiJzh49u
+
+bcrypt_check(password, hpwd)
+# True
+```
+
+<!--
+Fijaos que ejecutar bcrypt sobre la misma contraseña "sesamo", da resultados diferentes. De esta forma se puede guardar las contraseñas repetidas sin que ndie pueda saber que son repetidas
+-->
+
+# Resumen
+<!-- _class: lead
+header: '' -->
+
+## Conclusiones
+<!-- _class: smaller-font -->
+
+- Confidencialidad computacional: hoy en día no es práctico romperla (en 30 años, quizá sí)
+- Fortaleza de un algoritmo: "esfuerzo" necesario para romper un sistema. Relacionado con la longitud de la clave.
+- Cifrados simétricos: misma clave para cifrar y descifrar
+	- Cifrado de flujo:
+		- A partir de una clave corta, generamos un flujo "pseudoaleatorio" tan largo como el mensaje. cifrado y descifrado=`RANDOM XOR MENSAJE`.
+		- Ejemplos: RC4 (antiguo), ChaCha20
+	- Cifrado de bloque:
+		- Se divide el mensaje en bloques, cada bloque se cifra por separado.
+		- Es necesario utilizar el modo de funcionamiento adecuado
+        - Ejemplos: 3DES (no se usa en protocolos modernos), AES
+- Es necesario evitar cifrar dos mensajes diferentes con la misma clave
+
+
+## Referencias
+
+- [The Salsa20 family of stream cipher](https://cr.yp.to/snuffle/salsafamily-20071225.pdf), Daniel J. Bernstein, 2017
+- [Block Cipher Techniques](https://csrc.nist.gov/projects/block-cipher-techniques), NIST
+- [Recommendation for Key Establishment Using Symmetric Block Ciphers](https://csrc.nist.gov/CSRC/media/Publications/sp/800-71/draft/documents/sp800-71-draft.pdf), NIST 800-71, 2018
+- [Algorithms, key size and parameters report 2014](https://www.enisa.europa.eu/publications/algorithms-key-size-and-parameters-report-2014), ENISA, 2014
+
+---
+<!-- _class: center -->
+
+Continúa en: [Teoría complejidad y acuerdo D-H](04-complejidad.html)

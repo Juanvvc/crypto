@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Objetivos</title>
+
+    <meta name="description" content="Objetivos">
+    <meta name="author" content="Jordi Íñigo Griera">
+    <!-- Implementat amb revealjs: https://github.com/hakimel/reveal.js -->
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h2>Criptografía:
+                    <br/>Objetivos, Primitivas y Aplicación</h2>
+                <small>
+                    <em>
+                        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+                        </a>
+                        <br />
+
+                        <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">
+                            &ldquo;Curso de Introducción a la Criptografía&rdquo;
+                        </span>
+
+                        by
+                        <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/jig" property="cc:attributionName" rel="cc:attributionURL">Jordi Íñigo Griera</a> is licensed under a
+                        <br/>
+
+                        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+                        <br />Project hosted at
+                        <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/jig/crypto" rel="dct:source">github.com/jig/crypto</a>
+                    </em>
+                </small>
+            </section>
+            <section>
+                <h2>Criptografia: Objetivos</h2>
+                <p>la
+                    <u>protección</u> de los
+                    <u>mensajes</u> en transmisión a través de medios
+                    <u>desprotegidos</u> entre un
+                    <u>emisor</u> y un/varios
+                    <u>destinatario/s</u>
+                </p>
+                <p>esta protección debe soportar ataques de una complejidad
+                    <u>razonable</u>${}^{\dagger}$</p>
+                <p>
+                    <br/>
+                </p>
+                <p>${}^{\dagger}$) hay algoritmos que soportan ataques de complejidad infinita (dan
+                    <u>seguridad incondicional</u>) y algoritmos que soportan "sólo" ataques con computación limitada o finita
+                    (dan
+                    <u>seguridad computacional</u>)</p>
+            </section>
+            <section>
+                <h2>Objetivos</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Confidencialidad</td>
+                            <td>
+                                <u>sólo</u> el legítimo destinatario debe poder ser capaz de
+                                <u>leer</u> el contenido del mensaje original. Adicionalmente, nadie, aparte del legítimo destinatario,
+                                debe poder ser capaz de extraer ninguna información estadística del mensaje original (a parte
+                                de su longitud)</td>
+                        </tr>
+                        <tr>
+                            <td>Integridad</td>
+                            <td>el destinatario debe ser capaz de verificar que el contenido del mensaje original
+                                <u>no ha sido modificado</u>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Autenticidad</td>
+                            <td>el destinatario debe ser capaz de verificar que el emisor es
+                                <u>realmente el autor</u> del mensaje</td>
+                        </tr>
+                        <tr>
+                            <td>No repudio</td>
+                            <td>el emisor no debe ser capaz de
+                                <u>negar que es el autor</u> del mensaje</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <em>Otros</em>
+                            </td>
+                            <td>
+                                <em>acuerdo de claves, partición de secretos, PRNG&hellip;</em>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Primitivas criptográficas: tipos</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Sin clave</td>
+                            <td>el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica</td>
+                        </tr>
+                        <tr>
+                            <td>Clave simétrica</td>
+                            <td>el emisor usa el mensaje $m$ y una clave $k$ como argumento de la función criptográfica; el destinatario
+                                debe conocer esa clave $k$ para invertir la función</td>
+                        </tr>
+                        <tr>
+                            <td>Clave asimétrica</td>
+                            <td>el emisor usa el mensaje $m$ y una clave $k'$ como argumento de la función criptográfica; el
+                                destinatario debe conocer la
+                                <u>pareja</u> de esa clave $k''$ para invertir la función
+                                <br/> una pareja de la clave (llamada ${k}_{\text{privada}}$) permite calcular la otra pareja
+                                (llamada ${k}_{\text{pública}}$) pero la operación inversa és infactible (por ello se conoce
+                                también a la criptografía de clave asimétrica como
+                                <u>criptografía de clave pública</u>)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Primitivas criptográficas: tipos</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Sin clave</td>
+                            <td>Hash, Partición de secretos</td>
+                        </tr>
+                        <tr>
+                            <td>Clave simétrica</td>
+                            <td>Cifrado simétrico, firma simétrica (MAC/HMAC)</td>
+                        </tr>
+                        <tr>
+                            <td>Clave asimétrica</td>
+                            <td>Cifrado asimétrico, firma asimétrica, acuerdo de clavess</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Primitivas criptográficas: sin clave</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Hash</td>
+                            <td>$r=h(m)$</td>
+                            <td>
+                                <p>calcula un resumen $r$ único${}^{\dagger}$ para cada mensaje $m$</p>
+                                <p>para validarlo, debemos aplicar $h(\circ)$ sobre el mensaje $m$ y compararlo con el resumen
+                                    $r$ </p>
+                                <p class="fragment">$\dagger$) muy probablemente</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Primitivas criptográficas: clave simétrica</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Cifrado simétrico</td>
+                            <td>$\begin{aligned}c &= e_{\text{sim}}(k,m) \\ m &= d_{\text{sim}}(k,c)\end{aligned}$</td>
+                            <td>$e_{\text{sim}}(\circ)$ convierte un mensaje $m$ (texto en claro) en su versión cifrada $c$ (texto
+                                cifrado);
+                                <br/> $d_{\text{sim}}(\circ)$ devuelve el mensaje $m$ a partir de $c$ (sii se conoce la $k$ que
+                                se usó para generar $c$)</td>
+                        </tr>
+                        <tr>
+                            <td>Firma simétrica</td>
+                            <td title="HMAC: Hash-based Message Authentication Code">$t = \text{HMAC}(k, m)$</td>
+                            <td>devuelve un resumen $t$ (o etiqueta o firma) para el mensaje $m$;
+                                <br/> para validarse, debemos conocer $k$ (y el mensaje $m$) y aplicar la misma función
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Primitivas criptográficas: clave asimétrica</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Cifrado asimétrico</td>
+                            <td>$\begin{aligned}c &= e_{\text{asim}}(k_{\text{pública}},m) \\ m &= d_{\text{asim}}(k_{\text{privada}},c)\end{aligned}$</td>
+                            <td>$e_{\text{asim}}(\circ)$ convierte un mensaje $m$ (texto en claro) en su versión cifrada $c$
+                                (texto cifrado);
+                                <br/> $d_{\text{asim}}(\circ)$ devuelve el mensaje $m$ a partir de $c$
+                                <em>sii</em> se conoce $k_{\text{privada}}$</td>
+                        </tr>
+                        <tr>
+                            <td>Firma asimétrica</td>
+                            <td>$\begin{aligned}f &= e_{\text{asim}}(k_{\text{privada}},m) \\ m &= d_{\text{asim}}(k_{\text{pública}},f)\end{aligned}$</td>
+                            <td>$e_{\text{asim}}(\circ)$ devuelve el mensaje "cifrado" $f$ (firma) para el mensaje $m$;
+                                <br/> para validarse, debemos conocer $k_{\text{pública}}$ y la firma $f$, y aplicar $d_{\text{asim}}(\circ)$
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>objetivos $\rightarrow$ primitivas</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>confidencialidad</td>
+                            <td>cifrado simétrico, cifrado asimétrico</td>
+                        </tr>
+                        <tr>
+                            <td>integridad</td>
+                            <td>hash, firma simétrica, firma asimétrica</td>
+                        </tr>
+                        <tr>
+                            <td>autenticidad</td>
+                            <td>firma simétrica, firma asimétrica</td>
+                        </tr>
+                        <tr>
+                            <td>no repudio</td>
+                            <td>firma asimétrica</td>
+                        </tr>
+                        <tr>
+                            <td>compartir clave simétrica</td>
+                            <td>acuerdo de clave</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Composición</h2>
+                <p>Habitualmente no usamos una única primitiva/función criptográfica por/para:</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>objetivos múltiples</td>
+                            <td>me interesa confidencialidad, integridad y autenticidad simultáneamente para la transmisión del
+                                mensaje $m$</td>
+                        </tr>
+                        <tr>
+                            <td>eficiencia</td>
+                            <td>los algoritmos simétricos son varios órdenes de magnitud más rápidos que los asimétricos</td>
+                        </tr>
+                        <tr>
+                            <td>robustez</td>
+                            <td title="contraejemplo: H/MAC devuelve error si se ha modificado el mensaje firmado o la firma (falla la comparación)">muchas primitivas (individuales) no devuelven error en caso de que algo vaya mal (una firma asimétrica
+                                simplemente devuelve un mensaje firmado distinto)</td>
+                        </tr>
+                        <tr>
+                            <td>secuencias de mensajes</td>
+                            <td>nos interesa proteger no sólo los mensajes individuales si no secuencias de mensajes $\{m_1,
+                                m_2 \dots m_n \}$ o diálogos $\{m_{a_1}, m_{b_1}, m_{a_2}, m_{b_2} \dots \}$ u otros tipos
+                                de combinaciones de mensajes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Ejemplo de Composición 1/4: firma práctica</h2>
+                <p>En caso de que queramos que un documento firmado lo pueda verificar cualquiera, usaremos
+                    <u>firma asimétrica</u> .</p>
+                <p>Pero es muy ineficiente (muy lenta) en comparación a componer:</p>
+                <p>firma asimétrica $+$ hash</p>
+                <p>Así: $\begin{aligned} r &= \text{hash}(m) \\ f &= e_{\text{asim}}(k_{\text{privada}}, r) \end{aligned}$
+                </p>
+                <p class="fragment">Nota 1: con $e_{\text{asim}}(\circ)$ sólo tratamos $r$, que mide unos pocos bytes</p>
+                <p class="fragment">Nota 2: Ahora debemos enviar la firma $f$
+                    <u>junto con el mensaje</u> $m$ (usaremos la notación $m\|f$ para concatenar) para que el destinatario pueda
+                    realizar la validación (no basta con $d_{\text{asim}}(\circ)$ ya que sólo nos devolvería el resumen/hash
+                    $r$, no el mensaje original $m$) </p>
+            </section>
+            <section>
+                <h2>Ejemplo de Composición 2/4: cifrado práctico</h2>
+                <p>En caso de queramos cifrar un documento, para que sólo lo pueda descifrar el legítimo destinatario, lo podemos
+                    hacer de forma eficiente:</p>
+                <p>cifrado asimétrico $+$ cifrado simétrico</p>
+                <p>Así: $\begin{aligned} k &= \text{\{nueva clave generada por el emisor\}} \\ k_c &= e_{\text{asim}}(k_{\text{pública}},
+                    k) \\ c &= e_{\text{sim}}(k, m) \end{aligned}$
+                </p>
+                <p class="fragment">Nota: con $e_{\text{asim}}(k_{\text{pública}},\circ)$ sólo tratamos $k$, que mide unos pocos bytes</p>
+                <p class="fragment">Ahora debemos enviar la clave cifrada asimétricamente $k_c$
+                    <u>junto con el mensaje cifrado</u> $c$ ($k_c \| c$); el destinatario debe primero descifrar la clave simétrica
+                    (mediante $d_{\text{asim}}(k_{\text{privada}},k_c)$) y luego puede descifrar simétricamente el mensaje
+                    cifrado $c$ (mediante $d_{\text{sim}}(k, c)$)</p>
+            </section>
+            <section>
+                <h2>Ejemplo de Composición 3/4: cifrado y firmado</h2>
+                <p>En el caso de queramos cifrar y firmar asimétricamente combinaremos las dos combinaciones de primitivas anteriores</p>
+                <div style="text-align: left;">
+                    <p>Atención: se debe tener en cuanta que:</p>
+                    <ul>
+                        <li>la clave privada del emisor se usa para firmar</li>
+                        <li>la clave privada del receptor se usa para descifrar</li>
+                    </ul>
+                </div>
+                <p>firma asimétrica $+$ hash &amp; cifrado asimétrico $+$ cifrado simétrico </p>
+            </section>
+            <section>
+                <section>
+                    <p>El mensaje enviado es el resultado de:</p>
+                    <p>
+                        $\begin{aligned} r &= \text{hash}(m) \\ f &= e_{\text{asim}}(k_{\text{privada-autor}}, r) \\ k &= \text{\{nueva clave generada
+                        por el emisor\}} \\ k_c &= e_{\text{asim}}(k_{\text{pública-destinatario}}, k) \\ c &= e_{\text{sim}}(k,
+                        m\|f) \end{aligned}$
+                    </p>
+                    <p>y enviamos: $k_c \| c$</p>
+                </section>
+                <section>
+                    <p>Alternativamente se puede cifrar y luego firmar:</p>
+                    <p>
+                        $\begin{aligned} k &= \text{\{nueva clave generada por el emisor\}} \\ k_c &= e_{\text{asim}}(k_{\text{pública-destinatario}},
+                        k) \\ c &= e_{\text{sim}}(k, m) \\ r &= \text{hash}(k_c \| c) \\ f &= e_{\text{asim}}(k_{\text{privada-autor}},
+                        r) \end{aligned}$
+                    </p>
+                    <p>y enviamos: $k_c \| c \| f$</p>
+                </section>
+            </section>
+            <section>
+                <h2>Ejemplo de Composición 4/4: secuencia de mensajes</h2>
+                <p>Nos centramos en integridad (autenticidad, confidencialidad y no repudio se consiguen individualmente)</p>
+                <p>
+                    <p>se usa el concepto de
+                        <strong>secuencia de mensajes</strong> o
+                        <strong>sesión</strong>
+                    </p>
+                    <p>la sesión protege de que los mensajes (integridad de sesión):</p>
+                    <ul>
+                        <li>no se pierdan</li>
+                        <li>no se dupliquen</li>
+                        <li>y no se desordenen</li>
+                    </ul>
+                    <p>las primitivas criptográficas anteriores no cumplen con estos objetivos (e.g. un atacante borrando un
+                        mensaje no tiene contramedida); puede considerarse la sesión como una primitiva criptográfica adicional</p>
+            </section>
+            <section>
+                <p>se puede solucionar con:</p>
+                <ul>
+                    <li>añadiendo un identificador de secuencia $\{1\|m_1, 2\|m_2 \dots \}$</li>
+                    <li>añadiendo el hash del mensaje anterior $\{m_1, \text{hash}(m_1)\|m_2, \text{hash}(m_2)\|m_3 \dots \}$</li>
+                </ul>
+            </section>
+            <section>
+                <p>no es posible perder mensajes, duplicarlos o desordenarlos sin detectarlo&hellip; a excepción de un caso:</p>
+                <p>si eliminamos mensajes del final, no lo detectamos</p>
+                <p class="fragment">podemos corregir el problema añadiendo una señal de final. Si no la recibimos, es que se han perdido uno
+                    (o más) mensajes del final (bit
+                    <em>more</em> o mensaje de final)</p>
+            </section>
+            <section>
+                <h2 class="fragment">Protocolo</h2>
+                <p>La secuenciación de mensajes y la composición de primitivas se materializa en un "protocolo"</p>
+                <div class="fragment">
+                    <p>El protocolo (el lenguaje) se define a partir de:</p>
+                    <ul>
+                        <li>Formatos/estructuras de los mensajes o "sintaxis" (funciones/algoritmos, secuenciación)</li>
+                        <li>"Máquina de estados" (que tipos de mensajes son posibles después de otros)</li>
+                        <li>Especificación del significado de mensajes y/o estado, "semántica"</li>
+                    </ul>
+                </div>
+                <p class="fragment">el protocolo es un eslabón de la cadena de seguridad, tan importante como pueden ser las primitivas (o sea
+                    , los algoritmos criptográficos)</p>
+            </section>
+            <section>
+                <h2>Protocolos: ejemplos</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <div style="text-align: right;">
+                                <p>TLS (SSL), SSH, VPN</p>
+                                <p>PKCS #7, AdES, w'flow</p>
+                                <p>Git, Docker</p>
+                                <p>JWT tokens</p>
+                                <p>download, ISO</p>
+                                <p>$\vdots$</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="text-align: left;" class="fragment">
+                                <p>firma y cifrado, secuenciación</p>
+                                <p>firma y cifrado, semántica (razón de firma)</p>
+                                <p>resumen encadenado (integridad de BB.DD., append)</p>
+                                <p>firma simétrica o asimétrica</p>
+                                <p>resumen</p>
+                                <p>$\vdots$</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <h2>Protocolos: tipos</h2>
+                <ul>
+                    <li>Transmisión interactiva: TLS, VPN, SSH, etc. autentican los extremos, cifran el tráfico y impiden alteración
+                        del encadenamiento de mensajes</li>
+                    <li>Transmisión no interactiva: PKCS #7, S/MIME (correo), autentica el origen, cifrado de contenido</li>
+                    <li>Almacenamiento: disco, BB.DD., BB.DD. documentales (Git, etc.), etc. dan integridad mediante encadenamiento
+                        de hashes (Git, Docker) o integridad y confidencialidad con firma y cifrado simétricos</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Seguridad</h2>
+                <p>la fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena</p>
+                <ul>
+                    <li>algoritmos (diseño, criptoanálisis)</li>
+                    <li>algoritmos (dimensionado, longitud de claves,
+                        <em>security strength</em>)
+                        <li>protocolos (estructura, secuenciación)</li>
+                        <li>implementación (condiciones de uso, abuso de buffers, abuso de la máquina de estados)</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Objetivos: "otros"</h2>
+                <ul>
+                    <li>
+                        <strong>Acuerdo de claves</strong>: permite que un grupo de actores generen un número (pseudo) aleatorio
+                        sin que nadie externo al grupo pueda conocerlo</li>
+                    <li>
+                        <strong>Partición de secretos</strong>: permite repartir un secreto entre un grupo de actores, exigiendo
+                        un mínimo de actores para recomponerlas</li>
+                    <li>
+                        <strong>PRNG</strong> (Pseudo Random Number Generation): permite generar una secuencia aparentemente aleatoria
+                        para cualquiera que no conozca la
+                        <strong>semilla</strong>
+                    </li>
+                    <li>etcétera</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Algoritmos: ejemplos</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>hash</td>
+                            <td>SHA-2; SHA-3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="symmetric.html">cifrado simétrico</a>
+                            </td>
+                            <td>
+                                <a href="symmetric.html#/block-cipher" title="Cifrados de bloque">AES</a>;
+                                <a href="symmetric.html#/stream-cipher" title="Cifrados de flujo">ChaCha20</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="ecbc-mac.html">firma simétrica</a>
+                            </td>
+                            <td>
+                                <a href="hash.html#/hmac">HMAC (SHA-2/3)</a>;
+                                <a href="mac.html#/raw-cbc">ECBC-MAC (AES)</a>; Poly1305</td>
+                        </tr>
+                        <tr>
+                            <td>cifrado asimétrico</td>
+                            <td>
+                                <a href="rsa.html">RSA</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>firma asimétrica</td>
+                            <td>RSA;
+                                <a href="ecdsa.html">ECDSA</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>acuerdo de claves</td>
+                            <td>
+                                <a href="dh.html">Diffie-Hellman</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>partición de secretos</td>
+                            <td>
+                                <a href="hsm.html#/shamir-split">Shamir split</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PRNG</td>
+                            <td>AES; ChaCha20; SHA-2; SHA-3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Composición&hellip; de composición: PKI</h2>
+                <p>PKI:
+                    <em>Public Key Infrastructure</em>
+                </p>
+                <p>¿la clave pública $k_{\text{pública}}$ de quién es?</p>
+            </section>
+            <section>
+                <h3>
+                    <a href="intro.html">(Introducción/Historia) $\rightarrow$</a>
+                </h3>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-72628059-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <!-- <script type="text/javascript" src="js/svg_mathjax.js"></script> -->
+    <!-- <script type="text/javascript">new Svg_MathJax().install();</script> -->
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
+    <script type="text/javascript" src="js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: 'c/t',
+            // history: false,
+            // fragments: true,
+            // help: true,
+            // previewLinks: false,
+            width: 1280,
+            height: 720,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            math: {
+                mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+
+</body>
+
+</html>

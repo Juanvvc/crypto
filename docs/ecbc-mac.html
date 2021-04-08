@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>MAC</title>
+
+        <meta name="description" content="Códigos de autenticación de mensaje">
+        <meta name="author" content="Jordi Íñigo Griera">
+        <!-- Implementat amb revealjs: https://github.com/hakimel/reveal.js -->
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+                    var link = document.createElement( 'link' );
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                    document.getElementsByTagName( 'head' )[0].appendChild( link );
+                </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>ECBC-MAC</h1>
+                <p>Códigos de autenticación de mensaje basados en cipfradores de bloque<br/>
+                    <em><!-- Encrypted --> Cipher Block Chaining Message Authentication Code</em>
+                </p>
+                <small><em><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
+
+				<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">
+					&ldquo;Curso de Introducción a la Criptografía&rdquo;
+				</span>
+
+                    by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/jig" property="cc:attributionName" rel="cc:attributionURL">Jordi Íñigo Griera</a> is licensed under a<br/>
+
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+                    <br />Project hosted at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/jig/crypto" rel="dct:source">github.com/jig/crypto</a></em></small>
+            </section>
+
+
+
+
+
+
+
+
+
+            <section>
+                <h3>MAC: primera implementación</h3>
+                <p>podemos utilizar directamente una función de cifrado de <u>bloque</u>, así:
+                <br/>$t = e(k, m)$</p>
+
+		<svg width="360" height="120" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+		  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+		  <g>
+		    <title>Layer 1</title>
+		    <rect id="svg_3" height="37.25" width="137.75" y="30.75" x="177.75" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="#f7cfcf"/>
+		    <rect stroke="#000000" id="svg_1" height="37" width="139.99999" y="31" x="29" stroke-width="5" fill="#f7cfcf"/>
+		    <text transform="matrix(1,0,0,0.953496220250237,-0.25,22.196207110658804) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_2" y="36.37326" x="247.75" stroke-width="0" stroke="#000000" fill="#000000" font-style="italic">t</text>
+		    <text id="svg_4" transform="matrix(1,0,0,0.953496220250237,-0.25,22.196207110658804) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" y="34.80009" x="101.5" stroke-width="0" stroke="#000000" fill="#000000" font-style="italic">m</text>
+		  </g>
+		  </svg>
+                <p>Nota: no podemos utilizar cifrado de flujo (directamente), ya que el cálculo de $k$ sería trivial; pero sí que podemos usar <code>AES-128-ECB</code></p>
+            </section>
+
+            <section id="fixed-mac">
+                <h3>MAC: primera implementación</h3>
+                <p>$t = e(k, m)$</p>
+                <p>esta construcción tiene una limitación:
+                <br/>sólo podemos autenticar <u>mensajes de la longitud del bloque</u></p>
+            </section>
+
+            <section id="raw-cbc">
+                <h3 style="text-transform:none;">rawCBC-MAC</h3>
+                <p>derivado del <a href="symmetric.html#mode-of-operation">modo de operación</a> CBC (<em>Cipher Block Chaining</em>)</p>
+                <p><img border="9" src="img/CBC-MAC_structure_(en).svg"/>
+                    <br/><small>(basado en <a href="https://en.wikipedia.org/wiki/CBC-MAC">Wikipedia</a>)</small></p>
+                <p>pero en lugar de utilizar un $\text{IV}$, iniciaremos la cadena con $0$ (equivalente a $\text{IV}=0$)</p>
+                <p class="fragment">pero rawCBC-MAC es inseguro...</p>
+            </section>
+
+            <section>
+                <h3>ECBC-MAC</h3>
+                <p>...rawCBC-MAC es inseguro ya que un atacante puede combinar mensajes buenos para generar otros aparentemente <em title="aparentment">"buenos"</em></p>
+                <p>para evitar el problema podemos cambiar el $\text{IV}=0$ por la longitud del mensaje $\text{IV}=\ell$</p>
+            </section>
+
+            <section id="cbc">
+                <h3>ECBC-MAC</h3>
+                <p>...o habitualmente lo que se hace es utilizar una segunda clave para cerrar el cálculo y impedir el
+                    concatenado
+                    <br/>(ECBC: <em>Encrypted CBC</em>)</p>
+                <p><img border="9" src="img/CBC-MAC_(encrypt_last_block)_structure.svg"/>
+                    <br/><small>(basat en <a href="https://en.wikipedia.org/wiki/CBC-MAC">Wikipedia</a>)</small></p>
+            </section>
+
+            <section>
+                <h3>ECBC-MAC: seguridad</h3>
+                <p>ECBC-MAC es seguro mientras sea improbable encontrar una <a href="hash.html#collision">colisión</a></p>
+                <p>la probabilidad de colisión es cercana a $0.5$ para una cantidad de bloques generados de aproximadamente $\sqrt{|\text{bloque}|}$</p>
+                <p>e.g. en el caso de AES el bloque es de $128$ b, por tanto, no podremos usar la misma clave:
+                <br/>$\text{ops} \ll \sqrt{2^{128}} = 2^{64}$</p>
+                <p>(valores aceptados para una clave AES-128/192/256:
+                    <br/> $2^{48}$ mensajes autenticados)</p>
+            </section>
+
+            <section>
+                <h3>Otros MACs usados</h3>
+                <p>Poly1305-AES: longitud $\|t\| = 128 \text{b}$</p>
+                <p>Poly1305-ChaCha20: longitud $\|t\| = 128 \text{b}$</p>   <!-- https://tools.ietf.org/html/draft-ietf-cose-msg-08#page-36 -->
+            </section>
+
+            <section>
+                <h3>cifrar y autenticar</h3>
+                <p>estas dos funciones se utilizan juntas frecuentemente</p>
+                <p>enviaremos la concatenación $(c, t)$ donde:<br/>
+                    $\begin{aligned}
+                    c &= e(k_e, m) \\
+                    t &= \text{MAC}(k_t, c)
+                    \end{aligned}$</p>
+                <p class="fragment">Nota: hacer $t = \text{MAC}(k_t, \color{red}{m})$ no garantiza que la función MAC no revele
+                ningún de detalle de $m$ (en realidad sí lo hace: si dos mensajes son iguales, un atacante lo sabrá simplemente inspeccionando $t$ y $t'$</p>
+            </section>
+
+            <section>
+                <h1>AEAD</h1>
+                <p>Authenticated Encryption with Associated Data</p>
+            </section>                
+
+            <section>
+                <h3>cifrar y autenticar en un sólo paso</h3>
+                <p><em>(Authenticated Encryption o <span title="Authenticated Encryption with Associated Data">AEAD</span>)</em></p>
+                <p>Históricamente ha habido errores concatenando el cifrado y la firma</p>
+                <p></p>Con los algoritmos AEAD se trata de ofrecer primitivas combinadas que dan 
+                    <u>confidencialidad, integridad y autenticidad</u> en un único <u>algoritmo simétrico</u></p>
+                <p>Adicionalmente, la implementación combinada permite mayor rendimiento</p>
+                <ul>
+                    <li>CCM ó <em>Counter with <a href="#cbc">CBC-MAC</a></em>, es la combinación de AES-CTR con un CBC-MAC: con una misma clave, se calcula el MAC sobre los datos en claro, y después se cifra esos mismos datos en claro.</li>
+                    <li>ChaCha20/Poly1305 combina ambos algoritmos</li>
+                    <li>GCM ó <em>Galois Counter Mode</em>, también una combinación de AES-CTR pero ahora con una multiplicación modular sobre los datos cifrados que se usan como MAC; permite velocidades superiores a CCM</li>
+                </ul>
+            </section>
+            
+
+            <section>
+                <h3><a href="number-theory.html">(Teoría de números) $\rightarrow$</a></h3>
+            </section>
+        </div>
+
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72628059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- <script type="text/javascript" src="js/svg_mathjax.js"></script> -->
+    <!-- <script type="text/javascript">new Svg_MathJax().install();</script> -->
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
+    <script type="text/javascript" src="js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: 'c/t',
+            // history: false,
+            // fragments: true,
+            // help: true,
+            // previewLinks: false,
+            width: 1280,
+            height: 720,
+
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            math: {
+                mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+            },
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'plugin/math/math.js', async: true },
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+
+    </body>
+</html>
