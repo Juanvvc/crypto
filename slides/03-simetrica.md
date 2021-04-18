@@ -15,7 +15,7 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
 **Tema 3: Cifrado simétrico**

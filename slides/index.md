@@ -13,7 +13,7 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
 **Presentación**
@@ -82,6 +82,20 @@ Durante el estudio personal es muy recomendable seguir los enlaces que aperecen 
 El curso está basado [las notas de Jordi Íñigo Griera](https://github.com/jig/crypto), antiguo profesor de la asignatura
 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/) Esta obra esta sujeta a una licencia de [Atribución 4.0 Internacional de Creative Commons](http://creativecommons.org/licenses/by/4.0/)
+
+## Instrucciones de uso de los ejercicios
+
+Los ejercicios son notebook de Jupyter:
+
+1. Instala Jupyter como módulo de Python (Windows, MacOS, Linux): `python3 -m pip install jupyter`
+1. En el directorio de ejercicios, ejecuta `jupyter notebook`
+1. Comandos básicos:
+    - INTRO: edita línea actual
+    - SHIFT+INTRO: ejecuta línea actual
+1. Tutoriales:
+    - https://www.youtube.com/watch?v=jZ952vChhuI
+    - https://www.dataquest.io/blog/jupyter-notebook-tutorial/
+
 
 
 ## Conocimientos necesarios

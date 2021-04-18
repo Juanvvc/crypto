@@ -15,7 +15,7 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
 **Tema 4: Teoría complejidad y acuerdo D-H**
@@ -199,9 +199,11 @@ Esta es una discusión muy interesante para las matemáticas y que podría tener
 
 - Sodoku, Colorear mapas, El problema del viajante...
 
-[![center](https://imgs.xkcd.com/comics/travelling_salesman_problem.png)](https://www.explainxkcd.com/wiki/index.php/399:_Travelling_Salesman_Problem)
+![center](https://imgs.xkcd.com/comics/travelling_salesman_problem.png)
 
 - Logaritmos discretos, Factorizar números...
+
+> https://www.explainxkcd.com/wiki/index.php/399:_Travelling_Salesman_Problem
 
 ## "Mucho tiempo": una definición
 

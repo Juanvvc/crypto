@@ -15,10 +15,10 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
-**Tema 5: Funciones de Hash y Blockchains**
+**Tema 6: Funciones de Hash y Blockchains**
 
 Juan Vera del Campo
 
@@ -376,3 +376,9 @@ En el libro de transacciones, a parte de transacciones, se pueden inscribir dato
 1. Cambia el texto a `Hola mundo` (¡mayúsculas!) y compara el hash: ¿cuántos bytes han cambiado?
 1. Cambia el nombre del archico y compara el hash: ¿cuántos bytes han cambiado?
 1. Calcula el hash SHA-256 y SHA-512 de un archivo de unos 500MB en tu ordenador (por ejemplo, película) ¿Cuánto tiempo lleva?
+
+---
+
+<!-- _class: center -->
+
+Continúa en: [Integridad de mensajes](07-integridad.html)

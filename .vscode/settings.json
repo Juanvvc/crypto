@@ -2,6 +2,9 @@
   "markdown.marp.themes": [
     "slides/themes/marp-viu.css",
     "slides/themes/marp-upc.css",
-    "slides/themes/marp-incide.css"
+    "slides/themes/marp-incide.css",
+    "themes/marp-viu.css",
+    "themes/marp-upc.css",
+    "themes/marp-incide.css"
   ]
 }

@@ -13,7 +13,7 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
 **A2: Generación de números aleatorios**

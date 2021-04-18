@@ -13,7 +13,7 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
 **Tema 1: Conceptos básicos**
@@ -25,8 +25,8 @@ juan.vera@campusviu.es
 # Hoy hablamos de...
 
 - [Servicios criptográficos](#3): objetivos, seguridad por oscuridad, Cuentacuentos, principios de Kerckhoffs y máxima de Shannon, 
-- [Primitivas criptográficas](#19): hash, cifrado simétrico, cifrado asimétrico
-- [Procolos criptográficos](#27): composición de primitivas
+- [Primitivas criptográficas](#17): hash, cifrado simétrico, cifrado asimétrico
+- [Procolos criptográficos](#25): composición de primitivas
 - [Conclusiones](#33): resumen y referencias
 - Anexo recomendado: [Glosario](A1-glosario.html)
 
@@ -36,30 +36,56 @@ _class: lead
 header: 'Servicios criptográficos'
 -->
 
-## Objetivos de la criptografía
+---
 
-Protección de la comunicaciones a través de **medios desprotegidos** entre un emisor y uno o varios destinatarios.
+![bg left:40% w:100%](https://pics.filmaffinity.com/the_imitation_game-824166913-large.jpg)
+
+Años 40: Alemania controla Europa y amenaza al resto del mundo
+
+Sus comunicaciones radio están protegidas con "la cifra indescifrable"
+
+¿Por qué pensaban que era indescifrable?
+
+¿Cómo se descifró?
+
+¿Qué hemos aprendido desde entonces?
+
+> Hablaremos de esto en el [tema 2](02-historia.html)
+
+## ¿Qué es la criptografía?
+
+Protección de la comunicaciones a través de **medios desprotegidos** entre un emisor y uno o varios destinatarios
+
+![bg right:40% w:100%](images/pexels-cottonbro-7319077.jpg)
+
+...y eso es mucho más que mantener una conversación secreta...
+
+> Fondo: [(c) cottonbro](https://www.pexels.com/photo/clear-glass-bowl-on-white-table-cloth-7319077/). Free to use 
+
 
 ---
 
-¿Qué queremos proteger? No solo el mensaje que se transmite:
+¿Qué queremos proteger? **No solo el mensaje que se transmite**:
 
 Recurso|Ejemplo
 --|--
 **El contenido de un mensaje**|¿Cuánto dinero se está transfiriendo?
 **Las veces que se envía un mensaje**|¿Han sido una transferencia o dos? No queremos que un atacante repita una transferencia, aunque no sepa de cuánto es.
 **Los participantes**|¿Seguro que el ordenante es D. Paco Pérez? ¿Seguro que está hablando con su banco?
-**El no repudio**|Paco Pérez no podrá decir que no ordenó la transferencia.
+**El no repudio**|Paco Pérez no podrá decir que no ordenó la transferencia
 
 ## Servicios de seguridad
 
-- **Confidencialidad**: solo el legítimo destinatario debe poder ser capaz de leer el contenido del mensaje original o de sacar cualquier información estadística.
+[New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) (Whitfield Diffie y Martin Hellman, 1976) exploraba qué se necesitaba para que dos empresas pudiesen firmar un contrato mercantil:
+
+
+- **Confidencialidad**: solo el legítimo destinatario debe poder ser capaz de leer el contenido del contrato o cualquier información asociada.
 - **Integridad**: el destinatario debe ser capaz de verificar que el contenido del mensaje original no ha sido modificado
-- **Autenticidad**: el destinatario debe ser capaz de verificar que el emisor es realmente el autor del mensaje
-- **No repudio**: el emisor no debe ser capaz de negar que es el autor del mensaje
+- **Autenticidad**: el destinatario debe ser capaz de verificar que el emisor es realmente el autor del contrato
+- **No repudio**: el emisor no debe ser capaz de negar que es el autor del contrato
 - **Otros**: autorización, acuerdo de claves, partición de secretos, PRNG...
 
-> Enunciados con otro nombre: [New Directions in Cryptography](https://www.cs.utexas.edu/~shmat/courses/cs395t_fall06/dh.pdf), Whitfield Diffie y Martin Hellman en 1976. Pero hablaremos más de este paper en el capítulo 4
+> [New Directions in Cryptography](https://www.cs.utexas.edu/~shmat/courses/cs395t_fall06/dh.pdf), Whitfield Diffie y Martin Hellman en 1976. Hablaremos de esto en el [tema 5](05-asimetrica.html)
 > Estándar: [NIST Special Publication 800-57 Part 1, Section 3](https://doi.org/10.6028/NIST.SP.800-57pt1r5)
 
 
@@ -82,7 +108,9 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 Esta protección debe soportar ataques de una **complejidad razonable**:
 
 - **Seguridad incondicional**: un atacante no puede descifrar el mensaje aunque tenga infinito poder computacional.
-- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga: lleva demasido tiempo, dinero o recursos (por ejemplo, millones de años o más memoria de la que cabe en el universo).
+- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga: lleva demasido tiempo, dinero o recursos (por ejemplo, millones de años o más memoria de la que cabe en el universo)
+
+> Hablaremos de esto en el [tema 4](04-complejidad.html)
 
 <!--
 
@@ -122,76 +150,9 @@ Mantener las cosas en secreto no significa mantener los protocolos de seguridad 
 
 ![bg right:75%](images/security-through-obscurity-is-everywhere.jpg)
 
-## Ejemplo: Audiocuentos
-
-![w:18em center](images/caperu.jpg)
-
-https://www.mikrocontroller.net/topic/503014
-
-<!--
-Hay dos editoriales española que están comercializando un coleccionable de cuentos infantiles. El producto de ambas es similar: un altavoz con figuras coleccionables, el cuento suena cuando se acerca la figura al altavoz.
-
-En ambas, los cuentos se guardan en una tarjeta SD en el altavoz. Una de ellas cifra esos cuentos para que no puedan escucharse ni cambiarse sin las figuras...
-
-...pero han confiado en la seguridad por oscuridad
-
-(la otra no ha protegido los cuentos y ha confiado en que un particular no comprará etiquetas RFID, que son la que llevan las figuras)
-
-El enlace es un foro en alemán, pero pasan poco después al inglés. Hay también un foro en castellano sobre estas figuras que no es difícil de encontrar
--->
-
----
-
-Visor hexadecimal: https://hexed.it/
-
-MP3 de ejemplo: https://file-examples.com/index.php/sample-audio-files/sample-mp3-download/
-
-Archivo cifrado: `01.enc` en los recursos de la asignatura.
-
-<!--
-
-Ojo: el archivo cifrado no es un original de Audiocuentos. Es el propio MP3 de ejemplo cifrado con una contraseña. Los Audiocuentos reales están cifrados con otra contraseña, pero se pueden analizar igual.
-
--->
-
----
-
-![center w:25em](images/01-mp3.png)
-
-<!--
-Que el archivo es un MP3 y no otro formato es una suposición razonable. Podría ser también WAB, OGG, o algún otro formato de audio. En este caso son MP3. Si no lo hubiesen sido, un adversaria tardaría un poco pero no demasiado más: la idea es la misma.
-
-En la figura hemos abierto un archivo MP3 de ejemplo en un editor hexadecimal. Podemos observar qe los archivos MP3 contienen todos una cabecera conocida, empiezan por ID3, y de vez en cuando tienen espacios "de ceros" que se usan como secciones de padding.
-
-Es muy común que los archivos empiecen con unas pocos letras que los identifican: DOCX, JPG, ZIP... tienen todos una cabera inicial que los identifica.
--->
-
----
-
-![center w:25em](images/01-enc.png)
-
-<!--
-Si abrimos el archivo cifrado, observanos que no tiene cabecera inicial (eso es común en archivos cifrados, y de hecho podemos usarlo para distinguir cuando un archivo está cifrado, con gran probabilidad)
-
-Además, las secciones que en un MP3 se corresponden a ceros incluyen un patrón repetitivo y sospechoso...  que efectivamente es la clave de cifrado del resto de archivo. Eso es porque el cifrado es un XOR con secret.
-
-(como veremos: un cifrado de bloque en modo ECB, y similar a un vigenere)
-
-Este sistema no cumple una de las máximas que veremos en cifrado: la clave de cifrado se está reutilizando en todo el archivo. Aunque el XOR es un sistema real de cifrado, la gestión de la clave es completamente incorrecta y permite descifrar cualquier audiocuento, o cambiarlo.
-
-Comandos de descifrado (con la clave conocida)
-
-```
-# pip install xortool & hash xortool-xor
-file test.mp3
-hexdump -C -n 32 test.mp3 
-hexdump -C 01.enc | less 
-cat 01.enc |  xortool-xor -r "secret" -f - > 01.mp3
-```
- -->
-
 
 ## (inciso)
+<!-- _class: extra-slide -->
 
 * "Seguridad por oscuridad" es mala práctica
 * Pero "seguridad **y además** oscuridad" puede ser buena idea
@@ -205,6 +166,12 @@ PERO que un sistema sea seguro de por sí, utilizando protocolos realmente segur
 No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.
 
 -->
+
+## Principios de diseño
+
+Si la seguridad por oscuridad no es recomendable...
+
+...¿qué principios de diseño tenemos que seguir?
 
 ## Principios de Kerckhoffs
 <!-- _class: smallerfont -->
@@ -260,6 +227,7 @@ Pero son recomendaciones muy informadas.
 **Claude Elwood Shannon (1906-2001)**
 
 > [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
+> Hablaremos más de Shanon en el [tema 3](03-simetrica.html)
 
 <!-- Shanon es un gran matemático del siglo XX, que creó la teoría de la información. Le debemos la teoría detrás de la criptografía, los archivos comprimidos, la codificación digital...
 
@@ -328,6 +296,8 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 
 **Fíjate**: el resumen **no es único**. Hay un número infinito de mensajes con el mismo resumen. Como consecuencia, a partir del resumen no se puede obtener el mensaje original.
 
+> Hablaremos del hash en el [tema 6](06-hashes.html)
+
 ## Primitivas: clave simétrica
 <!-- _class: with-warning -->
 
@@ -342,6 +312,9 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 
 > open test2.mp3 
 ```
+
+> Hablaremos del cifrado simétrico en el [tema 3](06-simetrico.html)
+
 
 **AVISO**: pasar el password como argumento no es buena práctica. Solo se presenta aquí como ejemplo
 
@@ -363,6 +336,9 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 RSA operation error
 4345576940:error:04FFF06E:rsa routines:CRYPTO_internal:data too large for key size
 ```
+
+> Hablaremos del cifrado asimétrico en el [tema 5](05-asimetrico.html)
+
 
 <!--
 Aquí vemos un error provocado porque estamos usando la primitiva defectuosa. Las primitivas deben utilizarse en los contextos en que fueron diseñadas, y apoyarse entre ellas.

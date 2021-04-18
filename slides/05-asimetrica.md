@@ -16,7 +16,7 @@ theme: marp-viu
     }
 </style>
 
-# Criptografía y Teoría de Códigos
+# Criptografía
 <!-- _class: first-slide -->
 
 **Tema 5: Criptografía asimétrica**
