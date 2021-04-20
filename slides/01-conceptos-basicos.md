@@ -24,10 +24,10 @@ juan.vera@campusviu.es
 
 # Hoy hablamos de...
 
-- [Servicios criptográficos](#3): objetivos, seguridad por oscuridad, Cuentacuentos, principios de Kerckhoffs y máxima de Shannon, 
-- [Primitivas criptográficas](#17): hash, cifrado simétrico, cifrado asimétrico
-- [Procolos criptográficos](#25): composición de primitivas
-- [Conclusiones](#33): resumen y referencias
+- [Servicios criptográficos](#3): objetivos, seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon, 
+- [Primitivas criptográficas](#18): hash, cifrado simétrico, cifrado asimétrico
+- [Procolos criptográficos](#26): composición de primitivas
+- [Conclusiones](#34): resumen y referencias
 - Anexo recomendado: [Glosario](A1-glosario.html)
 
 # Servicios criptográficos
@@ -102,6 +102,18 @@ Los objetivos de un sistema criptográfico son los servicios de seguridad que of
 El NIST es la agencia de estandarización de EEUU, y entre las cosas que estandariza también está la seguridad del gobierno de EEUU. Sus estándares son sencillos de leer e incluyen un glosario que viene muy bien para introducirse en la criptografía.
 
 -->
+
+## Modelo de sistema criptográfico
+<!-- _class: two-columns with-header -->
+
+![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+
+- Alice y Bob solo pueden comunicarse por el canal inseguro
+- Maloy puede ser pasivo (solo escucha) o activo: cambia mensajes, los borra
+- Las claves de cifrado y descifrado pueden ser diferentes
+- Alice y Bob no se conocen
+
+Este es el modelo sobre el que trabajaremos: dos personas "Alice y Bob" comunicándose por un canal inseguro porque puede haber un adversario "Maloy" en medio.
 
 ## Grados de seguridad teórica
 

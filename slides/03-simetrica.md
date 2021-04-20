@@ -1080,7 +1080,7 @@ https://www.schneier.com/
 * *Cifradas con una clave conocida por la web*: un atacante podría robar la clave, y después las contraseñas
 * *Bcrypt*: cifradas, con *nonce*.
 
-## Cifrado como "hash", nonce como "salt
+## Cifrado como "hash", nonce como "salt"
 
 ![center w:35em](https://upload.wikimedia.org/wikipedia/commons/3/32/Bcrypt.png)
 

@@ -2,5 +2,6 @@
 slides/incide
 slides/incide.sh
 slides/Makefile.remote
+slides/*pdf
 refs
 **.swp
