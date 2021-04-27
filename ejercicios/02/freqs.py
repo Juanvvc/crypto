@@ -7,20 +7,16 @@ LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 def read_file(text_file, skip=0):
     # Initialize the dictionary of letter counts: {'A': 0, 'B': 0, ...}
     lcount = dict([(l, 0) for l in LETTERS])
-    # Read in the text and count the letter occurences
-    skipping = skip
     with open(text_file) as fin:
-        for l in fin.read():
-            if skipping > 0:
-                skipping -= 1
-                continue
-            else:
-                skipping = skip
+        for l in fin.read():            
             try:
                 lcount[l.upper()] += 1
+                if skip > 0:
+                    fin.read(skip)
             except KeyError:
                 # Ignore characters that are not letters
                 pass
+            
     # The total number of letters
     return lcount
 

@@ -59,5 +59,5 @@ if __name__ == '__main__':
     encrypt_file('el_quijote.txt', 'd', 'el_quijote.caesar')
     encrypt_file('el_quijote.txt', 'SESAMO', 'el_quijote.vigenere')
     decrypt_file('el_quijote.caesar', 'd', 'el_quijote.decrypt')
-    decrypt_file('el_quijote.vigenere', 'SESAEMO', 'el_quijote.decrypt2')
+    decrypt_file('el_quijote.vigenere', 'SESAMO', 'el_quijote.decrypt2')
     

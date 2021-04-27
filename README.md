@@ -11,20 +11,21 @@ Transparencias en [juanvvc.github.io/crypto/slides](https://juanvvc.github.io/cr
 - [Teoría de la complejidad, D-H](https://juanvvc.github.io/crypto/slides/04-complejidad.html)
 - [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/slides/05-asimetrica.html)
 - Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/slides/A2-rnd.html) 
+- [Hashes y Bitconins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
+- [Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/08-pki.html)
+- [Protocolos: PKI y TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
+- [Amenazas](https://juanvvc.github.io/crypto/slides/10-amenezas.html)
 
 Contenido sin actualizar (¡poco a poco!)
 
-- [MAC](https://juanvvc.github.io/crypto/es/ecbc-mac.html) `11` 
-- [Amenazas](http://juanvvc.github.io/crypto/es/threats.html) `15` 
-- [Conexiones (TLS)](http://juanvvc.github.io/crypto/es/tls.html) `11`
-- [Infraestructura de Clave Pública (PKI)](http://juanvvc.github.io/crypto/es/pki.html) `59` (&Sigma; → `126`)
-
-**Nota**: el número a la derecha de cada entrada indica el número de transparencias aproximado
+- [MAC](https://jig.github.io/crypto/es/ecbc-mac.html)
+- [Amenazas](http://jig.github.io/crypto/es/threats.html)
+- [Conexiones (TLS)](http://jig.github.io/crypto/es/tls.html)
+- [Infraestructura de Clave Pública (PKI)](http://jig.github.io/crypto/es/pki.html)
 
 ## Descarga local
 
-Aunque lo más recomendable es acceder a la versión en línea para ver siempre la versión actualizada, si quieres puedes descargarte las transparencias para visualizarlas fuera de línea.
-Simplemente aprieta el botón `Download ZIP` de arriba.
+Aunque lo más recomendable es acceder a la versión en línea para ver siempre la versión actualizada, si quieres puedes descargarte las transparencias para visualizarlas fuera de línea. Simplemente aprieta el botón `Download ZIP` de arriba.
 
 O si tienes cuenta en GitHub puedes simplemente un `fork` (botón de arriba a la derecha), aunque no las voy a borrar a medio plazo, con lo que si simplemente marcas con una estrella tendrás un recordatorio en tu cuenta de donde residen para cuando las necesites.
 

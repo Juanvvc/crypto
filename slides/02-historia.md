@@ -29,6 +29,8 @@ juan.vera@campusviu.es
 - [Confidencialidad perfecta](#38): Vernam
 - [Conclusiones](#48): resumen y referencias
 
+En resumen: cómo se hacían las cosas antes y por qué no funcionan
+
 # Criptografía clásica
 <!-- _class: lead -->
 
@@ -152,6 +154,8 @@ $13 \mod 4 = 1$
 
 Si hacemos loquesea módulo N, el resultado estará entre 0 y N-1. Es decir, hay N posible resultados
 
+Usaremos constantemente la aritmética del módulo en sistemas de cifrado asimétrico (tema 4 y siguientes)
+
 -->
 
 ## Descifrado
@@ -174,7 +178,7 @@ $E 	\rightarrow	B$
 
 ¿qué podemos hacer si solo tenemos el texto cifrado `ELIXJRKAL`?
 
-$0\leq k < 26$ , así que podemos probar las 26 claves una a una.
+$0\leq k < 26$ , así que podemos probar las 26 claves una a una: **ataque de fuerza bruta**
 
 ## Ataque de fuerza bruta
 
@@ -193,7 +197,7 @@ El segundo paso no siempre es posible
 
 - El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado. Suponiendo que use César, no se sabe en qué lengua está escrito originalmente.
 - [Código navajo](https://es.wikipedia.org/wiki/Locutor_de_claves) durante la segunda guerra mundial
-- ¿Y si un mismo texto puede descifrarse a varios mensajes en claro dependiendo de qué clave utilices? Entonces el atacante no puede distinguir la clave "buena"
+- Imagina que solo está cifrada la hora "atacamos a las XX"... Si una clave descifra "a las 7" y otra "a las 5" ¿cómo validamos cuál es correcta? 
 
 <!--
 
@@ -203,14 +207,14 @@ El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos 
 
 ## Contramedidas
 
-Las contramedidas contra los ataques de fuerza bruta son:
+La defensa contra los ataques de fuerza bruta son:
 
 - que la operación de descifrado sea costosa
 - que haga falta realizar muchas operaciones de descifrado
 
 Que la operación sea costosa tiene el problema que quien descifra lícitamente tiene un coste innecesario: actualmente esto no se recomienda
 
-Queda por tanto "que el adversario tenga que hacer muchas operaciones de descifrado". Es decir: probar muchas claves.
+Queda por tanto "**que el adversario tenga que hacer muchas operaciones de descifrado**". Es decir: probar muchas claves.
 
 ## Muchas claves
 
@@ -219,32 +223,43 @@ Queda por tanto "que el adversario tenga que hacer muchas operaciones de descifr
 * es decir: se prueban $10^9$ claves/s en 1000 CPU
 * es decir: se prueban 3.6 * $10^{12}$ claves/h en 1000 CPU
 * en AWS EC2 una *c4.large* cuesta 10 céntimos/h
-* es decir $3.6\ 10^{11}$ claves/€
+* es decir $3.6\ 10^{11}$ claves/€/h
 
-Si tenemos capacidad de diseñar/fabricar d() en hardware ([ASIC](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)) los costes bajan después de un periodo de amortización
+Si tenemos capacidad de diseñar/fabricar $d()$ en hardware ([ASIC](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)) los costes bajan después de un periodo de amortización
 
 <!-- Estos cálculos están desactualizados y son más rápidos cada año. En cualquier caso sirven para hacernos una idea de lo rápido que pueden hacer fuerza bruta los ordenadores actuales -->
 
 ---
+<!-- _class: with-success -->
 
 $10^{11}$ claves/€ en números redondos
 
-e.g. si nuestro "secreto" tiene un coste de 1000 €,
+e.g. si nuestro "secreto" tiene un coste de 1000 €:
 
-Nos hacen falta un sistema que permita $2·10^{14}$ claves diferentes ($\approx 2^{48}$)
+Nos hacen falta un sistema que permita $2·10^{14}$ claves diferentes ($\approx 2^{48}$) para guardar el secreto durante una hora.
 
-Definimos: **la fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
+**La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
 
-## Seguridad del cifrado del César: análisis de frecuencias
+## ¿Cuánto tiempo necesitamos guardar un secreto?
+<!-- _class: extra-slide -->
+
+
+- "Atacaremos a las 11" dejará de ser secreto a las 11: 1 día
+- "Mis cartas personales": 10 años
+- "La fórmula de la Coca-Cola": 100 años
+
+Piensa: en 10 años la tecnología ha avanzado mucho: lo que ahora cuenta 100 años, ¡en 10 años podría ser automático!
+
+Más sobre esto en el [tema 3](03-simetrica.html)
+
+## Mejorando la fuerza bruta
+
+¿Podemos encontrar un método más rápido que probar las claves una a una?
 
 `HOLAMUNDO`
 `ELIXJRKAL`
 
-¿qué podemos hacer si tenemos acceso al texto cifrado `ELIXJRKAL`?
-
-Sistema de escritura chino: el espacio de claves tiene miles decenas de miles de caracteres. Imaginemos que es suficiente para impedir fuerza bruta... (no lo es).
-
-Si el mensaje es suficientemente largo, podemos analizar la frecuencia de aparición de los carácteres
+Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de aparición de los carácteres**
 
 ## Análisis de frecuencias
 
@@ -253,7 +268,6 @@ Si el mensaje es suficientemente largo, podemos analizar la frecuencia de aparic
 ¡La estadística se mantiene igual (pero movida) después del cifrado César!
 
 ---
-<!-- _class: with-success -->
 
 **Hq** fulswrjudild, ho fliudgr Fhvdu, wdpelhq frqrflgr frpr fliudgr sru
 ghvsodcdplhqwr, frgljr **gh** Fhvdu **r** ghvsodcdplhqwr **gh** Fhvdu, hv xqd gh
@@ -272,10 +286,11 @@ https://www.dcode.fr/caesar-cipher
 - Los dígrafos hv gh (varias veces...) podrían ser es, el, me, le ó se -->
 
 ## Rotura de algoritmos criptográficos
+<!-- _class: with-success -->
 
-Definimos: **un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la mera fuerza bruta**.
+El cifrado César lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez conocida el análisis de frecuencia contra el cifrado César
 
-El cifrado César lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez conocida el análisis de frecuencia contra el cifrado César.
+**Un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la fuerza bruta**.
 
 
 # Mejoras al cifrado César
@@ -289,7 +304,7 @@ Podemos añadir una transposición a la vez de una substitución:
 
 ![center](https://i1.wp.com/nozdr.ru/_media/games/quest/for/cipher/marshrut.png)
 
-Podemos mapear cualquier letra a cualquier otra letra, o osar cifrado afín:
+Podemos mapear cualquier letra a cualquier otra letra, o utilizar cifrado afín:
 
 $e(k=\{a,b\}, m) = a · m + b \mod 26$
 
@@ -320,7 +335,7 @@ La tabula recta abrió el camino de los cifrados polialfabéticos. Solo unos 20 
 
 ## Cifrado de Vigenère
 
-Cifrado polialfabético de Giovan Battista Bellaso en 1553, pero atribuido a Vigenère
+[Cifrado polialfabético de Giovan Battista Bellaso en 1553](https://es.wikipedia.org/wiki/Cifrado_de_Vigen%C3%A8re), pero atribuido a Vigenère
 
 ![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/1/1a/Vigenere.jpg)
 
@@ -335,6 +350,7 @@ $k=XID$
 Fíjate: el "tabula recta" es un Vigenère con $K=ABCD...WXYZ$
 
 ---
+<!-- _class: center -->
 
 $c_i = e(k, m_i) = m_i + k_{(i \mod ||k||)} \mod 26$
 
@@ -399,7 +415,7 @@ Vulnerabilidad: la repetición de la clave, que además es de longitud adivinabl
 
 Si segmentamos el texto cifrado de acuerdo a la longitud de la contraseña, cada fragmento de texto mostrará las mismas estadísticas del idioma (cifrado César)...
 
-Sólo hace falta saber o adivinar la longitud de la "contraseña" o...
+Sólo hace falta adivinar la longitud de la "contraseña" ([Hamming](https://crypto.stackexchange.com/questions/8115/repeating-key-xor-and-hamming-distance/8118#8118), [Kasiski](https://en.wikipedia.org/wiki/Kasiski_examination)) o...
 
 ...como el espacio de longitudes será probablemente limitado, podemos probarlos uno por uno hasta que tenemos una estadística reconocible.
 
@@ -428,7 +444,7 @@ Fijate:
 
 - Los rotores podían extraerse e intercambiar sus posiciones
 - Los rotores podían empezar en cualquier letra
-- El panel conectada (o no) pares de letra entre sí. Al principio tenía 4 cables, luego aumentó a 6. El panel era exclusivo de la versión militar.
+- El panel conectaba (o no) pares de letra entre sí. Al principio tenía 4 cables, luego aumentó a 6. El panel era exclusivo de la versión militar.
 
 La clave era: posición de los rotores, letras iniciales en los rotores, posición de los cables. Todo esto cambiaba cada día.
 
@@ -503,11 +519,10 @@ Se define **la seguridad perfecta o incondicional** como aquella con la que, a p
 - Gilbert Sandford Vernam inventó y patentó una máquina de cifrado en 1917
 - Shannon demostró en 1945 que esa máquina tenía cifrado perfecto
 
+> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
+
 <!-- 
 excepto la longitud... y el momento de enviarlo, ...y el número de mensajes
-
-La seguridad perfecta es una definición matemática. 
-
  -->
 
 ---
@@ -589,6 +604,8 @@ Eso es lo que nos permitió romper el sistema de los Cuentacuentos en la primera
 
 El problema del algoritmo del Cuentacuentos es que estábamos repitiendo la clave: con la misma clave cifrábamos una zona de ceros y todo lo demás.
 
+XOR es una operación muy común en criptografía que usareos en el tema 3
+
 -->
 ---
 
@@ -604,7 +621,7 @@ Para poder usar un *one-time-pad*, la clave se prepara por adelantado para cuand
 
 Ninguna. Ni siquiera por fuerza bruta: si pruebas claves, puedes "descifrar" el texto cifrado y conseguir cualquier mensaje que se te ocurra...
 
-...mientras se cumplan las hipótesis de trabajo para la clave $k$:
+...**mientras se cumplan las hipótesis de trabajo para la clave $k$**:
 
 - tan larga como el mensaje
 - sólo un solo uso
@@ -617,6 +634,8 @@ Los humanos somos muy malos para distinguir qué es y qué no es aleatorio
 Pero el principal problema es que la longitud en bytes de $k$ es igual a la longitud en bytes de $m$.
 
 Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro por el mismo canal seguro
+
+> Más ejemplos: https://www.cryptomuseum.com/covert/conceal/index.htm
 
 ![bg right:60%](https://www.cryptomuseum.com/covert/deaddrop/img/302193/011/full.jpg)
 

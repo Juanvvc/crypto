@@ -30,10 +30,11 @@ juan.vera@campusviu.es
 1. [Criptografía de clave simétrica](03-simetrica.html)
     - Anexo: [RNG y HSM](A2-rng.html)
 1. [Teoría complejidad y acuerdo D-H](04-complejidad.html)
-1. [Funciones de Hash y Blockchain](04-hashes.html)
 1. [Criptografía de clave pública](05-asimetrica.html)
-1. [Firma digital](../docs/es/pki.html)
-1. [Protocolos](../docs/es/tls.html)
+1. [Funciones de Hash y Blockchain](06-hashes.html)
+1. [Firma digital](08-pki.html)
+1. [Protocolos](09-protocolos.html)
+1. [Amenazas](10-amenazas.html)
 
 
 # Presentación
