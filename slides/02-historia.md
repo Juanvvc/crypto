@@ -25,9 +25,9 @@ juan.vera@campusviu.es
 
 - [Criptografía clásica](#3)
 - [Cifrado César](#8): fuerza bruta y análisis frecuencial.
-- [Mejoras al cifrado César](#23): Vigenère y Enigma
-- [Confidencialidad perfecta](#38): Vernam
-- [Conclusiones](#48): resumen y referencias
+- [Mejoras al cifrado César](#24): Vigenère y Enigma
+- [Confidencialidad perfecta](#39): Vernam
+- [Conclusiones](#49): resumen y referencias
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
@@ -37,17 +37,20 @@ En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
 ## Criptografía = cifrado
 
-En "la antigüedad" (¡años 70!), la criptografía servía exclusivamente para dificultar que un tercero pudiera discernir lo que se envía (**confidencialidad**) 
+Hasta los 70, criptografía=confidencialidad: impedir que el enemigo supiese qué decimos
 
 Un mensaje $m$ (*plain-text*) se cifra con la función de cifrado $e()$, que se le pasa junto a una clave $k$ para dar el mensaje cifrado $c$
 
 $c = e(k, m)$
 
-Para descifrar hace falta la clave $k$ y el mensaje cifrado $c$, que se le pasa a la función de descifrado $d()$
+Para descifrar hace falta la clave $k$, el mensaje cifrado $c$, y la función de descifrado $d()$
 
 $m'=d(k, c)$
 
 El resultado $m'$ debería ser el mensaje en claro original $m$.
+
+![bg right:40% w:100%](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+
 
 <!--
 
