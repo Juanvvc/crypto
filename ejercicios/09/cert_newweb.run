@@ -1,0 +1,19 @@
+mkdir -p csr
+mkdir -p certs
+
+############  ESTO LO EJECUTA UN USUARIO CUALQUIERA EN SU CASA
+
+# Genera par de claves para www.example.com
+openssl genrsa -out private/www.example.com.key.pem 2048
+# Genera par de claves para www.example.com, protegido por contraseña
+# openssl genrsa -aes256 -out private/www.example.com.key.pem 2048
+
+# Genera petición de firmado. Esta es la petición que le enviamos a la CA
+openssl req -key private/www.example.com.key.pem -new -sha256 -out csr/www.example.com.csr.pem
+
+############  ESTO LO EJECUTA LA CA
+
+# La CA firma la petición y devuelve el certificado
+openssl x509 -signkey private/ca.key.pem -in csr/www.example.com.csr.pem -req -days 365 -out certs/www.example.com.cert.pem
+openssl x509 -noout -text -in certs/www.example.com.cert.pem
+

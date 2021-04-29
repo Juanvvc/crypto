@@ -1,0 +1,11 @@
+
+# Simplificado de https://jamielinux.com/docs/openssl-certificate-authority/create-the-root-pair.html
+
+mkdir -p private
+mkdir -p certs
+# Genera clave privada para la CA
+openssl genrsa -aes256 -out private/ca.key.pem 4096
+# Genera certificado público para la CA
+openssl req -key private/ca.key.pem -new -x509 -days 7300 -sha256 -out certs/ca.cert.pem
+# Muestra el certificado por pantalla
+openssl x509 -noout -text -in certs/ca.cert.pem
