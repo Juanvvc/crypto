@@ -26,7 +26,9 @@ juan.vera@campusviu.es
 
 # Como decíamos ayer...
 
-Confidencialidad perfecta implica $\|k\|=\|m\|$
+Cifrado Vernam ofrece **confidencialidad perfecta**
+
+Pero implica claves de un solo uso tan grandes como el mensaje: $\|k\|=\|m\|$
 
 Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica"
 
@@ -34,6 +36,26 @@ A partir de 1976:
 
 - **Criptografía simétrica**: es "casi perfecta" con claves cortas
 - **Criptografía asimétrica**: distribución de claves de cualquier tamaño
+
+
+> Más ejemplos: https://www.cryptomuseum.com/covert/conceal/index.htm
+
+![bg right:40% h:80%](https://www.cryptomuseum.com/covert/deaddrop/img/302193/011/full.jpg)
+
+<!--
+La confidencialidad es perfecta en cifrados tipo Vernam si la clave:
+
+- Es perfectamente aleatorio
+- Solo se usa una vez
+- Es tan larga como el mensaje
+
+Es decir: hay que distribuir claves tan grandes como mensajes de una forma secreta antes de poder distribuir un mensaje. Esto no es práctico.
+
+Hoy veremos como solucionarlo:
+
+- Relajando la confidencialidad perfecta a la confidencialidad computacional
+- Usando algoritmos de cifrado simétrico
+-->
 
 # Hoy hablamos de...
 
@@ -56,6 +78,10 @@ header: Confidencialidad computacional -->
 
 - **Confidencialidad perfecta**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional infinita**
 - **Confidencialidad computacional**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional razonable**
+
+![bg right:35% w:80%](https://www.researchgate.net/profile/Dominique-Elser/publication/288713921/figure/fig1/AS:614285285802002@1523468433568/Color-online-Computational-vs-Information-theoretic-security-The-four-ciphers-data.png)
+
+>  Imagen: Nitin Jain, Birgit Stiller, Imran Khan, Dominique Elser, Christoph Marquardt & Gerd Leuchs (2016) "Attacks on practical quantum key distribution systems (and how to prevent them)". [DOI: 10.1080/00107514.2016.1148333](https://www.tandfonline.com/doi/abs/10.1080/00107514.2016.1148333)
 
 ---
 <!-- _class: extra-slide -->
@@ -91,17 +117,17 @@ Informalmente: un atacante no puede descifrar el mensaje:
 
 <!-- Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano
 
-Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante pueda descifrar el mensaje -->
+Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante con unos recursos razonables pueda descifrar el mensaje -->
 
 ## Ataques de fuerza bruta
 <!-- _class: with-success -->
 
 La criptografía computacionalmente segura permite $\|k\| \ll \|m\|$
 
-- Es práctico
-- Pero los ataques de fuerza bruta son posibles
+- Es un cifrado práctico: la clave es mucho más pequeña que el mensaje y por tanto es fácil de distribuir
+- Pero hace posibles ataques de fuerza bruta
 
-**Conclusión**: hay que hace un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
+Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
 
 <!-- Recordad: en el cifrado de Verman no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
 
@@ -138,6 +164,7 @@ La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenad
 -->
 
 ## Tamaños recomendados de clave
+<!-- _class: with-success -->
 
 [El NIST recomienda](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final) (2020, sección 5.6.3) claves en las que un atacante
 tenga que hacer $2^{112}$ pruebas.
@@ -146,7 +173,11 @@ Es decir, según el NIST antes de 2030 las claves han de tener una longitud mín
 
 A partir del 2030 prevé recomendar $\|k\|=128$ bits
 
+Es decir: con una clave de 128 bits podemos cifrar un mensaje de **cualquier longitud**, y es razonable que nadie pueda descifrarlo en un futuro previsible
+
 En cifrado simétrico, el tamaño en bits de su clave es igual a la **fortaleza** del sistema
+
+> Otras recomendaciones: <https://www.keylength.com/en/compare/>
 
 <!-- algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
 
