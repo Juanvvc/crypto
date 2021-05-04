@@ -63,12 +63,13 @@ Hoy veremos como solucionarlo:
 - [Cifrado simétrico de flujo](#16)
 - [Cifrado Salsa20](#34): detalles y prácticas
 - Anexo recomendado: [RNG](A2-rng.html)
-- Ejercicios: [Tema 3 (1)](../scripts/03)
+- Ejercicios: [Tema 3 (1)](../ejercicios/03)
 - [Cifrado simétrico de bloque](#46)
 - [Cifrado AES](#60): detalles del algoritmo de cifrado de bloques AES y modos de operación.
-- [Protocolo Bcrypt](#84)
-- [Resumen](#91), conclusiones y referencias
-- Ejercicios: [Tema 3 (2)](../scripts/03)
+- Ejercicios: [Tema 3 (2)](../ejercicios/03)
+- [Protocolo Bcrypt](#85)
+- [Resumen](#95), conclusiones y referencias
+
 
 # Confidencialidad computacional
 <!-- _class: lead
@@ -649,6 +650,12 @@ Ninguna conocida, siempre que se cumplan las condiciones de uso: no se puede rep
 
 Anexo recomendado: [RNG y HSM](A1-rng.html)
 
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+
+- Cifrando con XOR: los peligros de reutilizar claves
+- Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20
+- (Opcional) Creación de azar: creación de números aleatorios
+
 # Cifrado de bloque
 <!-- _class: lead
 header: Cifrado de bloque -->
@@ -1073,13 +1080,21 @@ AES ha perdido fortaleza pero aún está aguantando.
 - 3DES: 100 Mbps (seguridad 112 bit)
 
 ## Computación cuántica
+<!-- _class: with-success -->
 
 
 - los computadores cuánticos actuales no tienen aplicación práctica: a parte de romper claves sirven para simular... fenómenos de física cuántica
 - se cree que no habrá computación cuántica práctica antes del ~2030
 - Se conoce un algoritmo óptimo para compuración cuántica (Grover) que permite romper el cifrado simétrico, pero para ser robustos a este algoritmo sólo hemos de doblar la longitud de claves. Por ejemplo pasar a AES-256 daría una fortaleza equivalente de 128 bits
 
-Por tanto, se considera que la criptografía simétrica es robusta ante la computación cuántica
+Se considera que la criptografía simétrica es robusta ante la computación cuántica
+
+---
+<!-- _class: extra-slide -->
+
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+
+- Modos de cifrado AES y gestión de bloques
 
 # Protocolo Bcrypt
 <!-- _class: lead
