@@ -14,7 +14,7 @@ Transparencias en [juanvvc.github.io/crypto/slides](https://juanvvc.github.io/cr
 - [Hashes y Bitconins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
 - [Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/08-pki.html)
 - [Protocolos: PKI y TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
-- [Amenazas](https://juanvvc.github.io/crypto/slides/10-amenezas.html)
+- [Amenazas](https://juanvvc.github.io/crypto/slides/10-amenazas.html)
 
 Contenido sin actualizar (¡poco a poco!)
 
