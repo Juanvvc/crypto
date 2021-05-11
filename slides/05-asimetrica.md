@@ -27,6 +27,26 @@ juan.vera@campusviu.es
 
 # Como decíamos ayer...
 
+![w:16em center](images/symmetric-example.png)
+
+El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros
+
+Solo necesitamos que las dos partes tenga una clave secreta en común
+
+¿Cómo conseguimos que las dos personas que no se han visto nunca tengan una clave secreta común?
+
+<!--
+Parecería que con lo que conocemos ya hemos resuelto el problema de comunicar dos personas de forma secreta
+
+Pero en realidad tenemos un "elefante en la habitación": ¿cómo se intercambian una clave de forma segura dos personas que no han hablado nunca antes, ni tienen otra forma de comunicació que Internet?
+
+Este es el problema de intercambio de clave. No fue resuelto hasta 1976 con una serie de conceptos completamente nuevos: cada persona tiene dos claves, una pública conocida por todo el mundo y otra privada y secreta. El algoritmo inventado en 1976 se llama Diffie-Hellman, y aún lo estamos utilizando.
+
+Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
+-->
+
+---
+
 El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez en la historia que dos personas cualquiera que no se conocían mantuviesen una conversación confidencial por medios dgitales...
 
 ...pero su artículo no se llamó "Solución al problema de intercambio de claves". Tenía un título mucho más ambicioso: [Nuevas direcciones en la criptografía](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720)
@@ -39,11 +59,11 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 
 # Hoy hablamos de...
 
-- [Criptografía asimétrica](#4)
+- [Criptografía asimétrica](#5)
 - [RSA](#22)
-- [Curvas Elípticas](#30)
-- [Depurando detalles](#30)
-- [Conclusiones](#30): resumen y referencias
+- [Curvas Elípticas](#36)
+- [Depurando detalles](#53)
+- [Conclusiones](#56): resumen y referencias
 
 # Criptografía asimétrica
 <!-- _class: lead -->
@@ -114,6 +134,8 @@ Resuelve la $x$:
 * Si te dan $n$ y $N$ y te preguntan $n^x=N$...
 * $x = \log_n N$
 
+> Para más detalles de este problema, consulta [tema 4](04-complejidad.html)
+
 ---
 <!-- _class: a-story -->
 
@@ -144,41 +166,79 @@ Ejemplo: ¿cuánto vale x? Recuerda que $x\lt17$
 ---
 <!-- _class: smaller-font -->
 
-**Si el módulo $p$ es primo, la solución de $g^x \mod p = A$ siempre existe y es única**, que es lo que interesa para poder cifrar y descifrar. $g$ también tiene restricciones, aunque normalmente $g=2$ ó $g=3$
+Problema: resuelve $m$ dado $g$, $p$ y $c$ en la ecuación $g^m \mod p = c$
 
 Si probamos con $p=12$, que no es primo, el problema:
 
-$$2^x \mod 12 = 8$$
+$$2^m \mod 12 = 8$$
 
 Tiene todas estas soluciones (compruébalo):
 
 $$
 \begin{aligned}
-x &= 3 \text{, ya que: } 2^3 \mod 12 = 8 \mod 12 = 8\\
-x &= 5 \text{, ya que: }  2^5 \mod 12 = 32 \mod 12 = 8\\
-x &= 7\\
-x &= 9
+m &= 3 \text{, ya que: } 2^3 \mod 12 = 8 \mod 12 = 8\\
+m &= 5 \text{, ya que: }  2^5 \mod 12 = 32 \mod 12 = 8\\
+m &= 7\\
+m &= 9
 \end{aligned}
 $$
 
 Pero: 
 
-$$2^x \mod 12 = 5$$
+$$2^m \mod 12 = 5$$
 
 no tiene solución para ningún número $x$ entero
 
-## Protocolo Diffie-Hellman, revisitado
+---
 
-1. Alice y Bob acuerdan $g$ y $p$ primos entre sí y escogen dos números en secreto $a$ y $b$, que son **sus claves privadas**
-1. Se envían entre ellos $A$ y $B$, que son **sus claves públicas**:
+Problema: resuelve $m$ dado $g$, $p$ y $c$ en la ecuación $g^m \mod p = c$
+
+**Si el módulo $p$ es primo, la solución de $g^m \mod p = c$ siempre existe y es única**, que es lo que interesa para poder cifrar y descifrar:
+
+$g$ también tiene restricciones, aunque normalmente $g=2$ ó $g=3$
+
+## Protocolo Diffie-Hellman, revisitado
+<!-- _class: smaller-font -->
+
+Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
+
+1. Acuerdan $g$ y $p$ primos entre sí
+1. Escogen números en secreto $a$ y $b$
+1. Se envían entre ellos:
     - $Alice \rightarrow Bob: A=g^{a} \mod p$
     - $Bob \rightarrow Alice: B=g^{b} \mod p$
-1. Calculan en secreto $s$, que usan como clave de cifrado simétrico:
+1. Calculan en secreto:
     - $Alice$: $s = B^{a} \mod p = g^{ab} \mod p$
     - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
 1. Y usan $s$ como clave de cifrado un algoritmo simétrico  
 
+![bg right:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/4/46/Diffie-Hellman_Key_Exchange.svg)
+
 **Observa**: para que un atacante que solo conoce $g$, $p$, $A$ y $B$ (claves públicas) pueda calcular $s=A^b$, tiene que resolver $B=g^b \mod p$, que se supone difícil
+
+## Claves secretas y claves públicas
+
+- Alice y Bob acuerdan $g$ y $p$ primos entre sí por canales que no son seguros. **El atacante conoce $g$ y $p$**
+- Cuando Alice y Bob se intercambian $g^{a}$ y $g^{b}$, el canal aún no es seguro. **El atacante conoce $g^a$ y $g^b$**
+- $a$ y $b$ nunca salen de los ordenadores de Alice ni Bob, nunca se intercambian. **El atacante no los conoce, Bob no conoce $a$ y Alice no conoce $b$**
+
+Dado que el atacante (o cualquiera) conoce $g$, $p$, $g^a$ y $g^b$, esta información es pública
+
+$a$ y $b$ es información privada y solo conocida por Alice y Bob, respectivamente
+
+---
+<!-- _class: with-success -->
+
+Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
+--|--|--|--
+1|$g$, $p$|$g$, $p$|$g$, $p$
+2|$a$, $g^a$|$b$, $g^b$|
+3|$g^b$|$g^a$|$g^a$, $g^b$
+4|$g^{ab}$|$g^{ab}$|
+
+Recuerda hipótesis DDH: $g^{ab}$ solo se puede calcular fácilmente si conoces o bien $a$ o bien $b$, pero no se puede calcular fácilmente si conoces solo $g^a$ y $g^b$
+
+Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
 
 ## Nuevas direcciones
 
@@ -256,12 +316,12 @@ $$m=\sqrt[e]{c}^ \mod n$$
 
 Es computacionalmente difícil para valores de $n$ **con factores desconocidos**
 
-Hemos cifrado un mensaje $m$ pero no hay manera de descifrar el resultado $c$
+Hemos cifrado un mensaje $m$ pero no hay manera de descifrar el resultado $c$... sin conocer "la trampa" (*trap function*)
 
 ---
 <!-- _class: smaller-font with-success -->
 
-La "trampa" según el teorema de Euler: si los factores de $n$ son conocidos, entonces:
+La "trampa" usa el teorema de Euler: si los factores de $n$ son conocidos, entonces:
 
 
 $$
@@ -321,7 +381,7 @@ $$9 \cdot 9 \mod 10 = 1$$
 [Existen algoritmos eficientes](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Modular_integers) para calcular el inverso de un número en un anillo cíclico $\Z_\phi$. Es decir, el cálculo de $d = e^{-1} \mod \phi$ dado $e$ y $\phi$ es posible y eficiente
 
 
-## El protocolo: generación de par de claves
+## El protocolo RSA: generación de par de claves
 
 1. Escoge dos números $p$, $q$ primos
 1. Calcula: $n = pq$. Su número de bits es el **tamaño de clave**
@@ -338,11 +398,11 @@ $$9 \cdot 9 \mod 10 = 1$$
 
 ## El protocolo: cifrado y descifrado
 
-Cifrado: Para enviar un mensaje a Alice, obtengo su clave pública $pk=\{e, n\}$ y calculo:
+Cifrado: Para enviar un mensaje a Alice, obtengo su clave pública $pk_A=\{e, n\}$ y calculo:
 
 $$c=m^e \mod n$$
 
-Descifrado: Alice utiliza su clave privada $sk=\{d, n\}$
+Descifrado: Alice utiliza su clave privada $sk_A=\{d, n\}$
 
 $$m'=c^d \mod n$$
 
@@ -534,6 +594,15 @@ A cambio, son más complejas de entender y programar pero eso como usuarios no e
 
 -->
 
+
+---
+
+![center](images/keysize-compare.png)
+
+NOTA: RSA está basado en "factorización", DSA y D-H en "logaritmo discreto"
+
+> https://www.keylength.com/en/compare/
+
 ## Elección de la curva
 
 No se suele escoger "cualquier curva elíptica", sino alguna de las ya existentes. Cada una tiene propiedades ligeramente diferentes, [algunas están patentadas](https://en.wikipedia.org/wiki/ECC_patents) y otras provocan dudas ([parte de las revelaciones de Snowden, 2013](https://en.wikipedia.org/wiki/Dual_EC_DRBG))
@@ -556,7 +625,7 @@ Bernstein es el creador de Chacha20 del [tema 3](03-simetrica.html)
 -->
 
 
-## Elliptic Curve Diffie-Hellman ECDH
+## Elliptic Curve Diffie-Hellman: ECDH
 
 Protocolo:
 
@@ -569,13 +638,13 @@ Protocolo:
 
 Nota que un atacante no podría calcular $s$ a partir de $A$ ó $B$: $A+B=(a+b)P$ Tiene que calcular o bien $a$ o bien $b$, y eso es difícil
 
-## Elliptic Curve DSA
+## Elliptic Curve DSA: ECDSA
 
 [DSA](https://en.wikipedia.org/wiki/Digital_Signature_Algorithm) es un algoritmo de firmado digital clásico, basado en [ElGammal (1985)](https://en.wikipedia.org/wiki/ElGamal_signature_scheme). Es similar a RSA pero basado en el problema del logaritmo discreto
 
 Ha sido estándar FIPS hasta hace poco, pero probablemente será retirado en el futuro próximo
 
-Existe una adaptación de DSA a curvas elípticas, que es la implementación que probablemente se estandarizará: [FIPS 186-5 (2019, aún borrador)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5-draft.pdf)
+Existe una adaptación de DSA a curvas elípticas: ECDSA, que es la implementación que probablemente se estandarizará: [FIPS 186-5 (2019, aún borrador)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5-draft.pdf)
 
 ## ¿Y RSA?
 
@@ -632,6 +701,9 @@ La situación quizá cambie en el futuro
 - Ejemplos modernos: ECDH, ECDSA, que son adaptaciones de D-H y DSA sobre curvas elípticas
 
 ## Referencias
+
+- [Nuevas direcciones en la criptografía](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) Whitfield Diffie y Martin Hellman, 1976
+- [Asymmetric Encryption - Simply explained](https://www.youtube.com/watch?v=AQDCe585Lnc)
 
 Las curvas elípticas son un concepto complejo. Esto son algunas propuestas explicativas:
 
