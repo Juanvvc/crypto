@@ -332,4 +332,4 @@ Antes, los certificados se compraban
 ---
 <!-- _class: center -->
 
-Continúa en: [Amenazas](10-amenazas.html)
+Continúa en: [Criptografía como amenaza](10-amenazas.html)

@@ -4,23 +4,23 @@ Transparencias en [juanvvc.github.io/crypto/slides](https://juanvvc.github.io/cr
 
 ## Contenido
 
-- [Introducción](https://juanvvc.github.io/crypto/slides/intro.html)
+- [Introducción](https://juanvvc.github.io/crypto/slides/index.html)
 - [Conceptos básicos](https://juanvvc.github.io/crypto/slides/01-conceptos-basicos.html)
 - [Criptografía clásica](https://juanvvc.github.io/crypto/slides/02-historia.html)
-- [Criptografía simétrica, AES](https://juanvvc.github.io/crypto/slides/03-simetrica.html)
-- [Teoría de la complejidad, D-H](https://juanvvc.github.io/crypto/slides/04-complejidad.html)
+- [Criptografía simétrica, ChaCha y AES](https://juanvvc.github.io/crypto/slides/03-simetrica.html)
+- [Teoría de la complejidad, Diffie-Hellman](https://juanvvc.github.io/crypto/slides/04-complejidad.html)
 - [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/slides/05-asimetrica.html)
 - Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/slides/A2-rnd.html) 
-- [Hashes y Bitconins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
+- [Hashes y Bitcoins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
 - [Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/08-pki.html)
-- [Protocolos: PKI y TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
-- [Amenazas](https://juanvvc.github.io/crypto/slides/10-amenazas.html)
+- [Protocolos: TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
+- [Criptografía como amenaza: BEC y Ransomware](https://juanvvc.github.io/crypto/slides/10-amenazas.html)
+- [Comunicaciones anónimas y TOR](https://juanvvc.github.io/crypto/slides/11-anonimato.html)
 
-Contenido sin actualizar (¡poco a poco!)
+Contenido sin actualizar, enlace a transparencias de cursos pasados (¡poco a poco!)
 
-- [MAC](https://jig.github.io/crypto/es/ecbc-mac.html)
-- [Amenazas](http://jig.github.io/crypto/es/threats.html)
-- [Conexiones (TLS)](http://jig.github.io/crypto/es/tls.html)
+- [Message Authentication Code](https://jig.github.io/crypto/es/ecbc-mac.html)
+- [El futuro de la ciriptografía](http://jig.github.io/crypto/es/threats.html)
 - [Infraestructura de Clave Pública (PKI)](http://jig.github.io/crypto/es/pki.html)
 
 ## Descarga local
@@ -47,10 +47,11 @@ Puedes acceder a las notas de presentación, que probablemente contengan informa
 
 # Licencia
 
-Esta obra esta sujeta a una licencia de [Atribución 4.0 Internacional de Creative Commons](http://creativecommons.org/licenses/by/4.0/)
+Esta obra esta sujeta a una licencia de [Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) ](https://creativecommons.org/licenses/by-sa/4.0/)
 
-[![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+[![Licencia de Creative Commons](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig)
+Copyright © 2020-2021 [Juan Vera del Campo](https://github.com/juanvvc)
 
-Copyright © 2019-2021 [Juan Vera del Campo](https://github.com/juanvvc)
+Basado en transparencias Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig/crypto)
+

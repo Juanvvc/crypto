@@ -381,4 +381,4 @@ En el libro de transacciones, a parte de transacciones, se pueden inscribir dato
 
 <!-- _class: center -->
 
-Continúa en: [Integridad de mensajes](07-integridad.html)
+Continúa en: [Public Key Infrastructure](08-pki.html)

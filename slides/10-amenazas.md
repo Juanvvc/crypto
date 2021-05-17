@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Amenezas
+title: Criptografía - Amenazas
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
@@ -332,3 +332,8 @@ Modern Ransomware and exfiltration
 - [Spying on the scammers](https://www.youtube.com/watch?v=le71yVPh4uk)
 - [Babuk Ransomware, by McAfee](https://www.mcafee.com/blogs/other-blogs/mcafee-labs/babuk-ransomware/)
 - [Babuk Ransomware, by ChuongDong](http://chuongdong.com/reverse%20engineering/2021/01/03/BabukRansomware/)
+
+---
+<!-- _class: center -->
+
+Continúa en: [Comunicaciones anónimas](11-anonimato.html)
