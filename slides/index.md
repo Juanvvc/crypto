@@ -2,7 +2,7 @@
 marp: true
 title: Criptografía - Índice
 paginate: true
-footer: '[Inicio](index.html) - [Juan Vera](<juan.vera@campusviu.es>)'
+footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
 ---
@@ -29,12 +29,16 @@ juan.vera@campusviu.es
 1. [Criptografía clásica](02-historia.html)
 1. [Criptografía de clave simétrica](03-simetrica.html)
     - Anexo: [RNG y HSM](A2-rng.html)
-1. [Teoría complejidad y acuerdo D-H](04-complejidad.html)
+1. [Teoría complejidad y acuerdo Diffie-Hellman](04-complejidad.html)
 1. [Criptografía de clave pública](05-asimetrica.html)
-1. [Funciones de Hash y Blockchain](06-hashes.html)
-1. [Firma digital](08-pki.html)
-1. [Protocolos](09-protocolos.html)
-1. [Amenazas](10-amenazas.html)
+
+---
+
+6. [Funciones de Hash y Blockchain](06-hashes.html)
+1. [Firma digital y PKI](08-pki.html)
+1. [Protocolo TLS](09-protocolos.html)
+1. [Criptografía como amenaza: BEC y Ransomware](10-amenazas.html)
+1. [Comunicaciones anónimas](11-anonimato.html)
 
 
 # Presentación
