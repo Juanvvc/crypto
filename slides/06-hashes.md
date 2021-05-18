@@ -43,9 +43,11 @@ juan.vera@campusviu.es
 # Funciones de hash
 <!-- _class: lead -->
 
-## Función de resumen
+## Función digest, hash o resumen
 
-Resume una cadena de longitud arbitraria $m$, a un valor $r$ de tamaño fijo $l$
+Recibe los tres nombres, aunque cuando se usan en criptografía se prefiere "hash"
+
+Función que resume una cadena de longitud arbitraria $m$, a un valor $r$ de tamaño fijo $l$
 
 $$
 \begin{aligned}
@@ -522,11 +524,10 @@ En el libro de transacciones, a parte de transacciones, se pueden inscribir dato
 
 ## Referencias
 
-- [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
 - [Hashing Algorithms and Security - Computerphile](https://www.youtube.com/watch?v=b4b8ktEV4Bg)
 - [But how does bitcoin actually work?](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
 - [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
-- [Hashcash- A Denial ofServiceCounter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
+- [Hashcash - A Denial of Service Counter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
 
 ---
 
