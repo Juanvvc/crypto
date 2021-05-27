@@ -193,7 +193,7 @@ Some acting is usually involved. Someone might call you!
 
 ![](images/bec4.png)
 
-## How you can prevent this? PGP
+## How can you prevent this? PGP
 
 Your contacts send their public keys to you manually. All communications from a contact must be signed using one of the accepted keys.
 
@@ -203,7 +203,7 @@ The perfect solution: sender signs the email, the receiver only accept emails fr
 
 Bad news: PGP is rarely used in real life!
 
-## How you can prevent this? SPF
+## How can you prevent this? SPF
 
 Check in the DNS the sender IP is authorized to send emails from that server
 
@@ -213,7 +213,7 @@ i.e.: you authenticate the email <someone@gmail.com> was sent from a server auth
 
 > https://medium.com/@pendraggon87/short-primer-on-spf-dkim-and-dmarc-9827eb2f359d
 
-## How you can prevent this? DomainKeys Identified Mail
+## How can you prevent this? DomainKeys Identified Mail
 
 The receiving **server** checks the digital signature of the sending **server**
 

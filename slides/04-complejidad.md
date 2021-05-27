@@ -73,7 +73,7 @@ El nombre "teoría de la complejidad" está muybien escogido para describir el c
 - Normas usuales de Sodoku
 - Las casillas ortogonales no tienen números consecutivos: no hay un 5 al lado de un 6
 - Las casillas separadas por movimientos de caballo o rey no tienen el mismo número
-- Pruébalo: [The Mirable, de Mitchell Lee](https://cracking-the-cryptic.web.app/sudoku/tjN9LtrrTL)
+- Pruébalo: [The Miracle, de Mitchell Lee](https://cracking-the-cryptic.web.app/sudoku/tjN9LtrrTL)
 - ¿Cuánto tiempo le llevará a un algoritmo que sea el más rápido posible?
 
 <!--
