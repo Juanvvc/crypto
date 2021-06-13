@@ -126,6 +126,8 @@ Lo más habitual en Internet es utilizar TLS con solo autenticación de servidor
 - Usuario y contraseñas
 - Sistemas Cl@ve, firma electrónica en momentos puntuales, 2FA...
 
+Más información en el [Tema 7](07-autenticacion.html)
+
 ## Acuerdos de los parámetros de la conexión
 
 Los clientes cuando se conectan acuerdan utilizar la versión más moderna que soporten ambos extremos:
@@ -256,6 +258,10 @@ Se debe vigilar que RSA y DHE sean de 2048 bit o más, y que ECDSA y ECDH usen P
 
 # Prácticas
 
+## Creación de una CA
+
+![center](images/A-2-layer-X509-certification-hierarchy.png)
+
 ## Creación de CA
 
 Simplificado de https://jamielinux.com/docs/openssl-certificate-authority/create-the-root-pair.html
@@ -324,10 +330,9 @@ Antes, los certificados se compraban
 
 ## Referencias
 
-- [Hashing Algorithms and Security - Computerphile](https://www.youtube.com/watch?v=b4b8ktEV4Bg)
-- [But how does bitcoin actually work?](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
-- [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
-- [Hashcash- A Denial ofServiceCounter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
+- [Transport Layer Security, TLS 1.2 and 1.3 (Explained by Example)](https://www.youtube.com/watch?v=AlE5X1NlHgg)
+- [SSL/TLS handshake Protocol](https://www.youtube.com/watch?v=sEkw8ZcxtFk)
+- [What is TLS (Transport Layer Security)?](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/)
 
 ---
 <!-- _class: center -->

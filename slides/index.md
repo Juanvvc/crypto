@@ -35,6 +35,7 @@ juan.vera@campusviu.es
 ---
 
 6. [Funciones de Hash y Blockchain](06-hashes.html)
+1. [Autenticación](07-autenticacion.html)
 1. [Firma digital y PKI](08-pki.html)
 1. [Protocolo TLS](09-protocolos.html)
 1. [Criptografía como amenaza: BEC y Ransomware](10-amenazas.html)

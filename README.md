@@ -12,16 +12,20 @@ Transparencias en [juanvvc.github.io/crypto/slides](https://juanvvc.github.io/cr
 - [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/slides/05-asimetrica.html)
 - Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/slides/A2-rnd.html) 
 - [Hashes y Bitcoins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
+- [Autenticación](https://juanvvc.github.io/crypto/slides/07-autenticacion.html)
 - [Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/08-pki.html)
 - [Protocolos: TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
 - [Criptografía como amenaza: BEC y Ransomware](https://juanvvc.github.io/crypto/slides/10-amenazas.html)
 - [Comunicaciones anónimas y TOR](https://juanvvc.github.io/crypto/slides/11-anonimato.html)
 
-Contenido sin actualizar, enlace a transparencias de cursos pasados (¡poco a poco!)
+Algunas notas:
 
-- [Message Authentication Code](https://jig.github.io/crypto/es/ecbc-mac.html)
-- [El futuro de la ciriptografía](http://jig.github.io/crypto/es/threats.html)
-- [Infraestructura de Clave Pública (PKI)](http://jig.github.io/crypto/es/pki.html)
+- Los temas 4, 10 y 11 son opcionales
+- Del tema 6 puede saltarse al 8, 9 y finalmente 7
+- Contenido sin actualizar, enlace a transparencias de cursos pasados (¡poco a poco!)
+    - [Message Authentication Code](https://jig.github.io/crypto/es/ecbc-mac.html)
+    - [El futuro de la criptografía](http://jig.github.io/crypto/es/threats.html)
+    - [Infraestructura de Clave Pública (PKI)](http://jig.github.io/crypto/es/pki.html)
 
 ## Descarga local
 

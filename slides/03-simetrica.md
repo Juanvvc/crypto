@@ -67,8 +67,7 @@ Hoy veremos como solucionarlo:
 - [Cifrado simétrico de bloque](#46)
 - [Cifrado AES](#60): detalles del algoritmo de cifrado de bloques AES y modos de operación.
 - Ejercicios: [Tema 3 (2)](../ejercicios/03)
-- [Protocolo Bcrypt](#85)
-- [Resumen](#95), conclusiones y referencias
+- [Resumen](#55), conclusiones y referencias
 
 
 # Confidencialidad computacional
@@ -1095,78 +1094,6 @@ Se considera que la criptografía simétrica es robusta ante la computación cu�
 Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
 
 - Modos de cifrado AES y gestión de bloques
-
-# Protocolo Bcrypt
-<!-- _class: lead
-header: bcrypt
--->
-
----
-
-[Bcrypt (1999)](https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html), de Niels Provos y David Mazieres, es un sistema para proteger contraseñas en bases de datos.
-
-- Basado en el cifrado por bloques de [Blowfish (1994)](https://www.schneier.com/academic/archives/1994/09/description_of_a_new.html) de Bruce Schneier (en la foto)
-- Se aprovecha de que Blowfish es muy lento durante la fase de expansión de claves
-
-![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/f/fc/Bruce_Schneier_at_CoPS2013-IMG_9174.jpg)
-
-<!--
-En la fotografía no está el creador de bcrypt sino el creador de Blowfish: Bruce Schneier
-
-El blog y los libros de Bruce Schneier son un imprescidible para estar en el mundo de la criptografía y la seguridad operacional. Es un divulgador nada técnico y accesible a personas con cualquier conocimiento.
-
-https://www.schneier.com/
--->
-
-## Escenario: usuarios de una página web
-
-¿Cómo puede guardar una web las contraseñas de sus usuarios?
-
-* *En claro*: un atacante podría robarlas
-* *Cifradas con una clave conocida por la web*: un atacante podría robar la clave, y después las contraseñas
-* *Bcrypt*: cifradas, con *nonce*.
-
-## Cifrado como "hash", nonce como "salt"
-
-![center w:35em](https://upload.wikimedia.org/wikipedia/commons/3/32/Bcrypt.png)
-
-## Algoritmo
-
-- Entrada:
-	- `password`
-	- `cost`, 10 ó 12 es usual son valores usuales
-	- `salt`, que se se escoge automáticamente. La *salt* es otro nombre para el *nonce*, veremos su uso más adelante.
-- Derivación de clave, que es el proceso lento de Blowfish, $2^{cost}$ veces.
-- Cifrar con la clave derivada *OrpheanBeholderScryDoubt* 64 veces.
-
----
-
-![center w:32em](https://i.stack.imgur.com/Z63W8.png)
-
-## Ejemplos
-<!-- _class: smaller-font -->
-
-PWD|Bcrypt
---|--
-abracadabra|`$2a$12$sWfsiB42yT.LvoyCqAHURujcDUTmEHVUjQHqTP4kL1Zs1p.j4G6Lu`
-sesamo|`$2a$12$kWTGyiUbTha.bKpGXyz8ieRIYMAVNaO7gvrZMZ86DKZNgpiJzh49u`
-sesamo|`$2a$12$LQbVUSGksM2vCoZiBhmKCerSTe/Uq7BWVgbxFAe8eY/9y3y1P8dzS`
-
-```python
-from Crypto.Protocol.KDF import bcrypt, bcrypt_check
-
-password = 'sesamo'
-
-hpwd = bcrypt(password, 12)
-# $2a$12$kWTGyiUbTha.bKpGXyz8ieRIYMAVNaO7gvrZMZ86DKZNgpiJzh49u
-
-bcrypt_check(password, hpwd)
-# True
-```
-
-<!--
-Fijaos que ejecutar bcrypt sobre la misma contraseña "sesamo", da resultados diferentes. De esta forma se puede guardar las contraseñas repetidas sin que ndie pueda saber que son repetidas
--->
 
 # Resumen
 <!-- _class: lead

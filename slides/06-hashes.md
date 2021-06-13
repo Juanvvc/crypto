@@ -533,4 +533,4 @@ En el libro de transacciones, a parte de transacciones, se pueden inscribir dato
 
 <!-- _class: center -->
 
-Continúa en: [Public Key Infrastructure](08-pki.html)
+Continúa en: [Autenticación](07-autenticacion.html)
