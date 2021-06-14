@@ -27,19 +27,20 @@ juan.vera@campusviu.es
 1. [Conceptos básicos](01-conceptos-basicos.html)
     - Anexo: [Glosario](A1-glosario.md)
 1. [Criptografía clásica](02-historia.html)
-1. [Criptografía de clave simétrica](03-simetrica.html)
+1. [Criptografía de clave simétrica: AES y ChaCha](03-simetrica.html)
     - Anexo: [RNG y HSM](A2-rng.html)
 1. [Teoría complejidad y acuerdo Diffie-Hellman](04-complejidad.html)
-1. [Criptografía de clave pública](05-asimetrica.html)
+1. [Criptografía de clave pública: RSA](05-asimetrica.html)
 
 ---
 
 6. [Funciones de Hash y Blockchain](06-hashes.html)
 1. [Autenticación](07-autenticacion.html)
 1. [Firma digital y PKI](08-pki.html)
+    - Anexo: [BEC y Ransomware](10-amenazas.html)
 1. [Protocolo TLS](09-protocolos.html)
-1. Anexo: [Criptografía como amenaza: BEC y Ransomware](10-amenazas.html)
-1. Anexo: [Comunicaciones anónimas](11-anonimato.html)
+    - Anexo: [Comunicaciones anónimas](A4-anonimato.html)
+
 
 
 # Presentación

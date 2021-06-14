@@ -16,7 +16,7 @@ Transparencias en [juanvvc.github.io/crypto/slides](https://juanvvc.github.io/cr
 - [Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/08-pki.html)
 - [Protocolos: TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
 - [Criptografía como amenaza: BEC y Ransomware](https://juanvvc.github.io/crypto/slides/10-amenazas.html)
-- [Comunicaciones anónimas y TOR](https://juanvvc.github.io/crypto/slides/11-anonimato.html)
+- [Comunicaciones anónimas y TOR](https://juanvvc.github.io/crypto/slides/A4-anonimato.html)
 
 Algunas notas:
 

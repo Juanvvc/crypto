@@ -337,4 +337,4 @@ Antes, los certificados se compraban
 ---
 <!-- _class: center -->
 
-Continúa en: [Criptografía como amenaza](10-amenazas.html)
+Anexo recomendable: [Comunicaciones anónimas](A4-anonimato.html)
