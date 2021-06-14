@@ -38,8 +38,8 @@ juan.vera@campusviu.es
 1. [Autenticación](07-autenticacion.html)
 1. [Firma digital y PKI](08-pki.html)
 1. [Protocolo TLS](09-protocolos.html)
-1. [Criptografía como amenaza: BEC y Ransomware](10-amenazas.html)
-1. [Comunicaciones anónimas](11-anonimato.html)
+1. Anexo: [Criptografía como amenaza: BEC y Ransomware](10-amenazas.html)
+1. Anexo: [Comunicaciones anónimas](11-anonimato.html)
 
 
 # Presentación

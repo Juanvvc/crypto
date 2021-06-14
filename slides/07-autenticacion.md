@@ -33,7 +33,15 @@ juan.vera@campusviu.es
 1. **Integridad** del contrato (llamada "autenticidad del mensaje")
 1. **No repudio** del contrato por ninguna de las partes
 
-Es la lista que conocemos como "los servicios básicos de seguridad" (tema 1)
+Es la lista que conocemos como "los servicios básicos de seguridad" del [Tema 1](01-conceptos-basicos.html)
+
+<!--
+Hoy nos centraremos en la autenticación.
+
+Fíjate: el no repudio de un documento se puede asegurar si estamos seguros de con quién estamos hablando y tenemos un medio de probar qué es lo que dice.
+
+Es decir, no repudio = autenticidad + integridad
+-->
 
 ## Hoy hablamos de...
 
@@ -43,7 +51,7 @@ Integridad y primer paso hacia autenticación
 - [Challenge / Response](#18)
 - [Usuario y contraseña](#23)
 - [Tokens](#35)
-- [Conclusiones](#44): resumen y referencias
+- [Conclusiones](#46): resumen y referencias
 
 ## TLS y la autenticación
 <!-- _class: extra-slide -->
@@ -75,6 +83,16 @@ La autenticación: proceso de confirmar que alguien es quien dice ser
 > https://es.wikipedia.org/wiki/Autenticaci%C3%B3n
 > Foto: https://www.totalentertainment.biz/rentals/entertainment/impersonators.html
 
+<!--
+
+Man in the middle y impersonation son muy similares, y la defensa contra ambos es la misma:
+
+- man in the middle: Malloy se pone en medio de una comunicación entre Alice y Bob, que piensan que están hablando entre sí cuando en realidad los dos hablar con Malloy
+- impersonation: Alice habla con Malloy pensando que está hablando con Bob. Puede que Bob ni sepa que hay una conversación en marcha.
+
+La diferencia es que en el caso de man in the middle malloy tiene algo más de ventaja: si Alice pregunta algo que solo puede responder Bob, Malloy podría preguntárselo a Bob y entonces le responde a Alice.
+-->
+
 ## Identidades
 
 Para poder tener autenticación es necesaria la existencia de identidades
@@ -84,11 +102,20 @@ Para poder tener autenticación es necesaria la existencia de identidades
 
 ![bg left:60%](https://technofaq.org/wp-content/uploads/2015/06/idtheft830-1024x659.jpg.webp)
 
+<!--
+Hay muchas formas de guardar nuestra identidad en internet:
+
+- Más informal: mi nombre de usuario, mi dirección de correo electrónico...
+- Más formal: certificados, DNI electrónico...
+
+En el caso de webs o empresas, la identidad puede ser simplemente que cuando el usuario se conecta a bancosantander.com, que el servidor que le responda es propiedad del Banco Santander
+-->
+
 ## Factores de la autenticación
 
 **Algo que sabemos** (*knowledge*): contraseña, PIN...
 
-**Algo que tenemos** (*ownership*): smartcards, Google Authentication...
+**Algo que tenemos** (*ownership*): clave privada, smartcards, Google Authentication...
 
 **Algo que somos** (*inference*): huellas digitales, voz, cara...
 
@@ -98,11 +125,15 @@ El servidor podría también comprobar que nos estamos conectando desde el lugar
 
 ![bg right:50% w:100%](https://cdn.ttgtmedia.com/rms/onlineimages/security-multifactor_authentication.png)
 
-## Autenticación tradicional
+<!--
+Estos son los factores clásico de la autenticación
+-->
+
+## Autenticación tradicional: algo que sabemos
 
 Tradicionalmente solo se ha utilizado el *algo que sabemos*: la contraseña
 
-Este sistema está poco seguro, pero fácil de usar
+Este sistema está poco seguro pero muy fácil de usar
 
 ![bg right w:80%](https://upload.wikimedia.org/wikipedia/commons/f/f1/Mediawiki_1.25_sign_in_form.png)
 
@@ -114,7 +145,7 @@ Usa al menos dos de los factores anteriores
 
 Fíjate: si desbloqueamos el móvil con biometría, ya estamos usando los tres factores
 
-## "Passwordless" authentication
+## *Passwordless / No password authentication*
 
 No usa el factor *algo que sabemos*
 
@@ -171,9 +202,9 @@ Esto no es tan raro: es la etapa *lateral movement* en cualquier ataque ciberné
 
 ## Desafío-Respuesta (*Challenge-Response*)
 
-Los sistemas de CAPTCHA son un sistemas básico de autenticación por desafío - respuesta: eres una persona
+Los sistemas de CAPTCHA son un sistemas básico de autenticación por desafío - respuesta: demuestra que eres una persona
 
-pueden ser un primer filtro de entrada a tus sistemas para evitar ataques automáticos
+pueden ser un **primer filtro** de entrada a tus sistemas para evitar ataques automáticos
 
 > https://en.wikipedia.org/wiki/CAPTCHA
 
@@ -365,7 +396,7 @@ $ echo 'YWxpY2U6c2VzYW1l' | base64 -d
 alice:sesame% 
 ```
 
-Para evitar enviar siempre la contrasela (o su hash): sesiones por tokens
+Para evitar enviar siempre la contraseña (o su hash): sesiones por tokens
 
 
 # Sesiones por tokens
@@ -382,7 +413,6 @@ Para evitar enviar siempre la contrasela (o su hash): sesiones por tokens
     - (opcional, pero muy recomendable) con cada nueva petición, el token se renueva
 
 > https://sherryhsu.medium.com/session-vs-token-based-authentication-11a6c5ac45e4
-
 
 ## Proceso
 <!-- _class: two-columns smaller-font -->
@@ -410,6 +440,18 @@ En esta transparencia se muestra el caso de que el usuario utilice nombre/contra
 1. Un número completamente aleatorio generado para cada usuario y guardado en la base de datos
     - En este caso, cada nueva petición puede exigir un nuevo token: en la respuesta se incluye el token a utilizar en la siguiente petición
 
+## ¿Dónde se guarda el token?
+<!-- _class: extra-slide -->
+
+En un entorno web, es común guardar el token dentro de una cookie asociada a una página web. Las cookies se envían en la cabecera de la petición HTTP
+
+Otra forma común es guardar tokens como un elemento oculto de un formulario POST
+
+![center w:10em](https://miro.medium.com/max/2400/0*t8gHduahlBDwDWsW.png)
+
+> [How To Submit Your Security Tokens to an API Provider](https://medium.com/@robert.broeckelmann/how-to-submit-your-security-tokens-to-an-api-provider-pt-1-4a68df35843a). Robert Broeckelmann, 2017
+
+
 ## Análisis de seguridad
 
 - Si un atacante consigue el token de seguridad, solo será válido hasta que caduque
@@ -427,6 +469,12 @@ Para solucionarlo: usa tokens con caducidad tan corta como sea posible. Idealmen
 - El uso de tokens nos permite tener servidores especializados en la autenticación, que son independientes del servicio
 - El servicio final no necesita conocer usuario y contraseña, solo validar que el token viene desde el servidor de autenticación.
     - Verificación: el token está firmado con la clave privada del servidor de autenticación
+
+---
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/3e/How_mobile_payment_tokenization_works.png)
+
+> https://es.wikipedia.org/wiki/Token_(inform%C3%A1tica)
 
 ## oAuth
 <!-- _class: smaller-font -->
