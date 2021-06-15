@@ -284,7 +284,7 @@ Fíjate:
 - Alice necesita algún mecanismo adicional para comprobar que esa clave pública está asociada a Bob ([tema 8](08-pki.html))
 
 ## Firma digital como challenge-response
-<!-- _class: with-warning -->
+<!-- _class: with-info -->
 
 Fíjate: la firma electrónica sigue este esquema
 
@@ -358,7 +358,7 @@ Nota: Alice podría enviar o bien su contraseña, o bien su hash. Es normal que 
 - En realidad, queremos un hash criptográfico pero **no un hash rápido**:
     - Bob solo hará la operación una vez, no pasa nada si es costosa
     - Un atacante tiene que hacer fuerza bruta: **interesa que cada intento lleve mucho tiempo**
-- Se suele implementar como una serie de hashes. Ejemplo: "calculamos el hash de la contraseña 1024 veces". así obligaríamos a un atacante a hacer un número descomunal de operaciones para cada prueba.
+- Se suele implementar como una serie de hashes. Ejemplo: "calculamos el hash de la contraseña 1024 veces". Así obligaríamos a un atacante a hacer un número descomunal de operaciones para cada prueba
 - Problemas:
     - si varios usuarios tienen la misma contraseña... la BBDD lo sabe
     - si se usan contraseñas sencillas... se pueden romper con *rainbow tables* o tablas precalculadas de contraseñas
@@ -368,22 +368,23 @@ Nota: Alice podría enviar o bien su contraseña, o bien su hash. Es normal que 
 
 [![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQWxpY2UtPj4rQm9iOiBVc3VhcmlvIC8gUGFzc3dvcmRcbiAgICBCb2ItPj4rQkJERDogVXN1YXJpb1xuICAgIEJCREQtPj4tQm9iOiBcIlNhbHRcIiBkZWwgdXN1YXJpb1xuICAgIEJvYi0-PitCQkREOiBVc3VhcmlvLCBoYXNoKFNhbHQ6UGFzc3dvcmQpXG4gICAgQkJERC0-Pi1Cb2I6IE9LXG4gICAgQm9iLT4-LUFsaWNlOiBPSyIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2UsImF1dG9TeW5jIjp0cnVlLCJ1cGRhdGVEaWFncmFtIjpmYWxzZX0)](https://mermaid-js.github.io/mermaid-live-editor/edit/##eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQWxpY2UtPj4rQm9iOiBVc3VhcmlvIC8gUGFzc3dvcmRcbiAgICBCb2ItPj4rQkJERDogVXN1YXJpb1xuICAgIEJCREQtPj4tQm9iOiBcIlNhbHRcIiBkZWwgdXN1YXJpb1xuICAgIEJvYi0-PitCQkREOiBVc3VhcmlvLCBoYXNoKFNhbHQ6UGFzc3dvcmQpXG4gICAgQkJERC0-Pi1Cb2I6IE9LXG4gICAgQm9iLT4-LUFsaWNlOiBPSyIsIm1lcm1haWQiOiJ7XG4gIFwidGhlbWVcIjogXCJkZWZhdWx0XCJcbn0iLCJ1cGRhdGVFZGl0b3IiOnRydWUsImF1dG9TeW5jIjp0cnVlLCJ1cGRhdGVEaWFncmFtIjpmYWxzZX0)
 
-- El "salt" es algo parecido al "nonce": se puede guardar en claro en la BBDD
-- El salt tiene que ser un valor **totalmente aleatorio y diferente para cada usuario**
+- El "*salt*" es algo parecido al "*nonce*" ([Tema 3](03-simetrica.html)): se puede guardar en claro en la BBDD
+- El *salt* tiene que ser un valor **totalmente aleatorio y diferente para cada usuario**
 - Ya no es posible tener tablas precomputadas
 - Esta es la solución tomada en la actualidad
 
 ## Análisis de seguridad
+<!-- _class: with-info -->
 
 - La BBDD guarda $hash(SALT:PASSWORD)$
     - No es vulenrable a tablas precalculadas de contraseñas
-    - Si dos usuarios tienen la misma contraseña, con gran probabilidad tendrán salt diferente así que la BBDD no sabe que las contraseñas son iguales
+    - Si dos usuarios tienen la misma contraseña, con gran probabilidad tendrán *salt* diferente así que la BBDD no sabe que las contraseñas son iguales
     - La BBDD no conoce la contraseña original, solo el hash
 - La salt tiene que ser aleatoria
 - Es el mecanismo usado en Linux, Windows... y en la mayor parte de las webs
 - Guardar una contraseña en una BBDD es un error, hay que guardar solo $hash(SALT:PASSWORD)$
 
-Nota: a veces, como en bcrypt, no se hace un hash sino un cifrado simétrico irreversible
+A veces, como en *bcrypt*, no se hace un hash sino un cifrado simétrico irreversible
 
 ## Protocolo Bcrypt
 
@@ -509,13 +510,12 @@ En esta transparencia se muestra el caso de que el usuario utilice nombre/contra
     - En este caso, cada nueva petición puede exigir un nuevo token: en la respuesta se incluye el token a utilizar en la siguiente petición
 
 ## ¿Dónde se guarda el token?
-<!-- _class: extra-slide -->
 
 En un entorno web, es común guardar el token dentro de una cookie asociada a una página web. Las cookies se envían en la cabecera de la petición HTTP
 
 Otra forma común es guardar tokens como un elemento oculto de un formulario POST
 
-![center w:10em](https://miro.medium.com/max/2400/0*t8gHduahlBDwDWsW.png)
+![center w:15em](https://miro.medium.com/max/2400/0*t8gHduahlBDwDWsW.png)
 
 > [How To Submit Your Security Tokens to an API Provider](https://medium.com/@robert.broeckelmann/how-to-submit-your-security-tokens-to-an-api-provider-pt-1-4a68df35843a). Robert Broeckelmann, 2017
 
@@ -589,8 +589,9 @@ CUIDADO: en los ciberataques actuales, los atacantes buscan por todos los medios
 
 Se han descrito ataques contra TODOS estos sistemas
 
-- [Pass the hash](https://en.wikipedia.org/wiki/Pass_the_hash)
 - [Reflection attack](https://en.wikipedia.org/wiki/Reflection_attack)
+- [Pass the hash](https://en.wikipedia.org/wiki/Pass_the_hash)
+- [Pass the token](https://o365blog.com/post/prt/)
 - ...
 
 El problema de la autenticación segura aún está a medio resolver en entornos complejos
