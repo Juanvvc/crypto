@@ -48,10 +48,10 @@ Es decir, no repudio = autenticidad + integridad
 Integridad y primer paso hacia autenticación
 
 - [Autenticación](#5)
-- [Challenge / Response](#18)
-- [Usuario y contraseña](#23)
-- [Tokens](#35)
-- [Conclusiones](#46): resumen y referencias
+- [Desafío / Respuesta](#20)
+- [Usuario y contraseña](#27)
+- [Tokens](#39)
+- [Conclusiones](#47): resumen y referencias
 
 ## TLS y la autenticación
 <!-- _class: extra-slide -->
@@ -93,6 +93,24 @@ Man in the middle y impersonation son muy similares, y la defensa contra ambos e
 La diferencia es que en el caso de man in the middle malloy tiene algo más de ventaja: si Alice pregunta algo que solo puede responder Bob, Malloy podría preguntárselo a Bob y entonces le responde a Alice.
 -->
 
+## Diffie-Hellman y el ataque Man in the Middle
+
+El algoritmo Diffie-Hellman ([Tema 5](05-asimetrica.html)) permite que dos personas que no se conocen acuerden una clave secreta común
+
+Un atacante **no puede conocer la clave secreta**
+
+Pero un atacante **puede convencer a cada parte que es otra persona**: así se pone en medio (*man in the middle*): D-H es vulnerable a ataques MitM.
+
+---
+
+![center w:30em](https://blog.trendmicro.com/trendlabs-security-intelligence/files/2015/09/anglerek_dh_02b.jpg)
+
+> https://www.trendmicro.com/en_us/research/15/i/how-exploit-kit-operators-are-misusing-diffie-hellman-key-exchange.html
+
+<!--
+Diffie Hellman no ofrece autenticación: vamos a acabar hablando de forma segura, sí, pero con Malloy: Alice habla con Malloy y Bob también habla con Malloy, sin saber que Malloy existe. Malloy puede limitarse a descifrar los mensajes que le envía Alice con la clave que comparte con Alice, leerlos y cifrarlos con la clave que comparte con Bob para enviarlos modificados o sin modificar.
+-->
+
 ## Identidades
 
 Para poder tener autenticación es necesaria la existencia de identidades
@@ -110,6 +128,7 @@ Hay muchas formas de guardar nuestra identidad en internet:
 
 En el caso de webs o empresas, la identidad puede ser simplemente que cuando el usuario se conecta a bancosantander.com, que el servidor que le responda es propiedad del Banco Santander
 -->
+
 
 ## Factores de la autenticación
 
@@ -144,6 +163,17 @@ Usa al menos dos de los factores anteriores
 ![center](https://4.bp.blogspot.com/-JSXGwbHpQCQ/W1FIvIjGNLI/AAAAAAAAIJM/E1oNm8OE-vIJsEc-VzYbuNK5a6YLwPyvwCLcBGAs/s1600/Two%2BFactor%2BAuthentication.jpg)
 
 Fíjate: si desbloqueamos el móvil con biometría, ya estamos usando los tres factores
+
+<!--
+Pregunta: ¿el orden en que se prueba cada factor importa? Es decir: ¿es lo mismo?:
+
+- preguntar por una clave y depués por algo que tenemos
+- preguntar por algo que tenemos y después por una clave
+
+Depende del sistema, y especialmente de lo difícil que sea atacar cada paso. Interesa preguntar primero lo que sea más difícil atacar.
+
+EnEl 2FA de Gmail preguntan primero por contraseña y después confirmación en el móvil. Eso es porque Gmail bloquea la cuenta si detecta muchos intentos de pruebas de contraseña: Gmail considera que "adivinar una contraseña" es más difícil que "robar un móvil".
+-->
 
 ## *Passwordless / No password authentication*
 
@@ -192,23 +222,36 @@ Esto no es tan raro: es la etapa *lateral movement* en cualquier ataque ciberné
 
 ## Vamos a ver tres soluciones
 
-- Desafío-respuestas
+- Desafío-respuesta / firma digital
 - Contraseñas / biometría
 - Tokens
 
 # Desafío - Respuesta
 <!-- _class: lead -->
 
+(basado en firma digital)
+
 
 ## Desafío-Respuesta (*Challenge-Response*)
 
 Los sistemas de CAPTCHA son un sistemas básico de autenticación por desafío - respuesta: demuestra que eres una persona
 
-pueden ser un **primer filtro** de entrada a tus sistemas para evitar ataques automáticos
+Pueden ser un **primer filtro** de entrada a tus sistemas para evitar ataques automáticos
 
 > https://en.wikipedia.org/wiki/CAPTCHA
 
 ![bg right:50% w:60%](https://upload.wikimedia.org/wikipedia/en/8/80/Images_Recaptcha.png)
+
+## ¿Es suficiente con que nos presenten una clave pública?
+
+Una CA puede enlazar una clave pública a una identidad: "*esta es sin duda la clave pública de Juan Vera*". Eso es el certificado ([Tema 8](08-pki.html))
+
+Pero que alguien te enseñe el certificado de Juan Vera no es suficiente para que sepas que estas hablando conmigo: mi clave pública (es decir, mi certificado) es público, cualquiera puede obtenerlo y presentarlo.
+
+Se necesita algo más: la persona con la que hablas tiene que tener la clave privada de Juan Vera. Solo así sabrás que sin duda estás hablando con Juan Vera.
+
+- Tiene la clave pública de Juan Vera, avalada por alguien en quien confiamos (una CA)
+- Demuestra que tiene la clave privada de Juan Vera
 
 ## Desafío-Respuesta (*Challenge-Response*) usando criptografía asimétrica
 
@@ -233,20 +276,45 @@ Fíjate:
 -->
 
 ## Proceso
-<!-- _class: two-columns smaller-font -->
+<!-- _class: two-columns -->
 
 [![w:20em](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQWxpY2UtPj4rQm9iOiBIRUxMT1xuICAgIEJvYi0-Pi1BbGljZTogQ2xhdmUgcMO6YmxpY2EgQm9iXG4gICAgQWxpY2UtPj5BbGljZTogQ29tcHJ1ZWJhIHF1ZSBsYSBjbGF2ZSBww7pibGljYSBlcyBPS1xuICAgIEFsaWNlLT4-K0JvYjogQ2hhbGxlbmdlPVwiODMyN2g0aDN5XCJcbiAgICBCb2ItPj4tQWxpY2U6IFJTQSg4MzI3aDRoM3kpXG4gICAgQWxpY2UtPj5BbGljZTogQ29tcHJ1ZWJhIHF1ZSBlbCBkZXNjaWZyYWRvIGVzIE9LXG4gICAgTm90ZSBvdmVyIEFsaWNlLEJvYjogRGlmZmllLUhlbGxtYW4gcGFyYSBhY29yZGFyIGNsYXZlIEFFU1xuICAgIE5vdGUgb3ZlciBBbGljZSxCb2I6IENvbXVuaWNhY2nDs24gY2lmcmFkYSBjb24gQUVTIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit/##eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQWxpY2UtPj4rQm9iOiBIRUxMT1xuICAgIEJvYi0-Pi1BbGljZTogQ2xhdmUgcMO6YmxpY2EgQm9iXG4gICAgQWxpY2UtPj5BbGljZTogQ29tcHJ1ZWJhIHF1ZSBsYSBjbGF2ZSBww7pibGljYSBlcyBPS1xuICAgIEFsaWNlLT4-K0JvYjogQ2hhbGxlbmdlPVwiODMyN2g0aDN5XCJcbiAgICBCb2ItPj4tQWxpY2U6IFJTQSg4MzI3aDRoM3kpXG4gICAgQWxpY2UtPj5BbGljZTogQ29tcHJ1ZWJhIHF1ZSBlbCBkZWNpZnJhZG8gZXMgT0tcbiAgICBOb3RlIG92ZXIgQWxpY2UsQm9iOiBEaWZmaWUtSGVsbG1hbiBwYXJhIGFjb3JkYXIgY2xhdmUgQUVTXG4gICAgTm90ZSBvdmVyIEFsaWNlLEJvYjogQ29tdW5pY2FjacOzbiBjaWZyYWRhIGNvbiBBRVMiLCJtZXJtYWlkIjoie1xuICBcInRoZW1lXCI6IFwiZGVmYXVsdFwiXG59IiwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)
 
 - Alice tiene que enviar una challenge diferente cada vez, que no sea predecible por un atacante
 - Alice necesita algún mecanismo adicional para comprobar que esa clave pública está asociada a Bob ([tema 8](08-pki.html))
-- Fíjate: este esquema es una firma electrónica:
-    - Firma electrónica: $challenge=hash(documento)$
-    - Pero en firma electrónica normalmente no hará falta que Alice haga un dasafío, Bob ya envía su firma junto con el documento original antes de que le desafíen
 
-## TLS y la autenticación
-<!-- _class: extra-slide -->
+## Firma digital como challenge-response
+<!-- _class: with-warning -->
 
-En TLS se aprovecha la fase D-H para hacer un challenge-response y probar que el servidor tiene la clave privada del certificado que ha enviado, en lo que se conoce como [Diffie-Hellman autenticado](https://datatracker.ietf.org/doc/html/rfc5246#appendix-F.1.1.3)
+Fíjate: la firma electrónica sigue este esquema
+
+*Challenge* para Bob: ¿puedes cifrar el hash de tus documentos?
+
+$$
+\begin{aligned}
+challenge &= hash(documento)\\
+firma &= E_{sk_{Bob}}(challenge)
+\end{aligned}
+$$
+
+En firma electrónica normalmente no hará falta que Alice haga un dasafío, **Bob toma la iniciativa y envía su firma junto con el documento original antes de que le desafíen**
+
+Documento: cualquier mensaje que Bob quiera intercambiar. No es solo un .docx, es cualquier mensaje, cadena de texto, parámetro de seguridad...
+
+## Authenticated Diffie-Hellman
+
+![center](https://present5.com/presentation/4dade2d669283ba231391cd696e9e4f2/image-37.jpg)
+
+> [Authentication and Authenticated Key Exchanges](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.6682), Whitfield Diffie and Paul C. Van Oorschot and Michael J. Wiener, 1992.
+> [Protocols PK Encr. /Auth. PK Key Establishment Secure Comm. in Open Networks SSL/TLS Nicolas Protocols PK Encr. /Auth. PK Key Establishment Secure Comm. in Open Networks SSL/TLS Nicolas T. Courtois - University College London](https://present5.com/protocols-pk-encr-auth-pk-key-establishment-secure/)
+
+<!--
+Es un Diffie-Hellman tradicional, pero los mensajes van firmados con las claves privadas de cada parte
+
+De esta forma, si tenemos y confiamos en la clave pública de la otra parte (ver tema 8), entonces sabemos que no se ha puesto nadie en medio de las comunicaciones
+
+Esta es la versión de D-H implementada en SSL/TLS (tema 10)
+-->
 
 # Autenticación por contraseña
 <!-- _class: lead -->
@@ -476,10 +544,16 @@ Para solucionarlo: usa tokens con caducidad tan corta como sea posible. Idealmen
 
 > https://es.wikipedia.org/wiki/Token_(inform%C3%A1tica)
 
-## oAuth
+<!--
+En el ejemplo un sismtema de pagos por tokens: queremos poder comprar desde una APP o una web, pero no nos interesa darle a la web nuestra tarjeta de crédito o nuestra contraseña de Paypal
+
+Podemos usar tokens, que se validan y caducan en cada paso, y así no hace falta decirle nuestra tarjeta de crédito a nadie
+-->
+
+## OAuth
 <!-- _class: smaller-font -->
 
-Gracias a oAuth, un usuario puede delegar el acceso a terceros a su cuenta de Google, Facebook, Twitter... sin necesidad de compartir contraseña
+Gracias a OAuth, un usuario puede delegar el acceso a terceros a su cuenta de Google, Facebook, Twitter... sin necesidad de compartir contraseña
 
 1. El usuario accede a un se∫rvicio de terceros (aplicación, página web...) que necesita acceder al Twitter, fotos de Google... del usuario
 2. Twitter, Google confirma con el usuario que garantiza el acceso
