@@ -25,7 +25,6 @@ juan.vera@campusviu.es
 ## Temario
 
 1. [Conceptos básicos](01-conceptos-basicos.html)
-    - Anexo: [Glosario](A1-glosario.md)
 1. [Criptografía clásica](02-historia.html)
 1. [Criptografía de clave simétrica: AES y ChaCha](03-simetrica.html)
     - Anexo: [RNG y HSM](A2-rng.html)
@@ -35,12 +34,12 @@ juan.vera@campusviu.es
 ---
 
 6. [Funciones de Hash y Blockchain](06-hashes.html)
-1. [Autenticación](07-autenticacion.html)
+1. [Integridad](07-integridad.html)
 1. [Firma digital y PKI](08-pki.html)
-    - Anexo: [BEC y Ransomware](10-amenazas.html)
-1. [Protocolo TLS](09-protocolos.html)
+    - Anexo: [BEC y Ransomware](A3-ofensiva.html)
+1. [Protocolo TLS](09-protocolos.html)    
     - Anexo: [Comunicaciones anónimas](A4-anonimato.html)
-
+1. [Autenticación](10-autenticacion.html)
 
 
 # Presentación

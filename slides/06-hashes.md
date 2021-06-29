@@ -528,9 +528,10 @@ En el libro de transacciones, a parte de transacciones, se pueden inscribir dato
 - [But how does bitcoin actually work?](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
 - [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
 - [Hashcash - A Denial of Service Counter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
+- [The State of Hashing Algorithms — The Why, The How, and The Future](https://medium.com/@rauljordan/the-state-of-hashing-algorithms-the-why-the-how-and-the-future-b21d5c0440de)
 
 ---
 
 <!-- _class: center -->
 
-Continúa en: [Autenticación](07-autenticacion.html)
+Continúa en: [Integridad](07-integridad.html)

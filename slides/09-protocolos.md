@@ -317,8 +317,6 @@ Antes, los certificados se compraban
 
 <https://certbot.eff.org/instructions>
 
-
-
 # Conclusiones
 <!-- _class: lead -->
 
@@ -336,5 +334,7 @@ Antes, los certificados se compraban
 
 ---
 <!-- _class: center -->
+
+Continúa en: [Autenticación](10-autenticacion.html)
 
 Anexo recomendable: [Comunicaciones anónimas](A4-anonimato.html)

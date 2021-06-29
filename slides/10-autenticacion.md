@@ -616,9 +616,7 @@ El problema de la autenticación segura aún está a medio resolver en entornos 
 - [WebAuthn 101 - Demystifying WebAuthn](https://i.blackhat.com/USA-19/Thursday/us-19-Brand-WebAuthn-101-Demystifying-WebAuthn.pdf). Christiaan Brand, Google. Blackhat 2019
 - [Kerberos Authentication Explained | A deep dive](https://www.youtube.com/watch?v=5N242XcKAsM)
 - [What is OAuth really all about - OAuth tutorial - Java Brains](https://www.youtube.com/watch?v=t4-416mg6iU)
+- [Why We Hash Passwords](https://dzone.com/articles/why-we-hash-passwords)
 
----
-<!-- _class: center -->
 
-Continúa en: [Public Key Infrastructure](08-pki.html)
 

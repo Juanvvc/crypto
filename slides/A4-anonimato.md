@@ -18,7 +18,7 @@ theme: marp-viu
 # Criptografía
 <!-- _class: first-slide -->
 
-**Tema 11: Servicio de anonimato**
+**Anexo 4: Servicio de anonimato**
 
 Juan Vera del Campo
 

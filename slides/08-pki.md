@@ -291,6 +291,6 @@ https://jig.github.io/crypto/es/pki.html#/
 ---
 <!-- _class: center -->
 
-Anexo recomendable: [BEC y Ransomware](10-amenazas.html)
+Anexo recomendable: [Criptografía ofensiva](A3-ofensiva.html)
 
 Continúa en: [Protocolos](09-protocolos.html)
