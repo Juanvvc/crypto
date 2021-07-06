@@ -105,7 +105,7 @@ Use: <!-- _class: extra-slide --> */div#p>svg>foreignObject>section.extra-slide{
 <ul>
 <li><a href="#3">True Random Number Generator</a></li>
 <li><a href="#10">Dispositivos ad-hoc para RNG</a></li>
-<li><a href="#28">Hardware Secure Module</a></li>
+<li><a href="#16">Hardware Secure Module</a></li>
 </ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
@@ -120,9 +120,10 @@ Use: <!-- _class: extra-slide --> */div#p>svg>foreignObject>section.extra-slide{
 <p>Muchos algoritmos criptográficos necesitan generar números realmente aleatorios.</p>
 <ul>
 <li><em>nonces</em></li>
+<li><em>Vectores de inicialización</em></li>
 <li><em>claves</em></li>
 </ul>
-<p>La generación de números aleatorios (RNG) no se puede implementar con un algoritmo, a diferencia de PRNG que precisamente eran algoritmos con un parámetro o semilla que les permitía generar secuencias impredecibles</p>
+<p>La generación de números totalmente aleatorios (RNG) no se puede implementar con un algoritmo: los algoritmos son precedibles</p>
 <p><a href="https://dilbert.com/strip/2001-10-25"><img src="https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png" alt="center" /></a></p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
@@ -169,14 +170,14 @@ Use: <!-- _class: extra-slide --> */div#p>svg>foreignObject>section.extra-slide{
 <li><a href="https://en.wikipedia.org/wiki/Random_number_generator_attack">Random number generator attack</a></li>
 <li><a href="https://www.schneier.com/blog/archives/2008/05/random_number_b.html">Random Number Bug in Debian Linux</a></li>
 <li><a href="https://www.engadget.com/2010-12-29-hackers-obtain-ps3-private-cryptography-key-due-to-epic-programm.html?guce_referrer=aHR0cHM6Ly9qaWcuZ2l0aHViLmlvL2NyeXB0by9lcy9oc20uaHRtbA&amp;guce_referrer_sig=AQAAAKXwkpkCNqfEaVw1yS3NK2tZmvzXMxfMX_8BWvxdm_EUJrBQiB2kWlvwNcwNwF2zt1hpN7NT7QfzQlleivOoPO2rB36OxlE27B5YT9Po_njXAv0RocpOJcTS53xIYCdwCKKoh8nKkw_VSOBvmIEQiebNsCgqTK0P3AgklvlogU1G">Hackers obtain PS3 private cryptography key due to epic programming fail</a></li>
+<li><a href="https://donjon.ledger.com/kaspersky-password-manager/">Kaspersky Password Manager: All your passwords are belong to us</a>: hasta abril de 2021, usaban una fuente no criptográfica para generar contraseñas. Con conocimiento adecuado, las contraseñas podían adivinarse &quot;en segundos&quot;. (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27020">CVE-2020-27020</a>)</li>
 </ul>
-<p>La criptografía es segura siempre que las hipótesis de funcionamiento se cumplan</p>
-<p>La aleatoriedad suficiente de la fuente RNG (ó PRNG) es una de ellas</p>
+<p>La criptografía es segura siempre que las hipótesis de funcionamiento se cumplan, y una de ellas es que <strong>se está generando números aleatorios con una fuente RNG ó PRNG criptográfica</strong></p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="9" data-marpit-pagination-total="28" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;">
 <h2>Generación de claves</h2>
-<p>¿para generar claves hemos de utilizar PRNG o RNG? Mejor RNG pero si no está disponible podemos usar PRNG a condición que:</p>
+<p>¿Para generar claves hemos de utilizar PRNG o RNG? Mejor RNG pero si no está disponible podemos usar PRNG a condición que:</p>
 <ul>
 <li>el PRNG se alimente de una semilla RNG</li>
 <li>que el PRNG sea de calidad criptográfica (AES-CTR por ejemplo)</li>

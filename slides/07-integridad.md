@@ -18,7 +18,7 @@ theme: marp-viu
 # Criptografía
 <!-- _class: first-slide -->
 
-**Tema 8: Integridad**
+**Tema 7: Integridad**
 
 Juan Vera del Campo
 
@@ -31,7 +31,52 @@ juan.vera@campusviu.es
 - [MAC](#20)
 - [Conclusiones y resumen](#27)
 
-(Tema aún por escribir)
+
+# Integridad
+<!-- _class: lead -->
+
+## Definición
+
+Capacidad de **detectar** si un mensaje ha sido modificado desde su transmisión hasta su recepción.
+
+La modificación se refiere tanto a una modificación **explícita por un atacante** como a una modificación debido a un error (por ejemplo de transmisión). 
+
+> https://es.wikipedia.org/wiki/Integridad_del_mensaje
+
+![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/1/12/Darwin_Hybrid_Tulip_Mutation_2014-05-01.jpg)
+
+
+## Cifrado autenticado: tipos
+
+- **Encrypt-then-MAC** (EtM): primero cifra, luego calcula MAC 
+- **Encrypt-and-MAC** (E&M): cifra y calcula MAC a la vez
+- **MAC-then-Encrypt** (MtE): primero calcula MAC, luego cifra
+
+> https://en.wikipedia.org/wiki/Authenticated_encryption
+
+## Encrypt-then-MAC (EtM)
+<!-- _class: two-columns -->
+
+![center](https://upload.wikimedia.org/wikipedia/commons/b/b9/Authenticated_Encryption_EtM.png)
+
+- Usado en IPSec
+- Necesita dos claves: una para cifrar y otra para el MAC
+
+## Encrypt-and-MAC (E&M)
+<!-- _class: two-columns -->
+
+![center](https://upload.wikimedia.org/wikipedia/commons/a/a5/Authenticated_Encryption_EaM.png)
+
+- Usado en SSH
+- Puede reutilizar clave para cifrar y calcular MAC
+
+## MAC-then-Encrypt (MtE)
+<!-- _class: two-columns -->
+
+![MAC-then-Encrypt](https://upload.wikimedia.org/wikipedia/commons/a/ac/Authenticated_Encryption_MtE.png)
+
+- Usado en TLS
+- Permite algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
 
 ---
 <!-- _class: center -->

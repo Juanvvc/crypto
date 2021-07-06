@@ -26,7 +26,7 @@ juan.vera@campusviu.es
 
 - [True Random Number Generator](#3)
 - [Dispositivos ad-hoc para RNG](#10)
-- [Hardware Secure Module](#28)
+- [Hardware Secure Module](#16)
 
 # RNG
 <!-- _class: lead -->
@@ -38,9 +38,10 @@ juan.vera@campusviu.es
 Muchos algoritmos criptográficos necesitan generar números realmente aleatorios.
 
 - *nonces*
+- *Vectores de inicialización*
 - *claves*
 
-La generación de números aleatorios (RNG) no se puede implementar con un algoritmo, a diferencia de PRNG que precisamente eran algoritmos con un parámetro o semilla que les permitía generar secuencias impredecibles
+La generación de números totalmente aleatorios (RNG) no se puede implementar con un algoritmo: los algoritmos son precedibles
 
 [![center](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)](https://dilbert.com/strip/2001-10-25)
 
@@ -88,14 +89,13 @@ Para $n$ bits generados, la probabilidad de una secuencia dada es la misma de la
 - [Random number generator attack](https://en.wikipedia.org/wiki/Random_number_generator_attack)
 - [Random Number Bug in Debian Linux](https://www.schneier.com/blog/archives/2008/05/random_number_b.html)
 - [Hackers obtain PS3 private cryptography key due to epic programming fail](https://www.engadget.com/2010-12-29-hackers-obtain-ps3-private-cryptography-key-due-to-epic-programm.html?guce_referrer=aHR0cHM6Ly9qaWcuZ2l0aHViLmlvL2NyeXB0by9lcy9oc20uaHRtbA&guce_referrer_sig=AQAAAKXwkpkCNqfEaVw1yS3NK2tZmvzXMxfMX_8BWvxdm_EUJrBQiB2kWlvwNcwNwF2zt1hpN7NT7QfzQlleivOoPO2rB36OxlE27B5YT9Po_njXAv0RocpOJcTS53xIYCdwCKKoh8nKkw_VSOBvmIEQiebNsCgqTK0P3AgklvlogU1G)
+- [Kaspersky Password Manager: All your passwords are belong to us](https://donjon.ledger.com/kaspersky-password-manager/): hasta abril de 2021, usaban una fuente no criptográfica para generar contraseñas. Con conocimiento adecuado, las contraseñas podían adivinarse "en segundos". ([CVE-2020-27020](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27020))
 
-La criptografía es segura siempre que las hipótesis de funcionamiento se cumplan
-
-La aleatoriedad suficiente de la fuente RNG (ó PRNG) es una de ellas
+La criptografía es segura siempre que las hipótesis de funcionamiento se cumplan, y una de ellas es que **se está generando números aleatorios con una fuente RNG ó PRNG criptográfica**
 
 ## Generación de claves
 
-¿para generar claves hemos de utilizar PRNG o RNG? Mejor RNG pero si no está disponible podemos usar PRNG a condición que:
+¿Para generar claves hemos de utilizar PRNG o RNG? Mejor RNG pero si no está disponible podemos usar PRNG a condición que:
 
 - el PRNG se alimente de una semilla RNG
 - que el PRNG sea de calidad criptográfica (AES-CTR por ejemplo)
@@ -245,3 +245,4 @@ en estos casos podemos dividir la clave en trozos:
 sí, pero el secreto ha estado "en claro" en la RAM del ordenador por tanto una vez recuperado el secreto su exposición ha aumentado notablemente
 
 pero en HSM es una propiedad habitual
+
