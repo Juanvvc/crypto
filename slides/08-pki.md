@@ -273,6 +273,10 @@ Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de at
 
 ---
 
+![center](images/rsa-meme.png)
+
+---
+
 Para el resto de la sesión usaremos las transparencias de cursos pasados, aún no adaptadas al curso actual:
 
 https://jig.github.io/crypto/es/pki.html#/

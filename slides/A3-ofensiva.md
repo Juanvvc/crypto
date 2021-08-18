@@ -38,7 +38,7 @@ Cómo se usa la criptografía para atacar, y seguiremos explorando conceptos de 
 
 - [Business email compromise (BEC)](#4)
 - [Ransomware](#32)
-- [Conclusiones](#49): resumen y referencias
+- [Referencias](#53)
 
 OBSERVA: estos dos ataques son los principales ataques contra los sistemas de una empresa en la actualidad
 
@@ -334,6 +334,8 @@ Google uses another DKIM signature that uses other headers. This is probably a s
 
 [![](images/ransomware3.png)](https://www.youtube.com/watch?v=6h9yh_A80fs)
 
+> [Ransomware - Anatomy of an Attack](https://www.youtube.com/watch?v=6h9yh_A80fs) ESI & CISCO, 2018
+
 ---
 
 - Malware that encrypts the victim's files, making them inaccessible, and demands a ransom payment to decrypt them
@@ -346,20 +348,87 @@ Google uses another DKIM signature that uses other headers. This is probably a s
 
 ---
 
-![center](https://images.squarespace-cdn.com/content/v1/5ab16578e2ccd10898976178/1611956824798-8W5NXZ3LSFFSDUH9APTX/ke17ZwdGBToddI8pDm48kPB1SG_2RlmnobI966_iSMVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwYM5DzE_lNWQHZaT5PwldrqqIUwOXZk5_-zGGtvKLkWeuP-aFiPLMRhj35l4FXaTU/1+-+Ransom+Payments%402x.png?format=750w)
+![center](https://images.squarespace-cdn.com/content/v1/5ab16578e2ccd10898976178/1627049910825-X5TD0U12JJ29ZQWO7204/1+-+Ransom+Payments%402x.png?format=750w)
 
-> https://www.coveware.com/blog/ransomware-marketplace-report-q4-2020
+> https://www.coveware.com/blog/2021/7/23/q2-ransom-payment-amounts-decline-as-ransomware-becomes-a-national-security-priority
 
 <!--
-El randomware es uno de los mayores peligros para una compañía, y también uno de los ataques más lucrativos...
+El ransomware es uno de los mayores peligros para una compañía, y también uno de los ataques más lucrativos...
 
-...hasta 2020. Enseguida veremos qué ha pasado en 2020
+...hasta 2020. Enseguida veremos qué pasó en 2020 y cómo respondieron los atacantes
+-->
+
+## Ransomware groups
+
+![center](images/ransom-criminals.png)
+
+<!--
+The attackers are well known, wealthy and they do not hide themselves.
+
+They say the plate on that automobile says, in Russian, "THIEF"
 -->
 
 ---
 
-![](images/ransom-criminals.png)
+![bg left:40%](https://www.fbi.gov/@@dvpdffiles/9/b/9b0a5435190f4902a5d88e3b1c047659/normal/dump_1.gif)
 
+- APT41 is a threat group that researchers have assessed as Chinese state-sponsored espionage group that also conducts financially-motivated operations.
+- APT41 has been active since as early as 2012.
+- The group has been observed targeting healthcare, telecom, technology, and video game industries in 14 countries.
+
+> https://www.fbi.gov/wanted/cyber/apt-41-group
+> https://attack.mitre.org/groups/G0096/
+> https://www.fireeye.com/current-threats/apt-groups.html
+> https://en.wikipedia.org/wiki/Double_Dragon_(hacking_group)
+
+<!--
+Notice:
+
+- The group is perfectly identified
+- The group has been active for 10 years
+- They are suspected to be supported by the Chinese goverments
+- This is APT 41... and that implies that there are at least other 40 identified groups! Check the link to MITRE, they have the list of other groups and their methods and techniques
+-->
+
+---
+
+![center w:29em](images/ransomware-groups.png)
+
+> [Christiaan Beek in Twitter, 2021](https://twitter.com/ChristiaanBeek/status/1427569852357693440)
+
+<!--
+Do you notice something funny?
+
+No China, no Russia. These countries are suspected to offer "free haven" to cybercriminals, if they do not attack to companies in their countries
+
+Some ransomware quits without doing any harm if they detect the OS language/keyboard is Russian!
+
+-->
+
+---
+
+<!-- _class: smallest-font center -->
+
+Most Common Ransomware Variants in Q2 2021
+
+Rank|Ransomware Type|Market Share %|Change from Q1 2021
+--|--|--|--|
+1|Sodinokibi|16.5%|-
+2|Conti V2|14.4%|-
+3|Avaddon|5.4%|+3
+4|Mespinoza|4.9%|New in Top Variants
+5|Hello Kitty|4.5%|New in Top Variants
+6|Ryuk|3.7%|+1
+7|Clop|3.3%|-3
+8|THT v2|2.9%|New in Top Variants
+9|LV|2.5%|New in Top Variants
+10|Zeppelin|2.5%|New in Top Variants
+
+<!--
+Fijaos que no hay tantas variantes de ransomware: solo unas pocas familias. Fijas también en que cambian muy rápidamente: de las 10 variantes más usadas, 5 han aparecido en los últimos 3 meses y otras 5 han desaparecido. Es un mundo que cambia MUY RAPIDAMENTE
+
+¿Cómo es que hay tan pocas variantes de ransomware?
+-->
 
 ## Ransomware-as-a-service
 
@@ -374,6 +443,24 @@ El randomware es uno de los mayores peligros para una compañía, y también uno
 - Hay mafias perfectamente organizadas detrás del ransomware y está totalmente profesionalizado
 - OJO: está tan profesionalizado que si pagas, es MUY PROBABLE que recuperes tus archivos
 - OJO2: si un atacante no recupera sus archivos, enseguida se correrá la voz y "el mayorista" tomaría el control
+
+Por ejemplo: nosotros hemos detectado el "modus operandi" asociado a APT41 varias veces. ¡Pero eso no significa que haya sido APT41! Varios grupos pueden estar usando el mismo software, o el mismo manual, o APT41 puede estar colaborando con otros grupos (es habitual: APT41 espía, luego vende el acceso a otros grupos que plantan ransomware)
+-->
+
+---
+
+![bg left:40% w:100%](images/ransomware-conti-leak.png)
+
+On August, 2021, a disgruntled member of the Conti ransomware program leaked the manuals and technical guides used by the Conti gang to train affiliate members on how to access, move laterally, and escalate access inside a hacked company and then exfiltrate its data before encrypting files.
+
+> https://cryptographybuzz.com/ransomware-affiliate-leaks-conti/
+
+<!--
+En la imagen hay una parte de los manuales, traducidos al inglés. El material original tiene los manuales solo en ruso.
+
+No hace falta un gran conocimiento técnico para llevar a cabo un ataque de ransomware: puedes comprar el malware y los manuales detallados, y ofrecen un "servicio técnico de cibercriminales" para ayudarte a usarlo. Luego, desarrolladores y atacantes van a medias.
+
+Fíjate: de esta manera, un desarrollador de ransomware no se expone y es poco probable que se le pueda detener algún día. 
 -->
 
 ## Defense against ransomware
@@ -415,7 +502,7 @@ Estos grupos tienen páginas en la dark web que son visitable con Tor o similare
 
 - Los investigadors conocen estas páginas
 - Los grupos de atacantes conocen estas páginas
-- Si tu información está hay, es necesario darla como comprometida
+- Si tu información está ahí, es necesario darla como comprometida
 - En enlace propuesto https://www.ransomwatch.org/ (gestionado por investigadores de seguridad) hace capturas periódicas de las páginas de muchos grupos conocidos que tienen sus páginas en .onion
 - Podéis encontrar "List of ransomware groups" en varios sitios. Los enlaces dejan de funcionar a menudo
 -->
@@ -480,8 +567,25 @@ Modern Ransomware and exfiltration
 - [Don’t Wake Up to a Ransomware Attack - CISA](https://www.youtube.com/watch?v=GdXLp1bEnZE)
 - [Babuk Ransomware, by McAfee](https://www.mcafee.com/blogs/other-blogs/mcafee-labs/babuk-ransomware/)
 - [Babuk Ransomware, by ChuongDong](http://chuongdong.com/reverse%20engineering/2021/01/03/BabukRansomware/)
+- [Ransomware: lecciones desde las trincheras](https://ens.ccn.cni.es/es/docman/documentos-publicos/iii-encuentro-ens/553-11-ransomware-lecciones-desde-las-trincheras/file)
+
+<!--
+Pero vamos a destacar dos recursos que me parecen especialmente interesantes: la introducción al ransomware de John Oliver, que incluye muchos de los conceptos menos ténicos que hemos visto aquí, y el informe 2021 de CrowdStrike, con descripción detallada de ataques actuales.
+-->
 
 ---
-<!-- _class: center -->
 
-Continúa en: [Comunicaciones anónimas](11-anonimato.html)
+[![](images/ransomware-oliver.png)](https://www.youtube.com/watch?v=WqD-ATqw3js)
+
+> [Ransomware: Last Week Tonight with John Oliver (HBO)](https://www.youtube.com/watch?v=WqD-ATqw3js)
+
+---
+
+[2021 CrowdStrike Global Threat Report](https://www.crowdstrike.com/resources/reports/global-threat-report/). This year’s highlights include:
+
+- The COVID-19 pandemic and its effect on cybersecurity
+- “Big game hunters” targeting the healthcare sector
+- Significant nation-state-based targeted attacks and operations observed from China, Iran, DPRK, Russia and others
+- The pivotal role that access brokers play in the eCrime ecosystem
+- How ransomware adversaries are rapidly adopting data extortion methods
+- Recommendations you can take to proactively address emerging threats
