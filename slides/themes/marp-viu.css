@@ -10,7 +10,9 @@
 
 :root {
     --main-color: #e65014;
-    --extra-back-color: #aaa;
+    --darker-color: #e65014;
+    --lighter-color: #e26c3e;
+    --extra-back-color: rgb(175, 172, 172);
 }
 
 section header {
@@ -52,6 +54,10 @@ section table {
     margin-right: auto;
     margin-left: auto;
     width: auto;
+}
+section table th {
+    background-color: var(--lighter-color);
+    color: white;
 }
 
 /* image directive: center the image. 
@@ -120,7 +126,7 @@ section.first-slide footer, section.first-slide first-slide, section.first-slide
 
 /* center class: center all text
 Use: <!-- _class: center --> */
-section.center p {
+section.center p, section.center h1, section.center h2 {
     text-align: center;
 }
 
@@ -214,6 +220,7 @@ section.extra-slide {
     padding: 0.5em 1em;
     width: 90%;
     margin: auto;
+    text-align: center;
 }
 section.with-success > p:last-of-type {
     border-radius: 0.15em;
@@ -222,6 +229,7 @@ section.with-success > p:last-of-type {
     padding: 0.5em 1em;
     width: 90%;
     margin: auto;
+    text-align: center;
 }
 section.with-warning > p:last-of-type {
     border-radius: 0.15em;
@@ -230,4 +238,149 @@ section.with-warning > p:last-of-type {
     padding: 0.5em 1em;
     width: 90%;
     margin: auto;
+    text-align: center;
+}
+
+/******************* cool-list *****************************/
+
+/* Una lista redonda
+
+Sacada de: https://catalin.red/css3-ordered-list-styles/
+
+Uso:
+
+## cool-list
+<!-- _class: cool-list -->
+
+1. *Uno*
+1. *Dos*
+    1. *Tres*
+    1. *Cuatro*
+1. *Cinco*
+*/
+
+section.cool-list ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+section.cool-list ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+  }
+section.cool-list ol li em, section.cool-list ol li a {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: .5em 0;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+    font-style: normal;
+}
+section.cool-list ol li em:before,section.cool-list ol li a:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: var(--main-color);
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: .3em solid #fff;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 2em;
+    transition: all .3s ease-out;
+    color: white;
+}
+section.cool-list ol li em:hover,section.cool-list ol li a:hover{
+    background: #eee;
+    font-weight: bolder;
+}
+/* Rotating effect */
+/*
+section.cool-list ol li em:hover:before,section.cool-list ol li a:hover:before{
+    transform: rotate(360deg);
+}*/
+
+/******************* cool-list-animated *****************************/
+
+/* Una lista animada.
+
+Sacada de: https://catalin.red/css3-ordered-list-styles/
+
+Uso:
+
+## cool-list-animated
+<!-- _class: cool-list-animated -->
+
+1. *Uno*
+1. *Dos*
+    1. *Tres*
+    1. *Cuatro*
+1. *Cinco*
+*/
+
+section.cool-list-animated ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+section.cool-list-animated ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+}
+section.cool-list-animated ol li em {
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    *padding: .4em;
+    margin: .5em 0 .5em 2.5em;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    transition: all .3s ease-out;
+    font-style: normal;
+}
+section.cool-list-animated ol li em:hover {
+      background: #eee;
+      font-weight: bolder;
+}
+section.cool-list-animated ol li em:before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -2.5em;
+    top: 50%;
+    margin-top: -1em;
+    /* background: #fa8072; */
+    background: var(--main-color);
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    text-align: center;
+    font-weight: bold;
+    color: white
+}
+section.cool-list-animated ol li em:after{
+    position: absolute;
+    content: '';
+    border: .5em solid transparent;
+    left: -1em;
+    top: 50%;
+    margin-top: -.5em;
+    transition: all .3s ease-out;
+}
+section.cool-list-animated ol li em:hover:after{
+    left: -.5em;
+    /* border-left-color: #fa8072; */
+    border-left-color: var(--main-color);
 }

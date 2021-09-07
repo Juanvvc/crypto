@@ -35,10 +35,11 @@ juan.vera@campusviu.es
 ![bg right w:90%](https://i.imgur.com/Cq78TET.png?1)
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Funciones de hash](#4)
-- [Blockchain](#30)
-- [Conclusiones](#45): resumen y referencias
+1. [Funciones de hash](#4)
+1. [Blockchain](#30)
+1. [Resumen y referencias](#45)
 
 # Funciones de hash
 <!-- _class: lead -->

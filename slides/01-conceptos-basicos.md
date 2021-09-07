@@ -23,12 +23,14 @@ Juan Vera del Campo
 juan.vera@campusviu.es
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Servicios criptográficos](#3): objetivos, seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon, 
-- [Primitivas criptográficas](#18): hash, cifrado simétrico, cifrado asimétrico
-- [Procolos criptográficos](#26): composición de primitivas
-- [Conclusiones](#34): resumen y referencias
-- Anexo recomendado: [Glosario](A1-glosario.html)
+1. [Servicios criptográficos: objetivos, seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#3)
+1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#18)
+1. [Procolos criptográficos: composición de primitivas](#26)
+1. [Conclusiones: resumen y referencias](#34)
+
+Anexo recomendado: [Glosario](A1-glosario.html)
 
 # Servicios criptográficos
 <!--
@@ -249,12 +251,11 @@ El paper enlazado es una estupenda introducción a los conceptos fundamentales d
 -->
 
 ## Confusión y difusión
-<!-- _class: smaller-font -->
 
 Según Shannon, la criptografía debe **maximizar la confusión y difusión de los mensajes cifrados**
 
 
-![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/SubstitutionPermutationNetwork2.png/468px-SubstitutionPermutationNetwork2.png)
+![bg left:30% w:95%](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/SubstitutionPermutationNetwork2.png/468px-SubstitutionPermutationNetwork2.png)
 
 - **Confusión**: cada bit de un mensaje cifrado depende de varios bits de la clave.
 - **Difusión**: un cambio de un bit en el mensaje original cambia la mitad de los bits en el mensaje cifrado.

@@ -46,11 +46,12 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 -->
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Teoría de la complejidad](#4)
-- [Logaritmo discreto](#22)
-- [Acuerdo de clave Diffie-Hellman](#26)
-- [Conclusiones](#43)
+1. [Teoría de la complejidad](#4)
+1. [Logaritmo discreto](#22)
+1. [Acuerdo de clave Diffie-Hellman](#26)
+1. [Resumen y referencias](#43)
 
 # Teoría de la complejidad
 <!-- _class: lead -->

@@ -58,12 +58,13 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 > Foto: https://www.publicdomainpictures.net/en/view-image.php?image=363738&picture=signpost-giving-directions (CC0)
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Criptografía asimétrica](#5)
-- [RSA](#22)
-- [Curvas Elípticas](#36)
-- [Depurando detalles](#53)
-- [Conclusiones](#56): resumen y referencias
+1. [Criptografía asimétrica](#5)
+1. [RSA](#22)
+1. [Curvas Elípticas](#36)
+1. [Depurando detalles](#53)
+1. [Resumen y referencias](#56)
 
 # Criptografía asimétrica
 <!-- _class: lead -->

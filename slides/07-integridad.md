@@ -25,11 +25,12 @@ Juan Vera del Campo
 juan.vera@campusviu.es
 
 ## Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Integridad](#3)
-- [HMAC](#12)
-- [MAC](#20)
-- [Conclusiones y resumen](#27)
+1. [Integridad](#3)
+1. [HMAC](#12)
+1. [MAC](#20)
+1. [Resumen y referencias](#27)
 
 
 # Integridad

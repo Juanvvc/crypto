@@ -58,17 +58,16 @@ Hoy veremos como solucionarlo:
 -->
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Confidencialidad computacional](#4)
-- [Cifrado simétrico de flujo](#16)
-- [Cifrado Salsa20](#34): detalles y prácticas
-- Anexo recomendado: [RNG](A2-rng.html)
-- Ejercicios: [Tema 3 (1)](../ejercicios/03)
-- [Cifrado simétrico de bloque](#46)
-- [Cifrado AES](#60): detalles del algoritmo de cifrado de bloques AES y modos de operación.
-- Ejercicios: [Tema 3 (2)](../ejercicios/03)
-- [Resumen](#55), conclusiones y referencias
+1. [Confidencialidad computacional](#4)
+1. [Cifrado simétrico de flujo](#16)
+1. [Cifrado Salsa20](#34)
+1. [Cifrado simétrico de bloque](#46)
+1. [Cifrado AES y modos de operación](#60)
+1. [Resumen y rerencias](#55)
 
+Anexo recomendado: [RNG](A2-rng.html)
 
 # Confidencialidad computacional
 <!-- _class: lead

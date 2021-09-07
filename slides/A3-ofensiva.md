@@ -32,17 +32,17 @@ juan.vera@campusviu.es
     - Recuerda: firma = cifrado asimétrico del hash de un mensaje
 
 # Hoy hablamos de...
-<!-- _class: with-warning -->
+<!-- _class: cool-list with-warning -->
 
 Cómo se usa la criptografía para atacar, y seguiremos explorando conceptos de firma electrónica y usos de cada tipo de criptografía simétrica y asimétrica
 
-- [Business email compromise (BEC)](#4)
-- [Ransomware](#32)
-- [Referencias](#53)
+1. [Business email compromise (BEC)](#4)
+1. [Ransomware](#32)
+1. [Resumen y referencias](#53)
 
 OBSERVA: estos dos ataques son los principales ataques contra los sistemas de una empresa en la actualidad
 
-NOTA: Las transparencias de esta sesión están en inglés
+Las transparencias de esta sesión están en inglés
 
 # Business email compromise (BEC)
 <!-- _class: lead -->

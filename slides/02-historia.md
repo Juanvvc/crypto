@@ -22,12 +22,13 @@ Juan Vera del Campo
 juan.vera@campusviu.es
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Criptografía clásica](#3)
-- [Cifrado César](#8): fuerza bruta y análisis frecuencial.
-- [Mejoras al cifrado César](#24): Vigenère y Enigma
-- [Confidencialidad perfecta](#39): Vernam
-- [Conclusiones](#49): resumen y referencias
+1. [Criptografía clásica](#3)
+1. [Cifrado César: fuerza bruta y análisis frecuencial](#8)
+1. [Mejoras al cifrado César: Vigenère y Enigma](#24)
+1. [Confidencialidad perfecta: Vernam](#39)
+1. [Resumen y referencias](#49)
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 

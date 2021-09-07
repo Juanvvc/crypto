@@ -44,14 +44,13 @@ Es decir, no repudio = autenticidad + integridad
 -->
 
 ## Hoy hablamos de...
+<!-- _class: cool-list -->
 
-Integridad y primer paso hacia autenticación
-
-- [Autenticación](#5)
-- [Desafío / Respuesta](#20)
-- [Usuario y contraseña](#27)
-- [Tokens](#39)
-- [Conclusiones](#47): resumen y referencias
+1. [Autenticación](#5)
+1. [Desafío / Respuesta](#20)
+1. [Usuario y contraseña](#27)
+1. [Tokens](#39)
+1. [Resumen y referencias](#47)
 
 ## TLS y la autenticación
 <!-- _class: extra-slide -->

@@ -34,11 +34,12 @@ Servicios de seguridad:
 En este tema veremos cómo usar la criptografía para ofrecer el servicio de anonimato. Así aprendemos un nuevo servicio, afianzamos conceptos que ya sabemos, conoceremos nuevos protocolos y exploramos qué capacidades tienen los adversarios
 
 # Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Comunicaciones anónimas](#4)
-- [Enrutamiento onion](#16)
-- [Servicios onion](#27)
-- [Referencias y ejercicios](#37)
+1. [Comunicaciones anónimas](#4)
+1. [Enrutamiento onion](#16)
+1. [Servicios onion](#27)
+1. [Referencias y ejercicios](#37)
 
 # Comunicaciones anónimas
 <!-- _class: lead -->
@@ -56,7 +57,7 @@ Los servicios clásicos de seguridad (*confidencialidad*) aseguran que nadie que
 ## Recordatorio: un paquete IP
 <!-- _class: extra-slide -->
 
-![center w:20em](https://upload.wikimedia.org/wikipedia/commons/7/71/IPv4_Packet_-en.svg)
+![center w:20em](https://upload.wikimedia.org/wikipedia/commons/6/60/IPv4_Packet-en.svg)
 
 - Un paquete IP incluye obligatoriamente las direcciones IP reales de origen y destino
 - Todos los routers en el camino tienen que conocer estas direcciones para poder enrutar un mensaje

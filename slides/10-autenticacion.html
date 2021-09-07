@@ -16,7 +16,7 @@
 
 /* Tema VIU para MARP */
 
-/******************* common styles *****************************/div#p>svg>foreignObject>section:not(\9){--main-color:#e65014;--extra-back-color:#aaa}div#p>svg>foreignObject>section header{
+/******************* common styles *****************************/div#p>svg>foreignObject>section:not(\9){--main-color:#e65014;--darker-color:#e65014;--lighter-color:#e26c3e;--extra-back-color:rgb(175,172,172)}div#p>svg>foreignObject>section header{
     /* header to the rigth
     right: 30px !important;
     left: auto !important; */font-size:0.5em}div#p>svg>foreignObject>section footer{font-size:0.5em}
@@ -28,7 +28,7 @@
 
 /* Logo */div#p>svg>foreignObject>section:before{content:"";width:12%;height:10%;position:absolute;right:1%;top:2%;background:url('themes/viu/logo-viu.png') no-repeat center/contain}
 
-/* tables: always centered */div#p>svg>foreignObject>section table{margin-right:auto;margin-left:auto;width:auto}
+/* tables: always centered */div#p>svg>foreignObject>section table{margin-right:auto;margin-left:auto;width:auto}div#p>svg>foreignObject>section table th{background-color:var(--lighter-color);color:white}
 
 /* image directive: center the image. 
 Use: ![center](image.png) */div#p>svg>foreignObject>section img[alt~=center]{display:block;margin:0 auto}
@@ -53,7 +53,7 @@ Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.first-slide{
 
 
 /* center class: center all text
-Use: <!-- _class: center --> */div#p>svg>foreignObject>section.center p{text-align:center}
+Use: <!-- _class: center --> */div#p>svg>foreignObject>section.center h1,div#p>svg>foreignObject>section.center h2,div#p>svg>foreignObject>section.center p{text-align:center}
 
 /******************* smaller-font and smallest-font *****************************/
 
@@ -89,7 +89,50 @@ Use: <!-- _class: extra-slide --> */div#p>svg>foreignObject>section.extra-slide{
 
 /* Nota: el magin: auto lleva la caja al final de la transparencia. Si solo la quieres centrada:
     margin: 0 auto 0 auto;
- */div#p>svg>foreignObject>section.with-info>p:last-of-type{border-radius:0.15em;border:2px solid rgb(17,138,207,0.50);background-color:rgb(17,138,207,0.25);padding:0.5em 1em;width:90%;margin:auto}div#p>svg>foreignObject>section.with-success>p:last-of-type{border-radius:0.15em;border:2px solid #73AD21aa;background-color:#73AD2133;padding:0.5em 1em;width:90%;margin:auto}div#p>svg>foreignObject>section.with-warning>p:last-of-type{border-radius:0.15em;border:2px solid #ce5708aa;background-color:#ce570855;padding:0.5em 1em;width:90%;margin:auto}
+ */div#p>svg>foreignObject>section.with-info>p:last-of-type{border-radius:0.15em;border:2px solid rgb(17,138,207,0.50);background-color:rgb(17,138,207,0.25);padding:0.5em 1em;width:90%;margin:auto;text-align:center}div#p>svg>foreignObject>section.with-success>p:last-of-type{border-radius:0.15em;border:2px solid #73AD21aa;background-color:#73AD2133;padding:0.5em 1em;width:90%;margin:auto;text-align:center}div#p>svg>foreignObject>section.with-warning>p:last-of-type{border-radius:0.15em;border:2px solid #ce5708aa;background-color:#ce570855;padding:0.5em 1em;width:90%;margin:auto;text-align:center}
+
+/******************* cool-list *****************************/
+
+/* Una lista redonda
+
+Sacada de: https://catalin.red/css3-ordered-list-styles/
+
+Uso:
+
+## cool-list
+<!-- _class: cool-list -->
+
+1. *Uno*
+1. *Dos*
+    1. *Tres*
+    1. *Cuatro*
+1. *Cinco*
+*/div#p>svg>foreignObject>section.cool-list ol{counter-reset:li; /* Initiate a counter */list-style:none; /* Remove default numbering */*list-style:decimal; /* Keep using default numbering for IE6/7 */padding:0;text-shadow:0 1px 0 rgba(255,255,255,.5)}div#p>svg>foreignObject>section.cool-list ol ol{margin:0 0 0 2em /* Add some left margin for inner lists */}div#p>svg>foreignObject>section.cool-list ol li a,div#p>svg>foreignObject>section.cool-list ol li em{position:relative;display:block;padding:.4em .4em .4em 2em;*padding:.4em;margin:.5em 0;background:#ddd;color:#444;text-decoration:none;border-radius:.3em;transition:all .3s ease-out;font-style:normal}div#p>svg>foreignObject>section.cool-list ol li a:before,div#p>svg>foreignObject>section.cool-list ol li em:before{content:counter(li);counter-increment:li;position:absolute;left:-1.3em;top:50%;margin-top:-1.3em;background:var(--main-color);height:2em;width:2em;line-height:2em;border:.3em solid #fff;text-align:center;font-weight:normal;border-radius:2em;transition:all .3s ease-out;color:white}div#p>svg>foreignObject>section.cool-list ol li a:hover,div#p>svg>foreignObject>section.cool-list ol li em:hover{background:#eee;font-weight:bolder}
+/* Rotating effect */
+/*
+section.cool-list ol li em:hover:before,section.cool-list ol li a:hover:before{
+    transform: rotate(360deg);
+}*/
+
+/******************* cool-list-animated *****************************/
+
+/* Una lista animada.
+
+Sacada de: https://catalin.red/css3-ordered-list-styles/
+
+Uso:
+
+## cool-list-animated
+<!-- _class: cool-list-animated -->
+
+1. *Uno*
+1. *Dos*
+    1. *Tres*
+    1. *Cuatro*
+1. *Cinco*
+*/div#p>svg>foreignObject>section.cool-list-animated ol{counter-reset:li; /* Initiate a counter */list-style:none; /* Remove default numbering */*list-style:decimal; /* Keep using default numbering for IE6/7 */padding:0;text-shadow:0 1px 0 rgba(255,255,255,.5)}div#p>svg>foreignObject>section.cool-list-animated ol ol{margin:0 0 0 2em /* Add some left margin for inner lists */}div#p>svg>foreignObject>section.cool-list-animated ol li em{position:relative;display:block;padding:.4em .4em .4em .8em;*padding:.4em;margin:.5em 0 .5em 2.5em;background:#ddd;color:#444;text-decoration:none;transition:all .3s ease-out;font-style:normal}div#p>svg>foreignObject>section.cool-list-animated ol li em:hover{background:#eee;font-weight:bolder}div#p>svg>foreignObject>section.cool-list-animated ol li em:before{content:counter(li);counter-increment:li;position:absolute;left:-2.5em;top:50%;margin-top:-1em;
+    /* background: #fa8072; */background:var(--main-color);height:2em;width:2em;line-height:2em;text-align:center;font-weight:bold;color:white}div#p>svg>foreignObject>section.cool-list-animated ol li em:after{position:absolute;content:'';border:.5em solid transparent;left:-1em;top:50%;margin-top:-.5em;transition:all .3s ease-out}div#p>svg>foreignObject>section.cool-list-animated ol li em:hover:after{left:-.5em;
+    /* border-left-color: #fa8072; */border-left-color:var(--main-color)}
 /* You can add custom style here. VSCode supports this.
     Other editor might need these custom code in
     the YAML header: section: | */
@@ -114,16 +157,16 @@ Use: <!-- _class: extra-slide --> */div#p>svg>foreignObject>section.extra-slide{
 <p>Es la lista que conocemos como &quot;los servicios básicos de seguridad&quot; del <a href="01-conceptos-basicos.html">Tema 1</a></p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="3" data-marpit-pagination-total="52" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-footer="[Inicio](index.html)" data-class="cool-list" data-heading-divider="2" data-theme="marp-viu" class="cool-list" data-marpit-pagination="3" data-marpit-pagination-total="52" style="--paginate:true;--footer:[Inicio](index.html);--class:cool-list;--heading-divider:2;--theme:marp-viu;">
 <h2>Hoy hablamos de...</h2>
-<p>Integridad y primer paso hacia autenticación</p>
-<ul>
+
+<ol>
 <li><a href="#5">Autenticación</a></li>
 <li><a href="#20">Desafío / Respuesta</a></li>
 <li><a href="#27">Usuario y contraseña</a></li>
 <li><a href="#39">Tokens</a></li>
-<li><a href="#47">Conclusiones</a>: resumen y referencias</li>
-</ul>
+<li><a href="#47">Resumen y referencias</a></li>
+</ol>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" data-footer="[Inicio](index.html)" data-class="extra-slide" data-heading-divider="2" data-theme="marp-viu" class="extra-slide" data-marpit-pagination="4" data-marpit-pagination-total="52" style="--paginate:true;--footer:[Inicio](index.html);--class:extra-slide;--heading-divider:2;--theme:marp-viu;">

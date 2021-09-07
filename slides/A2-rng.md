@@ -23,10 +23,11 @@ Juan Vera del Campo
 juan.vera@campusviu.es
 
 # Contenido
+<!-- _class: cool-list -->
 
-- [True Random Number Generator](#3)
-- [Dispositivos ad-hoc para RNG](#10)
-- [Hardware Secure Module](#16)
+1. [True Random Number Generator](#3)
+1. [Dispositivos ad-hoc para RNG](#10)
+1. [Hardware Secure Module](#16)
 
 # RNG
 <!-- _class: lead -->

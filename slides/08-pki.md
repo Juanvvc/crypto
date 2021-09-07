@@ -25,11 +25,12 @@ Juan Vera del Campo
 juan.vera@campusviu.es
 
 ## Hoy hablamos de...
+<!-- _class: cool-list -->
 
-- [Cifrado híbrido](#3)
-- [Firma digital](#12)
-- [Certificados electrónicos](#20)
-- [Conclusiones y resumen](#27)
+1. [Cifrado híbrido](#3)
+1. [Firma digital](#12)
+1. [Certificados electrónicos](#20)
+1. [Resumen y referencias](#27)
 
 ## Recordatorio
 
