@@ -23,6 +23,7 @@ Juan Vera del Campo
 juan.vera@campusviu.es
 
 ## Temario
+<!-- _class: cool-list -->
 
 1. [Conceptos básicos](01-conceptos-basicos.html)
 1. [Criptografía clásica](02-historia.html)
@@ -32,6 +33,11 @@ juan.vera@campusviu.es
 1. [Criptografía de clave pública: RSA](05-asimetrica.html)
 
 ---
+<!-- _class: cool-list -->
+
+<style scoped>
+    ol { counter-reset: li 5; }
+</style>
 
 6. [Funciones de Hash y Blockchain](06-hashes.html)
 1. [Integridad](07-integridad.html)

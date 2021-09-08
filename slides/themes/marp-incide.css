@@ -26,7 +26,7 @@ section footer {
     font-size: 0.5em;
 }
 
-/* Main header color */
+/* Main headers color */
 section h1, section h2 {
     color: var(--darker-color);
 }
@@ -73,8 +73,8 @@ img[alt~="center"] {
 
 /* Block quote: use only as the last element of a slide, for cites! */
 section blockquote {
-    border-top: 0.1em dashed gray;
-    font-size: 50%;
+    border-top: 0.1em dashed var(--extra-back-color);
+    font-size: 60%;
     margin-top: auto;
 }
 
@@ -131,7 +131,7 @@ section.lead2 footer, section.lead2 header, section.lead2:after {
 /******************* first-slide *****************************/
 
 
-/* lead class: first slide (main title). Use h1 as header.
+/* first slide (main title). Use h1 as header.
 Use: <!-- _class: first-slide --> */
 section.first-slide {
     background-image: url('themes/incide/incide-back.png');
@@ -224,6 +224,28 @@ section.two-columns-33.with-header :nth-child(5) {
     grid-column: 1 / 3 !important;
 }
 
+/******************* two-columns-list *****************************/
+
+/* two-columns-list
+A large ul list that fits in two columns
+
+Examples of configuration for three columns. In a scoped style section:
+
+ul { height: 20em; list-style-type: numeric; }
+ul>* { width: 12em; } 
+ul ol { list-style-type: lower-latin; /* disc lower-roman decimal }
+*/
+section.two-columns-list ul {
+    height: 18em; /* height of the list. You may want to change this */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+section.two-columns-list ul>* {
+  width: 20em; /* You can change this for more columns */
+  padding-right: 2em;
+}
+
 /******************* extra-slide *****************************/
 
 /* extra-slide class (greyed out)
@@ -292,18 +314,13 @@ Uso:
 section.cool-list ol {
     counter-reset: li; /* Initiate a counter */
     list-style: none; /* Remove default numbering */
-    *list-style: decimal; /* Keep using default numbering for IE6/7 */
     padding: 0;
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
-section.cool-list ol ol {
-    margin: 0 0 0 2em; /* Add some left margin for inner lists */
-  }
-section.cool-list ol li em, section.cool-list ol li a {
+section.cool-list ol > li > em, section.cool-list > ol > li > a {
     position: relative;
     display: block;
     padding: .4em .4em .4em 2em;
-    *padding: .4em;
     margin: .5em 0;
     background: #ddd;
     color: #444;
@@ -312,7 +329,7 @@ section.cool-list ol li em, section.cool-list ol li a {
     transition: all .3s ease-out;
     font-style: normal;
 }
-section.cool-list ol li em:before,section.cool-list ol li a:before{
+section.cool-list ol > li > em:before,section.cool-list > ol > li > a:before{
     content: counter(li);
     counter-increment: li;
     position: absolute;
@@ -330,15 +347,33 @@ section.cool-list ol li em:before,section.cool-list ol li a:before{
     transition: all .3s ease-out;
     color: white;
 }
-section.cool-list ol li em:hover,section.cool-list ol li a:hover{
+section.cool-list > ol > li > em:hover,section.cool-list > ol > li > a:hover{
     background: #eee;
     font-weight: bolder;
 }
 /* Rotating effect */
 /*
-section.cool-list ol li em:hover:before,section.cool-list ol li a:hover:before{
+section.cool-list ol > li > em:hover:before,section.cool-list ol > li > a:hover:before{
     transform: rotate(360deg);
 }*/
+/* Lists inside lists */
+section.cool-list > ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+    font-size: 75%;
+    counter-reset: li2; /* Initiate a counter */
+}
+section.cool-list > ol ol > li > em:before,section.cool-list > ol ol > li > a:before{
+    content: counter(li2);
+    counter-increment: li2;
+}
+section.cool-list > ol > li > ul {
+    list-style-type: disc;
+    margin: 0 0 0 1em;
+    font-size: 75%;
+}
+section.cool-list > ol ol > li > em {
+    background: #efefef;
+}
 
 /******************* cool-list-animated *****************************/
 
@@ -361,7 +396,6 @@ Uso:
 section.cool-list-animated ol {
     counter-reset: li; /* Initiate a counter */
     list-style: none; /* Remove default numbering */
-    *list-style: decimal; /* Keep using default numbering for IE6/7 */
     padding: 0;
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
@@ -372,7 +406,6 @@ section.cool-list-animated ol li em {
     position: relative;
     display: block;
     padding: .4em .4em .4em .8em;
-    *padding: .4em;
     margin: .5em 0 .5em 2.5em;
     background: #ddd;
     color: #444;
@@ -412,4 +445,23 @@ section.cool-list-animated ol li em:hover:after{
     left: -.5em;
     /* border-left-color: #fa8072; */
     border-left-color: var(--lighter-color);
+}
+/* Lists inside lists */
+section.cool-list-animated ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+    font-size: 75%;
+    counter-reset: li2; /* Initiate a counter */
+}
+section.cool-list-animated ol ol > li > em:before,section.cool-list-animated ol ol > li > a:before{
+    content: counter(li2);
+    counter-increment: li2;
+    background: lightgray;
+}
+section.cool-list-animated ol ul {
+    list-style-type: disc;
+    margin: 0 0 0 1em;
+    font-size: 75%;
+}
+section.cool-list-animated ol ol em {
+    background: #efefef;
 }
