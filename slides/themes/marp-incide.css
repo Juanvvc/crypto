@@ -231,19 +231,21 @@ A large ul list that fits in two columns
 
 Examples of configuration for three columns. In a scoped style section:
 
-ul { height: 20em; list-style-type: numeric; }
-ul>* { width: 12em; } 
-ul ol { list-style-type: lower-latin; /* disc lower-roman decimal }
+ol { height: 20em; list-style-type: numeric; }
+ol>* { width: 12em; } 
+ol { list-style-type: lower-latin; /* disc lower-roman decimal }
 */
-section.two-columns-list ul {
-    height: 18em; /* height of the list. You may want to change this */
+
+section.two-columns-list ol {
+    height: 18em;  /* height of the list. You may want to change this */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    list-style-type: disc;
 }
-section.two-columns-list ul>* {
-  width: 20em; /* You can change this for more columns */
-  padding-right: 2em;
+section.two-columns-list ol>* {
+    flex: 0 1 auto;
+    width: 20em; /* You can change this for more columns */
 }
 
 /******************* extra-slide *****************************/
@@ -315,7 +317,7 @@ section.cool-list ol {
     counter-reset: li; /* Initiate a counter */
     list-style: none; /* Remove default numbering */
     padding: 0;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    /*text-shadow: 0 1px 0 rgba(255,255,255,.5);*/
 }
 section.cool-list ol > li > em, section.cool-list > ol > li > a {
     position: relative;
@@ -375,7 +377,7 @@ section.cool-list > ol ol > li > em {
     background: #efefef;
 }
 
-/******************* cool-list-animated *****************************/
+/******************* cool-list2 *****************************/
 
 /* Una lista animada.
 
@@ -383,8 +385,8 @@ Sacada de: https://catalin.red/css3-ordered-list-styles/
 
 Uso:
 
-## cool-list-animated
-<!-- _class: cool-list-animated -->
+## cool-list2
+<!-- _class: cool-list2 -->
 
 1. *Uno*
 1. *Dos*
@@ -393,16 +395,16 @@ Uso:
 1. *Cinco*
 */
 
-section.cool-list-animated ol {
+section.cool-list2 ol {
     counter-reset: li; /* Initiate a counter */
     list-style: none; /* Remove default numbering */
     padding: 0;
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
-section.cool-list-animated ol ol {
+section.cool-list2 ol ol {
     margin: 0 0 0 2em; /* Add some left margin for inner lists */
 }
-section.cool-list-animated ol li em {
+section.cool-list2 ol li em {
     position: relative;
     display: block;
     padding: .4em .4em .4em .8em;
@@ -413,11 +415,11 @@ section.cool-list-animated ol li em {
     transition: all .3s ease-out;
     font-style: normal;
 }
-section.cool-list-animated ol li em:hover {
+section.cool-list2 ol li em:hover {
       background: #eee;
       font-weight: bolder;
 }
-section.cool-list-animated ol li em:before {
+section.cool-list2 ol li em:before {
     content: counter(li);
     counter-increment: li;
     position: absolute;
@@ -432,7 +434,7 @@ section.cool-list-animated ol li em:before {
     text-align: center;
     font-weight: bold;
 }
-section.cool-list-animated ol li em:after{
+section.cool-list2 ol li em:after{
     position: absolute;
     content: '';
     border: .5em solid transparent;
@@ -441,27 +443,27 @@ section.cool-list-animated ol li em:after{
     margin-top: -.5em;
     transition: all .3s ease-out;
 }
-section.cool-list-animated ol li em:hover:after{
+section.cool-list2 ol li em:hover:after{
     left: -.5em;
     /* border-left-color: #fa8072; */
     border-left-color: var(--lighter-color);
 }
 /* Lists inside lists */
-section.cool-list-animated ol ol {
+section.cool-list2 ol ol {
     margin: 0 0 0 2em; /* Add some left margin for inner lists */
     font-size: 75%;
     counter-reset: li2; /* Initiate a counter */
 }
-section.cool-list-animated ol ol > li > em:before,section.cool-list-animated ol ol > li > a:before{
+section.cool-list2 ol ol > li > em:before,section.cool-list2 ol ol > li > a:before{
     content: counter(li2);
     counter-increment: li2;
     background: lightgray;
 }
-section.cool-list-animated ol ul {
+section.cool-list2 ol ul {
     list-style-type: disc;
     margin: 0 0 0 1em;
     font-size: 75%;
 }
-section.cool-list-animated ol ol em {
+section.cool-list2 ol ol em {
     background: #efefef;
 }

@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Autenticación
+author: Juan Vera
+eywords: autenticación,authentication,criptografía,cryptography,tokens,contraseña,password,kerberos,oauth
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>
@@ -50,7 +53,7 @@ Es decir, no repudio = autenticidad + integridad
 1. [Desafío / Respuesta](#20)
 1. [Usuario y contraseña](#27)
 1. [Tokens](#39)
-1. [Resumen y referencias](#47)
+1. [Resumen y referencias](#51)
 
 ## TLS y la autenticación
 <!-- _class: extra-slide -->
@@ -220,10 +223,11 @@ Esto no es tan raro: es la etapa *lateral movement* en cualquier ataque ciberné
 ![bg right w:100%](https://i0.wp.com/ciberseguridadenlinea.com/wp-content/uploads/2020/06/lateralmovement.jpg?resize=768%2C563&ssl=1)
 
 ## Vamos a ver tres soluciones
+<!-- _class: cool-list -->
 
-- Desafío-respuesta / firma digital
-- Contraseñas / biometría
-- Tokens
+1. [Desafío-respuesta / firma digital](#20)
+1. [Contraseñas / biometría](#27)
+1. [Tokens](#39)
 
 # Desafío - Respuesta
 <!-- _class: lead -->
@@ -563,6 +567,10 @@ Gracias a OAuth, un usuario puede delegar el acceso a terceros a su cuenta de Go
 > https://docs.axway.com/bundle/APIGateway_762_OAuthUserGuide_allOS_en_HTML5/page/Content/OAuthGuideTopics/oauth_intro.htm
 > https://aaronparecki.com/oauth-2-simplified/
 
+---
+
+[![center](images/twitter-oauth.png)](https://twitter.com/LittleJoeTables/status/1366098640482230281)
+
 ## Kerberos
 
 - Desarrollado en el MIT en los 80
@@ -598,7 +606,7 @@ El problema de la autenticación segura aún está a medio resolver en entornos 
 
 ![bg right:60% w:100%](https://blogvaronis2.wpengine.com/wp-content/uploads/2018/12/what-can-mimikatz-do@2x-1-960x669.png)
 
-# Conclusiones
+# Resumen y referencias
 <!-- _class: lead -->
 
 ## Resumen
