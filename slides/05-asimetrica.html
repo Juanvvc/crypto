@@ -172,22 +172,38 @@ Uso:
 
 /******************* common styles *****************************/div#p>svg>foreignObject>section:not(a){--main-color:#e65014;--darker-color:#e65014;--lighter-color:#e26c3e;--extra-back-color:rgb(175,172,172)}
 
-/* Logo */div#p>svg>foreignObject>section:before{content:"";width:12%;height:10%;position:absolute;right:1%;top:2%;background:url('themes/viu/logo-viu.png') no-repeat center/contain}
+/* Logo */div#p>svg>foreignObject>section:before{content:"";width:9%;height:10%;position:absolute;right:2.5%;top:2%;background:url('themes/viu/logo-viu.png') no-repeat center/contain}
 
 
 /******************* lead *****************************/
 
+/* lead class: first slide in a section. Use h1 as header.
+Use: <!-- _class: lead --> */div#p>svg>foreignObject>section.lead{background-color:var(--main-color);text-align:center;color:white;padding:inherit}div#p>svg>foreignObject>section.lead a,div#p>svg>foreignObject>section.lead h1,div#p>svg>foreignObject>section.lead h2,div#p>svg>foreignObject>section.lead p{color:white;padding:0.5em;background-color:inherit;margin-bottom:0}div#p>svg>foreignObject>section.lead:after,div#p>svg>foreignObject>section.lead footer,div#p>svg>foreignObject>section.lead header{
+    /* hide header, footer and pagination */display:none}div#p>svg>foreignObject>section.lead:before{
+    /* logo in white */filter:invert(100%) saturate(0) brightness(1.8) }
+
+/******************* lead2 *****************************/
+
 
 /* lead class: first slide in a section. Use h1 as header.
-Use: <!-- _class: lead --> */div#p>svg>foreignObject>section.lead{background-color:white;text-align:center;padding:inherit}div#p>svg>foreignObject>section.lead h1,div#p>svg>foreignObject>section.lead h2,div#p>svg>foreignObject>section.lead p{margin-left:25%;background-color:white;color:var(--main-color);padding:inherit;margin-bottom:inherit}div#p>svg>foreignObject>section.lead h1:before{content:'';width:25%;height:100%;position:absolute;left:0;top:0;display:block;background:url('themes/viu/lead2.png') no-repeat}div#p>svg>foreignObject>section.lead:after,div#p>svg>foreignObject>section.lead footer,div#p>svg>foreignObject>section.lead header{
-    /* hide footer and pagination */display:none}
+Use: <!-- _class: lead --> */div#p>svg>foreignObject>section.lead2{background-color:white;text-align:center;padding:inherit;background-image:none}div#p>svg>foreignObject>section.lead2 h1,div#p>svg>foreignObject>section.lead2 h2,div#p>svg>foreignObject>section.lead2 p{margin-left:25%;background-color:white;color:var(--main-color);padding:inherit;margin-bottom:inherit}div#p>svg>foreignObject>section.lead2 h1:before{content:'';width:25%;height:100%;position:absolute;left:0;top:0;display:block;background:url('themes/viu/lead2.png') no-repeat}div#p>svg>foreignObject>section.lead2 footer,div#p>svg>foreignObject>section.lead:after,div#p>svg>foreignObject>section.lead header{
+    /* hide footer and pagination */display:none}div#p>svg>foreignObject>section.lead2:before{
+    /* reset logo */filter:inherit}div#p>svg>foreignObject>section section2 header{color:var(--main-color)}
+
 
 /******************* first-slide *****************************/
 
 
 /* first slide (main title). Use h1 as header.
-Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.first-slide{background-image:url('themes/viu/lead2.png');background-size:cover;background-repeat:no-repeat;text-align:center}div#p>svg>foreignObject>section.first-slide h1,div#p>svg>foreignObject>section.first-slide h2{color:white;background-color:#2c3e50dd}div#p>svg>foreignObject>section.first-slide:after,div#p>svg>foreignObject>section.first-slide first-slide,div#p>svg>foreignObject>section.first-slide footer{
+Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.first-slide{background-size:cover;background-repeat:no-repeat;background-image:url('themes/viu/bg2.png');text-align:left}div#p>svg>foreignObject>section.first-slide h1,div#p>svg>foreignObject>section.first-slide h2{color:#333;text-align:left;margin-top:10em!important}div#p>svg>foreignObject>section.first-slide:after,div#p>svg>foreignObject>section.first-slide first-slide,div#p>svg>foreignObject>section.first-slide footer{
     /* hide footer and pagination */display:none}
+
+/******************* corporative *****************************/
+
+
+/* first slide (main title). Use h1 as header.
+Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{background-size:cover;background-repeat:no-repeat;background-image:url('themes/viu/bg1.png');text-align:left}div#p>svg>foreignObject>section.corporative h1,div#p>svg>foreignObject>section.corporative h2{color:#111;text-align:left;margin-top:10em!important}div#p>svg>foreignObject>section.corporative:after,div#p>svg>foreignObject>section.corporative corporative,div#p>svg>foreignObject>section.corporative footer{
+    /* hide footer and pagination */display:none}div#p>svg>foreignObject>section.corporative a,div#p>svg>foreignObject>section.corporative p{color:#111}
 /* You can add custom style here. VSCode supports this.
     Other editor might need these custom code in
     the YAML header: section: | */div#p>svg>foreignObject>section.a-story ul li{list-style-type:none;text-align:center}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]{columns:initial!important;display:block!important;padding:0!important}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]:after,div#p>svg>foreignObject>section[data-marpit-advanced-background=background]:before,div#p>svg>foreignObject>section[data-marpit-advanced-background=content]:after,div#p>svg>foreignObject>section[data-marpit-advanced-background=content]:before{display:none!important}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]>div[data-marpit-advanced-background-container]{all:initial;display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]>div[data-marpit-advanced-background-container][data-marpit-advanced-background-direction=vertical]{flex-direction:column}div#p>svg>foreignObject>section[data-marpit-advanced-background=background][data-marpit-advanced-background-split]>div[data-marpit-advanced-background-container]{width:var(--marpit-advanced-background-split,50%)}div#p>svg>foreignObject>section[data-marpit-advanced-background=background][data-marpit-advanced-background-split=right]>div[data-marpit-advanced-background-container]{margin-left:calc(100% - var(--marpit-advanced-background-split, 50%))}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]>div[data-marpit-advanced-background-container]>figure{all:initial;background-position:center;background-repeat:no-repeat;background-size:cover;flex:auto;margin:0}div#p>svg>foreignObject>section[data-marpit-advanced-background=content],div#p>svg>foreignObject>section[data-marpit-advanced-background=pseudo]{background:transparent!important}div#p>svg>foreignObject>section[data-marpit-advanced-background=pseudo],div#p>svg[data-marpit-svg]>foreignObject[data-marpit-advanced-background=pseudo]{pointer-events:none!important}div#p>svg>foreignObject>section[data-marpit-advanced-background-split]{width:100%;height:100%}</style></head><body><div class="bespoke-progress-parent"><div class="bespoke-progress-bar"></div></div><div class="bespoke-marp-osc"><button data-bespoke-marp-osc="prev" tabindex="-1" title="Previous slide">Previous slide</button><span data-bespoke-marp-osc="page"></span><button data-bespoke-marp-osc="next" tabindex="-1" title="Next slide">Next slide</button><button data-bespoke-marp-osc="fullscreen" tabindex="-1" title="Toggle fullscreen (f)">Toggle fullscreen</button><button data-bespoke-marp-osc="presenter" tabindex="-1" title="Open presenter view (p)">Open presenter view</button></div><div id="p"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-paginate="true" data-footer="[Inicio](index.html)" data-class="first-slide" data-heading-divider="2" data-theme="marp-viu" class="first-slide" data-marpit-pagination="1" data-marpit-pagination-total="59" style="--paginate:true;--footer:[Inicio](index.html);--class:first-slide;--heading-divider:2;--theme:marp-viu;">

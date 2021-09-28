@@ -172,22 +172,38 @@ Uso:
 
 /******************* common styles *****************************/div#p>svg>foreignObject>section:not(a){--main-color:#e65014;--darker-color:#e65014;--lighter-color:#e26c3e;--extra-back-color:rgb(175,172,172)}
 
-/* Logo */div#p>svg>foreignObject>section:before{content:"";width:12%;height:10%;position:absolute;right:1%;top:2%;background:url('themes/viu/logo-viu.png') no-repeat center/contain}
+/* Logo */div#p>svg>foreignObject>section:before{content:"";width:9%;height:10%;position:absolute;right:2.5%;top:2%;background:url('themes/viu/logo-viu.png') no-repeat center/contain}
 
 
 /******************* lead *****************************/
 
+/* lead class: first slide in a section. Use h1 as header.
+Use: <!-- _class: lead --> */div#p>svg>foreignObject>section.lead{background-color:var(--main-color);text-align:center;color:white;padding:inherit}div#p>svg>foreignObject>section.lead a,div#p>svg>foreignObject>section.lead h1,div#p>svg>foreignObject>section.lead h2,div#p>svg>foreignObject>section.lead p{color:white;padding:0.5em;background-color:inherit;margin-bottom:0}div#p>svg>foreignObject>section.lead:after,div#p>svg>foreignObject>section.lead footer,div#p>svg>foreignObject>section.lead header{
+    /* hide header, footer and pagination */display:none}div#p>svg>foreignObject>section.lead:before{
+    /* logo in white */filter:invert(100%) saturate(0) brightness(1.8) }
+
+/******************* lead2 *****************************/
+
 
 /* lead class: first slide in a section. Use h1 as header.
-Use: <!-- _class: lead --> */div#p>svg>foreignObject>section.lead{background-color:white;text-align:center;padding:inherit}div#p>svg>foreignObject>section.lead h1,div#p>svg>foreignObject>section.lead h2,div#p>svg>foreignObject>section.lead p{margin-left:25%;background-color:white;color:var(--main-color);padding:inherit;margin-bottom:inherit}div#p>svg>foreignObject>section.lead h1:before{content:'';width:25%;height:100%;position:absolute;left:0;top:0;display:block;background:url('themes/viu/lead2.png') no-repeat}div#p>svg>foreignObject>section.lead:after,div#p>svg>foreignObject>section.lead footer,div#p>svg>foreignObject>section.lead header{
-    /* hide footer and pagination */display:none}
+Use: <!-- _class: lead --> */div#p>svg>foreignObject>section.lead2{background-color:white;text-align:center;padding:inherit;background-image:none}div#p>svg>foreignObject>section.lead2 h1,div#p>svg>foreignObject>section.lead2 h2,div#p>svg>foreignObject>section.lead2 p{margin-left:25%;background-color:white;color:var(--main-color);padding:inherit;margin-bottom:inherit}div#p>svg>foreignObject>section.lead2 h1:before{content:'';width:25%;height:100%;position:absolute;left:0;top:0;display:block;background:url('themes/viu/lead2.png') no-repeat}div#p>svg>foreignObject>section.lead2 footer,div#p>svg>foreignObject>section.lead:after,div#p>svg>foreignObject>section.lead header{
+    /* hide footer and pagination */display:none}div#p>svg>foreignObject>section.lead2:before{
+    /* reset logo */filter:inherit}div#p>svg>foreignObject>section section2 header{color:var(--main-color)}
+
 
 /******************* first-slide *****************************/
 
 
 /* first slide (main title). Use h1 as header.
-Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.first-slide{background-image:url('themes/viu/lead2.png');background-size:cover;background-repeat:no-repeat;text-align:center}div#p>svg>foreignObject>section.first-slide h1,div#p>svg>foreignObject>section.first-slide h2{color:white;background-color:#2c3e50dd}div#p>svg>foreignObject>section.first-slide:after,div#p>svg>foreignObject>section.first-slide first-slide,div#p>svg>foreignObject>section.first-slide footer{
+Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.first-slide{background-size:cover;background-repeat:no-repeat;background-image:url('themes/viu/bg2.png');text-align:left}div#p>svg>foreignObject>section.first-slide h1,div#p>svg>foreignObject>section.first-slide h2{color:#333;text-align:left;margin-top:10em!important}div#p>svg>foreignObject>section.first-slide:after,div#p>svg>foreignObject>section.first-slide first-slide,div#p>svg>foreignObject>section.first-slide footer{
     /* hide footer and pagination */display:none}
+
+/******************* corporative *****************************/
+
+
+/* first slide (main title). Use h1 as header.
+Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{background-size:cover;background-repeat:no-repeat;background-image:url('themes/viu/bg1.png');text-align:left}div#p>svg>foreignObject>section.corporative h1,div#p>svg>foreignObject>section.corporative h2{color:#111;text-align:left;margin-top:10em!important}div#p>svg>foreignObject>section.corporative:after,div#p>svg>foreignObject>section.corporative corporative,div#p>svg>foreignObject>section.corporative footer{
+    /* hide footer and pagination */display:none}div#p>svg>foreignObject>section.corporative a,div#p>svg>foreignObject>section.corporative p{color:#111}
 /* You can add custom style here. VSCode supports this.
     Other editor might need these custom code in
     the YAML header: section: | */

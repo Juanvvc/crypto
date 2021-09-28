@@ -18,9 +18,7 @@ theme: marp-viu
 
 **Tema 1: Conceptos básicos**
 
-Juan Vera del Campo
-
-juan.vera@campusviu.es
+Juan Vera del Campo - juan.vera@campusviu.es
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->
