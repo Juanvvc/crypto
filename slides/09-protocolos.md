@@ -20,9 +20,7 @@ theme: marp-viu
 
 **Tema 9: protocolos**
 
-Juan Vera del Campo
-
-juan.vera@campusviu.es
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Qué sabemos hacer
 

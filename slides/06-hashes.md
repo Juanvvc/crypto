@@ -20,9 +20,8 @@ theme: marp-viu
 
 **Tema 6: Funciones de Hash y Blockchains**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 # Como decíamos ayer...
 

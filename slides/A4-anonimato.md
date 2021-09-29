@@ -18,11 +18,10 @@ theme: marp-viu
 # Criptografía
 <!-- _class: first-slide -->
 
-**Anexo 4: Servicio de anonimato**
+**Anexo: Servicio de anonimato**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 # Como decíamos ayer...
 

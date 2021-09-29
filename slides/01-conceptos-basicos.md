@@ -23,9 +23,10 @@ Juan Vera del Campo - juan.vera@campusviu.es
 # Hoy hablamos de...
 <!-- _class: cool-list -->
 
-1. [Servicios criptográficos: objetivos, seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#3)
-1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#18)
-1. [Procolos criptográficos: composición de primitivas](#26)
+1. [Servicios criptográficos: objetivos](#3)
+1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#7)
+1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#19)
+1. [Protocolos criptográficos: composición de primitivas](#26)
 1. [Conclusiones: resumen y referencias](#34)
 
 Anexo recomendado: [Glosario](A1-glosario.html)
@@ -58,21 +59,27 @@ Protección de la comunicaciones a través de **medios desprotegidos** entre un 
 
 ![bg right:40% w:100%](images/pexels-cottonbro-7319077.jpg)
 
-...y eso es mucho más que mantener una conversación secreta...
+...y eso es mucho más que mantener un mensaje secreto...
 
 > Fondo: [(c) cottonbro](https://www.pexels.com/photo/clear-glass-bowl-on-white-table-cloth-7319077/). Free to use 
 
 
 ---
 
-¿Qué queremos proteger? **No solo el mensaje que se transmite**:
+**¿Qué queremos proteger?**
 
 Recurso|Ejemplo
 --|--
 **El contenido de un mensaje**|¿Cuánto dinero se está transfiriendo?
-**Las veces que se envía un mensaje**|¿Han sido una transferencia o dos? No queremos que un atacante repita una transferencia, aunque no sepa de cuánto es.
-**Los participantes**|¿Seguro que el ordenante es D. Paco Pérez? ¿Seguro que está hablando con su banco?
+**Las veces que se envía un mensaje**|¿Ha sido una transferencia o dos? Un atacante no puede repetir una transferencia, aunque no sepa de cuánto es
+**Los participantes**|¿Seguro que el ordenante es Paco Pérez? ¿Seguro que está hablando con su banco?
 **El no repudio**|Paco Pérez no podrá decir que no ordenó la transferencia
+
+<!--
+Solo el primer punto trata de mantener un mensaje secreto. Además vamos a querer saber con quién estamos hablando, entre otros servicios.
+
+¡Si estamos hablando con un malo, da igual que el mensaje esté perfectamente cifrado!
+ -->
 
 ## Servicios de seguridad
 
@@ -80,9 +87,9 @@ Recurso|Ejemplo
 
 
 - **Confidencialidad**: solo el legítimo destinatario debe poder ser capaz de leer el contenido del contrato o cualquier información asociada.
-- **Integridad**: el destinatario debe ser capaz de verificar que el contenido del mensaje original no ha sido modificado
+- **Integridad**: el destinatario debe ser capaz de verificar que el contenido del contrato no ha sido modificado por el camino... ni en el futuro
 - **Autenticidad**: el destinatario debe ser capaz de verificar que el emisor es realmente el autor del contrato
-- **No repudio**: el emisor no debe ser capaz de negar que es el autor del contrato
+- **No repudio**: nadie puede decir que ese no es el contrato que ha firmado
 - **Otros**: autorización, acuerdo de claves, partición de secretos, PRNG...
 
 > [New Directions in Cryptography](https://www.cs.utexas.edu/~shmat/courses/cs395t_fall06/dh.pdf), Whitfield Diffie y Martin Hellman en 1976. Hablaremos de esto en el [tema 5](05-asimetrica.html)
@@ -103,24 +110,33 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 
 -->
 
+# Estrategias de los sistemas seguros
+<!-- _class: lead -->
+
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
 
 ![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
 
-- Alice y Bob solo pueden comunicarse por el canal inseguro
-- Maloy puede ser pasivo (solo escucha) o activo: cambia mensajes, los borra
-- Las claves de cifrado y descifrado pueden ser diferentes
 - Alice y Bob no se conocen
+- Alice y Bob solo pueden comunicarse por este canal
+- Maloy puede ser pasivo: solo escucha
+- ...o activo: cambia o borra mensajes
+- Las claves de cifrado y descifrado pueden ser diferentes
 
+
+<!--
 Este es el modelo sobre el que trabajaremos: dos personas "Alice y Bob" comunicándose por un canal inseguro porque puede haber un adversario "Maloy" en medio.
+
+Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo.  En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real, y son añadidos a la criptografía que mejoran aún más la seguridad del sistema.
+-->
 
 ## Grados de seguridad teórica
 
 Esta protección debe soportar ataques de una **complejidad razonable**:
 
-- **Seguridad incondicional**: un atacante no puede descifrar el mensaje aunque tenga infinito poder computacional.
-- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga: lleva demasido tiempo, dinero o recursos (por ejemplo, millones de años o más memoria de la que cabe en el universo)
+- **Seguridad incondicional**: un atacante no puede descifrar el mensaje aunque tenga infinito dinero o infinito poder computacional.
+- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga porque lleva demasiado tiempo, dinero o recursos.Por ejemplo, millones de años o más memoria de la que cabe en el universo.
 
 > Hablaremos de esto en el [tema 4](04-complejidad.html)
 
@@ -128,7 +144,7 @@ Esta protección debe soportar ataques de una **complejidad razonable**:
 
 Tenemos que **poder** **proteger** los mensajes.
 
-Veremos que existen protocolos que ofrecen seguridad incondicional, pero su utilización es tan pesada que no es práctica, y se prefiere la seguridad computacional
+Veremos que existen protocolos que ofrecen seguridad incondicional, pero su utilización es tan pesada que no es práctica, y actualmente se prefiere la seguridad computacional
 
 -->
 
@@ -166,8 +182,8 @@ Mantener las cosas en secreto no significa mantener los protocolos de seguridad 
 ## (inciso)
 <!-- _class: extra-slide -->
 
-* "Seguridad por oscuridad" es mala práctica
-* Pero "seguridad **y además** oscuridad" puede ser buena idea
+* "Seguridad solo por oscuridad" es mala práctica
+* Pero "seguridad por estándares **y además** oscuridad" puede ser buena idea
 
 <!--
 
@@ -280,17 +296,19 @@ header: 'Primitivas criptográficos'
 
 La criptografía actual se basa en **composición** de técnicas primitivas:
 
-- Composición de operaciones matemáticas que crean "puertas criptográficas" (*criptographics gates*).
+- Composición de **operaciones matemáticas** que crean "**puertas criptográficas**" (*criptographics gates*).
 - Composición de puertas que crean **algoritmos**.
-- Composición de algoritmos que crean protocolos de seguridad.
+- Composición de algoritmos que crean **protocolos de seguridad**.
 
 La composición es compleja y todo debe funcionar como un reloj.
 
----
-
+<!--
 - **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
+
 - **Clave simétrica**: misma clave $k$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
+
 - **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
+-->
 
 ---
 
@@ -379,6 +397,28 @@ _class: lead
 header: 'Protocolos criptográficos'
 -->
 
+## Protocolo de seguridad
+
+La secuenciación de mensajes y la composición de primitivas se materializa en un "protocolo"
+
+El protocolo (el lenguaje) se define a partir de:
+
+- Formatos/estructuras de los mensajes o "sintaxis" (funciones/algoritmos, secuenciación)
+- "Máquina de estados" (que tipos de mensajes son posibles después de otros)
+- Especificación del significado de mensajes y/o estado, "semántica"
+
+El protocolo es un eslabón de la cadena de seguridad, tan importante como pueden ser las primitivas
+
+## Seguridad del protocolo de seguridad.
+
+La fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena:
+
+- **algoritmos** (diseño, criptoanálisis)
+- **algoritmos** (dimensionado, longitud de claves, security strength)
+- **protocolos** (estructura, secuenciación)
+- **implementación** (condiciones de uso, abuso de buffers, abuso de la máquina de estados)
+- **gestión** (PKI, gestión de certificados...)
+
 ## Composición de algoritmos
 
 Habitualmente no usamos una única primitiva/función criptográfica:
@@ -388,7 +428,7 @@ Habitualmente no usamos una única primitiva/función criptográfica:
 - **robustez**: muchas primitivas (individuales) no devuelven error en caso de que algo vaya mal (una firma asimétrica simplemente devuelve un mensaje firmado distinto)
 - **secuencias de mensajes**: nos interesa proteger no sólo los mensajes individuales si no secuencias de mensajes {m1,m2…mn} o diálogos {ma1,mb1,ma2,mb2…} u otros tipos de combinaciones de
 
-## Ejemplo de composición: cifrado eficiente
+# Ejemplo de composición: cifrado eficiente
 
 ```sh
 # Generar par de claves
@@ -412,7 +452,7 @@ Habitualmente no usamos una única primitiva/función criptográfica:
 ```
 
 <!--
-Aquí vemos la manera correcta de usar la primtiva que dio error en el caso anterior:
+Aquí vemos la manera correcta de usar la primitiva que dio error en el caso anterior:
 
 - Ciframos la información de gran tamaño con una clave simétrica
 - Usamos la primitiva de cifrado asimétrico para cifrar la clave simétrica, y solo ella
@@ -443,27 +483,7 @@ Es decir, los mensajes son eslabones de una cadena, cada mensaje tiene el hash d
 Casi, casi, hemos definido una blockchain como bitcoin
 -->
 
-## Protocolo de seguridad
 
-La secuenciación de mensajes y la composición de primitivas se materializa en un "protocolo"
-
-El protocolo (el lenguaje) se define a partir de:
-
-- Formatos/estructuras de los mensajes o "sintaxis" (funciones/algoritmos, secuenciación)
-- "Máquina de estados" (que tipos de mensajes son posibles después de otros)
-- Especificación del significado de mensajes y/o estado, "semántica"
-
-El protocolo es un eslabón de la cadena de seguridad, tan importante como pueden ser las primitivas (o sea , los algoritmos criptográficos)
-
-## Seguridad del protocolo de seguridad.
-
-La fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena:
-
-- **algoritmos** (diseño, criptoanálisis)
-- **algoritmos** (dimensionado, longitud de claves, security strength)
-- **protocolos** (estructura, secuenciación)
-- **implementación** (condiciones de uso, abuso de buffers, abuso de la máquina de estados)
-- **gestión** (PKI, gestión de certificados...)
 
 
 ## Objetivos: "otros"
@@ -503,4 +523,4 @@ header: ''
 ---
 <!-- _class: center -->
 
-Continúa en: [Criptografía clásica](02-historia.html)
+- Continúa en: [Criptografía clásica](02-historia.html)

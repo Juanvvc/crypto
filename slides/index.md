@@ -18,9 +18,8 @@ theme: marp-viu
 
 **Presentación**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 ## Temario
 <!-- _class: cool-list -->
@@ -85,13 +84,13 @@ Versión más actualizada:
 
 - Acceso directo HTML: <http://juanvvc.github.io/crypto/slides>
     - Puedes pulsar `p` para ver las notas de presentación
-    - El "Inicio" (en pie de cada trasparencia) puedes ir a la primera, que incluye un índice de temas.
+    - Con "Inicio" (en pie de cada transparencia) puedes venir a esta presentación, con el índice global de contenidos
     - Encontrarás la versión en PDF entre los recursos de la asignatura
 - Código Markdown: <https://github.com/juanvvc/crypto>
 
-Durante el estudio personal es muy recomendable seguir los enlaces que aperecen en las transparencias para completar el tema.
+Durante el estudio personal es muy recomendable seguir los enlaces que aparecen en las transparencias para completar el tema.
 
-El curso está basado [las notas de Jordi Íñigo Griera](https://github.com/jig/crypto), antiguo profesor de la asignatura
+El curso está adaptado de [las notas de Jordi Íñigo Griera](https://github.com/jig/crypto), antiguo profesor de la asignatura
 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/) Esta obra esta sujeta a una licencia de [Atribución 4.0 Internacional de Creative Commons](http://creativecommons.org/licenses/by/4.0/)
 

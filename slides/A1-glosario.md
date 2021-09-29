@@ -16,11 +16,10 @@ theme: marp-viu
 # Criptografía
 <!-- _class: first-slide -->
 
-**A1: Glosario**
+**Anexo: Glosario**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 ## Fuentes de información
 <!-- _class: center -->

@@ -20,9 +20,8 @@ theme: marp-viu
 
 **Tema 8: Firma digital y Public Key Infrastructure**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 ## Hoy hablamos de...
 <!-- _class: cool-list -->

@@ -1,25 +1,31 @@
 # Compiles the marp deck into pdf and html
 
-# You can overwrite these from the command line.
+# This command only works if you have marp-cli: npm install -g @marp-team/marp-cli
+# Optional: chrome/chromium in your system for the PDF
+MARP=marp
+# This command needs marp-cli from docker: docker pull marpteam/marp-cli
+#MARP=docker run --rm --init -v "$(PWD)":/home/marp/app/ marpteam/marp-cli
+
+# You can overwrite these from the command line
 # For example: make -e THEME=marp-viu
 THEME=marp-viu
 THEME_SET=themes
+THEME_OPTS=--theme $(THEME) --theme-set "$(THEME_SET)"
 
-#all: index.html 01-conceptos-basicos.html 02-historia.html 03-simetrica.html 04-complejidad.html A1-glosario.html A2-rng.html
-
+# Convert all .md files in this directory
 SRCS=$(shell find . -name '*.md')
 OBJS=$(patsubst %.md,%.html,$(SRCS))
 
 all: $(OBJS)
 
 %.pdf: %.md
-	marp "$<" -o "$@" --no-config --theme $(THEME) --theme-set $(THEME_SET) --pdf --allow-local-files --pdf-notes
+	$(MARP) "$<" -o "$@" --no-config $(THEME_OPTS) --pdf --allow-local-files --html --pdf-notes
 
 %.html: %.md
-	marp "$<" -o "$@" --no-config --theme $(THEME) --theme-set $(THEME_SET) --bespoke.progress true
+	$(MARP) "$<" -o "$@" --no-config $(THEME_OPTS) --bespoke.progress true --html
 	#--bespoke.transition
 
 clean:
-	/bin/rm -f *.pdf *html
+	/bin/rm -rf *.html *.pdf
 
 .PHONY: all clean

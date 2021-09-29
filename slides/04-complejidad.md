@@ -17,12 +17,8 @@ theme: marp-viu
 
 # Criptografía
 <!-- _class: first-slide -->
-
 **Tema 4: Teoría complejidad y acuerdo D-H**
-
-Juan Vera del Campo
-
-juan.vera@campusviu.es
+Juan Vera del Campo - juan.vera@campusviu.es
 
 # Como decíamos ayer...
 <!-- _class: with-info -->
@@ -38,7 +34,9 @@ Solo necesitamos que las dos partes tenga una clave secreta en común
 <!--
 Parecería que con lo que conocemos ya hemos resuelto el problema de comunicar dos personas de forma secreta
 
-Pero en realidad tenemos un "elefante en la habitación": ¿cómo se intercambian una clave de forma segura dos personas que no han hablado nunca antes, ni tienen otra forma de comunicació que Internet?
+Pero en realidad tenemos un "elefante en la habitación": las dos personas necesitan tener una clave en común. Fíjate que no se conocen de antes: no pueden tener un "libro de claves" como los espías del siglo XX, y solo tienen Internet para comunicarse. No pueden llamarse por teléfono para enviarse la clave.
+
+¿Cómo se intercambian una clave de forma segura dos personas que no han hablado nunca antes, ni tienen otra forma de comunicació que Internet?
 
 Este es el problema de intercambio de clave. No fue resuelto hasta 1976 con una serie de conceptos completamente nuevos: cada persona tiene dos claves, una pública conocida por todo el mundo y otra privada y secreta. El algoritmo inventado en 1976 se llama Diffie-Hellman, y aún lo estamos utilizando.
 
@@ -57,25 +55,27 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 <!-- _class: lead -->
 
 <!--
-Hablaremos de la teoría de la complejidad desde un punto de vistra abstracto y sin entrar en detalles
+Hablaremos de la teoría de la complejidad desde un punto de vista abstracto y sin entrar en detalles
 
 Todo lo que vamos a decir tiene una enorme literatura detrás y basada en la lógica y el álgebra
 
 Por si fuera poco, es un campo del que aún no conocemos casi nada: hay aún muchas preguntas abiertas
 
-El nombre "teoría de la complejidad" está muybien escogido para describir el campo. Vamos a intentar saber de qué va
+El nombre "teoría de la complejidad" está muy bien escogido para describir el campo. Vamos a intentar saber de qué va
 -->
 
 ## ¿Cuánto tiempo tardarías en resolver este sodoku?
-<!-- _class: two-columns -->
+<!-- _class: two-columns smaller-font -->
 
-![center](images/sudoku.png)
+![center w:20em](images/sudoku.png)
 
-- Normas usuales de Sodoku
-- Las casillas ortogonales no tienen números consecutivos: no hay un 5 al lado de un 6
-- Las casillas separadas por movimientos de caballo o rey no tienen el mismo número
+- Normas comunes de Sodoku
+- Las casillas adyacentes no tienen números consecutivos: no hay un 6 encima, debajo a la izquierda o la derecha de un 6
+- Las casillas separadas por movimientos de ajedrez de caballo o rey no tienen el mismo número
 - Pruébalo: [The Miracle, de Mitchell Lee](https://cracking-the-cryptic.web.app/sudoku/tjN9LtrrTL)
 - ¿Cuánto tiempo le llevará a un algoritmo que sea el más rápido posible?
+
+"*It might have a unique solution but it's not gonna be findable by a human being*"
 
 <!--
 Una manera de resolver el sudok es simplemente probar números uno a uno hasta que se verifique el resultado. Esto es fuerza bruta.
@@ -92,18 +92,18 @@ Nota: no necesitamos conocer cuál es el algoritmo más eficiente. Solo cuánto 
 
 Resolver un Sudoku es "sencillo": vamos comprobando números y, si funcionan, los dejamos
 
-...eso se parece mucho a resolver un cifrado clásico
+Eso se parece mucho a resolver por fuerza bruta un cifrado clásico
 
-Pero estamos interesados en conocer el tiempo que le llevará **al algoritmo más rápido posible**, incluso aunque no sepamos qué algoritmo es ése
+Pero estamos interesados en conocer el tiempo teórico que le llevará **al algoritmo más rápido posible**, incluso aunque no sepamos qué algoritmo es ése
 
 10 veces más casillas... ¿necesita 10 veces más tiempo? ¿ó 100 veces más tiempo? ¿ó 1000 veces más tiempo? ¿podremos acaso solucionarlo?
 
 Si al aumentar el tamaño de un problema el tiempo necesario para resolverlo sigue siendo "razonable", decimos que es un  "problema P"
 
 <!--
-Definiremos qué significa creciente exactamente: ¿lineal? ¿polinomial? ¿exponencial?
+Definiremos qué significa tiempo creciente con el tamaño del problema exactamente:creciente de forma .... ¿lineal? ¿polinomial? ¿exponencial?
 
-Adelanto: poco significa polinomial: el tiempo necesario para resolverlo crece de forma polinomial con respecto a su tamaño
+Adelanto: razonable significa polinomial: el tiempo necesario para resolverlo crece de forma polinomial con respecto a su tamaño
  -->
 
 
@@ -114,25 +114,25 @@ Adelanto: poco significa polinomial: el tiempo necesario para resolverlo crece d
 <!--
 No es una pregunta trampa: tardamos pocos segundos. Mucho menos tiempo que en resolver el Sudoku
 
-En el vídeo, Simon resuelve el Sudoku de antes en 20 gloriosos y emocionantes minutos
+En el vídeo, Simon resuelve el Sudoku que parecía imposible en 20 gloriosos y emocionantes minutos
 -->
 
 ## Mucho tiempo para resolver, poco para comprobar
 <!-- _class: with-info -->
 
-Existen algunos problemas que si aumenta el tamaño ya no podremos solucionarlos en un tiempo razonable...
+Existen algunos problemas que si aumenta el tamaño ya no podremos solucionarlos en un tiempo razonable
 
-pero si nos dan una solución, es muy rápido **decidir** si la solución correcta
+Pero si nos dan una solución, es muy rápido **decidir** si la solución correcta
 
 Si lleva poco tiempo decidir si una solución es válida para un problema, decimos que es "un problema NP"
 
 <!--
-La teoría de la complejidad se centra en "problemas de decisión", aquellos cuya respuesta es Sí/NO
+La teoría de la complejidad se centra en "problemas de decisión", aquellos cuya respuesta es Sí/No
 
-- Es esta solución válida para un problema?
-- Es esta solición óptima?
+- ¿Es esta solución válida para un problema?
+- ¿Es esta solición óptima?
 
-Casi todos los problemas se pueden plantear como una pregunta SI/NO.
+Casi todos los problemas se pueden replantear como una pregunta SI/NO.
 -->
 
 ## ¿Cuánto tiempo tardas en colorear este mapa con 9 colores diferentes?
@@ -151,7 +151,7 @@ Obviamente, si 4 colores es el mínimo posible, tiene que ser posible hacerlo co
 
 [![](images/sudoku-colors.png)](https://www.youtube.com/watch?v=Tnu_Ws7Llo4)
 
-- Si los dos problemas de antes parecen similares, es que lo son
+- Si los el Sudoku y colores parecen similares, es porque lo son
 - Se puede expresar un Sudoku como un problema de colorear mapas y viceversa
 - Si podemos pasar rápidamente de un problema a otro y tenemos un algoritmo rápido para resolver uno, [podemos resolver también el otro rápidamente](https://medium.com/code-science/sudoku-solver-graph-coloring-8f1b4df47072)
 
@@ -160,15 +160,15 @@ Si un problema NP se puede transformar en otro problema NP, entonces es un "prob
 <!--
 Los problemas NP-completos son muy interesantes: si podemos resolver uno de ellos rápidamente, de rebote podremos resolver una clase enorme de problemas a la vez.
 
-En el enlace, un ejemplo de solución de Sudoku transformándolo primero a un problema de coloreado de mapas, y resolviendo el problema de coloreado de mapas
+En el enlace, solucionan un Sudoku transformándolo primero a un problema de coloreado de mapas, resolviendo el problema de coloreado de mapas y deshaciendo la transformación a un Sudoku
 -->
 
 ## Seguridad basada en problemas NP
 
 A partir de ahora vamos a basar la seguridad en problemas:
 
-- Que el ciptoanálisis sea NP y por tanto *no razonable*
-- Que sea corto decidir si algo es solución: el cifrado y descifrado está en P y *es razonable*
+- Que el criptoanálisis sea NP y por tanto *no razonable*
+- Que sea corto decidir si algo es solución: el cifrado y descifrado es P y *es razonable*
 
 Si además podemos convertir unos problemas en otros y sabemos que un problema es "computacionalmente seguro", el otro también lo será. Por tanto:
 
@@ -234,20 +234,20 @@ Lo importante es comparar las velocidades: ¿cómo crece el tiempo de ejecución
 
 En criptografía, $n$ es el tamaño de la clave en bits
 
-Queremos algoritmos que el atacante necesite realizar $O(2^n)$ operaciones, siendo $n$ el tamaño de la clave
+Queremos algoritmos que el atacante necesite realizar $O(2^n)$ operaciones de fuerza bruta
 
-Pero también queremos que, conociendo la clave, el descifrado sea $O(n)$
+Pero también queremos que, conociendo la clave, el descifrado solo necesite $O(n)$ operaciones
 
-Un algoritmo está roto si el atancante necesita muchas menos de $O(2^{n-1})$ operaciones
+Un algoritmo está roto si el atacante necesita muchas menos de $O(2^n)$ operaciones
 
 ---
 
 Ejemplo: si queremos aumentar la seguridad de un algoritmo, pasamos de una clave de 128 a 256 bits
 
-- Cifrado $O(n)$: ahora costará $n=2$ veces más descifrar con la nueva clave
+- Cifrado $O(n)$: ahora costará el doble descifrar con la nueva clave
 - Mejor ataque posible $O(2^n)$: al atacante le costará $2^{256} / 2^{128} = 3 \cdot 10^{34}$ veces más encontrar la nueva clave
 
-Nota que no necesitamos conocer el ataque: si se demuestra que el mejor ataque es de orden $O(2^n)$, entonces el sistema es seguro aunque no conozcamos cómo es el ataque
+Nota que no necesitamos conocer el ataque: si se demuestra que el mejor ataque es de orden $O(2^n)$, entonces **el sistema es seguro aunque no conozcamos cómo es el ataque**
 
 ---
 <!-- _class: extra-slide -->
@@ -287,16 +287,6 @@ O(2^{2,774·(b_n^{1/3})(ln(b_n)^{2/3})})
 $$
 
 
-# Logaritmo discreto
-<!--
-_class: lead
-header: Logaritmo discreto
- -->
-
-<!--
-Vamos a ver con más detalles el problema del logaritmo discreto, porque es el que se usa en casi todos los sistemas que veremos a partir de ahora
--->
-
 ## Logaritmo discreto
 
 Problema NP y probablemente no es NP-completo
@@ -308,6 +298,11 @@ $$
 Si conoces $c$, $g$ y $p$...
 
 Problema: encuentra $m$
+
+<!--
+Vamos a ver con más detalles el problema del logaritmo discreto, porque es el que se usa en casi todos los sistemas que veremos a partir de ahora
+-->
+
 
 # p=17 g=5 c=4 m=?
 <!-- _class: two-columns center smaller-font with-header center -->
@@ -360,6 +355,11 @@ El "aspecto" es el de una permutación pseudoaleatoria del cifrado de bloque, co
 Dado un mensaje cifrado $c \in \Z_{p}^{*}$ y conocido $g$ y $p$, decidir si el mensaje en claro $m'$ es el mensaje original es tan complejo como resolver el problema del logaritmo discreto.
 
 > https://en.wikipedia.org/wiki/Cyclic_group
+
+## Curvas elípticas
+<!-- _class: extra-slide -->
+
+Las veremos en el [tema 5](05-asimetrica.html)
 
 # Acuerdo de clave Diffie-Hellman
 <!--
@@ -415,7 +415,7 @@ $\Z_{p}^{*}$  es grupo cíclico con el elemento generador $g$ y $p$ primo
 
 Calcular $g^{ab}$ a partir de $g^a, g^b$ es computacionalmente difícil: primero tendríamos que calcular $b$ a partir de $g^b$, **y eso es el problema del logaritmo discreto**
 
-(Recuerda que $g^a \cdot g^b = g^{a+b}$, así no vale)
+(Recuerda que $g^a \cdot g^b = g^{a+b}$)
 
 Pero si nos diesen $a$ ó $b$: $g^{ab} = (g^a)^b = (g^b)^a$ y es muy fácil de calcular
 
@@ -424,12 +424,16 @@ Que nos den $a$ ó $b$ se conoce como "trampa" o "*trapdoor*". Sin conocer la tr
 ---
 <!-- _class: with-warning -->
 
-Vamos a diseñar un protocolo entre Alice y Bob el que se tenga que calcular $g^{ab}$:
+Vamos a diseñar un protocolo entre Alice y Bob para que usen la clave $k=g^{ab}$:
 
 - El atacante solo conoce $g^a$ y $g^b$: problema difícil
 - Pero Alice y Bob conocen también $a$ ó $b$: problema fácil
 
 Se asume que $g^{ab}$ es computacionalmente difícil de calcular para el atacante al ser equivalente al problema del logaritmo discreto. En 50 años no hemos encontrado una forma rápida (es decir, polinomial $O(n^k)$) de hacer este cálculo sin conocer previamente $a$ ó $b$
+
+<!--
+Recuerda: sabemos que el problema del logaritmo discreto es NP, pero no sabemos si también es P y por tanto y fácil de resolver. Sospechamos muchísimo que no es P y que el algoritmo más rápido posible tomará un tiempo exponencial con el tamaño de la clave. Pero no estamos *matemáticamente* seguros. ¿es P=NP o no? No lo sabemos.
+-->
 
 ## (inciso: Alice y Bob)
 <!-- _class: extra-slide -->
@@ -455,9 +459,9 @@ Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
     - $Alice \rightarrow Bob: A=g^{a} \mod p$
     - $Bob \rightarrow Alice: B=g^{b} \mod p$
 1. Calculan en secreto:
-    - $Alice$: $s = B^{a} \mod p = g^{ab} \mod p$
-    - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
-1. Y usan $s$ como clave de cifrado un algoritmo simétrico  
+    - $Alice$: $k = B^{a} \mod p = g^{ab} \mod p$
+    - $Bob$: $k = A^{b} \mod p = g^{ab} \mod p$
+1. Y usan $k$ como clave de cifrado un algoritmo simétrico  
 
 ![bg right:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/4/46/Diffie-Hellman_Key_Exchange.svg)
 
@@ -489,7 +493,7 @@ Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
 
 Recuerda hipótesis DDH: $g^{ab}$ solo se puede calcular fácilmente si conoces o bien $a$ o bien $b$, pero no se puede calcular fácilmente si conoces solo $g^a$ y $g^b$
 
-Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
+Alice y Bob, que no se habían visto nunca antes, puede utilizar $k=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
 
 ---
 
@@ -521,15 +525,17 @@ D-H tiene cuatro parámetros: los secretos $a$, $b$ y los públicos $g$, $p$
 - Si $p$ no es lo suficientemente grande, se puede romper por fuerza bruta
 - $g$ tiene que ser generador de $\Z^*_p$
 
+¡Estas son muchas conficiones! ¿Cómo podemos escoger $g$ y $p$ bien?
+
 ---
 <!-- _class: smaller-font -->
 
-Afortunadamente:
+Afortunadamente no tenemos que escogerlos:
 
-- $g$ puede y suele ser un número bajo como 2
-- $p$ se puede reutilizar cuantas veces sean necesarias, así que se puede y suele sacar de [tablas públicas (RFC7919, 2016)](https://tools.ietf.org/html/rfc7919)
+- $g$ puede puede ser un número bajo. Normalmente, $g=2$
+- $p$ se puede reutilizar cuantas veces sean necesarias, así que se suele sacar de [tablas públicas (RFC7919, 2016)](https://tools.ietf.org/html/rfc7919)
 
-Ejemplo:
+Ejemplo real:
 
 ```
 p = 0xFFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E088A6
@@ -585,7 +591,7 @@ AES (bits)|D-H (bits)
 
 NIST recomienda $\|p\| > 2048$ hasta 2030
 
-Compara, para AES: $\|p\| = 128$
+Compara, para AES: $\|k\| = 128$
 
 > https://blog.cloudflare.com/why-are-some-keys-small/
 > https://www.keylength.com/en/3/

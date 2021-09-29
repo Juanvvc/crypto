@@ -217,9 +217,10 @@ Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{
 <h1>Hoy hablamos de...</h1>
 
 <ol>
-<li><a href="#3">Servicios criptográficos: objetivos, seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon</a></li>
-<li><a href="#18">Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico</a></li>
-<li><a href="#26">Procolos criptográficos: composición de primitivas</a></li>
+<li><a href="#3">Servicios criptográficos: objetivos</a></li>
+<li><a href="#7">Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon</a></li>
+<li><a href="#19">Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico</a></li>
+<li><a href="#26">Protocolos criptográficos: composición de primitivas</a></li>
 <li><a href="#34">Conclusiones: resumen y referencias</a></li>
 </ol>
 <p>Anexo recomendado: <a href="A1-glosario.html">Glosario</a></p>
@@ -248,7 +249,7 @@ Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{
 <h2>¿Qué es la criptografía?</h2>
 <p>Protección de la comunicaciones a través de <strong>medios desprotegidos</strong> entre un emisor y uno o varios destinatarios</p>
 
-<p>...y eso es mucho más que mantener una conversación secreta...</p>
+<p>...y eso es mucho más que mantener un mensaje secreto...</p>
 <blockquote>
 <p>Fondo: <a href="https://www.pexels.com/photo/clear-glass-bowl-on-white-table-cloth-7319077/">(c) cottonbro</a>. Free to use</p>
 </blockquote>
@@ -256,7 +257,7 @@ Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{
 </section>
 </foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="5" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="6" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
-<p>¿Qué queremos proteger? <strong>No solo el mensaje que se transmite</strong>:</p>
+<p><strong>¿Qué queremos proteger?</strong></p>
 <table>
 <thead>
 <tr>
@@ -271,11 +272,11 @@ Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{
 </tr>
 <tr>
 <td><strong>Las veces que se envía un mensaje</strong></td>
-<td>¿Han sido una transferencia o dos? No queremos que un atacante repita una transferencia, aunque no sepa de cuánto es.</td>
+<td>¿Ha sido una transferencia o dos? Un atacante no puede repetir una transferencia, aunque no sepa de cuánto es</td>
 </tr>
 <tr>
 <td><strong>Los participantes</strong></td>
-<td>¿Seguro que el ordenante es D. Paco Pérez? ¿Seguro que está hablando con su banco?</td>
+<td>¿Seguro que el ordenante es Paco Pérez? ¿Seguro que está hablando con su banco?</td>
 </tr>
 <tr>
 <td><strong>El no repudio</strong></td>
@@ -291,9 +292,9 @@ Use: <!-- _class: first-slide --> */div#p>svg>foreignObject>section.corporative{
 <p><a href="https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720">New Directions in Cryptography</a> (Whitfield Diffie y Martin Hellman, 1976) exploraba qué se necesitaba para que dos empresas pudiesen firmar un contrato mercantil:</p>
 <ul>
 <li><strong>Confidencialidad</strong>: solo el legítimo destinatario debe poder ser capaz de leer el contenido del contrato o cualquier información asociada.</li>
-<li><strong>Integridad</strong>: el destinatario debe ser capaz de verificar que el contenido del mensaje original no ha sido modificado</li>
+<li><strong>Integridad</strong>: el destinatario debe ser capaz de verificar que el contenido del contrato no ha sido modificado por el camino... ni en el futuro</li>
 <li><strong>Autenticidad</strong>: el destinatario debe ser capaz de verificar que el emisor es realmente el autor del contrato</li>
-<li><strong>No repudio</strong>: el emisor no debe ser capaz de negar que es el autor del contrato</li>
+<li><strong>No repudio</strong>: nadie puede decir que ese no es el contrato que ha firmado</li>
 <li><strong>Otros</strong>: autorización, acuerdo de claves, partición de secretos, PRNG...</li>
 </ul>
 <blockquote>
@@ -302,34 +303,39 @@ Estándar: <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">NIST Special Pu
 </blockquote>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="two-columns with-header" data-heading-divider="2" data-theme="marp-viu" class="two-columns with-header" data-marpit-pagination="8" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:two-columns with-header;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="lead" data-heading-divider="2" data-theme="marp-viu" class="lead" data-marpit-pagination="8" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:lead;--heading-divider:2;--theme:marp-viu;">
+<header>Servicios criptográficos</header>
+<h1>Estrategias de los sistemas seguros</h1>
+<footer><a href="index.html">Inicio</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="two-columns with-header" data-heading-divider="2" data-theme="marp-viu" class="two-columns with-header" data-marpit-pagination="9" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:two-columns with-header;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
 <h2>Modelo de sistema criptográfico</h2>
 
 <p><img src="https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg" alt="center w:25em" style="width:25em;" /></p>
 <ul>
-<li>Alice y Bob solo pueden comunicarse por el canal inseguro</li>
-<li>Maloy puede ser pasivo (solo escucha) o activo: cambia mensajes, los borra</li>
-<li>Las claves de cifrado y descifrado pueden ser diferentes</li>
 <li>Alice y Bob no se conocen</li>
+<li>Alice y Bob solo pueden comunicarse por este canal</li>
+<li>Maloy puede ser pasivo: solo escucha</li>
+<li>...o activo: cambia o borra mensajes</li>
+<li>Las claves de cifrado y descifrado pueden ser diferentes</li>
 </ul>
-<p>Este es el modelo sobre el que trabajaremos: dos personas &quot;Alice y Bob&quot; comunicándose por un canal inseguro porque puede haber un adversario &quot;Maloy&quot; en medio.</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="9" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="10" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
 <h2>Grados de seguridad teórica</h2>
 <p>Esta protección debe soportar ataques de una <strong>complejidad razonable</strong>:</p>
 <ul>
-<li><strong>Seguridad incondicional</strong>: un atacante no puede descifrar el mensaje aunque tenga infinito poder computacional.</li>
-<li><strong>Seguridad computacional</strong>: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga: lleva demasido tiempo, dinero o recursos (por ejemplo, millones de años o más memoria de la que cabe en el universo)</li>
+<li><strong>Seguridad incondicional</strong>: un atacante no puede descifrar el mensaje aunque tenga infinito dinero o infinito poder computacional.</li>
+<li><strong>Seguridad computacional</strong>: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga porque lleva demasiado tiempo, dinero o recursos.Por ejemplo, millones de años o más memoria de la que cabe en el universo.</li>
 </ul>
 <blockquote>
 <p>Hablaremos de esto en el <a href="04-complejidad.html">tema 4</a></p>
 </blockquote>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="with-info" data-heading-divider="2" data-theme="marp-viu" class="with-info" data-marpit-pagination="10" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:with-info;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="with-info" data-heading-divider="2" data-theme="marp-viu" class="with-info" data-marpit-pagination="11" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:with-info;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
 <h2>Seguridad por oscuridad</h2>
 
@@ -343,7 +349,7 @@ Estándar: <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">NIST Special Pu
 <p>Confiar en &quot;la oscuridad&quot; para ofrecer seguridad no es buena idea.</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="11" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="12" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
 <p><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--NDXZXYxb--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://www.explainhownow.com/assets/images/security_through_obscurity_cover.png" alt="center" /></p>
 <blockquote>
@@ -352,29 +358,29 @@ Estándar: <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">NIST Special Pu
 </blockquote>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="12" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:75%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;images/security-through-obscurity-is-everywhere.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="25%" height="720"><section id="12" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="12" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:75%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="13" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:75%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;images/security-through-obscurity-is-everywhere.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="25%" height="720"><section id="13" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="13" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:75%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
 <header>Servicios criptográficos</header>
 <h2>Pero tenemos malas noticias...</h2>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="12" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-marpit-fragments="2" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="extra-slide" data-heading-divider="2" data-theme="marp-viu" class="extra-slide" data-marpit-pagination="13" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:extra-slide;--heading-divider:2;--theme:marp-viu;">
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="13" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-marpit-fragments="2" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="extra-slide" data-heading-divider="2" data-theme="marp-viu" class="extra-slide" data-marpit-pagination="14" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:extra-slide;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
 <h2>(inciso)</h2>
 
 <ul>
-<li data-marpit-fragment="1">&quot;Seguridad por oscuridad&quot; es mala práctica</li>
-<li data-marpit-fragment="2">Pero &quot;seguridad <strong>y además</strong> oscuridad&quot; puede ser buena idea</li>
+<li data-marpit-fragment="1">&quot;Seguridad solo por oscuridad&quot; es mala práctica</li>
+<li data-marpit-fragment="2">Pero &quot;seguridad por estándares <strong>y además</strong> oscuridad&quot; puede ser buena idea</li>
 </ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="14" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="15" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Servicios criptográficos</header>
 <h2>Principios de diseño</h2>
 <p>Si la seguridad por oscuridad no es recomendable...</p>
 <p>...¿qué principios de diseño tenemos que seguir?</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="smallerfont" data-heading-divider="2" data-theme="marp-viu" class="smallerfont" data-marpit-pagination="15" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:smallerfont;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;images/Auguste_Kerckhoffs.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="67%" height="720" x="33%"><section id="15" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="smallerfont" data-heading-divider="2" data-theme="marp-viu" class="smallerfont" data-marpit-pagination="15" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:smallerfont;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="smallerfont" data-heading-divider="2" data-theme="marp-viu" class="smallerfont" data-marpit-pagination="16" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:smallerfont;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;images/Auguste_Kerckhoffs.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="67%" height="720" x="33%"><section id="16" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-class="smallerfont" data-heading-divider="2" data-theme="marp-viu" class="smallerfont" data-marpit-pagination="16" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--class:smallerfont;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
 <header>Servicios criptográficos</header>
 <h2>Principios de Kerckhoffs</h2>
 
@@ -390,7 +396,7 @@ Estándar: <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">NIST Special Pu
 </ol>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="smallerfont" style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="15" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="16" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;images/220px-ClaudeShannon_MFO3807.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="67%" height="720" x="33%"><section id="16" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="16" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="smallerfont" style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="16" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="17" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;images/220px-ClaudeShannon_MFO3807.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="67%" height="720" x="33%"><section id="17" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="17" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:33%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
 <header>Servicios criptográficos</header>
 <h2>Máxima de Shannon</h2>
 
@@ -402,7 +408,7 @@ Hablaremos más de Shanon en el <a href="03-simetrica.html">tema 3</a></p>
 </blockquote>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="16" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="17" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:30%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/SubstitutionPermutationNetwork2.png/468px-SubstitutionPermutationNetwork2.png&quot;);background-size:95% auto;"></figure></div></section></foreignObject><foreignObject width="70%" height="720" x="30%"><section id="17" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="17" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:30%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="17" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="18" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:30%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/SubstitutionPermutationNetwork2.png/468px-SubstitutionPermutationNetwork2.png&quot;);background-size:95% auto;"></figure></div></section></foreignObject><foreignObject width="70%" height="720" x="30%"><section id="18" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Servicios criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="18" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Servicios criptográficos;--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:30%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
 <header>Servicios criptográficos</header>
 <h2>Confusión y difusión</h2>
 <p>Según Shannon, la criptografía debe <strong>maximizar la confusión y difusión de los mensajes cifrados</strong></p>
@@ -416,29 +422,20 @@ Hablaremos más de Shanon en el <a href="03-simetrica.html">tema 3</a></p>
 </blockquote>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="17" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Primitivas criptográficos" data-class="lead" data-heading-divider="2" data-theme="marp-viu" class="lead" data-marpit-pagination="18" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Primitivas criptográficos;--class:lead;--heading-divider:2;--theme:marp-viu;">
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="18" data-marpit-pagination-total="37"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Primitivas criptográficos" data-class="lead" data-heading-divider="2" data-theme="marp-viu" class="lead" data-marpit-pagination="19" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Primitivas criptográficos;--class:lead;--heading-divider:2;--theme:marp-viu;">
 <header>Primitivas criptográficos</header>
 <h1>Primitivas criptográficas</h1>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Primitivas criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="19" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Primitivas criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Primitivas criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="20" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Primitivas criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Primitivas criptográficos</header>
 <p>La criptografía actual se basa en <strong>composición</strong> de técnicas primitivas:</p>
 <ul>
-<li>Composición de operaciones matemáticas que crean &quot;puertas criptográficas&quot; (<em>criptographics gates</em>).</li>
+<li>Composición de <strong>operaciones matemáticas</strong> que crean &quot;<strong>puertas criptográficas</strong>&quot; (<em>criptographics gates</em>).</li>
 <li>Composición de puertas que crean <strong>algoritmos</strong>.</li>
-<li>Composición de algoritmos que crean protocolos de seguridad.</li>
+<li>Composición de algoritmos que crean <strong>protocolos de seguridad</strong>.</li>
 </ul>
 <p>La composición es compleja y todo debe funcionar como un reloj.</p>
-<footer><a href="index.html">Inicio</a></footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Primitivas criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="20" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Primitivas criptográficos;--heading-divider:2;--theme:marp-viu;">
-<header>Primitivas criptográficos</header>
-<ul>
-<li><strong>Sin clave</strong>: el emisor usa sólo el mensaje <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> como argumento de la función criptográfica. Ejemplo: hash.</li>
-<li><strong>Clave simétrica</strong>: misma clave <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> para cifrar y descifrar un mensaje <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...</li>
-<li><strong>Clave asimétrica</strong>: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA</li>
-</ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Primitivas criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="21" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Primitivas criptográficos;--heading-divider:2;--theme:marp-viu;">
@@ -544,6 +541,32 @@ RSA operation error
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="27" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Protocolos criptográficos</header>
+<h2>Protocolo de seguridad</h2>
+<p>La secuenciación de mensajes y la composición de primitivas se materializa en un &quot;protocolo&quot;</p>
+<p>El protocolo (el lenguaje) se define a partir de:</p>
+<ul>
+<li>Formatos/estructuras de los mensajes o &quot;sintaxis&quot; (funciones/algoritmos, secuenciación)</li>
+<li>&quot;Máquina de estados&quot; (que tipos de mensajes son posibles después de otros)</li>
+<li>Especificación del significado de mensajes y/o estado, &quot;semántica&quot;</li>
+</ul>
+<p>El protocolo es un eslabón de la cadena de seguridad, tan importante como pueden ser las primitivas</p>
+<footer><a href="index.html">Inicio</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="28" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
+<header>Protocolos criptográficos</header>
+<h2>Seguridad del protocolo de seguridad.</h2>
+<p>La fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena:</p>
+<ul>
+<li><strong>algoritmos</strong> (diseño, criptoanálisis)</li>
+<li><strong>algoritmos</strong> (dimensionado, longitud de claves, security strength)</li>
+<li><strong>protocolos</strong> (estructura, secuenciación)</li>
+<li><strong>implementación</strong> (condiciones de uso, abuso de buffers, abuso de la máquina de estados)</li>
+<li><strong>gestión</strong> (PKI, gestión de certificados...)</li>
+</ul>
+<footer><a href="index.html">Inicio</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="29" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
+<header>Protocolos criptográficos</header>
 <h2>Composición de algoritmos</h2>
 <p>Habitualmente no usamos una única primitiva/función criptográfica:</p>
 <ul>
@@ -554,9 +577,9 @@ RSA operation error
 </ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="28" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="30" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Protocolos criptográficos</header>
-<h2>Ejemplo de composición: cifrado eficiente</h2>
+<h1>Ejemplo de composición: cifrado eficiente</h1>
 <pre><code class="language-sh"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-comment"># Generar par de claves</span>
 &gt; openssl genrsa -aes256 -out private.key 2048
 &gt; openssl rsa -<span class="hljs-keyword">in</span> private.key -pubout -out public.key
@@ -578,7 +601,7 @@ RSA operation error
 </span></span></foreignObject></svg></code></pre>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="29" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="31" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Protocolos criptográficos</header>
 <h2>Ejemplo de composición: secuencias</h2>
 <p>La sesión protege de que los mensajes (integridad de sesión):</p>
@@ -590,38 +613,12 @@ RSA operation error
 <p>Las primitivas criptográficas anteriores no cumplen con estos objetivos (e.g. un atacante borrando un mensaje no tiene contramedida); puede considerarse la sesión como una primitiva criptográfica adicional</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="30" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="32" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
 <header>Protocolos criptográficos</header>
 <p>Se puede solucionar con:</p>
 <ul>
 <li>añadiendo un identificador de secuencia <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><msub><mi>m</mi><mn>1</mn></msub><mo separator="true">,</mo><mn>2</mn><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><msub><mi>m</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">{1||m_1,2||m_2,...}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">1∣∣</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2∣∣</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">...</span></span></span></span></span></li>
 <li>añadiendo el hash del mensaje anterior {<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>h</mi><mi>a</mi><mi>s</mi><mi>h</mi><mo stretchy="false">(</mo><msub><mi>m</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mn>3</mn><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>h</mi><mi>a</mi><mi>s</mi><mi>h</mi><mo stretchy="false">(</mo><msub><mi>m</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">{1,2||hash(m_1),3||hash(m_2),...}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2∣∣</span><span class="mord mathnormal">ha</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3∣∣</span><span class="mord mathnormal">ha</span><span class="mord mathnormal">s</span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">...</span></span></span></span></span></li>
-</ul>
-<footer><a href="index.html">Inicio</a></footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="31" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
-<header>Protocolos criptográficos</header>
-<h2>Protocolo de seguridad</h2>
-<p>La secuenciación de mensajes y la composición de primitivas se materializa en un &quot;protocolo&quot;</p>
-<p>El protocolo (el lenguaje) se define a partir de:</p>
-<ul>
-<li>Formatos/estructuras de los mensajes o &quot;sintaxis&quot; (funciones/algoritmos, secuenciación)</li>
-<li>&quot;Máquina de estados&quot; (que tipos de mensajes son posibles después de otros)</li>
-<li>Especificación del significado de mensajes y/o estado, &quot;semántica&quot;</li>
-</ul>
-<p>El protocolo es un eslabón de la cadena de seguridad, tan importante como pueden ser las primitivas (o sea , los algoritmos criptográficos)</p>
-<footer><a href="index.html">Inicio</a></footer>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Protocolos criptográficos" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="32" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--header:Protocolos criptográficos;--heading-divider:2;--theme:marp-viu;">
-<header>Protocolos criptográficos</header>
-<h2>Seguridad del protocolo de seguridad.</h2>
-<p>La fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena:</p>
-<ul>
-<li><strong>algoritmos</strong> (diseño, criptoanálisis)</li>
-<li><strong>algoritmos</strong> (dimensionado, longitud de claves, security strength)</li>
-<li><strong>protocolos</strong> (estructura, secuenciación)</li>
-<li><strong>implementación</strong> (condiciones de uso, abuso de buffers, abuso de la máquina de estados)</li>
-<li><strong>gestión</strong> (PKI, gestión de certificados...)</li>
 </ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
@@ -659,11 +656,15 @@ RSA operation error
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-paginate="true" data-footer="[Inicio](index.html)" data-class="center" data-heading-divider="2" data-theme="marp-viu" class="center" data-marpit-pagination="37" data-marpit-pagination-total="37" style="--paginate:true;--footer:[Inicio](index.html);--class:center;--heading-divider:2;--theme:marp-viu;">
-<p>Continúa en: <a href="02-historia.html">Criptografía clásica</a></p>
+<ul>
+<li>Continúa en: <a href="02-historia.html">Criptografía clásica</a></li>
+</ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 <script>!function(){"use strict";const t="marpitSVGPolyfill:setZoomFactor,",e=Symbol();let r,o;function n(n){const i="object"==typeof n&&n.target||document,a="object"==typeof n?n.zoom:n;window[e]||(Object.defineProperty(window,e,{configurable:!0,value:!0}),window.addEventListener("message",(({data:e,origin:r})=>{if(r===window.origin)try{if(e&&"string"==typeof e&&e.startsWith(t)){const[,t]=e.split(","),r=Number.parseFloat(t);Number.isNaN(r)||(o=r)}}catch(t){console.error(t)}})));let l=!1;Array.from(i.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,n,i,s;t.style.transform||(t.style.transform="translateZ(0)");const c=a||o||t.currentScale||1;r!==c&&(r=c,l=c);const d=t.getBoundingClientRect(),{length:u}=t.children;for(let r=0;r<u;r+=1){const o=t.children[r],a=o.getScreenCTM();if(a){const t=null!==(n=null===(e=o.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==n?n:0,r=null!==(s=null===(i=o.y)||void 0===i?void 0:i.baseVal.value)&&void 0!==s?s:0,l=o.firstElementChild,{style:u}=l;u.transformOrigin||(u.transformOrigin=`${-t}px ${-r}px`),u.transform=`scale(${c}) matrix(${a.a}, ${a.b}, ${a.c}, ${a.d}, ${a.e-d.left}, ${a.f-d.top}) translateZ(0.0001px)`}}})),!1!==l&&Array.from(i.querySelectorAll("iframe"),(({contentWindow:e})=>{null==e||e.postMessage(`${t}${l}`,"null"===window.origin?"*":window.origin)}))}r=1,o=void 0;const i=(t,e,r)=>{if(t.getAttribute(e)!==r)return t.setAttribute(e,r),!0};function a({once:t=!1,target:e=document}={}){const r="Apple Computer, Inc."===navigator.vendor?[n]:[];let o=!t;const a=()=>{for(const t of r)t({target:e});!function(t=document){Array.from(t.querySelectorAll('svg[data-marp-fitting="svg"]'),(t=>{var e;const r=t.firstChild,o=r.firstChild,{scrollWidth:n,scrollHeight:a}=o;let l,s=1;if(t.hasAttribute("data-marp-fitting-code")&&(l=null===(e=t.parentElement)||void 0===e?void 0:e.parentElement),t.hasAttribute("data-marp-fitting-math")&&(l=t.parentElement),l){const t=getComputedStyle(l),e=Math.ceil(l.clientWidth-parseFloat(t.paddingLeft||"0")-parseFloat(t.paddingRight||"0"));e&&(s=e)}const c=Math.max(n,s),d=Math.max(a,1),u=`0 0 ${c} ${d}`;i(r,"width",`${c}`),i(r,"height",`${d}`),i(t,"preserveAspectRatio",getComputedStyle(t).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),i(t,"viewBox",u)&&t.classList.toggle("__reflow__")}))}(e),o&&window.requestAnimationFrame(a)};return a(),()=>{o=!1}}const l=Symbol(),s=document.currentScript;((t=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(t[l])return t[l];const e=a({target:t}),r=()=>{e(),delete t[l]};Object.defineProperty(t,l,{configurable:!0,value:r})})(s?s.getRootNode():document)}();
-</script></foreignObject></svg></div><div class="bespoke-marp-note" data-index="6" tabindex="0"><p>El objetivo más evidente de un sistema criptográfico es alcanzar confidencialidad: no queremos que nadie pueda leer nuestras comunicaciones aparte de la persona a la que están destinadas
+</script></foreignObject></svg></div><div class="bespoke-marp-note" data-index="5" tabindex="0"><p>Solo el primer punto trata de mantener un mensaje secreto. Además vamos a querer saber con quién estamos hablando, entre otros servicios.
+
+¡Si estamos hablando con un malo, da igual que el mensaje esté perfectamente cifrado!</p></div><div class="bespoke-marp-note" data-index="6" tabindex="0"><p>El objetivo más evidente de un sistema criptográfico es alcanzar confidencialidad: no queremos que nadie pueda leer nuestras comunicaciones aparte de la persona a la que están destinadas
 
 Pero un sistema que solo ofrezca confidencialidad no es seguro casi nunca. Por ejemplo, si estamos hablando con un adversario en vez de nuestro banco, da igual que nadie más pueda leer nuestras comunicaciones. Tenemos que estar seguros de que al otro lado está realmente el banco: autenticidad
 
@@ -671,15 +672,17 @@ En ocasiones, un adversario puede modificar un mensaje a pesar de que no sepa qu
 
 Los objetivos de un sistema criptográfico son los servicios de seguridad que ofrece
 
-El NIST es la agencia de estandarización de EEUU, y entre las cosas que estandariza también está la seguridad del gobierno de EEUU. Sus estándares son sencillos de leer e incluyen un glosario que viene muy bien para introducirse en la criptografía.</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>Tenemos que **poder** **proteger** los mensajes.
+El NIST es la agencia de estandarización de EEUU, y entre las cosas que estandariza también está la seguridad del gobierno de EEUU. Sus estándares son sencillos de leer e incluyen un glosario que viene muy bien para introducirse en la criptografía.</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>Este es el modelo sobre el que trabajaremos: dos personas &quot;Alice y Bob&quot; comunicándose por un canal inseguro porque puede haber un adversario &quot;Maloy&quot; en medio.
 
-Veremos que existen protocolos que ofrecen seguridad incondicional, pero su utilización es tan pesada que no es práctica, y se prefiere la seguridad computacional</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>La seguridad por oscuridad es pensar que un sistema secreto es más seguro que un sistema conocido. En realidad, es muy difícil mantener un sistema en secreto. Además, la criptografía está llena de &quot;trampas&quot; y razonamientos no evidentes. Es muy difícil que unas pocas personas puedan diseñar un sistema realmente seguro y además mantenerlo en secreto. Eso es lo que se llama &quot;seguridad por oscuridad&quot;, y fiar la seguridad a la oscuridad no es buena idea, como nos ha enseñado la experiencia.
+Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo.  En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real, y son añadidos a la criptografía que mejoran aún más la seguridad del sistema.</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>Tenemos que **poder** **proteger** los mensajes.
 
-Mantener las cosas en secreto no significa mantener los protocolos de seguridad en secreto.</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>Un sistema no es inseguro por ser oscuro. Es simplemente oscuro. Basar tu seguridad en la oscuridad lo consideramos una mala idea porque los hackers pueden saber más que tú. No hay ningún error lógico en querer basar tu seguridad en la oscuridad. Simplemente, la experiencia nos dice que no es buena idea, y que los sistemas cuya seguridad se basa en la oscuridad caen antes.
+Veremos que existen protocolos que ofrecen seguridad incondicional, pero su utilización es tan pesada que no es práctica, y actualmente se prefiere la seguridad computacional</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>La seguridad por oscuridad es pensar que un sistema secreto es más seguro que un sistema conocido. En realidad, es muy difícil mantener un sistema en secreto. Además, la criptografía está llena de &quot;trampas&quot; y razonamientos no evidentes. Es muy difícil que unas pocas personas puedan diseñar un sistema realmente seguro y además mantenerlo en secreto. Eso es lo que se llama &quot;seguridad por oscuridad&quot;, y fiar la seguridad a la oscuridad no es buena idea, como nos ha enseñado la experiencia.
+
+Mantener las cosas en secreto no significa mantener los protocolos de seguridad en secreto.</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Un sistema no es inseguro por ser oscuro. Es simplemente oscuro. Basar tu seguridad en la oscuridad lo consideramos una mala idea porque los hackers pueden saber más que tú. No hay ningún error lógico en querer basar tu seguridad en la oscuridad. Simplemente, la experiencia nos dice que no es buena idea, y que los sistemas cuya seguridad se basa en la oscuridad caen antes.
 
 PERO que un sistema sea seguro de por sí, utilizando protocolos realmente seguros y buenas prácticas criptográficas, Y ADEMÁS lo ocultamos al mundo, es sin duda una buena idea que no perjudica. Tendrás a los adversarios entretenidos para intentar entender tu sistema, y cuando lo consigan verán que es un indescifrable AES-512.
 
-No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>Kerckhoffs enunció sus principios en 1883.
+No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Kerckhoffs enunció sus principios en 1883.
 
 Los principios 1, 2 y 6 guiarán todo el desarrollo de la criptografía actual
 
@@ -706,26 +709,30 @@ recomendables.
 
 Eso nos lleva a que: la seguridad a veces es cuestión de opinión. &quot;Buenas
 prácticas&quot;. &quot;Recomendaciones&quot;. Por ejemplo, el NIST solo emite recomendaciones.
-Pero son recomendaciones muy informadas.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Shanon es un gran matemático del siglo XX, que creó la teoría de la información. Le debemos la teoría detrás de la criptografía, los archivos comprimidos, la codificación digital...
+Pero son recomendaciones muy informadas.</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p>Shanon es un gran matemático del siglo XX, que creó la teoría de la información. Le debemos la teoría detrás de la criptografía, los archivos comprimidos, la codificación digital...
 
 Su máxima se contrapone a la &quot;seguridad por oscuridad&quot;. Es decir, tratar de dejar el sistema secreto. No funciona.
 
-El paper enlazado es una estupenda introducción a los conceptos fundamentales de la criptografía y se recomienda mucho su lectura</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p>Shannon fue quien recomendó que la criptografía se centrase en maximizar esos dos parámetros
+El paper enlazado es una estupenda introducción a los conceptos fundamentales de la criptografía y se recomienda mucho su lectura</p></div><div class="bespoke-marp-note" data-index="17" tabindex="0"><p>Shannon fue quien recomendó que la criptografía se centrase en maximizar esos dos parámetros
 
 ![center w:30em](images/Simplified-International-Data-Encryption-AlgorithmIDEA.jpg)
 
 Algunos algoritmos de cifrado no son complejos y están formados por pequeños módulos o pasos que actúan en cascada. Cada uno de estos pasos aumenta la difusión y confusión del mensaje original, hasta que es totalmente indescifrable
 
-La unión de pequeños pasos sencillos (llamados puertas criptográficas, o gates), crea una primitiva criptográfica, que es lo que veremos a continuación</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>Aquí vemos un error provocado porque estamos usando la primitiva defectuosa. Las primitivas deben utilizarse en los contextos en que fueron diseñadas, y apoyarse entre ellas.</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Ya hemos visto unas pocas primitivas. ¿Qué servicios de seguridad ofrece cada una?
+La unión de pequeños pasos sencillos (llamados puertas criptográficas, o gates), crea una primitiva criptográfica, que es lo que veremos a continuación</p></div><div class="bespoke-marp-note" data-index="19" tabindex="0"><p>- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
+
+- **Clave simétrica**: misma clave $k$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
+
+- **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>Aquí vemos un error provocado porque estamos usando la primitiva defectuosa. Las primitivas deben utilizarse en los contextos en que fueron diseñadas, y apoyarse entre ellas.</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Ya hemos visto unas pocas primitivas. ¿Qué servicios de seguridad ofrece cada una?
 
 Lo normal será que no queramos que el sistema ofrezca un solo servicio sino varios de ellos. Es decir, juntar primitivas criptográficas.
 
-La unión de primitivas criptográficas crea un protocolo criptográfico</p></div><div class="bespoke-marp-note" data-index="27" tabindex="0"><p>Aquí vemos la manera correcta de usar la primtiva que dio error en el caso anterior:
+La unión de primitivas criptográficas crea un protocolo criptográfico</p></div><div class="bespoke-marp-note" data-index="29" tabindex="0"><p>Aquí vemos la manera correcta de usar la primitiva que dio error en el caso anterior:
 
 - Ciframos la información de gran tamaño con una clave simétrica
 - Usamos la primitiva de cifrado asimétrico para cifrar la clave simétrica, y solo ella
 - Enviamos a la otra parte el archivo cifrado y el cifrado de la clave simétrica
-- La otra parte primero descifra la clave simétrica y después con ella descifra el mensaje.</p></div><div class="bespoke-marp-note" data-index="29" tabindex="0"><p>Es decir, los mensajes son eslabones de una cadena, cada mensaje tiene el hash del eslabón anterior.
+- La otra parte primero descifra la clave simétrica y después con ella descifra el mensaje.</p></div><div class="bespoke-marp-note" data-index="31" tabindex="0"><p>Es decir, los mensajes son eslabones de una cadena, cada mensaje tiene el hash del eslabón anterior.
 
 Casi, casi, hemos definido una blockchain como bitcoin</p></div><div class="bespoke-marp-note" data-index="32" tabindex="0"><p>Nos centraremos en los servicios de confidencialidad, integridad y autenticación. Además, podemos conseguir no-repudio como consecuencia de juntar autenticidad e integridad.
 

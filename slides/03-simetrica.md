@@ -20,9 +20,7 @@ theme: marp-viu
 
 **Tema 3: Cifrado simétrico**
 
-Juan Vera del Campo
-
-juan.vera@campusviu.es
+Juan Vera del Campo - juan.vera@campusviu.es
 
 # Como decíamos ayer...
 

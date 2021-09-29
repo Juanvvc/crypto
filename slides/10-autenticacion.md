@@ -21,11 +21,10 @@ transition: fade
 # Criptografía
 <!-- _class: first-slide -->
 
-**Tema 7: Autenticación de usuarios**
+**Tema 10: Autenticación de usuarios**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 # Como decíamos ayer...
 

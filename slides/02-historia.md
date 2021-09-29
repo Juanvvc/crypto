@@ -18,8 +18,7 @@ theme: marp-viu
 
 **Tema 2: Historia de la criptografía**
 
-Juan Vera del Campo
-juan.vera@campusviu.es
+Juan Vera del Campo - juan.vera@campusviu.es
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->

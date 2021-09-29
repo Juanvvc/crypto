@@ -16,11 +16,10 @@ theme: marp-viu
 # Criptografía
 <!-- _class: first-slide -->
 
-**A2: Generación de números aleatorios**
+**Anexo: Generación de números aleatorios**
 
-Juan Vera del Campo
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
-juan.vera@campusviu.es
 
 # Contenido
 <!-- _class: cool-list -->
