@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Teoría complejidad y acuerdo D-H
+title: Criptografía - Teoría de la complejidad y acuerdo D-H
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
@@ -17,7 +17,7 @@ theme: marp-viu
 
 # Criptografía
 <!-- _class: first-slide -->
-**Tema 4: Teoría complejidad y acuerdo D-H**
+**Tema 4: Teoría de la complejidad y acuerdo D-H**
 Juan Vera del Campo - juan.vera@campusviu.es
 
 # Como decíamos ayer...
@@ -47,7 +47,6 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 <!-- _class: cool-list -->
 
 1. [Teoría de la complejidad](#4)
-1. [Logaritmo discreto](#22)
 1. [Acuerdo de clave Diffie-Hellman](#26)
 1. [Resumen y referencias](#43)
 
@@ -69,7 +68,7 @@ El nombre "teoría de la complejidad" está muy bien escogido para describir el 
 
 ![center w:20em](images/sudoku.png)
 
-- Normas comunes de Sodoku
+- Normas comunes de Sudoku
 - Las casillas adyacentes no tienen números consecutivos: no hay un 6 encima, debajo a la izquierda o la derecha de un 6
 - Las casillas separadas por movimientos de ajedrez de caballo o rey no tienen el mismo número
 - Pruébalo: [The Miracle, de Mitchell Lee](https://cracking-the-cryptic.web.app/sudoku/tjN9LtrrTL)
@@ -78,29 +77,35 @@ El nombre "teoría de la complejidad" está muy bien escogido para describir el 
 "*It might have a unique solution but it's not gonna be findable by a human being*"
 
 <!--
-Una manera de resolver el sudok es simplemente probar números uno a uno hasta que se verifique el resultado. Esto es fuerza bruta.
+Una manera de resolver el sudoku es simplemente probar números uno a uno hasta que se verifique el resultado. Esto es fuerza bruta. ¿Hay algoritmos mejores?
 
-Hay algoritmos más inteligentes para resolverlo, y de hecho nuetros cerebro los usa cuando intenta resolverlos "si esto es un 2, entonces esto no puede ser un 3". Eso es mucho más eficiente que la fuerza bruta.
+Claro que sí, podemos ser inteligentes: "si esto es un 2, entonces todas estas casillas no pueden contener un 2". **Esto es mucho más eficiente que la fuerza bruta**
 
 ¿Cuánto tiempo mínimo le lleva al algoritmo más eficiente posible? De esto va la teoría de la complejidad.
 
-Nota: no necesitamos conocer cuál es el algoritmo más eficiente. Solo cuánto tiempo le llevaría, aunque no separamos cuál es ese algoritmo. Si incluso el mejor algoritmo matemáticamente posible para resolver un cifrado es muy lento... entonces el cifrado es seguro incluso aunque no conozcamos ese algoritmo.
+Nota: el objetivo de la teoría de la complejidad no es descubrir el algoritmo más eficiente. **Queremos saber cuánto tiempo le llevará al algoritmo más eficiente para resolver un problema incluso aunque no sepamos cuál es ese algoritmo perfectamente eficiente**. Si diseñamos un sistema de cifrado y podemos demostrar que el mejor atacante, el que use los mejores algiritmos posibles, incluso aquellos que no están aún inventados, va a tardar un tiempo descomunal para romper el sistema... entonces el cifrado es seguro.
 -->
 
 ## Mucho tiempo para resolver
 <!-- _class: with-info -->
 
-Resolver un Sudoku es "sencillo": vamos comprobando números y, si funcionan, los dejamos
+Hacer un algoritmo de fuerza bruta para un Sudoku es "sencillo": vamos comprobando números y, si funcionan, los dejamos
 
 Eso se parece mucho a resolver por fuerza bruta un cifrado clásico
 
-Pero estamos interesados en conocer el tiempo teórico que le llevará **al algoritmo más rápido posible**, incluso aunque no sepamos qué algoritmo es ése
+Pero estamos interesados en conocer el tiempo teórico que le llevará **al algoritmo más rápido posible**
 
 10 veces más casillas... ¿necesita 10 veces más tiempo? ¿ó 100 veces más tiempo? ¿ó 1000 veces más tiempo? ¿podremos acaso solucionarlo?
 
 Si al aumentar el tamaño de un problema el tiempo necesario para resolverlo sigue siendo "razonable", decimos que es un  "problema P"
 
 <!--
+Nota: casi siempre será posible resolver las cosas por fuerza bruta, pero a veces habrá algoritmo mejores
+
+En AES no, en AES y en otros algoritmos simétricos sospechamos que la fuerza bruta es el mejor algoritmo posible. Eso es estupendo. Pero AES no resuelve el problema de intercambiar claves.
+
+Para intercambiar una clave de forma segura, a los criptógrafos se les ocurrió probar unos sistemas basados en problemas que podrían tener soluciones mejores que la fuerza bruta. Y decidieron que usar esos problemas era aceptable, siempre que el mejor algoritmo necesitase un tiempo no razonable para resolverlos.
+
 Definiremos qué significa tiempo creciente con el tamaño del problema exactamente:creciente de forma .... ¿lineal? ¿polinomial? ¿exponencial?
 
 Adelanto: razonable significa polinomial: el tiempo necesario para resolverlo crece de forma polinomial con respecto a su tamaño
