@@ -147,6 +147,26 @@ section.first-slide footer, section.first-slide header, section.first-slide:afte
     display: none;
 }
 
+/******************* last-slide *****************************/
+
+
+/* last slide (thanks). Use h1 as header.
+Use: <!-- _class: last-slide --> */
+section.last-slide {
+    background-image: url('themes/incide/incide-back.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+section.last-slide h1, section.last-slide h2, section.last-slide a {
+    color: var(--darker-color);
+}
+section.last-slide footer, section.last-slide header, section.last-slide:after {
+    /* hide header, footer and pagination */
+    display: none;
+}
+
+
 /******************* center *****************************/
 
 /* center class: center all text
@@ -466,4 +486,19 @@ section.cool-list2 ol ul {
 }
 section.cool-list2 ol ol em {
     background: #efefef;
+}
+
+
+/******************* cool-list2 *****************************/
+
+/* A special class for a white logo */
+section.white-logo::before {
+    /* logo in white */
+    filter: sepia(100%) brightness(2) saturate(0) !important;
+}
+
+/* A special class for a black logo */
+section.black-logo::before {
+    /* logo in white */
+    filter: brightness(0) !important;
 }
