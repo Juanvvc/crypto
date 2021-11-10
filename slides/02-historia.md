@@ -18,16 +18,18 @@ theme: marp-viu
 
 **Tema 2: Historia de la criptografía**
 
-Juan Vera del Campo - juan.vera@campusviu.es
+Juan Vera del Campo
+
+juan.vera@campusviu.es
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->
 
 1. [Criptografía clásica](#3)
 1. [Cifrado César: fuerza bruta y análisis frecuencial](#8)
-1. [Mejoras al cifrado César: Vigenère y Enigma](#24)
-1. [Confidencialidad perfecta: Vernam](#39)
-1. [Resumen y referencias](#49)
+1. [Mejoras al cifrado César: Vigenère y Enigma](#25)
+1. [Confidencialidad perfecta: Vernam](#40)
+1. [Resumen y referencias](#51)
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
@@ -37,17 +39,11 @@ En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
 ## Criptografía = cifrado
 
-Hasta los 70, criptografía=confidencialidad: impedir que el enemigo supiese qué decimos
+Hasta los años 70 del siglo XX, la criptografía se usaba solo en el ámbito militar y solo ofrecía confidencialidad:
 
-Un mensaje $m$ (*plain-text*) se cifra con la función de cifrado $e()$, que se le pasa junto a una clave $k$ para dar el mensaje cifrado $c$
+**El enemigo no puede saber nuestros planes**
 
-$c = e(k, m)$
-
-Para descifrar hace falta la clave $k$, el mensaje cifrado $c$, y la función de descifrado $d()$
-
-$m'=d(k, c)$
-
-El resultado $m'$ debería ser el mensaje en claro original $m$.
+El resultado debería ser un mensaje igual que el original
 
 ![bg right:40% w:100%](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
 
@@ -194,13 +190,34 @@ Un ataque de fuerza bruta implica probar sobre el mensaje cifrado $c$ todas las 
 
 ---
 
+![bg right:60%](https://static.elcorreo.com/www/multimedia/202110/22/media/cortadas/carta-encriptada-kbnG-U150920286448l0B-624x580@El%20Correo.jpg)
+
+Descifra una carta encriptada de las guerras carlistas escrita en Bizkaia
+
+"*...han llegado a Leqitio 6 trincaduras con pertrechos para ellos....*"
+
+> https://www.elcorreo.com/culturas/descifra-carta-encriptada-20211108081121-nt.html
+
+<!--
+José Ramón Cuesta, archivero, investigador y escritor, que explica que el mensaje "está codificado mediante el sistema de sustitución simple o de letras emparejadas". Para poder interpretarlo hay que sustituir cada letra por su par. Cada vez que aparece una a hay que sustituirla por una eme, la be por una ene y la ce por una o. Y así de forma sucesiva.
+
+Es decir, es un César con k=12. Fíjate en algunas curiosidades típicas en el ámbito militar para simplificar el proceso de cifrado manual:
+
+"no tiene en cuenta la uve, sustituida por la be, que es representa por la ene. Tampoco consta la ka ni la eñe. La u sirve para representar tanto la i latina como la i griega."
+
+Estas simplificaciones de letras dependen de la lengua original. Fíjate también que para interpretar el texto necesitas información de contexto, porque son telegramas y no novelas. Estas características (letras de menos, jerga) ya no las estudia la criptografía moderna aunque sí que sean necesarias para interpretar correctamente un mensaje, y fueron importantes para descifrar textos en el pasado. Por ejemplo con la máquina enigma, como veremos más tarde.
+
+Además, la forma del papel sugiere que estaba oculto en algún sitio y tenía esa forma para que no fuese reconocible. Sí que hay un rama de la criptografía moderna que estudia cómo ocultar un mensaje: la esteganografía. No estudiaremos esteganografía en este curso.
+-->
+
+---
+
 ![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg)
 
-El segundo paso no siempre es posible
+Pero saber si un mensaje se ha descifrado correctamente no siempre es posible:
 
 - El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado. Suponiendo que use César, no se sabe en qué lengua está escrito originalmente.
-- [Código navajo](https://es.wikipedia.org/wiki/Locutor_de_claves) durante la segunda guerra mundial
-- Imagina que solo está cifrada la hora "atacamos a las XX"... Si una clave descifra "a las 7" y otra "a las 5" ¿cómo validamos cuál es correcta? 
+- Imagina que solo está cifrada la hora "atacamos a las X"... Si una clave descifra "a las 5" y otra "a las 7" ¿cómo validamos qué hora es correcta? 
 
 <!--
 
@@ -517,7 +534,7 @@ El descifrado de Enigma fue una de las claves que permitió a los aliados ganar 
 
 ![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/0/06/USpatent1310719.fig1.png)
 
-Se define **la seguridad perfecta o incondicional** como aquella con la que, a partir únicamente del texto cifrado, no se puede deducir ninguna propiedad del texto original en claro, incluso aunque el atacante tenga capacidad computacional infinita.
+**Seguridad perfecta o incondicional**: no se puede deducir ninguna propiedad del texto original en claro, incluso aunque el atacante tenga recursos infinitos (tiempo, dinero)
 
 - Gilbert Sandford Vernam inventó y patentó una máquina de cifrado en 1917
 - Shannon demostró en 1945 que esa máquina tenía cifrado perfecto
@@ -532,7 +549,7 @@ excepto la longitud... y el momento de enviarlo, ...y el número de mensajes
 
 Definición exacta:
 
-**Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribición de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de m dada c y la probabilidad de m coinciden
+**Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribución de probabilidad sobre el espacio de mensajes en claro $m$, y para todos los mensajes en claro y para todos los textos cifrados posibles $c$, la probabilidad condicionada de $m$ dada $c$ y la probabilidad de $m$ coinciden
 
 $$
 P[m|c] = P[m]
@@ -544,11 +561,16 @@ Cosas que implica:
 
 - Lo que dijimos antes: dado un texto cifrado, no conocemos nada de su texto en claro
 - Dado un texto cifrado, el mensaje en claro podría ser cualquiera:
-
-Si el cifrado es XHAJSJXXNFHFDOIOJUMNFNNNF existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE", así que un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles.
-
-Es decir: ni siquiera por fuerza bruta podemos atacar el sistema de cifrado, porque no sabremos si el mensaje que hemos obtenido es el bueno
 -->
+
+---
+<!-- _class: with-success -->
+
+Si un cifado perfecto cifra como XHAJSJXXNFHFDOIOJUMNFNNNF, existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE"
+
+Un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles.
+
+Es decir, un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta
 
 ---
 
