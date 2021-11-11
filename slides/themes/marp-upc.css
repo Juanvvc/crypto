@@ -80,7 +80,8 @@ section.first-slide p {
     color: white;
     background-color: #2c3e5099;
     margin: 0em;
-    padding: 0em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
 }
 section.first-slide a {
     color: white;
