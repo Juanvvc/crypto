@@ -66,9 +66,7 @@ Protección de la comunicaciones a través de **medios desprotegidos** entre un 
 > Fondo: [(c) cottonbro](https://www.pexels.com/photo/clear-glass-bowl-on-white-table-cloth-7319077/). Free to use 
 
 
----
-
-**¿Qué queremos proteger?**
+## ¿Qué queremos proteger?
 
 Recurso|Ejemplo
 --|--
@@ -120,11 +118,11 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 
 ![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
 
-- Alice y Bob no se conocen
-- Alice y Bob solo pueden comunicarse por este canal
-- Maloy puede ser pasivo: solo escucha
-- ...o activo: cambia o borra mensajes
-- Las claves de cifrado y descifrado pueden ser diferentes
+- Mensaje o texto en claro: $m$
+- Cifrado: $c = e(k_1, m)$
+- Descifrado: $m' = d(k_2, m)$
+- Objetivo: $m=m'$
+
 
 
 <!--
@@ -133,14 +131,15 @@ Este es el modelo sobre el que trabajaremos: dos personas "Alice y Bob" comunic�
 Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo.  En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real, y son añadidos a la criptografía que mejoran aún más la seguridad del sistema.
 -->
 
-## Grados de seguridad teórica
+## Grados de seguridad
+<!-- _class: with-warning -->
 
-Esta protección debe soportar ataques de una **complejidad razonable**:
+- **Seguridad perfecta**: un atacante no puede descifrar el mensaje aunque tenga infinito dinero o infinito poder computacional.
+- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga porque lleva demasiado tiempo, dinero o recursos. Por ejemplo, millones de años o más memoria de la que cabe en el universo.
 
-- **Seguridad incondicional**: un atacante no puede descifrar el mensaje aunque tenga infinito dinero o infinito poder computacional.
-- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga porque lleva demasiado tiempo, dinero o recursos.Por ejemplo, millones de años o más memoria de la que cabe en el universo.
+Aunque la seguridad perfecta puede parecer lo mejor, veremos que no es práctica: nos conformaremos con la seguridad computacional
 
-> Hablaremos de esto en el [tema 4](04-complejidad.html)
+> Hablaremos de esto en el [tema 3](03-simetrica.html)
 
 <!--
 
@@ -151,7 +150,7 @@ Veremos que existen protocolos que ofrecen seguridad incondicional, pero su util
 -->
 
 ## Seguridad por oscuridad
-<!-- _class: with-info -->
+<!-- _class: with-warning -->
 
 **Falacia**: "Nadie sabe cómo es nuestro sistema, y por tanto es seguro"
 
@@ -249,12 +248,15 @@ Pero son recomendaciones muy informadas.
 -->
 
 ## Máxima de Shannon
+<!-- _class: with-success -->
 
 ![bg left:33%](images/220px-ClaudeShannon_MFO3807.jpg)
 
-*El adversario conoce el sistema*
+*El atacante conoce el sistema*
 
 **Claude Elwood Shannon (1906-2001)**
+
+Diseña el sistema asumiendo que el atacante sabe qué hacer para cifrar o descifrar, pero no conoce la clave
 
 > [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
 > Hablaremos más de Shanon en el [tema 3](03-simetrica.html)
@@ -298,7 +300,7 @@ header: 'Primitivas criptográficos'
 
 La criptografía actual se basa en **composición** de técnicas primitivas:
 
-- Composición de **operaciones matemáticas** que crean "**puertas criptográficas**" (*criptographics gates*).
+- Composición de **operaciones matemáticas** que crean "**puertas criptográficas**" (*cryptographic gates*).
 - Composición de puertas que crean **algoritmos**.
 - Composición de algoritmos que crean **protocolos de seguridad**.
 
@@ -333,7 +335,7 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 <!-- _class: with-warning -->
 
 
-- Un algoritmo para cifrar y otro para descifrar. Pueden ser el mismo (por ejemplo, en los audiocuentos era el mismo)
+- Un algoritmo para cifrar y otro para descifrar. Pueden ser el mismo
 - Una sola clave para cifrar y descifrar.
 
 ```
@@ -351,10 +353,8 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 
 ## Primitivas: clave asimétrica
 
-<!-- _class: smaller-font -->
-
 - Un algoritmo para cifrar y otro para descifrar.
-- Una sola clave para cifrar y otro para descrifrar.
+- Una clave para cifrar y otra para descrifrar.
 - Casi nunca se cifra directamente, sino que se cifra una clave simétrica.
 
 ```sh
@@ -525,4 +525,4 @@ header: ''
 ---
 <!-- _class: center -->
 
-- Continúa en: [Criptografía clásica](02-historia.html)
+Continúa en: [Criptografía clásica](02-historia.html)
