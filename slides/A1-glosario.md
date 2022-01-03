@@ -18,7 +18,9 @@ theme: marp-viu
 
 **Anexo: Glosario**
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo
+
+<juan.vera@campusviu.es>
 
 ---
 <!-- _class: cool-list -->
@@ -37,12 +39,12 @@ Por tradición, cuando se describen protocolos criptográficos:
 
 - Alice y Bob son dos personas que quieren intercambiar información
 - Charlie será otro participante legítimo, cuando lo necesitemos
-- Eve (solo escucha) y Malloy (puede enviar mensajes) son atacantes
+- Eve es un atacante pasivo, solo escucha
+- Malloy es atacante activo, modifica mensajes
 
  Fijate: A, B, C, E y M
 
 > Alice y Bob: https://www.explainxkcd.com/wiki/index.php/177:_Alice_and_Bob
-
 
 ## Servicios de seguridad principales
 
@@ -58,11 +60,21 @@ Por tradición, cuando se describen protocolos criptográficos:
 - **Partición de secretos**: permite repartir un secreto entre un grupo de actores, exigiendo un mínimo de actores para recomponerlas
 - **PRNG** (Pseudo Random Number Generation): permite generar una secuencia aparentemente aleatoria para cualquiera que no conozca la semilla
 
+## Modelo de sistema criptográfico
+<!-- _class: two-columns with-header -->
+
+![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+
+- Mensaje o texto en claro: $m$
+- Cifrado: $c = e(k_1, m)$
+- Descifrado: $m' = d(k_2, m)$
+- Objetivo: $m=m'$
+
 ## Primitivas criptográficas
 
-- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
-- **Clave simétrica**: misma clave $k$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
-- **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
+- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash. No hay clave.
+- **Clave simétrica**: misma clave $k=k_1=k_2$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
+- **Clave asimétrica**: claves diferentes para cifrar $k_1$ y descifrar $k_2$ un mensaje $m$. Si el emisor solo conoce $k_1$. puede cifrar pero no descifrar. Ejemplo: RSA
 
 ---
 

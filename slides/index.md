@@ -66,19 +66,6 @@ Intereses:
 - Protección de la privacidad
 - Cualquier cosa que vuele
 
-<!-- ## La asignatura: Criptografía y Teoría de Códigos
-
-En esta asignatura estudiaremos los mecanismos de seguridad necesarios para mantener nuestras comunicaciones seguras: historia de la criptografía, criptografía simétrica y asimétrica, protocolos criptográficos y firma digital.
-
-- Opcional de cuarto curso, segundo cuatrimestre
-- Jueves entre el 11 de febrero y el 29 de abril, excepto el 8 de abril.
-- 11 sesiones, más los exámenes
-- CET: de 20:00 horas a 22:00 horas
-- UTC (hasta abril): de 19:00 horas a 21:00 horas
-- UTC (a partir de abril): de 18:00 horas a 20:00 horas
-
--->
-
 ## Intrucciones de uso de las transparencias
 <!-- _class: smaller-font -->
 
