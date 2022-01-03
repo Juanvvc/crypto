@@ -26,10 +26,35 @@ Juan Vera del Campo
 <!-- _class: cool-list -->
 
 1. [Definiciones Generales](#3)
-1. [Matemáticas](#11)
+1. [Matemáticas](#12)
 
 ## Definiciones generales
 <!-- _class: lead -->
+
+## Definiciones básicas
+
+- $m$ **texto en claro**: mensaje que queremos proteger
+- $c$ **mensaje cifrado**: mensaje protegido
+- $e()$ y $d()$ **algoritmos de cifrado y descifrado**: convierten un texto en claro en un mensaje cifrado o al revés
+- $k_1$ y $k_2$: **clave criptográfica de cifrado o descifrado**: parte secreta de los algoritmos de cifrado y descifrado
+
+<!--
+No confundas clave criptográfica y contraseña.
+
+Contraseña: texto que un humano recuerda para entrar en algún sitio, abrir una clave criptográfica... Las contraseñas no suelen tener la suficiente seguridad para un protocolo criptográfico.
+
+En ocasiones podremos crear (también se dice "derivar") una clave criptográfica a partir de una contraseña, aunque no siempre es buena idea porque los humanos son muy malos para escoger contraseñas.
+-->
+
+## Modelo de sistema criptográfico
+<!-- _class: two-columns with-header -->
+
+![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+
+- Mensaje o texto en claro: $m$
+- Cifrado: $c = e(k_1, m)$
+- Descifrado: $m' = d(k_2, m)$
+- Objetivo: $m=m'$
 
 ## Los amigos de Alice
 
@@ -59,16 +84,6 @@ Por tradición, cuando se describen protocolos criptográficos:
 - **Acuerdo de claves**: permite que un grupo de actores generen un número (pseudo) aleatorio sin que nadie externo al grupo pueda conocerlo
 - **Partición de secretos**: permite repartir un secreto entre un grupo de actores, exigiendo un mínimo de actores para recomponerlas
 - **PRNG** (Pseudo Random Number Generation): permite generar una secuencia aparentemente aleatoria para cualquiera que no conozca la semilla
-
-## Modelo de sistema criptográfico
-<!-- _class: two-columns with-header -->
-
-![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
-
-- Mensaje o texto en claro: $m$
-- Cifrado: $c = e(k_1, m)$
-- Descifrado: $m' = d(k_2, m)$
-- Objetivo: $m=m'$
 
 ## Primitivas criptográficas
 
@@ -129,6 +144,15 @@ $$
 13 \mod 3 &= 1
 \end{aligned}
 $$
+
+<!-- La aritmética modular produce ciclos: 012301230123
+
+Si hacemos loquesea módulo N, el resultado estará entre 0 y N-1. Es decir, hay N posible resultados
+
+Usaremos constantemente la aritmética modular en sistemas de cifrado asimétrico (tema 4 y siguientes)
+
+-->
+
 
 ## XOR
 

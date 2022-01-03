@@ -27,9 +27,9 @@ juan.vera@campusviu.es
 
 1. [Servicios criptográficos: objetivos](#3)
 1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#7)
-1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#19)
-1. [Protocolos criptográficos: composición de primitivas](#26)
-1. [Conclusiones: resumen y referencias](#34)
+1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#20)
+1. [Protocolos criptográficos: composición de primitivas](#27)
+1. [Conclusiones: resumen y referencias](#32)
 
 Anexo recomendado: [Glosario](A1-glosario.html)
 
@@ -123,6 +123,21 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 <!-- _class: lead -->
 
 *The thing is secure if its outputs look like random junk*
+
+## Definiciones básicas
+
+- $m$ **texto en claro**: mensaje que queremos proteger
+- $c$ **mensaje cifrado**: mensaje protegido
+- $e()$ y $d()$ **algoritmos de cifrado y descifrado**: convierten un texto en claro en un mensaje cifrado o al revés
+- $k_1$ y $k_2$: **clave criptográfica de cifrado o descifrado**: parte secreta de los algoritmos de cifrado y descifrado
+
+<!--
+No confundas clave criptográfica y contraseña.
+
+Contraseña: texto que un humano recuerda para entrar en algún sitio, abrir una clave criptográfica... Las contraseñas no suelen tener la suficiente seguridad para un protocolo criptográfico.
+
+En ocasiones podremos crear (también se dice "derivar") una clave criptográfica a partir de una contraseña, aunque no siempre es buena idea porque los humanos son muy malos para escoger contraseñas.
+-->
 
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
@@ -367,8 +382,8 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 <!-- _class: with-warning -->
 
 
-- Un algoritmo para cifrar y otro para descifrar. Pueden ser el mismo
-- Una sola clave para cifrar y descifrar.
+- El algoritmo de cifrado y el de descrifrado pueden ser el mismo
+- **Una sola clave** para cifrar y descifrar
 
 ```
 > openssl aes-256-cbc -a -salt -in test.mp3 -out test.aes -pass pass:1234
@@ -383,9 +398,9 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 
 ## Primitivas: clave asimétrica
 
-- Un algoritmo para cifrar y otro para descifrar.
-- Una clave para cifrar y otra para descrifrar.
-- Casi nunca se cifra directamente, sino que se cifra una clave simétrica.
+- Un algoritmo para cifrar y otro para descifrar
+- **Una clave para cifrar y otra para descrifrar**
+- La clave de cifrado suele ser conocida por todos, por eso se llama también "pareja de clave pública y privada".
 
 ```sh
 # Generar par de claves
@@ -460,8 +475,9 @@ Habitualmente no usamos una única primitiva/función criptográfica:
 - **objetivos múltiples**: me interesa confidencialidad, integridad y autenticidad simultáneamente para la transmisión del mensaje $m$
 - **eficiencia**: los algoritmos simétricos son varios órdenes de magnitud más rápidos que los asimétricos
 - **robustez**: muchas primitivas (individuales) no devuelven error en caso de que algo vaya mal (una firma asimétrica simplemente devuelve un mensaje firmado distinto)
-- **secuencias de mensajes**: nos interesa proteger no sólo los mensajes individuales si no secuencias de mensajes {m1,m2…mn} o diálogos {ma1,mb1,ma2,mb2…} u otros tipos de combinaciones de
+- **secuencias de mensajes**: nos interesa proteger secuencias de mensajes $\{m_1,m_2, ..., m_n\}$ o diálogos $\{m_{a_1},m_{b_1},m_{a_2},m_{b_2}, ...\}$ para que no llegen mensajes repetidos o desordenados.
 
+<!--
 # Ejemplo de composición: cifrado eficiente
 
 ```sh
@@ -492,7 +508,7 @@ Aquí vemos la manera correcta de usar la primitiva que dio error en el caso ant
 - Usamos la primitiva de cifrado asimétrico para cifrar la clave simétrica, y solo ella
 - Enviamos a la otra parte el archivo cifrado y el cifrado de la clave simétrica
 - La otra parte primero descifra la clave simétrica y después con ella descifra el mensaje.
--->
+- ->
 
 ## Ejemplo de composición: secuencias
 
@@ -515,6 +531,8 @@ Se puede solucionar con:
 Es decir, los mensajes son eslabones de una cadena, cada mensaje tiene el hash del eslabón anterior.
 
 Casi, casi, hemos definido una blockchain como bitcoin
+- ->
+
 -->
 
 ## Objetivos: "otros"
@@ -549,10 +567,13 @@ header: ''
 
 ## Referencias
 
+- Primer capítulo de "[*The Joy of Cryptography*](https://joyofcryptography.com/)" de Mike Rosulek, 2021
 - [Recommendation for Key Management: Part 1 – General](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf), NIST SP 800-57 Part 1, Revision 5, mayo 2020. Capítulos 2 (glosario) y 3 (servicios), aunque el resto serán de utilidad en el resto del curso
-- [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
+- Introducción del paper [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
 
 ---
 <!-- _class: center -->
 
 Continúa en: [Criptografía clásica](02-historia.html)
+
+Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales

@@ -64,6 +64,12 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 1. [Depurando detalles](#53)
 1. [Resumen y referencias](#56)
 
+<!--
+Atención: este tema es matemáticamente denso, pero no es necesario seguir todos los detalles. Si tienes interés en los detalles, por favor, consulta los papers y libros especilizados.
+
+Los objetivos del tema es conocer la base de la criptografía asimétrica, cómo funciona y cómo se usa.
+-->
+
 # Criptografía asimétrica
 <!-- _class: lead -->
 
@@ -381,6 +387,7 @@ $$9 \cdot 9 \mod 10 = 1$$
 
 
 ## El protocolo RSA: generación de par de claves
+<!-- _class: smaller-font -->
 
 1. Escoge dos números $p$, $q$ primos
 1. Calcula: $n = pq$. Su número de bits es el **tamaño de clave**
@@ -406,6 +413,8 @@ Descifrado: Alice utiliza su clave privada $sk_A=\{d, n\}$
 $$m'=c^d \mod n$$
 
 ## Ejemplo (lo veremos con ejercicios)
+<!-- _class: smaller-font -->
+
 
 Claves:
 - $p=17, q=23$

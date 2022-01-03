@@ -104,7 +104,7 @@ Pero un atacante **puede convencer a cada parte que es otra persona**: así se p
 
 ---
 
-![center w:30em](https://blog.trendmicro.com/trendlabs-security-intelligence/files/2015/09/anglerek_dh_02b.jpg)
+![center w:30em](https://i.imgur.com/Cq78TET.png)
 
 > https://www.trendmicro.com/en_us/research/15/i/how-exploit-kit-operators-are-misusing-diffie-hellman-key-exchange.html
 

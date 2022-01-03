@@ -27,9 +27,9 @@ juan.vera@campusviu.es
 
 1. [Criptografía clásica](#3)
 1. [Cifrado César: fuerza bruta y análisis frecuencial](#8)
-1. [Mejoras al cifrado César: Vigenère y Enigma](#25)
-1. [Confidencialidad perfecta: Vernam](#40)
-1. [Resumen y referencias](#50)
+1. [Mejoras al cifrado César: Vigenère y Enigma](#23)
+1. [Confidencialidad perfecta: Vernam / one-time-pad](#38)
+1. [Resumen y referencias](#48)
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
@@ -50,29 +50,25 @@ El resultado debería ser un mensaje igual que el original
 
 <!--
 
-Conceptos para recordar que aún usamos.
-
-- **texto en claro**: mensaje original sin cifrar
-- **texto cifrado**: mensaje cifrado
-- **algoritmos de cifrado y descifrado**: pueden ser el mismo
-
 ¿Recordáis la máxima de Shanon y los principios de Kerckhoffs? "El adversario conoce el sistema". Es decir: los único que debe ser secreto (a parte del mensaje, claro) es la clave de cifrado/descifrado. Se tiene que asumir que el adversario conoce las funciones e() y d()
 
 Aún no estaban preocupados de identificar con quién estaban hablando: "si conoce la clave, será un interlocutor legítimo".
 
-Nota: ¿Cifrar o encriptar?
+Nota: ¿Cifrar o encriptar? En este curso llamaremos a la ciencia "criptogafía" y al acto "cifrado". Encontrarás gente que utiliza "encriptar" como sinónimo de "cifrar". La RAE ha aceptado recientemente el verbo "encriptar", pero la polémica sobre si usar o no ese verbo sigue abierta en nuestro sector.
 -->
 
 ## Mecanismos clásicos de cifrado
 
-- Cifrados por **transposición**: mover letras de sitio.
-- Cifrados por **sustitución**: una letra por otra.
+- Cifrados por **sustitución**: cambiar una letra por otra.
     - Monoalfabéticos: mismo algoritmo para toda las letras
     - Polialfabéticos: algoritmos diferentes para cada letra
+- Cifrados por **transposición**: mover letras de sitio.
 
+<!--
 Con "clásicos" queremos decir que se usaban desde tiempos del imperio egipcio, pasando por hebreos, griegos, romanos, edad media, edad moderna (incluidas las guerras mundiales)... es decir, desde que se inventó la escritura hasta ayer mismo.
 
-<!-- Estos dos métodos de cifrado se han utilizado durante miles de años, y nuestros algoritmos de cifrado simétrico actual aún los tienen como parte de sus pasos -->
+Estos dos métodos de cifrado se han utilizado durante miles de años, y nuestros algoritmos de cifrado simétrico actual aún los tienen como parte de sus pasos
+-->
 
 ## Transposición: escítala griega
 <!-- _class: two-columns -->
@@ -99,14 +95,17 @@ Prácticamente todos los algoritmos actuales de cifrado simétrico utilizan sist
 
 <!-- Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los '70  ha sido algún tipo de cifrado por sustitución más o menos complejo. Los estudiaremos a continuación con más detalle en el resto de capítulos -->
 
-# Cifrado César (en detalle)
+# Cifrado César
 <!-- _class: lead -->
+
+Fuerza bruta y análisis frecuencial
 
 ## Historia
 
 - Leyenda: Julio César lo usaba para comunicarse con sus generales
 - Como todos los cifrados de sustitución monalfabética, se descifra con facilidad y en la práctica no ofrece apenas seguridad en la comunicación.
-- El cifrado César forma parte de sistemas más complejos de codificación, como el cifrado Vigenère, e incluso tiene aplicación en el sistema ROT13, y su estudio sirve para entender por qué los cifrados fallan.
+
+El cifrado César forma parte de sistemas más complejos de codificación, como el cifrado Vigenère, e incluso tiene aplicación en el sistema ROT13, y su estudio sirve para entender por qué los cifrados fallan.
 
 ![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/8/8f/Gaius_Iulius_Caesar_%28Vatican_Museum%29.jpg)
 
@@ -123,52 +122,39 @@ Es muy posible que César utilizase sistemas más complejos de cifrado que no co
 
 $c = e(k, m) = m + k \mod {26}$
 
-Por ejemplo, clave $k=3$
+Por ejemplo, clave $k=3$:
 
-$X 	\rightarrow A$
-$Y 	\rightarrow B$
-$Z 	\rightarrow	C$
-$A 	\rightarrow	D$
-$B 	\rightarrow	E$
+$$
+\begin{aligned}
+X &\rightarrow A \\
+Y &\rightarrow B \\
+Z &\rightarrow	C \\
+A &\rightarrow	D \\
+B &\rightarrow	E
+\end{aligned}
+$$
+
+> Si necesitas repasar la aritmética modular, consulta el [glosario](A1-glosario.html)
 
 <!-- En las transparencias que siguen, asumimos que el alfabeto es el latino y solo hay 26 posibles letras-->
 
-## (recordatorio: aritmética del resto)
-<!-- _class: extra-slide -->
-
-Aritmética del resto (módulo): "7 entre 4 son 1 y **de resto 3**": $\ 7 \mod 4 = 3$
-
-Ejemplos:
-
-$1 \mod 4 = 1$
-$2 \mod 4 = 2$
-$3 \mod 4 = 3$
-$4 \mod 4 = 0$
-$5 \mod 4 = 1$
-$6 \mod 4 = 2$
-...
-$13 \mod 4 = 1$
-
-<!-- La aritmética del módulo produce ciclos: 012301230123
-
-Si hacemos loquesea módulo N, el resultado estará entre 0 y N-1. Es decir, hay N posible resultados
-
-Usaremos constantemente la aritmética del módulo en sistemas de cifrado asimétrico (tema 4 y siguientes)
-
--->
-
 ## Descifrado
-<!-- _class: center -->
 
-$m' = d(k, d) = c - k \mod {26} = e(26 - k \mod 26, c)$
+$$
+m' = d(k, d) = c - k \mod {26} = e(26 - k \mod 26, c)
+$$
 
-Giramos la tabla. Para $k=3$, el descifrado es como cifrar con $k'=26-3=23$:
+Giramos la tabla. Fíjate: para $k=3$, el descifrado es equivalente a cifrar con $k'=26-3=23$:
 
-$A 	\rightarrow X$
-$B 	\rightarrow Y$
-$C 	\rightarrow	Z$
-$D 	\rightarrow	A$
-$E 	\rightarrow	B$
+$$
+\begin{aligned}
+X &\leftarrow A \\
+Y &\leftarrow B \\
+Z &\leftarrow	C \\
+A &\leftarrow	D \\
+B &\leftarrow	E
+\end{aligned}
+$$
 
 ## Seguridad del cifrado del César: fuerza bruta
 
@@ -192,7 +178,7 @@ Un ataque de fuerza bruta implica probar sobre el mensaje cifrado $c$ todas las 
 
 ![bg right:60%](https://static.elcorreo.com/www/multimedia/202110/22/media/cortadas/carta-encriptada-kbnG-U150920286448l0B-624x580@El%20Correo.jpg)
 
-Descifra una carta encriptada de las guerras carlistas escrita en Bizkaia
+Descifrada una carta encriptada de las guerras carlistas escrita en Bizkaia
 
 "*...han llegado a Leqitio 6 trincaduras con pertrechos para ellos....*"
 
@@ -203,7 +189,7 @@ José Ramón Cuesta, archivero, investigador y escritor, que explica que el mens
 
 Es decir, es un César con k=12. Fíjate en algunas curiosidades típicas en el ámbito militar para simplificar el proceso de cifrado manual:
 
-"no tiene en cuenta la uve, sustituida por la be, que es representa por la ene. Tampoco consta la ka ni la eñe. La u sirve para representar tanto la i latina como la i griega."
+"no tiene en cuenta la uve, sustituida por la be, que es representada por la ene. Tampoco consta la ka ni la eñe. La u sirve para representar tanto la i latina como la i griega."
 
 Estas simplificaciones de letras dependen de la lengua original. Fíjate también que para interpretar el texto necesitas información de contexto, porque son telegramas y no novelas. Estas características (letras de menos, jerga) ya no las estudia la criptografía moderna aunque sí que sean necesarias para interpretar correctamente un mensaje, y fueron importantes para descifrar textos en el pasado. Por ejemplo con la máquina enigma, como veremos más tarde.
 
@@ -230,11 +216,11 @@ El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos 
 La defensa contra los ataques de fuerza bruta son:
 
 - que la operación de descifrado sea costosa
-- que haga falta realizar muchas operaciones de descifrado
+- que el descifrado sea sencillo, pero que el atacante tenga que realizar muchas operaciones de descifrado
 
-Que la operación sea costosa tiene el problema que quien descifra lícitamente tiene un coste innecesario: actualmente esto no se recomienda
+Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente. Actualmente no se recomienda
 
-Queda por tanto "**que el adversario tenga que hacer muchas operaciones de descifrado**". Es decir: probar muchas claves.
+Queda por tanto "**que el adversario tenga que hacer muchas operaciones de descifrado**". Es decir: que el atacante tenga que probar muchas claves.
 
 ## Muchas claves
 
@@ -252,42 +238,27 @@ Si tenemos capacidad de diseñar/fabricar $d()$ en hardware ([ASIC](https://en.w
 ---
 <!-- _class: with-success -->
 
-$10^{11}$ claves/€ en números redondos
+Alquilando equipos en la nube por segundos, con un euro cada segundo podemos probar $10^{11}$ claves
 
-e.g. si nuestro "secreto" tiene un coste de 1000 €:
+Si estimamos que nuestro "secreto" vale 1000 €:
 
 Nos hacen falta un sistema que permita $2·10^{14}$ claves diferentes ($\approx 2^{48}$) para guardar el secreto durante una hora.
 
 **La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
 
 ## ¿Cuánto tiempo necesitamos guardar un secreto?
-<!-- _class: extra-slide -->
-
 
 - "Atacaremos a las 11" dejará de ser secreto a las 11: 1 día
 - "Mis cartas personales": 10 años
 - "La fórmula de la Coca-Cola": 100 años
 
-Piensa: en 10 años la tecnología ha avanzado mucho: lo que ahora cuenta 100 años, ¡en 10 años podría ser automático!
+Piensa: en 10 años la tecnología ha avanzado mucho: lo que ahora cuesta 100 años, ¡en 10 años podría ser automático!
 
 Más sobre esto en el [tema 3](03-simetrica.html)
 
 ## Mejorando la fuerza bruta
 
 ¿Podemos encontrar un método más rápido que probar las claves una a una?
-
-`HOLAMUNDO`
-`ELIXJRKAL`
-
-Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de aparición de los carácteres**
-
-## Análisis de frecuencias
-
-![w:18em](images/el_quijote.freqs.png) ![w:18em](images/el_quijote.caesar.freqs.png)
-
-¡La estadística se mantiene igual (pero movida) después del cifrado César!
-
----
 
 **Hq** fulswrjudild, ho fliudgr Fhvdu, wdpelhq frqrflgr frpr fliudgr sru
 ghvsodcdplhqwr, frgljr **gh** Fhvdu **r** ghvsodcdplhqwr **gh** Fhvdu, hv xqd gh
@@ -297,24 +268,36 @@ uhhpsodcdgd sru rwud ohwud
 
 https://www.dcode.fr/caesar-cipher
 
-**La información de contexto nos ayuda a descifrar (espacios, lenguaje...)**. Eso también pasa en una web actual: ¿qué es lo que tiene un mensaje cifrado a un banco inmediatamente después de visitar una tienda?
+Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de aparición de los carácteres**
 
 <!-- No recuerdo qué cifré aquí, ni con que clave,pero no parece difícil descubrirlo.
 
 - Hay letras solas, que en castellano solo pueden ser a, y, o. También e, u, pero es muy improbable. Cualquier otra letra será aún más improbable. Por eso la criptografía clásica en realidad nunca ha usado espacios: da mucha información al adversario
 - Haciendo análisis de frecuencias, la h aparece muchas veces: es muy probable que sea a ó e
-- Los dígrafos hv gh (varias veces...) podrían ser es, el, me, le ó se -->
+- Los dígrafos hv gh (varias veces...) podrían ser es, el, me, le ó se
+
+**La información de contexto nos ayuda a descifrar (espacios, lenguaje...)**. Eso también pasa en una web actual: ¿qué es lo que tiene un mensaje cifrado a un banco inmediatamente después de visitar una tienda?
+-->
+
+
+## Análisis de frecuencias
+
+![w:18em](images/el_quijote.freqs.png) ![w:18em](images/el_quijote.caesar.freqs.png)
+
+¡La estadística se mantiene igual (pero movida) después del cifrado César!
 
 ## Rotura de algoritmos criptográficos
 <!-- _class: with-success -->
 
-El cifrado César lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez conocida el análisis de frecuencia contra el cifrado César
+El cifrado César lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez el análisis de frecuencia contra el cifrado César
 
 **Un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la fuerza bruta**.
 
 
 # Mejoras al cifrado César
 <!-- _class: lead -->
+
+Vigenère y Enigma
 
 
 ## Transponer y sustituir
@@ -363,11 +346,15 @@ $k$ ahora será una secuencia de números.
 
 $k=\{23,8,3\}$
 
+Es decir: la primera letra se desplaza 23 posiciones, la segunda 8, la tercera 3, luego 23 otra vez, luego 8, luego 3...
+
 Habitualmente se escriben las letras que cifran el texto "AAA":
 
-$k=XID$
+$k=e(\{23,8,3\}, ``AAA") =XID$
 
-Fíjate: el "tabula recta" es un Vigenère con $K=ABCD...WXYZ$
+<!--
+Fíjate: el "tabula recta" es un Vigenère con una clave fija que se se puede cambiar $k=ABCD...WXYZ$
+-->
 
 ---
 <!-- _class: center -->
@@ -404,7 +391,7 @@ https://www.dcode.fr/vigenere-cipher
 
 <!-- clave: SESAME
 
-Ahora el análisis frecuencil es mucho más complejo... ¡pero podemos agrupar los textos en grupos de 6 y aplicar freciencias a cada columna!
+Ahora el análisis frecuencil es mucho más complejo... ¡pero podemos agrupar los textos en grupos de 6 y aplicar frecuencias a cada columna!
 
 ¿Por qué 6? No lo sabemos. Podemos probar, o buscar ciclos (que son comunes) y estimar la longitud de la clabe. En ejemplo, la w está muchas veces en grupos de palabras solos: ¿quizá es la E cifrada con una de esas S de la clave?
 
@@ -414,19 +401,25 @@ Ahora el análisis frecuencil es mucho más complejo... ¡pero podemos agrupar l
 
 Ahora el espacio de claves es (clave de 3 carácteres):
 
-$0<k<26^3$
-$0<k<17576$
+$$
+\begin{aligned}
+0 &<k<26^3 \\
+0 &<k<17576
+\end{aligned}
+$$
 
 Se puede aumentar el espacio de claves indefinidamente con contraseñas más largas.
 
 Para contraseñas de $n$ carácteres:
 
-$0<k<26^n$
+$$
+0<k<26^n
+$$
 
-ejemplo :
+Ejemplos :
 
-$n=8 \rightarrow 26^8 = 2·10^{11}$ (0,5 €)
-$n=16 \rightarrow 26^{16} = 4·10^{22}$ (0,1 B€)
+- Si $n=8$, existen $26^8 = 2·10^{11}$ claves diferentes. Coste de fuerza bruta: 0,5 €
+- Si $n=16$, existen $26^{16} = 4·10^{22}$ claves diferentes. Coste: 0,1 billones de €
 
 ---
 <!-- _class: with-success -->
@@ -527,8 +520,11 @@ Una vez reducido el espacio de clave, identificados qué textos es probable que 
 La "Bombe" fue una de las primeras máquinas de procesado binario.
 
 El descifrado de Enigma fue una de las claves que permitió a los aliados ganar la Segunda Guerra Mundial
+
 # Confidencialidad perfecta
 <!-- _class: lead -->
+
+One-time-pad (cifrado Vernam)
 
 ## Cifrado Vernam
 
@@ -568,29 +564,22 @@ Cosas que implica:
 
 Si un cifado perfecto cifra como XHAJSJXXNFHFDOIOJUMNFNNNF, existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE"
 
-Un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles.
-
-Es decir, un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta
+Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
 
 ---
 
 El cifrado de Vigenère sufría un problema similar al del César (aunque camuflado): manifestaba la estadística del mensaje en claro en el mensaje cifrado
 
-Podemos evitar que se manifieste la estadística en el texto cifrado si utilizamos cada letra de la contraseña una sola vez
+Podemos evitar que se manifieste la estadística en el texto cifrado si utilizamos cada letra de la clave una sola vez
 
-**Tenemos confidencialidad perfecta si y solo sí usamos Vigenère**:
+**Tenemos confidencialidad perfecta si y solo sí usamos un cifrado Vigenère con las siguientes características**:
 
-- con una contraseña tan larga como el mensaje
+- con una clave tan larga como el mensaje
 - no conocida por el atacante (es decir: totalmente aleatoria)
 - la clave no se usa nunca más
 
 <!--
 En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
-
-Fíjate: ni siquiera es posible atacar el sistema por fuerza bruta. La clave es completamente aleatorio.
-
-Dado un mensaje cifrado, puedes encontrar una clave que dé absolutamente cualquier mensaje en claro, y no sabrás cuál de todos los mensajes "descifrados" es el verdadero.
-
 -->
 
 ---
@@ -650,7 +639,7 @@ Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro po
 - 1962 (ataque canal lateral): las máquinas usadas para cifrar eran eléctricas y emitían un campo magnético, que Japón podría haber aprovechado para captar qué cifraba la embajada de EEUU: [TEMPEST](https://www.governmentattic.org/18docs/Hist_US_COMSEC_Boak_NSA_1973u.pdf)
 
 
-# Conclusiones
+# Resumen y referencias
 <!-- _class: lead -->
 
 ---

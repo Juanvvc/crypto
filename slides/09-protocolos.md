@@ -27,10 +27,11 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 - Sabemos enviar mensajes con confidencialidad: criptografía simétrica
     - [Tema 3](03-simetrica.html): AES, ChaCha20
 - Sabemos acordar una clave con alguien a quien no conocíamos:
-    - [Tema 5](05-asimetrica.html): Diffie-Hellman
+    - [Tema 4](04-complejidad.html): Diffie-Hellman
 - Sabemos ofrecer integridad: hash y después cifrado con criptografía asimétrica
-    - [Tema 6](06-hashes.html): resumen de mensajes, hashes
     - [Tema 5](05-asimetrica.html): RSA
+    - [Tema 6](06-hashes.html): resumen de mensajes, hashes
+    - [Tema 7](07-integridad.html): integridad de mensajes
 - Sabemos autenticar: claves públicas y sistemas de confianza
     - [Tema 8](08-pki.html): PKI
 
@@ -255,6 +256,7 @@ Se debe vigilar que RSA y DHE sean de 2048 bit o más, y que ECDSA y ECDH usen P
 - (actualmente) deben regenerarse frecuentemente (certificados de corta duración)
 
 # Prácticas
+<!-- _class: lead -->
 
 ## Creación de una CA
 

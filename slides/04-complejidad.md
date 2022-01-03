@@ -68,10 +68,11 @@ El nombre "teoría de la complejidad" está muy bien escogido para describir el 
 
 ![center w:20em](images/sudoku.png)
 
-- Normas comunes de Sudoku
-- Las casillas adyacentes no tienen números consecutivos: no hay un 6 encima, debajo a la izquierda o la derecha de un 6
-- Las casillas separadas por movimientos de ajedrez de caballo o rey no tienen el mismo número
+- Normas comunes de Sudoku, y además...
+- Las casillas adyacentes no tienen números consecutivos. Ejemplo: no hay un 6 encima, debajo, a la izquierda o la derecha de un 5
+- Las casillas separadas por movimientos de ajedrez rey o caballo de ajedrez no tienen el mismo número
 - Pruébalo: [The Miracle, de Mitchell Lee](https://cracking-the-cryptic.web.app/sudoku/tjN9LtrrTL)
+- ¿Cuánto tiempo estimas que te llevará resolverlo?
 - ¿Cuánto tiempo le llevará a un algoritmo que sea el más rápido posible?
 
 "*It might have a unique solution but it's not gonna be findable by a human being*"
@@ -520,14 +521,14 @@ D-H tiene cuatro parámetros: los secretos $a$, $b$ y los públicos $g$, $p$
 - Si $p$ no es lo suficientemente grande, se puede romper por fuerza bruta
 - $g$ tiene que ser generador de $\Z^*_p$
 
-¡Estas son muchas conficiones! ¿Cómo podemos escoger $g$ y $p$ bien?
+¡Estas son muchas condiciones! ¿Cómo podemos escoger $g$ y $p$ bien?
 
 ---
 <!-- _class: smaller-font -->
 
 Afortunadamente no tenemos que escogerlos:
 
-- $g$ puede puede ser un número bajo. Normalmente, $g=2$
+- $g$ puede ser un número bajo. Normalmente, $g=2$
 - $p$ se puede reutilizar cuantas veces sean necesarias, así que se suele sacar de [tablas públicas (RFC7919, 2016)](https://tools.ietf.org/html/rfc7919)
 
 Ejemplo real:

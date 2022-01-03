@@ -29,7 +29,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 * **Integridad**: ¿?
 * **Autenticidad**: ¿?
 * **No repudio**: ¿?
-* Para los demás necesitamos conocer hashes, MAC y más sobre criptografía asimétrica
+* Para los demás servicios necesitamos conocer hashes, MAC y más sobre criptografía asimétrica
 
 ![bg right w:90%](https://i.imgur.com/Cq78TET.png?1)
 

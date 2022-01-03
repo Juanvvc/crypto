@@ -24,13 +24,11 @@ Juan Vera del Campo - juan.vera@campusviu.es
 
 # Como decíamos ayer...
 
-Cifrado Vernam ofrece **confidencialidad perfecta**
+Podemos conseguir **confidencialidad perfecta** que nadie puede descifrar....
 
 Pero implica claves de un solo uso tan grandes como el mensaje: $\|k\|=\|m\|$
 
-Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica"
-
-A partir de 1976:
+Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica". A partir de 1976:
 
 - **Criptografía simétrica**: es "casi perfecta" con claves cortas
 - **Criptografía asimétrica**: distribución de claves de cualquier tamaño
@@ -63,7 +61,7 @@ Hoy veremos como solucionarlo:
 1. [Cifrado Salsa20](#34)
 1. [Cifrado simétrico de bloque](#46)
 1. [Cifrado AES y modos de operación](#60)
-1. [Resumen y rerencias](#55)
+1. [Resumen y referencias](#55)
 
 Anexo recomendado: [RNG](A2-rng.html)
 
@@ -83,11 +81,17 @@ header: Confidencialidad computacional -->
 ---
 <!-- _class: extra-slide -->
 
-**Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribución de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de m dada c y la probabilidad de m coinciden
+**Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribución de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de $m$ dado $c$ y la probabilidad de $m$ coinciden:
 
 $$
 P[m|c] = P[m]
 $$
+
+Se necesita:
+
+- Que la clave sea tan larga como el mensaje
+- Que la clave sea totalmente aleatoria
+- Que la clave se use solo una vez, y después se descarte
 
 <!--
 Transparencia recordatorio
@@ -109,8 +113,12 @@ Es decir: ni siquiera por fuerza bruta podemos atacar el sistema de cifrado, por
 **Seguridad computacional**: un sistema es seguro computacionalmente si cualquier algoritmo probabilístico en tiempo polinomial solo puede romper el algoritmo con probabilidad negligible en $\|n\|$
 
 Informalmente: un atacante no puede descifrar el mensaje:
-- en un tiempo razonable y
-- con la tecnología actual.
+
+- en un tiempo razonable
+- con la tecnología actual
+- ...probablemente
+
+Con la seguridad computacional hay que definir el objetivo: "quiero un sistema criptográfico que mantenga este mensaje secreto durante los próximos 100 años"
 
 <!-- Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano
 
@@ -122,7 +130,7 @@ Lo importante es que relajamos el sistema lo suficiente como para que, por un ti
 La criptografía computacionalmente segura permite $\|k\| \ll \|m\|$
 
 - Es un cifrado práctico: la clave es mucho más pequeña que el mensaje y por tanto es fácil de distribuir
-- Pero hace posibles ataques de fuerza bruta
+- Pero si es muy pequeña, es posible hacer fuerza bruta
 
 Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
 
@@ -338,11 +346,11 @@ Recordatorio: este es el esquema para hacer un cifrador de flujo.
 -->
 
 ## Intento 1
-<!-- _class: smaller-font -->
+<!-- _class: smaller-font with-success -->
 
 Supongamos que tenemos una función PRNG, y usamos una clave k como semilla del PRNG para cifrar un flujo de datos en una conexión
 
-Si ciframos dos mensajes con la misma clave (semilla), un atacante puede :
+Si ciframos dos mensajes cifrados $c_1$ y $c_2$ con la misma clave (semilla), un atacante puede hacer:
 
 $$
 \begin{aligned}
@@ -355,14 +363,16 @@ c_1 \oplus c_2  &= (k_{\text{g}} \oplus m_1) \oplus (k_{\text{g}} \oplus m_2) \\
 \end{aligned}
 $$
 
-¡Un atacante puede hacer XOR de los dos textos cifrados y el XOR de los textos en claro!
+¡Un atacante puede hacer XOR de los dos textos cifrados y obtener el XOR de los textos en claro!
+
+Nunca hay que usar la misma clave (ni generada) con dos mensajes diferentes
 
 > Información adicional: [Chosen plaintext attacks](https://en.wikipedia.org/wiki/Chosen-plaintext_attack)
 
 <!--
 Qué puede hacer un atacante con el xor de los textos en claro:
 
-- Análisis frecuencia: La "clave para cifrar m2" es m1, que ya no es aleatorio y permite el análisis de frcuencuas.
+- Análisis frecuencia: La "clave para cifrar m2" es m1, que ya no es aleatorio y permite el análisis de frecuencias.
 - Si partes de m1 son conocidas, es aún más sencillo descifrar partes de m2
 
 Es decir, este esquema falla ante ataques de "chosen plaintext attacks": si el enemigo puede forzarnos a cifrar algo, el sistema está roto.
@@ -376,11 +386,11 @@ Mira el ejemplo de ataque japonés en el Pacífico de wikipedia
 
 Cambiamos la clave (la semilla del PRNG) en cada transmisión
 
-Esto es correcto pero costoso, y volvemos a los problemas de la confidencilidad perfecta: distribución de claves
+Esto es correcto pero costoso, y volvemos a los problemas de la confidencilidad perfecta: cómo distribuimos una clave diferente para cada mensaje
 
 ## Intento 3
 
-Generar variaciones de las claves en cada transmisión
+Generar **variaciones de las claves en cada transmisión**
 
 Supongamos que la semilla no es directamente la clave, sino una función de la clave y otro parámetro $r$
 
@@ -396,7 +406,7 @@ Pero tenemos que asumir que un atacante conoce $r$ porque monitoriza nuestras co
 
 Curiosamente: **¡esto es correcto!**
 
-Que el atacante conozca la $r$ reduce la fortaleza del algoritmo en los bits de $r$, pero es puede ser perfectamente adecuado (si el PRNG está bien diseñado)
+Que el atacante conozca la $r$ reduce la fortaleza del algoritmo en los bits de $r$, pero compensa utilizar una clave diferente cada mensaje (si el PRNG está bien diseñado)
 
 Este elemento se conoce como *nonce* y forma parte de muchos algoritmos criptográficos.
 
@@ -523,7 +533,7 @@ Recuerda:
 ## Descifrado con Python
 
 ``` python 
-# La clave key se tiene por canal seguro
+# La clave key se ontiene por canal seguro
 # el receptor recibe el mensaje anterior {nonce, ciphertext}
 nonce = b64decode(received['nonce'])
 ciphertext = b64decode(received['ciphertext'])
@@ -803,7 +813,7 @@ m | c $=e(k, m)$
 $pos_1$|$pos_2$
 $pos_2$|$pos_4$
 $pos_3$|$pos_3$
-$pos_4$|$pos_1)$
+$pos_4$|$pos_1$
 
 No solo la frecuencia de los símbolos de entrada se mantiene, si no que los propios símbolos se mantiene (aunque en posiciones diferentes)
 

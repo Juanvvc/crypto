@@ -271,9 +271,7 @@ Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de at
     - PGP: gestión descentralizada (Web of trust)
     - PKI/X.509: gestión centralizada
 
----
-
-![center](images/rsa-meme.png)
+![bg right w:100%](images/ssh-meme.png)
 
 ---
 
