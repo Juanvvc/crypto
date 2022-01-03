@@ -436,22 +436,12 @@ Vamos a diseñar un protocolo entre Alice y Bob para que usen la clave $k=g^{ab}
 
 Se asume que $g^{ab}$ es computacionalmente difícil de calcular para el atacante al ser equivalente al problema del logaritmo discreto. En 50 años no hemos encontrado una forma rápida (es decir, polinomial $O(n^k)$) de hacer este cálculo sin conocer previamente $a$ ó $b$
 
+
+> Si lo necesitas, consulta la definición de Alice y Bob en el [glosario](A1-glosario.html)
+
 <!--
 Recuerda: sabemos que el problema del logaritmo discreto es NP, pero no sabemos si también es P y por tanto y fácil de resolver. Sospechamos muchísimo que no es P y que el algoritmo más rápido posible tomará un tiempo exponencial con el tamaño de la clave. Pero no estamos *matemáticamente* seguros. ¿es P=NP o no? No lo sabemos.
 -->
-
-## (inciso: Alice y Bob)
-<!-- _class: extra-slide -->
-
-![bg right w:35em](https://www.explainxkcd.com/wiki/images/8/8d/alice_and_bob.png)
-
-Por tradición, cuando se describen protocolos criptográficos:
-
-- Alice y Bob son dos personas que quieren intercambiar información
-- Charlie será otro participante legítimo, cuando lo necesitemos
-- Eve (solo escucha) y Malloy (puede enviar mensajes) son atacantes
-
-> Alice y Bob: https://www.explainxkcd.com/wiki/index.php/177:_Alice_and_Bob
 
 ## Protocolo
 <!-- _class: smaller-font -->

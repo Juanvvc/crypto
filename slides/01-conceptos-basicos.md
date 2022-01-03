@@ -33,11 +33,17 @@ juan.vera@campusviu.es
 
 Anexo recomendado: [Glosario](A1-glosario.html)
 
+<!--
+El glosario es un resumen de las trasparencias de este tema, y un recordatorio de las matermáticas que usaremos
+-->
+
 # Servicios criptográficos
 <!--
 _class: lead
 header: 'Servicios criptográficos'
 -->
+
+¿Qué queremos proteger?
 
 ---
 
@@ -53,8 +59,6 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 
 ¿Qué hemos aprendido desde entonces?
 
-> Hablaremos de esto en el [tema 2](02-historia.html)
-
 ## ¿Qué es la criptografía?
 
 Protección de la comunicaciones a través de **medios desprotegidos** entre un emisor y uno o varios destinatarios
@@ -63,8 +67,13 @@ Protección de la comunicaciones a través de **medios desprotegidos** entre un 
 
 ...y eso es mucho más que mantener un mensaje secreto...
 
-> Fondo: [(c) cottonbro](https://www.pexels.com/photo/clear-glass-bowl-on-white-table-cloth-7319077/). Free to use 
+> Fondo: [(c) cottonbro](https://www.pexels.com/photo/clear-glass-bowl-on-white-table-cloth-7319077/). Free to use
 
+<!--
+Tradicionalmente hemos entendido la criptogafía como las técnicas para mantener un mensaje confidencial y que solo pueda leerlo la persona para la que está destinado.
+
+Pero hay mucho más detrás: ¿cómo nos aseguramos que realmente solo el receptor puede leer un mensaje? ¿Es posible demostrar matemáticamente que solo el receptor puede leerlo? ¿ Y cómo se asegura el receptor que el emisor es realmente quien dice ser?
+-->
 
 ---
 
@@ -115,6 +124,8 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 # Estrategias de los sistemas seguros
 <!-- _class: lead -->
 
+*The thing is secure if its outputs look like random junk*
+
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
 
@@ -130,25 +141,33 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 <!--
 Este es el modelo sobre el que trabajaremos: dos personas "Alice y Bob" comunicándose por un canal inseguro porque puede haber un adversario "Maloy" en medio.
 
-Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo.  En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real, y son añadidos a la criptografía que mejoran aún más la seguridad del sistema.
+Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo. En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real para mejorar aún más la seguridad del sistema.
 -->
 
 ## Grados de seguridad teórica
 
-Esta protección debe soportar ataques de una **complejidad razonable**:
-
 - **Seguridad incondicional**: un atacante no puede descifrar el mensaje aunque tenga infinito dinero o infinito poder computacional.
 - **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga porque lleva demasiado tiempo, dinero o recursos.Por ejemplo, millones de años o más memoria de la que cabe en el universo.
-
-> Hablaremos de esto en el [tema 4](04-complejidad.html)
 
 <!--
 
 Tenemos que **poder** **proteger** los mensajes.
 
 Veremos que existen protocolos que ofrecen seguridad incondicional, pero su utilización es tan pesada que no es práctica, y actualmente se prefiere la seguridad computacional
-
 -->
+
+## Seguridad computacional
+<!-- _class: with-info -->
+
+La criptografía actual se basa en la seguridad computacional: una comunicación será **probablemente** segura durante las próximas **décadas**. 
+
+- Solo con cierta probabilidad matemática
+- Solo durante un tiempo determinado
+
+Para poder diseñar un sistema seguro moderno empezamos con la pregunta: ¿con qué probabilidad queremos que ningún atacante pueda leer el mensaje durante la próxima década?
+
+> Hablaremos de esto en el [tema 4](04-complejidad.html)
+
 
 ## Seguridad por oscuridad
 <!-- _class: with-info -->
@@ -160,12 +179,16 @@ Veremos que existen protocolos que ofrecen seguridad incondicional, pero su util
 - Adopción de políticas de no revelación pública de la información sobre vulnerabilidades.
 - Confiar en configuraciones no estándar (por ejemplo, poner el servidor en el puerto 3181)
 
-Confiar en "la oscuridad" para ofrecer seguridad no es buena idea.
+Confiar solo en "la oscuridad" para ofrecer seguridad no es buena idea.
 
 <!--
 La seguridad por oscuridad es pensar que un sistema secreto es más seguro que un sistema conocido. En realidad, es muy difícil mantener un sistema en secreto. Además, la criptografía está llena de "trampas" y razonamientos no evidentes. Es muy difícil que unas pocas personas puedan diseñar un sistema realmente seguro y además mantenerlo en secreto. Eso es lo que se llama "seguridad por oscuridad", y fiar la seguridad a la oscuridad no es buena idea, como nos ha enseñado la experiencia.
 
-Mantener las cosas en secreto no significa mantener los protocolos de seguridad en secreto.
+Un sistema no es inseguro por ser oscuro. Es simplemente oscuro. Basar tu seguridad en la oscuridad lo consideramos una mala idea porque los hackers pueden saber más que tú. No hay ningún error lógico en querer basar tu seguridad en la oscuridad. Simplemente, la experiencia nos dice que no es buena idea, y que los sistemas cuya seguridad se basa en la oscuridad caen antes.
+
+PERO que un sistema sea seguro de por sí, utilizando protocolos realmente seguros y buenas prácticas criptográficas, Y ADEMÁS lo ocultamos al mundo, es sin duda una buena idea que no perjudica. Tendrás a los adversarios entretenidos para intentar entender tu sistema, y cuando lo consigan verán que es un indescifrable AES-512.
+
+No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.
 -->
 
 ---
@@ -176,28 +199,12 @@ Mantener las cosas en secreto no significa mantener los protocolos de seguridad 
 > <https://dev.to/ctrlshifti/what-security-through-obscurity-is-and-why-it-s-evil-47d5>
 
 
-## Pero tenemos malas noticias...
-
-![bg right:75%](images/security-through-obscurity-is-everywhere.jpg)
-
-
-## (inciso)
-<!-- _class: extra-slide -->
-
-* "Seguridad solo por oscuridad" es mala práctica
-* Pero "seguridad por estándares **y además** oscuridad" puede ser buena idea
-
 <!--
-
-Un sistema no es inseguro por ser oscuro. Es simplemente oscuro. Basar tu seguridad en la oscuridad lo consideramos una mala idea porque los hackers pueden saber más que tú. No hay ningún error lógico en querer basar tu seguridad en la oscuridad. Simplemente, la experiencia nos dice que no es buena idea, y que los sistemas cuya seguridad se basa en la oscuridad caen antes.
-
-PERO que un sistema sea seguro de por sí, utilizando protocolos realmente seguros y buenas prácticas criptográficas, Y ADEMÁS lo ocultamos al mundo, es sin duda una buena idea que no perjudica. Tendrás a los adversarios entretenidos para intentar entender tu sistema, y cuando lo consigan verán que es un indescifrable AES-512.
-
-No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.
-
+![bg right:75%](images/security-through-obscurity-is-everywhere.jpg)
 -->
 
 ## Principios de diseño
+<!-- _class: center -->
 
 Si la seguridad por oscuridad no es recomendable...
 
@@ -231,7 +238,7 @@ Pero atención: la criptografía actual
   fácilmente memorizables.
 - Los resultados son binarios, y por tanto no son alfanuméricos en general. Aún
   así y aunque no sea estrictamente necesario, la criptografía tiene como
-  "costumbre" guardar claves codificadas en Base65, es decir, usando solo
+  "costumbre" guardar claves codificadas en Base64, es decir, usando solo
   caracteres imprimibles. El principio 4 se sigue cumpliento parcialmente, aunque
   no sea estrictamente necesaria.
 - El sistema completo suele necesitar de varias personas para operar, y en
@@ -261,20 +268,22 @@ Pero son recomendaciones muy informadas.
 
 <!-- Shanon es un gran matemático del siglo XX, que creó la teoría de la información. Le debemos la teoría detrás de la criptografía, los archivos comprimidos, la codificación digital...
 
-Su máxima se contrapone a la "seguridad por oscuridad". Es decir, tratar de dejar el sistema secreto. No funciona.
+Su máxima se contrapone a la "seguridad por oscuridad". Es decir, la seguridad de un sistema secreto solo será segura mientras el sistema sea secreto. ¿Y si deja de serlo? ¿Y si pensamos que es seguro, pero no lo es?
 
 El paper enlazado es una estupenda introducción a los conceptos fundamentales de la criptografía y se recomienda mucho su lectura
 -->
 
 ## Confusión y difusión
 
-Según Shannon, la criptografía debe **maximizar la confusión y difusión de los mensajes cifrados**
+Según Shanon, un sistema seguro no debe basarse en que los algoritmos sean secretos, sino solo en que exista una clave secreta.
+
+La criptografía debe **maximizar la confusión y difusión de los mensajes cifrados**
 
 
 ![bg left:30% w:95%](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/SubstitutionPermutationNetwork2.png/468px-SubstitutionPermutationNetwork2.png)
 
-- **Confusión**: cada bit de un mensaje cifrado depende de varios bits de la clave.
-- **Difusión**: un cambio de un bit en el mensaje original cambia la mitad de los bits en el mensaje cifrado.
+- **Confusión**: cada bit de un mensaje cifrado depende de varios bits **de la clave**.
+- **Difusión**: cada bit de un mensaje cifrado depende de varios bits **del mensaje original**.
 
 > Fuente: <https://en.wikipedia.org/wiki/Confusion_and_diffusion>
 
@@ -286,6 +295,27 @@ Shannon fue quien recomendó que la criptografía se centrase en maximizar esos 
 Algunos algoritmos de cifrado no son complejos y están formados por pequeños módulos o pasos que actúan en cascada. Cada uno de estos pasos aumenta la difusión y confusión del mensaje original, hasta que es totalmente indescifrable
 
 La unión de pequeños pasos sencillos (llamados puertas criptográficas, o gates), crea una primitiva criptográfica, que es lo que veremos a continuación
+-->
+
+## Gestión de claves
+
+![bg left:30% h:100%](https://securityledger.com/wp-content/uploads/2021/07/Lea_Kissner.jpeg)
+
+*La criptografía es una herramienta para convertir un montón de problemas diferentes en un problema de gestión de claves*
+
+Lea Kissner, antigua ingeniera principal de seguridad de Google
+
+- **Contraseña**: palabra que utilizamos para entrar en un sistema. "Sesamo"
+- **Clave criptográfica**: conjunto de números que dan seguridad a un sistema: "82198329382371291821201"
+
+<!--
+Si la clave es lo único que tiene que ser secreto, tenemos que protegerla a toda costa.
+
+En este curso no estudiaremos cómo proteger las claves, pero tened en cuenta que, al ser la pieza central de la seguridad de un sistema, es necesario que los usuarios de criptografía dispongan de algún modo de gestión segura de claves criptogrtáficas
+
+Una contraseña no es lo mismo que una clave criptográfica. Las contraseñas suelen ser mucho más inseguras que una clave (a veces no son aleatorias o están pensadas para que las pueda recordar un humano) A veces las contraseñas serán el primer paso para entrar en un sistema seguro, pero **no son buenas claves criptográficas**
+
+En muchas ocasiones un sistema se romperá no por que la criptopgrafía sea débil, sino porque incluye un paso de control con contraseña que es habitualmente la parte más débil de un protocolo.
 -->
 
 # Primitivas criptográficas
@@ -325,8 +355,6 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 71a3644f14bdd5d2ebf56aaca440ad3c2b76b13f6a0708a9918e6b8bfabaeff3  -
 ```
 
-**Fíjate**: el resumen **no es único**. Hay un número infinito de mensajes con el mismo resumen. Como consecuencia, a partir del resumen no se puede obtener el mensaje original.
-
 > Hablaremos del hash en el [tema 6](06-hashes.html)
 
 ## Primitivas: clave simétrica
@@ -340,8 +368,6 @@ Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcul
 > openssl aes-256-cbc -a -salt -in test.mp3 -out test.aes -pass pass:1234
 
 > openssl aes-256-cbc -d -a -salt -in test.aes -out test2.mp3 -pass pass:1234
-
-> open test2.mp3 
 ```
 
 > Hablaremos del cifrado simétrico en el [tema 3](06-simetrico.html)
@@ -398,6 +424,8 @@ La unión de primitivas criptográficas crea un protocolo criptográfico
 _class: lead 
 header: 'Protocolos criptográficos'
 -->
+
+*If A is a secure thingamajig, then B is a secure doohickey*
 
 ## Protocolo de seguridad
 
@@ -485,15 +513,13 @@ Es decir, los mensajes son eslabones de una cadena, cada mensaje tiene el hash d
 Casi, casi, hemos definido una blockchain como bitcoin
 -->
 
-
-
-
 ## Objetivos: "otros"
 
 - **Autorización**: ¿está el interlocutor autorizado a acceder a estos datos?
-- **Acuerdo de claves**: permite que un grupo de actores generen un número (pseudo) aleatorio sin que nadie externo al grupo pueda conocerlo
+- **Acuerdo de claves**: permite que un grupo de actores generen una clave sin que nadie externo al grupo la conozca
 - **Partición de secretos**: permite repartir un secreto entre un grupo de actores, exigiendo un mínimo de actores para recomponerlas
-- **PRNG** (Pseudo Random Number Generation): permite generar una secuencia aparentemente aleatoria para cualquiera que no conozca la semilla
+- **Esteganografía**: queremos ocultar que dos personas están hablando
+- **Anonimato**: el emisor quiere ocultar su identidad
 - etcétera
 
 <!--
@@ -525,4 +551,4 @@ header: ''
 ---
 <!-- _class: center -->
 
-- Continúa en: [Criptografía clásica](02-historia.html)
+Continúa en: [Criptografía clásica](02-historia.html)

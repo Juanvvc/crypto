@@ -649,7 +649,8 @@ Han decidido que harán extorsión con los datos. Algunos grupos, como Babyk, ha
 
 ![center w:20em](images/babuk-leaks.png)
 
-> Check: https://www.ransomwatch.org/
+> Check: <https://www.ransomwatch.org/>
+> Alternative: <https://darkfeed.io>
 
 <!--
 Ejemplo de una página web de un grupo de atacantes que ha tenido mucho éxito durante 2021: Babyk/Babuk. Aquí se pueden ver sus últimos ataques con éxito y la amenaza de publicar los datos robrados.

@@ -20,16 +20,29 @@ theme: marp-viu
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
+---
+<!-- _class: cool-list -->
 
-## Fuentes de información
-<!-- _class: center -->
+1. [Definiciones Generales](#3)
+1. [Matemáticas](#11)
 
-- [NIST Special Publication 800-57 Part 1, Section 3](https://doi.org/10.6028/NIST.SP.800-57pt1r5), NIST SP 800-57. El NIST es la agencia de estandarización de EEUU, y entre las cosas que estandariza también están las definiciones de seguridad. Sus estándares son sencillos de leer y empiezan un glosario que viene muy bien para introducirse en la criptografía
-- [Algorithms, key size and parameters report](https://www.enisa.europa.eu/publications/algorithms-key-size-and-parameters-report-2014/), ENISA, 2014. ENISA es el equivalente al NIST para Europa. Su documento de referencia es válido para definiciones y descripciones generales
+## Definiciones generales
+<!-- _class: lead -->
 
-## Generales
+## Los amigos de Alice
 
-- [*Alice*, *Bob*, *Charlie*, *Eve* y *Mallory*](https://en.wikipedia.org/wiki/Alice_and_Bob): al describir protocolos, se suelen utilizar estos nombres para los participantes. Fijate: A, B, C, E y M. Eve y Malloy suelen ser atacantes pasivos o activos
+![bg right w:35em](https://www.explainxkcd.com/wiki/images/8/8d/alice_and_bob.png)
+
+Por tradición, cuando se describen protocolos criptográficos:
+
+- Alice y Bob son dos personas que quieren intercambiar información
+- Charlie será otro participante legítimo, cuando lo necesitemos
+- Eve (solo escucha) y Malloy (puede enviar mensajes) son atacantes
+
+ Fijate: A, B, C, E y M
+
+> Alice y Bob: https://www.explainxkcd.com/wiki/index.php/177:_Alice_and_Bob
+
 
 ## Servicios de seguridad principales
 
@@ -73,3 +86,59 @@ Objetivo|Primitiva
 - [PRNG](03-simetrica.html): Pseudo Random Number Generator
 - [RNG](A2-rng.html): Random Number Generator
 
+# Matemáticas
+<!-- _class: lead -->
+
+## Logaritmos y exponenciaciones
+
+$$
+\begin{aligned}
+(x^a)(x^b) &= x{a+b} \\
+(x^a)^b &= x^{ab} \\
+\log_x (ab) &= \log_x a + \log_x b \\
+a \log_x b &= \log_x (ba) \\
+\end{aligned}
+$$
+
+## Aritmética modular
+
+$$a \mod b = m$$
+
+Significa: $a$ divivido entre $b$ da lo que sea y de resto $m$. **Lo único que interesa en la aritmética modular es el resto de la división**.
+
+Ejemplos:
+
+$$
+\begin{aligned}
+9 \mod 3 &= 0 \\
+10 \mod 3 &= 1 \\
+11 \mod 3 &= 2 \\
+12 \mod 3 &= 0 \\
+13 \mod 3 &= 1
+\end{aligned}
+$$
+
+## XOR
+
+Operación XOR de dos cadenas binarias: $a \otimes b=c$ El bit de la posición $x$ de $c$ tiene (1) el mismo bit que $a$ si el bit en $b$ es 0 (2) el bit cambiado de $a$ si el bit en $b$ es 1.
+
+$$
+\begin{aligned}
+...1010...\otimes...1100...&=...0110... \\
+...1010...\otimes...0101...&=...1111... \\
+...1010...\otimes...0000...&=...1010... \\
+...1010...\otimes...1111...&=...0101...
+\end{aligned}
+$$
+
+<!-- Fíjate:
+
+- XOR con todos 0, es el mismo mensaje
+- XOR con todos 1, cambia todos los bits
+- XOR es conmutativo, por eso da igual cuál interpretes como a o como b
+
+XOR es una operación muy común en criptografía que usaremos en el tema 3, y la base de muchos algoritmos criptográficos.
+
+Pero solo XOR no es suficiente para un algoritmo: si la clave es 0000, ¡el texto cifrado será el texto en claro! Eso es lo que nos permitió romper el sistema de los Cuentacuentos en la primera sesión
+
+-->

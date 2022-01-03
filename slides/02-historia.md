@@ -29,7 +29,7 @@ juan.vera@campusviu.es
 1. [Cifrado César: fuerza bruta y análisis frecuencial](#8)
 1. [Mejoras al cifrado César: Vigenère y Enigma](#25)
 1. [Confidencialidad perfecta: Vernam](#40)
-1. [Resumen y referencias](#51)
+1. [Resumen y referencias](#50)
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
@@ -609,29 +609,8 @@ La NSA tenía 86.000 *one-time-pads* solo para el año 1972.
 
 ![bg left:50%](https://www.cryptomuseum.com/spy/r353/img/300148/191/full.jpg)
 
-## (recordatorio: XOR)
-<!-- _class: extra-slide -->
+> Si lo necesitas, mira la operación XOR en [el glosario](A1-glosario.html)
 
-
-$...00000...\otimes...00000...=...00000...$
-
-$...10010...\otimes...11000...=...01010...$
-
-$...11111...\otimes...11000...=...00111...$
-
-$...00011...\otimes...11100...=...11111...$
-
-$...10101...\otimes...00000...=...10101...$
-
-<!-- Fíjate: una series de ceros XOR una clave ¡es la clave!
-
-Eso es lo que nos permitió romper el sistema de los Cuentacuentos en la primera sesión
-
-El problema del algoritmo del Cuentacuentos es que estábamos repitiendo la clave: con la misma clave cifrábamos una zona de ceros y todo lo demás.
-
-XOR es una operación muy común en criptografía que usareos en el tema 3
-
--->
 ---
 
 El teléfono rojo entre Washington y Moscú fue en realidad un teletipo que usaba cifrado de bloque de un solo uso

@@ -113,7 +113,7 @@ Los ejercicios son notebook de Jupyter:
 
 ## Conocimientos necesarios
 
-- Álgebra, teoría de conjuntos, probabilidad
+- Álgebra básica, teoría de conjuntos, probabilidad
 - Conocimientos básicos de programación: ejemplos en Python
 - Conocimientos básicos de Linux: comandos en consola
 - Conocimientos básicos de redes: cómo funciona la WWW.
@@ -127,6 +127,7 @@ Los ejercicios son notebook de Jupyter:
     - https://www.coursera.org/learn/crypto
     - https://www.coursera.org/learn/crypto2
     - https://www.coursera.org/learn/cryptography
+- "[*The Joy of Cryptography*](https://joyofcryptography.com/)" de Mike Rosulek, 2021
 - "[*A Course in Cryptography*](https://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf)" Rafael Pass & Abhi Shelat. Más ligero que el anterior.
 - "[*Handbook of Applied Cryptography*](http://cacr.uwaterloo.ca/hac/)" Alfred J. Menezes. Un clásico para conceptos fundamentales.
 - "A Course in Cryptography" Heiko Knospe.
