@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Protocolos
+author: Juan Vera
+keywords: criptografía,protocolos
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>
@@ -43,7 +46,6 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 ## Transport Layer Security
 
 Seguridad de la capa de transporte (en inglés: *Transport Layer Security* o TLS) y su antecesor Secure Sockets Layer (*Secure Socket Layer*) son protocolos criptográficos que proporcionan:
-
 - Autenticación mediante certificados. Es decir: criptografía asimétrica.
 - Gestión de claves. Es decir: protocolo Diffie-Hellman
 - Confidencialidad de las comunicaciones. Es decir: criptografía simétrica
@@ -106,6 +108,16 @@ TLS tiene dos modos para garantizar la autenticación de las partes:
 - **Autenticación de servidor**: solo el servidor tiene un certificado. El cliente sabe que está hablando con el banco, pero **el banco no sabe nada del cliente**
 
 Utilizar TLS solo con autenticación de servidor es lo más habitual en Internet
+
+---
+
+HTTPS & SSL doesn't mean "trust this." It means "this is private." You may be having a private conversation with Satan.
+
+- Scott Hanselman
+
+![bg right:50%](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a3027904-ae41-45a8-b650-e764095bcb3e/d4rpcot-50371f8c-8c06-437a-8925-02b8543b9791.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2EzMDI3OTA0LWFlNDEtNDVhOC1iNjUwLWU3NjQwOTViY2IzZVwvZDRycGNvdC01MDM3MWY4Yy04YzA2LTQzN2EtODkyNS0wMmI4NTQzYjk3OTEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ihGQMgyjQrzBSxldIEVPJv51GOA9RVSAYAxFvSNoqCQ)
+
+> https://www.deviantart.com/karosu-maker/art/The-Call-of-Cthulhu-288397181
 
 ## Autenticación: gestión de la identidad
 

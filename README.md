@@ -21,6 +21,7 @@ el apartado "Contenido".
 - [Protocolos: TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
 - Apéndice: [Comunicaciones anónimas y TOR](https://juanvvc.github.io/crypto/slides/A4-anonimato.html)
 - [Autenticación](https://juanvvc.github.io/crypto/slides/10-autenticacion.html)
+- [Esteganografía](https://juanvvc.github.io/crypto/slides/11-esteganografia.html)
 
 Algunas notas:
 

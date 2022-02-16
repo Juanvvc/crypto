@@ -141,7 +141,6 @@ There is movie about his life: Je Compte sur Vous
 
 ![center w:28em](images/BEC/bec-mailinthemiddle.png)
 
-
 <!--
 Impersonation example: man-in-the-middle
 
@@ -297,6 +296,15 @@ Most of the times, they even hide this emails. His objective is that the victim 
 - Assessing which emails or data has been accessed and/or exfiltrated is critical for  determining the impact on an organisation, including but not limited to financial losses, privacy implications and reputational damages. 
 - Threat intelligence is an important part of the investigative process-
 - BEC intrusions are typically opportunistic and attribution is difficult.
+
+## External confirmation
+
+
+- https://emailrep.io
+- https://email-checker.net
+- https://tools.emailhippo.com
+- https://hunter.io/email-verifier
+- https://trumail.io
 
 ## Threat intelligence
 

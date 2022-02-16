@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Teoría de la complejidad y acuerdo D-H
+author: Juan Vera
+keywords: criptografía,complejidad,diffie-hellman
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>

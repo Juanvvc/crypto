@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Funciones de Hash y Blockchains
+author: Juan Vera
+keywords: criptografía,hash,sha256,bitcoin
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>
@@ -37,8 +40,8 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 <!-- _class: cool-list -->
 
 1. [Funciones de hash](#4)
-1. [Blockchain](#30)
-1. [Resumen y referencias](#45)
+1. [Blockchain](#31)
+1. [Resumen y referencias](#46)
 
 # Funciones de hash
 <!-- _class: lead -->
@@ -221,6 +224,12 @@ c99fe5e1ec0f637d77dddb32b1679c21  06-hashes.md
 ```
 
 Si calculas los valores de hash del archivo, verás que no coinciden. Eso es porque no se puede calcular el hash de un archivo, meter el hash en el propio archivo, volver a calcular el hash ¡y que dé lo mismo! Recuerda: cualquier cambio (como por ejemplo meter el hash) cambia totalmente el hash
+
+## Visual SHA-256
+
+[![center w:30em](images/visual-sha256.png)](https://sha256algorithm.com/)
+
+> https://sha256algorithm.com/
 
 ## ¿SHA-2 ó SHA-3?
 

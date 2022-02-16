@@ -2,7 +2,7 @@
 marp: true
 title: Criptografía - Autenticación
 author: Juan Vera
-eywords: autenticación,authentication,criptografía,cryptography,tokens,contraseña,password,kerberos,oauth
+keywords: autenticación,authentication,criptografía,cryptography,tokens,contraseña,password,kerberos,oauth
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
@@ -623,6 +623,11 @@ El problema de la autenticación segura aún está a medio resolver en entornos 
 - [Kerberos Authentication Explained | A deep dive](https://www.youtube.com/watch?v=5N242XcKAsM)
 - [What is OAuth really all about - OAuth tutorial - Java Brains](https://www.youtube.com/watch?v=t4-416mg6iU)
 - [Why We Hash Passwords](https://dzone.com/articles/why-we-hash-passwords)
+
+---
+<!-- _class: center -->
+
+Continúa en: [Esteganografía](11-esteganografia.html)
 
 
 

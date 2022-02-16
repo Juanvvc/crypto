@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Criptografía asimétrica
+author: Juan Vera
+keywords: criptografía,asimétrica,rsa,dsa,diffie-hellman
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>

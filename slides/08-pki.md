@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - PKI
+author: Juan Vera
+keywords: criptografía,pki,firma
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>

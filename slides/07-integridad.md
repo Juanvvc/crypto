@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Integridad
+author: Juan Vera
+keywords: criptografía,integridad
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>

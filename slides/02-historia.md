@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Historia de la criptografía
+author: Juan Vera
+keywords: historia,criptografía,cesar,vigenere,enigma,vernam,one-time-pad
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>
@@ -673,6 +676,7 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 - <https://www.ugr.es/~aquiran/cripto/enigma/boletin_enigma_18.htm#1>, y siguientes, con la historia de la criptografía en la Segunda Guerra Mundial.
 - https://www.cryptomuseum.com/, con fotografías de aparatos criptográficos históricos.
 - Película: <https://en.wikipedia.org/wiki/The_Imitation_Game>
+- [The Cryptograhic Mathematics of Enigma](https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/wwii/CryptoMathEnigma_Miller.pdf) Dr. A. Ray Miller, NSA 2019
 
 ---
 <!-- _class: center -->

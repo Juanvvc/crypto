@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Principios Básicos
+author: Juan Vera
+keywords: criptografía,principios
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>
