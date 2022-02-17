@@ -36,6 +36,8 @@ juan.vera@campusviu.es
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/02
+
 # Criptografía clásica
 <!-- _class: lead -->
 

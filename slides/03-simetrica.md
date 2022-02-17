@@ -68,6 +68,9 @@ Hoy veremos como solucionarlo:
 
 Anexo recomendado: [RNG](A2-rng.html)
 
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+
+
 # Confidencialidad computacional
 <!-- _class: lead
 header: Confidencialidad computacional -->

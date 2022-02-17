@@ -67,6 +67,9 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 1. [Depurando detalles](#53)
 1. [Resumen y referencias](#56)
 
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/05
+
+
 <!--
 Atención: este tema es matemáticamente denso, pero no es necesario seguir todos los detalles. Si tienes interés en los detalles, por favor, consulta los papers y libros especilizados.
 

@@ -29,12 +29,16 @@ juan.vera@campusviu.es
 <!-- _class: cool-list -->
 
 1. [Servicios criptográficos: objetivos](#3)
-1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#7)
+1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#8)
 1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#20)
 1. [Protocolos criptográficos: composición de primitivas](#27)
 1. [Conclusiones: resumen y referencias](#32)
 
-Anexo recomendado: [Glosario](A1-glosario.html)
+Ejercicios:
+
+- https://github.com/Juanvvc/crypto/tree/master/ejercicios/01
+- Alternativamente, curso de www.cryptohack.org: "Introduction to Cryptohack"
+
 
 <!--
 El glosario es un resumen de las trasparencias de este tema, y un recordatorio de las matermáticas que usaremos
@@ -298,6 +302,7 @@ El paper enlazado es una estupenda introducción a los conceptos fundamentales d
 -->
 
 ## Confusión y difusión
+<!-- _class: extra-slide -->
 
 Según Shanon, un sistema seguro no debe basarse en que los algoritmos sean secretos, sino solo en que exista una clave secreta.
 

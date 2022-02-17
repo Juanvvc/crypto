@@ -1,10 +1,13 @@
 ---
 marp: true
 title: Criptografía - Anonimato
+author: Juan Vera
+keywords: anonimato
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
+transition: fade
 ---
 
 <style>

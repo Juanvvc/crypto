@@ -53,6 +53,9 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 1. [Acuerdo de clave Diffie-Hellman](#26)
 1. [Resumen y referencias](#43)
 
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/04
+
+
 # Teoría de la complejidad
 <!-- _class: lead -->
 

@@ -43,6 +43,8 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 1. [Blockchain](#31)
 1. [Resumen y referencias](#46)
 
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
+
 # Funciones de hash
 <!-- _class: lead -->
 
