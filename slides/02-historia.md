@@ -15,7 +15,6 @@ transition: fade
     Other editor might need these custom code in
     the YAML header: section: | */
 </style>
-
 # Criptografía
 <!-- _class: first-slide -->
 
@@ -30,9 +29,9 @@ juan.vera@campusviu.es
 
 1. [Criptografía clásica](#3)
 1. [Cifrado César: fuerza bruta y análisis frecuencial](#8)
-1. [Mejoras al cifrado César: Vigenère y Enigma](#23)
-1. [Confidencialidad perfecta: Vernam / one-time-pad](#38)
-1. [Resumen y referencias](#48)
+1. [Mejoras al cifrado César: Vigenère y Enigma](#24)
+1. [Confidencialidad perfecta: Vernam / one-time-pad](#39)
+1. [Resumen y referencias](#51)
 
 En resumen: cómo se hacían las cosas antes y por qué no funcionan
 
@@ -161,6 +160,14 @@ B &\leftarrow	E
 \end{aligned}
 $$
 
+<!-- El descifrado césar sigue exactamente el mismo algoritmo que el cifrado, pero usando una clave diferente.
+
+Esto pasará a menudo: la función de cifrado (o al menos algunos de los pasos de la función de cifrado) es muy parecida a la función de descifrado. Esto es una enorme ventaja porque nos permite utilizar los mismos programas, o parte de los mismos, para cifrar y descifrar:
+
+- menos errores, al reutilizar código
+- si usamos hardware especializado, podemos reaprovecharlo en el envío y la recepción
+-->
+
 ## Seguridad del cifrado del César: fuerza bruta
 
 `HOLAMUNDO`
@@ -198,14 +205,14 @@ Es decir, es un César con k=12. Fíjate en algunas curiosidades típicas en el 
 
 Estas simplificaciones de letras dependen de la lengua original. Fíjate también que para interpretar el texto necesitas información de contexto, porque son telegramas y no novelas. Estas características (letras de menos, jerga) ya no las estudia la criptografía moderna aunque sí que sean necesarias para interpretar correctamente un mensaje, y fueron importantes para descifrar textos en el pasado. Por ejemplo con la máquina enigma, como veremos más tarde.
 
-Además, la forma del papel sugiere que estaba oculto en algún sitio y tenía esa forma para que no fuese reconocible. Sí que hay un rama de la criptografía moderna que estudia cómo ocultar un mensaje: la esteganografía. No estudiaremos esteganografía en este curso.
+Además, la forma del papel sugiere que estaba oculto en algún sitio y tenía esa forma para que no fuese reconocible. Sí que hay un rama de la criptografía moderna que estudia cómo ocultar un mensaje: la esteganografía.
 -->
 
 ---
 
 ![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg)
 
-Pero saber si un mensaje se ha descifrado correctamente no siempre es posible:
+Pero no siempre es posible saber si un mensaje se ha descifrado correctamente:
 
 - El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado. Suponiendo que use César, no se sabe en qué lengua está escrito originalmente.
 - Imagina que solo está cifrada la hora "atacamos a las X"... Si una clave descifra "a las 5" y otra "a las 7" ¿cómo validamos qué hora es correcta? 
@@ -247,9 +254,27 @@ Alquilando equipos en la nube por segundos, con un euro cada segundo podemos pro
 
 Si estimamos que nuestro "secreto" vale 1000 €:
 
-Nos hacen falta un sistema que permita $2·10^{14}$ claves diferentes ($\approx 2^{48}$) para guardar el secreto durante una hora.
+Nos hacen falta un sistema criptográfico que permita escoger entre $2·10^{14}$ claves diferentes ($\approx 2^{48}$) para guardar el secreto durante una hora.
 
 **La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
+
+## Aumentando el espacio de claves en César: mapeo aleatorio
+
+Hemos visto que el César original tiene como máximo 26 claves, aproximadamente $2^5$, es decir, entre 4 y 5 bits de fortaleza.
+
+Podemos mejorarlo permitiendo cualquier mapeo aleatorio:
+
+$$
+\begin{aligned}
+X &\rightarrow F \\
+Y &\rightarrow B \\
+Z &\rightarrow	M \\
+A &\rightarrow	Y \\
+B &\rightarrow	B
+\end{aligned}
+$$
+
+Ahora tenemos $26!$ posibles claves, $\approx 2^{88}$, 88 bits de fortaleza.
 
 ## ¿Cuánto tiempo necesitamos guardar un secreto?
 
@@ -294,12 +319,12 @@ Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de apar
 ## Rotura de algoritmos criptográficos
 <!-- _class: with-success -->
 
-El cifrado César lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez el análisis de frecuencia contra el cifrado César
+El cifrado César, incluso con mapeos aleatorios, lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez el análisis de frecuencia contra el cifrado César
 
 **Un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la fuerza bruta**.
 
 
-# Mejoras al cifrado César
+# Mejoras al cifrado César: sistemas polialfabéticos
 <!-- _class: lead -->
 
 Vigenère y Enigma
@@ -312,16 +337,14 @@ Podemos añadir una transposición a la vez de una substitución:
 
 ![center](https://i1.wp.com/nozdr.ru/_media/games/quest/for/cipher/marshrut.png)
 
-Podemos mapear cualquier letra a cualquier otra letra, o utilizar cifrado afín:
-
-$e(k=\{a,b\}, m) = a · m + b \mod 26$
+Podemos mapear cualquier letra a cualquier otra letra
 
 ```
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
 XZCTEROSIULKWNGYQFHDJVMAPB
 ```
 
-Aumenta el espacio de claves ($26! \approx 4·10^{26} \approx 2^{88}$), pero sigue siendo vulnerable a análisis de frecuencia.
+Todo esto aumenta el espacio de claves, pero sigue siendo vulnerable a análisis de frecuencia.
 
 <!-- En vez de usar un movimiento en el alfabeto, podemos cambiar totalmente el alfabeto. Eso aumenta espectacularmente el espacio de claves, hasta el punto de que no es posible para un humano hacer fuerza bruta...
 
@@ -388,6 +411,7 @@ EWO XUX KLR
 "*Le chiffre indéchiffrable*" se utilizó desde el siglo XVI hasta bien entrado el siglo XX.
 
 ...aunque ya había expertos en romperlo en el siglo XIX.
+
 ## Ejemplo
 
 **W**r urutlsyrmjae, **w**l omxvsda Gwwsr, feefaez ggrgcuhg ggma gajjaps hsj dqwhpszmqaifta, gghaga hw Gwsmv g hwsbpsdsmuifxg dq Gwwsr, qw mrs dq psw leoragss pi umxrmhg qss emetdee c eek ueevek. Ee yf xapa hw gafdevs hod wmwlifyumgn qr wp iuq yfe defvs if ex xwblo avakanmp **ww** jeqqhpszmhs tgr axje defvs
@@ -424,7 +448,7 @@ $$
 Ejemplos :
 
 - Si $n=8$, existen $26^8 = 2·10^{11}$ claves diferentes. Coste de fuerza bruta: 0,5 €
-- Si $n=16$, existen $26^{16} = 4·10^{22}$ claves diferentes. Coste: 0,1 billones de €
+- Si $n=16$, existen $26^{16} = 4·10^{22}$ claves diferentes. Coste: 100 mil millones de €
 
 ---
 <!-- _class: with-success -->
@@ -531,7 +555,7 @@ El descifrado de Enigma fue una de las claves que permitió a los aliados ganar 
 
 One-time-pad (cifrado Vernam)
 
-## Cifrado Vernam
+## Confidencialidad perfecta
 
 ![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/0/06/USpatent1310719.fig1.png)
 
@@ -567,11 +591,35 @@ Cosas que implica:
 ---
 <!-- _class: with-success -->
 
-Si un cifado perfecto cifra como XHAJSJXXNFHFDOIOJUMNFNNNF, existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE"
+Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF, existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE"
 
 Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
 
+## ¿A qué hora atacamos?
+<!-- _class: center two-columns -->
+
+![w:25em center](https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png)
+
+- A = 16
+- B = 7
+- C = 13
+- ...
+
+"Atacamos a las F horas"
+
 ---
+
+Observa:
+
+- Si el enemigo, que no conoce la clave, intercepta el mensaje "Atacamos a las F horas", no tiene forma saber a qué hora se atacará. **Este cifrado es perfecto**
+- Pero el enemigo sabrá:
+    - Si no le han atacado a la 1, F no es 1
+    - Si no le han atacado a las 2, F no es 2
+    - Si le atacan a las 3, F (y solo F) es 3
+- Solo se puede usar esta clave **una vez**. A la siguiente, el enemigo ya tendrá mucha información. **La clave no puede reutilizarse nunca más**
+- Hay que volver a enviar una nueva clave cada vez que queramos enviar un mensaje nuevo, con el riesgo de que el enemigo intercepte el mensaje de envío de clave
+
+## Convirtiendo Vigènere en cifrado perfecto: cifrado Vernam
 
 El cifrado de Vigenère sufría un problema similar al del César (aunque camuflado): manifestaba la estadística del mensaje en claro en el mensaje cifrado
 
@@ -579,8 +627,8 @@ Podemos evitar que se manifieste la estadística en el texto cifrado si utilizam
 
 **Tenemos confidencialidad perfecta si y solo sí usamos un cifrado Vigenère con las siguientes características**:
 
-- con una clave tan larga como el mensaje
-- no conocida por el atacante (es decir: totalmente aleatoria)
+- una clave tan larga como el mensaje
+- no conocida por el atacante. Es decir: totalmente aleatoria
 - la clave no se usa nunca más
 
 <!--
@@ -622,7 +670,7 @@ Ninguna. Ni siquiera por fuerza bruta: si pruebas claves, puedes "descifrar" el 
 ...**mientras se cumplan las hipótesis de trabajo para la clave $k$**:
 
 - tan larga como el mensaje
-- sólo un solo uso
+- un solo uso
 - aleatoria (i.e. uniformemente distribuida)
 
 Los humanos somos muy malos para distinguir qué es y qué no es aleatorio

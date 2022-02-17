@@ -120,10 +120,10 @@ Objetivo|Primitiva
 
 $$
 \begin{aligned}
-(x^a)(x^b) &= x{a+b} \\
+(x^a)(x^b) &= x^{a+b} \\
 (x^a)^b &= x^{ab} \\
 \log_x (ab) &= \log_x a + \log_x b \\
-a \log_x b &= \log_x (ba) \\
+a \log_x b &= \log_x (b^a) \\
 \end{aligned}
 $$
 
@@ -156,7 +156,11 @@ Usaremos constantemente la aritmética modular en sistemas de cifrado asimétric
 
 ## XOR
 
-Operación XOR de dos cadenas binarias: $a \otimes b=c$ El bit de la posición $x$ de $c$ tiene (1) el mismo bit que $a$ si el bit en $b$ es 0 (2) el bit cambiado de $a$ si el bit en $b$ es 1.
+Operación XOR de dos cadenas binarias: $a \otimes b=c$
+
+El bit de la posición $x$ de $c$, $c_x$ tiene: (1) $a_x$ si el bit $b_x$ es 0; (2) el bit cambiado de $a_x$ si $b_x$ es 1.
+
+También se puede entender como que $c$ es la suma binaria de $a$ y $b$, sin acarreo.
 
 $$
 \begin{aligned}
@@ -167,14 +171,17 @@ $$
 \end{aligned}
 $$
 
-<!-- Fíjate:
+---
 
-- XOR con todos 0, es el mismo mensaje
-- XOR con todos 1, cambia todos los bits
-- XOR es conmutativo, por eso da igual cuál interpretes como a o como b
+Propiedades de XOR. Fíjate:
 
-XOR es una operación muy común en criptografía que usaremos en el tema 3, y la base de muchos algoritmos criptográficos.
+- $a \otimes 0000...0000 = a$. XOR con todos 0, es el mismo mensaje
+- $a \otimes 1111...1111 = NOT\ a$. XOR con todos 1, cambia todos los bits
+- $a \otimes b = b \otimes a$. XOR es conmutativo.
+- $a \otimes (b \otimes c) = (a \otimes b) \otimes c$. XOR es asociativo.
 
+XOR es una operación muy común en criptografía que usaremos en el tema 3, y la base de muchos algoritmos criptográficos: el mensaje cifrado es muchas veces el mensaje en claro $\otimes$ algo, como por ejemplo una clave.
+
+<!--
 Pero solo XOR no es suficiente para un algoritmo: si la clave es 0000, ¡el texto cifrado será el texto en claro! Eso es lo que nos permitió romper el sistema de los Cuentacuentos en la primera sesión
-
 -->

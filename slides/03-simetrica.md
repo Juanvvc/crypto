@@ -27,7 +27,7 @@ Juan Vera del Campo - juan.vera@campusviu.es
 
 # Como decíamos ayer...
 
-Podemos conseguir **confidencialidad perfecta** que nadie puede descifrar....
+Sabemos conseguir **confidencialidad perfecta** que nadie puede descifrar (tema 2)
 
 Pero implica claves de un solo uso tan grandes como el mensaje: $\|k\|=\|m\|$
 
@@ -64,11 +64,11 @@ Hoy veremos como solucionarlo:
 1. [Cifrado Salsa20](#34)
 1. [Cifrado simétrico de bloque](#46)
 1. [Cifrado AES y modos de operación](#60)
-1. [Resumen y referencias](#55)
+1. [Resumen y referencias](#85)
 
-Anexo recomendado: [RNG](A2-rng.html)
-
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+Ejercicios:
+- https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+- Alternativamente, ejercicios de AES de www.cryptohack.org
 
 
 # Confidencialidad computacional
@@ -85,6 +85,7 @@ header: Confidencialidad computacional -->
 >  Imagen: Nitin Jain, Birgit Stiller, Imran Khan, Dominique Elser, Christoph Marquardt & Gerd Leuchs (2016) "Attacks on practical quantum key distribution systems (and how to prevent them)". [DOI: 10.1080/00107514.2016.1148333](https://www.tandfonline.com/doi/abs/10.1080/00107514.2016.1148333)
 
 ---
+
 <!-- _class: extra-slide -->
 
 **Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribución de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de $m$ dado $c$ y la probabilidad de $m$ coinciden:
@@ -93,11 +94,13 @@ $$
 P[m|c] = P[m]
 $$
 
-Se necesita:
+Puede demostrarse matemáticamete que es necesario:
 
 - Que la clave sea tan larga como el mensaje
 - Que la clave sea totalmente aleatoria
 - Que la clave se use solo una vez, y después se descarte
+
+**La confidencialidad prerfecta no es práctica**
 
 <!--
 Transparencia recordatorio
@@ -115,6 +118,7 @@ Es decir: ni siquiera por fuerza bruta podemos atacar el sistema de cifrado, por
 -->
 
 ---
+
 
 **Seguridad computacional**: un sistema es seguro computacionalmente si cualquier algoritmo probabilístico en tiempo polinomial solo puede romper el algoritmo con probabilidad negligible en $\|n\|$
 
@@ -278,6 +282,7 @@ Recordatorio: este es el esquema para hacer un cifrador de flujo.
 -->
 
 ## Generadores de números aleatorios
+<!-- _class: small-text -->
 
 La función *PRNG* (*Pseudo Random Number Generator*) es un generador de bits que tiene como entrada una **semilla** (que será la clave de cifrado $k$) y tiene como salida el flujo de bits que aplicaremos sobre el mensaje para cifrarlo con *XOR*
 
