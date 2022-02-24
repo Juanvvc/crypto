@@ -28,6 +28,9 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 # Esteganografía
 <!-- _class: lead -->
 
+# DNS tunneling
+<!-- _class: lead -->
+
 # Watermarking
 <!-- _class: lead -->
 

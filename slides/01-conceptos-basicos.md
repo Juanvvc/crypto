@@ -29,10 +29,10 @@ juan.vera@campusviu.es
 <!-- _class: cool-list -->
 
 1. [Servicios criptográficos: objetivos](#3)
-1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#8)
-1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#20)
-1. [Protocolos criptográficos: composición de primitivas](#27)
-1. [Conclusiones: resumen y referencias](#32)
+1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#9)
+1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#21)
+1. [Protocolos criptográficos: composición de primitivas](#28)
+1. [Conclusiones: resumen y referencias](#33)
 
 Ejercicios:
 
@@ -96,6 +96,32 @@ Solo el primer punto trata de mantener un mensaje secreto. Además vamos a quere
 
 ¡Si estamos hablando con un malo, da igual que el mensaje esté perfectamente cifrado!
  -->
+
+## ¿Contra quién nos queremos proteger?
+
+Atacante|Ejemplo
+--|--
+**Ladrón**|Persona con pocos recursos, ataques oportunistas
+**Competidor**|Profesionalización, interés
+**ATP - estado**|Recursos enormes, dedicación
+
+La seguridad tiene costes:
+
+- Coste de las tecnologías
+- Complejidad en los procesos
+
+Decidir, evaluar y asumir el riesgo de ataques contra los que no nos podemos proteger
+
+<!--
+¿Contra quién queremos proteger la información?
+
+- Una persona que quiere consumir un servicio sin pagar
+- Una persona que quiere invadir nuestra privacidad
+- Un competidor que quiere acceso a nuestros documentos secretos
+- Una grupo financiado por un estado nación
+-->
+
+
 
 ## Servicios de seguridad
 
