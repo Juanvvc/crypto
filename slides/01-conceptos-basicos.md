@@ -32,7 +32,7 @@ juan.vera@campusviu.es
 1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#9)
 1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#21)
 1. [Protocolos criptográficos: composición de primitivas](#28)
-1. [Conclusiones: resumen y referencias](#33)
+1. [Conclusiones: resumen y referencias](#34)
 
 Ejercicios:
 
@@ -584,6 +584,24 @@ Nos centraremos en los servicios de confidencialidad, integridad y autenticació
 También veremos, aunque a más alto nivel, los servicios de acuerdo de claves, PRNG, partición de secretos... porque están relacionados con los primeros
 
 Otros servicios como la autorización, aunque sin duda son importantes para que un sistema sea seguro, quedan fuera de este curso por limitación de tiempo.
+-->
+
+---
+
+[![w:33em center](images/rely-attack.png)](https://www.youtube.com/watch?v=uxzm_6SYBFo)
+
+> https://www.youtube.com/watch?v=uxzm_6SYBFo
+
+<!--
+Aquí tenemos un ejemplo de un protocolo de comunicaciones donde el objetivo no es la confidencialidad.
+
+Estos son unos ladrones robando un coche, que se abre cuando la llave está cerca. La persona de la derecha está utilizando una antena enorme para "hacer relay" de la comunicaciones entre la llave (que se supone dentro de la casa, cerca de la pared) y el coche.
+
+Aquí el protocolo no tiene que proteger la confidencialidad del mensaje: todos sabemos que la llave envía "ABRETE". Fíjate que el protocolo tampoco está protegido con contraseñas, ni con una firma digital.
+
+Lo que se necesita en esta caso es detectar cuándo el atacante está accediendo a los mensajes y ampliando su radio de acción diseñado
+
+¿Se te ocurre alguna manera de proteger contra esta situación?
 -->
 
 # Conclusiones
