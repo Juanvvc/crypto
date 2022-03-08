@@ -2,9 +2,14 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"markdown.marp.exportType": "html",
+		"markdown.marp.themes": [
+			"themes/marp-viu.css",
+			"themes/marp-upc.css",
+			"themes/marp-base.css"
+		]
+	}
 }
