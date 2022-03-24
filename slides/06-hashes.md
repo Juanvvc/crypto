@@ -515,9 +515,14 @@ Pero estamos hablando de dinero... un tema en el que pocas veces hay consenso y 
 
 ## Usos adicionales
 
-El "ledger" BlockChain (y otros como NameCoin, Ethereum...) se está usando también como notaría:
+En el registro de BlockChain / Ethereum y otros, a parte de transacciones económicas, se pueden inscribir datos que quedan públicos (el ledger es público) para posterior consulta:
 
-En el libro de transacciones, a parte de transacciones, se pueden inscribir datos que quedan públicos (el ledger es público) para posterior consulta
+- "Notaría" digital
+- Contratos digitales
+- Non Fungible Tokens (NFTs): hash de una fotografía
+- ...
+
+![bg left:40%](https://foto.wuestenigel.com/wp-content/uploads/api2/non-fungible-tokens-nfts-unique-collectible-crypto-assets.jpeg)
 
 # Conclusiones
 <!-- _class: lead -->

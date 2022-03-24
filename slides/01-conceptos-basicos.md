@@ -34,10 +34,7 @@ juan.vera@campusviu.es
 1. [Protocolos criptográficos: composición de primitivas](#28)
 1. [Conclusiones: resumen y referencias](#34)
 
-Ejercicios:
-
-- https://github.com/Juanvvc/crypto/tree/master/ejercicios/01
-- Alternativamente, curso de www.cryptohack.org: "Introduction to Cryptohack"
+Ejercicios: <https://github.com/Juanvvc/crypto/tree/master/ejercicios/01>
 
 
 <!--
