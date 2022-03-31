@@ -18,7 +18,6 @@ transition: fade
         list-style-type: none; text-align: center;
     }
 </style>
-
 # Criptografía
 <!-- _class: first-slide -->
 
@@ -62,10 +61,10 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 <!-- _class: cool-list -->
 
 1. [Criptografía asimétrica](#5)
-1. [RSA](#22)
-1. [Curvas Elípticas](#36)
-1. [Depurando detalles](#53)
-1. [Resumen y referencias](#56)
+1. [RSA](#25)
+1. [Curvas Elípticas](#39)
+1. [Depurando detalles](#56)
+1. [Resumen y referencias](#59)
 
 Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/05
 
@@ -117,12 +116,30 @@ A veces son intercambiables: lo que se cifra con una se descifra con la otra
 
 > Compara con criptografía simétrica: misma clave para cifrar y descifrar, Bob y Alice tienen que manetenarla en secreto
 
+## Esquema de cifrado
+
+![w:20em center](images/IMG_0056.PNG)
+
+- Todos conocen la clave $K_{pub}$ de Bob, solo Bob conoce la clave $K_{priv}$
+- **Cualquier puede cifrar un mensaje para Bob, solo Bob puede descifrarlo**: confidencialidad
+
+## Esquema de firma electrónica
+
+![w:20em center](images/IMG_0055.PNG)
+
+- Solo Bob puede cifrar con su clave $K_{priv}$ y cualquier puede descifrar con $K_{pub}$
+- Pero si pueden descifrar el mensaje, **todos saben que el mensaje solo puede haberlo enviado Bob: autenticación**
+
+
 ## *Trap door functions*, funciones trampa
+<!-- _class: with-success -->
 
 Las matemáticas de la criptografía asimétrica utilizan funciones trampa:
 
 - Si conoces $a$, entonces calcular $A=f(a)$ es fácil (problema P, tiempo polinomial)
 - Si conoces $A$, entonces calcular $a=f^{-1}(A)$ es muy difícil (problema NP, tiempo exponencial)
+
+No encontramos una función trampa hasta 1976
 
 ---
 
@@ -250,6 +267,13 @@ Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
 Recuerda hipótesis DDH: $g^{ab}$ solo se puede calcular fácilmente si conoces o bien $a$ o bien $b$, pero no se puede calcular fácilmente si conoces solo $g^a$ y $g^b$
 
 Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
+
+## Problemas de Diffie Hellman: Man in the middle
+<!-- _class: with-warning -->
+
+![center](https://i.imgur.com/Cq78TET.png?1)
+
+Diffie-Hellman no protege contra MitM, no tiene un sistema de gestión de claves públicas asociadas a identidades. Necesitamos otras tecnologías.
 
 ## Nuevas direcciones
 
