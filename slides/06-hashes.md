@@ -52,7 +52,7 @@ Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
 
 Recibe los tres nombres, aunque cuando se usan en criptografía se prefiere "hash"
 
-Función que resume una cadena de longitud arbitraria $m$, a un valor $r$ de tamaño fijo $l$
+Función que resume una cadena de longitud arbitraria $m$ en un valor $r$ **de tamaño fijo $l$**
 
 $$
 \begin{aligned}
@@ -104,7 +104,7 @@ Dado un mensaje $m$ con un resumen $r=h(m)$, para encontrar un mensaje $m'$ con 
 
 Obvio: no puede existir una aplicación inyectiva entre un conjunto de $m$ elementos y otro de $n$ elementos si $m>n$
 
-Mensajes diferentes tendrán el mismo resumen: esto se llama "colisión"
+Existen infinitos mensajes diferentes con el mismo resumen: esto se llama "colisión"
 
 ![bg right:50% w:100%](https://upload.wikimedia.org/wikipedia/commons/5/5c/TooManyPigeons.jpg)
 
@@ -135,13 +135,13 @@ $$
 
 Es decir, hay un número $10^{26·10^6}$, que en la práctica es "casi infinito", de fotografías de 1MB que se resumen en el mismo número de 256 bits
 
-A pesar de eso, queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" fotografías: la única forma debe de ser probar las fotografías una a una
+Queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" fotografías: la única forma debe de ser probar las fotografías una a una
 
 ## Requisitos de una función de hash criptográfica
 
 - Que sea rápida de calcular
-- Resistencia a la preimagen: dado un hash, no se puede calcular la imagen más que probando una a una
-- Resistencia a la colisión: dado el hash de un mensaje, no se puede encontrar otro con el mismo hash más que por fuerza bruta
+- Resistencia a la preimagen: dado un hash, no se puede saber el mensaje exacto que tiene ese hash
+- Resistencia a la colisión: dificultad para encontrar dos mensajes diferentes con el mismo hash
 - Sensibilidad: un cambio mínimo en el mensaje produce un hash totalmente diferente
 
 > https://en.wikipedia.org/wiki/Cryptographic_hash_function#Properties
