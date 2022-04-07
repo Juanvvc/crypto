@@ -348,7 +348,7 @@ Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese
 
 ![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
 
-Firma digital de un mensaje = cifrado el hash de un mensaje con mi clave privada
+Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
 ---
 
