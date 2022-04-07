@@ -229,17 +229,17 @@ Use: <!-- _class: last-slide --> */div#p>svg>foreignObject>section.last-slide{ba
 <p>Juan Vera del Campo - <a href="mailto:juan.vera@campusviu.es">juan.vera@campusviu.es</a></p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-marpit-fragments="4" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="2" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:50%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://i.imgur.com/Cq78TET.png?1&quot;);background-size:90% auto;"></figure></div></section></foreignObject><foreignObject width="50%" height="720"><section id="2" data-marpit-fragments="4" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="2" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:50%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-marpit-fragments="3" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="2" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:50%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://i.imgur.com/Cq78TET.png?1&quot;);background-size:90% auto;"></figure></div></section></foreignObject><foreignObject width="50%" height="720"><section id="2" data-marpit-fragments="3" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="2" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;--marpit-advanced-background-split:50%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
 <h1>Como decíamos ayer...</h1>
 <ul>
 <li><strong>Confidencialidad</strong>: AES/ChaCha20 + D-H</li>
 </ul>
 <ul>
-<li data-marpit-fragment="1"><strong>Integridad</strong>: ¿?</li>
-<li data-marpit-fragment="2"><strong>Autenticidad</strong>: ¿?</li>
-<li data-marpit-fragment="3"><strong>No repudio</strong>: ¿?</li>
-<li data-marpit-fragment="4">Para los demás servicios necesitamos conocer hashes, MAC y más sobre criptografía asimétrica</li>
+<li data-marpit-fragment="1"><strong>Autenticidad</strong>: RSA + firma digital</li>
+<li data-marpit-fragment="2"><strong>No repudio</strong>: RSA + firma digital</li>
+<li data-marpit-fragment="3"><strong>Integridad</strong>: firma digital</li>
 </ul>
+<p>Los hashes nos permiten calcular <strong>una firma digital</strong></p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="2" data-marpit-pagination-total="49"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-footer="[Inicio](index.html)" data-class="cool-list" data-heading-divider="2" data-theme="marp-viu" class="cool-list" data-marpit-pagination="3" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--class:cool-list;--heading-divider:2;--theme:marp-viu;">
@@ -529,10 +529,12 @@ b12ee96400fa19e7909a48f1727d3c81f6af71178209b58b612b5d2e75bf2d13  -
 <p>Un atacante tendría que romper el cifrado y el HMAC para modificar un mensaje: <strong>si hacer solo una de esas dos cosas es lleva siglos, las dos a la vez llevaría siglos de siglos</strong></p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="27" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-footer="[Inicio](index.html)" data-class="with-success" data-heading-divider="2" data-theme="marp-viu" class="with-success" data-marpit-pagination="27" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--class:with-success;--heading-divider:2;--theme:marp-viu;">
 <h2>Usos: Firma digital</h2>
-<p>Podemos proteger la <strong>integridad, no-repudio y autenticidad de un mensaje</strong> mediante una combinación de hash y cifrado asimétrico: cifrnado <strong>el hash de un mensaje</strong> con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede comprobarlo</p>
+
+<p>Cifrando <strong>el hash de un mensaje</strong> con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg" alt="center" style="width:15em;" /></p>
+<p>Firma digital de un mensaje = cifrado el hash de un mensaje con mi clave privada</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="28" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;">
@@ -628,16 +630,16 @@ b12ee96400fa19e7909a48f1727d3c81f6af71178209b58b612b5d2e75bf2d13  -
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="38" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;">
 <h2>Minería</h2>
 <p>Se adaptó el X-Hashcash. Un bloque es así:</p>
-<pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>HASH DEL BLOQUE ANTERIOR
-TRANSACCION 1: ALICE LE PAGA A BOB
-TRANSACCIÓN 2: BOB LE PAGA A CHARLIE
-...
-1 BITCOIN PARA MÍ
-COUNTER
+<pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>* HASH DEL BLOQUE ANTERIOR
+* TRANSACCION 1: ALICE LE PAGA A BOB
+* TRANSACCIÓN 2: BOB LE PAGA A CHARLIE
+* ...
+* 1 BITCOIN PARA MÍ
+* COUNTER
 </span></span></foreignObject></svg></code></pre>
 <p>Y minar es encontrar un COUNTER tal que el hash de ese bloque empiece por el-número-de-ceros que toque</p>
 <p>SHA2-256(bloque)=000000000000000000000000000000000000000000000000000000000000000000000001... y 185 bits más</p>
-<p>El primero que encuentre ese COUNTER, se lleva un bitcoin</p>
+<p>El primero que encuentre ese COUNTER se lleva un bitcoin</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-paginate="true" data-footer="[Inicio](index.html)" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="39" data-marpit-pagination-total="49" style="--paginate:true;--footer:[Inicio](index.html);--heading-divider:2;--theme:marp-viu;">

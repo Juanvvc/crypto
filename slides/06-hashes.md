@@ -29,10 +29,11 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 # Como decíamos ayer...
 
 - **Confidencialidad**: AES/ChaCha20 + D-H
-* **Integridad**: ¿?
-* **Autenticidad**: ¿?
-* **No repudio**: ¿?
-* Para los demás servicios necesitamos conocer hashes, MAC y más sobre criptografía asimétrica
+* **Autenticidad**: RSA + firma digital
+* **No repudio**: RSA + firma digital
+* **Integridad**: firma digital
+
+Los hashes nos permiten calcular **una firma digital**
 
 ![bg right w:90%](https://i.imgur.com/Cq78TET.png?1)
 
@@ -341,10 +342,13 @@ Es decir, el código para validar que un mensaje no ha sido modificado por un at
 Un atacante tendría que romper el cifrado y el HMAC para modificar un mensaje: **si hacer solo una de esas dos cosas es lleva siglos, las dos a la vez llevaría siglos de siglos**
 
 ## Usos: Firma digital
+<!-- _class: with-success -->
 
-Podemos proteger la **integridad, no-repudio y autenticidad de un mensaje** mediante una combinación de hash y cifrado asimétrico: cifrnado **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede comprobarlo
+Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
 
 ![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
+
+Firma digital de un mensaje = cifrado el hash de un mensaje con mi clave privada
 
 ---
 
@@ -449,19 +453,19 @@ echo -n 1:52:380119:calvin@comics.net:::9B760005E92F0DAE | sha1sum
 Se adaptó el X-Hashcash. Un bloque es así:
 
 ```
-HASH DEL BLOQUE ANTERIOR
-TRANSACCION 1: ALICE LE PAGA A BOB
-TRANSACCIÓN 2: BOB LE PAGA A CHARLIE
-...
-1 BITCOIN PARA MÍ
-COUNTER
+* HASH DEL BLOQUE ANTERIOR
+* TRANSACCION 1: ALICE LE PAGA A BOB
+* TRANSACCIÓN 2: BOB LE PAGA A CHARLIE
+* ...
+* 1 BITCOIN PARA MÍ
+* COUNTER
 ```
 
 Y minar es encontrar un COUNTER tal que el hash de ese bloque empiece por el-número-de-ceros que toque
 
 SHA2-256(bloque)=000000000000000000000000000000000000000000000000000000000000000000000001... y 185 bits más
 
-El primero que encuentre ese COUNTER, se lleva un bitcoin
+El primero que encuentre ese COUNTER se lleva un bitcoin
 
 ---
 
