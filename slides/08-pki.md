@@ -2,7 +2,7 @@
 marp: true
 title: Criptografía - PKI
 author: Juan Vera
-keywords: criptografía,pki,firma
+keywords: criptografía,protocolos,ssl,https,tls,pki
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
@@ -21,7 +21,7 @@ transition: fade
 # Criptografía
 <!-- _class: first-slide -->
 
-**Tema 8: Firma digital y Public Key Infrastructure**
+**Tema 8: TLS y Public Key Infrastructure**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
@@ -29,8 +29,8 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 ## Hoy hablamos de...
 <!-- _class: cool-list -->
 
-1. [Cifrado híbrido](#3)
-1. [Gestión de claes públicas](#16)
+1. [Cifrado híbrido, protocolo TLS](#3)
+1. [Gestión de claves públicas, PKI](#16)
 1. [Resumen y referencias](#35)
 
 ## Recordatorio: cifrado asimétrico
