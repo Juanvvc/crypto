@@ -30,8 +30,8 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 <!-- _class: cool-list -->
 
 1. [Cifrado híbrido](#3)
-1. [Certificados electrónicos](#20)
-1. [Resumen y referencias](#27)
+1. [Gestión de claes públicas](#16)
+1. [Resumen y referencias](#35)
 
 ## Recordatorio: cifrado asimétrico
 <!-- _class: two-columns -->
@@ -65,7 +65,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 - Muy lento comparado con el cifrado simétrico
 - ¿Cómo distribuimos las claves públicas?
 
-Hoy veremos las soluciones para estos problemas: cifrado híbrido y PKI
+Hoy veremos las soluciones para estos problemas: cifrado híbrido y certificados
 
 # Criptografía híbrida
 <!-- _class: lead -->
@@ -237,10 +237,9 @@ Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de at
 <!-- _class: smaller-font -->
 
 - El cliente guarda cifrada la clave privada y la lista de claves públicas de los servidores en que confía
-```
-cliente$ ~/.ssh/id_rsa (...) 
-cliente$ ~/.ssh/known_hosts
-```
+
+![center](images/sshclient.png)
+
 - El servidor guarda en claro la clave privada (del servicio sshd) y las claves públicas de los usuarios
 ```
 servidor$ /etc/ssh/ssh_host_rsa_key (...) 
@@ -364,6 +363,25 @@ La clave privada de un TTP es muy delicada: se protege en grandes edificios con 
 Por eso los certificados de usuarios no suelen estar firmados por una TTP final (llamada "Root CA") sino por otras terceras partes intermedias con capacidad para firmas certificados de usuarios. El certificados de estos intermediarios sí que está firmado por la Autoridad raíz
 -->
 
+---
+
+![w:25em center](images/certificate-chain-example.png)
+
+<!--
+Esto es el ejemplo de una cadena de certificados de campus.viu.es, que aparece al pinchar "en el candado" de la barra de direcciones.
+
+La transparencia está solo para ocupar el espacio, veremos los detalles durante la clase
+
+Fíjate:
+
+- Identidades del certificado de la web
+- Certificados intermedios
+- Certificado raíz
+- Lista de revocación
+
+Prueba también con otras páginas web
+-->
+
 ## Jerarquía de Autoridades de Certificación
 
 - CA raíz: sólo emite certificados para CA subordinadas y "revocaciones"
@@ -373,13 +391,21 @@ Por eso los certificados de usuarios no suelen estar firmados por una TTP final 
     - está en línea constantemente, ya sea por red pública o privada
     - en caso de compromiso se sigue el procedimiento de revocación de CA
 
-## REVOCACIÓN
+## Autoridades de certificación raíz
+
+Instaladas con el sistema operativo o el navegador
+
+En la imagen, Root CAs instaladas en mi Firefox
+
+![bg right w:100%](images/CAs-firefox.png)
+
+## Revocación
 
 Los certificados tienen una validez limitada en el tiempo, pero es posible que su contenido deje de ser válido antes
 
 Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo los procedimientos que dictamine la Política de Certificación (o la Declaración de Prácticas de Certificación derivada)
 
-## ¿CÓMO SABEMOS SI UN CERTIFICADO HA SIDO REVOCADO?
+## ¿Cómo sabemos si un certificado ha sido revocado?
 
 - se publica una CRL: Certificate Revocation List
 - se publica en un servidor OCSP
@@ -394,6 +420,7 @@ Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo l
     - [debian.org Developers LDAP Search](https://db.debian.org/)
 - [IZENPE sustituirá los certificados electrónicos afectados por "ROCA", la amenaza mundial a los chips de algunas tarjetas de identificación](https://www.euskadi.eus/gobierno-vasco/-/noticia/2017/izenpe-sustituira-los-certificados-electronicos-afectados-por-roca-la-amenaza-mundial-a-los-chips-de-algunas-tarjetas-de-identificacion/)
 - [Diferencias entre firma digital, electronica, digitalizada y certificado digital. Autónomos y Pymes](https://www.youtube.com/watch?v=-_SARWc3ots)
+- [Create your own Certificate Authority (CA) using OpenSSL](https://arminreiter.com/2022/01/create-your-own-certificate-authority-ca-using-openssl/)
 
 ---
 <!-- _class: center -->
