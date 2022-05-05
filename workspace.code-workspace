@@ -7,9 +7,9 @@
 	"settings": {
 		"markdown.marp.exportType": "html",
 		"markdown.marp.themes": [
-			"themes/marp-viu.css",
-			"themes/marp-upc.css",
-			"themes/marp-base.css"
+			"slides/themes/marp-viu.css",
+			"slides/themes/marp-upc.css",
+			"slides/themes/marp-base.css"
 		]
 	}
 }

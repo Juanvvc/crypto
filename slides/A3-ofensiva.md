@@ -496,7 +496,7 @@ Google uses another DKIM signature that uses other headers. This is probably a s
 
 ---
 
-[![](images/ransomware3.png)](https://www.youtube.com/watch?v=6h9yh_A80fs)
+[![](images/BEC/ransomware3.png)](https://www.youtube.com/watch?v=6h9yh_A80fs)
 
 > [Ransomware - Anatomy of an Attack](https://www.youtube.com/watch?v=6h9yh_A80fs) ESI & CISCO, 2018
 
@@ -524,7 +524,7 @@ El ransomware es uno de los mayores peligros para una compañía, y también uno
 
 ## Ransomware groups
 
-![center](images/ransom-criminals.png)
+![center](images/BEC/ransom-criminals.png)
 
 <!--
 The attackers are well known, wealthy and they do not hide themselves.
@@ -556,7 +556,7 @@ Notice:
 
 ---
 
-![center w:29em](images/ransomware-groups.png)
+![center w:29em](images/BEC/ransomware-groups.png)
 
 > [Christiaan Beek in Twitter, 2021](https://twitter.com/ChristiaanBeek/status/1427569852357693440)
 
@@ -596,7 +596,7 @@ Fijaos que no hay tantas variantes de ransomware: solo unas pocas familias. Fija
 
 ## Ransomware-as-a-service
 
-![center w:30em](images/bec.png)
+![center w:30em](images/BEC/bec.png)
 
 - Ransomware as a service (RaaS) is a subscription-based model that enables affiliates to use already-developed ransomware tools to execute ransomware attacks
 - Affiliates earn a percentage of each successful ransom payment
@@ -613,7 +613,7 @@ Por ejemplo: nosotros hemos detectado el "modus operandi" asociado a APT41 varia
 
 ---
 
-![bg left:40% w:100%](images/ransomware-conti-leak.png)
+![bg left:40% w:100%](images/BEC/ransomware-conti-leak.png)
 
 On August, 2021, a disgruntled member of the Conti ransomware program leaked the manuals and technical guides used by the Conti gang to train affiliate members on how to access, move laterally, and escalate access inside a hacked company and then exfiltrate its data before encrypting files.
 
@@ -679,11 +679,11 @@ Estos grupos tienen páginas en la dark web que son visitable con Tor o similare
 
 ---
 
-![](images/ransomware1.png)
+![](images/BEC/ransomware1.png)
 
 ---
 
-![](images/ransomware2.png)
+![](images/BEC/ransomware2.png)
 
 ## Example: Babuk
 
@@ -737,7 +737,7 @@ Pero vamos a destacar dos recursos que me parecen especialmente interesantes: la
 
 ---
 
-[![](images/ransomware-oliver.png)](https://www.youtube.com/watch?v=WqD-ATqw3js)
+[![](images/BEC/ransomware-oliver.png)](https://www.youtube.com/watch?v=WqD-ATqw3js)
 
 > [Ransomware: Last Week Tonight with John Oliver (HBO)](https://www.youtube.com/watch?v=WqD-ATqw3js)
 
