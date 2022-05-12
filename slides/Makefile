@@ -19,7 +19,7 @@ OBJS=$(patsubst %.md,%.html,$(SRCS))
 all: $(OBJS)
 
 %.pdf: %.md
-	$(MARP) "$<" -o "$@" --no-config $(THEME_OPTS) --pdf --allow-local-files --html --pdf-notes
+	PUPPETEER_TIMEOUT=0 $(MARP) "$<" -o "$@" --no-config $(THEME_OPTS) --pdf --allow-local-files --html --pdf-notes
 
 %.html: %.md
 	$(MARP) "$<" -o "$@" --no-config $(THEME_OPTS) --bespoke.progress true --html
