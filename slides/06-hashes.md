@@ -41,7 +41,8 @@ Los hashes nos permiten calcular **una firma digital**
 <!-- _class: cool-list -->
 
 1. [Funciones de hash](#4)
-1. [Blockchain](#31)
+1. [Integridad](#30)
+1. [Blockchain](#36)
 1. [Resumen y referencias](#46)
 
 Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
@@ -364,16 +365,63 @@ Inicio de cadena de custodia publicando sus hashes
 
 ![center w:20em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
 
-## Usos: ...
+# Integridad
+<!-- _class: lead -->
+
+## Definición
+
+Capacidad de **detectar** si un mensaje ha sido modificado desde su transmisión hasta su recepción.
+
+La modificación se refiere tanto a una modificación **explícita por un atacante** como a una modificación debido a un error (por ejemplo de transmisión). 
+
+> https://es.wikipedia.org/wiki/Integridad_del_mensaje
+
+![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/1/12/Darwin_Hybrid_Tulip_Mutation_2014-05-01.jpg)
+
+
+## Cifrado autenticado: tipos
+
+- **Encrypt-then-MAC** (EtM): primero cifra, luego calcula hash 
+- **Encrypt-and-MAC** (E&M): cifra y calcula hash a la vez
+- **MAC-then-Encrypt** (MtE): primero calcula hash, luego cifra
+
+> MAC: Message Authenticated Code
+> https://en.wikipedia.org/wiki/Authenticated_encryption
+
+## Encrypt-then-MAC (EtM)
+<!-- _class: two-columns -->
+
+![center](https://upload.wikimedia.org/wikipedia/commons/b/b9/Authenticated_Encryption_EtM.png)
+
+- Usado en IPSec
+- Necesita dos claves: una para cifrar y otra para el MAC
+
+## Encrypt-and-MAC (E&M)
+<!-- _class: two-columns -->
+
+![center](https://upload.wikimedia.org/wikipedia/commons/a/a5/Authenticated_Encryption_EaM.png)
+
+- Usado en SSH
+- Puede reutilizar clave para cifrar y calcular MAC
+
+## MAC-then-Encrypt (MtE)
+<!-- _class: two-columns -->
+
+![MAC-then-Encrypt](https://upload.wikimedia.org/wikipedia/commons/a/ac/Authenticated_Encryption_MtE.png)
+
+- Usado en TLS
+- Permite algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
+
+# Blockchain
+<!-- _class: lead -->
+
+---
 
 Ya veis que los hashes tienen muchos usos en criptografía
 
 Vamos a ver con un poco más de detalle su uso en las monedas digitales: Blockchain y BitCoin
 
 ![bg right:40%](https://www.ledgerinsights.com/wp-content/uploads/2019/10/digital-currency-dollar.2-810x476.jpg)
-
-# Blockchain
-<!-- _class: lead -->
 
 ## Bitcoin
 
@@ -554,4 +602,5 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 
 <!-- _class: center -->
 
-Continúa en: [TLS y Public Key Infrastructure](08-pki.html)
+Continúa en: [TLS y Public Key Infrastructure](07-pki.html)
+
