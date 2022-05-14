@@ -15,12 +15,12 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía
+# Criptografía como amenaza
 <!-- _class: first-slide -->
 
-**Anexo: Criptografía como amenaza**
+Juan Vera del Campo
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+<juan.vera@campusviu.es>
 
 
 # Como decíamos ayer...
@@ -751,3 +751,8 @@ Pero vamos a destacar dos recursos que me parecen especialmente interesantes: la
 - The pivotal role that access brokers play in the eCrime ecosystem
 - How ransomware adversaries are rapidly adopting data extortion methods
 - Recommendations you can take to proactively address emerging threats
+
+---
+<!-- _class: center -->
+
+Continúa en: [Esteganografía](09-esteganografia.html)

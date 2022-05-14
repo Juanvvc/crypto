@@ -6,7 +6,7 @@ keywords: criptografía,esteganografía,watermarking
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
-theme: marp-viu
+theme: marp-incide
 transition: fade
 ---
 
@@ -18,12 +18,12 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía
+# Esteganografía
 <!-- _class: first-slide -->
 
-**Tema 11: Esteganografía**
+Juan Vera del Campo
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+<juan.vera@campusviu.es>
 
 ## Hoy hablamos de...
 <!-- _class: cool-list -->
@@ -211,3 +211,11 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 - [IMAGE WATERMARKING USING DISCRETE COSINE TRANSFORM [DCT] AND GENETIC ALGORITHM](https://www.researchgate.net/publication/317605329_IMAGE_WATERMARKING_USING_DISCRETE_COSINE_TRANSFORM_DCT_AND_GENETIC_ALGORITHM_GA_MAHIMA_SINGH), MAHIMA SINGH June 2017. INTERNATIONAL JOURNAL OF INNOVATION IN ENGINEERING RESEARCH & MANAGEMENT ISSN :2348-4918
 - ["A Comparative Analysis of Information Hiding Techniques for Copyright Protection of Text Documents"](https://www.hindawi.com/journals/scn/2018/5325040/),Milad Taleby Ahvanooey,1 Qianmu Li, Hiuk Jae Shim, and Yanyan Huang. Security and Communication Networks / 2018
+
+---
+<!-- _class: last-slide -->
+
+¡Esto ha sido todo!
+
+Juan Vera
+<juan.vera@campusviu.es>

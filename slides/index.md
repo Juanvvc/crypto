@@ -41,13 +41,10 @@ Juan Vera del Campo
 </style>
 
 6. [Funciones de Hash y Blockchain](06-hashes.html)
-1. [Integridad](07-integridad.html)
-1. [Firma digital y PKI](08-pki.html)
-    - Anexo: [BEC y Ransomware](A3-ofensiva.html)
-1. [Protocolo TLS](09-protocolos.html)    
-    - Anexo: [Comunicaciones anónimas](A4-anonimato.html)
-1. [Autenticación](10-autenticacion.html)
-1. [Esteganografía](11-esteganografia.html)
+1. [TLS y Public Key Infrastructure](07-pki.html)
+1. [BEC y Ransomware](08-ofensiva.html)
+1. [Esteganografía](09-esteganografia.html)
+
 
 
 # Presentación
@@ -64,7 +61,7 @@ juan.vera@campusviu.es
 Intereses:
 
 - DFIR: Análisis forense e *Incident Response*
-- Protección de la privacidad
+- Miembro del Cyber Incident Response Team de [Valeo](https://es.wikipedia.org/wiki/Valeo)
 - Cualquier cosa que vuele
 
 ## Intrucciones de uso de las transparencias
@@ -96,8 +93,6 @@ Los ejercicios son notebook de Jupyter:
 1. Tutoriales:
     - https://www.youtube.com/watch?v=jZ952vChhuI
     - https://www.dataquest.io/blog/jupyter-notebook-tutorial/
-
-
 
 ## Conocimientos necesarios
 

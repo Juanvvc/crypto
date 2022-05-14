@@ -18,12 +18,12 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía
+# Funciones de Hash y Blockchains
 <!-- _class: first-slide -->
 
-**Tema 6: Funciones de Hash y Blockchains**
+Juan Vera del Campo
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+<juan.vera@campusviu.es>
 
 
 # Como decíamos ayer...
@@ -554,4 +554,4 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 
 <!-- _class: center -->
 
-Continúa en: [Integridad](07-integridad.html)
+Continúa en: [TLS y Public Key Infrastructure](08-pki.html)

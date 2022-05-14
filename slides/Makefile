@@ -15,8 +15,11 @@ THEME_OPTS=--theme $(THEME) --theme-set "$(THEME_SET)"
 # Convert all .md files in this directory
 SRCS=$(shell find . -name '*.md')
 OBJS=$(patsubst %.md,%.html,$(SRCS))
+OBJS_PDFS=$(patsubst %.md,%.pdf,$(SRCS))
 
 all: $(OBJS)
+
+allpdfs: $(OBJS_PDFS)
 
 %.pdf: %.md
 	PUPPETEER_TIMEOUT=0 $(MARP) "$<" -o "$@" --no-config $(THEME_OPTS) --pdf --allow-local-files --html --pdf-notes

@@ -18,12 +18,13 @@ transition: fade
         list-style-type: none; text-align: center;
     }
 </style>
-# Criptografía
+
+# Criptografía asimétrica
 <!-- _class: first-slide -->
 
-**Tema 5: Criptografía asimétrica**
+Juan Vera del Campo
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+<juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 

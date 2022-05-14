@@ -15,14 +15,13 @@ transition: fade
     Other editor might need these custom code in
     the YAML header: section: | */
 </style>
-# Criptografía
-<!-- _class: first-slide -->
 
-**Tema 2: Historia de la criptografía**
+# Historia de la criptografía
+<!-- _class: first-slide -->
 
 Juan Vera del Campo
 
-juan.vera@campusviu.es
+<juan.vera@campusviu.es>
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->

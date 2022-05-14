@@ -18,12 +18,12 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía
+# Cifrado simétrico
 <!-- _class: first-slide -->
 
-**Tema 3: Cifrado simétrico**
+Juan Vera del Campo
 
-Juan Vera del Campo - juan.vera@campusviu.es
+<juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 

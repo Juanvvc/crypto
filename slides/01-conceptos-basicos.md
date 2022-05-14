@@ -16,14 +16,12 @@ transition: fade
     the YAML header: section: | */
 </style>
 
-# Criptografía
+# Criptografía: conceptos básicos
 <!-- _class: first-slide -->
-
-**Tema 1: Conceptos básicos**
 
 Juan Vera del Campo
 
-juan.vera@campusviu.es
+<juan.vera@campusviu.es>
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->

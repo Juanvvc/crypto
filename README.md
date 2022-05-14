@@ -15,21 +15,9 @@ el apartado "Contenido".
 - [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/slides/05-asimetrica.html)
 - Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/slides/A2-rnd.html) 
 - [Hashes y Bitcoins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
-- [Integridad](https://juanvvc.github.io/crypto/slides/07-integridad.html)
-- [Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/08-pki.html)
-- Apéndice: [Criptografía ofensiva: BEC y Ransomware](https://juanvvc.github.io/crypto/slides/A3-ofensiva.html)
-- [Protocolos: TLS](https://juanvvc.github.io/crypto/slides/09-protocolos.html)
-- Apéndice: [Comunicaciones anónimas y TOR](https://juanvvc.github.io/crypto/slides/A4-anonimato.html)
-- [Autenticación](https://juanvvc.github.io/crypto/slides/10-autenticacion.html)
-- [Esteganografía](https://juanvvc.github.io/crypto/slides/11-esteganografia.html)
-
-Algunas notas:
-
-- El tema 4 y apéndices son opcionales, dependiendo de las horas disponibles
-- Los temas 8, 9 y 10 están muy relacionados entre sí y no siguen un orden lineal
-- Contenido sin actualizar, enlace a transparencias de cursos pasados (¡poco a poco!)
-    - [Message Authentication Code](https://jig.github.io/crypto/es/ecbc-mac.html)
-    - [El futuro de la criptografía](http://jig.github.io/crypto/es/threats.html)
+- [TLS y Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/07-pki.html)
+- [Criptografía ofensiva: BEC y Ransomware](https://juanvvc.github.io/crypto/slides/08-ofensiva.html)
+- [Esteganografía](https://juanvvc.github.io/crypto/slides/09-esteganografia.html)
 
 ## Descarga local
 
@@ -69,7 +57,7 @@ International (CC BY-SA 4.0) ](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Licencia de Creative
 Commons](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-Copyright © 2020-2021 [Juan Vera del Campo](https://github.com/juanvvc)
+Copyright © 2020-2022 [Juan Vera del Campo](https://github.com/juanvvc)
 
 Basado en transparencias Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig/crypto)
 

@@ -18,10 +18,12 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía
+# Teoría de la complejidad y acuerdo D-H
 <!-- _class: first-slide -->
-**Tema 4: Teoría de la complejidad y acuerdo D-H**
-Juan Vera del Campo - juan.vera@campusviu.es
+
+Juan Vera del Campo
+
+<juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 <!-- _class: with-info -->
