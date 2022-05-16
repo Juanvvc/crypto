@@ -26,7 +26,7 @@ Juan Vera del Campo
 ## Temario
 <!-- _class: cool-list -->
 
-1. [Conceptos básicos](01-conceptos-basicos.html)
+1. [Conceptos básicos](01-conceptos.html)
 1. [Criptografía clásica](02-historia.html)
 1. [Criptografía de clave simétrica: AES y ChaCha](03-simetrica.html)
     - Anexo: [RNG y HSM](A2-rng.html)
@@ -42,10 +42,8 @@ Juan Vera del Campo
 
 6. [Funciones de Hash y Blockchain](06-hashes.html)
 1. [TLS y Public Key Infrastructure](07-pki.html)
-1. [BEC y Ransomware](08-ofensiva.html)
+1. [Ransomware](08-ransomware.html)
 1. [Esteganografía](09-esteganografia.html)
-
-
 
 # Presentación
 <!-- _class: lead -->
@@ -69,10 +67,9 @@ Intereses:
 
 Versión más actualizada:
 
-- Acceso directo HTML: <http://juanvvc.github.io/crypto/slides>
+- Acceso directo HTML: <http://juanvvc.github.io/crypto>
     - Puedes pulsar `p` para ver las notas de presentación
     - Con "Inicio" (en pie de cada transparencia) puedes venir a esta presentación, con el índice global de contenidos
-    - Encontrarás la versión en PDF entre los recursos de la asignatura
 - Código Markdown: <https://github.com/juanvvc/crypto>
 
 Durante el estudio personal es muy recomendable seguir los enlaces que aparecen en las transparencias para completar el tema.
@@ -104,7 +101,7 @@ Los ejercicios son notebook de Jupyter:
 ## Bibliografía
 <!-- _class: smaller-font -->
 
-- Del profesor: <https://juanvvc.github.io/crypto/slides/>
+- Del profesor: <https://juanvvc.github.io/crypto/>
 - "[*A Graduate Course in Applied Cryptography*](http://toc.cryptobook.us/)".  Dan Boneh   and   Victor Shoup. Con vídeos en:
     - <https://crypto.stanford.edu/~dabo/courses/OnlineCrypto/>
     - https://www.coursera.org/learn/crypto
@@ -119,4 +116,4 @@ Los ejercicios son notebook de Jupyter:
 ---
 <!-- _class: center -->
 
-Continúa en: [Conceptos básicos](01-conceptos-basicos.html)
+Continúa en: [Conceptos básicos](01-conceptos.html)

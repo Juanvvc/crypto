@@ -1,8 +1,7 @@
 .DS_Store
-slides/incide
-slides/incide.sh
+build
 slides/Makefile.remote
 slides/*pdf
-refs
 **.swp
 notas.txt
+refs

@@ -425,6 +425,4 @@ Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo l
 ---
 <!-- _class: center -->
 
-Anexo recomendable: [Criptografía ofensiva](A3-ofensiva.html)
-
-Continúa en: [Protocolos](09-protocolos.html)
+Continúa en: [Ransomware](08-ransomware.html)

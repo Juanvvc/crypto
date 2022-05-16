@@ -147,6 +147,15 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 
 -->
 
+## El problema que queremos resolver
+
+Firma digital de un contrato entre dos empresas
+
+- **Confidencialidad**: el contrato tiene que ser secreto para cualquier otra parte
+- **Autenticación**: las empresas tienen que estar seguras de que están hablando con quien creen
+- **Integridad**: ninguna de las dos empresas puede cambiar unilaterlamente el contrato
+- **No repudio**: ninguna de las empresas podrá decir que no lo ha firmado
+
 # Estrategias de los sistemas seguros
 <!-- _class: lead -->
 
@@ -320,31 +329,6 @@ Diseña el sistema asumiendo que el atacante sabe qué hacer para cifrar o desci
 Su máxima se contrapone a la "seguridad por oscuridad". Es decir, la seguridad de un sistema secreto solo será segura mientras el sistema sea secreto. ¿Y si deja de serlo? ¿Y si pensamos que es seguro, pero no lo es?
 
 El paper enlazado es una estupenda introducción a los conceptos fundamentales de la criptografía y se recomienda mucho su lectura
--->
-
-## Confusión y difusión
-<!-- _class: extra-slide -->
-
-Según Shanon, un sistema seguro no debe basarse en que los algoritmos sean secretos, sino solo en que exista una clave secreta.
-
-La criptografía debe **maximizar la confusión y difusión de los mensajes cifrados**
-
-
-![bg left:30% w:95%](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/SubstitutionPermutationNetwork2.png/468px-SubstitutionPermutationNetwork2.png)
-
-- **Confusión**: cada bit de un mensaje cifrado depende de varios bits **de la clave**.
-- **Difusión**: cada bit de un mensaje cifrado depende de varios bits **del mensaje original**.
-
-> Fuente: <https://en.wikipedia.org/wiki/Confusion_and_diffusion>
-
-<!--
-Shannon fue quien recomendó que la criptografía se centrase en maximizar esos dos parámetros
-
-![center w:30em](images/Simplified-International-Data-Encryption-AlgorithmIDEA.jpg)
-
-Algunos algoritmos de cifrado no son complejos y están formados por pequeños módulos o pasos que actúan en cascada. Cada uno de estos pasos aumenta la difusión y confusión del mensaje original, hasta que es totalmente indescifrable
-
-La unión de pequeños pasos sencillos (llamados puertas criptográficas, o gates), crea una primitiva criptográfica, que es lo que veremos a continuación
 -->
 
 ## Gestión de claves

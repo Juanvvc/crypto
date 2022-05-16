@@ -1,23 +1,23 @@
 # Introducción a la criptografía
 
 Transparencias en
-[juanvvc.github.io/crypto/slides](https://juanvvc.github.io/crypto/slides/index.html),
+[juanvvc.github.io/crypto/](https://juanvvc.github.io/crypto/index.html),
 pero puedes acceder directamente a cada capítulo seleccionando los enlaces en
 el apartado "Contenido".
 
 ## Contenido
 
-- [Introducción](https://juanvvc.github.io/crypto/slides/index.html)
-- [Conceptos básicos](https://juanvvc.github.io/crypto/slides/01-conceptos-basicos.html)
-- [Criptografía clásica](https://juanvvc.github.io/crypto/slides/02-historia.html)
+- [Introducción](https://juanvvc.github.io/crypto/index.html)
+- [Conceptos básicos](https://juanvvc.github.io/crypto/01-conceptos.html)
+- [Criptografía clásica](https://juanvvc.github.io/crypto/02-historia.html)
 - [Criptografía simétrica, ChaCha y AES](https://juanvvc.github.io/crypto/slides/03-simetrica.html)
 - [Teoría de la complejidad, Diffie-Hellman](https://juanvvc.github.io/crypto/slides/04-complejidad.html)
-- [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/slides/05-asimetrica.html)
-- Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/slides/A2-rnd.html) 
-- [Hashes y Bitcoins](https://juanvvc.github.io/crypto/slides/06-hashes.html)
-- [TLS y Public Key Infrastructure](https://juanvvc.github.io/crypto/slides/07-pki.html)
-- [Criptografía ofensiva: BEC y Ransomware](https://juanvvc.github.io/crypto/slides/08-ofensiva.html)
-- [Esteganografía](https://juanvvc.github.io/crypto/slides/09-esteganografia.html)
+- [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/05-asimetrica.html)
+- Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/A2-rnd.html) 
+- [Hashes y Bitcoins](https://juanvvc.github.io/crypto/06-hashes.html)
+- [TLS y Public Key Infrastructure](https://juanvvc.github.io/crypto/07-pki.html)
+- [Ransomware](https://juanvvc.github.io/crypto/08-ransomware.html)
+- [Esteganografía](https://juanvvc.github.io/crypto/09-esteganografia.html)
 
 ## Descarga local
 
@@ -42,7 +42,20 @@ De esta manera tienes una copia local que siempre puedes mantener al día con:
 
 ```
 $ git pull
-```            
+```
+
+Puedes crear las transparencias con:
+ 
+```
+# Si no tienes marp instalado, ejecuta esto solo una vez
+npm install -g @marp-team/marp-cli
+
+# Para crear las transparencias en el directorio build
+make
+
+# Alternativamente, para crear PDFs en el directorio build
+make pdfs
+```
 
 # Notas de presentación
 
