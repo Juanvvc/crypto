@@ -5,3 +5,4 @@ slides/*pdf
 **.swp
 notas.txt
 refs
+.ipynb_checkpoints
