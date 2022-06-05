@@ -29,9 +29,9 @@ Juan Vera del Campo
 # Como decíamos ayer...
 
 - **Confidencialidad**: AES/ChaCha20 + D-H
-* **Autenticidad**: RSA + firma digital
-* **No repudio**: RSA + firma digital
-* **Integridad**: firma digital
+- **Autenticidad**: RSA + firma digital
+- **No repudio**: RSA + firma digital
+- **Integridad**: firma digital
 
 Los hashes nos permiten calcular **una firma digital**
 
@@ -43,23 +43,20 @@ Los hashes nos permiten calcular **una firma digital**
 1. [Funciones de hash](#4)
 1. [Integridad](#30)
 1. [Blockchain](#36)
-1. [Resumen y referencias](#46)
+1. [Resumen y referencias](#50)
 
 Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
 
 # Funciones de hash
 <!-- _class: lead -->
 
-## Función digest, hash o resumen
+## Función de hash, digest o resumen
 
-Recibe los tres nombres, aunque cuando se usan en criptografía se prefiere "hash"
-
-Función que resume una cadena de longitud arbitraria $m$ en un valor $r$ **de tamaño fijo $l$**
+Resume un mensaje $m$ de longitud arbitraria en un valor $r$ **de tamaño fijo $l$**, sea cual sea la longitud del mensaje
 
 $$
 \begin{aligned}
 r &= h(m)\\
-\|r\| &= min(\|m\| , l)
 \end{aligned}
 $$
 
@@ -67,9 +64,9 @@ Ejemplos:
 
 - "Resumir" un mensaje de 12 bytes en 32 bytes
 - Resumir una imagen de 532KB en 32 bytes
-- Resumir un vídeo de 4GB en 32 bytes
+- Resumir una película de 4GB en 32 bytes
 
-## Ejemplos
+## Ejemplos no criptográficos
 
 - Bit de paridad un mensaje: número de "1" en el mensaje
 - CRC
@@ -90,54 +87,31 @@ Pero estas funciones, en general, no sirven en criptografía: imagina que un ata
 
 ## Funciones de hash criptográficas
 
-Funciones hash criptográficas (CHF) son aquellas que:
+Funciones hash criptográficas son aquellas que:
 
-- Comprimen la entrada a una salida de menor longitud y son fáciles de calcular. Es decir, son **funciones resumen**
-- Cumplen **propiedades adicionales**. Muy por encima:
+- Son funciones resumen: comprimen la entrada a una salida de menor longitud
+- Son fáciles y rapidas de calcular
+- **Propiedades adicionales**:
     - Dado un resumen, no es posible calcular el mensaje original
     - No es factible encontrar dos mensajes con el mismo resumen
 
-Dado un mensaje $m$ con un resumen $r=h(m)$, para encontrar un mensaje $m'$ con el mismo resumen que $m$, es decir, $r=h(m)=h(m')$, la manera más eficiente tiene que ser probar mensajes uno a uno: fuerza bruta
+Dado un mensaje $m$ con un resumen $r=h(m)$, para encontrar otro mensaje $m'$ con el mismo resumen, $r=h(m)=h(m')$, la manera más eficiente tiene que ser probar mensajes uno a uno: fuerza bruta
 
 > https://en.wikipedia.org/wiki/Cryptographic_hash_function
 
-## ¿Mensajes con el mismo resumen?
-<!-- _class: with-success -->
 
-Obvio: no puede existir una aplicación inyectiva entre un conjunto de $m$ elementos y otro de $n$ elementos si $m>n$
+## Ejemplos de valores de hash
 
-Existen infinitos mensajes diferentes con el mismo resumen: esto se llama "colisión"
-
-![bg right:50% w:100%](https://upload.wikimedia.org/wikipedia/commons/5/5c/TooManyPigeons.jpg)
-
-
-> [Principio del palomar](https://es.wikipedia.org/wiki/Principio_del_palomar)
+![center w:25em](https://upload.wikimedia.org/wikipedia/commons/2/2b/Cryptographic_Hash_Function.svg)
 
 <!--
-El principio del palomar dice que si tienes 9 agujeros y 10 palomas, es necesario que dos palomas compartan agujero. Puede parecer una obviedad, pero a veces se nos pasan las obviedades:
+Ejemplos de valores de hash:
 
-Si los mensaje de 1.000.000 de caracteres se resumen en 256 caracteres... ¡por fuerza varios mensajes tendrán el mismo resumen!
+- el primero "resume" un texto "Fox" en otro más largo: la función de hash siempre tiene la misma longitud, incluso si el texto es corto: SHA-256 siempre dará un resumen de 256 bits sea como sea el texto de entrada.
+- Los demás son variaciones del mismo texto de entrada. Fíjate: pequeñas variaciones dan un hash diferente a simple vista
+
+¿Qué tenemos que cambiar en "The red fox jumps over the blue dog" para que tenga el mismo hash? Es decir, para que el hash no detecte el cambio. Ya que el texto es mayor de 256 bits, sabemos seguro que habrá otro texto que tendrá el mismo resumen. Pero lo único que podemos hacer es probar cambios uno y otro hasta tener suerte!
 -->
-
----
-<!-- _class: with-success -->
-
-Por ejemplo:
-
-Si queremos resumir fotografías de 1MB en resúmenes de 256 bits (tamaño típico)
-
-$$
-\left.
-\begin{aligned}
-    \|r\| & = 256\text{b} \Rightarrow |r| = 2^{256}\text{resúmenes} \\
-    \|m\| & \approx 10^6\text{B} \Rightarrow |m| = 2^{2^{23}}\text{fotografías}
-\end{aligned}
-\right\} \frac{|m|}{|r|} = \frac{2^{2^{23}}}{2^{256}} = 2^{2^{23}-256} \approx 2^{8·10^6} \approx 10^{26·10^6}
-$$
-
-Es decir, hay un número $10^{26·10^6}$, que en la práctica es "casi infinito", de fotografías de 1MB que se resumen en el mismo número de 256 bits
-
-Queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" fotografías: la única forma debe de ser probar las fotografías una a una
 
 ## Requisitos de una función de hash criptográfica
 
@@ -162,18 +136,43 @@ Los hashes se usan mucho en minería bitcoin, así que podemos utilizar sus tabl
 > Más ejemplos: https://miningchamp.com/
 > En la imagen, un Avalon 6, bloque especializado en calcular hashes
 
-## Ejemplos de valores de hash
+## ¿Mensajes con el mismo resumen?
+<!-- _class: with-success -->
 
-![center w:25em](https://upload.wikimedia.org/wikipedia/commons/2/2b/Cryptographic_Hash_Function.svg)
+Obvio: no puede existir una aplicación inyectiva entre un conjunto de $m$ elementos y otro de $n$ elementos si $m>n$
+
+Existen infinitos mensajes diferentes con el mismo resumen: esto se llama "colisión"
+
+![bg right:50% w:100%](https://upload.wikimedia.org/wikipedia/commons/5/5c/TooManyPigeons.jpg)
+
+
+> [Principio del palomar](https://es.wikipedia.org/wiki/Principio_del_palomar)
 
 <!--
-Ejemplos de valores de hash:
+El principio del palomar dice que si tienes 9 agujeros y 10 palomas, es necesario que dos palomas compartan agujero. Puede parecer una obviedad, pero a veces se nos pasan las obviedades:
 
-- el primero "resume" un texto "Fox" en otro más largo: la función de hash siempre tiene la misma longitud, incluso si el texto es corto: SHA-256 siempre dará un resumen de 256 bits sea como sea el texto de entrada.
-- Los demás son variaciones del mismo texto de entrada. Fíjate: pequeñas variaciones dan un hash diferente a simple vista
-
-¿Qué tenemos que cambiar en "The red fox jumps over the blue dog" para que tenga el mismo hash? Es decir, para que el hash no detecte el cambio. Ya que el texto es mayor de 256 bits, sabemos seguro que habrá otro texto que tendrá el mismo resumen. Pero lo único que podemos hacer es probar cambios uno y otro hasta tener suerte!
+Si los mensajes de 1.000.000 de caracteres se resumen en 256 caracteres... ¡por fuerza varios mensajes tendrán el mismo resumen!
 -->
+
+---
+<!-- _class: with-success -->
+
+Por ejemplo:
+
+Si queremos resumir fotografías de 1MB en resúmenes de 256 bits (tamaño típico)
+
+$$
+\left.
+\begin{aligned}
+    \|r\| & = 256\text{b} \Rightarrow |r| = 2^{256}\text{resúmenes} \\
+    \|m\| & \approx 10^6\text{B} \Rightarrow |m| = 2^{2^{23}}\text{fotografías}
+\end{aligned}
+\right\} \frac{|m|}{|r|} = \frac{2^{2^{23}}}{2^{256}} = 2^{2^{23}-256} \approx 2^{8·10^6} \approx 10^{26·10^6}
+$$
+
+Es decir, hay un número $10^{26·10^6}$, que en la práctica es "casi infinito", de fotografías de 1MB que se resumen en el mismo número de 256 bits
+
+Queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" fotografías: la única forma debe de ser probar las fotografías una a una
 
 ## Paradoja del cumpleaños
 
@@ -294,13 +293,23 @@ En este curso no hacemos criptoanálisis, es decir, no rompemos cosas. Si estái
 - Usando diccionarios de "contraseñas probables"
 - Herramientas como [John the Ripper](https://www.openwall.com/john/) o [CrackHash](https://pypi.org/project/crackhash/) aprovechan estas técnicas
 
-## Usos: Merkle Hash tree
+# Usos
+<!-- _class: lead -->
+
+Árboles de Merkle, Integridad, Cadena de custodia...
+
+## Merkle Hash tree
+<!-- _class: smaller-font -->
+
+Si un archivo gran cambia a menudo y hay que calcular su hash cada vez, llevará mucho tiempo
+
+Solución: calcular hash solo de los bloques que cambien, y agruparlos en un árbol
 
 Permite firmar bases de datos, discos... de forma eficiente
 
 ![center w:25em](images/Hash_Tree.svg)
 
-## Usos: almacenamiento de contraseñas
+## Almacenamiento de contraseñas
 
 El sistema operativo no debe guardar las contraseñas de los usuarios: si alguien consigue entrar, ¡obtiene la contraseña del usuario!
 
@@ -310,23 +319,30 @@ Pero esto tiene un problema: muchos usuarios usan palabras, nombres, etc. limita
 
 Un atacante realizar un "diccionario" con el hash de todas las palabras, nombres, etc. (ataque de diccionario y rainbow table)
 
-## Contramedida a ataques de diccionario / rainbowtables
+## Almacenamiento de contraseñas: *salt* y bcrypt
 
-Añadir un valor aleatorio o salt y lo guardamos:
-
-$$salt\|hash(salt\|contraseña)$$
-
-Esto fuerza al atacante a calcular el diccionario para cada contraseña
-
-Pero sigue siendo factible realizar $\approx 100.000$ operaciones para encontrar una contraseña
-
-Contramedida adicional: realizar iteraciones implementar un hash "costoso":
+1. Añadir un valor aleatorio o $salt$ y tamibén lo guardamos: $hash(salt\|contraseña)$
+1. Hashear varias veces o implementar un hash "costoso":
 
 $$hash(hash(hash(...hash(salt\|contraseña))))$$
 
-(Recuerda [bcrypt del tema 3](#03-simetrica.html))
+![](https://i.stack.imgur.com/m8opZ.png)
 
-## Usos: Integridad de mensajes
+<!--
+En la imagen se puede ver un ejemplo de cómo guarda una base de datos una contraseña protegida con bcrypt
+
+Nota: bcrypt no es exactamente un hash con salt sino un cifrado con contraseña conocida, aunque tiene la misma función que un hash. Se usa bcrypt porque es más lento que un hash, y eso añade seguridad adicional
+
+La cadena es lo que guardará la base de datos. Incluye los campos, separados con $:
+
+- Identificador del algoritmo: 2y
+- Número de operaciones de hash repetidas. En realidad es base 2: 2^10
+- Salt
+- hash(password||salt)
+
+-->
+
+## Integridad de mensajes
 
 Se puede usar un hash para asegurar la integridad de un mensaje: [HMAC](https://en.wikipedia.org/wiki/HMAC)
 
@@ -334,56 +350,23 @@ $$
 HMAC(k, m) = hash(E_k(m))
 $$
 
-Es decir, el código para validar que un mensaje no ha sido modificado por un atacante:
+<!--
 
-- Las dos partes escogen una clave de verificación (suele ser diferente a la clave de cifrado)
-- El mensaje por un lado se cifra con la clave de cifrado
-- El mensaje por otro lado se cifra con la clave de verificación, y se calcula su hash
-
-Un atacante tendría que romper el cifrado y el HMAC para modificar un mensaje: **si hacer solo una de esas dos cosas es lleva siglos, las dos a la vez llevaría siglos de siglos**
-
-## Usos: Firma digital
-<!-- _class: with-success -->
-
-Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
-
-![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
-
-Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
-
----
-
-![](https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/assets/signature-sign-verify.png)
-
-> https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/digital-signatures.html
-
-## Usos: cadena de custodia
-
-Cuando se investiga un crimen... ¿cómo se protegen las evidencias digitales contra modificaciones?
-
-Inicio de cadena de custodia publicando sus hashes
-
-![center w:20em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
-
-# Integridad
-<!-- _class: lead -->
-
-## Definición
-
-Capacidad de **detectar** si un mensaje ha sido modificado desde su transmisión hasta su recepción.
+Integredad Capacidad de **detectar** si un mensaje ha sido modificado desde su transmisión hasta su recepción.
 
 La modificación se refiere tanto a una modificación **explícita por un atacante** como a una modificación debido a un error (por ejemplo de transmisión). 
 
 > https://es.wikipedia.org/wiki/Integridad_del_mensaje
 
-![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/1/12/Darwin_Hybrid_Tulip_Mutation_2014-05-01.jpg)
+-->
 
-
-## Cifrado autenticado: tipos
+---
 
 - **Encrypt-then-MAC** (EtM): primero cifra, luego calcula hash 
 - **Encrypt-and-MAC** (E&M): cifra y calcula hash a la vez
 - **MAC-then-Encrypt** (MtE): primero calcula hash, luego cifra
+
+Hay modos de AES que utilizan estos esquemas: [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
 
 > MAC: Message Authenticated Code
 > https://en.wikipedia.org/wiki/Authenticated_encryption
@@ -410,7 +393,26 @@ La modificación se refiere tanto a una modificación **explícita por un atacan
 ![MAC-then-Encrypt](https://upload.wikimedia.org/wikipedia/commons/a/ac/Authenticated_Encryption_MtE.png)
 
 - Usado en TLS
-- Permite algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
+- Vulnerable algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
+
+## Cadena de custodia
+
+Cuando se investiga un crimen... ¿cómo se protegen las evidencias digitales contra modificaciones?
+
+Inicio de cadena de custodia publicando sus hashes
+
+![center w:20em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
+
+
+## Firma digital
+<!-- _class: with-success -->
+
+Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
+
+![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
+
+Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
+
 
 # Blockchain
 <!-- _class: lead -->
@@ -576,7 +578,7 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 
 ![bg left:40%](https://foto.wuestenigel.com/wp-content/uploads/api2/non-fungible-tokens-nfts-unique-collectible-crypto-assets.jpeg)
 
-# Conclusiones
+# Resumen y referencias
 <!-- _class: lead -->
 
 ## Resumen

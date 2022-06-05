@@ -28,6 +28,9 @@ build:
 pdfs: build
 	PUPPETEER_TIMEOUT=0 $(MARP) -I $(IN_DIR) -o $(OUT_DIR) --no-config $(THEME_OPTS) --pdf --allow-local-files --html --pdf-notes
 
+serve:
+	$(MARP) -I $(IN_DIR) -w -s
+
 release: pdfs
 	rm -rf $(OUT_DIR)/themes
 	rm -rf $(OUT_DIR)/images
