@@ -1,0 +1,132 @@
+/*
+@theme marp-viu
+*/
+
+/* Tema VIU para MARP */
+
+@import 'marp-base';
+
+/******************* common styles *****************************/
+
+:root {
+    --main-color: #e65014;
+    --darker-color: #e65014;
+    --lighter-color: #e26c3e;
+    --extra-back-color: rgb(175, 172, 172);
+}
+
+/* Logo */
+section::before {
+    content: "";
+    width: 9%;
+    height: 10%;
+    position: absolute;
+    right: 2.5%;
+    top: 2%;
+    background: url('themes/viu/logo-viu.png') no-repeat center/contain;
+}
+
+
+/******************* lead2 *****************************/
+
+/* first slide (main title). Use h1 as header.
+Use: <!-- _class: first-slide --> */
+section.lead2 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('themes/viu/bg2.png');
+    text-align: left;
+    padding: inherit;
+}
+section.lead2 h1, section.lead2 h2 {
+    color: #333;
+    text-align: center;
+    background-color: transparent;
+    margin-top: 10em !important;
+    margin-bottom: 0;
+}
+section.lead2 footer, section.lead2:after {
+    /* hide footer and pagination */
+    display: none;
+}
+
+
+/******************* lead *****************************/
+
+/* lead class: first slide in a section. Use h1 as header.
+Use: <!-- _class: lead --> */
+section.lead {
+    background-color: var(--main-color);
+    text-align: center;
+    color: white;
+    padding: inherit;
+}
+section.lead h1, section.lead h2, section.lead p, section.lead a {
+    color: white;
+    padding: 0.5em;
+    background-color: inherit;
+    margin-bottom: 0;
+}
+section.lead footer, section.lead header, section.lead:after {
+    /* hide header, footer and pagination */
+    display: none;
+}
+section.lead::before {
+    /* logo in white */
+    filter: invert(100%) saturate(0) brightness(1.8);
+}
+
+
+
+/******************* first-slide *****************************/
+
+/* first slide (main title). Use h1 as header.
+Use: <!-- _class: first-slide --> */
+section.first-slide {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('themes/viu/bg1.png');
+    justify-content: flex-start;
+    align-items: center;
+}
+section.first-slide h1 {
+    color: #111;
+    margin-bottom: 8em;
+}
+section.first-slide h2, section.first-slide p {
+    color: #111;
+}
+section.first-slide footer, section.first-slide:after {
+    /* hide footer and pagination */
+    display: none;
+}
+section.first-slide a, section.first-slide p {
+    color: #111;
+}
+
+/******************* last-slide *****************************/
+
+
+/* last-slide. Use h1 as header.
+Use: <!-- _class: last-slide --> */
+section.last-slide {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('themes/viu/bg1.png');
+    justify-content: flex-start;
+    align-items: center;
+}
+section.last-slide h1 {
+    color: #111;
+    margin-bottom: 8em;
+}
+section.last-slide h2, section.last-slide p {
+    color: #111;
+}
+section.last-slide footer, section.last-slide:after {
+    /* hide footer and pagination */
+    display: none;
+}
+section.last-slide a, section.last-slide p {
+    color: #111;
+}
