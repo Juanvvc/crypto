@@ -2,7 +2,7 @@ name: marp-to-pages
 concurrency: marp-to-pages
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
     types:
       - opened
