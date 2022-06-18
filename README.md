@@ -77,3 +77,4 @@ Copyright © 2020-2022 [Juan Vera del Campo](https://github.com/juanvvc)
 
 Basado en transparencias Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig/crypto)
 
+
