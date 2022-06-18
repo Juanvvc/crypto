@@ -16,8 +16,10 @@ transition: fade
     the YAML header: section: | */
 </style>
 
-# Criptografía: conceptos básicos
+# Criptografía y Teoría de códigos
 <!-- _class: first-slide -->
+
+**Principios básicos**
 
 Juan Vera del Campo
 
@@ -608,3 +610,9 @@ header: ''
 Continúa en: [Criptografía clásica](02-historia.html)
 
 Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales
+
+---
+<!-- _class: last-slide -->
+
+---
+<!-- _class: last-slide -->

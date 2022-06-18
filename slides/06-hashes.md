@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Funciones de Hash y Blockchains
+title: Criptografía - Funciones de Hash y blockchain
 author: Juan Vera
 keywords: criptografía,hash,sha256,bitcoin
 paginate: true
@@ -18,8 +18,10 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Funciones de Hash y Blockchains
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Funciones de hash y blockchain**
 
 Juan Vera del Campo
 
@@ -606,3 +608,5 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 
 Continúa en: [TLS y Public Key Infrastructure](07-pki.html)
 
+---
+<!-- _class: last-slide -->

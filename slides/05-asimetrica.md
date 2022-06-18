@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Criptografía asimétrica
+title: Criptografía - Cifrado asimétrico
 author: Juan Vera
 keywords: criptografía,asimétrica,rsa,dsa,diffie-hellman
 paginate: true
@@ -19,8 +19,10 @@ transition: fade
     }
 </style>
 
-# Criptografía asimétrica
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Cifrado asimétrico o de clave pública**
 
 Juan Vera del Campo
 
@@ -756,3 +758,6 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 <!-- _class: center -->
 
 Continúa en: [Funciones de Hash y Blockchains](06-hashes.html)
+
+---
+<!-- _class: last-slide -->

@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - PKI
+title: Criptografía - Publick Key Infrastructure
 author: Juan Vera
 keywords: criptografía,protocolos,ssl,https,tls,pki
 paginate: true
@@ -18,12 +18,14 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
 
-**Tema 8: TLS y Public Key Infrastructure**
+**TLS y *Public Key Infrastructure***
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo
+
+<juan.vera@campusviu.es>
 
 
 ## Hoy hablamos de...
@@ -59,7 +61,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 ## Problemas cifrado asimétrico
 
-![bg left:50%](images/I-m-Wolf-I-solve-problems.jpg)
+![bg left:50% w:90%](images/I-m-Wolf-I-solve-problems.jpg)
 
 - Solo cifran números enteros con una longitud igual a la clave. Ej: 4096 bits
 - Muy lento comparado con el cifrado simétrico
@@ -426,3 +428,7 @@ Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo l
 <!-- _class: center -->
 
 Continúa en: [Ransomware](08-ransomware.html)
+
+---
+<!-- _class: last-slide -->
+

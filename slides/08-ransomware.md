@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Amenazas
+title: Criptografía - Ransomware
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
@@ -15,8 +15,10 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía como amenaza: ransomware
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Ransomware**
 
 Juan Vera del Campo
 

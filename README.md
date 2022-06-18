@@ -8,16 +8,19 @@ el apartado "Contenido".
 ## Contenido
 
 - [Introducción](https://juanvvc.github.io/crypto/index.html)
-- [Conceptos básicos](https://juanvvc.github.io/crypto/01-conceptos.html)
+- [Principios básicos](https://juanvvc.github.io/crypto/01-conceptos.html)
+    - Anexo: [Glosario](https://juanvvc.github.io/crypto/A1-glosario.html) 
 - [Criptografía clásica](https://juanvvc.github.io/crypto/02-historia.html)
-- [Criptografía simétrica, ChaCha y AES](https://juanvvc.github.io/crypto/slides/03-simetrica.html)
-- [Teoría de la complejidad, Diffie-Hellman](https://juanvvc.github.io/crypto/slides/04-complejidad.html)
-- [Criptografía asimétrica, RSA](https://juanvvc.github.io/crypto/05-asimetrica.html)
-- Apéndice: [RND y HSM](https://juanvvc.github.io/crypto/A2-rnd.html) 
-- [Hashes y Bitcoins](https://juanvvc.github.io/crypto/06-hashes.html)
-- [TLS y Public Key Infrastructure](https://juanvvc.github.io/crypto/07-pki.html)
+- [Cifrado simétrico o de clave secreta: ChaCha y AES](https://juanvvc.github.io/crypto/slides/03-simetrica.html)
+    - Anexo: [RND y HSM](https://juanvvc.github.io/crypto/A2-rnd.html) 
+- [Teoría de la complejidad y Diffie-Hellman](https://juanvvc.github.io/crypto/slides/04-complejidad.html)
+- [Cifrado asimétrico o de clave pública: RSA](https://juanvvc.github.io/crypto/05-asimetrica.html)
+- [Funciones de hash y *blockchain*](https://juanvvc.github.io/crypto/06-hashes.html)
+- [TLS y *Public Key Infrastructure*](https://juanvvc.github.io/crypto/07-pki.html)
 - [Ransomware](https://juanvvc.github.io/crypto/08-ransomware.html)
 - [Esteganografía](https://juanvvc.github.io/crypto/09-esteganografia.html)
+
+Recuerda: puedes "imprimir a PDF" para obtener las translarencias en PDF
 
 ## Descarga local
 

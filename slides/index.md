@@ -13,7 +13,7 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
 
 **Presentación**
@@ -78,7 +78,8 @@ El curso está adaptado de [las notas de Jordi Íñigo Griera](https://github.co
 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/) Esta obra esta sujeta a una licencia de [Atribución 4.0 Internacional de Creative Commons](http://creativecommons.org/licenses/by/4.0/)
 
-## Instrucciones de uso de los ejercicios
+## Instrucciones de uso de las actividades
+<!-- _class: with-warning smaller-font -->
 
 Los ejercicios son notebook de Jupyter:
 
@@ -91,7 +92,9 @@ Los ejercicios son notebook de Jupyter:
     - https://www.youtube.com/watch?v=jZ952vChhuI
     - https://www.dataquest.io/blog/jupyter-notebook-tutorial/
 
-## Conocimientos necesarios
+Presenta las actividades como PDF: si usas los notebook, opción **imprimir a PDF**
+
+## Conocimientos recomendables
 
 - Álgebra básica, teoría de conjuntos, probabilidad
 - Conocimientos básicos de programación: ejemplos en Python
@@ -116,4 +119,7 @@ Los ejercicios son notebook de Jupyter:
 ---
 <!-- _class: center -->
 
-Continúa en: [Conceptos básicos](01-conceptos.html)
+Continúa en: [Principios básicos](01-conceptos.html)
+
+---
+<!-- _class: last-slide -->

@@ -16,8 +16,10 @@ transition: fade
     the YAML header: section: | */
 </style>
 
-# Historia de la criptografía
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Historia de la criptografía**
 
 Juan Vera del Campo
 
@@ -731,3 +733,6 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 <!-- _class: center -->
 
 Continúa en: [Criptografía simétrica](03-simetrica.html)
+
+---
+<!-- _class: last-slide -->

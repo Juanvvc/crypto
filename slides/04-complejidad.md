@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Teoría de la complejidad y acuerdo D-H
+title: Criptografía - Teoría de la complejidad y acuerdo Diffie-Hellman
 author: Juan Vera
 keywords: criptografía,complejidad,diffie-hellman
 paginate: true
@@ -18,8 +18,10 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Teoría de la complejidad y acuerdo D-H
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Teoría de la complejidad y acuerdo Diffie-Hellman**
 
 Juan Vera del Campo
 
@@ -631,3 +633,6 @@ header: Hash
 <!-- _class: center -->
 
 Continúa en: [Criptografía asimétrica](05-asimetrica.html)
+
+---
+<!-- _class: last-slide -->

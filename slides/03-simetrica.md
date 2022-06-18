@@ -18,8 +18,10 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Cifrado simétrico
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Crifrado simétrico o de clave privada**
 
 Juan Vera del Campo
 
@@ -1144,3 +1146,6 @@ header: '' -->
 <!-- _class: center -->
 
 Continúa en: [Teoría complejidad y acuerdo D-H](04-complejidad.html)
+
+---
+<!-- _class: last-slide -->

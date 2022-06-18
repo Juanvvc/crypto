@@ -2,11 +2,11 @@
 marp: true
 title: Criptografía - Esteganografía
 author: Juan Vera
-keywords: criptografía,esteganografía,watermarking
+keywords: criptografía,esteganografía,watermarking,fingerprinting
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
-theme: marp-incide
+theme: marp-viu
 transition: fade
 ---
 
@@ -18,8 +18,10 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Esteganografía
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
+
+**Esteganografía**
 
 Juan Vera del Campo
 
@@ -214,8 +216,3 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 ---
 <!-- _class: last-slide -->
-
-¡Esto ha sido todo!
-
-Juan Vera
-<juan.vera@campusviu.es>

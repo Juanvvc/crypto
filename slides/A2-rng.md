@@ -13,12 +13,14 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía
+# Criptografía y teoría de códigos
 <!-- _class: first-slide -->
 
 **Anexo: Generación de números aleatorios**
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo
+
+<juan.vera@campusviu.es>
 
 
 # Contenido
@@ -230,19 +232,21 @@ PKCS: Public Key Cryptographic Standard. Estándares de facto publicados por RSA
 
 ## Partición de Secretos
 
-en claves importantes (e.g. la de una CA raíz) un HSM puede no ser suficiente (¿y si lo roban?)
+En claves importantes (e.g. la de una CA raíz) un HSM puede no ser suficiente (¿y si lo roban?)
 
-en estos casos podemos dividir la clave en trozos:
+En estos casos podemos dividir la clave en trozos:
 
-- dividir la cadena de bits en trozos disminuye la seguridad: si el atacante adquiere una parte, tiene que adivinar menos bits de la otra.
+- Dividir la cadena de bits en trozos disminuye la seguridad: si el atacante adquiere una parte, tiene que adivinar menos bits de la otra.
 - $\otimes$ entre las claves: seguro incondicionalmente, pero frágil (la clave se pierde si se pierde una parte)
-- [algoritmo de Shamir](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing): seguro incondicionalmente y robusto. Permite recuperar la clave si se dispone de al menos M de los N trozos.
+- [Algoritmo de Shamir](https://en.wikipedia.org/wiki/Shamir's_Secret_Sharing): seguro incondicionalmente y robusto. Permite recuperar la clave si se dispone de al menos M de los N trozos.
 
 ---
 
-¿lo podemos hacer "por software"?
+¿Lo podemos hacer "por software"?
 
-sí, pero el secreto ha estado "en claro" en la RAM del ordenador por tanto una vez recuperado el secreto su exposición ha aumentado notablemente
+Sí, pero el secreto ha estado "en claro" en la RAM del ordenador por tanto una vez recuperado el secreto su exposición ha aumentado notablemente
 
-pero en HSM es una propiedad habitual
+Pero en HSM es una propiedad habitual
 
+---
+<!-- _class: last-slide -->
