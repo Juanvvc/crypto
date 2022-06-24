@@ -12,17 +12,18 @@ OUT_DIR=build
 # You can overwrite these from the command line
 # For example: make -e THEME=marp-viu
 THEME=marp-viu
-THEME_SET=$(IN_DIR)/themes
+THEME_SET=slides-support/slides/themes
 THEME_OPTS=--theme $(THEME) --theme-set "$(THEME_SET)"
 
 VERSION=$(shell date '+%Y%m')
 
 all:
+	git submodule init
+	git submodule update --remote --merge
 	make htmls
 
 build:
 	mkdir -p $(OUT_DIR)
-	cp -r $(THEME_SET) $(OUT_DIR)/.
 	cp -r $(IN_DIR)/images $(OUT_DIR)/.
 
 pdfs: build
@@ -37,8 +38,7 @@ release: pdfs
 	cd $(OUT_DIR) && zip $(VERSION)-slides.zip *pdf && rm *.pdf
 
 htmls: build
-	$(MARP) -I $(IN_DIR) -o $(OUT_DIR) --no-config $(THEME_OPTS) --bespoke.progress true --html 
-	#--bespoke.transition
+	$(MARP) -I $(IN_DIR) -o $(OUT_DIR) --no-config $(THEME_OPTS) --bespoke.progress true --html --bespoke.transition
 
 clean:
 	/bin/rm -rf $(OUT_DIR)

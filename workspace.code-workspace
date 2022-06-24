@@ -7,9 +7,12 @@
 	"settings": {
 		"markdown.marp.exportType": "html",
 		"markdown.marp.themes": [
-			"slides/themes/marp-viu.css",
-			"slides/themes/marp-upc.css",
-			"slides/themes/marp-base.css"
-		]
+			"slides-support/slides/themes/marp-viu.css",
+			"slides-support/slides/themes/marp-upc.css",
+			"slides-support/slides/themes/marp-base.css"
+		],
+		"pasteImage.path": "${currentFileDir}/images",
+		"pasteImage.showFilePathConfirmInputBox": true,
+		"pasteImage.filePathConfirmInputBoxMode": "onlyName"
 	}
 }
