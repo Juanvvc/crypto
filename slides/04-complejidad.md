@@ -23,9 +23,7 @@ transition: fade
 
 **Teoría de la complejidad y acuerdo Diffie-Hellman**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 <!-- _class: with-info -->
@@ -634,5 +632,5 @@ header: Hash
 
 Continúa en: [Criptografía asimétrica](05-asimetrica.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

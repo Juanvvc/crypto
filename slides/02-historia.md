@@ -21,9 +21,7 @@ transition: fade
 
 **Historia de la criptografía**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->
@@ -734,5 +732,5 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 
 Continúa en: [Criptografía simétrica](03-simetrica.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

@@ -23,9 +23,7 @@ transition: fade
 
 **Crifrado simétrico o de clave privada**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 
@@ -1147,5 +1145,5 @@ header: '' -->
 
 Continúa en: [Teoría complejidad y acuerdo D-H](04-complejidad.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

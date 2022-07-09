@@ -18,9 +18,7 @@ theme: marp-viu
 
 **Anexo: Generación de números aleatorios**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 
 # Contenido
@@ -248,5 +246,5 @@ Sí, pero el secreto ha estado "en claro" en la RAM del ordenador por tanto una 
 
 Pero en HSM es una propiedad habitual
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

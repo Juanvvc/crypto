@@ -21,9 +21,7 @@ transition: fade
 
 **Principios básicos**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Hoy hablamos de...
 <!-- _class: cool-list -->
@@ -611,8 +609,6 @@ Continúa en: [Criptografía clásica](02-historia.html)
 
 Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->
 
----
-<!-- _class: last-slide -->

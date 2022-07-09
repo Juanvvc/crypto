@@ -23,9 +23,7 @@ transition: fade
 
 **TLS y *Public Key Infrastructure***
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 
 ## Hoy hablamos de...
@@ -429,6 +427,5 @@ Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo l
 
 Continúa en: [Ransomware](08-ransomware.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->
-

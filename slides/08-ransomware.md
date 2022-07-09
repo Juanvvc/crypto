@@ -20,9 +20,7 @@ theme: marp-viu
 
 **Ransomware**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Hoy hablamos de...
 <!-- _class: cool-list with-warning -->
@@ -284,3 +282,6 @@ Modern Ransomware and exfiltration
 <!-- _class: center -->
 
 Continúa en: [Esteganografía](09-esteganografia.html)
+
+# ¡Gracias!
+<!-- _class: last-slide -->

@@ -24,9 +24,7 @@ transition: fade
 
 **Cifrado asimétrico o de clave pública**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 
@@ -759,5 +757,5 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 
 Continúa en: [Funciones de Hash y Blockchains](06-hashes.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

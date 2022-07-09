@@ -18,9 +18,7 @@ theme: marp-viu
 
 **Presentación**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 
 ## Temario
@@ -121,5 +119,5 @@ Presenta las actividades como PDF: si usas los notebook, opción **imprimir a PD
 
 Continúa en: [Principios básicos](01-conceptos.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

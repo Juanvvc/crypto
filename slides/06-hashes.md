@@ -23,9 +23,7 @@ transition: fade
 
 **Funciones de hash y blockchain**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 
 # Como decíamos ayer...
@@ -608,5 +606,5 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 
 Continúa en: [TLS y Public Key Infrastructure](07-pki.html)
 
----
+# ¡Gracias!
 <!-- _class: last-slide -->

@@ -23,9 +23,7 @@ transition: fade
 
 **Esteganografía**
 
-Juan Vera del Campo
-
-<juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@campusviu.es>
 
 ## Hoy hablamos de...
 <!-- _class: cool-list -->
@@ -216,4 +214,7 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 - ["A Comparative Analysis of Information Hiding Techniques for Copyright Protection of Text Documents"](https://www.hindawi.com/journals/scn/2018/5325040/),Milad Taleby Ahvanooey,1 Qianmu Li, Hiuk Jae Shim, and Yanyan Huang. Security and Communication Networks / 2018
 
 ---
+<!-- _class: last-slide -->
+
+# ¡Gracias!
 <!-- _class: last-slide -->
