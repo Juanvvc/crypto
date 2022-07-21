@@ -18,10 +18,8 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y teoría de códigos
+# Teoría de la complejidad y acuerdo Diffie-Hellman
 <!-- _class: first-slide -->
-
-**Teoría de la complejidad y acuerdo Diffie-Hellman**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 

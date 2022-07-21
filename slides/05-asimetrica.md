@@ -19,10 +19,10 @@ transition: fade
     }
 </style>
 
-# Criptografía y teoría de códigos
+# Cifrado asimétrico o de clave pública
 <!-- _class: first-slide -->
 
-**Cifrado asimétrico o de clave pública**
+**RSA y curvas elípticas**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 

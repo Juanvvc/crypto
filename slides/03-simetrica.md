@@ -18,10 +18,10 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y teoría de códigos
+# Cifrado simétrico o de clave privada
 <!-- _class: first-slide -->
 
-**Crifrado simétrico o de clave privada**
+**AES y ChaCha**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 

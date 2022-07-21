@@ -13,10 +13,8 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía y teoría de códigos
+# Glosario
 <!-- _class: first-slide -->
-
-**Anexo: Glosario**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
@@ -24,7 +22,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 <!-- _class: cool-list -->
 
 1. [Definiciones Generales](#3)
-1. [Matemáticas](#12)
+2. [Matemáticas](#12)
 
 ## Definiciones generales
 <!-- _class: lead -->

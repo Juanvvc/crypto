@@ -16,10 +16,8 @@ transition: fade
     the YAML header: section: | */
 </style>
 
-# Criptografía y Teoría de códigos
+# Principios básicos de la criptografía
 <!-- _class: first-slide -->
-
-**Principios básicos**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 

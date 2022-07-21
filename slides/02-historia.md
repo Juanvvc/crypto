@@ -16,10 +16,8 @@ transition: fade
     the YAML header: section: | */
 </style>
 
-# Criptografía y teoría de códigos
+# Historia de la criptografía
 <!-- _class: first-slide -->
-
-**Historia de la criptografía**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
@@ -37,7 +35,10 @@ En resumen: cómo se hacían las cosas antes y por qué no funcionan
 Ejercicios: curso de <www.cryptohack.org>: "Introduction to Cryptohack"
 
 # Criptografía clásica
-<!-- _class: lead -->
+<!--
+_class: lead
+header: Criptografía clásica
+-->
 
 
 ## Criptografía = cifrado
@@ -99,9 +100,12 @@ Prácticamente todos los algoritmos actuales de cifrado simétrico utilizan sist
 <!-- Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los '70  ha sido algún tipo de cifrado por sustitución más o menos complejo. Los estudiaremos a continuación con más detalle en el resto de capítulos -->
 
 # Cifrado César
-<!-- _class: lead -->
+<!--
+_class: lead
+header: César y la fortaleza
+-->
 
-Fuerza bruta y análisis frecuencial
+Fuerza bruta, análisis frecuencial y fortaleza de un algoritmo
 
 ## Historia
 
@@ -324,7 +328,10 @@ El cifrado César, incluso con mapeos aleatorios, lleva roto como mínimo desde 
 
 
 # Mejoras al cifrado César: sistemas polialfabéticos
-<!-- _class: lead -->
+<!--
+_class: lead
+header: Vigenère y Enigma
+-->
 
 Vigenère y Enigma
 
@@ -550,7 +557,10 @@ La "Bombe" fue una de las primeras máquinas de procesado binario.
 El descifrado de Enigma fue una de las claves que permitió a los aliados ganar la Segunda Guerra Mundial
 
 # Confidencialidad perfecta
-<!-- _class: lead -->
+<!--
+_class: lead
+header: Confidencialidad perfecta
+-->
 
 One-time-pad (cifrado Vernam)
 
@@ -597,7 +607,7 @@ Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un 
 ## ¿A qué hora atacamos?
 <!-- _class: center two-columns -->
 
-![w:25em center](https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png)
+![bg right w:100%](https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png)
 
 - A = 16
 - B = 7
@@ -692,7 +702,10 @@ Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro po
 
 
 # Resumen y referencias
-<!-- _class: lead -->
+<!--
+_class: lead
+header: ""
+-->
 
 ---
 

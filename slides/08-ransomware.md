@@ -15,10 +15,8 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y teoría de códigos
+# Ransomware
 <!-- _class: first-slide -->
-
-**Ransomware**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 

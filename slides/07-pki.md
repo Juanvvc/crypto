@@ -18,10 +18,8 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y teoría de códigos
+# TLS y *Public Key Infrastructure*
 <!-- _class: first-slide -->
-
-**TLS y *Public Key Infrastructure***
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
@@ -68,7 +66,10 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 Hoy veremos las soluciones para estos problemas: cifrado híbrido y certificados
 
 # Criptografía híbrida
-<!-- _class: lead -->
+<!--
+_class: lead
+header: Criptografía híbrida
+-->
 
 O cómo combinar los ladrillos que hemos visto para construir protocolos
 
@@ -199,7 +200,10 @@ por el de
 **cómo compartir claves públicas (asimétricas)**
 
 # Gestión de claves públicas
-<!-- _class: lead -->
+<!--
+_class: lead
+header: Gestión de claves públicas
+-->
 
 Certificados electrónicos
 
@@ -410,8 +414,23 @@ Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo l
 - se publica una CRL: Certificate Revocation List
 - se publica en un servidor OCSP
 
-# Conclusiones
-<!-- _class: lead -->
+# Resumen y referencias
+<!--
+_class: lead
+header: ""
+-->
+
+## Resumen
+
+- Hemos reducido el problema de la seguridad en un problema de gestión de claves públicas
+- Tres soluciones:
+  - SSH: claves públicas gestinadas manualmente
+  - PGP: claves públicas proporcionadas por amigos
+  - PKI (certificados): claves públicas proporcionadas por terceras partes de confianza y firmadas digitalmente
+- TLS / HTTPS:
+  - Primera parte: negocia la seguridad de un servidor con una clave pública y PKI
+  - Opcional: clave simétrica calculada con D-H
+  - Tras la negociación, cifrado simétrico
 
 ## Referencias
 

@@ -13,10 +13,8 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía y teoría de códigos
+# Generación de números aleatorios 
 <!-- _class: first-slide -->
-
-**Anexo: Generación de números aleatorios**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 

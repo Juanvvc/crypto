@@ -18,10 +18,8 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Criptografía y teoría de códigos
+# Funciones de hash y blockchain
 <!-- _class: first-slide -->
-
-**Funciones de hash y blockchain**
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
