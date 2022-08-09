@@ -22,17 +22,13 @@ transition: fade
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
 1. [Criptografía clásica](#3)
-1. [Cifrado César: fuerza bruta y análisis frecuencial](#8)
-1. [Mejoras al cifrado César: Vigenère y Enigma](#24)
-1. [Confidencialidad perfecta: Vernam / one-time-pad](#39)
+1. [Cifrado César](#8)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#24)
+1. [Confidencialidad perfecta](#39)
 1. [Resumen y referencias](#51)
-
-En resumen: cómo se hacían las cosas antes y por qué no funcionan
-
-Ejercicios: curso de <www.cryptohack.org>: "Introduction to Cryptohack"
 
 # Criptografía clásica
 <!--
@@ -741,7 +737,7 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 - [The Cryptograhic Mathematics of Enigma](https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/wwii/CryptoMathEnigma_Miller.pdf) Dr. A. Ray Miller, NSA 2019
 
 ---
-<!-- _class: center -->
+Ejercicios: curso de <www.cryptohack.org>: "Introduction to Cryptohack"
 
 Continúa en: [Criptografía simétrica](03-simetrica.html)
 

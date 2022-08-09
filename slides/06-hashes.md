@@ -36,14 +36,12 @@ Los hashes nos permiten calcular **una firma digital**
 ![bg right w:90%](https://i.imgur.com/Cq78TET.png?1)
 
 # Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
 1. [Funciones de hash](#4)
-1. [Integridad](#30)
-1. [Blockchain](#36)
+1. [Usos](#23)
+1. [Blockchain](#34)
 1. [Resumen y referencias](#50)
-
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
 
 # Funciones de hash
 <!-- _class: lead -->
@@ -601,6 +599,9 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 ---
 
 <!-- _class: center -->
+
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
+
 
 Continúa en: [TLS y Public Key Infrastructure](07-pki.html)
 

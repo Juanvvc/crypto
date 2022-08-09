@@ -24,12 +24,12 @@ transition: fade
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
 ## Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
 1. [Esteganografía](#3)
 1. [Ejemplos](#9)
 1. [Ataques y detección](#22)
-1. [Resumen y referencias](#27)
+1. [Referencias](#27)
 
 # Esteganografía
 <!-- _class: lead -->

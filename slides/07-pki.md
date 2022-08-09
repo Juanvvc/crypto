@@ -25,10 +25,10 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 
 ## Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
-1. [Cifrado híbrido, protocolo TLS](#3)
-1. [Gestión de claves públicas, PKI](#16)
+1. [Criptografía híbrida](#5)
+1. [Gestión de claves públicas](#16)
 1. [Resumen y referencias](#35)
 
 ## Recordatorio: cifrado asimétrico

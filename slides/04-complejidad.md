@@ -47,14 +47,11 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 -->
 
 # Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
 1. [Teoría de la complejidad](#4)
 1. [Acuerdo de clave Diffie-Hellman](#26)
-1. [Resumen y referencias](#43)
-
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/04
-
+1. [Conclusiones](#42)
 
 # Teoría de la complejidad
 <!-- _class: lead -->
@@ -626,7 +623,8 @@ header: Hash
 - [New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720), Whitfield Diffie y Martin E. Hellman, 1976. El paper describe parte de la teoría de la complejidad que hemos estudiado aquí y describe el intercambio de claves Diffie-Hellman
 
 ---
-<!-- _class: center -->
+
+Ejercicios: <https://github.com/Juanvvc/crypto/tree/master/ejercicios/04>
 
 Continúa en: [Criptografía asimétrica](05-asimetrica.html)
 

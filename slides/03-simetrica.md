@@ -57,19 +57,14 @@ Hoy veremos como solucionarlo:
 -->
 
 # Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
 1. [Confidencialidad computacional](#4)
-1. [Cifrado simétrico de flujo](#16)
-1. [Cifrado Salsa20](#34)
-1. [Cifrado simétrico de bloque](#46)
-1. [Cifrado AES y modos de operación](#60)
-1. [Resumen y referencias](#85)
-
-Ejercicios:
-- https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
-- Alternativamente, ejercicios de AES de www.cryptohack.org
-
+1. [Cifrado de flujo](#16)
+1. [ChaCha20](#34)
+1. [Cifrado de bloque](#46)
+1. [Cifrado AES](#60)
+1. [Resumen](#85)
 
 # Confidencialidad computacional
 <!-- _class: lead
@@ -1141,7 +1136,10 @@ header: '' -->
 - [Algorithms, key size and parameters report 2014](https://www.enisa.europa.eu/publications/algorithms-key-size-and-parameters-report-2014), ENISA, 2014
 
 ---
-<!-- _class: center -->
+
+Ejercicios:
+- https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+- Alternativamente, ejercicios de AES de www.cryptohack.org
 
 Continúa en: [Teoría complejidad y acuerdo D-H](04-complejidad.html)
 

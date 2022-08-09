@@ -22,20 +22,13 @@ transition: fade
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Hoy hablamos de...
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
-1. [Servicios criptográficos: objetivos](#3)
-1. [Estrategias de los sistemas seguros: seguridad por oscuridad, principios de Kerckhoffs y máxima de Shannon](#9)
-1. [Primitivas criptográficas: hash, cifrado simétrico, cifrado asimétrico](#21)
-1. [Protocolos criptográficos: composición de primitivas](#28)
-1. [Conclusiones: resumen y referencias](#34)
-
-Ejercicios: <https://github.com/Juanvvc/crypto/tree/master/ejercicios/01>
-
-
-<!--
-El glosario es un resumen de las trasparencias de este tema, y un recordatorio de las matermáticas que usaremos
--->
+1. [Servicios criptográficos](#3)
+1. [Estrategias de los sistemas seguros](#10)
+1. [Primitivas criptográficas](#21)
+1. [Prococolos criptográficos](#28)
+1. [Conclusiones](#37)
 
 # Servicios criptográficos
 <!--

@@ -58,23 +58,20 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 
 > Foto: https://www.publicdomainpictures.net/en/view-image.php?image=363738&picture=signpost-giving-directions (CC0)
 
-# Hoy hablamos de...
-<!-- _class: cool-list -->
-
-1. [Criptografía asimétrica](#5)
-1. [RSA](#25)
-1. [Curvas Elípticas](#39)
-1. [Depurando detalles](#56)
-1. [Resumen y referencias](#59)
-
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/05
-
-
 <!--
 Atención: este tema es matemáticamente denso, pero no es necesario seguir todos los detalles. Si tienes interés en los detalles, por favor, consulta los papers y libros especilizados.
 
 Los objetivos del tema es conocer la base de la criptografía asimétrica, cómo funciona y cómo se usa.
 -->
+
+# Hoy hablamos de...
+<!-- _class: cool-list toc -->
+
+1. [Criptografía asimétrica](#5)
+1. [RSA](#25)
+1. [Curvas elípticas](#39)
+1. [Depurando detalles](#56)
+1. [Conclusiones](#59)
 
 # Criptografía asimétrica
 <!-- _class: lead -->
@@ -752,8 +749,8 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 - [Elliptic Curve Diffie Hellman](https://www.youtube.com/watch?v=F3zzNa42-tQ): Vídeo sobre ECDH y curvas elípticas en general de Robert Pierce. Asume conocimientos de álgebra.
 
 ---
+Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/05
 
-<!-- _class: center -->
 
 Continúa en: [Funciones de Hash y Blockchains](06-hashes.html)
 

@@ -19,10 +19,10 @@ theme: marp-viu
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
 ---
-<!-- _class: cool-list -->
+<!-- _class: cool-list toc -->
 
-1. [Definiciones Generales](#3)
-2. [Matemáticas](#12)
+1. [Definiciones generales](#3)
+1. [Matemáticas](#13)
 
 ## Definiciones generales
 <!-- _class: lead -->

@@ -8,6 +8,7 @@ MARP=marp
 
 IN_DIR=slides
 OUT_DIR=build
+RELEASE_DIR=release
 
 # You can overwrite these from the command line
 # For example: make -e THEME=marp-viu
@@ -22,7 +23,7 @@ all:
 	git submodule update --remote --merge
 	make htmls
 
-build:
+build: toc
 	mkdir -p $(OUT_DIR)
 	cp -r $(IN_DIR)/images $(OUT_DIR)/.
 
@@ -33,12 +34,14 @@ serve:
 	$(MARP) -I $(IN_DIR) -w -s
 
 release: pdfs
-	rm -rf $(OUT_DIR)/themes
-	rm -rf $(OUT_DIR)/images
-	cd $(OUT_DIR) && zip $(VERSION)-slides.zip *pdf && rm *.pdf
+	mkdir -p $(RELEASE_DIR)
+	cd $(OUT_DIR) && zip ../$(RELEASE_DIR)/$(VERSION)-slides.zip *pdf
 
 htmls: build
 	$(MARP) -I $(IN_DIR) -o $(OUT_DIR) --no-config $(THEME_OPTS) --bespoke.progress true --html --bespoke.transition
+
+toc:
+	find $(IN_DIR) -name '*.md' -exec python3 slides-support/maketoc.py --input \{} --level 2 \;
 
 clean:
 	/bin/rm -rf $(OUT_DIR)
