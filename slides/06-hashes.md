@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Funciones de Hash y blockchain
+title: Criptografía - Funciones de Hash y Blockchain
 author: Juan Vera
 keywords: criptografía,hash,sha256,bitcoin
 paginate: true
@@ -18,7 +18,7 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Funciones de hash y blockchain
+# Funciones de Hash y Blockchain
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
@@ -114,7 +114,7 @@ Ejemplos de valores de hash:
 - Que sea rápida de calcular
 - Resistencia a la preimagen: dado un hash, no se puede saber el mensaje exacto que tiene ese hash
 - Resistencia a la colisión: dificultad para encontrar dos mensajes diferentes con el mismo hash
-- Sensibilidad: un cambio mínimo en el mensaje produce un hash totalmente diferente
+- Sensibilidad / efecto avalancha: un cambio mínimo en el mensaje produce un valor hash completamente diferente
 
 > https://en.wikipedia.org/wiki/Cryptographic_hash_function#Properties
 
@@ -196,14 +196,14 @@ La *security strength* de una función de hash de longitud $b$ bits es $b/2$
 ## Ejemplos de funciones de hash
 
 
-- MD5: utilizado mucho tiempo. [Totalmente roto desde 2008](https://www.win.tue.nl/hashclash/rogue-ca/): no hay que usarlo.
+- MD5: utilizado mucho tiempo. [No es resistente a colisión desde 2008](https://www.win.tue.nl/hashclash/rogue-ca/). Es decir, está roto y **no hay que usarlo**
 - SHA-1: 160 bits. [En la actualidad se considera roto](https://empresas.blogthinkbig.com/nuevo-ataque-sha-1-explicacion/)
-- SHA-2: longitudes de 256 b y 512 b. Son conocidos como **SHA-256 y SHA-512**.
-- SHA-3: longitudes entre 224 b a 512 b
+- SHA-2: longitudes de 256 y 512 bits. Son conocidos como **SHA-256 y SHA-512**.
+- SHA-3: longitudes entre 224 y 512 bits.
 
 Los hashes recomendados en la actualidad son el SHA-2 (cualquier de las dos variantes) y el SHA-3
 
-Fíjate: longitudes aproximadamente el doble que las longitudes de claves que las claves de AES (128 b, 192 b, 256 b) para una seguridad equivalente
+Fíjate: longitudes aproximadamente el doble que las longitudes de claves que las claves de AES (128, 192 y 256 bits) para una seguridad equivalente
 
 ---
 <!-- _class: with-warning -->

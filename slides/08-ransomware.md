@@ -264,6 +264,7 @@ Modern Ransomware and exfiltration
 - [Credit Card Scammers in the Dark Web](https://www.youtube.com/watch?v=jT-jmq8KBw0)
 - [Be aware - how hackers can steal your money](https://www.youtube.com/watch?v=h8-27iLvyS4)
 - [Spying on the scammers](https://www.youtube.com/watch?v=le71yVPh4uk)
+- [Reverse engineering of PLAY ransomware](https://chuongdong.com/reverse%20engineering/2022/09/03/PLAYRansomware/)
 
 ---
 
