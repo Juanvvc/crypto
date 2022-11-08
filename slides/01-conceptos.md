@@ -16,7 +16,7 @@ transition: fade
     the YAML header: section: | */
 </style>
 
-# Principios básicos de la criptografía
+# Conceptos básicos de la criptografía
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
@@ -25,10 +25,8 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 <!-- _class: cool-list toc -->
 
 1. [Servicios criptográficos](#3)
-1. [Estrategias de los sistemas seguros](#10)
-1. [Primitivas criptográficas](#21)
-1. [Prococolos criptográficos](#28)
-1. [Conclusiones](#37)
+1. [Estrategias de los sistemas seguros](#11)
+1. [Resumen y referencias](#27)
 
 # Servicios criptográficos
 <!--
@@ -38,19 +36,6 @@ header: 'Servicios criptográficos'
 
 ¿Qué queremos proteger?
 
----
-
-![bg left:40% w:100%](https://pics.filmaffinity.com/the_imitation_game-824166913-large.jpg)
-
-Años 40: Alemania controla Europa y amenaza al resto del mundo
-
-Sus comunicaciones radio están protegidas con "la cifra indescifrable"
-
-¿Por qué pensaban que era indescifrable?
-
-¿Cómo se descifró?
-
-¿Qué hemos aprendido desde entonces?
 
 ## ¿Qué es la criptografía?
 
@@ -109,7 +94,22 @@ Decidir, evaluar y asumir el riesgo de ataques contra los que no nos podemos pro
 
 
 
-## Servicios de seguridad
+## El problema que queremos resolver
+
+Firma digital de un contrato entre dos empresas
+
+- El contrato tiene que ser secreto para cualquiera que no participe en la comunicación
+- Las empresas tienen que estar seguras de con quién están hablando
+- Ninguna de las dos empresas puede cambiar unilateralmente el contrato
+- Ninguna de las empresas debe poder decir que no firmó el contrato
+
+![bg right:40%](images/generic/binding-contract-948442_1280.jpg)
+
+<!--
+Fondo: https://pixabay.com/photos/binding-contract-contract-secure-948442/ Uso comercial libre
+-->
+
+## Principales servicios de seguridad
 
 [New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) (Whitfield Diffie y Martin Hellman, 1976) exploraba qué se necesitaba para que dos empresas pudiesen firmar un contrato mercantil:
 
@@ -120,7 +120,6 @@ Decidir, evaluar y asumir el riesgo de ataques contra los que no nos podemos pro
 - **No repudio**: nadie puede decir que ese no es el contrato que ha firmado
 - **Otros**: autorización, acuerdo de claves, partición de secretos, PRNG...
 
-> [New Directions in Cryptography](https://www.cs.utexas.edu/~shmat/courses/cs395t_fall06/dh.pdf), Whitfield Diffie y Martin Hellman en 1976. Hablaremos de esto en el [tema 5](05-asimetrica.html)
 > Estándar: [NIST Special Publication 800-57 Part 1, Section 3](https://doi.org/10.6028/NIST.SP.800-57pt1r5)
 
 
@@ -138,45 +137,61 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 
 -->
 
-## El problema que queremos resolver
 
-Firma digital de un contrato entre dos empresas
+## Otros servicios de seguridad
 
-- **Confidencialidad**: el contrato tiene que ser secreto para cualquier otra parte
-- **Autenticación**: las empresas tienen que estar seguras de que están hablando con quien creen
-- **Integridad**: ninguna de las dos empresas puede cambiar unilaterlamente el contrato
-- **No repudio**: ninguna de las empresas podrá decir que no lo ha firmado
-
-# Estrategias de los sistemas seguros
-<!-- _class: lead -->
-
-*The thing is secure if its outputs look like random junk*
-
-## Definiciones básicas
-
-- $m$ **texto en claro**: mensaje que queremos proteger
-- $c$ **mensaje cifrado**: mensaje protegido
-- $e()$ y $d()$ **algoritmos de cifrado y descifrado**: convierten un texto en claro en un mensaje cifrado o al revés
-- $k_1$ y $k_2$: **clave criptográfica de cifrado o descifrado**: parte secreta de los algoritmos de cifrado y descifrado
+- **Autorización**: ¿está el interlocutor autorizado a acceder a estos datos?
+- **Acuerdo de claves**: permite que un grupo de actores generen una clave sin que nadie externo al grupo la conozca
+- **Partición de secretos**: permite repartir un secreto entre un grupo de actores, exigiendo un mínimo de actores para recomponerlas
+- **Esteganografía**: queremos ocultar que dos personas están hablando
+- **Anonimato**: el emisor quiere ocultar su identidad
+- etcétera
 
 <!--
-No confundas clave criptográfica y contraseña.
+Nos centraremos en los servicios de confidencialidad, integridad y autenticación. Además, podemos conseguir no-repudio como consecuencia de juntar autenticidad e integridad.
 
-Contraseña: texto que un humano recuerda para entrar en algún sitio, abrir una clave criptográfica... Las contraseñas no suelen tener la suficiente seguridad para un protocolo criptográfico.
+También veremos, aunque a más alto nivel, los servicios de acuerdo de claves, PRNG, partición de secretos... porque están relacionados con los primeros
 
-En ocasiones podremos crear (también se dice "derivar") una clave criptográfica a partir de una contraseña, aunque no siempre es buena idea porque los humanos son muy malos para escoger contraseñas.
+Otros servicios como la autorización, aunque sin duda son importantes para que un sistema sea seguro, quedan fuera de este curso por limitación de tiempo.
 -->
+
+---
+
+[![w:33em center](images/rely-attack.png)](https://www.youtube.com/watch?v=uxzm_6SYBFo)
+
+> https://www.youtube.com/watch?v=uxzm_6SYBFo
+
+<!--
+Aquí tenemos un ejemplo de un protocolo de comunicaciones donde el objetivo no es la confidencialidad.
+
+Estos son unos ladrones robando un coche, que se abre cuando la llave está cerca. La persona de la derecha está utilizando una antena enorme para "hacer relay" de la comunicaciones entre la llave (que se supone dentro de la casa, cerca de la pared) y el coche.
+
+Aquí el protocolo no tiene que proteger la confidencialidad del mensaje: todos sabemos que la llave envía "ABRETE". Fíjate que el protocolo tampoco está protegido con contraseñas, ni con una firma digital.
+
+Lo que se necesita en esta caso es detectar cuándo el atacante está accediendo a los mensajes y ampliando su radio de acción diseñado
+
+¿Se te ocurre alguna manera de proteger contra esta situación?
+-->
+
+
+# Estrategias de los sistemas seguros
+<!--
+_class: lead
+header: Estrategias de seguridad
+-->
+
+*The thing is secure if its outputs look like random junk*
 
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
 
 ![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
 
-- Mensaje o texto en claro: $m$
-- Cifrado: $c = e(k_1, m)$
-- Descifrado: $m' = d(k_2, m)$
+- **Mensaje o texto en claro**: $m$
+- **Texto cifrado**: $c = e(k_1, m)$
+- **Texto descifrado**: $m' = d(k_2, m)$
+- $k_1$ y $k_2$: **clave criptográfica de cifrado o descifrado**: parte secreta de los algoritmos de cifrado y descifrado
 - Objetivo: $m=m'$
-
 
 
 <!--
@@ -185,79 +200,8 @@ Este es el modelo sobre el que trabajaremos: dos personas "Alice y Bob" comunic�
 Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo. En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real para mejorar aún más la seguridad del sistema.
 -->
 
-## Grados de seguridad
-<!-- _class: with-warning -->
-
-- **Seguridad incondicional**: un atacante no puede descifrar el mensaje aunque tenga infinito dinero o infinito poder computacional.
-- **Seguridad computacional**: un atacante podría teóricamente descifrar el mensaje, pero no es razonable que lo haga porque lleva demasiado tiempo, dinero o recursos. Por ejemplo, millones de años o más memoria de la que cabe en el universo.
-
-Aunque la seguridad perfecta puede parecer lo mejor, veremos que no es práctica: nos conformaremos con la seguridad computacional
-
-> Hablaremos de esto en el [tema 3](03-simetrica.html)
-
-<!--
-
-Tenemos que **poder** **proteger** los mensajes.
-
-Veremos que existen protocolos que ofrecen seguridad incondicional, pero su utilización es tan pesada que no es práctica, y actualmente se prefiere la seguridad computacional
--->
-
-## Seguridad computacional
-<!-- _class: with-info -->
-
-La criptografía actual se basa en la seguridad computacional: una comunicación será **probablemente** segura durante las próximas **décadas**. 
-
-- Solo con cierta probabilidad matemática
-- Solo durante un tiempo determinado
-
-Para poder diseñar un sistema seguro moderno empezamos con la pregunta: ¿con qué probabilidad queremos que ningún atacante pueda leer el mensaje durante la próxima década?
-
-> Hablaremos de esto en el [tema 4](04-complejidad.html)
-
-
-## Seguridad por oscuridad
-<!-- _class: with-warning -->
-
-**Falacia**: "Nadie sabe cómo es nuestro sistema, y por tanto es seguro"
-
-- Mantener el secreto del código fuente del software.
-- Mantener el secreto de algoritmos y protocolos utilizados, o utilizar un protocolo ad-hoc o inventado.
-- Adopción de políticas de no revelación pública de la información sobre vulnerabilidades.
-- Confiar en configuraciones no estándar (por ejemplo, poner el servidor en el puerto 3181)
-
-Confiar solo en "la oscuridad" para ofrecer seguridad no es buena idea.
-
-<!--
-La seguridad por oscuridad es pensar que un sistema secreto es más seguro que un sistema conocido. En realidad, es muy difícil mantener un sistema en secreto. Además, la criptografía está llena de "trampas" y razonamientos no evidentes. Es muy difícil que unas pocas personas puedan diseñar un sistema realmente seguro y además mantenerlo en secreto. Eso es lo que se llama "seguridad por oscuridad", y fiar la seguridad a la oscuridad no es buena idea, como nos ha enseñado la experiencia.
-
-Un sistema no es inseguro por ser oscuro. Es simplemente oscuro. Basar tu seguridad en la oscuridad lo consideramos una mala idea porque los hackers pueden saber más que tú. No hay ningún error lógico en querer basar tu seguridad en la oscuridad. Simplemente, la experiencia nos dice que no es buena idea, y que los sistemas cuya seguridad se basa en la oscuridad caen antes.
-
-PERO que un sistema sea seguro de por sí, utilizando protocolos realmente seguros y buenas prácticas criptográficas, Y ADEMÁS lo ocultamos al mundo, es sin duda una buena idea que no perjudica. Tendrás a los adversarios entretenidos para intentar entender tu sistema, y cuando lo consigan verán que es un indescifrable AES-512.
-
-No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.
--->
-
----
-
-![center](https://res.cloudinary.com/practicaldev/image/fetch/s--NDXZXYxb--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://www.explainhownow.com/assets/images/security_through_obscurity_cover.png)
-
-> https://www.robohara.com/?p=1439
-> <https://dev.to/ctrlshifti/what-security-through-obscurity-is-and-why-it-s-evil-47d5>
-
-
-<!--
-![bg right:75%](images/security-through-obscurity-is-everywhere.jpg)
--->
-
-## Principios de diseño
-<!-- _class: center -->
-
-Si la seguridad por oscuridad no es recomendable...
-
-...¿qué principios de diseño tenemos que seguir?
-
 ## Principios de Kerckhoffs
-<!-- _class: smallerfont -->
+<!-- _class: smaller-font -->
 
 <https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle>
 
@@ -320,11 +264,20 @@ Diseña el sistema asumiendo que el atacante sabe qué hacer para cifrar o desci
 Su máxima se contrapone a la "seguridad por oscuridad". Es decir, la seguridad de un sistema secreto solo será segura mientras el sistema sea secreto. ¿Y si deja de serlo? ¿Y si pensamos que es seguro, pero no lo es?
 
 El paper enlazado es una estupenda introducción a los conceptos fundamentales de la criptografía y se recomienda mucho su lectura
+
+La seguridad por oscuridad es pensar que un sistema secreto es más seguro que un sistema conocido. En realidad, es muy difícil mantener un sistema en secreto. Además, la criptografía está llena de "trampas" y razonamientos no evidentes. Es muy difícil que unas pocas personas puedan diseñar un sistema realmente seguro y además mantenerlo en secreto. Eso es lo que se llama "seguridad por oscuridad", y fiar la seguridad a la oscuridad no es buena idea, como nos ha enseñado la experiencia.
+
+Un sistema no es inseguro por ser oscuro. Es simplemente oscuro. Basar tu seguridad en la oscuridad lo consideramos una mala idea porque los hackers pueden saber más que tú. No hay ningún error lógico en querer basar tu seguridad en la oscuridad. Simplemente, la experiencia nos dice que no es buena idea, y que los sistemas cuya seguridad se basa en la oscuridad caen antes.
+
+PERO que un sistema sea seguro de por sí, utilizando protocolos realmente seguros y buenas prácticas criptográficas, Y ADEMÁS lo ocultamos al mundo, es sin duda una buena idea que no perjudica. Tendrás a los adversarios entretenidos para intentar entender tu sistema, y cuando lo consigan verán que es un indescifrable AES-512.
+
+No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre ayuda.
+
 -->
 
 ## Gestión de claves
 
-![bg left:30% h:100%](https://securityledger.com/wp-content/uploads/2021/07/Lea_Kissner.jpeg)
+![bg left:33% h:100%](https://securityledger.com/wp-content/uploads/2021/07/Lea_Kissner.jpeg)
 
 *La criptografía es una herramienta para convertir un montón de problemas diferentes en un problema de gestión de claves*
 
@@ -343,21 +296,9 @@ Una contraseña no es lo mismo que una clave criptográfica. Las contraseñas su
 En muchas ocasiones un sistema se romperá no por que la criptopgrafía sea débil, sino porque incluye un paso de control con contraseña que es habitualmente la parte más débil de un protocolo.
 -->
 
-# Primitivas criptográficas
-<!--
-_class: lead
-header: 'Primitivas criptográficos'
--->
-
 ---
 
-La criptografía actual se basa en **composición** de técnicas primitivas:
-
-- Composición de **operaciones matemáticas** que crean "**puertas criptográficas**" (*cryptographic gates*).
-- Composición de puertas que crean **algoritmos**.
-- Composición de algoritmos que crean **protocolos de seguridad**.
-
-La composición es compleja y todo debe funcionar como un reloj.
+![](images/cta2296-fig-0002-m.jpg)
 
 <!--
 - **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
@@ -366,10 +307,6 @@ La composición es compleja y todo debe funcionar como un reloj.
 
 - **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
 -->
-
----
-
-![](images/cta2296-fig-0002-m.jpg)
 
 ## Primitivas: hash
 
@@ -431,8 +368,8 @@ Objetivo|Primitiva
 **confidencialidad**|cifrado simétrico, cifrado asimétrico
 **integridad**|hash, firma simétrica, firma asimétrica
 **autenticidad**|firma simétrica, firma asimétrica
-**no repudio**|firma asimétrica
-**compartir**|clave simétrica, acuerdo de clave
+**no repudio / trazabilidad**|firma asimétrica
+**compartir clave**|clave simétrica, acuerdo de clave
 
 <!--
 Ya hemos visto unas pocas primitivas. ¿Qué servicios de seguridad ofrece cada una?
@@ -442,25 +379,18 @@ Lo normal será que no queramos que el sistema ofrezca un solo servicio sino var
 La unión de primitivas criptográficas crea un protocolo criptográfico
 -->
 
-# Prococolos criptográficos
-<!--
-_class: lead 
-header: 'Protocolos criptográficos'
--->
+## Protocolos criptográficos
 
 *If A is a secure thingamajig, then B is a secure doohickey*
 
-## Protocolo de seguridad
 
-La secuenciación de mensajes y la composición de primitivas se materializa en un "protocolo"
+La criptografía actual se basa en **composición** de técnicas primitivas:
 
-El protocolo (el lenguaje) se define a partir de:
+- Composición de **operaciones matemáticas** que crean "**puertas criptográficas**" (*cryptographic gates*).
+- Composición de puertas que crean **algoritmos**.
+- Composición de algoritmos que crean **protocolos de seguridad**.
 
-- Formatos/estructuras de los mensajes o "sintaxis" (funciones/algoritmos, secuenciación)
-- "Máquina de estados" (que tipos de mensajes son posibles después de otros)
-- Especificación del significado de mensajes y/o estado, "semántica"
-
-El protocolo es un eslabón de la cadena de seguridad, tan importante como pueden ser las primitivas
+La composición es compleja y todo debe funcionar como un reloj.
 
 ## Seguridad del protocolo de seguridad.
 
@@ -539,42 +469,7 @@ Casi, casi, hemos definido una blockchain como bitcoin
 
 -->
 
-## Objetivos: "otros"
-
-- **Autorización**: ¿está el interlocutor autorizado a acceder a estos datos?
-- **Acuerdo de claves**: permite que un grupo de actores generen una clave sin que nadie externo al grupo la conozca
-- **Partición de secretos**: permite repartir un secreto entre un grupo de actores, exigiendo un mínimo de actores para recomponerlas
-- **Esteganografía**: queremos ocultar que dos personas están hablando
-- **Anonimato**: el emisor quiere ocultar su identidad
-- etcétera
-
-<!--
-Nos centraremos en los servicios de confidencialidad, integridad y autenticación. Además, podemos conseguir no-repudio como consecuencia de juntar autenticidad e integridad.
-
-También veremos, aunque a más alto nivel, los servicios de acuerdo de claves, PRNG, partición de secretos... porque están relacionados con los primeros
-
-Otros servicios como la autorización, aunque sin duda son importantes para que un sistema sea seguro, quedan fuera de este curso por limitación de tiempo.
--->
-
----
-
-[![w:33em center](images/rely-attack.png)](https://www.youtube.com/watch?v=uxzm_6SYBFo)
-
-> https://www.youtube.com/watch?v=uxzm_6SYBFo
-
-<!--
-Aquí tenemos un ejemplo de un protocolo de comunicaciones donde el objetivo no es la confidencialidad.
-
-Estos son unos ladrones robando un coche, que se abre cuando la llave está cerca. La persona de la derecha está utilizando una antena enorme para "hacer relay" de la comunicaciones entre la llave (que se supone dentro de la casa, cerca de la pared) y el coche.
-
-Aquí el protocolo no tiene que proteger la confidencialidad del mensaje: todos sabemos que la llave envía "ABRETE". Fíjate que el protocolo tampoco está protegido con contraseñas, ni con una firma digital.
-
-Lo que se necesita en esta caso es detectar cuándo el atacante está accediendo a los mensajes y ampliando su radio de acción diseñado
-
-¿Se te ocurre alguna manera de proteger contra esta situación?
--->
-
-# Conclusiones
+# Resumen y referencias
 <!--
 _class: lead
 header: ''

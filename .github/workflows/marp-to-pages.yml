@@ -28,7 +28,7 @@ jobs:
       - name: Marp Build (slides folder)
         uses: docker://marpteam/marp-cli:v1.7.0
         with:
-          args: -I slides/ -o build/ --no-config --theme marp-upc --theme-set slides-support/slides/themes --bespoke.progress true --bespoke.transition
+          args: -I slides/ -o build/ --no-config --theme marp-viu --theme-set slides-support/slides/themes --bespoke.progress true --bespoke.transition
         env:
           MARP_USER: root:root
 
