@@ -71,9 +71,8 @@ Estos dos métodos de cifrado se han utilizado durante miles de años, y nuestro
 -->
 
 ## Transposición: escítala griega
-<!-- _class: two-columns -->
 
-![Escítala](https://upload.wikimedia.org/wikipedia/commons/5/51/Skytale.png)
+![bg left:40% w:90%](https://upload.wikimedia.org/wikipedia/commons/5/51/Skytale.png)
 
 - Dos varas del mismo grosor
 - Envío: se enrolla una cinta de forma espiral a uno de los bastones y se escribía el mensaje longitudinalmente.
@@ -86,9 +85,8 @@ Prácticamente todos los algoritmos actuales de cifrado simétrico utilizan sist
 -->
 
 ## Sustitución: cifrado César
-<!-- _class: two-columns -->
 
-![](https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg)
+![bg left:40% w:90%](https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg)
 
 - Es un cifrado **monoalfabético**: "sustituimos una letra por otra que viene $k$ posiciones detrás"
 - Es más antiguo que los romanos: incluso la Biblia hebrea incluye palabras con cifrado de sustitución y evitar así escribir la palabra real.
@@ -299,7 +297,7 @@ https://www.dcode.fr/caesar-cipher
 
 Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de aparición de los carácteres**
 
-<!-- No recuerdo qué cifré aquí, ni con que clave,pero no parece difícil descubrirlo.
+<!-- No recuerdo qué cifré aquí, ni con que clave, pero no parece difícil descubrirlo.
 
 - Hay letras solas, que en castellano solo pueden ser a, y, o. También e, u, pero es muy improbable. Cualquier otra letra será aún más improbable. Por eso la criptografía clásica en realidad nunca ha usado espacios: da mucha información al adversario
 - Haciendo análisis de frecuencias, la h aparece muchas veces: es muy probable que sea a ó e
