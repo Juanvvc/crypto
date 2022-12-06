@@ -21,14 +21,28 @@ transition: fade
 
 Juan Vera del Campo - <juan.vera@campusviu.es>
 
+---
+
+![bg left:40% w:100%](https://pics.filmaffinity.com/the_imitation_game-824166913-large.jpg)
+
+Años 40: Alemania controla Europa y amenaza al resto del mundo
+
+Sus comunicaciones radio están protegidas con "la cifra indescifrable"
+
+¿Por qué pensaban que era indescifrable?
+
+¿Cómo se descifró?
+
+¿Qué hemos aprendido desde entonces?
+
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Criptografía clásica](#3)
-1. [Cifrado César](#8)
-1. [Mejoras al cifrado César: sistemas polialfabéticos](#24)
-1. [Confidencialidad perfecta](#39)
-1. [Resumen y referencias](#51)
+1. [Criptografía clásica](#4)
+1. [Cifrado César](#9)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#25)
+1. [Confidencialidad perfecta](#40)
+1. [Resumen y referencias](#52)
 
 # Criptografía clásica
 <!--
@@ -221,17 +235,35 @@ El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos 
 -->
 
 ## Contramedidas
+<!-- _class: center with-success -->
+
+![w:10em](images/generic/lock-1929089_640.jpg) ![w:17.5em](images/generic/money-256319_640.jpg)
+
+¿Cómo podemos proteger estos sistemas contra la fuerza bruta?
+
+<!--
+Estos no son exactamente sistemas de cifrado, pero nos sirven para explicar lo que es la fuerza bruta.
+
+¿Cómo abrirías la cerradura de la puerta? ¿Cómo puede un ladrón utilizar una tarjeta de crédito robada? ¿Qué estrategias se usan en cada caso para proteger el sistema?
+
+Images: free for commercial use:
+
+- https://pixabay.com/photos/money-cards-business-credit-card-256319/
+- https://pixabay.com/photos/lock-combination-security-safety-1929089/
+-->
+
+---
 
 La defensa contra los ataques de fuerza bruta son:
 
-- que la operación de descifrado sea costosa
-- que el descifrado sea sencillo, pero que el atacante tenga que realizar muchas operaciones de descifrado
+- Tarjeta de crédito: que la operación de descifrado sea costosa, o intentos limitados
+- Cerradura: que el descifrado sea sencillo, pero que el atacante tenga que realizar muchas operaciones de descifrado. Es decir, aumentar el tamaño de la clave
 
 Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente. Actualmente no se recomienda
 
 Queda por tanto "**que el adversario tenga que hacer muchas operaciones de descifrado**". Es decir: que el atacante tenga que probar muchas claves.
 
-## Muchas claves
+## Fuerza bruta
 
 * En una CPU "estándar" se prueban 1.000.000 clave/CPU/s
 * es decir: $10^6$ clave/CPU/s
@@ -245,13 +277,17 @@ Si tenemos capacidad de diseñar/fabricar $d()$ en hardware ([ASIC](https://en.w
 <!-- Estos cálculos están desactualizados y son más rápidos cada año. En cualquier caso sirven para hacernos una idea de lo rápido que pueden hacer fuerza bruta los ordenadores actuales -->
 
 ---
-<!-- _class: with-success -->
+<!-- _class: smaller-font with-success -->
 
 Alquilando equipos en la nube por segundos, con un euro cada segundo podemos probar $10^{11}$ claves
 
 Si estimamos que nuestro "secreto" vale 1000 €:
 
 Nos hacen falta un sistema criptográfico que permita escoger entre $2·10^{14}$ claves diferentes ($\approx 2^{48}$) para guardar el secreto durante una hora.
+
+Este sistema tendría fortaleza 48 bits: un atacante tiene que probar $2^{48}$ claves si quiere romperlo por fuerza bruta
+
+Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años.
 
 **La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
 
@@ -594,33 +630,46 @@ Cosas que implica:
 ---
 <!-- _class: with-success -->
 
-Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF, existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO" y otra que descifra "SE HA QUEDADO BUENA TARDE"
+Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF:
+
+- existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO"
+- existe otra clave que descifra "SE HA QUEDADO BUENA TARDE"
+- un atacante no sabe qué mensaje es el que realmente se cifró, así que nosabe si ha acertado la clave
 
 Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
 
 ## ¿A qué hora atacamos?
-<!-- _class: center two-columns -->
 
-![bg right w:100%](https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png)
+
+![bg right:40% w:100%](https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png)
+
+Imagina que un ejército decide el siguiente mapeo, es decir, clave:
 
 - A = 16
 - B = 7
 - C = 13
 - ...
 
-"Atacamos a las F horas"
+El enemigo captura este mensaje: "Atacamos a las F horas"
+
+¿Tiene alguna forma el enemigo de conocer a qué hora le atacarán?
 
 ---
+<!-- _class: smaller-font -->
 
-Observa:
-
-- Si el enemigo, que no conoce la clave, intercepta el mensaje "Atacamos a las F horas", no tiene forma saber a qué hora se atacará. **Este cifrado es perfecto**
-- Pero el enemigo sabrá:
+- Si el enemigo, que no conoce la clave no tiene forma saber a qué hora se atacará ni aunque pruebe todas las claves. **Este cifrado es perfecto**
+- Pero el enemigo puede aprovechar un mensaje para descifrar los siguientes que usen la misma clave:
     - Si no le han atacado a la 1, F no es 1
     - Si no le han atacado a las 2, F no es 2
-    - Si le atacan a las 3, F (y solo F) es 3
+    - Si le atacan a las 3, F es 3
 - Solo se puede usar esta clave **una vez**. A la siguiente, el enemigo ya tendrá mucha información. **La clave no puede reutilizarse nunca más**
+- Fíjate: el mapeo tiene que ser de números completos. Si no y el enemigo intercepta un mensaje HK, sabe que H es 1 ó 2 porque no hay "hora 37": el mapeo tiene que ser completo (es decir: clave tan larga como el mensaje)
 - Hay que volver a enviar una nueva clave cada vez que queramos enviar un mensaje nuevo, con el riesgo de que el enemigo intercepte el mensaje de envío de clave
+
+<!--
+
+Un sistema tan sencillo como este se utilizó en la realidad: los espías tenían "libros de claves" de un colo uso que tenían que llevar escondidos.
+-->
 
 ## Convirtiendo Vigènere en cifrado perfecto: cifrado Vernam
 

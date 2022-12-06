@@ -68,6 +68,7 @@ Versión más actualizada:
 - Acceso directo HTML: <http://juanvvc.github.io/crypto>
     - Puedes pulsar `p` para ver las notas de presentación
     - Con "Inicio" (en pie de cada transparencia) puedes venir a esta presentación, con el índice global de contenidos
+    - Puedes "Imprimir a PDF" usando Chrome para tener las transparencias en PDF
 - Código Markdown: <https://github.com/juanvvc/crypto>
 
 Durante el estudio personal es muy recomendable seguir los enlaces que aparecen en las transparencias para completar el tema.
@@ -79,10 +80,8 @@ El curso está adaptado de [las notas de Jordi Íñigo Griera](https://github.co
 ## Instrucciones de uso de las actividades
 <!-- _class: with-warning smaller-font -->
 
-Los ejercicios son notebook de Jupyter:
+Los ejercicios son notebook de Jupyter / Google Collab:
 
-1. Instala Jupyter como módulo de Python (Windows, MacOS, Linux): `python3 -m pip install jupyter`
-1. En el directorio de ejercicios, ejecuta `jupyter notebook`
 1. Comandos básicos:
     - INTRO: edita línea actual
     - SHIFT+INTRO: ejecuta línea actual
