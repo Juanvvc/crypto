@@ -41,7 +41,7 @@ header: 'Servicios criptográficos'
 
 Protección de la comunicaciones a través de **medios desprotegidos** entre un emisor y uno o varios destinatarios
 
-![bg right:40% w:100%](images/pexels-cottonbro-7319077.jpg)
+![bg right:40% w:100%](images/generic/pexels-cottonbro-7319077.jpg)
 
 ...y eso es mucho más que mantener un mensaje secreto...
 
@@ -157,7 +157,7 @@ Otros servicios como la autorización, aunque sin duda son importantes para que 
 
 ---
 
-[![w:33em center](images/rely-attack.png)](https://www.youtube.com/watch?v=uxzm_6SYBFo)
+[![w:33em center](images/conceptos/rely-attack.png)](https://www.youtube.com/watch?v=uxzm_6SYBFo)
 
 > https://www.youtube.com/watch?v=uxzm_6SYBFo
 
@@ -185,7 +185,7 @@ header: Estrategias de seguridad
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
 
-![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+![center w:25em](images/conceptos/cryptosystem.jpg)
 
 - **Mensaje o texto en claro**: $m$
 - **Texto cifrado**: $c = e(k_1, m)$
@@ -198,6 +198,8 @@ header: Estrategias de seguridad
 Este es el modelo sobre el que trabajaremos: dos personas "Alice y Bob" comunicándose por un canal inseguro porque puede haber un adversario "Maloy" en medio.
 
 Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una operación bancaria enviada por correo electrónico usando una clave enviada al teléfono, por ejemplo. En criptografía asumiremos que no existen estas vías alternativas de comunicación, aunque en la realidad sí existen y los utilizamos en la vida real para mejorar aún más la seguridad del sistema.
+
+Imagen: https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg
 -->
 
 ## Principios de Kerckhoffs
@@ -205,7 +207,7 @@ Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una opera
 
 <https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle>
 
-![bg left:33%](images/Auguste_Kerckhoffs.jpg)
+![bg left:33%](images/conceptos/Auguste_Kerckhoffs.jpg)
 
 1. **Si el sistema no es teóricamente irrompible, al menos debe serlo en la práctica.**
 1. **La efectividad del sistema no debe depender de que su diseño permanezca en secreto.**
@@ -248,7 +250,7 @@ Pero son recomendaciones muy informadas.
 ## Máxima de Shannon
 <!-- _class: with-success -->
 
-![bg left:33%](images/220px-ClaudeShannon_MFO3807.jpg)
+![bg left:33%](images/conceptos/220px-ClaudeShannon_MFO3807.jpg)
 
 *El atacante conoce el sistema*
 
@@ -277,7 +279,7 @@ No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre
 
 ## Gestión de claves
 
-![bg left:33% h:100%](https://securityledger.com/wp-content/uploads/2021/07/Lea_Kissner.jpeg)
+![bg left:33% h:100%](images/conceptos/Lea_Kissner.jpeg)
 
 *La criptografía es una herramienta para convertir un montón de problemas diferentes en un problema de gestión de claves*
 
@@ -298,7 +300,7 @@ En muchas ocasiones un sistema se romperá no por que la criptopgrafía sea déb
 
 ---
 
-![](images/cta2296-fig-0002-m.jpg)
+![](images/conceptos/cta2296-fig-0002-m.jpg)
 
 <!--
 - **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.

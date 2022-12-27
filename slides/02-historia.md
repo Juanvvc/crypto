@@ -23,7 +23,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 ---
 
-![bg left:40% w:100%](https://pics.filmaffinity.com/the_imitation_game-824166913-large.jpg)
+![bg left:40% w:100%](images/historia/the_imitation_game-824166913-large.jpg)
 
 Años 40: Alemania controla Europa y amenaza al resto del mundo
 
@@ -40,9 +40,9 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 
 1. [Criptografía clásica](#4)
 1. [Cifrado César](#9)
-1. [Mejoras al cifrado César: sistemas polialfabéticos](#25)
-1. [Confidencialidad perfecta](#40)
-1. [Resumen y referencias](#52)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#26)
+1. [Confidencialidad perfecta](#41)
+1. [Resumen y referencias](#53)
 
 # Criptografía clásica
 <!--
@@ -59,7 +59,7 @@ Hasta los años 70 del siglo XX, la criptografía se usaba solo en el ámbito mi
 
 El resultado debería ser un mensaje igual que el original
 
-![bg right:40% w:100%](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+![bg right:40% w:100%](images/conceptos/cryptosystem.jpg)
 
 
 <!--
@@ -96,16 +96,22 @@ Estos dos métodos de cifrado se han utilizado durante miles de años, y nuestro
 Recordad: la criptografía quiere mejorar la dispersión y la difusión del mensaje original. La transposición simple como la de la escítala ayuda en ambos casos.
 
 Prácticamente todos los algoritmos actuales de cifrado simétrico utilizan sistemas de transposición como uno de los pasos del cifrado.
+
+Imagen: https://upload.wikimedia.org/wikipedia/commons/5/51/Skytale.png
 -->
 
 ## Sustitución: cifrado César
 
-![bg left:40% w:90%](https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg)
+![bg left:40% w:90%](images/historia/Caesar3.svg)
 
 - Es un cifrado **monoalfabético**: "sustituimos una letra por otra que viene $k$ posiciones detrás"
 - Es más antiguo que los romanos: incluso la Biblia hebrea incluye palabras con cifrado de sustitución y evitar así escribir la palabra real.
 
-<!-- Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los '70  ha sido algún tipo de cifrado por sustitución más o menos complejo. Los estudiaremos a continuación con más detalle en el resto de capítulos -->
+<!--
+Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los '70  ha sido algún tipo de cifrado por sustitución más o menos complejo. Los estudiaremos a continuación con más detalle en el resto de capítulos
+
+Imagen: https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg
+-->
 
 # Cifrado César
 <!--
@@ -122,18 +128,20 @@ Fuerza bruta, análisis frecuencial y fortaleza de un algoritmo
 
 El cifrado César forma parte de sistemas más complejos de codificación, como el cifrado Vigenère, e incluso tiene aplicación en el sistema ROT13, y su estudio sirve para entender por qué los cifrados fallan.
 
-![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/8/8f/Gaius_Iulius_Caesar_%28Vatican_Museum%29.jpg)
+![bg right:30%](images/historia/busto-cesar.jpg)
 
 <!--
 Es muy posible que César utilizase sistemas más complejos de cifrado que no conocemos:
 
 "There is even a rather ingeniously written treatise by the grammarian Probus concerning the secret meaning of letters in the composition of Caesar's epistles."
 — Aulus Gellius, Attic Nights 17.9.1–5
+
+Imagen: https://upload.wikimedia.org/wikipedia/commons/8/8f/Gaius_Iulius_Caesar_%28Vatican_Museum%29.jpg
 -->
 
 ## Cifrado
 
-![bg w:100% right:50%](https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg)
+![bg w:100% right:50%](images/historia/Caesar3.svg)
 
 $c = e(k, m) = m + k \mod {26}$
 
@@ -199,7 +207,7 @@ Un ataque de fuerza bruta implica probar sobre el mensaje cifrado $c$ todas las 
 
 ---
 
-![bg right:60%](https://static.elcorreo.com/www/multimedia/202110/22/media/cortadas/carta-encriptada-kbnG-U150920286448l0B-624x580@El%20Correo.jpg)
+![bg right:60%](images/historia/carta-encriptada.jpg)
 
 Descifrada una carta encriptada de las guerras carlistas escrita en Bizkaia
 
@@ -221,7 +229,7 @@ Además, la forma del papel sugiere que estaba oculto en algún sitio y tenía e
 
 ---
 
-![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg)
+![bg left:50%](images/historia/voynich.jpg)
 
 Pero no siempre es posible saber si un mensaje se ha descifrado correctamente:
 
@@ -231,6 +239,8 @@ Pero no siempre es posible saber si un mensaje se ha descifrado correctamente:
 <!--
 
 El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos parecen hacer descartado que el manuscrito Voynich tenga un cifrado simple como el César. Aún así, han analizado los textos y han encontrado que siguen pautas estadísticas de un lenguaje real. El misterio sigue abierto.
+
+Imagen: https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg
 
 -->
 
@@ -345,7 +355,7 @@ Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de apar
 
 ## Análisis de frecuencias
 
-![w:18em](images/el_quijote.freqs.png) ![w:18em](images/el_quijote.caesar.freqs.png)
+![w:18em](images/historia/el_quijote.freqs.png) ![w:18em](images/historia/el_quijote.caesar.freqs.png)
 
 ¡La estadística se mantiene igual (pero movida) después del cifrado César!
 
@@ -371,7 +381,7 @@ Vigenère y Enigma
 
 Podemos añadir una transposición a la vez de una substitución:
 
-![center](https://i1.wp.com/nozdr.ru/_media/games/quest/for/cipher/marshrut.png)
+![center](images/historia/marshrut.png)
 
 Podemos mapear cualquier letra a cualquier otra letra
 
@@ -384,11 +394,14 @@ Todo esto aumenta el espacio de claves, pero sigue siendo vulnerable a análisis
 
 <!-- En vez de usar un movimiento en el alfabeto, podemos cambiar totalmente el alfabeto. Eso aumenta espectacularmente el espacio de claves, hasta el punto de que no es posible para un humano hacer fuerza bruta...
 
-... pero no impide hacer análisis frecuencial. Cualquiera de estas propuestas está tan rota como el cifrado César. -->
+... pero no impide hacer análisis frecuencial. Cualquiera de estas propuestas está tan rota como el cifrado César.
+
+Imagen: https://i1.wp.com/nozdr.ru/_media/games/quest/for/cipher/marshrut.png
+-->
 
 ## Tabula recta
 
-![bg left:50% w:90%](https://upload.wikimedia.org/wikipedia/commons/9/9a/Vigen%C3%A8re_square_shading.svg)
+![bg left:50% w:90%](images/historia/tabula-rasa.svg)
 
 Johannes Trithemius en 1508, con el primer libro conocido dedicado a la criptografía, inició el sistema de cifrados polialfabéticos...
 
@@ -442,11 +455,15 @@ EWO XUX KLR
 
 ---
 
-![h:18em](https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-front.jpg) ![h:18em](https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-back.jpg) 
+![h:18em](images/historia/crypto-disk-us-ww1-front.jpg) ![h:18em](images/historia/crypto-disk-us-ww1-back.jpg) 
 
 "*Le chiffre indéchiffrable*" se utilizó desde el siglo XVI hasta bien entrado el siglo XX.
 
 ...aunque ya había expertos en romperlo en el siglo XIX.
+
+<!--
+Images: https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-front.jp
+-->
 
 ## Ejemplo
 
@@ -503,16 +520,13 @@ Vigenère está también roto. Su análisis es más laborioso que César, pero n
 **No se debe cifrar dos trozos del mensaje con la misma clave**
 
 ## Máquina Enigma
-<!-- _class: two-columns -->
-
-![h:18em](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg/800px-Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg)
 
 - Inventada por Arthur Scherbius y usada a partir de los años 20 del siglo XX
 - Existía versión comercial y versión militar
 - Finalmente "vencida" por Alan Turing.
 - [Ejemplo de uso](https://www.101computing.net/enigma-machine-emulator/)
 
-![bg right:25%](https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_Scherbius_1.jpg)
+![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_Scherbius_1.jpg)
 
 
 <!--
@@ -530,8 +544,9 @@ Además, para evitar que todos los alemanes usasen cada día la misma clave en t
 
 -->
 ---
+<!-- _class: center -->
 
-![w:20em](https://upload.wikimedia.org/wikipedia/commons/7/7b/Bundesarchiv_Bild_183-2007-0705-502%2C_Chiffriermaschine_%22Enigma%22.jpg) ![h:20em](https://upload.wikimedia.org/wikipedia/commons/6/6c/Enigma-action.svg)
+![w:20em](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg/800px-Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg) ![h:20em](https://upload.wikimedia.org/wikipedia/commons/6/6c/Enigma-action.svg)
 
 <!-- 
 
@@ -701,7 +716,7 @@ Las claves se guardaban en hojas de papel de un solo uso. Las dos partes tenían
 
 La NSA tenía 86.000 *one-time-pads* solo para el año 1972.
 
-![bg left:50%](https://www.cryptomuseum.com/spy/r353/img/300148/191/full.jpg)
+![bg left:50%](images/historia/cryptomuseum1.jpg)
 
 > Si lo necesitas, mira la operación XOR en [el glosario](A1-glosario.html)
 
@@ -735,7 +750,7 @@ Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro po
 
 > Más ejemplos: https://www.cryptomuseum.com/covert/conceal/index.htm
 
-![bg right:60%](https://www.cryptomuseum.com/covert/deaddrop/img/302193/011/full.jpg)
+![bg right:60%](images/historia/cryptomuseum2.jpg)
 
 ---
 
@@ -752,7 +767,7 @@ header: ""
 
 ---
 
-![](images/esquema-clasica.png)
+![center w:45em](images/historia/esquema-clasica.png)
 
 ---
 

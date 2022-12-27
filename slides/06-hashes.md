@@ -178,7 +178,7 @@ En realidad hay un ataque a la resistencia a la colisión que deriva de la parad
 
 Sólo hace falta que el grupo llegue a 70 personas para que la probabilidad sea del 99%
 
-![bg right:40%](images/pexels-nappy-3063910.jpg)
+![bg right:40%](images/generic/pexels-nappy-3063910.jpg)
 
 > Foto: [nappy](https://www.pexels.com/photo/group-of-people-standing-on-metal-stairs-3063910/), free to use
 

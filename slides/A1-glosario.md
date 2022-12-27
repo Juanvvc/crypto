@@ -45,7 +45,7 @@ En ocasiones podremos crear (también se dice "derivar") una clave criptográfic
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
 
-![center w:25em](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg)
+![center w:25em](images/conceptos/cryptosystem.jpg)
 
 - Mensaje o texto en claro: $m$
 - Cifrado: $c = e(k_1, m)$
@@ -89,7 +89,7 @@ Por tradición, cuando se describen protocolos criptográficos:
 
 ---
 
-![](images/cta2296-fig-0002-m.jpg)
+![](images/conceptos/cta2296-fig-0002-m.jpg)
 
 ## Servicios de seguridad a primitivas
 
