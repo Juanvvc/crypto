@@ -60,6 +60,15 @@ Intereses:
 - Miembro del Cyber Incident Response Team de [Valeo](https://es.wikipedia.org/wiki/Valeo)
 - Cualquier cosa que vuele
 
+## Objetivos
+
+- Presentación de qué es la criptografía moderna, para qué se usa y por qué es tan complicada
+  - Confidencialidad
+  - Autenticación
+  - Firma digital
+- Que te convenzas de que solo hay que usar protocolos estándar para evitar errores
+- Descubrir otros usos de la criptografía: ransomware, bitcoin...
+
 ## Intrucciones de uso de las transparencias
 <!-- _class: smallest-font -->
 
@@ -76,6 +85,10 @@ Durante el estudio personal es muy recomendable seguir los enlaces que aparecen 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/) Esta obra esta sujeta a una licencia de [Atribución 4.0 Internacional de Creative Commons](http://creativecommons.org/licenses/by/4.0/)
 
 ![bg right:40% w:100%](images/guia-transparencias.png)
+
+<!-- 
+Esto es un ejemplo de notas de profesor. Aquí habrá información adicional, aclaraciones, referencias o explicaciones más largas de los conceptos de la transparencia
+-->
 
 ## Instrucciones de uso de las actividades
 <!-- _class: with-warning smaller-font -->
@@ -95,9 +108,9 @@ Los ejercicios son notebook de Jupyter ó Google Collab:
 <!-- _class: with-warning -->
 
 - 50% examen
-- 50% ejercicios
+- 50% ejercicios. Son tres ejercicios en total, asociados a los temas 3, 4 y 5. Se recomienda realizarlos después de cada uno de estos temas.
 
-Son tres ejercicios en total, se recomienda realizarlos después del tema 3
+Para superar la asignatura, es necesario obtener más de un 5 sobre 10 en el examen y en los ejercicios
 
 ## Conocimientos recomendables
 
