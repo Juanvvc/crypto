@@ -56,17 +56,17 @@ juan.vera@campusviu.es
 
 Intereses:
 
-- DFIR: Análisis forense e *Incident Response*
+- DFIR: [*Digital Forensics and Incident Response*](https://en.wikipedia.org/wiki/Computer_security_incident_management)
 - Miembro del Cyber Incident Response Team de [Valeo](https://es.wikipedia.org/wiki/Valeo)
 - Cualquier cosa que vuele
 
 ## Objetivos
 
-- Presentación de qué es la criptografía moderna, para qué se usa y por qué es tan complicada
+- Introducción a la criptografía moderna, para qué se usa y por qué es tan complicada
   - Confidencialidad
   - Autenticación
   - Firma digital
-- Que te convenzas de que solo hay que usar protocolos estándar para evitar errores
+- Que te convenzas de que la mejor estrategia para evitar errores de seguridad son los protocolos y algoritmos abiertos
 - Descubrir otros usos de la criptografía: ransomware, bitcoin...
 
 ## Intrucciones de uso de las transparencias
@@ -107,8 +107,8 @@ Los ejercicios son notebook de Jupyter ó Google Collab:
 ## Evaluación
 <!-- _class: with-warning -->
 
-- 50% examen
-- 50% ejercicios. Son tres ejercicios en total, asociados a los temas 3, 4 y 5. Se recomienda realizarlos después de cada uno de estos temas.
+- 50% examen. Alrededor de 30 preguntas "tipo test"
+- 50% ejercicios. Tres ejercicios en total, asociados a los temas 3, 4 y 5. Se recomienda realizarlos después de cada uno de estos temas.
 
 Para superar la asignatura, es necesario obtener más de un 5 sobre 10 en el examen y en los ejercicios
 
@@ -116,7 +116,6 @@ Para superar la asignatura, es necesario obtener más de un 5 sobre 10 en el exa
 
 - Álgebra básica, teoría de conjuntos, probabilidad
 - Conocimientos básicos de programación: ejemplos en Python
-- Conocimientos básicos de Linux: comandos en consola
 - Conocimientos básicos de redes: cómo funciona la WWW.
 
 ## Bibliografía
