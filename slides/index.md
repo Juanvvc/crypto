@@ -61,35 +61,43 @@ Intereses:
 - Cualquier cosa que vuele
 
 ## Intrucciones de uso de las transparencias
-<!-- _class: smaller-font -->
+<!-- _class: smallest-font -->
 
 Versión más actualizada:
 
 - Acceso directo HTML: <http://juanvvc.github.io/crypto>
-    - Puedes pulsar `p` para ver las notas de presentación
-    - Con "Inicio" (en pie de cada transparencia) puedes venir a esta presentación, con el índice global de contenidos
+    - Pulsa `p` para ver las notas de presentación
+    - El enlace "Inicio" lleva a esta presentación con el índice global de contenidos
     - Puedes "Imprimir a PDF" usando Chrome para tener las transparencias en PDF
 - Código Markdown: <https://github.com/juanvvc/crypto>
 
 Durante el estudio personal es muy recomendable seguir los enlaces que aparecen en las transparencias para completar el tema.
 
-El curso está adaptado de [las notas de Jordi Íñigo Griera](https://github.com/jig/crypto), antiguo profesor de la asignatura
-
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/) Esta obra esta sujeta a una licencia de [Atribución 4.0 Internacional de Creative Commons](http://creativecommons.org/licenses/by/4.0/)
+
+![bg right:40% w:100%](images/guia-transparencias.png)
 
 ## Instrucciones de uso de las actividades
 <!-- _class: with-warning smaller-font -->
 
-Los ejercicios son notebook de Jupyter / Google Collab:
+Los ejercicios son notebook de Jupyter ó Google Collab:
 
+1. Si usas el enlace de Google Collab de la zona de actividades, **no necesitas instalar nada en tu PC**.
 1. Comandos básicos:
     - INTRO: edita línea actual
     - SHIFT+INTRO: ejecuta línea actual
+1. Presenta las actividades como PDF: **imprime a PDF**
 1. Tutoriales:
     - https://www.youtube.com/watch?v=jZ952vChhuI
     - https://www.dataquest.io/blog/jupyter-notebook-tutorial/
 
-Presenta las actividades como PDF: si usas los notebook, opción **imprimir a PDF**
+## Evaluación
+<!-- _class: with-warning -->
+
+- 50% examen
+- 50% ejercicios
+
+Son tres ejercicios en total, se recomienda realizarlos después del tema 3
 
 ## Conocimientos recomendables
 
