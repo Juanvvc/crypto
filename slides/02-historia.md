@@ -275,12 +275,12 @@ Queda por tanto "**que el adversario tenga que hacer muchas operaciones de desci
 
 ## Fuerza bruta
 
-* En una CPU "estándar" se prueban 1.000.000 clave/CPU/s
-* es decir: $10^6$ clave/CPU/s
-* es decir: se prueban $10^9$ claves/s en 1000 CPU
-* es decir: se prueban 3.6 * $10^{12}$ claves/h en 1000 CPU
-* en AWS EC2 una *c4.large* cuesta 10 céntimos/h
-* es decir $3.6\ 10^{11}$ claves/€/h
+- En una CPU "estándar" se prueban 1.000.000 clave/CPU/s
+- es decir: $10^6$ clave/CPU/s
+- es decir: se prueban $10^9$ claves/s en 1000 CPU
+- es decir: se prueban 3.6 * $10^{12}$ claves/h en 1000 CPU
+- en AWS EC2 una *c4.large* cuesta 10 céntimos/h
+- es decir $3.6\ 10^{11}$ claves/€/h
 
 Si tenemos capacidad de diseñar/fabricar $d()$ en hardware ([ASIC](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)) los costes bajan después de un periodo de amortización
 
@@ -799,7 +799,10 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 - [The Cryptograhic Mathematics of Enigma](https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/wwii/CryptoMathEnigma_Miller.pdf) Dr. A. Ray Miller, NSA 2019
 
 ---
-Ejercicios: curso de <www.cryptohack.org>: "Introduction to Cryptohack"
+Ejercicios opcionales pero muy recomendables:
+
+- Del profesor: <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/01/Seguridad%20por%20oscuridad.ipynb>
+- "Introducción a cryptohack" en <https://cryptohack.org/>
 
 Continúa en: [Criptografía simétrica](03-simetrica.html)
 
