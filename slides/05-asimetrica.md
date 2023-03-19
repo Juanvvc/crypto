@@ -28,7 +28,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 # Como decíamos ayer...
 
-![w:16em center](images/symmetric-example.png)
+![w:16em center](images/simetrica/symmetric-example.png)
 
 El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros
 
@@ -54,7 +54,7 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 
 ¿Qué direcciones eran esas?
 
-![bg right:30%](https://www.publicdomainpictures.net/pictures/370000/velka/signpost-giving-directions.jpg)
+![bg right:30%](images/asimetrica/signpost-giving-directions.jpg)
 
 > Foto: https://www.publicdomainpictures.net/en/view-image.php?image=363738&picture=signpost-giving-directions (CC0)
 
@@ -116,14 +116,14 @@ A veces son intercambiables: lo que se cifra con una se descifra con la otra
 
 ## Esquema de cifrado
 
-![w:20em center](images/IMG_0056.PNG)
+![w:20em center](images/asimetrica/IMG_0056.PNG)
 
 - Todos conocen la clave $K_{pub}$ de Bob, solo Bob conoce la clave $K_{priv}$
 - **Cualquier puede cifrar un mensaje para Bob, solo Bob puede descifrarlo**: confidencialidad
 
 ## Esquema de firma electrónica
 
-![w:20em center](images/IMG_0055.PNG)
+![w:20em center](images/asimetrica/IMG_0055.PNG)
 
 - Solo Bob puede cifrar con su clave $K_{priv}$ y cualquier puede descifrar con $K_{pub}$
 - Pero si pueden descifrar el mensaje, **todos saben que el mensaje solo puede haberlo enviado Bob: autenticación**
@@ -186,8 +186,12 @@ La dificultad está en la aritmética modular: partiendo del resultado, no es f�
 
 Ejemplo: ¿cuánto vale x? Recuerda que $x\lt17$
 
-- $$3^{x} \mod 17 = 1$$
-* ![center w:25em](https://miro.medium.com/max/2400/1*YZieEVE_LsNK4i94KNnZqg.png)
+$$3^{x} \mod 17 = 1$$
+
+![center w:25em](images/asimetrica/clockmod.png)
+
+
+> https://miro.medium.com/max/2400/1*YZieEVE_LsNK4i94KNnZqg.png
 
 ---
 <!-- _class: smaller-font -->
@@ -269,7 +273,7 @@ Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como
 ## Problemas de Diffie Hellman: Man in the middle
 <!-- _class: with-warning -->
 
-![center](https://i.imgur.com/Cq78TET.png?1)
+![center](images/asimetrica/dh-maninthemiddle.png)
 
 Diffie-Hellman no protege contra MitM, no tiene un sistema de gestión de claves públicas asociadas a identidades. Necesitamos otras tecnologías.
 
@@ -311,11 +315,13 @@ No entraremos en las diferencias de implementación, pero ten en cuenta que exis
 
 ## RSA
 
-![bg left](https://hsto.org/getpro/habr/post_images/453/10e/602/45310e602d784a489301bf1996edef68.jpg)
+![bg left](images/asimetrica/rsa-creators.jpg)
 
 [A method for obtaining digital signatures and public-key cryptosystems](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.607.2677), Ron **R**ivest, Adi **S**hamir, Leonard **A**dleman, 1978
 
 *trap door function*: dificultad del cálculo de la raíz $e$-ésima($\mod n$) para valores de $n$ con ciertas propiedades
+
+> Background: https://hsto.org/getpro/habr/post_images/453/10e/602/45310e602d784a489301bf1996edef68.jpg
 
 <!--
 Fundaron la empresa RSA Security LLC, que sigue siendo uno de los mayores proveedores de seguridad del mundo
@@ -548,7 +554,7 @@ Dado un punto $A$, definimos una operación "proyección" $A+B = C$ como:
 
 $C$ es "la proyección de recta que une $A$ y $B$, reflejada al otro lado de la curva"
 
-![center w:20em](images/elliptic55-addition.png)
+![center w:20em](images/asimetrica/elliptic55-addition.png)
 
 Usamos el símbolo "suma" por tradición, pero no es una "suma geométrica"
 
@@ -556,7 +562,7 @@ Usamos el símbolo "suma" por tradición, pero no es una "suma geométrica"
 
 Y lo volvemos a aplicar, varias veces, desde el mismo origen
 
-![center](images/elliptic55-addition2.png)
+![center](images/asimetrica/elliptic55-addition2.png)
 
 ---
 
@@ -564,7 +570,7 @@ En vez de empezar con dos puntos, podemos empezar con uno solo, y la recta inici
 
 $$P=nA$$
 
-![center w:20em](images/elliptic.gif)
+![center w:20em](images/asimetrica/elliptic.gif)
 
 > Fuente: https://medium.com/@icostan/animated-elliptic-curves-cryptography-122fff8fcae
 
@@ -597,7 +603,7 @@ Ejemplo número primo grande de 256 bits: $p=2^{255}-19$
 
 Ejemplo $\Z_{61}$ (es solo un ejemplo, el primo tiene que ser mucho más grande):
 
-![w:18em](images/elliptic-finitefield.png) ![w:20em](https://upload.wikimedia.org/wikipedia/commons/7/7e/Elliptic_curve_on_Z61.svg)
+![w:18em](images/asimetrica/elliptic-finitefield.png) ![w:20em](https://upload.wikimedia.org/wikipedia/commons/7/7e/Elliptic_curve_on_Z61.svg)
 
 > Fuente: https://www.youtube.com/watch?v=mFVKuFZ29Fc&list=PLN9KZDpNfsHMd7d7PX87JGesGY_Qzyb3V
 
@@ -609,7 +615,7 @@ Observa: la curva sobre los reales se mapea en un toroide, con la marca de "núm
 
 Ejemplo de proyección sobre los enteros
 
-![center](images/elliptic-projection.png)
+![center](images/asimetrica/elliptic-projection.png)
 
 ## Tamaño de clave
 
@@ -633,7 +639,7 @@ A cambio, son más complejas de entender y programar pero eso como usuarios no e
 
 ---
 
-![center](images/keysize-compare.png)
+![center](images/asimetrica/keysize-compare.png)
 
 NOTA: RSA está basado en "factorización", DSA y D-H en "logaritmo discreto"
 

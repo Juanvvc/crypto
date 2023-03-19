@@ -39,7 +39,7 @@ Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica". A pa
 
 > Más ejemplos: https://www.cryptomuseum.com/covert/conceal/index.htm
 
-![bg right:40% h:80%](https://www.cryptomuseum.com/covert/deaddrop/img/302193/011/full.jpg)
+![bg right:40% w:100%](images/historia/cryptomuseum2.jpg)
 
 <!--
 La confidencialidad es perfecta en cifrados tipo Vernam si la clave:
@@ -141,7 +141,14 @@ Hay que usar un espacio de claves lo suficientemente grande como para que no sea
 
 <!-- Recordad: en el cifrado de Verman no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
 
-Ahora no sucede así: si al descifrar por fuerza bruta encontramos algo con sentido, con gran probabilidad hemos encontrado la clave y el mensaje es el original-->
+Ahora no sucede así: si al descifrar por fuerza bruta encontramos algo con sentido, con gran probabilidad hemos encontrado la clave y el mensaje es el original
+
+Recordad: los ordenadores mejoran constantemente.
+
+Los algoritmos se diseñan para que, con la tecnología actual, se tarde miles de años en hacer fuerza bruta. Pero la tecnología mejora con el tiempo, y eso también se tiene en cuenta: aunque "se venda" que un cifrado "no puede romperse en miles de años", en realidad eso es relativo a la tecnología actual y el algoritmo tiene una caducidad de unas pocas décadas.
+
+La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenador que haga esa misma fuerza bruta de forma instantánea
+-->
 
 
 ---
@@ -270,7 +277,7 @@ $c = k_{\text{generada}} \oplus m$
 
 ## Cifrado de flujo: algoritmo
 
-![w:25em center](images/symmetric-example.png)
+![w:25em center](images/simetrica/symmetric-example.png)
 
 <!--
 Recordatorio: este es el esquema para hacer un cifrador de flujo.
@@ -302,15 +309,18 @@ La confidencialidad perfecta decía que el algoritmo era seguro aunque el advers
 -->
 
 ## PRNG: seguridad
+<!-- _class: with-warning -->
 
 Una función PRNG es realmente PRNG (es decir, útil en criptografía) si ningún atacante puede distingir entre las secuencia generada y una fuente aleatoria aleatoria uniforme RNG con una probabilidad diferente de $0.5$
 
+![center](images/simetrica/dilbert.png)
 
-![center](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)
+Fuente aleatorio uniforme RNG: medios físicos, no algorítmicos. Por ejemplo, [generadores cuánticos](https://physicsworld.com/a/fast-quantum-random-number-generator-could-advance-cryptography-on-the-cheap/).
 
-Fuente aleatorio uniforme RNG: medios físicos, no algorítmicos. Por ejemplo, [generadores cuánticos](https://physicsworld.com/a/fast-quantum-random-number-generator-could-advance-cryptography-on-the-cheap/). Encontrarás más información en el [Anexo 2](A2-rng.html)
+Encontrarás más información en el [Anexo 2](A2-rng.html)
 
 > Información adicional: https://www.incibe-cert.es/blog/comprobando-aleatoriedad
+
 
 <!--
 Curiosidad: "un atacante no puede distinguir... con una probabilidad..." En análisis criptográfico, se analiza el protocolo como un juego. Los atacantes o los usuarios plantean un juego e intentan adivinar algo. Aquí el usuario le da al atacante un número y le pregunta "¿esto lo he sacado de un RNG o de un PRNG?". La pregunta se hace muchas veces. El atacante gana si puede adivinarlo más de la mitad de las veces.
@@ -344,7 +354,7 @@ La seguridad del cifrado depende del generador PRNG utilizado...
 
 ## Cifrado de flujo: algoritmo
 
-![w:25em center](images/symmetric-example.png)
+![w:25em center](images/simetrica/symmetric-example.png)
 
 En las próximas transparencias, exploraremos cómo podemos diseñar un cifrado de flujo a partir de un PRNG, y cómo la solución más obvia... no funciona
 
@@ -397,7 +407,9 @@ Generar **variaciones de las claves en cada transmisión**
 
 Supongamos que la semilla no es directamente la clave, sino una función de la clave y otro parámetro $r$
 
-$k_{generada} = PRNG(f(k, r))$
+$$
+k_{generada} = PRNG(f(k, r))
+$$
 
 Y $r$ lo enviamos con cada transmisión: $c' = c \| r$
 
@@ -407,11 +419,11 @@ Pero tenemos que asumir que un atacante conoce $r$ porque monitoriza nuestras co
 
 ## *Nonce*: *number used only once*
 
-Curiosamente: **¡esto es correcto!**
+Curiosamente: **¡esto es correcto!**: reservar algunos bits de la clave para un contador:
 
-Que el atacante conozca la $r$ reduce la fortaleza del algoritmo en los bits de $r$, pero compensa utilizar una clave diferente cada mensaje (si el PRNG está bien diseñado)
+SESAMO_1, SESAMO_2, SESAMO_3...
 
-Este elemento se conoce como *nonce* y forma parte de muchos algoritmos criptográficos.
+Este elemento se conoce como *nonce* y forma parte de muchos algoritmos criptográficos
 
 ![bg w:90% right:50%](https://upload.wikimedia.org/wikipedia/commons/4/4f/Nonce-cnonce-uml.svg)
 
@@ -442,6 +454,7 @@ El cifrado de flujo es tan seguro como:
 -->
 
 ## Ejemplos
+<!-- _class: with-info -->
 
 - RC4 (histórico): obsoleto
 - ChaCha: derivado del Salsa20 y probablemente la única alternativa al AES en TLS 1.3
@@ -450,7 +463,9 @@ El cifrado de flujo es tan seguro como:
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/4/47/Salsa_round_function.svg)
 
-## RC4
+ChaCha es el algoritmo de cifrado simétrico de flujo más usado
+
+---
 
 Un comentario rápido sobre [RC4/ARC4/RCFOUR](https://en.wikipedia.org/wiki/RC4):
 
@@ -513,7 +528,6 @@ result = json.dumps({'nonce':nonce, 'ciphertext':ct})
 <!-- Cosas para fijarse: la salida se codifica en Base64 y el nonce se envía con la comunicación -->
 
 ## (inciso: Base64 no es un cifrado)
-<!-- _class: extra-slide smaller-font -->
 
 [Base64](https://es.wikipedia.org/wiki/Base64) se utiliza para representar información binaria como cadena imprimible
 
@@ -548,7 +562,7 @@ print("The message was " + plaintext)
 
 ## Diagrama de flujo
 
-![w:25em center](images/ChaCha20.png)
+![w:25em center](images/simetrica/ChaCha20.png)
 
 <!--
 
@@ -654,16 +668,6 @@ Nonce length|Description|Max data|If random nonce and same key
 
 Ninguna conocida, siempre que se cumplan las condiciones de uso: no se puede repetir clave y nonce.
 
----
-<!-- _class: extra-slide -->
-
-Anexo recomendado: [RNG y HSM](A1-rng.html)
-
-Ejercicios:
-
-- [Cifrando con XOR: los peligros de reutilizar claves](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb)
-- [Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2%20-%20Cifrado%20de%20flujo%20ChaCha20.ipynb)
-- (Opcional) [Creación de azar: creación de números aleatorios](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/4%20-%20Random%20numbers.ipynb)
 
 # Cifrado de bloque
 <!-- _class: lead
@@ -894,7 +898,9 @@ Desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el co
 - longitud de bloque: 128 bits (16 Bytes)
 - longitud de clave: 128, 192 ó 256 bits
 
-![bg left:40%](https://whatsupcourtney.com/wp-content/uploads/2017/10/Things-to-do-in-Leuven-52-e1560945504897.jpeg)
+![bg left:40%](images/simetrica/leuven.jpg)
+
+> background: https://whatsupcourtney.com/wp-content/uploads/2017/10/Things-to-do-in-Leuven-52-e1560945504897.jpeg
 
 <!--
 AES fue desarrollado por Vincent Rijmen y Joan Daemen en el COSIC de la KU Leuven, Bélgica.
@@ -918,7 +924,7 @@ Parte de una matriz de estado que se va modificando durante 10, 12 o 14 rondas s
 
 ---
 
-![center](images/aes-algorithm.png)
+![center](images/simetrica/aes-algorithm.png)
 
 <!--
 Fíjate:
@@ -929,13 +935,13 @@ Fíjate:
 
 ## SubBytes
 
-![center Wikipedia](images/AES-SubBytes.svg)
+![center Wikipedia](images/simetrica/AES-SubBytes.svg)
 
 "sustitución de bytes en función de una tabla fija de 256 entradas"
 
 ## ShiftRows
 
-![center Wikipedia](images/AES-ShiftRows.svg)
+![center Wikipedia](images/simetrica/AES-ShiftRows.svg)
 
 "transposición de bytes fija"
 
@@ -945,13 +951,13 @@ Añade **difusión**: los bits de salida dependerán de varios bits de entrada.
 
 ## MixColumns
 
-![center Wikipedia](images/AES-MixColumns.svg)
+![center Wikipedia](images/simetrica/AES-MixColumns.svg)
 
 "4 multiplicaciones modulares de 4 Byte, valores fijos"
 
 ## AddRoundKey
 
-![center w:20em Wikipedia](images/AES-AddRoundKey.svg)
+![center w:20em Wikipedia](images/simetrica/AES-AddRoundKey.svg)
 
 "$\text{bloque} \oplus k_{i}$ (subclave $k_{i}$)"
 
@@ -972,7 +978,7 @@ Nota 2: hacen falta más etapas en los AES de clave larga para "aplicar" el mayo
 
 ---
 
-![center w:35em](images/aes-keyexpansion.png)
+![center w:35em](images/simetrica/aes-keyexpansion.png)
 
 ## Vulnerabilidades
 
@@ -988,7 +994,7 @@ Ahora los bloques son de 16 B, no de 1 B por tanto la estadística es menos impo
 
 Un cifrado debe parecerse a esto:
 
-![center](images/gimp/bio-c.png)
+![center](images/simetrica/bio-c.png)
 
 ## Modos de operación
 
@@ -1013,7 +1019,7 @@ Si acumulamos estado durante el cifrado, podemos utilizar este estado sobre el c
 
 ## ECB: Electronic Code-Book
 
-![center Wikipedia w:35em](images/ECB_encryption.svg)
+![center Wikipedia w:35em](images/simetrica/ECB_encryption.svg)
 
 ---
 <!-- _class: center -->
@@ -1028,15 +1034,15 @@ Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
 ## CBC: Cipher Block Chaining
 
-![center Wikipedia w:35em](images/CBC_encryption.svg)
+![center Wikipedia w:35em](images/simetrica/CBC_encryption.svg)
 
 ## OFB: Output Feedback
 
-![center Wikipedia w:35em](images/OFB_encryption.svg)
+![center Wikipedia w:35em](images/simetrica/OFB_encryption.svg)
 
 ## CTR: Counter
 
-![center Wikipedia w:35em](images/CTR_encryption.svg)
+![center Wikipedia w:35em](images/simetrica/CTR_encryption.svg)
 
 ## Vector de Inicialización (IV)
 
@@ -1098,13 +1104,6 @@ AES ha perdido fortaleza pero aún está aguantando.
 
 Se considera que la criptografía simétrica es robusta ante la computación cuántica
 
----
-<!-- _class: extra-slide -->
-
-Ejercicios:
-
-- [Modos de cifrado AES y gestión de bloques](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/3%20-%20Modos%20de%20cifrado%20AES.ipynb)
-
 # Resumen
 <!-- _class: lead
 header: '' -->
@@ -1134,9 +1133,17 @@ header: '' -->
 
 ---
 
-Ejercicios:
-- https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
-- Alternativamente, ejercicios de AES de www.cryptohack.org
+Ejercicios de profesor:
+
+- [Cifrando con XOR: los peligros de reutilizar claves](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb)
+- [Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2%20-%20Cifrado%20de%20flujo%20ChaCha20.ipynb)
+- (Opcional) [Creación de azar: creación de números aleatorios](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/4%20-%20Random%20numbers.ipynb)
+- [Modos de cifrado AES y gestión de bloques](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/3%20-%20Modos%20de%20cifrado%20AES.ipynb)
+
+
+Alternativamente, podéis hacer los ejercicios de AES de <https://www.cryptohack.org>
+
+---
 
 Continúa en: [Teoría complejidad y acuerdo D-H](04-complejidad.html)
 
