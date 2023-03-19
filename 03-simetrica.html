@@ -389,8 +389,8 @@ tenga que hacer <span class="katex"><span class="katex-mathml"><math xmlns="http
 <td>Más complejo</td>
 </tr>
 <tr>
-<td>Implementado en hardware</td>
 <td>Implementado en software</td>
+<td>Implementado en hardware</td>
 </tr>
 <tr>
 <td>RC4, <strong>ChaCha20</strong></td>
@@ -476,11 +476,11 @@ tenga que hacer <span class="katex"><span class="katex-mathml"><math xmlns="http
 <p><a href="https://en.wikipedia.org/wiki/Lorenz_cipher#Cryptanalysis">Lorenz SZ</a> fue una máquina alemana de cifrado de flujo, rota porque un operador envió dos mensajes diferentes seguidos sin cambiar la clave.</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
-</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="24" data-marpit-pagination-total="89"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Cifrado de flujo" data-class="extra-slide" data-heading-divider="2" data-theme="marp-viu" class="extra-slide" data-marpit-pagination="25" data-marpit-pagination-total="89" style="--paginate:true;--footer:[Inicio](index.html);--header:Cifrado de flujo;--class:extra-slide;--heading-divider:2;--theme:marp-viu;" data-transition="fade" data-transition-back="fade">
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section style="" data-marpit-advanced-background="pseudo" data-marpit-pagination="24" data-marpit-pagination-total="89"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Cifrado de flujo" data-heading-divider="2" data-theme="marp-viu" data-marpit-pagination="25" data-marpit-pagination-total="89" style="--paginate:true;--footer:[Inicio](index.html);--header:Cifrado de flujo;--heading-divider:2;--theme:marp-viu;" data-transition="fade" data-transition-back="fade">
 <header>Cifrado de flujo</header>
 <h2>Cifrado de flujo: algoritmo</h2>
-
 <p><img src="images/symmetric-example.png" alt="center" style="width:25em;" /></p>
+<p>En las próximas transparencias, exploraremos cómo podemos diseñar un cifrado de flujo a partir de un PRNG, y cómo la solución más obvia... no funciona</p>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-paginate="true" data-footer="[Inicio](index.html)" data-header="Cifrado de flujo" data-class="smaller-font with-success" data-heading-divider="2" data-theme="marp-viu" class="smaller-font with-success" data-marpit-pagination="26" data-marpit-pagination-total="89" style="--paginate:true;--footer:[Inicio](index.html);--header:Cifrado de flujo;--class:smaller-font with-success;--heading-divider:2;--theme:marp-viu;" data-transition="fade" data-transition-back="fade">
@@ -819,11 +819,11 @@ c += d; b ^= c; b &lt;&lt;&lt;= 7;
 <header>ChaCha20</header>
 
 <p>Anexo recomendado: <a href="A1-rng.html">RNG y HSM</a></p>
-<p>Ejercicios: <a href="https://github.com/Juanvvc/crypto/tree/master/ejercicios/03">https://github.com/Juanvvc/crypto/tree/master/ejercicios/03</a></p>
+<p>Ejercicios:</p>
 <ul>
-<li>Cifrando con XOR: los peligros de reutilizar claves</li>
-<li>Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20</li>
-<li>(Opcional) Creación de azar: creación de números aleatorios</li>
+<li><a href="https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb">Cifrando con XOR: los peligros de reutilizar claves</a></li>
+<li><a href="https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2%20-%20Cifrado%20de%20flujo%20ChaCha20.ipynb">Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20</a></li>
+<li>(Opcional) <a href="https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/4%20-%20Random%20numbers.ipynb">Creación de azar: creación de números aleatorios</a></li>
 </ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
@@ -1273,9 +1273,9 @@ c_n &amp;= e_n(k_n, c_{n-1})\\
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="84" data-paginate="true" data-footer="[Inicio](index.html)" data-header="AES" data-class="extra-slide" data-heading-divider="2" data-theme="marp-viu" class="extra-slide" data-marpit-pagination="84" data-marpit-pagination-total="89" style="--paginate:true;--footer:[Inicio](index.html);--header:AES;--class:extra-slide;--heading-divider:2;--theme:marp-viu;" data-transition="fade" data-transition-back="fade">
 <header>AES</header>
 
-<p>Ejercicios: <a href="https://github.com/Juanvvc/crypto/tree/master/ejercicios/03">https://github.com/Juanvvc/crypto/tree/master/ejercicios/03</a></p>
+<p>Ejercicios:</p>
 <ul>
-<li>Modos de cifrado AES y gestión de bloques</li>
+<li><a href="https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/3%20-%20Modos%20de%20cifrado%20AES.ipynb">Modos de cifrado AES y gestión de bloques</a></li>
 </ul>
 <footer><a href="index.html">Inicio</a></footer>
 </section>
@@ -1377,7 +1377,7 @@ Seguimos.
 
 Los ordenadores no pueden generar números realmente aleatorios ya que solo usan algoritmos. Para generar números realmente aleatorios es necesaria ayuda externa: pulsaciones de teclado, movimiento de ratón...
 
-Fíjate que incluso las pulsaciones de teclado no son del todo aleatorias: después de una vocal es posible que venta una consonante. Por la noche habrá menos pulsaciones que durante el día... Son fuentes mejores de aletoriedad, pero no perfectas</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Recordatorio: este es el esquema para hacer un cifrador de flujo.</p></div><div class="bespoke-marp-note" data-index="25" tabindex="0"><p>Qué puede hacer un atacante con el xor de los textos en claro:
+Fíjate que incluso las pulsaciones de teclado no son del todo aleatorias: después de una vocal es posible que venta una consonante. Por la noche habrá menos pulsaciones que durante el día... Son fuentes mejores de aletoriedad, pero no perfectas</p></div><div class="bespoke-marp-note" data-index="25" tabindex="0"><p>Qué puede hacer un atacante con el xor de los textos en claro:
 
 - Análisis frecuencia: La &quot;clave para cifrar m2&quot; es m1, que ya no es aleatorio y permite el análisis de frecuencias.
 - Si partes de m1 son conocidas, es aún más sencillo descifrar partes de m2
