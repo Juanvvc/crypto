@@ -229,7 +229,7 @@ Flujo|Bloque
 --|--
 Más rápido|Más lento (a menos que exista ayuda del hardware)
 Fácil de programar: pequeños dispositivos|Más complejo
-Implementado en hardware|Implementado en software
+Implementado en software|Implementado en hardware
 RC4, **ChaCha20**|3DES, **AES**
 
 <!--
@@ -343,13 +343,10 @@ La seguridad del cifrado depende del generador PRNG utilizado...
 [Lorenz SZ](https://en.wikipedia.org/wiki/Lorenz_cipher#Cryptanalysis) fue una máquina alemana de cifrado de flujo, rota porque un operador envió dos mensajes diferentes seguidos sin cambiar la clave.
 
 ## Cifrado de flujo: algoritmo
-<!-- _class: extra-slide -->
 
 ![w:25em center](images/symmetric-example.png)
 
-<!--
-Recordatorio: este es el esquema para hacer un cifrador de flujo.
--->
+En las próximas transparencias, exploraremos cómo podemos diseñar un cifrado de flujo a partir de un PRNG, y cómo la solución más obvia... no funciona
 
 ## Intento 1
 <!-- _class: smaller-font with-success -->
@@ -662,11 +659,11 @@ Ninguna conocida, siempre que se cumplan las condiciones de uso: no se puede rep
 
 Anexo recomendado: [RNG y HSM](A1-rng.html)
 
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+Ejercicios:
 
-- Cifrando con XOR: los peligros de reutilizar claves
-- Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20
-- (Opcional) Creación de azar: creación de números aleatorios
+- [Cifrando con XOR: los peligros de reutilizar claves](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb)
+- [Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2%20-%20Cifrado%20de%20flujo%20ChaCha20.ipynb)
+- (Opcional) [Creación de azar: creación de números aleatorios](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/4%20-%20Random%20numbers.ipynb)
 
 # Cifrado de bloque
 <!-- _class: lead
@@ -1104,9 +1101,9 @@ Se considera que la criptografía simétrica es robusta ante la computación cu�
 ---
 <!-- _class: extra-slide -->
 
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/03
+Ejercicios:
 
-- Modos de cifrado AES y gestión de bloques
+- [Modos de cifrado AES y gestión de bloques](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/3%20-%20Modos%20de%20cifrado%20AES.ipynb)
 
 # Resumen
 <!-- _class: lead
