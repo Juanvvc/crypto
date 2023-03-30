@@ -26,7 +26,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 # Como decíamos ayer...
 <!-- _class: with-info -->
 
-![w:18em center](images/symmetric-example.png)
+![w:18em center](images/simetrica/symmetric-example.png)
 
 El cifrados de flujo y de bloque permiten enviar mensajes computacionalmente seguros
 
@@ -64,6 +64,20 @@ Todo lo que vamos a decir tiene una enorme literatura detrás y basada en la ló
 Por si fuera poco, es un campo del que aún no conocemos casi nada: hay aún muchas preguntas abiertas
 
 El nombre "teoría de la complejidad" está muy bien escogido para describir el campo. Vamos a intentar saber de qué va
+-->
+
+## Teoría de la complejidad
+
+Ciencia que estudia cuánto tiempo le llevaría al algoritmo más rápido computacional posible para resolver un problema
+
+Ojo: la teoría de la complejidad no dice cuál es ese algoritmo más rápido posible, simplemente calcula cuánto tiempo mínimo lleva resolver un problema
+
+Aplicación en criptografía: dado un mensaje cifrado con cierto algoritmo ¿existe un algoritmo más rápido que con fuerza bruta... aunque aún no sepamos cuál?
+
+<!--
+
+Ojo 2: "el tiempo mínimo en resolver un problema" es para el problema general, puede haber algunos problemas que teóricamente sean sencillos pero que "con suerte" se puedan resolver, o que tienen características especiales que los hacen más sencillos
+
 -->
 
 ## ¿Cuánto tiempo tardarías en resolver este sodoku?
@@ -383,7 +397,7 @@ Ya tenemos los conocimientos suficientes para presentar el problema de la primer
 ---
 <!-- _class: extra-slide with-info -->
 
-![w:18em center](images/symmetric-example.png)
+![w:18em center](images/simetrica/symmetric-example.png)
 
 El cifrados de flujo y de bloque permiten enviar mensajes computacionalmente seguros
 
@@ -469,6 +483,16 @@ Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
 ![center w:25em](https://i.imgur.com/oFIYQRW.png?1)
 
 > https://stackoverflow.com/questions/10471009/how-does-the-man-in-the-middle-attack-work-in-diffie-hellman
+>
+
+---
+
+Ejemplo sencillo:
+
+![center](images/asimetrica/dh-example.png)
+
+Aunque un atacante conozca $g=7$, $p=23$, $A=21$ y $B=4$, no podría calcular $K$ más que por fuerza bruta. En cambio, Alice y Bobo han podido calcular $K$ muy fácilmente
+
 
 ## Claves secretas y claves públicas
 
@@ -493,6 +517,7 @@ Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
 Recuerda hipótesis DDH: $g^{ab}$ solo se puede calcular fácilmente si conoces o bien $a$ o bien $b$, pero no se puede calcular fácilmente si conoces solo $g^a$ y $g^b$
 
 Alice y Bob, que no se habían visto nunca antes, puede utilizar $k=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
+
 
 ---
 
@@ -624,7 +649,7 @@ header: Hash
 
 ---
 
-Ejercicios: <https://github.com/Juanvvc/crypto/tree/master/ejercicios/04>
+Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/04/T4%20-%20Acuerdo%20de%20claves%20D-H.ipynb>
 
 Continúa en: [Criptografía asimétrica](05-asimetrica.html)
 
