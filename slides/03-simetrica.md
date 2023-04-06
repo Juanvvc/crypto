@@ -62,9 +62,9 @@ Hoy veremos como solucionarlo:
 1. [Confidencialidad computacional](#4)
 1. [Cifrado de flujo](#16)
 1. [ChaCha20](#34)
-1. [Cifrado de bloque](#46)
-1. [Cifrado AES](#60)
-1. [Resumen](#85)
+1. [Cifrado de bloque](#45)
+1. [Cifrado AES](#59)
+1. [Resumen](#83)
 
 # Confidencialidad computacional
 <!-- _class: lead

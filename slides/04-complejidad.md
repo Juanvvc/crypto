@@ -50,8 +50,8 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 <!-- _class: cool-list toc -->
 
 1. [Teoría de la complejidad](#4)
-1. [Acuerdo de clave Diffie-Hellman](#26)
-1. [Conclusiones](#42)
+1. [Acuerdo de clave Diffie-Hellman](#27)
+1. [Conclusiones](#44)
 
 # Teoría de la complejidad
 <!-- _class: lead -->
@@ -491,7 +491,7 @@ Ejemplo sencillo:
 
 ![center](images/asimetrica/dh-example.png)
 
-Aunque un atacante conozca $g=7$, $p=23$, $A=21$ y $B=4$, no podría calcular $K$ más que por fuerza bruta. En cambio, Alice y Bobo han podido calcular $K$ muy fácilmente
+Aunque un atacante conozca $g=7$, $p=23$, $A=21$ y $B=4$, no podría calcular $K$ más que por fuerza bruta. En cambio, Alice y Bob han podido calcular $K$ muy fácilmente
 
 
 ## Claves secretas y claves públicas

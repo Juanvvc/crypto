@@ -68,10 +68,10 @@ Los objetivos del tema es conocer la base de la criptografía asimétrica, cómo
 <!-- _class: cool-list toc -->
 
 1. [Criptografía asimétrica](#5)
-1. [RSA](#25)
-1. [Curvas elípticas](#39)
-1. [Depurando detalles](#56)
-1. [Conclusiones](#59)
+1. [RSA](#27)
+1. [Curvas elípticas](#41)
+1. [Los límites de la criptografía asimétrica](#58)
+1. [Conclusiones](#62)
 
 # Criptografía asimétrica
 <!-- _class: lead -->
@@ -99,7 +99,7 @@ Y se dieron cuenta: se puede extender la misma idea para solucionar todo lo dem�
 
 ![bg right](https://upload.wikimedia.org/wikipedia/commons/4/4c/Public_key_shared_secret.svg)
 
-## Criptografía asimétrica
+## Criptografía asimétrica o de clave pública
 
 También conocida como **criptografía de clave pública**
 
@@ -113,6 +113,16 @@ A veces son intercambiables: lo que se cifra con una se descifra con la otra
 ![bg right:40% w:90%](https://upload.wikimedia.org/wikipedia/commons/f/f9/Public_key_encryption.svg)
 
 > Compara con criptografía simétrica: misma clave para cifrar y descifrar, Bob y Alice tienen que manetenarla en secreto
+
+
+---
+
+La criptografía de clave pública nos permite hacer dos cosas:
+
+- cifrar mensajes --> servicio de confidencialidad
+- firmar digitalmente mensajes --> servicio de autenticación
+
+La criptografía simétrica también nos permitía cifrar, pero no firmar
 
 ## Esquema de cifrado
 
@@ -275,13 +285,19 @@ Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como
 
 ![center](images/asimetrica/dh-maninthemiddle.png)
 
-Diffie-Hellman no protege contra MitM, no tiene un sistema de gestión de claves públicas asociadas a identidades. Necesitamos otras tecnologías.
+Diffie-Hellman no protege contra MitM porque no permite autenticar mensajes.Necesitamos otras tecnologías.
+
+## Usos de Diffie-Hellman
+
+- Acuerdo inicial de una clave que luego puede usarse para cifrar las comunicaciones usando criptografía simétrica: es la etapa inicial de HTTPS
+- Pero no permite autenticar a la otra parte
+- Tampoco permite cifrar mensajes
 
 ## Nuevas direcciones
 
-El DLP, en la versión D-H de 1976, no una solución completa: permite hacer acuerdo de claves, pero no cifrado
+El DLP, en la versión D-H de 1976, no una solución completa: permite hacer acuerdo de claves, pero no cifrado, ni firma, ni autenticado
 
-En pocos años aparecieron nuevas funciones basadas en esas ideas: **RSA**, ElGammal, DSA, Pailier...
+En pocos años aparecieron nuevas funciones basadas en las mismas ideas que D-H, pero que permitían hacerlo todo: **RSA**, ElGammal, DSA, Pailier...
 
 Luego, las soluciones se refinaron con curvas elípticas: ECDH (*Elliptic Curves Diffie-Hellman*), ECDSA (*Elliptic Curves DSA*)...
 
@@ -298,16 +314,15 @@ Lo que no era público en 1976 es que en realidad la "*non-secret encryption*" y
 
 ## Cifrado y firmado
 
-Técnicamente, los sistemas propuestos sirven o bien para firmar, o bien para cifrar / distribuir claves. Los algoritmos son ligeramente diferentes en cada caso:
 
-Firma|Cifrado/Distribución
---|--
-RSA (conf. de firma)|RSA (conf. de cifrado)
-ElGammal (conf. de firma)|ElGammal (conf. de cifrado)
-DSA|-
--|D-H
+Algoritmo|Firma|Cifrado|Acuerdo de claves
+--|--|--|--
+RSA|Sí|Sí|Una parte cifra la clave que va a usarse
+ElGammal|Sí|Sí|Una parte cifra la clave que va a usarse
+DSA|Sí|No|Una parte cifra la clave que va a usarse
+D-H|No|No|Sí, es su único uso
 
-No entraremos en las diferencias de implementación, pero ten en cuenta que existen
+Técnicamente, los sistemas propuestos sirven o bien para firmar, o bien para cifrar o distribuir claves. Los algoritmos son ligeramente diferentes si se usan para firmar o para cifrar, pero no estudiaremos las diferencias
 
 
 # RSA
@@ -446,6 +461,12 @@ Descifrado: Alice utiliza su clave privada $sk_A=\{d, n\}$
 
 $$m'=c^d \mod n$$
 
+<!--
+
+Fíjate: necesitamos alguna manera de convertir mensajes a números. Lo verás en los ejercicios
+
+-->
+
 ## Ejemplo (lo veremos con ejercicios)
 <!-- _class: smaller-font -->
 
@@ -541,12 +562,14 @@ Los [cuerpos finitos](https://es.wikipedia.org/wiki/Cuerpo_finito) son estructur
 
 ---
 
+Ejemplo:
+
 $$y^2 = x^3 - 3x + 5$$
 
 (por ahora simplificamos la explicación representando la curva los reales, sin módulos)
 
 
-![center w:28em](images/elliptic55.png)
+![center w:26em](images/asimetrica/elliptic55.png)
 
 ## Trap door function
 
@@ -703,28 +726,42 @@ La situación quizá cambie en el futuro
 - [RSA and ECC: A Comparative Analysis](https://www.ripublication.com/ijaer17/ijaerv12n19_140.pdf) D. Mahto y D. K. Yadav, 2017
 
 
-# Depurando detalles
+# Los límites de la criptografía asimétrica
 <!-- _class: lead -->
 
-## Limitaciones de RSA
+## Limitaciones
 
 - Los esquemas descritos no cifran bytes, sino números: tenemos que ser capaces de codificar nuestro mensaje en un número entero. **No ciframos "*hola*", sino el número "*0x686f6c61*"**
 
 - En RSA, el número "5" siempre se cifrará igual (¡compruébalo!). Eso es mala idea: quizá el enemigo no sepa qué estamos cifrando, pero sabe que es lo mismo que antes. Otros cifrados asimétricos como DSA son naturalmente probabilísticos, no hace falta añadirlo como un extra
 
+- Todos ellos son **muchísimo más lentos** que la criptografía simétrica para cifrar. Tanto, que no se usan par cifrar, solo par distribuir claves o hformar digitalmente
 
-- En realidad suele usarse un cifrado mixto: con asimétrica se cifra la clave simétrica que es la que realmente se usa para cifrar
+- En realidad suele usarse un **cifrado mixto**: con asimétrica se cifra la clave simétrica que es la que realmente se usa para cifrar
 
 
 ## PKCS#1
 
 
-[PKCS#1 (RFC8017)](https://tools.ietf.org/html/rfc8017): recomendaciones para **utilizar correctamente** RSA. Por ejemplo:
+[PKCS#1 (RFC8017)](https://tools.ietf.org/html/rfc8017): recomendaciones para **utilizar correctamente** RSA, y es obligatorio que las librerías que uses las implementen. Por ejemplo:
 
 - Añade random padding al inicio de un mensaje, de forma que dos mensajes iguales se cifren de forma diferente cada vez... pero se descifren igual
-- Uso de RSA en esquemas de cifrado y firmado
-- Conversión entre enteros y cadenas de bytes
+- Diferencias de implementación de  RSA en esquemas de cifrado y firmado
+- Cómo hacer correctamente la conversión entre mensajes (cadenas de bytes) y enteros (que es lo que cifra RSA)
 
+## Computación cuántica
+<!-- _class: smaller-font -->
+
+- 1994: algoritmo de Shor: una máquina cuántica puede resolver eficazmente la factorización de números enteros grandes.
+   - Recuerda: cuando hablábamos de complejidad en el Tema 4, solo nos referíamos a máquinas "normales" de Turing
+- La computación cuántica, cuando llegue, **impedirá utilizar todos los algoritmos asimétricos actuales**: RSA, DSA, D-H... y también sus versiones con curvas elípticas
+   - Recuerda: la computación cuántica no rompe la criptografía simétrica, aunque sí que exige que se usen claves el doble de largas: mínimo 256 bits
+- Se están buscando algoritmos simétricos nuevos que sean resistentes a la computación cuántica: **criptografía post-cuántica**
+
+> https://cso.computerworld.es/cibercrimen/la-amenaza-cuantica-la-computacion-cuantica-y-la-criptografia
+> https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file
+
+![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/6/60/IBM_Q_system_%28Fraunhofer_2%29.jpg)
 
 # Conclusiones
 <!-- _class: lead -->
@@ -747,6 +784,9 @@ La situación quizá cambie en el futuro
 - [Nuevas direcciones en la criptografía](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) Whitfield Diffie y Martin Hellman, 1976
 - [Asymmetric Encryption - Simply explained](https://www.youtube.com/watch?v=AQDCe585Lnc)
 - [Diffie-Hellman Key Exchange explained (Python)](https://medium.com/@sadatnazrul/diffie-hellman-key-exchange-explained-python-8d67c378701c)
+- [Recomendaciones para una
+transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file) Centro Criptográfico Nacional, CCnN-TEC 009, Diciembre 2022 
+
 
 Las curvas elípticas son un concepto complejo. Esto son algunas propuestas explicativas:
 
@@ -754,9 +794,12 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 - [Elliptic Curve Cryptography Overview](https://www.youtube.com/watch?v=dCvB-mhkT0w), de John Wagnon. No asume conocimientos de álgebra.
 - [Elliptic Curve Diffie Hellman](https://www.youtube.com/watch?v=F3zzNa42-tQ): Vídeo sobre ECDH y curvas elípticas en general de Robert Pierce. Asume conocimientos de álgebra.
 
----
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/05
 
+---
+Ejercicios:
+
+- https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/RSA.ipynb
+- 
 
 Continúa en: [Funciones de Hash y Blockchains](06-hashes.html)
 
