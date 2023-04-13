@@ -173,7 +173,7 @@ Fíjate: de esta manera, un desarrollador de ransomware no se expone y es poco p
 - Train your employees not to open suspicious links
 - Good enpoint protection
 
-![bg right:60% w:100%](https://2sq7d632aduy7flhh6iaxnby-wpengine.netdna-ssl.com/wp-content/uploads/2020/02/Screen-Shot-2020-02-18-at-11.14.56-AM-1024x447.png)
+![bg right:60% w:100%](images/BEC/3-2-1-backup-rule.png)
 
 > https://insights.sei.cmu.edu/blog/3-ransomware-defense-strategies/
 > https://www.cybereason.com/blog/three-keys-to-a-reliable-ransomware-defense-strategy
