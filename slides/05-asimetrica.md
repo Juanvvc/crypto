@@ -799,7 +799,6 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 Ejercicios:
 
 - https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/RSA.ipynb
-- 
 
 Continúa en: [Funciones de Hash y Blockchains](06-hashes.html)
 

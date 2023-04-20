@@ -600,7 +600,7 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 
 <!-- _class: center -->
 
-Ejercicios: https://github.com/Juanvvc/crypto/tree/master/ejercicios/06
+Ejercicios: [Funciones de hash](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/06/Hashes.ipynb)
 
 
 Continúa en: [TLS y Public Key Infrastructure](07-pki.html)
