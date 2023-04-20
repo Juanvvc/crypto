@@ -33,7 +33,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 Los hashes nos permiten calcular **una firma digital**
 
-![bg right w:90%](https://i.imgur.com/Cq78TET.png?1)
+![bg right w:90%](images/asimetrica/dh-maninthemiddle.png)
 
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
@@ -70,7 +70,7 @@ Ejemplos:
 
 Todos estos son resúmenes, pero no son de utilidad en criptografía
 
-![bg right:30% w:100%](https://www.gatevidyalay.com/wp-content/uploads/2018/10/Parity-Check-Parity-Bit.png)
+![bg right:40% w:120%](images/hashes/parity-check.png)
 
 
 > https://es.wikipedia.org/wiki/Verificaci%C3%B3n_de_redundancia_c%C3%ADclica
@@ -226,7 +226,7 @@ Si calculas los valores de hash del archivo, verás que no coinciden. Eso es por
 
 ## Visual SHA-256
 
-[![center w:30em](images/visual-sha256.png)](https://sha256algorithm.com/)
+[![center w:30em](images/hashes/visual-sha256.png)](https://sha256algorithm.com/)
 
 > https://sha256algorithm.com/
 
@@ -303,7 +303,7 @@ Solución: calcular hash solo de los bloques que cambien, y agruparlos en un ár
 
 Permite firmar bases de datos, discos... de forma eficiente
 
-![center w:25em](images/Hash_Tree.svg)
+![center w:25em](images/hashes/Hash_Tree.svg)
 
 ## Almacenamiento de contraseñas
 
@@ -322,7 +322,7 @@ Un atacante realizar un "diccionario" con el hash de todas las palabras, nombres
 
 $$hash(hash(hash(...hash(salt\|contraseña))))$$
 
-![](https://i.stack.imgur.com/m8opZ.png)
+![](images/hashes/bcrypt.png)
 
 <!--
 En la imagen se puede ver un ejemplo de cómo guarda una base de datos una contraseña protegida con bcrypt
@@ -445,7 +445,7 @@ El paper original de "Satoshi Nakamoto" es sencillo de entender al menos en su p
 
 ## Transacciones
 
-![w:25em center](images/bc-transactions.png)
+![w:25em center](images/hashes/bc-transactions.png)
 
 <!--
 Esto es una transacción bitcoin: "X le da a Y Z bitcoins". Y el mensaje va firmado por Y.
@@ -473,7 +473,7 @@ La única manera de que pueda hacer eso es "entreteniéndose" probando números 
 
 La idea es ajustar "el número de ceros iniciales" para que sepamos que tarde más o menos un minuto en encontrar el número
 
-![bg w:100% right:40%](https://www.coinkolik.com/wp-content/uploads/2021/03/Proof-of-work-no-purple-line-730x410.jpg)
+![bg w:100% right:40%](images/hashes/proof-of-work.jpg)
 
 > http://ronny-roehrig.com/criptoavances/que-es-el-algoritmo-proof-of-work-pow-como-funciona/
 
@@ -523,13 +523,13 @@ El número de ceros necesario se ajusta para que  más o menos cada 15 minutos a
 
 ---
 
-![](images/btccom3.png)
+![](images/hashes/btccom3.png)
 
 ---
 
 Pincha en cualquiera de los bloques y verás las transacciones
 
-![w:25em center](images/btccom2.png)
+![w:25em center](images/hashes/btccom2.png)
 
 ## Consenso distribuido
 
@@ -550,7 +550,7 @@ Pero estamos hablando de dinero... un tema en el que pocas veces hay consenso y 
 - Cuando lo consigue: lo anuncia a todos los nodos que conocen.
 - Los demás nodos lo comprueban y reconocen y empiezan un nuevo bloque.
 
-![bg right:50%](https://miro.medium.com/max/539/0*0qwTOWUxevWKigsv)
+![bg right:50%](images/hashes/consenso.png)
 
 ---
 - A veces es imposible llegar a un consenso: [The Byzantine General Problem](https://es.wikipedia.org/wiki/Tolerancia_a_faltas_bizantinas)
@@ -559,7 +559,7 @@ Pero estamos hablando de dinero... un tema en el que pocas veces hay consenso y 
     - Cuando los nodos en la cadena más pequeña "claudican" y desisten
 - El protocolo funciona siempre que al menos la mitad de los nodos cooperen
 
-![bg right:50% w:200%](https://academy.horizen.io/assets/post_files/technology/expert/2.4.1-distributed-consensus/longest_chain_D.jpg)
+![bg right:50% w:200%](images/hashes/consenso2.jpg)
 
 > https://academy.binance.com/en/articles/what-is-a-51-percent-attack
 
@@ -572,7 +572,7 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 - Non Fungible Tokens (NFTs): hash de una fotografía
 - ...
 
-![bg left:40%](https://foto.wuestenigel.com/wp-content/uploads/api2/non-fungible-tokens-nfts-unique-collectible-crypto-assets.jpeg)
+![bg left:40%](images/hashes/nft.jpg)
 
 # Resumen y referencias
 <!-- _class: lead -->
