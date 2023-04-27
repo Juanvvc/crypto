@@ -55,13 +55,13 @@ DRM: Digital Right Management
 
 ## Técnicas de ocultación de información
 
-![center w:30em](images/5325040.fig.001.png)
+![center w:30em](images/stego/5325040.fig.001.png)
 
 > ["A Comparative Analysis of Information Hiding Techniques for Copyright Protection of Text Documents"](https://www.hindawi.com/journals/scn/2018/5325040/),Milad Taleby Ahvanooey,1 Qianmu Li, Hiuk Jae Shim, and Yanyan Huang. Security and Communication Networks / 2018
 
 ## Proceso
 
-![](images/5325040.fig.002.png)
+![](images/stego/5325040.fig.002.png)
 
 <!--
 ¿Es posible detectarlo?
@@ -87,7 +87,7 @@ Watermarking y fingerprinting
 
 ## Imágenes
 
-![bg left:30%](https://static.bhphotovideo.com/explora/sites/default/files/proof.jpg)
+![bg left:30%](images/stego/proof.jpg)
 
 - Pixeles "muertos"
 - Bit menos significativo: en pixeles o en sus transformadas
@@ -97,33 +97,39 @@ Watermarking y fingerprinting
 
 <https://www.mobilefish.com/services/steganography/steganography.php>
 
+<!--
+Image: https://static.bhphotovideo.com/explora/sites/default/files/proof.jpg
+-->
+
 ---
 
 ![](https://blog.fastforwardlabs.com/images/2017/06/stego_images.jpg)
 
 <!--
 ¿Se mantiene la marca después de convertir la imagen?
+
+Images: https://blog.fastforwardlabs.com/images/2017/06/stego_images.jpg
 -->
 
 ---
 
-![](https://i.blogs.es/e7a33c/look2/1366_2000.jpg)
+![](images/stego/scanned.jpg)
 
 > [Look Scanned](https://lookscanned.io/)
 
 ---
 
-![](https://ychef.files.bbci.co.uk/1600x900/p05568yh.webp)
+![](images/stego/printer.jpg)
 
 > https://www.bbc.com/future/article/20170607-why-printers-add-secret-tracking-dots
 
 ---
 
-![](https://ychef.files.bbci.co.uk/1600x900/p05568js.png)
+![](images/stego/printer2.jpg)
 
 ## Textos
 
-![bg left:30%](images/stego-julio.png)
+![bg left:30%](images/stego/stego-julio.png)
 
 - A la vista
 - Resiste impresiones y algunas manipulaciones
@@ -132,7 +138,7 @@ Watermarking y fingerprinting
 
 ## Shaadow.io
 
-[![w:20em center](images/stego-shadowio.png)](https://www.shaadow.io/)
+[![w:20em center](images/stego/stego-shadowio.png)](https://www.shaadow.io/)
 
 > https://www.elladodelmal.com/2022/04/como-poner-una-marca-oculta-shaadow-los.html
 
@@ -142,28 +148,29 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 ---
 
-![center](images/stego-text1.png)
+![center](images/stego/stego-text1.png)
 
 ---
 
-![center](images/stego-text2.png)
+![center](images/stego/stego-text2.png)
 
 
 ## DNS tunneling
 
-![](https://help.zscaler.com/downloads/zia/documentation-knowledgebase/creating-and-managing-policies/firewall/firewall-policies-resources/about-dns-application-groups/dns%20tunneling%20diagram.png)
+![center w:20em](images/stego/dns-tunneling.png)
+
 
 > https://help.zscaler.com/zia/about-dns-tunnel-detection
 
 ## Esconder malware en archivos
 
-![center w:20em](https://blog.reversinglabs.com/hubfs/Blog/malware-in-images/malware_in_images_03.jpg)
+![center w:20em](images/stego/metadata.jpg)
 
 > https://blog.reversinglabs.com/blog/malware-in-images
 
 ---
 
-![center](images/estego-bezzos.png)
+![center](images/stego/bezzos.png)
 
 > https://ia802801.us.archive.org/6/items/ftireportintojeffbezosphonehack/FTI-Report-into-Jeff-Bezos-Phone-Hack_text.pdf
 
@@ -180,13 +187,13 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 ## Estimación de la marca
 
-![w:40em center](images/stego-image17.gif)
+![w:40em center](images/stego/stego-image17.gif)
 
 > https://ai.googleblog.com/2017/08/making-visible-watermarks-more-effective.html
 
 ## Entropía
 
-![bg left w:100%](https://i.stack.imgur.com/uZH9F.png)
+![bg left w:100%](images/stego/entropy1.png)
 
 - Medida de la aleatoriedad de un archivo
 - Texto normal: 0.6 bits por bit
@@ -197,9 +204,9 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 ---
 
-![center w:20em](images/estego-entropy1.png)
+![center](images/stego/entropy2.png)
 
-<!-- Ejemplo del archivo cifrado del primer ejericio. Fíjate: al principio y al final no tiene entropía, y esas son las partes "que estaban a cero" -->
+Ejemplo del archivo cifrado del primer ejericio. Fíjate: al principio y al final no tiene entropía, y esas son las partes "que estaban a cero"
 
 
 # Referencias
