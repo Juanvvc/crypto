@@ -12,7 +12,7 @@ el apartado "Contenido".
     - Anexo: [Glosario](https://juanvvc.github.io/crypto/A1-glosario.html) 
 - [Criptografía clásica](https://juanvvc.github.io/crypto/02-historia.html)
 - [Cifrado simétrico o de clave secreta: ChaCha y AES](https://juanvvc.github.io/crypto/03-simetrica.html)
-    - Anexo: [RND y HSM](https://juanvvc.github.io/crypto/A2-rng.html)
+    - Anexo: [RNG y HSM](https://juanvvc.github.io/crypto/A2-rng.html)
 - [Teoría de la complejidad y Diffie-Hellman](https://juanvvc.github.io/crypto/04-complejidad.html)
 - [Cifrado asimétrico o de clave pública: RSA](https://juanvvc.github.io/crypto/05-asimetrica.html)
 - [Funciones de hash y *blockchain*](https://juanvvc.github.io/crypto/06-hashes.html)
