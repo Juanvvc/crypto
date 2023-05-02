@@ -966,7 +966,7 @@ Gráfico: <a href="https://en.wikipedia.org/wiki/Ulam_spiral">https://en.wikiped
 <p>En RSA, el número &quot;5&quot; siempre se cifrará igual (¡compruébalo!). Eso es mala idea: quizá el enemigo no sepa qué estamos cifrando, pero sabe que es lo mismo que antes. Otros cifrados asimétricos como DSA son naturalmente probabilísticos, no hace falta añadirlo como un extra</p>
 </li>
 <li>
-<p>Todos ellos son <strong>muchísimo más lentos</strong> que la criptografía simétrica para cifrar. Tanto, que no se usan par cifrar, solo par distribuir claves o hformar digitalmente</p>
+<p>Todos ellos son <strong>muchísimo más lentos</strong> que la criptografía simétrica para cifrar. Tanto, que no se usan par cifrar, solo para distribuir claves o hformar digitalmente</p>
 </li>
 <li>
 <p>En realidad suele usarse un <strong>cifrado mixto</strong>: con asimétrica se cifra la clave simétrica que es la que realmente se usa para cifrar</p>
@@ -988,17 +988,17 @@ Gráfico: <a href="https://en.wikipedia.org/wiki/Ulam_spiral">https://en.wikiped
 <h2>Computación cuántica</h2>
 
 <ul>
-<li>1994: algoritmo de Shor: una máquina cuántica puede resolver eficazmente la factorización de números enteros grandes.
+<li>1994: <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Shor">algoritmo de Shor</a>: una máquina cuántica resuelve con eficacia la factorización de números enteros grandes.
 <ul>
-<li>Recuerda: cuando hablábamos de complejidad en el Tema 4, solo nos referíamos a máquinas &quot;normales&quot; de Turing</li>
+<li>Recuerda: en el Tema 4, solo nos referíamos a los PCs &quot;tradicionales&quot;, llamados &quot;de Turing&quot;</li>
 </ul>
 </li>
-<li>La computación cuántica, cuando llegue, <strong>impedirá utilizar todos los algoritmos asimétricos actuales</strong>: RSA, DSA, D-H... y también sus versiones con curvas elípticas
+<li>La computación cuántica <strong>impedirá utilizar todos los algoritmos asimétricos actuales</strong>: RSA, DSA, D-H... y también sus versiones con curvas elípticas
 <ul>
-<li>Recuerda: la computación cuántica no rompe la criptografía simétrica, aunque sí que exige que se usen claves el doble de largas: mínimo 256 bits</li>
+<li>Recuerda: la computación cuántica no rompe la criptografía simétrica AES, ChaCha... aunque sí que exige que se usen claves el doble de largas: mínimo 256 bits para AES</li>
 </ul>
 </li>
-<li>Se están buscando algoritmos simétricos nuevos que sean resistentes a la computación cuántica: <strong>criptografía post-cuántica</strong></li>
+<li>Se están buscando algoritmos nuevos que sean resistentes a la computación cuántica: <strong>criptografía post-cuántica</strong></li>
 </ul>
 <blockquote>
 <p><a href="https://cso.computerworld.es/cibercrimen/la-amenaza-cuantica-la-computacion-cuantica-y-la-criptografia">https://cso.computerworld.es/cibercrimen/la-amenaza-cuantica-la-computacion-cuantica-y-la-criptografia</a><br />
