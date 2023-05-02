@@ -640,7 +640,7 @@ result = json.dumps({<span class="hljs-string">&#x27;nonce&#x27;</span>:nonce, <
 wqFRdcOpIHRhbCBlc3TDoXMhCg==
 &gt; dd count=1 bs=16 if=/dev/random 2&gt;/dev/null 
 ???n??????;N%  
-&gt; dd count=1 bs=16 if=/dev/random 2&gt;/dev/null 
+&gt; dd count=1 bs=16 if=/dev/random 2&gt;/dev/null | base64
 D87WM0+4j5vYzLpHhJFMTA==
 </span></span></foreignObject></svg></code></pre>
 <p>Base64 <strong>NO ES UN CIFRADO</strong>. Es una <strong>CODIFICACIÓN</strong> para representar cadenas binarias como texto. A veces se usa también para representar texto (ej: correos electrónicos) y ahorrar problemas con letras acentuadas.</p>
