@@ -889,7 +889,7 @@ Pero al combinarlo tres veces, con tres claves diferentes, y aumentar su espacio
 <!-- _class: lead
 header: AES -->
 
-## Advanced Encryption System (AES)
+## Advanced Encryption Standard (AES)
 
 Desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001.
 
