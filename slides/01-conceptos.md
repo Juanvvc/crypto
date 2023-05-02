@@ -398,7 +398,7 @@ La composición es compleja y todo debe funcionar como un reloj.
 
 La fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena:
 
-- **algoritmos** (diseño, criptoanálisis)
+- **puertas criptográficas** (diseño, criptoanálisis)
 - **algoritmos** (dimensionado, longitud de claves, security strength)
 - **protocolos** (estructura, secuenciación)
 - **implementación** (condiciones de uso, abuso de buffers, abuso de la máquina de estados)

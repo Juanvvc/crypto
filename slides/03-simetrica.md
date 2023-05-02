@@ -536,7 +536,7 @@ result = json.dumps({'nonce':nonce, 'ciphertext':ct})
 wqFRdcOpIHRhbCBlc3TDoXMhCg==
 > dd count=1 bs=16 if=/dev/random 2>/dev/null 
 ???n??????;N%  
-> dd count=1 bs=16 if=/dev/random 2>/dev/null 
+> dd count=1 bs=16 if=/dev/random 2>/dev/null | base64
 D87WM0+4j5vYzLpHhJFMTA==
 ```
 
@@ -889,7 +889,7 @@ Pero al combinarlo tres veces, con tres claves diferentes, y aumentar su espacio
 <!-- _class: lead
 header: AES -->
 
-## Advanced Encryption System (AES)
+## Advanced Encryption Standard (AES)
 
 Desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001.
 
