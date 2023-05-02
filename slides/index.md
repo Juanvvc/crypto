@@ -108,7 +108,7 @@ Los ejercicios son notebook de Jupyter ó Google Collab:
 <!-- _class: with-warning -->
 
 - 50% examen. Alrededor de 30 preguntas "tipo test"
-- 50% ejercicios. Tres ejercicios en total, asociados a los temas 3, 4 y 5. Se recomienda realizarlos después de cada uno de estos temas.
+- 50% ejercicios. Cuatro ejercicios en total, asociados a los temas 3, 4, 5 y 6. Se recomienda realizarlos después de cada uno de estos temas.
 
 Para superar la asignatura, es necesario obtener más de un 5 sobre 10 en el examen y en los ejercicios
 

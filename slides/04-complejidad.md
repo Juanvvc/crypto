@@ -50,8 +50,8 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 <!-- _class: cool-list toc -->
 
 1. [Teoría de la complejidad](#4)
-1. [Acuerdo de clave Diffie-Hellman](#27)
-1. [Conclusiones](#44)
+1. [Acuerdo de clave Diffie-Hellman](#26)
+1. [Conclusiones](#43)
 
 # Teoría de la complejidad
 <!-- _class: lead -->
@@ -290,7 +290,7 @@ Es decir: un cifrado es seguro computacionalmente si el mejor ataque posible tie
 
 - Factorización en números primos
 - Logaritmo discreto
-- Curvas elípticas
+- Curvas elípticas: las veremos en el [tema 5](05-asimetrica.html)
 
 ## Ejemplo: factorización en números primos
 
@@ -378,11 +378,6 @@ El "aspecto" es el de una permutación pseudoaleatoria del cifrado de bloque, co
 Dado un mensaje cifrado $c \in \Z_{p}^{*}$ y conocido $g$ y $p$, decidir si el mensaje en claro $m'$ es el mensaje original es tan complejo como resolver el problema del logaritmo discreto.
 
 > https://en.wikipedia.org/wiki/Cyclic_group
-
-## Curvas elípticas
-<!-- _class: extra-slide -->
-
-Las veremos en el [tema 5](05-asimetrica.html)
 
 # Acuerdo de clave Diffie-Hellman
 <!--
@@ -640,8 +635,8 @@ header: Hash
 - Hay una serie de problemas difíciles de resolver pero fáciles de comprobar: son los NP, en los que basaremos los demás sistemas que veremos
 - La existencia de que estos problemas realmente son difíciles de resolver es una asunción de la criptografía actual. Amenaza: computación cuántica
 - El problema del logaritmo discreto es uno de estos problemas y la base de muchos algoritmos
-- D-H se utiliza para acordar una clave simétrica al inicio de una comunicación entre dos personas que no se conocen previamente
-- Ahora tenemos claves con dos partes: una parte es pública, la otra es privada
+- D-H (en realidad, su actualizació para curvas elípticas "ECDH" que veremos en el tema 5) se utiliza para acordar una clave simétrica al inicio de una comunicación entre dos personas que no se conocen previamente
+- Ahora tenemos claves divididas en dos partes: una parte es pública, la otra es privada
 
 ## Referencias
 
