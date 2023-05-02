@@ -536,7 +536,7 @@ result = json.dumps({'nonce':nonce, 'ciphertext':ct})
 wqFRdcOpIHRhbCBlc3TDoXMhCg==
 > dd count=1 bs=16 if=/dev/random 2>/dev/null 
 ???n??????;N%  
-> dd count=1 bs=16 if=/dev/random 2>/dev/null 
+> dd count=1 bs=16 if=/dev/random 2>/dev/null | base64
 D87WM0+4j5vYzLpHhJFMTA==
 ```
 
