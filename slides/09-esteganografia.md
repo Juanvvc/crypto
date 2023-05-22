@@ -36,9 +36,9 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 ## Esteganografía
 
-![left:40% bg](https://mymodernmet.com/wp/wp-content/uploads/archive/s24fY-fNlvsNkyhLvLM4_gecko.jpg)]
+![left:40% bg](https://mymodernmet.com/wp/wp-content/uploads/archive/s24fY-fNlvsNkyhLvLM4_gecko.jpg)
 
-*Ocultación de información dentro de otra información más comúnn, un documento que no sea secreto, o un documento que no levante sospechas*
+*Ocultación de información dentro de otra información más común, un documento que no sea secreto, o un documento que no levante sospechas*
 
 ## Usos
 
