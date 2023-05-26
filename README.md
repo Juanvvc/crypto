@@ -51,7 +51,7 @@ Puedes crear las transparencias con:
  
 ```
 # Si no tienes marp instalado, ejecuta esto solo una vez
-npm install -g @marp-team/marp-cli
+npm install @marp-team/marp-cli
 
 # Para crear las transparencias en el directorio build
 make
