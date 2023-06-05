@@ -214,6 +214,7 @@ Ejemplo del archivo cifrado del primer ejericio. Fíjate: al principio y al fina
 
 ## Referencias
 
+- [Evasión de antivirus y seguridad perimetral usando esteganografía. Alfonoso Muñoz, 2021](https://raw.githubusercontent.com/mindcrypt/libros/master/Libro%20Estegomalware%20-%20Evasi%C3%B3n%20de%20antivirus%20y%20seguridad%20perimetral%20usando%20esteganograf%C3%ADa%20v1%20-%20Dr.%20Alfonso%20Munoz%20-%20mindcrypt.pdf)
 - [The Ancient Practice of Steganography: What Is It, How Is It Used and Why Do Cybersecurity Pros Need to Understand It](https://www.comptia.org/blog/what-is-steganography)
 - [IMAGE WATERMARKING USING DISCRETE COSINE TRANSFORM [DCT] AND GENETIC ALGORITHM](https://www.researchgate.net/publication/317605329_IMAGE_WATERMARKING_USING_DISCRETE_COSINE_TRANSFORM_DCT_AND_GENETIC_ALGORITHM_GA_MAHIMA_SINGH), MAHIMA SINGH June 2017. INTERNATIONAL JOURNAL OF INNOVATION IN ENGINEERING RESEARCH & MANAGEMENT ISSN :2348-4918
 - ["A Comparative Analysis of Information Hiding Techniques for Copyright Protection of Text Documents"](https://www.hindawi.com/journals/scn/2018/5325040/),Milad Taleby Ahvanooey,1 Qianmu Li, Hiuk Jae Shim, and Yanyan Huang. Security and Communication Networks / 2018
