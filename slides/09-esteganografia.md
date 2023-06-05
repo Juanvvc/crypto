@@ -28,8 +28,9 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 1. [Esteganografía](#3)
 1. [Ejemplos](#9)
-1. [Ataques y detección](#22)
-1. [Referencias](#27)
+1. [Esteganografía para atacantes](#19)
+1. [Ataques y detección](#27)
+1. [Referencias](#33)
 
 # Esteganografía
 <!-- _class: lead -->
@@ -146,31 +147,87 @@ Images: https://blog.fastforwardlabs.com/images/2017/06/stego_images.jpg
 Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir el texto a papel
 -->
 
----
+## Text steganography: kerning spaces
 
 ![center](images/stego/stego-text1.png)
 
----
+## Text steganography: rejillas
 
-![center](images/stego/stego-text2.png)
+![center w:30em](images/stego/stego-text2.png)
 
+# Esteganografía para atacantes
+<!-- _class: lead -->
+
+## Usos
+
+- Evasión de antivirus: Ocultar el malware dentro de archivos/protocolos aparentemente legitimos
+- Evasión de cortafuegos: comunicaciones prohibidas a través de protocolos permitidos
+- Ocultar la exfiltración de información a los sistemas de seguridad
+
+## Network steganography
+
+- **Protocolo IPv4**: StegTunnel (campo identificación datagramas IP)
+- **Protocolo TCP**: Covert_tcp21, StegTunnel (campo número de secuencia)
+- **Protocolo ICMP**: troyano Loki (ICMP echo Reply/ICMP echo request),
+IcmpShell, Pingtunnel...
+- **Protocolo IPv6**: VoodooNet, IPV6teal...
+- **Protocolo DNS**: dnssteganography, Netcross, denise, dns2tcp, dnscapy,
+dnscat, heyoka, iodine, psudp, squeeza, TUNS33, dnscat2, dnsExfiltrator...
+- **Protocolo HTTP**: HttpTunnel, Firepass (transferencia de datos
+TCP/UDP en mensajes HTTP POST), HCovert, Cctt, http cookies,
+Mística...
+- **Capa de aplicación**: MailTunnel, MsnShell, StegTorrent, g00gle Crewbots.
+- **SCAPY** (https://scapy.net/): manipulación de paquetes
+
+> [Evasión de antivirus y seguridad perimetral usando esteganografía. Alfonoso Muñoz, 2021](https://raw.githubusercontent.com/mindcrypt/libros/master/Libro%20Estegomalware%20-%20Evasi%C3%B3n%20de%20antivirus%20y%20seguridad%20perimetral%20usando%20esteganograf%C3%ADa%20v1%20-%20Dr.%20Alfonso%20Munoz%20-%20mindcrypt.pdf)
 
 ## DNS tunneling
 
-![center w:20em](images/stego/dns-tunneling.png)
+![center w:40em](images/stego/dns-tunneling.png)
 
 
 > https://help.zscaler.com/zia/about-dns-tunnel-detection
 
-## Esconder malware en archivos
+## Malware en archivos
 
 ![center w:20em](images/stego/metadata.jpg)
 
 > https://blog.reversinglabs.com/blog/malware-in-images
 
+
+## Polyglots
+
+Con esta técnica, un archivo puede ser una cosa u otra según un contexto
+
+![bg right](images/steg/../stego/escher-mce008.gif)
+
 ---
 
-![center](images/stego/bezzos.png)
+![bg left](images/stego/smuggling-diagram.jpeg)
+
+Qbot durante 2022:
+
+```html
+<embed src="data:image/svg+xml;
+base64,SDKSJdisdskskjskdsk432432...."
+...
+```
+
+Viejo bug en Explorer: algunas imágenes podían visualizarse o ejecutarse:
+
+```html
+<img src="cat.png" />
+
+<script src="cat.png"></script>
+```
+
+
+> https://www.blackhat.com/docs/eu-15/materials/eu-15-Shah-Stegosploit-Exploit-Delivery-With-Steganography-And-Polyglots.pdf
+> https://www.bleepingcomputer.com/news/security/attackers-use-svg-files-to-smuggle-qbot-malware-onto-windows-systems/
+
+---
+
+![center w:45em](images/stego/bezzos.png)
 
 > https://ia802801.us.archive.org/6/items/ftireportintojeffbezosphonehack/FTI-Report-into-Jeff-Bezos-Phone-Hack_text.pdf
 
@@ -208,6 +265,11 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 Ejemplo del archivo cifrado del primer ejericio. Fíjate: al principio y al final no tiene entropía, y esas son las partes "que estaban a cero"
 
+## Administradores web
+
+- Re-codifica las imágenes subidas por los usuarios
+- Monitoriza librerías JavaScript
+- Herramientas especializadas de detección: IDS/firewall/WAF...
 
 # Referencias
 <!-- _class: lead -->
