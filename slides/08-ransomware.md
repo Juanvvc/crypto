@@ -50,9 +50,9 @@ Las transparencias de esta sesión están en inglés
 
 ---
 
-![center](https://images.squarespace-cdn.com/content/v1/5ab16578e2ccd10898976178/1627049910825-X5TD0U12JJ29ZQWO7204/1+-+Ransom+Payments%402x.png?format=750w)
+![center w:30em](images/BEC/Ransom%2BPayments.png)
 
-> https://www.coveware.com/blog/2021/7/23/q2-ransom-payment-amounts-decline-as-ransomware-becomes-a-national-security-priority
+> https://www.coveware.com/blog/2023/4/28/big-game-hunting-is-back-despite-decreasing-ransom-payment-amounts
 
 <!--
 El ransomware es uno de los mayores peligros para una compañía, y también uno de los ataques más lucrativos...
@@ -108,23 +108,13 @@ Some ransomware quits without doing any harm if they detect the OS language/keyb
 -->
 
 ---
+<!-- _class: center -->
 
-<!-- _class: smallest-font center -->
+Most Common Ransomware Variants in Q2 2023
 
-Most Common Ransomware Variants in Q2 2021
+![w:20em](images/BEC/ransomware-type.png)
 
-Rank|Ransomware Type|Market Share %|Change from Q1 2021
---|--|--|--|
-1|Sodinokibi|16.5%|-
-2|Conti V2|14.4%|-
-3|Avaddon|5.4%|+3
-4|Mespinoza|4.9%|New in Top Variants
-5|Hello Kitty|4.5%|New in Top Variants
-6|Ryuk|3.7%|+1
-7|Clop|3.3%|-3
-8|THT v2|2.9%|New in Top Variants
-9|LV|2.5%|New in Top Variants
-10|Zeppelin|2.5%|New in Top Variants
+> https://www.coveware.com/blog/2023/4/28/big-game-hunting-is-back-despite-decreasing-ransom-payment-amounts
 
 <!--
 Fijaos que no hay tantas variantes de ransomware: solo unas pocas familias. Fijas también en que cambian muy rápidamente: de las 10 variantes más usadas, 5 han aparecido en los últimos 3 meses y otras 5 han desaparecido. Es un mundo que cambia MUY RAPIDAMENTE
@@ -133,6 +123,7 @@ Fijaos que no hay tantas variantes de ransomware: solo unas pocas familias. Fija
 -->
 
 ## Ransomware-as-a-service
+<!-- _class: smaller-font -->
 
 ![center w:30em](images/BEC/bec.png)
 
@@ -181,7 +172,7 @@ Fíjate: de esta manera, un desarrollador de ransomware no se expone y es poco p
 
 ## Ransomware as an unplanned backup
 
-Backups do not stop attackers! Asking for a ransom for NOT PUBLISHING your data is a trend in 2021 
+Backups do not stop attackers! Asking for a ransom for NOT PUBLISHING your data is a trend since 2021 
 
 ![center](images/unplanned-backup.png)
 
@@ -195,8 +186,8 @@ Han decidido que harán extorsión con los datos. Algunos grupos, como Babyk, ha
 
 ![center w:20em](images/babuk-leaks.png)
 
-> Check: <https://www.ransomwatch.org/>
-> Alternative: <https://darkfeed.io>
+> Check: <https://ransomwatch.telemetry.ltd/#>
+> Alternative: <https://darkfeed.io/ransomwiki/>
 
 <!--
 Ejemplo de una página web de un grupo de atacantes que ha tenido mucho éxito durante 2021: Babyk/Babuk. Aquí se pueden ver sus últimos ataques con éxito y la amenaza de publicar los datos robrados.
@@ -254,10 +245,10 @@ Modern Ransomware and exfiltration
 
 ## Recommendations
 
-- Ransomware uses state-of-the-art encryption mechanisms: files cannot be decrypted without contacting paying the attacker
-- Backup your files
+- Ransomware uses state-of-the-art encryption mechanisms: **files cannot be decrypted without paying the attacker**
+- Backup your files: https://www.coveware.com/blog/2023/1/19/improved-security-and-backups-result-in-record-low-number-of-ransomware-payments
 - Do not store the backup in the same machine or it will be encrypted as well!
-- After a ransomware event, check carefully the attacker is not still inside!
+- After a ransomware event, **check carefully the attacker is not still inside!**
 
 ## References
 
@@ -265,22 +256,15 @@ Modern Ransomware and exfiltration
 - [Be aware - how hackers can steal your money](https://www.youtube.com/watch?v=h8-27iLvyS4)
 - [Spying on the scammers](https://www.youtube.com/watch?v=le71yVPh4uk)
 - [Reverse engineering of PLAY ransomware](https://chuongdong.com/reverse%20engineering/2022/09/03/PLAYRansomware/)
+- [The Most Prolific Ransomware Families: 2023 Edition](https://www.domaintools.com/resources/blog/the-most-prolific-ransomware-families-2023-edition/)
 
 ---
 
-[2021 CrowdStrike Global Threat Report](https://www.crowdstrike.com/resources/reports/global-threat-report/). This year’s highlights include:
+[2023 CrowdStrike Global Threat Report](https://www.crowdstrike.com/resources/reports/global-threat-report/). This year’s highlights include:
 
-- The COVID-19 pandemic and its effect on cybersecurity
-- “Big game hunters” targeting the healthcare sector
-- Significant nation-state-based targeted attacks and operations observed from China, Iran, DPRK, Russia and others
-- The pivotal role that access brokers play in the eCrime ecosystem
-- How ransomware adversaries are rapidly adopting data extortion methods
-- Recommendations you can take to proactively address emerging threats
-
----
-<!-- _class: center -->
-
-Continúa en: [Esteganografía](09-esteganografia.html)
+- Nation-state adversaries engaged in relentless computer network operations throughout 2022, emphasizing the integral role these operations play in supporting state goals
+- After some of the biggest and most notorious ransomware enterprise shutdowns, ransomware affiliates moved to new ransomware-as-a-service (RaaS) operations
+- Increase in social engineering using human interaction, such as vishing, to successfully download malware or circumvent multifactor authentication (MFA)
 
 # ¡Gracias!
 <!-- _class: last-slide -->
