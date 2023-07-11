@@ -266,5 +266,9 @@ Modern Ransomware and exfiltration
 - After some of the biggest and most notorious ransomware enterprise shutdowns, ransomware affiliates moved to new ransomware-as-a-service (RaaS) operations
 - Increase in social engineering using human interaction, such as vishing, to successfully download malware or circumvent multifactor authentication (MFA)
 
+---
+
+Ejercicios: https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/08/Ransomware%20Venus.ipynb
+
 # ¡Gracias!
 <!-- _class: last-slide -->

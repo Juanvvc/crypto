@@ -348,7 +348,7 @@ $$
 
 <!--
 
-Integredad Capacidad de **detectar** si un mensaje ha sido modificado desde su transmisión hasta su recepción.
+Integridad: Capacidad de **detectar** si un mensaje ha sido modificado desde su transmisión hasta su recepción.
 
 La modificación se refiere tanto a una modificación **explícita por un atacante** como a una modificación debido a un error (por ejemplo de transmisión). 
 
