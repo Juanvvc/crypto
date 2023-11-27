@@ -18,7 +18,7 @@ theme: marp-viu
 # Ransomware
 <!-- _class: first-slide -->
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Hoy hablamos de...
 <!-- _class: cool-list with-warning -->

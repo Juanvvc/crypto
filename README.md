@@ -37,21 +37,21 @@ para cuando las necesites.
 O también, puedes clonar el proyecto en tu disco duro local (necesitas un
 cliente `git`):
 
-```
+```bash
 $ git clone git@github.com:juanvvc/crypto.git
 ```
 
 De esta manera tienes una copia local que siempre puedes mantener al día con:
 
-```
+```bash
 $ git pull
 ```
 
 Puedes crear las transparencias con:
  
-```
+```bash
 # Si no tienes marp instalado, ejecuta esto solo una vez
-npm install -g @marp-team/marp-cli
+npm install @marp-team/marp-cli
 
 # Para crear las transparencias en el directorio build
 make
@@ -73,7 +73,7 @@ International (CC BY-SA 4.0) ](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Licencia de Creative
 Commons](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-Copyright © 2020-2022 [Juan Vera del Campo](https://github.com/juanvvc)
+Copyright © 2020-2023 [Juan Vera del Campo](https://github.com/juanvvc)
 
 Basado en transparencias Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig/crypto)
 

@@ -24,7 +24,7 @@ transition: fade
 
 **RSA y curvas elípticas**
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Como decíamos ayer...
 

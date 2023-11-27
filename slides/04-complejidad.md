@@ -21,7 +21,7 @@ transition: fade
 # Teoría de la complejidad y acuerdo Diffie-Hellman
 <!-- _class: first-slide -->
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Como decíamos ayer...
 <!-- _class: with-info -->

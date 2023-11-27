@@ -18,7 +18,7 @@ theme: marp-viu
 
 **Presentación**
 
-Juan Vera del Campo - <juan.vera@campusviu.es>
+Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 
 ## Temario
@@ -52,7 +52,7 @@ Juan Vera del Campo - <juan.vera@campusviu.es>
 
 Dr. Juan Vera (Juanvi)
 
-juan.vera@campusviu.es
+<juan.vera@professor.universidadviu.com>
 
 Intereses:
 
@@ -93,28 +93,35 @@ Esto es un ejemplo de notas de profesor. Aquí habrá información adicional, ac
 ## Instrucciones de uso de las actividades
 <!-- _class: with-warning smaller-font -->
 
-Los ejercicios son notebook de Jupyter ó Google Collab:
+Los ejercicios son notebook de Google Colab:
 
-1. Si usas el enlace de Google Collab de la zona de actividades, **no necesitas instalar nada en tu PC**.
+1. Después de los temas 2, 3 y 5 se incluirá el enlace a Google Colab en la zona de Actividades de la asignatura
 1. Comandos básicos:
     - INTRO: edita línea actual
     - SHIFT+INTRO: ejecuta línea actual
-1. Presenta las actividades como PDF: **imprime a PDF**
-1. Tutoriales:
-    - https://www.youtube.com/watch?v=jZ952vChhuI
-    - https://www.dataquest.io/blog/jupyter-notebook-tutorial/
+1. Las actividades deben resolverse individualmente
+1. Aunque haya código, no es necesario saber programar: son preguntas de texto libre
+
+**Presenta las actividades como PDF: imprimir a PDF**
+
+<!-- Las actividades refuerzan el contenido de las clases e incluyen información adicional -->
 
 ## Evaluación
-<!-- _class: with-warning -->
+<!-- _class: smaller-font -->
 
-- 50% examen. Alrededor de 30 preguntas "tipo test"
-- 50% ejercicios. Cuatro ejercicios en total, asociados a los temas 3, 4, 5 y 6. Se recomienda realizarlos después de cada uno de estos temas.
-
-Para superar la asignatura, es necesario obtener más de un 5 sobre 10 en el examen y en los ejercicios
+- Puntuación. Dos partes:
+    - 50% examen
+    - 50% actividades
+- Son tres actividades en total, se recomienda realizarlas después de los temas 2, 3 y 5
+    - No es  necesario superar las actividades individuales, solo que **la media de todos las actividades sea superior a 5**
+    - Las actividades no presentados se puntúan como 0
+    - Se pueden presentar las actividades hasta el día del examen correspondiente
+- Es necesario superar con nota media de 5 **cada parte por separado**
+- En segunda convocatoria, se mantiene la nota de aquella parte que fue superada en primera convocatoria
 
 ## Conocimientos recomendables
 
-- Álgebra básica, teoría de conjuntos, probabilidad
+- Álgebra básica, probabilidad
 - Conocimientos básicos de programación: ejemplos en Python
 - Conocimientos básicos de redes: cómo funciona la WWW.
 
