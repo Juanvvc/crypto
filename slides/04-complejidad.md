@@ -83,7 +83,7 @@ Ojo 2: "el tiempo mínimo en resolver un problema" es para el problema general, 
 ## ¿Cuánto tiempo tardarías en resolver este sodoku?
 <!-- _class: two-columns smaller-font -->
 
-![center w:20em](images/sudoku.png)
+![center w:20em](images/complejidad/miracle-sudoku.png)
 
 - Normas comunes de Sudoku, y además...
 - Las casillas adyacentes no tienen números consecutivos. Ejemplo: no hay un 6 encima, debajo, a la izquierda o la derecha de un 5
@@ -132,7 +132,7 @@ Adelanto: razonable significa polinomial: el tiempo necesario para resolverlo cr
 
 ## ¿Cuánto tiempo tardarías en comprobar si ésta es la solución?
 
-[![w:30em center](images/sudoku-solve.png)](https://www.youtube.com/watch?v=yKf9aUIxdb4)
+[![w:30em center](images/complejidad/sudoku-solve.png)](https://www.youtube.com/watch?v=yKf9aUIxdb4)
 
 <!--
 No es una pregunta trampa: tardamos pocos segundos. Mucho menos tiempo que en resolver el Sudoku
@@ -160,7 +160,7 @@ Casi todos los problemas se pueden replantear como una pregunta SI/NO.
 
 ## ¿Cuánto tiempo tardas en colorear este mapa con 9 colores diferentes?
 
-![w:25em center](images/fourcolors.svg)
+![w:25em center](images/complejidad/fourcolors.svg)
 
 <!--
 El problema tradicional es "con 4 colores", que resulta ser el mínimo posible con cualquier mapa. Pero vamos a exigir 9 colores para poder hacer una observación interesante a continuación.
@@ -172,7 +172,7 @@ Obviamente, si 4 colores es el mínimo posible, tiene que ser posible hacerlo co
 
 <!-- _class: two-columns with-info -->
 
-[![](images/sudoku-colors.png)](https://www.youtube.com/watch?v=Tnu_Ws7Llo4)
+[![](images/complejidad/sudoku-colors.png)](https://www.youtube.com/watch?v=Tnu_Ws7Llo4)
 
 - Si los el Sudoku y colores parecen similares, es porque lo son
 - Se puede expresar un Sudoku como un problema de colorear mapas y viceversa
@@ -223,7 +223,9 @@ Esta es una discusión muy interesante para las matemáticas y que podría tener
 
 - Sodoku, Colorear mapas, El problema del viajante...
 
-![center](https://imgs.xkcd.com/comics/travelling_salesman_problem.png)
+![center](images/complejidad/travelling_salesman_problem.png)
+
+
 
 - Logaritmos discretos, Factorizar números...
 
@@ -249,7 +251,7 @@ Lo importante es comparar las velocidades: ¿cómo crece el tiempo de ejecución
 
 ---
 
-![center w:25em](https://cdn-images-1.medium.com/max/1000/1*eDRWfab60l7trIFmP4WuiQ.png)
+![center w:25em](images/complejidad/big-o.png)
 
 > Fuente: https://laptrinhx.com/time-complexity-and-big-o-529699432/
 
@@ -352,8 +354,6 @@ $m$|$c = 5 ^ m \mod 17$
 15|7
 16|1
 
-![bg right:30% w:25em center](https://www.onlinemath4all.com/images/relationsandfunctions12.png)
-
 <!--
 Fijaos: se están mapeando todos los números de 1 a 17 en otros números de 1 a 17 de forma "aleatoria". Esto es un "grupo cíclico"
 
@@ -427,9 +427,9 @@ Su paper de 1976 es, junto con el de Shannon (capítulo 1), uno de los más impo
 ## Hipótesis DDH (*Decisional D-H*)
 <!-- _class: with-info -->
 
-$\Z_{p}^{*}$  es grupo cíclico con el elemento generador $g$ y $p$ primo
+$Z_{p}^{*}$  es grupo cíclico con el elemento generador $g$ y $p$ primo
 
-**Problema:** dado $g^a, g^b \in \Z_{p}^{*}$, ¿cuál es el valor de $g^{ab} \in \Z_{p}^{*}$?
+**Problema:** dado $g^a, g^b \in Z_{p}^{*}$, ¿cuál es el valor de $g^{ab} \in Z_{p}^{*}$?
 
 Calcular $g^{ab}$ a partir de $g^a, g^b$ es computacionalmente difícil: primero tendríamos que calcular $b$ a partir de $g^b$, **y eso es el problema del logaritmo discreto**
 
@@ -472,13 +472,6 @@ Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
 1. Y usan $k$ como clave de cifrado un algoritmo simétrico  
 
 ![bg right:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/4/46/Diffie-Hellman_Key_Exchange.svg)
-
----
-
-![center w:25em](https://i.imgur.com/oFIYQRW.png?1)
-
-> https://stackoverflow.com/questions/10471009/how-does-the-man-in-the-middle-attack-work-in-diffie-hellman
->
 
 ---
 
@@ -588,7 +581,7 @@ g = 2
 
 ¿Qué sucede si Malloy se pone en medio de un D-H?
 
-![center](https://i.imgur.com/Cq78TET.png?1)
+![center](images/asimetrica/dh-maninthemiddle.png)
 
 Alice y Bob están hablando en secreto... con el atacante
 
@@ -656,11 +649,9 @@ header: Hash
 - [New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720), Whitfield Diffie y Martin E. Hellman, 1976. El paper describe parte de la teoría de la complejidad que hemos estudiado aquí y describe el intercambio de claves Diffie-Hellman
 - [NP-Hardness](https://jeffe.cs.illinois.edu/teaching/algorithms/book/12-nphard.pdf), capítulo 12 del libro [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/) de Jeff Erickson. Aunque no está enfocado a la criptografía, es una buena explicación de los problemas P y NP.
 
----
+# Ejercicios
 
-Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/04/T4%20-%20Acuerdo%20de%20claves%20D-H.ipynb>
-
-Continúa en: [Criptografía asimétrica](05-asimetrica.html)
+<https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/04/T4%20-%20Acuerdo%20de%20claves%20D-H.ipynb>
 
 # ¡Gracias!
 <!-- _class: last-slide -->

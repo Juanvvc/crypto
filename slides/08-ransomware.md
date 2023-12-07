@@ -50,9 +50,9 @@ Las transparencias de esta sesión están en inglés
 
 ---
 
-![center w:30em](images/BEC/Ransom%2BPayments.png)
+![center w:30em](images/ransomware/Ransom+Payments.png)
 
-> https://www.coveware.com/blog/2023/4/28/big-game-hunting-is-back-despite-decreasing-ransom-payment-amounts
+> https://www.coveware.com/blog/2023/10/27/scattered-ransomware-attribution-blurs-focus-on-ir-fundamentals
 
 <!--
 El ransomware es uno de los mayores peligros para una compañía, y también uno de los ataques más lucrativos...
@@ -62,7 +62,7 @@ El ransomware es uno de los mayores peligros para una compañía, y también uno
 
 ## Ransomware groups
 
-![center](images/BEC/ransom-criminals.png)
+![center](images/ransomware/ransom-criminals.png)
 
 <!--
 The attackers are well known, wealthy and they do not hide themselves.
@@ -72,7 +72,7 @@ They say the plate on that automobile says, in Russian, "THIEF"
 
 ---
 
-![bg left:40%](https://www.fbi.gov/@@dvpdffiles/9/b/9b0a5435190f4902a5d88e3b1c047659/normal/dump_1.gif)
+![bg left:40%](images/ransomware/apt41.png)
 
 - APT41 is a threat group that researchers have assessed as Chinese state-sponsored espionage group that also conducts financially-motivated operations.
 - APT41 has been active since as early as 2012.
@@ -94,7 +94,7 @@ Notice:
 
 ---
 
-![center w:29em](images/BEC/ransomware-groups.png)
+![center w:29em](images/ransomware/ransomware-groups.png)
 
 > [Christiaan Beek in Twitter, 2021](https://twitter.com/ChristiaanBeek/status/1427569852357693440)
 
@@ -108,11 +108,8 @@ Some ransomware quits without doing any harm if they detect the OS language/keyb
 -->
 
 ---
-<!-- _class: center -->
 
-Most Common Ransomware Variants in Q2 2023
-
-![w:20em](images/BEC/ransomware-type.png)
+![center w:25em](images/ransomware/ransomware-type.png)
 
 > https://www.coveware.com/blog/2023/4/28/big-game-hunting-is-back-despite-decreasing-ransom-payment-amounts
 
@@ -125,7 +122,7 @@ Fijaos que no hay tantas variantes de ransomware: solo unas pocas familias. Fija
 ## Ransomware-as-a-service
 <!-- _class: smaller-font -->
 
-![center w:30em](images/BEC/bec.png)
+![center w:40em](images/ransomware/raas.png)
 
 - Ransomware as a service (RaaS) is a subscription-based model that enables affiliates to use already-developed ransomware tools to execute ransomware attacks
 - Affiliates earn a percentage of each successful ransom payment
@@ -142,7 +139,7 @@ Por ejemplo: nosotros hemos detectado el "modus operandi" asociado a APT41 varia
 
 ---
 
-![bg left:40% w:100%](images/BEC/ransomware-conti-leak.png)
+![bg left:40% w:100%](images/ransomware/ransomware-conti-leak.png)
 
 On August, 2021, a disgruntled member of the Conti ransomware program leaked the manuals and technical guides used by the Conti gang to train affiliate members on how to access, move laterally, and escalate access inside a hacked company and then exfiltrate its data before encrypting files.
 
@@ -164,7 +161,7 @@ Fíjate: de esta manera, un desarrollador de ransomware no se expone y es poco p
 - Train your employees not to open suspicious links
 - Good enpoint protection
 
-![bg right:60% w:100%](images/BEC/3-2-1-backup-rule.png)
+![bg right:60% w:100%](images/ransomware/3-2-1-backup-rule.png)
 
 > https://insights.sei.cmu.edu/blog/3-ransomware-defense-strategies/
 > https://www.cybereason.com/blog/three-keys-to-a-reliable-ransomware-defense-strategy
@@ -174,7 +171,7 @@ Fíjate: de esta manera, un desarrollador de ransomware no se expone y es poco p
 
 Backups do not stop attackers! Asking for a ransom for NOT PUBLISHING your data is a trend since 2021 
 
-![center](images/unplanned-backup.png)
+![center](images/ransomware/unplanned-backup.png)
 
 <!--
 Dado que los atacantes han visto que se reducen sus ganancias porque las empresas están usando sus backups...
@@ -184,7 +181,7 @@ Han decidido que harán extorsión con los datos. Algunos grupos, como Babyk, ha
 
 ---
 
-![center w:20em](images/babuk-leaks.png)
+![center w:20em](images/ransomware/babuk-leaks.png)
 
 > Check: <https://ransomwatch.telemetry.ltd/#>
 > Alternative: <https://darkfeed.io/ransomwiki/>
@@ -204,15 +201,17 @@ Estos grupos tienen páginas en la dark web que son visitable con Tor o similare
 
 ## Entry point
 
-![center](https://images.squarespace-cdn.com/content/v1/5ab16578e2ccd10898976178/1611957716171-HWVYTETCVBMQCQHNRKL3/ke17ZwdGBToddI8pDm48kPB1SG_2RlmnobI966_iSMVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwYM5DzE_lNWQHZaT5PwldrqqIUwOXZk5_-zGGtvKLkWeuP-aFiPLMRhj35l4FXaTU/2+-+RaaS+Attack+Vectors%402x.png?format=750w)
+![center](images/ransomware/entrypoint.png)
+
+> https://www.coveware.com/blog/2023/10/27/scattered-ransomware-attribution-blurs-focus-on-ir-fundamentals
 
 ---
 
-![](images/BEC/ransomware1.png)
+![](images/ransomware/ransomware1.png)
 
 ---
 
-![](images/BEC/ransomware2.png)
+![](images/ransomware/ransomware2.png)
 
 ## Example: Babuk
 
@@ -241,7 +240,7 @@ Modern Ransomware and exfiltration
 
 ---
 
-![center](https://sensorstechforum.com/wp-content/uploads/2021/01/NIST_K571_-babuk-loader-image-stf-Virus.jpeg)
+![center](images/ransomware/babuk-loader.png)
 
 ## Recommendations
 
@@ -266,9 +265,9 @@ Modern Ransomware and exfiltration
 - After some of the biggest and most notorious ransomware enterprise shutdowns, ransomware affiliates moved to new ransomware-as-a-service (RaaS) operations
 - Increase in social engineering using human interaction, such as vishing, to successfully download malware or circumvent multifactor authentication (MFA)
 
----
+# Ejercicios
 
-Ejercicios: https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/08/Ransomware%20Venus.ipynb
+<https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/08/Ransomware%20Venus.ipynb>
 
 # ¡Gracias!
 <!-- _class: last-slide -->
