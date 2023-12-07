@@ -4,7 +4,7 @@ title: Criptografía - Public Key Infrastructure
 author: Juan Vera
 keywords: criptografía,protocolos,ssl,https,tls,pki
 paginate: true
-footer: '[Inicio](index.html)'
+footer:
 headingDivider: 2
 theme: marp-viu
 transition: fade

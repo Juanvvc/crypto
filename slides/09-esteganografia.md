@@ -4,7 +4,7 @@ title: Criptografía - Esteganografía
 author: Juan Vera
 keywords: criptografía,esteganografía,watermarking,fingerprinting
 paginate: true
-footer: '[Inicio](index.html)'
+footer:
 headingDivider: 2
 theme: marp-viu
 transition: fade

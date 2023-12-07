@@ -4,7 +4,7 @@ title: Criptografía - Funciones de Hash y Blockchain
 author: Juan Vera
 keywords: criptografía,hash,sha256,bitcoin
 paginate: true
-footer: '[Inicio](index.html)'
+footer:
 headingDivider: 2
 theme: marp-viu
 transition: fade

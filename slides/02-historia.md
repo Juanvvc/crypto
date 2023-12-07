@@ -4,7 +4,7 @@ title: Criptografía - Historia de la criptografía
 author: Juan Vera
 keywords: historia,criptografía,cesar,vigenere,enigma,vernam,one-time-pad
 paginate: true
-footer: '[Inicio](index.html)'
+footer:
 headingDivider: 2
 theme: marp-viu
 transition: fade
@@ -40,9 +40,9 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 
 1. [Criptografía clásica](#4)
 1. [Cifrado César](#9)
-1. [Mejoras al cifrado César: sistemas polialfabéticos](#26)
-1. [Confidencialidad perfecta](#41)
-1. [Resumen y referencias](#53)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#28)
+1. [Confidencialidad perfecta](#43)
+1. [Resumen y referencias](#55)
 
 # Criptografía clásica
 <!--
@@ -287,7 +287,6 @@ Si tenemos capacidad de diseñar/fabricar $d()$ en hardware ([ASIC](https://en.w
 <!-- Estos cálculos están desactualizados y son más rápidos cada año. En cualquier caso sirven para hacernos una idea de lo rápido que pueden hacer fuerza bruta los ordenadores actuales -->
 
 ---
-<!-- _class: smaller-font with-success -->
 
 Alquilando equipos en la nube por segundos, con un euro cada segundo podemos probar $10^{11}$ claves
 
@@ -297,9 +296,25 @@ Nos hacen falta un sistema criptográfico que permita escoger entre $2·10^{14}$
 
 Este sistema tendría fortaleza 48 bits: un atacante tiene que probar $2^{48}$ claves si quiere romperlo por fuerza bruta
 
-Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años.
+Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años
 
-**La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles. Normalmente se expresa en bits.
+## Fortaleza de un algoritmo
+<!-- _class: with-success -->
+
+¿Qué es más seguro, DES, AES o RSA? Para comparar la seguridad de los algoritmos usamos el concepto de **fortaleza**
+
+En los algoritmos bien diseñados, su fortaleza depende solo del tamaño de la clave: claves más largas tienen una fortaleza mayor
+
+La fortaleza o seguridad de un algoritmo es **el número de claves que tienen que probar un atacante por fuerza bruta para romper un algoritmo**. Normalmente se expresa en bits.
+
+---
+
+Ejemplos:
+
+- Si el atacante tiene que romper César por fuerza bruta, tiene que probar 28 contraseñas diferentes: entre 4 y 5 bits de fortaleza
+- Si el atacante tiene que probar $2^{48}$ claves para romper un algoritmo, este algoritmo tiene fortaleza 48 bits
+
+Los algoritmos actuales tienen fortalezas de 128 ó 256 bits, pero ya veremos esto con más detalles en sesiones posteriores
 
 ## Aumentando el espacio de claves en César: mapeo aleatorio
 
@@ -363,6 +378,8 @@ Si el mensaje es suficientemente largo, **podemos analizar la frecuencia de apar
 <!-- _class: with-success -->
 
 El cifrado César, incluso con mapeos aleatorios, lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez el análisis de frecuencia contra el cifrado César
+
+Es decir: no es necesario probar todas las claves ciegamente. Por ejemplo, podemos descartar todas aquellas que darían un texto con un número imposible de Z
 
 **Un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la fuerza bruta**.
 

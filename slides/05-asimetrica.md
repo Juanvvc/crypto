@@ -4,7 +4,7 @@ title: Criptografía - Cifrado asimétrico
 author: Juan Vera
 keywords: criptografía,asimétrica,rsa,dsa,diffie-hellman
 paginate: true
-footer: '[Inicio](index.html)'
+footer:
 headingDivider: 2
 theme: marp-viu
 transition: fade

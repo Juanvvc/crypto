@@ -4,7 +4,7 @@ title: Criptografía - Teoría de la complejidad y acuerdo Diffie-Hellman
 author: Juan Vera
 keywords: criptografía,complejidad,diffie-hellman
 paginate: true
-footer: '[Inicio](index.html)'
+footer:
 headingDivider: 2
 theme: marp-viu
 transition: fade
@@ -51,7 +51,7 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 
 1. [Teoría de la complejidad](#4)
 1. [Acuerdo de clave Diffie-Hellman](#26)
-1. [Conclusiones](#43)
+1. [Conclusiones](#44)
 
 # Teoría de la complejidad
 <!-- _class: lead -->
@@ -615,6 +615,19 @@ Compara, para AES: $\|k\| = 128$
 > https://blog.cloudflare.com/why-are-some-keys-small/
 > https://www.keylength.com/en/3/
 
+## Uso de la clave D-H con AES o Chacha: Función derivación de clave KDF
+<!-- _class: smaller-font -->
+
+El número secreto generado por el intercambio Diffie-Hellman no debe utilizarse como clave en protocolos de cifrado simétrico AES ni en cifrados de flujo como ChaCha20: no existen requisitos de seguridad para este número, como que sean perfectamente uniformes
+
+Por esto, se utiliza una transformación **KDF** (*Key Derivation Function*). ​ Las KDF se pueden utilizar para extender claves en otras más largas o para obtener claves en un cierto formato. Las funciones de hash pueden usarse como KDF, aunque suelen incluir también inputs adicionales
+
+Más información aquí:
+
+- https://es.wikipedia.org/wiki/Funci%C3%B3n_de_derivaci%C3%B3n_de_clave
+- https://crypto.stackexchange.com/questions/101439/how-is-diffe-hellman-linked-to-aes
+- https://crypto.stackexchange.com/questions/66893/what-should-i-use-for-consequent-aes-key-derivation
+
 ## Composición de elementos criptográficos
 
 Acamos de ver una composición de elementos criptográficos: D-H y AES
@@ -622,7 +635,7 @@ Acamos de ver una composición de elementos criptográficos: D-H y AES
 - Alice y Bob acuerdan una clave AES-256 utilizando DH-4096
 - Alice y Bob utilizan esa clave para comunicaciones seguras con AES.
 
-Esto es una introducción a TLS. En la última parte de la asignatura veremos este protocolo con mucho más detalle.
+Esto es solo una presentación de TLS. En la última parte de la asignatura veremos este protocolo con mucho más detalle.
 
 # Conclusiones
 <!--
@@ -641,6 +654,7 @@ header: Hash
 ## Referencias
 
 - [New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720), Whitfield Diffie y Martin E. Hellman, 1976. El paper describe parte de la teoría de la complejidad que hemos estudiado aquí y describe el intercambio de claves Diffie-Hellman
+- [NP-Hardness](https://jeffe.cs.illinois.edu/teaching/algorithms/book/12-nphard.pdf), capítulo 12 del libro [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/) de Jeff Erickson. Aunque no está enfocado a la criptografía, es una buena explicación de los problemas P y NP.
 
 ---
 

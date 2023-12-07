@@ -19,8 +19,9 @@ el apartado "Contenido".
 - [TLS y *Public Key Infrastructure*](https://juanvvc.github.io/crypto/07-pki.html)
 - [Ransomware](https://juanvvc.github.io/crypto/08-ransomware.html)
 - [Esteganografía](https://juanvvc.github.io/crypto/09-esteganografia.html)
+- [Criptografía Post-cuántica](https://juanvvc.github.io/crypto/10-postcuantica.html)
 
-Recuerda: puedes "imprimir a PDF" para obtener las translarencias en PDF
+Recuerda: puedes "imprimir a PDF" para obtener las translarencias en PDF, aunque solo en Chrome o Edge. Firefox y Safari no lo hacen correctamente.
 
 ## Descarga local
 
