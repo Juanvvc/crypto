@@ -34,7 +34,7 @@ Las transparencias de esta sesión están en inglés
 
 ---
 
-[![](images/BEC/ransomware3.png)](https://www.youtube.com/watch?v=6h9yh_A80fs)
+[![](images/ransomware/ransomware3.png)](https://www.youtube.com/watch?v=6h9yh_A80fs)
 
 > [Ransomware - Anatomy of an Attack](https://www.youtube.com/watch?v=6h9yh_A80fs) ESI & CISCO, 2018
 
@@ -109,7 +109,7 @@ Some ransomware quits without doing any harm if they detect the OS language/keyb
 
 ---
 
-![center w:25em](images/ransomware/ransomware-type.png)
+![center w:35em](images/ransomware/ransomware-type.png)
 
 > https://www.coveware.com/blog/2023/4/28/big-game-hunting-is-back-despite-decreasing-ransom-payment-amounts
 
@@ -183,8 +183,8 @@ Han decidido que harán extorsión con los datos. Algunos grupos, como Babyk, ha
 
 ![center w:20em](images/ransomware/babuk-leaks.png)
 
-> Check: <https://ransomwatch.telemetry.ltd/#>
-> Alternative: <https://darkfeed.io/ransomwiki/>
+> Check: <https://ransomwatch.telemetry.ltd/#/INDEX>
+> Alternative: <https://darkfeed.io/ransomgroups/>
 
 <!--
 Ejemplo de una página web de un grupo de atacantes que ha tenido mucho éxito durante 2021: Babyk/Babuk. Aquí se pueden ver sus últimos ataques con éxito y la amenaza de publicar los datos robrados.
@@ -201,7 +201,7 @@ Estos grupos tienen páginas en la dark web que son visitable con Tor o similare
 
 ## Entry point
 
-![center](images/ransomware/entrypoint.png)
+![center w:25em](images/ransomware/entrypoint.png)
 
 > https://www.coveware.com/blog/2023/10/27/scattered-ransomware-attribution-blurs-focus-on-ir-fundamentals
 
