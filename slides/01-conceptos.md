@@ -120,6 +120,7 @@ Fondo: https://pixabay.com/photos/binding-contract-contract-secure-948442/ Uso c
 - **No repudio**: nadie puede decir que ese no es el contrato que ha firmado
 - **Otros**: autorización, acuerdo de claves, partición de secretos, PRNG...
 
+> https://www.universidadviu.com/es/actualidad/nuestros-expertos/las-4-claves-de-la-seguridad-de-la-informacion
 > Estándar: [NIST Special Publication 800-57 Part 1, Section 3](https://doi.org/10.6028/NIST.SP.800-57pt1r5)
 
 
@@ -146,6 +147,8 @@ El NIST es la agencia de estandarización de EEUU, y entre las cosas que estanda
 - **Esteganografía**: queremos ocultar que dos personas están hablando
 - **Anonimato**: el emisor quiere ocultar su identidad
 - etcétera
+
+> https://www.grouphacking.com/ciberseguridad/todos-los-principios-de-la-seguridad-de-la-informacion/
 
 <!--
 Nos centraremos en los servicios de confidencialidad, integridad y autenticación. Además, podemos conseguir no-repudio como consecuencia de juntar autenticidad e integridad.
@@ -493,9 +496,9 @@ header: ''
 ---
 <!-- _class: center -->
 
-Continúa en: [Criptografía clásica](02-historia.html)
-
 Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales
+
+Ejemplo de ejercicio. Lo resolvemos en clase, no es necesario presentarlo: https://github.com/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb
 
 # ¡Gracias!
 <!-- _class: last-slide -->

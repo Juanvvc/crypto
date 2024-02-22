@@ -42,6 +42,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 1. [TLS y Public Key Infrastructure](07-pki.html)
 1. [Ransomware](08-ransomware.html)
 1. [Esteganografía](09-esteganografia.html)
+1. [Criptografía post-cuántica](10-postcuantica.html)
 
 # Presentación
 <!-- _class: lead -->
@@ -112,11 +113,11 @@ Los ejercicios son notebook de Google Colab:
 - Puntuación. Dos partes:
     - 50% examen
     - 50% actividades
+- Es necesario superar con nota media de 5 **cada parte por separado**
 - Son tres actividades en total, se recomienda realizarlas después de los temas 2, 3 y 5
     - No es  necesario superar las actividades individuales, solo que **la media de todos las actividades sea superior a 5**
     - Las actividades no presentados se puntúan como 0
     - Se pueden presentar las actividades hasta el día del examen correspondiente
-- Es necesario superar con nota media de 5 **cada parte por separado**
 - En segunda convocatoria, se mantiene la nota de aquella parte que fue superada en primera convocatoria
 
 ## Conocimientos recomendables
@@ -139,11 +140,6 @@ Los ejercicios son notebook de Google Colab:
 - "[*Handbook of Applied Cryptography*](http://cacr.uwaterloo.ca/hac/)" Alfred J. Menezes. Un clásico para conceptos fundamentales.
 - "A Course in Cryptography" Heiko Knospe.
 - "Criptografía Ofensiva. Atacando y defendiendo organizaciones". Dr. Alfonso Muñoz.
-
----
-<!-- _class: center -->
-
-Continúa en: [Principios básicos](01-conceptos.html)
 
 # ¡Gracias!
 <!-- _class: last-slide -->
