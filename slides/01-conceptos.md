@@ -205,7 +205,7 @@ Alice y Bob no tienen otra forma de comunicación: no pueden confirmar una opera
 Imagen: https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg
 -->
 
-## Principios de Kerckhoffs
+## Principios de Kerckhoffs (1883)
 <!-- _class: smaller-font -->
 
 <https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle>
@@ -498,7 +498,7 @@ header: ''
 
 Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales
 
-Ejemplo de ejercicio. Lo resolvemos en clase, no es necesario presentarlo: https://github.com/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb
+Ejemplo de ejercicio. Lo resolvemos en clase, no es necesario presentarlo: <https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb#scrollTo=controversial-america>
 
 # ¡Gracias!
 <!-- _class: last-slide -->
