@@ -39,10 +39,10 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 <!-- _class: cool-list toc -->
 
 1. [Criptografía clásica](#4)
-1. [Cifrado César](#9)
-1. [Mejoras al cifrado César: sistemas polialfabéticos](#28)
-1. [Confidencialidad perfecta](#43)
-1. [Resumen y referencias](#55)
+1. [Cifrado César](#11)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#30)
+1. [Confidencialidad perfecta](#45)
+1. [Resumen y referencias](#57)
 
 # Criptografía clásica
 <!--
@@ -76,12 +76,53 @@ Nota: ¿Cifrar o encriptar? En este curso llamaremos a la ciencia "criptogafía"
 - Cifrados por **sustitución**: cambiar una letra por otra.
     - Monoalfabéticos: mismo algoritmo para toda las letras
     - Polialfabéticos: algoritmos diferentes para cada letra
-- Cifrados por **transposición**: mover letras de sitio.
+    - Características: **confusión**, S-boxes
+- Cifrados por **transposición**: mover letras de sitio
+    - Característica: **difusión**, P-boxes
 
 <!--
 Con "clásicos" queremos decir que se usaban desde tiempos del imperio egipcio, pasando por hebreos, griegos, romanos, edad media, edad moderna (incluidas las guerras mundiales)... es decir, desde que se inventó la escritura hasta ayer mismo.
 
 Estos dos métodos de cifrado se han utilizado durante miles de años, y nuestros algoritmos de cifrado simétrico actual aún los tienen como parte de sus pasos
+-->
+
+> https://medium.com/@maitri.51/securing-the-digital-realm-a-closer-look-at-s-boxes-and-p-boxes-in-encryption-b14b35f7e139
+
+---
+<!-- _class: vertical_tables -->
+
+<style scoped>
+    th { background-color: #ddd; color: black; font-weight: normal; border: 0;}
+    /*td:first-child { background-color: var(--main-color);}
+    th:first-child { background-color: var(--main-color);}*/
+</style>
+
+[Sustitución monoalfabética:](https://www.dcode.fr/caesar-cipher)
+
+Texto en claro:|H|O|L|A|C|L|A|S|E
+--|--|--|--|--|--|--|--|--|--
+Texto cifrado:|K|R|O|D|F|O|D|V|H
+
+[Sustitución polialfabética:](https://www.dcode.fr/vigenere-cipher)
+
+Texto en claro:|H|O|L|A|C|L|A|S|E
+--|--|--|--|--|--|--|--|--|--
+Texto cifrado:|R|S|J|K|G|J|K|W|C
+
+[Ejemplo de transposición:](https://www.dcode.fr/transposition-cipher)
+
+Texto en claro:|H|O|L|A|C|L|A|S|E
+--|--|--|--|--|--|--|--|--|--
+Texto cifrado:|O|C|S|H|A|A|L|L|E
+
+<!--
+Fíjate:
+
+- En el primer caso, las letras A y L siempre se cifran igual
+- En el segundo caso, las letras A y L se cifran diferente cada vez
+- En el tercer caso, son las mismas letras pero desordenadas
+
+El cifrado con XOR es un tipo de cifrado polialfabético
 -->
 
 ## Transposición: escítala griega
@@ -113,6 +154,16 @@ Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los 
 Imagen: https://upload.wikimedia.org/wikipedia/commons/2/2b/Caesar3.svg
 -->
 
+## Criptografía moderna
+
+Combinación de sustitución (s-boxes) y permutación (p-boxes)
+
+![center](images/historia/modern-algorithms.png)
+
+<!--
+Gracias a la ayuda de los computadores modernos podemos hacer redes complejas pero, en esencia, seguimos haciendo permutaciones y sustituciones
+-->
+
 # Cifrado César
 <!--
 _class: lead
@@ -126,7 +177,7 @@ Fuerza bruta, análisis frecuencial y fortaleza de un algoritmo
 - Leyenda: Julio César lo usaba para comunicarse con sus generales
 - Como todos los cifrados de sustitución monalfabética, se descifra con facilidad y en la práctica no ofrece apenas seguridad en la comunicación.
 
-El cifrado César forma parte de sistemas más complejos de codificación, como el cifrado Vigenère, e incluso tiene aplicación en el sistema ROT13, y su estudio sirve para entender por qué los cifrados fallan.
+El cifrado César forma parte de sistemas más complejos de cifrado y su estudio sirve para entender por qué los cifrados fallan.
 
 ![bg right:30%](images/historia/busto-cesar.jpg)
 
@@ -444,7 +495,7 @@ Es decir: la primera letra se desplaza 23 posiciones, la segunda 8, la tercera 3
 
 Habitualmente se escriben las letras que cifran el texto "AAA":
 
-$k=e(\{23,8,3\}, ``AAA") =XID$
+$k=e(\{23,8,3\}, AAA) =XID$
 
 <!--
 Fíjate: el "tabula recta" es un Vigenère con una clave fija que se se puede cambiar $k=ABCD...WXYZ$
