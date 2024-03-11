@@ -26,7 +26,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Servicios criptográficos](#3)
 1. [Estrategias de los sistemas seguros](#11)
-1. [Resumen y referencias](#27)
+1. [Resumen y referencias](#24)
 
 # Servicios criptográficos
 <!--

@@ -42,7 +42,7 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 1. [Cifrado César](#11)
 1. [Mejoras al cifrado César: sistemas polialfabéticos](#30)
 1. [Confidencialidad perfecta](#45)
-1. [Resumen y referencias](#57)
+1. [Resumen y referencias](#58)
 
 # Criptografía clásica
 <!--
@@ -107,7 +107,7 @@ Texto cifrado:|K|R|O|D|F|O|D|V|H
 
 Texto en claro:|H|O|L|A|C|L|A|S|E
 --|--|--|--|--|--|--|--|--|--
-Texto cifrado:|R|S|J|K|G|J|K|W|C
+Texto cifrado:|Z|S|N|R|G|E|S|W|G
 
 [Ejemplo de transposición:](https://www.dcode.fr/transposition-cipher)
 
@@ -679,7 +679,7 @@ One-time-pad (cifrado Vernam)
 
 ## Confidencialidad perfecta
 
-![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/0/06/USpatent1310719.fig1.png)
+![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/4/4d/Lorenz-SZ42-2.jpg)
 
 **Seguridad perfecta o incondicional**: no se puede deducir ninguna propiedad del texto original en claro, incluso aunque el atacante tenga recursos infinitos (tiempo, dinero)
 
@@ -690,7 +690,9 @@ One-time-pad (cifrado Vernam)
 
 <!-- 
 excepto la longitud... y el momento de enviarlo, ...y el número de mensajes
- -->
+
+La fotogradía no es la máquina patentada por Vernam, si la máquina de Lorentz, usada en la Segunda Guerra mundial por los alemanes para mensajes que necesitaban permanecer secretos mucho tiempo (comunicaciones dipomáticas, por ejemplo). La máquina de Lorentz era similar al a de Vernam: https://en.wikipedia.org/wiki/Lorenz_cipher
+-->
 
 ---
 
@@ -717,7 +719,7 @@ Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF:
 
 - existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO"
 - existe otra clave que descifra "SE HA QUEDADO BUENA TARDE"
-- un atacante no sabe qué mensaje es el que realmente se cifró, así que nosabe si ha acertado la clave
+- un atacante no sabe qué mensaje es el que realmente se cifró, así que no sabe si ha acertado la clave
 
 Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
 
@@ -760,18 +762,14 @@ El cifrado de Vigenère sufría un problema similar al del César (aunque camufl
 
 Podemos evitar que se manifieste la estadística en el texto cifrado si utilizamos cada letra de la clave una sola vez
 
-**Tenemos confidencialidad perfecta si y solo sí usamos un cifrado Vigenère con las siguientes características**:
+```
+Msg: ELMENSAJEQUEQUEREMOSCIFRARPUEDESERCUALQUIERA
+Key: LACLAVEDEBESERTANLARGACOMOELMENSAJEYSEREPITE
 
-- una clave tan larga como el mensaje
-- no conocida por el atacante. Es decir: totalmente aleatoria
-- la clave no se usa nunca más
-
-<!--
-En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
--->
+Cif: PLOPNNEMIRYWULXRRXOJIIHFMFTFQHRKEAGSSPHYXMKE
+```
 
 ---
-<!-- _class: smaller-font -->
 
 Vernam patentó el *one-time-pad* de una manera similar pero equivalente:
 
@@ -788,15 +786,34 @@ La NSA tenía 86.000 *one-time-pads* solo para el año 1972.
 
 > Si lo necesitas, mira la operación XOR en [el glosario](A1-glosario.html)
 
+<!-- Esos libritos naranjas son los libros de claves, y el gran problema de estas máquinas es cómo hacer llegar los libros de claves a cada espía -->
+
 ---
 
-El teléfono rojo entre Washington y Moscú fue en realidad un teletipo que usaba cifrado de bloque de un solo uso
+El teléfono rojo entre Washington y Moscú fue un teletipo que usaba cifrado de bloque de un solo uso
 
-La clave $k$ se intercambiaba por valija diplomática en cinta perforada que se entregaba en ambos sentidos. Mientras no hacía falta, se guardaba protegida y  se destruía después de ser usada
+La clave $k$ se intercambiaba por valija diplomática en cinta perforada que se entregaba en ambos sentidos. Mientras no hiciese falta, se guardaba protegida y  se destruía después de ser usada
 
 Además, el *one-time-pad* permitía trabajar de forma segura sin intercambiar ningún algoritmo secreto que diera ventaja técnica al enemigo
 
-Para poder usar un *one-time-pad*, la clave se prepara por adelantado para cuando haga falta enviar algún mensaje inmediatamente.
+---
+<!-- _class: with-warning -->
+
+Shanon (1949) demostró que para tener confidencialidad perfecta el sistema de cifrado tienen que cumplir obligatoriamente las siguientes características:
+
+- La clave debe tan larga como el mensaje
+- No conocida por el atacante. Es decir: totalmente aleatoria
+- La clave no se usa nunca más
+
+Problema: ¿cómo distribuimos estas claves tan largas?
+
+El cifrado perfecto no se puede descifrar, pero la necesidad de claves largas limita su uso
+
+> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
+
+<!--
+En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
+-->
 
 ## Vulnerabilidades
 
@@ -812,7 +829,9 @@ Los humanos somos muy malos para distinguir qué es y qué no es aleatorio
 
 ---
 
-Pero el principal problema es que la longitud en bytes de $k$ es igual a la longitud en bytes de $m$.
+El principal problema es que la longitud en bytes de $k$ es igual a la longitud en bytes de $m$
+
+Para poder usar un *one-time-pad*, la clave se prepara por adelantado
 
 Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro por el mismo canal seguro
 
@@ -822,7 +841,7 @@ Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro po
 
 ---
 
-- Al final de la segunda guerra mundial, EEUU descifró el *one-time-pad* usado por los diplomáticos alemanes porque utilizaban contraseñas no totalmente aleatorias y podían adivinarse.
+- Al final de la segunda guerra mundial, EEUU descifró el *one-time-pad* usado por los diplomáticos alemanes porque [utilizaban contraseñas no totalmente aleatorias y podían adivinarse](https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Lorenz_cipher).
 - 1944: EEUU descifró mensajes de la URSS a Australia... porque utilizaban el mismo *one-time-pad* que la URSS usaba con EEUU.
 - 1962 (ataque canal lateral): las máquinas usadas para cifrar eran eléctricas y emitían un campo magnético, que Japón podría haber aprovechado para captar qué cifraba la embajada de EEUU: [TEMPEST](https://www.governmentattic.org/18docs/Hist_US_COMSEC_Boak_NSA_1973u.pdf)
 
@@ -857,6 +876,7 @@ Whitfield Diffie y Martin Hellman generan el primer algoritmo práctico de cript
 
 <!-- La criptografía actual empezó en 1976: se escogió un algoritmo de cifrado simétrico que es casi perfecto y además práctico, y se
 descubrió la criptogradía asimétrica que permitía publicar parte de la clave. -->
+
 ## Referencias
 
 - <https://www.youtube.com/watch?v=ncL2Fl6prH8>: resumen de criptografía clásica y máquina Enigma.
@@ -871,8 +891,6 @@ Ejercicios opcionales pero muy recomendables:
 
 - Del profesor: <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/01/Seguridad%20por%20oscuridad.ipynb>
 - "Introducción a cryptohack" en <https://cryptohack.org/>
-
-Continúa en: [Criptografía simétrica](03-simetrica.html)
 
 # ¡Gracias!
 <!-- _class: last-slide -->
