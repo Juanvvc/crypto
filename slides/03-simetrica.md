@@ -60,11 +60,11 @@ Hoy veremos como solucionarlo:
 <!-- _class: cool-list toc -->
 
 1. [Confidencialidad computacional](#4)
-1. [Cifrado de flujo](#16)
-1. [ChaCha20](#34)
-1. [Cifrado de bloque](#45)
-1. [Cifrado AES](#59)
-1. [Resumen](#83)
+1. [Cifrado de flujo](#15)
+1. [ChaCha20](#33)
+1. [Cifrado de bloque](#46)
+1. [Cifrado AES](#52)
+1. [Resumen](#76)
 
 # Confidencialidad computacional
 <!-- _class: lead
@@ -136,6 +136,7 @@ La criptografía computacionalmente segura permite $\|k\| \ll \|m\|$
 
 - Es un cifrado práctico: la clave es mucho más pequeña que el mensaje y por tanto es fácil de distribuir
 - Pero si es muy pequeña, es posible hacer fuerza bruta
+- **Fortaleza de un sistema criptográfico**: número de claves que hay que probar por fuerza bruta (en bits)
 
 Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
 
@@ -149,24 +150,6 @@ Los algoritmos se diseñan para que, con la tecnología actual, se tarde miles d
 
 La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenador que haga esa misma fuerza bruta de forma instantánea
 -->
-
-
----
-<!-- _class: with-info -->
-
-- podemos probar $10^6$ clave/CPU/s $\approx 2^{20}$ clave/CPU/s
-- ó $10^{13}$ clave/CPU/año $\approx 2^{43}$ clave/CPU/año
-- ó $10^{16}$ clave/año con $1000$ CPU ≈$\approx 2^{53}$ clave/CPU·año
-- ó $10^{19}$ clave/año con $10^6$ CPU $\approx 2^{63}$ clave/año
-- ó $10^{25}$ claves con $10^6$ CPU un millón de años $\approx 2^{83}$ 
-- ó $10^{29}$ claves con $10^6$ CPU desde el Big Bang $\approx 2^{96}$ 
-
-Si tengo una "suerte media" sólo nos hará falta la mitad de las pruebas
-
-Con hardware ad-hoc podemos llegar a multiplicar por $10^4$ ó $10^5$ veces
-($2^{13}$ ó $2^{17}$ veces). Ejemplo: Bitcoin
-
-Fortaleza de un sistema criptográfico: número de claves que hay que probar por fuerza bruta (en bits)
 
 ---
 
@@ -250,9 +233,9 @@ header: Cifrado de flujo -->
 ---
 <!-- _class: center -->
 
-Es una implementación práctica de los bloques de una solo uso (*one-time-pad*)
+Es una implementación práctica de *one-time-pad* (cifrado perfecto, Vernam)
 
-Recuerda: con *one-time-pad* necesitábamos una clave tan larga como el mensaje
+Recuerda: para cifrado perfecto necesitábamos una clave tan larga como el mensaje
 
 $$\|k\|=\|m\|$$
 
@@ -674,7 +657,8 @@ Ninguna conocida, siempre que se cumplan las condiciones de uso: no se puede rep
 header: Cifrado de bloque -->
 
 ---
-<!-- _class: smaller-font -->
+<style scoped>{font-size: 180%}</style>
+
 
 El cifrado de bloque es lo que hacía el cifrado Vignère: cortar el texto en claro en bloques de la misma longitud de la clave y cifrar cada uno de los bloques
 
@@ -692,6 +676,7 @@ Fíjate: los bloques no tienen memoria, al contrario de lo que pasaba en el cifr
 
 El cifrado de bloque se suele definir como una **serie de permutaciones**.
 
+<!--
 ## Permutaciones (P)
 
 ![w:28em center](https://upload.wikimedia.org/wikipedia/commons/4/43/Injective%2C_Surjective%2C_Bijective.svg)
@@ -783,6 +768,8 @@ Esto nos permitirá realizar cifrados de bloque factibles, intercambiando una ca
 Como en el caso de PRNG, hace falta que las PRP sean indistinguibles de las RP
 
 Además, hace falta que tanto $f_k$ como $f`{−1}_k$ se puedan calcular de forma eficiente
+
+-->
 
 ## Construcción de cifrados de bloque
 
@@ -1022,7 +1009,7 @@ Si acumulamos estado durante el cifrado, podemos utilizar este estado sobre el c
 ![center Wikipedia w:35em](images/simetrica/ECB_encryption.svg)
 
 ---
-<!-- _class: center -->
+<!-- _class: center, with-warning -->
 
 Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
@@ -1030,31 +1017,41 @@ Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg) ![](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg)
 
-**No se puede usar AES en modo ECB**
+**No se debe usar AES en modo ECB**
 
 ## CBC: Cipher Block Chaining
 
 ![center Wikipedia w:35em](images/simetrica/CBC_encryption.svg)
 
+Desventaja: perder un bloque implica que la sincronización se pierde
+
 ## OFB: Output Feedback
 
 ![center Wikipedia w:35em](images/simetrica/OFB_encryption.svg)
+
+Ventaja: puede preparse el cifrado antes de necesitarlo
 
 ## CTR: Counter
 
 ![center Wikipedia w:35em](images/simetrica/CTR_encryption.svg)
 
+Ventaja: perder bloques no afecta a la capacidad de descifrado
+
 ## Vector de Inicialización (IV)
 
-Los distintos encadenados requieren de una semilla inicial para empezar el encadenado: vector de inicialización (IV), que cumple la misma función que un *nonce*.
+Vector de inicialización (IV) cumple la misma función que un *nonce*: semilla inicial
 
-Esto hace que en lugar de transmitir $n$ bloques como en ECB, haga falta transmitir $n+1$
+Impide que el mismo mensaje se cifre de la misma manera
+
+Se tiene que transmitir al receptor, y no hace falta que sea secreto: puede enviarse en el primer mensaje sin cifrar
 
 - IV en CBC: es el hipotético bloque cifrado $−1$
 - IV en OFB: es el bloque que se cifra constantmente $e(e(e(...e(IV))))$ y se aplica sobre los bloques en claro (con $\otimes$)
 - IV en CTR: es el valor inicial del contador que se cifra ECB, y se aplica sobre los bloques en claro (con $\otimes$)
 
 `AES_128_CTR` es efectivamente un cifrado de flujo, siendo $k$ la semilla, y el IV el *nonce*
+
+
 
 ## Otros modos
 
@@ -1102,7 +1099,7 @@ AES ha perdido fortaleza pero aún está aguantando.
 - se cree que no habrá computación cuántica práctica antes del ~2030
 - Se conoce un algoritmo óptimo para compuración cuántica (Grover) que permite romper el cifrado simétrico, pero para ser robustos a este algoritmo sólo hemos de doblar la longitud de claves. Por ejemplo pasar a AES-256 daría una fortaleza equivalente de 128 bits
 
-Se considera que la criptografía simétrica es robusta ante la computación cuántica
+Se considera que la criptografía simétrica es robusta ante la computación cuántica, pero tendremos que doblar el tamaño de la clave
 
 # Resumen
 <!-- _class: lead
