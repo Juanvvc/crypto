@@ -50,8 +50,8 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 <!-- _class: cool-list toc -->
 
 1. [Teoría de la complejidad](#4)
-1. [Acuerdo de clave Diffie-Hellman](#26)
-1. [Conclusiones](#44)
+1. [Acuerdo de clave Diffie-Hellman](#29)
+1. [Conclusiones](#45)
 
 # Teoría de la complejidad
 <!-- _class: lead -->
@@ -66,17 +66,41 @@ Por si fuera poco, es un campo del que aún no conocemos casi nada: hay aún muc
 El nombre "teoría de la complejidad" está muy bien escogido para describir el campo. Vamos a intentar saber de qué va
 -->
 
+## Algoritmos de ordenamiento
+
+![w:15em center](https://upload.wikimedia.org/wikipedia/commons/f/fe/Quicksort.gif)
+
+Algoritmos|Complejidad temporal|Complejidad espacial
+--|--|--
+Selection|$O(n^2)$|$O(1)$
+Bubble|$O(n)$|$O(1)$
+Quick Sort|$O(n \log n)$|$O(n)$
+
+¿Cuánto tiempo le llevaría al menor algoritmo posible?
+
+> https://www.geeksforgeeks.org/time-complexities-of-all-sorting-algorithms/
+
+<!--
+Dado un conjunto de datos, existen varios algoritmos que permiten ordenadores: quick sort, bubble, merge...
+
+¿Por qué hay varios algoritmos? Algunos son muy rápidos pero consumen más memoria, otros son muy rápidos si los datos ya están casi ordenados...
+
+¿Existe un algoritmo que sea "el mejor de todos?
+-->
+
 ## Teoría de la complejidad
 
-Ciencia que estudia cuánto tiempo le llevaría al algoritmo más rápido computacional posible para resolver un problema
+![bg left:40%](images/complejidad/teoria.png)
 
-Ojo: la teoría de la complejidad no dice cuál es ese algoritmo más rápido posible, simplemente calcula cuánto tiempo mínimo lleva resolver un problema
+Ciencia que estudia cuánto tiempo lleva resolver un problema **al algoritmo más rápido posible**
 
-Aplicación en criptografía: dado un mensaje cifrado con cierto algoritmo ¿existe un algoritmo más rápido que con fuerza bruta... aunque aún no sepamos cuál?
+**No dice cuál es el algoritmo más rápido posible**, simplemente calcula cuánto tiempo mínimo lleva resolver un problema
+
+Aplicación en criptografía: dado un mensaje cifrado con cierto algoritmo ¿existe aunque solo sea en toería un algoritmo más rápido que con fuerza bruta... aunque aún no sepamos cuál?
 
 <!--
 
-Ojo 2: "el tiempo mínimo en resolver un problema" es para el problema general, puede haber algunos problemas que teóricamente sean sencillos pero que "con suerte" se puedan resolver, o que tienen características especiales que los hacen más sencillos
+Aviso 2: "el tiempo mínimo en resolver un problema" es para el problema general, puede haber algunos problemas que teóricamente sean sencillos pero que "con suerte" se puedan resolver, o que tienen características especiales que los hacen más sencillos
 
 -->
 
@@ -104,14 +128,19 @@ Claro que sí, podemos ser inteligentes: "si esto es un 2, entonces todas estas 
 Nota: el objetivo de la teoría de la complejidad no es descubrir el algoritmo más eficiente. **Queremos saber cuánto tiempo le llevará al algoritmo más eficiente para resolver un problema incluso aunque no sepamos cuál es ese algoritmo perfectamente eficiente**. Si diseñamos un sistema de cifrado y podemos demostrar que el mejor atacante, el que use los mejores algiritmos posibles, incluso aquellos que no están aún inventados, va a tardar un tiempo descomunal para romper el sistema... entonces el cifrado es seguro.
 -->
 
-## Mucho tiempo para resolver
-<!-- _class: with-info -->
+---
 
 Hacer un algoritmo de fuerza bruta para un Sudoku es "sencillo": vamos comprobando números y, si funcionan, los dejamos
 
 Eso se parece mucho a resolver por fuerza bruta un cifrado clásico
 
 Pero estamos interesados en conocer el tiempo teórico que le llevará **al algoritmo más rápido posible**
+
+---
+<!-- _class: with-info -->
+
+
+![w:20em center](images/complejidad/sudoku-complex.png)
 
 10 veces más casillas... ¿necesita 10 veces más tiempo? ¿ó 100 veces más tiempo? ¿ó 1000 veces más tiempo? ¿podremos acaso solucionarlo?
 
@@ -188,9 +217,17 @@ En el enlace, solucionan un Sudoku transformándolo primero a un problema de col
 
 ## Seguridad basada en problemas NP
 
+Los matemáticos se han dado cuenta de que existen...
+
+- **Problemas P**: se pueden resolver en un tiempo razonable
+- **Problemas NP**: si te dan una solución, se puede verificar en un tiempo razonable. Fíjate: no sabemos si estos también se pueden resolver en un tiempo razonable
+- **Problemas NP-completos**: se pueden convertir en otro problema que sepamos resolver en un tiempo razonable
+
+---
+
 A partir de ahora vamos a basar la seguridad en problemas:
 
-- Que el criptoanálisis sea NP y por tanto *no razonable*
+- Que el criptoanálisis sea NP y por tanto probablemente *no razonable*
 - Que sea corto decidir si algo es solución: el cifrado y descifrado es P y *es razonable*
 
 Si además podemos convertir unos problemas en otros y sabemos que un problema es "computacionalmente seguro", el otro también lo será. Por tanto:
@@ -200,12 +237,11 @@ Si además podemos convertir unos problemas en otros y sabemos que un problema e
 
 > Requisitos de [New Directions in Cryptography](https://www.cs.utexas.edu/~shmat/courses/cs395t_fall06/dh.pdf), Diffie y Hellman, 1976. Hablaremos más de este paper en unos minutos
 
-## P = NP
-<!-- _class: smaller-font two-columns -->
+## P = NP?
+<!-- _class: two-columns -->
 
 - Un problema P es también un problema NP, pero...
 - ¿Todos los problemas NP son también P? ¿Y qué pasa con los NP-Completos?
-- **Este es una de las grandes incógnitas actuales de la matemática**
 - No sabemos si P es igual a NP, o si todos los problemas NP son NP-completos
 - **La seguridad actual se basa en la fuerte sospecha de que hay problemas NP que no son P ni NP-Completos**
 
@@ -259,9 +295,9 @@ Lo importante es comparar las velocidades: ¿cómo crece el tiempo de ejecución
 
 En criptografía, $n$ es el tamaño de la clave en bits
 
-Queremos algoritmos que el atacante necesite realizar $O(2^n)$ operaciones de fuerza bruta
+Queremos algoritmos que el atacante necesite realizar $O(2^n)$ operaciones de fuerza bruta: **crecimiento exponencial con el tamaño de la clave**
 
-Pero también queremos que, conociendo la clave, el descifrado solo necesite $O(n)$ operaciones
+Pero también queremos que, conociendo la clave, el descifrado solo necesite $O(n)$ operaciones: **crecimiento polinomial con el tamaño de la clave**
 
 Un algoritmo está roto si el atacante necesita muchas menos de $O(2^n)$ operaciones
 
@@ -274,17 +310,14 @@ Ejemplo: si queremos aumentar la seguridad de un algoritmo, pasamos de una clave
 
 Nota que no necesitamos conocer el ataque: si se demuestra que el mejor ataque es de orden $O(2^n)$, entonces **el sistema es seguro aunque no conozcamos cómo es el ataque**
 
----
-<!-- _class: extra-slide -->
+## "Tiempo razonable", la definición
 
 Nota: las clases de problemas P, NP, NP-completo... en realidad se definen con notación big-O:
 
-- P: problemas resolubles en tiempo exponencial $O(2^n)$
+- P: problemas resolubles en tiempo polinomial $O(n^k)$
 - NP: problemas comprobables en tiempo polinomial $O(n^k)$ para algún valor de $k$.
 
 Recuerda: un sistema es **seguro computacionalmente** si cualquier algoritmo probabilístico en tiempo polinomial solo puede romper el algoritmo con probabilidad negligible en $\|n\|$
-
-Es decir: un cifrado es seguro computacionalmente si el mejor ataque posible tiene complejidad $O(n^k)$, para cualquier $k$
 
 (falta definir eso de "probabilidad negligible", pero no lo haremos en este curso)
 
@@ -296,12 +329,13 @@ Es decir: un cifrado es seguro computacionalmente si el mejor ataque posible tie
 
 ## Ejemplo: factorización en números primos
 
-$$
-15 = 5 \cdot 3 \\
-38 = 19 \cdot 2 \\
-3248 = 29 \cdot 7 \cdot 2^4 \\
-8012012832918391238193192198219981928192889382938998982 = ?
-$$
+$15 = 5 \cdot 3$
+
+$38 = 19 \cdot 2$
+
+$3248 = 29 \cdot 7 \cdot 2^4$
+
+$8012012832918391238193192198219981928192889382938998982 = ?$
 
 Es un problema NP y probablemente ni P ni NP-Completo
 
@@ -329,7 +363,7 @@ Vamos a ver con más detalles el problema del logaritmo discreto, porque es el q
 -->
 
 
-# p=17 g=5 c=4 m=?
+# $4=5^m \mod 17$
 <!-- _class: two-columns center smaller-font with-header center -->
 
 $m$|$c = 5 ^ m \mod 17$
@@ -353,6 +387,8 @@ $m$|$c = 5 ^ m \mod 17$
 14|15
 15|7
 16|1
+
+¿Cuánto vale $m$? Solo podemos hacerlo por fuerza brita, probando todos los valores de m
 
 <!--
 Fijaos: se están mapeando todos los números de 1 a 17 en otros números de 1 a 17 de forma "aleatoria". Esto es un "grupo cíclico"
@@ -431,11 +467,11 @@ $Z_{p}^{*}$  es grupo cíclico con el elemento generador $g$ y $p$ primo
 
 **Problema:** dado $g^a, g^b \in Z_{p}^{*}$, ¿cuál es el valor de $g^{ab} \in Z_{p}^{*}$?
 
-Calcular $g^{ab}$ a partir de $g^a, g^b$ es computacionalmente difícil: primero tendríamos que calcular $b$ a partir de $g^b$, **y eso es el problema del logaritmo discreto**
+Calcular $g^{ab}$ solamente a partir de $g^a, g^b$ es computacionalmente difícil: primero tendríamos que calcular $b$ a partir de $g^b$, **y eso es el problema del logaritmo discreto**
 
 (Recuerda que $g^a \cdot g^b = g^{a+b}$)
 
-Pero si nos diesen $a$ ó $b$: $g^{ab} = (g^a)^b = (g^b)^a$ y es muy fácil de calcular
+Pero si también nos diesen $a$ ó $b$, entonces $g^{ab} = (g^a)^b = (g^b)^a$ y es muy fácil de calcular
 
 Que nos den $a$ ó $b$ se conoce como "trampa" o "*trapdoor*". Sin conocer la trampa, el problema se considera muy difícil computacionalmente
 
@@ -567,15 +603,6 @@ g = 2
 
 > Fuente: https://github.com/amiralis/pyDH/blob/master/pyDH/pyDH.py
 
-## D-H efímero / DH Ephemeral
-
-- $a$ y $b$ se tienen que calcular en secreto
-- no tienen ninguna restricción especial: el cálculo de las claves públicas y privadas para D-H es muy rápido
-- Se pueden escoger cada vez que las necesitemos y olvidarlas después
-
-- **Ventaja**: cada vez tendremos una clave diferente (D-H efímero)
-- **Desventaja**: no podemos autenticar a la otra persona
-
 ## Debilidades
 <!-- _class: with-warning -->
 
@@ -586,7 +613,6 @@ g = 2
 Alice y Bob están hablando en secreto... con el atacante
 
 ---
-<!-- _class: smaller-font -->
 
 ![bg left:20%](https://upload.wikimedia.org/wikipedia/commons/6/69/Ulam_1.png)
 
@@ -599,8 +625,6 @@ AES (bits)|D-H (bits)
 128|3072
 256|15360
 
-¡No se suelen usar $p$ tan enormes!
-
 NIST recomienda $\|p\| > 2048$ hasta 2030
 
 Compara, para AES: $\|k\| = 128$
@@ -609,11 +633,10 @@ Compara, para AES: $\|k\| = 128$
 > https://www.keylength.com/en/3/
 
 ## Uso de la clave D-H con AES o Chacha: Función derivación de clave KDF
-<!-- _class: smaller-font -->
 
-El número secreto generado por el intercambio Diffie-Hellman no debe utilizarse como clave en protocolos de cifrado simétrico AES ni en cifrados de flujo como ChaCha20: no existen requisitos de seguridad para este número, como que sean perfectamente uniformes
+El número secreto generado por el intercambio Diffie-Hellman no debe utilizarse como clave en protocolos de cifrado simétrico AES o Chacha ChaCha20: no es perfectamente uniforme
 
-Por esto, se utiliza una transformación **KDF** (*Key Derivation Function*). ​ Las KDF se pueden utilizar para extender claves en otras más largas o para obtener claves en un cierto formato. Las funciones de hash pueden usarse como KDF, aunque suelen incluir también inputs adicionales
+Se utiliza una transformación **KDF** (*Key Derivation Function*). ​ Las KDF se pueden utilizar para extender claves en otras más largas o para obtener claves en un cierto formato. Las funciones de hash pueden usarse como KDF, aunque suelen incluir también inputs adicionales
 
 Más información aquí:
 
