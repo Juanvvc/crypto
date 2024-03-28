@@ -30,11 +30,9 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 ![w:16em center](images/simetrica/symmetric-example.png)
 
-El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros
+El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros. Con Diffie-Hellman, dos personas que no se han conocido nunca pueden tener una clave común.
 
-Solo necesitamos que las dos partes tenga una clave secreta en común
-
-¿Cómo conseguimos que las dos personas que no se han visto nunca tengan una clave secreta común?
+¿Qué hay de los demás servicios de seguridad?
 
 <!--
 Parecería que con lo que conocemos ya hemos resuelto el problema de comunicar dos personas de forma secreta
@@ -108,16 +106,21 @@ Cada persona tiene dos claves:
 - $pk$: clave pública, todos la conocen
 - $sk$: clave secreta, **nadie más la conoce**
 
-A veces son intercambiables: lo que se cifra con una se descifra con la otra
+Hay una relación matemática entre ambas: no las puedes escogerlas al azar. Pero si conoces la pública, no puedes sacar la privada más que por fuerza bruta
 
 ![bg right:40% w:90%](https://upload.wikimedia.org/wikipedia/commons/f/f9/Public_key_encryption.svg)
 
-> Compara con criptografía simétrica: misma clave para cifrar y descifrar, Bob y Alice tienen que manetenarla en secreto
+<!--
 
+Fíjate que no estoy diciendo que la pública se use para cifrar y la privada para descifrar o viceversa
 
----
+Normalmente, si cifras con una puedes descifrar con la otra. Y según la que uses puedes cifrar o firmar documentos, como veremos a continuación
 
-La criptografía de clave pública nos permite hacer dos cosas:
+-->
+
+## Usos de la criptografía asimétrica
+
+Según si usamos la clave pública o la privada para cifrar, podemos hacer dos cosas:
 
 - cifrar mensajes --> servicio de confidencialidad
 - firmar digitalmente mensajes --> servicio de autenticación
