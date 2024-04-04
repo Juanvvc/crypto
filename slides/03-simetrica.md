@@ -62,9 +62,9 @@ Hoy veremos como solucionarlo:
 1. [Confidencialidad computacional](#4)
 1. [Cifrado de flujo](#15)
 1. [ChaCha20](#33)
-1. [Cifrado de bloque](#46)
+1. [Cifrado de bloque](#44)
 1. [Cifrado AES](#52)
-1. [Resumen](#76)
+1. [Resumen](#77)
 
 # Confidencialidad computacional
 <!-- _class: lead
@@ -676,101 +676,6 @@ Fíjate: los bloques no tienen memoria, al contrario de lo que pasaba en el cifr
 
 El cifrado de bloque se suele definir como una **serie de permutaciones**.
 
-<!--
-## Permutaciones (P)
-
-![w:28em center](https://upload.wikimedia.org/wikipedia/commons/4/43/Injective%2C_Surjective%2C_Bijective.svg)
-
-Una permutación es una función biyectiva de un conjunto sobre sí mismo
-
-$$
-X = \{ a,b,c \} \\
-f : X \rightarrow X
-$$
-
----
-
-Podemos representar el cifrado de bloque de tamaño $n$ con una permutación $f$, que es la clave de cifrado.
-
-$$f : X\rightarrow X$$
-
-
-Donde $X$ es el conjunto de posibles bloques tanto de texto en claro como de texto cifrado
-
-La función de descifrado como su inversa $f^{-1}$
-
-$$f^{-1} : X\rightarrow X$$
-
-Es decir:
-
-$$
-\begin{aligned}
-    c &= e(k, m) = f(m) \\
-    m &= d(k, c) = f^{-1}(c)
-\end{aligned}
-$$
-
-## Permutación aleatoria (RP)
-
-La permutación se puede ver como una tabla de $2^n$ entradas, con $n$ el tamaño de bloque
-
-$$f : X\rightarrow X$$
-$$f : \{0,1\}^n\rightarrow \{0,1\}^n$$
-
-$$
-00000000 \rightarrow 01010011\\
-00000001 \rightarrow 11000110\\
-00000010 \rightarrow 01010100\\
-...
-$$
-
-Estas $2^n$ entradas de longitud $n$ las deberemos escoger **de forma aleatoria** de forma que no podremos conocer $f$ sin conocer la tabla
-
----
-
-En realidad para que el cifrado sea seguro necesitaremos una "familia" de funciones equivalentes pero diferentes. Las indexaremos en función de la clave, $k$
-
-$$\begin{aligned}
-f_k &: X \rightarrow X \\
-f_k &: \{0,1\}^n \rightarrow \{0,1\}^n
-\end{aligned}$$
-
-O también, podemos redefinir $f$ y añadirle $k$ como parámetro:
-
-$$\begin{aligned}
-f &: K \times X \rightarrow X \\
-f &: \{0,1\}^{\|k\|} \times \{0,1\}^n \rightarrow \{0,1\}^n
-\end{aligned}$$
-
-donde $K$ es el espacio de claves $k$, es decir, el conjunto de claves
-
----
-
-Por ejemplo, para DES que tiene un tamaño de bloque de $n=64$ bits
-
-hace falta guardar:
-
-$$64·2^{64} b=2^{70} b=2^{67} B=2^{27} TB$$
-
-... para cada una de las posibles claves $k$
-
-Obviamente no es factible implementar los cifrados modernos directamente con una tabla indexada.
-
-
-## Permutación pseudoaleatoria (PRP)
-
-Igual que para el cifrado de flujo nos hacía falta un flujo de bits aparentemente aleatorio para quien no tuviera la semilla (la clave $k$)...
-
-...para cifrado de bloque utilizaremos permutaciones pseudoaleatorias (PRP, *Pseudo Random Permutation*) en las que la permutación será aparentemente aleatoria para alguien que no conozca la clave
-
-Esto nos permitirá realizar cifrados de bloque factibles, intercambiando una cantidad inmensa de memoria por una computación abordable
-
-Como en el caso de PRNG, hace falta que las PRP sean indistinguibles de las RP
-
-Además, hace falta que tanto $f_k$ como $f`{−1}_k$ se puedan calcular de forma eficiente
-
--->
-
 ## Construcción de cifrados de bloque
 
 Hay dos clases de cifrado de bloque. Es decir, dos maneras de implementar PRP:
@@ -1051,23 +956,37 @@ Se tiene que transmitir al receptor, y no hace falta que sea secreto: puede envi
 
 `AES_128_CTR` es efectivamente un cifrado de flujo, siendo $k$ la semilla, y el IV el *nonce*
 
-
-
 ## Otros modos
 
-AES puede usarse también con "modos autenticados":
+AES puede usarse también con "modos autenticados": detectan si el atacante ha cambiado algún byte durante la comunicación
 
 - [OCB](https://en.wikipedia.org/wiki/OCB_mode)
 - [GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
-- Y otros
 
-> Información adicional, de la librería que usamos en los ejercicios: https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
+![bg right w:80%](https://upload.wikimedia.org/wikipedia/commons/2/25/GCM-Galois_Counter_Mode_with_IV.svg)
+
+>Información adicional, de la librería que usamos en los ejercicios: https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
+> Explicación del modo GCM: <https://www.youtube.com/watch?v=-fpVv_T4xwA&t=747>
 
 <!--
 La autenticación es un servicio que aún no hemos visto, pero tenemos casi toda la segunda parte de la asignatura para ello.
 
 Hasta ahora solo nos preocupábamos de mantener la información secreta, pero no hemos comprobado la identidad de la persona que está hablando. AES tiene algunos modos de uso avanzados que permiten también comprobar esta identidad. Pero aún necesitamos un poco de teoría.
 -->
+
+## Comparación de algunos modos AES
+<!-- _class: with-success -->
+
+- No hay razón para usar AES-ECB, nunca
+- Unos modos necesitan padding (rellenar los huecos)
+- Otros permiten paralelizar el cifrado (OFB) o el descifrado (CBC) o ambos (CTR)
+- Otros permiten recuperarse ante fallos en la comunicación (CBC, OFB)
+- Otros están especializados en aplicaciones concretas: [XTS](https://en.wikipedia.org/wiki/Disk_encryption_theory#XTS) para cifrados de discos (Bitlocker, TrueCrypt...)
+
+En la actualidad, el modo más usado en comunicaciones en [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
+
+> https://www.highgo.ca/2019/08/08/the-difference-in-five-modes-in-the-aes-encryption-algorithm/
+> https://stackoverflow.com/questions/1220751/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb
 
 ## Vulnerabilidades
 
@@ -1127,6 +1046,7 @@ header: '' -->
 - [Block Cipher Techniques](https://csrc.nist.gov/projects/block-cipher-techniques), NIST
 - [Recommendation for Key Establishment Using Symmetric Block Ciphers](https://csrc.nist.gov/CSRC/media/Publications/sp/800-71/draft/documents/sp800-71-draft.pdf), NIST 800-71, 2018
 - [Algorithms, key size and parameters report 2014](https://www.enisa.europa.eu/publications/algorithms-key-size-and-parameters-report-2014), ENISA, 2014
+- [AES GCM (Advanced Encryption Standard in Galois Counter Mode) - Computerphile](https://www.youtube.com/watch?v=-fpVv_T4xwA&t=747)
 
 ---
 
