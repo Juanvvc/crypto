@@ -17,11 +17,12 @@ el apartado "Contenido".
 - [Cifrado asimétrico o de clave pública: RSA](https://juanvvc.github.io/crypto/05-asimetrica.html)
 - [Funciones de hash y *blockchain*](https://juanvvc.github.io/crypto/06-hashes.html)
 - [TLS y *Public Key Infrastructure*](https://juanvvc.github.io/crypto/07-pki.html)
+	- [Anexo: TLS en detalle](https://juanvvc.github.io/crypto2/A1-glosario.html)
 - [Ransomware](https://juanvvc.github.io/crypto/08-ransomware.html)
 - [Esteganografía](https://juanvvc.github.io/crypto/09-esteganografia.html)
 - [Criptografía Post-cuántica](https://juanvvc.github.io/crypto/10-postcuantica.html)
 
-Recuerda: puedes "imprimir a PDF" para obtener las translarencias en PDF, aunque solo en Chrome o Edge. Firefox y Safari no lo hacen correctamente.
+Puedes crear la versión PDF de las transparencias "imprimiendo a PDF" en Google Chrome.
 
 ## Descarga local
 
