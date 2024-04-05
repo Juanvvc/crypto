@@ -863,14 +863,6 @@ Si fuerzas "reglas para las contraseñas"...
 - [How SAML Authentication Works](https://auth0.com/blog/how-saml-authentication-works/#What-is-SAML)
 
 ---
-<!-- _class: center -->
-
-Continúa en:
-
-- [Business Email Compromise (BEC)](06-bec.html)
-- [Anonimato](07-anonimato.html)
-
----
 <!-- _class: last-slide -->
 
 
