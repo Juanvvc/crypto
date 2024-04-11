@@ -113,9 +113,12 @@ Ejemplos de valores de hash:
 ## Requisitos de una función de hash criptográfica
 
 - Que sea **rápida** de calcular
-- **Resistencia a la preimagen**: dado un hash, no se puede saber el mensaje exacto que tiene ese hash
-- **Resistencia a la colisión**: dificultad para encontrar dos mensajes diferentes con el mismo hash
+
+- **Resistencia a la preimagen**: dado un hash, encontrar el mensaje exacto que tiene ese hash tiene que ser difícil
+- **Resistencia a la colisión**: encontrar dos mensajes diferentes con el mismo hash tiene que ser difícil
 - **Sensibilidad** / efecto avalancha: un cambio mínimo en el mensaje produce un valor hash completamente diferente
+
+La única forma de encontrar preimágenes o colisiones tiene que ser la fuerza bruta
 
 > https://en.wikipedia.org/wiki/Cryptographic_hash_function#Properties
 
@@ -138,7 +141,7 @@ Los hashes se usan mucho en minería bitcoin, así que podemos utilizar sus tabl
 
 Obvio: no puede existir una aplicación inyectiva entre un conjunto de $m$ elementos y otro de $n$ elementos si $m>n$
 
-Existen infinitos mensajes diferentes con el mismo resumen: esto se llama "colisión"
+Existen infinitos mensajes diferentes con el mismo resumen: esto se llama "**colisión**"
 
 ![bg right:50% w:100%](https://upload.wikimedia.org/wikipedia/commons/5/5c/TooManyPigeons.jpg)
 
@@ -169,7 +172,7 @@ $$
 
 Es decir, hay un número $10^{26·10^6}$, que en la práctica es "casi infinito", de fotografías de 1MB que se resumen en el mismo hash de 256 bits
 
-Queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" fotografías: la única forma debe de ser probar las fotografías una a una
+Queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" colisiones: la única forma debe de ser probar las fotografías una a una
 
 ## Paradoja del cumpleaños
 
@@ -482,17 +485,8 @@ Cuando llegue el jucio (o una investigación paralela) las evidencias digitales 
 
 ---
 
-Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto2/blob/main/ejercicios/03/Hashes.ipynb>
+Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/06/Hashes.ipynb>
 
-
-Sigue el tema en:
-
-- [Firma digital](03-firma.html)
-- [Blockchain](03-blockchain.html)
-
-Siguiente tema:
-
-- [TLS y Public Key Infrastructure](04-pki.html)
 
 # ¡Gracias!
 <!-- _class: last-slide -->
