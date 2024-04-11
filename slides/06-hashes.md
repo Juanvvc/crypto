@@ -310,8 +310,6 @@ Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese
 
 Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
-Tenemos todo un [tema para hablar de firma digital](03-firma.html)
-
 ## Almacenamiento de contraseñas
 
 El sistema operativo no debe guardar las contraseñas de los usuarios: si alguien consigue entrar, ¡obtiene la contraseña del usuario!
@@ -377,6 +375,8 @@ La modificación se refiere tanto a una modificación **explícita por un atacan
 
 Hay modos de AES que utilizan estos esquemas: [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
 
+![bg right w:100%](https://upload.wikimedia.org/wikipedia/commons/2/25/GCM-Galois_Counter_Mode_with_IV.svg)
+
 > MAC: Message Authenticated Code
 > https://en.wikipedia.org/wiki/Authenticated_encryption
 
@@ -404,12 +404,6 @@ Hay modos de AES que utilizan estos esquemas: [AES-GCM](https://en.wikipedia.org
 - Usado en TLS
 - Vulnerable algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
 
-## AES en modo GCM
-
-![center w:25em](https://upload.wikimedia.org/wikipedia/commons/2/25/GCM-Galois_Counter_Mode_with_IV.svg)
-
-> Fuente: wikipedia
-
 ## Merkle Hash tree
 <!-- _class: smaller-font -->
 
@@ -419,7 +413,7 @@ Solución: calcular hash solo de los bloques que cambien, y agruparlos en un ár
 
 Permite firmar bases de datos, discos... de forma eficiente
 
-![center w:25em](images/hashes/Hash_Tree.svg)
+![center w:35em](images/hashes/Hash_Tree.svg)
 
 ## Blockchain
 
@@ -434,11 +428,11 @@ Tenemos todo un [tema para hablar de blockchain](03-blockchain.html)
 
 Cuando se investiga un crimen... ¿cómo se protegen las evidencias digitales contra modificaciones?
 
-![center w:20em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
+![center w:25em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
 
 ---
 
-![center](images/hashes/dossier.png)
+![center w:25em](images/hashes/dossier.png)
 
 
 ## Inicio de una cadena de custodia
@@ -453,7 +447,7 @@ Cuando llegue el jucio (o una investigación paralela) las evidencias digitales 
 
 ## Cadena de custodia en blockchain
 
-![center w:20em](images/hashes/Blockchain-enabled-Digital-Chain-of-Custody.png)
+![center w:20em](images/blockchain/Blockchain-enabled-Digital-Chain-of-Custody.png)
 
 > https://www.researchgate.net/publication/338443914_A_Survey_on_the_Internet_of_Things_IoT_Forensics_Challenges_Approaches_and_Open_Issues
 
