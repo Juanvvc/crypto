@@ -1,10 +1,10 @@
 ---
 marp: true
-title: Criptografía - Funciones de Hash y Blockchain
+title: Criptografía - Funciones de Hash y Firma digital
 author: Juan Vera
-keywords: criptografía,hash,sha256,bitcoin
+keywords: criptografía,hash,sha256,integridad,firma digital
 paginate: true
-footer:
+footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
 transition: fade
@@ -18,7 +18,7 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Funciones de Hash y Blockchain
+# Funciones de Hash y Firma digital
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
@@ -33,20 +33,19 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 Los hashes nos permiten calcular **una firma digital**
 
-![bg right w:90%](images/asimetrica/dh-maninthemiddle.png)
-
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
 1. [Funciones de hash](#4)
-1. [Usos](#23)
-1. [Blockchain](#34)
-1. [Resumen y referencias](#50)
+1. [Ejemplos de aplicaciones](#23)
+1. [Aplicación: cadena de custodia](#35)
+1. [Resumen y referencias](#41)
 
 # Funciones de hash
 <!-- _class: lead -->
 
 ## Función de hash, digest o resumen
+<!-- _class: with-success -->
 
 Resume un mensaje $m$ de longitud arbitraria en un valor $r$ **de tamaño fijo $l$**, sea cual sea la longitud del mensaje
 
@@ -58,9 +57,11 @@ $$
 
 Ejemplos:
 
-- "Resumir" un mensaje de 12 bytes en 32 bytes
-- Resumir una imagen de 532KB en 32 bytes
-- Resumir una película de 4GB en 32 bytes
+- "Resumir" un mensaje de 12 Bytes en 256 bits (32 Bytes)
+- Resumir una imagen de 532KB en 256 bits (32 Bytes)
+- Resumir una película de 4GB en 256 bits (32 Bytes)
+
+Da igual como sea la entrada, la salida siempre tiene el mismo número de bits
 
 ## Ejemplos no criptográficos
 
@@ -98,7 +99,7 @@ Dado un mensaje $m$ con un resumen $r=h(m)$, para encontrar otro mensaje $m'$ co
 
 ## Ejemplos de valores de hash
 
-![center w:25em](https://upload.wikimedia.org/wikipedia/commons/2/2b/Cryptographic_Hash_Function.svg)
+![center w:30em](https://upload.wikimedia.org/wikipedia/commons/2/2b/Cryptographic_Hash_Function.svg)
 
 <!--
 Ejemplos de valores de hash:
@@ -111,10 +112,10 @@ Ejemplos de valores de hash:
 
 ## Requisitos de una función de hash criptográfica
 
-- Que sea rápida de calcular
-- Resistencia a la preimagen: dado un hash, no se puede saber el mensaje exacto que tiene ese hash
-- Resistencia a la colisión: dificultad para encontrar dos mensajes diferentes con el mismo hash
-- Sensibilidad / efecto avalancha: un cambio mínimo en el mensaje produce un valor hash completamente diferente
+- Que sea **rápida** de calcular
+- **Resistencia a la preimagen**: dado un hash, no se puede saber el mensaje exacto que tiene ese hash
+- **Resistencia a la colisión**: dificultad para encontrar dos mensajes diferentes con el mismo hash
+- **Sensibilidad** / efecto avalancha: un cambio mínimo en el mensaje produce un valor hash completamente diferente
 
 > https://en.wikipedia.org/wiki/Cryptographic_hash_function#Properties
 
@@ -127,7 +128,7 @@ Los hashes se usan mucho en minería bitcoin, así que podemos utilizar sus tabl
 - Bitmain AntMiner D3: 19,3 GH/s
 - Avalon 6: 3.5 TH/s
 
-![bg right:50%](https://images-na.ssl-images-amazon.com/images/I/610vUTCY-qL._AC_SL1000_.jpg)
+![bg right:50%](images/hashes/avalon6.jpg)
 
 > Más ejemplos: https://miningchamp.com/
 > En la imagen, un Avalon 6, bloque especializado en calcular hashes
@@ -155,7 +156,7 @@ Si los mensajes de 1.000.000 de caracteres se resumen en 256 caracteres... ¡por
 
 Por ejemplo:
 
-Si queremos resumir fotografías de 1MB en resúmenes de 256 bits (tamaño típico)
+Si queremos resumir fotografías de 1MB en hashes de 256 bits (tamaño típico)
 
 $$
 \left.
@@ -166,7 +167,7 @@ $$
 \right\} \frac{|m|}{|r|} = \frac{2^{2^{23}}}{2^{256}} = 2^{2^{23}-256} \approx 2^{8·10^6} \approx 10^{26·10^6}
 $$
 
-Es decir, hay un número $10^{26·10^6}$, que en la práctica es "casi infinito", de fotografías de 1MB que se resumen en el mismo número de 256 bits
+Es decir, hay un número $10^{26·10^6}$, que en la práctica es "casi infinito", de fotografías de 1MB que se resumen en el mismo hash de 256 bits
 
 Queremos que no sea nada fácil (computacionalmente hablando) encontrar cualquiera de esas "casi infinitas" fotografías: la única forma debe de ser probar las fotografías una a una
 
@@ -191,7 +192,10 @@ Para $\|r\|=256$ bits esto son unas $\sqrt{2^{256}} = 2^\frac{256}{2} = 2^{128}$
 
 Esto implica que para un hash hacen falta resúmenes el doble de largos de lo que hacía falta para las claves simétricas para obtener el mismo nivel de seguridad
 
-La *security strength* de una función de hash de longitud $b$ bits es $b/2$
+- SHA-256 tiene una seguridad equivalente a AES-128, pero se usan para cosas diferentes, SHA para hashes y AES para cifrado.
+- SHA-512 tiene una seguridad equivalente a AES-256
+
+La *fortaleza* de una función de hash de longitud $b$ bits es $b/2$
 
 ## Ejemplos de funciones de hash
 
@@ -203,23 +207,21 @@ La *security strength* de una función de hash de longitud $b$ bits es $b/2$
 
 Los hashes recomendados en la actualidad son el SHA-2 (cualquier de las dos variantes) y el SHA-3
 
-Fíjate: longitudes aproximadamente el doble que las longitudes de claves que las claves de AES (128, 192 y 256 bits) para una seguridad equivalente
-
 ---
 <!-- _class: with-warning -->
 
 Ejemplos de valores de hash MD5, SHA256 y SHA512 de esta presentación:
 
 ```
-> ms5sum 06-hashes.md
-c99fe5e1ec0f637d77dddb32b1679c21  06-hashes.md
+> ms5sum 03-hashes.md
+c99fe5e1ec0f637d77dddb32b1679c21  03-hashes.md
 
-> sha256sum 06-hashes.md
-06efc998ac8ad6867b4f1a9ee94d903503c0c52e6f1184a9561000eb303844ec  06-hashes.md
+> sha256sum 03-hashes.md
+06efc998ac8ad6867b4f1a9ee94d903503c0c52e6f1184a9561000eb303844ec  03-hashes.md
 
-> sha512sum 06-hashes.md 
+> sha512sum 03-hashes.md 
 64b378a66da3714e723ac8469525ac7b460d7ad7ff348b9453d177907a14fd4a
-445a11c07206b7df599bcf3ec70475a6e89b4bbfe605c928c36494ff1a31311d  06-hashes.md
+445a11c07206b7df599bcf3ec70475a6e89b4bbfe605c928c36494ff1a31311d  03-hashes.md
 ```
 
 Si calculas los valores de hash del archivo, verás que no coinciden. Eso es porque no se puede calcular el hash de un archivo, meter el hash en el propio archivo, volver a calcular el hash ¡y que dé lo mismo! Recuerda: cualquier cambio (como por ejemplo meter el hash) cambia totalmente el hash
@@ -229,6 +231,8 @@ Si calculas los valores de hash del archivo, verás que no coinciden. Eso es por
 [![center w:30em](images/hashes/visual-sha256.png)](https://sha256algorithm.com/)
 
 > https://sha256algorithm.com/
+
+<!-- Visita la referencia para ver el funcionamiento de SHA256 en cada paso. Observa que aunque sean muchas operaciones, todas ellas son XOR y shifts que son muy rápidas -->
 
 ## ¿SHA-2 ó SHA-3?
 
@@ -277,7 +281,7 @@ b12ee96400fa19e7909a48f1727d3c81f6af71178209b58b612b5d2e75bf2d13  -
 
 https://crackstation.net/
 
-![center w:40em](images/crackstation.png)
+![center w:40em](images/hashes/crackstation.png)
 
 ---
 <!-- _class: extra-slide -->
@@ -289,21 +293,21 @@ En este curso no hacemos criptoanálisis, es decir, no rompemos cosas. Si estái
 - Usando diccionarios de "contraseñas probables"
 - Herramientas como [John the Ripper](https://www.openwall.com/john/) o [CrackHash](https://pypi.org/project/crackhash/) aprovechan estas técnicas
 
-# Usos
+# Ejemplos de aplicaciones
 <!-- _class: lead -->
 
 Árboles de Merkle, Integridad, Cadena de custodia...
 
-## Merkle Hash tree
-<!-- _class: smaller-font -->
+## Firma digital
+<!-- _class: with-success -->
 
-Si un archivo gran cambia a menudo y hay que calcular su hash cada vez, llevará mucho tiempo
+Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
 
-Solución: calcular hash solo de los bloques que cambien, y agruparlos en un árbol
+![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
 
-Permite firmar bases de datos, discos... de forma eficiente
+Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
-![center w:25em](images/hashes/Hash_Tree.svg)
+Tenemos todo un [tema para hablar de firma digital](03-firma.html)
 
 ## Almacenamiento de contraseñas
 
@@ -314,6 +318,10 @@ Podemos guardar simplemente su hash: $hash(contraseña)$
 Pero esto tiene un problema: muchos usuarios usan palabras, nombres, etc. limitados. Las palabras, nombres conocidos són del orden de ≈100.000
 
 Un atacante realizar un "diccionario" con el hash de todas las palabras, nombres, etc. (ataque de diccionario y rainbow table)
+
+> https://nordpass.com/es/most-common-passwords-list/
+
+<!-- Visita la referencia para tener un listado de las contraseñas más usadas y tiempo que se tarda en romperlas -->
 
 ## Almacenamiento de contraseñas: *salt* y bcrypt
 
@@ -339,6 +347,8 @@ La cadena es lo que guardará la base de datos. Incluye los campos, separados co
 -->
 
 ## Integridad de mensajes
+
+Se pueden usar hashes para detectar cuándo un atacante ha cambiado un mensaje: integridad
 
 Se puede usar un hash para asegurar la integridad de un mensaje: [HMAC](https://en.wikipedia.org/wiki/HMAC)
 
@@ -391,188 +401,65 @@ Hay modos de AES que utilizan estos esquemas: [AES-GCM](https://en.wikipedia.org
 - Usado en TLS
 - Vulnerable algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
 
-## Cadena de custodia
+## AES en modo GCM
 
-Cuando se investiga un crimen... ¿cómo se protegen las evidencias digitales contra modificaciones?
+![center w:25em](https://upload.wikimedia.org/wikipedia/commons/2/25/GCM-Galois_Counter_Mode_with_IV.svg)
 
-Inicio de cadena de custodia publicando sus hashes
+> Fuente: wikipedia
 
-![center w:20em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
+## Merkle Hash tree
+<!-- _class: smaller-font -->
 
+Si un archivo gran cambia a menudo y hay que calcular su hash cada vez, llevará mucho tiempo
 
-## Firma digital
-<!-- _class: with-success -->
+Solución: calcular hash solo de los bloques que cambien, y agruparlos en un árbol
 
-Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
+Permite firmar bases de datos, discos... de forma eficiente
 
-![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
+![center w:25em](images/hashes/Hash_Tree.svg)
 
-Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
+## Blockchain
 
+![w:30em center](images/blockchain/bc-transactions.png)
 
-# Blockchain
+Tenemos todo un [tema para hablar de blockchain](03-blockchain.html)
+
+## Aplicación: cadena de custodia
 <!-- _class: lead -->
 
 ---
 
-Ya veis que los hashes tienen muchos usos en criptografía
+Cuando se investiga un crimen... ¿cómo se protegen las evidencias digitales contra modificaciones?
 
-Vamos a ver con un poco más de detalle su uso en las monedas digitales: Blockchain y BitCoin
-
-![bg right:40%](https://www.ledgerinsights.com/wp-content/uploads/2019/10/digital-currency-dollar.2-810x476.jpg)
-
-## Bitcoin
-
-![center w:15em](https://upload.wikimedia.org/wikipedia/commons/c/c5/Bitcoin_logo.svg)
-
-- Inventado en 2008 por Satoshi Nakamoto (¡no se sabe quién es!)
-- Sistema descentralizado de pagos digitales
-- Utiliza firma digital y *proof-of-work* mediante hashes
-
-> [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
-
-
-<!--
-El paper original de "Satoshi Nakamoto" es sencillo de entender al menos en su primera parte, y se recomienda su lectura
--->
-
+![center w:20em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
 
 ---
 
-![center](https://steemitimages.com/DQmbuB6M8nfThcsUeWWJwpNrzHDDXMJQAmXL7aLtxEshrJA/blockchain%20transitionnew.jpeg)
-
-> https://www.investopedia.com/news/how-bitcoin-works/
-
-## Transacciones
-
-![w:25em center](images/hashes/bc-transactions.png)
-
-<!--
-Esto es una transacción bitcoin: "X le da a Y Z bitcoins". Y el mensaje va firmado por Y.
-
-Además, las transacciones se encadenan unas con otras: una transacción contiene también el hash de las transacción anterior. Para modificar una transacción... ¡habría que modificar todas las transacciones anteriores, y sus firmas!
--->
-
-## Proof of work: Hashcash
-
-Hashcash fue propuesto por Adam Back en 1997 para reducir el spam.
-
-- Problema a resolver: queremos que un ordenador solo pueda enviar un correo electrónico por minuto.
-- Solución: obligémosle a calcular 10.000.000 de hashes antes de que pueda enviar un correo.
-
-> [Hashcash- A Denial ofServiceCounter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
+![center](images/hashes/dossier.png)
 
 
----
+## Inicio de una cadena de custodia
 
-1. Crea una cadena con la dirección de correo destino
-1. Añade la fecha de envío
-1. Busca un número tal que el hash de todo esto empiece por 8 ceros
+- Valor de hash en un acta notarial
+- Valor de hash en un informe que se presenta en juzgado
+- Valor de hash en una tercera parte de confianza. Ejemplo: eGarante
 
-La única manera de que pueda hacer eso es "entreteniéndose" probando números uno después de otro
+Cuando llegue el jucio (o una investigación paralela) las evidencias digitales tienen que tener el mismo valor de hash que el inicial, lo que demuestra que la prueba no ha sido modificada
 
-La idea es ajustar "el número de ceros iniciales" para que sepamos que tarde más o menos un minuto en encontrar el número
+![bg right w:90%](images/hashes/chainofcustody-form.png)
 
-![bg w:100% right:40%](images/hashes/proof-of-work.jpg)
+## Cadena de custodia en blockchain
 
-> http://ronny-roehrig.com/criptoavances/que-es-el-algoritmo-proof-of-work-pow-como-funciona/
+![center w:20em](images/hashes/Blockchain-enabled-Digital-Chain-of-Custody.png)
 
----
+> https://www.researchgate.net/publication/338443914_A_Survey_on_the_Internet_of_Things_IoT_Forensics_Challenges_Approaches_and_Open_Issues
 
-```
-X-Hashcash: 1:52:380119:calvin@comics.net:::9B760005E92F0DAE
-```
 
-- versión
-- bits: número de bits iniciales del hash
-- date: fecha
-- resource: Descripción del recurso: correo electrónico, transacción...
-- counter: La PoW: lo que añadido al resto del mensaje da un hash con un número determinado de ceros
+## Preguntas...
 
-```
-echo -n 1:52:380119:calvin@comics.net:::9B760005E92F0DAE | sha1sum  
-0000000000000756af69e2ffbdb930261873cd71  -
-```
-
-## Minería
-
-Se adaptó el X-Hashcash. Un bloque es así:
-
-```
-* HASH DEL BLOQUE ANTERIOR
-* TRANSACCION 1: ALICE LE PAGA A BOB
-* TRANSACCIÓN 2: BOB LE PAGA A CHARLIE
-* ...
-* 1 BITCOIN PARA MÍ
-* COUNTER
-```
-
-Y minar es encontrar un COUNTER tal que el hash de ese bloque empiece por el-número-de-ceros que toque
-
-SHA2-256(bloque)=000000000000000000000000000000000000000000000000000000000000000000000001... y 185 bits más
-
-El primero que encuentre ese COUNTER se lleva un bitcoin
-
----
-
-https://btc.com/
-
-![](images/btccom.png)
-
-El número de ceros necesario se ajusta para que  más o menos cada 15 minutos alguien encuentre ese COUNTER: la dificultad es ajustable
-
----
-
-![](images/hashes/btccom3.png)
-
----
-
-Pincha en cualquiera de los bloques y verás las transacciones
-
-![w:25em center](images/hashes/btccom2.png)
-
-## Consenso distribuido
-
-![bg right:50% w:100%](https://miro.medium.com/max/600/0*FCWGyPmN-wBK4wBe.jpeg)
-
-Bitcoin funciona por consenso distribuidos: todos se tienen que poner de acuerdo en quién ha sido el primero en encontrar el COUNTER
-
-Pero estamos hablando de dinero... un tema en el que pocas veces hay consenso y sí mucha competitividad
-
-¿Qué pasa si algún nodo es egoísta y no reconoce que otro ha encontrado antes el hash?
-
-> https://kasunindrasiri.medium.com/understanding-raft-distributed-consensus-242ec1d2f521
-
----
-
-- Bit coin: red P2P de nodos
-- Cada nodo está constantemente tratando de encontrar el COUNTER del bloque que provoque que el hash se inicie con un número determinado de ceros.
-- Cuando lo consigue: lo anuncia a todos los nodos que conocen.
-- Los demás nodos lo comprueban y reconocen y empiezan un nuevo bloque.
-
-![bg right:50%](images/hashes/consenso.png)
-
----
-- A veces es imposible llegar a un consenso: [The Byzantine General Problem](https://es.wikipedia.org/wiki/Tolerancia_a_faltas_bizantinas)
-- En Bitcoin se resuelve:
-    - Creando una moneda nueva
-    - Cuando los nodos en la cadena más pequeña "claudican" y desisten
-- El protocolo funciona siempre que al menos la mitad de los nodos cooperen
-
-![bg right:50% w:200%](images/hashes/consenso2.jpg)
-
-> https://academy.binance.com/en/articles/what-is-a-51-percent-attack
-
-## Usos adicionales
-
-En el registro de BlockChain / Ethereum y otros, a parte de transacciones económicas, se pueden inscribir datos que quedan públicos (el ledger es público) para posterior consulta:
-
-- "Notaría" digital
-- Contratos digitales
-- Non Fungible Tokens (NFTs): hash de una fotografía
-- ...
-
-![bg left:40%](images/hashes/nft.jpg)
+- ¿Es válida la cadena de custodia si no se publica el hash?
+- Si el valor de hash no es el mismo... ¿se ha invalidado la prueba?
+- MD5... ¿es válido como valor de hash para el inicio de una cadena de custodia?
 
 # Resumen y referencias
 <!-- _class: lead -->
@@ -586,24 +473,26 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
     - Bitcoin
     - Cadena de custodia
     - HMAC (integridad)
-    - ...
+- Firma digital = cifrado con clave privada del hash de un documento
 
 ## Referencias
 
 - [Hashing Algorithms and Security - Computerphile](https://www.youtube.com/watch?v=b4b8ktEV4Bg)
-- [But how does bitcoin actually work?](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
-- [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
-- [Hashcash - A Denial of Service Counter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
 - [The State of Hashing Algorithms — The Why, The How, and The Future](https://medium.com/@rauljordan/the-state-of-hashing-algorithms-the-why-the-how-and-the-future-b21d5c0440de)
 
 ---
 
-<!-- _class: center -->
-
-Ejercicios: [Funciones de hash](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/06/Hashes.ipynb)
+Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto2/blob/main/ejercicios/03/Hashes.ipynb>
 
 
-Continúa en: [TLS y Public Key Infrastructure](07-pki.html)
+Sigue el tema en:
+
+- [Firma digital](03-firma.html)
+- [Blockchain](03-blockchain.html)
+
+Siguiente tema:
+
+- [TLS y Public Key Infrastructure](04-pki.html)
 
 # ¡Gracias!
 <!-- _class: last-slide -->

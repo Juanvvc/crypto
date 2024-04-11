@@ -38,7 +38,8 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
     ol { counter-reset: li 5; }
 </style>
 
-6. [Funciones de Hash y Blockchain](06-hashes.html)
+6. [Funciones de Hash](06-hashes.html)
+    - Anexo: [Blockchain](A3-blockchain.html)
 1. [TLS y Public Key Infrastructure](07-pki.html)
 1. [Ransomware](08-ransomware.html)
 1. [Esteganografía](09-esteganografia.html)
