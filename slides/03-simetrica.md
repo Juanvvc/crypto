@@ -153,7 +153,7 @@ La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenad
 
 ---
 
-![center h:22em](images/hitchhikers_guide.jpg)
+![center h:22em](images/generic/hitchhikers_guide.jpg)
 
 <!-- Recordad: los ordenadores mejoran constantemente.
 
@@ -185,7 +185,7 @@ En cifrado simétrico, el tamaño en bits de su clave es igual a la **fortaleza*
 
 NIST: *The  most  important  approach  is  to  be  flexible;  the  use  of  implementations  and  applications  that  can  most  easily  be  adapted  to  the  cryptographic  security  offerings  and  a  plan  for  transitioning  to  them  offer  the  best  solution*
 
-![w:22em center](images/nist-usage.png)
+![w:22em center](images/simetrica/nist-usage.png)
 
 La amenaza conocida que puede modificar el calendario es la **computación cuántica**
 

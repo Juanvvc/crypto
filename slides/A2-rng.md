@@ -109,7 +109,7 @@ La criptografía es segura siempre que las hipótesis de funcionamiento se cumpl
 
  ## Ruido térmico
 
- ![center w:15em](images/sorolltermic.png)
+ ![center w:15em](images/random/sorolltermic.png)
 
  Una resistencia a temperatura ambiente tiene electrones libres que se mueven aleatoriamente (carga negativa) y podemos medir el desequilibrio momentáneo con un conversor Analógico/Digital
 
@@ -118,7 +118,7 @@ El conversor dará una secuencia indefinida de bits aleatorios
 ## Generador cuántico
 <!-- _class: center -->
 
-![w:15em](images/randomquantic.png) ![](images/idquantiquerng.png)
+![w:15em](images/random/randomquantic.png) ![](images/random/idquantiquerng.png)
 
 Con una fuente de luz apuntamos a un espejo semireflectante; dos fotodetectores detectan uno u otro el fotón de forma totalmente aleatoria
 
@@ -174,7 +174,7 @@ las funciones de un HSM son:
 
 ## HSM servicio en red
 
-![center](images/ncipher-xarxa.png)
+![center](images/random/ncipher-xarxa.png)
 
 ## Requisitos
 

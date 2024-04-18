@@ -1,10 +1,10 @@
 ---
 marp: true
-title: Criptografía - Public Key Infrastructure
+title: Criptografía - PKI
 author: Juan Vera
 keywords: criptografía,protocolos,ssl,https,tls,pki
 paginate: true
-footer:
+footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
 transition: fade
@@ -18,7 +18,7 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# *Public Key Infrastructure* y protocolo HTTPS
+# TLS y Public Key Infrastructure
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
@@ -27,30 +27,19 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 ## Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Gestión de claves públicas](#5)
-1. [Juntando las piezas](#29)
-1. [Resumen y referencias](#38)
+1. [Criptografía híbrida](#5)
+1. [Gestión de claves públicas](#16)
+1. [Resumen y referencias](#35)
 
-## Qué sabemos hacer
+## Recordatorio: cifrado asimétrico
+<!-- _class: two-columns -->
 
-- Sabemos enviar mensajes con confidencialidad: criptografía simétrica
-    - [Tema 3](03-simetrica.html): AES, ChaCha20
-- Sabemos acordar una clave con alguien a quien no conocíamos:
-    - [Tema 4](05-asimetrica.html): Diffie-Hellman
-- Sabemos firmar mensajes: hash y después cifrado con criptografía asimétrica
-    - [Tema 5](05-asimetrica.html): RSA
-    - [Tema 6](06-hashes.html): resumen de mensajes, hashes, firmas
+![center w:25em](images/asimetrica/asimetrica.svg)
 
-
-## Problemas cifrado asimétrico
-
-![bg left:50% w:90%](images/generic/I-m-Wolf-I-solve-problems.jpg)
-
-- Solo cifran números enteros con una longitud igual a la clave. Ej: 4096 bits
-- Muy lento comparado con el cifrado simétrico
-- ¿Cómo distribuimos las claves públicas?
-
-Hoy veremos las soluciones para estos problemas: cifrado híbrido y certificados
+- Todo el mundo tiene dos claves: pública y privada
+- Lo que cifras con una lo puedes descifrar con la otra
+- Confidencialidad: Alice cifra con la clave pública de Bob, Bob descifra con su clave privada
+- Autenticación (firma): Alice cifra con su clave privada, cualquiera descifra con la clave pública de Alice
 
 <!-- Recordatorio de cómo funciona el cifrado asimétrico:
 
@@ -66,50 +55,129 @@ Hoy veremos las soluciones para estos problemas: cifrado híbrido y certificados
     - PERO: dado que el mensaje podemos descifrarlo con una clave pública específica, sabemos que solo la persona que tenga la clave privada podría haber enviado ese mensaje: estamos acercándonos a la **autenticidad**: probar quién ha enviado un mensaje
 -->
 
-   
-# Gestión de claves públicas
-<!--
-_class: lead
-header: Gestión de claves públicas
--->
+## Problemas cifrado asimétrico
 
-Certificados electrónicos
+![bg left:50% w:90%](images/generic/I-m-Wolf-I-solve-problems.jpg)
 
-## Recordatorio: cifrado asimétrico
+- Solo cifran números enteros con una longitud igual a la clave. Ej: 4096 bits
+- Muy lento comparado con el cifrado simétrico
+- ¿Cómo distribuimos las claves públicas?
 
-![center w:25em](images/asimetrica/asimetrica.svg)
+Hoy veremos las soluciones para estos problemas: cifrado híbrido y certificados
 
-- Todo el mundo tiene dos claves: pública y privada
-- Lo que cifras con una lo puedes descifrar con la otra
-- Confidencialidad: Alice cifra con la clave pública de Bob, Bob descifra con su clave privada
-- Autenticación (firma): Alice cifra con su clave privada, cualquiera descifra con la clave pública de Alice
+# Criptografía híbrida
+<!-- _class: lead -->
 
-## Ataque *man in the middle*
+O cómo combinar los ladrillos que ya hemos visto para construir protocolos
 
-![center w:25em](images/asimetrica/dh-maninthemiddle.png)
+## Definición
 
-<!--
-Durante un ataque man in the middle, un atacante se pone en medio de las comunicaciones. Cada una de las partes establece una conexión segura con el atacante: nadie de fuera sabe qué es está diciendo, pero no estamos hablando con quien queremos hablar.
+- La criptografía simétrica permite cifrar **muy rápidamente**
+- Los hashes permiten calcular resúmenes **muy rápidamente**
+- La criptografía asimétrica permite cifrar cosas sin tener que intercambiar una clave privada... **pero es lenta**
+- [Criptografía híbrida](https://es.wikipedia.org/wiki/Criptograf%C3%ADa_h%C3%ADbrida)
+    - **Cifrado híbrido**: enviamos clave simétrica cifrado con la clave pública
+        - Ejemplo 1: D-H y después ciframos con AES
+        - Ejemplo 2: ciframos la clave AES con RSA con la clave pública del receptor.
+    - **Firma digital**: calculamos el hash de un mensaje y lo ciframos con nuestra clave privada RSA
 
-El atacante dejará pasar la mayoría de las comunicaciones, solo está interesado en participar una vez, cambiando la cuenta bancaria en la que se realiza un pago.
+## Firma digital: proceso
 
-Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de ataque!
 
-- No hemos dado autenticación: no sabemos con quién estamos hablando
-- No hemos dado integridad: un atacante podría cambiar el mensaje sin que nos enteremos
+- Los algoritmos como RSA solo cifran **números enteros** de una longitud igual a la clave. Por ejemplo, 4096 bits.
+- Alice podría dividir el documento en bloques de 4096b, pero eso no es eficiente
+- Solución: **hash cifrado con la clave privada**
+    1. Alice calcula el hash de su documento de 10MB. El hash tiene 512 bytes
+    1. Alice cifra el hash con su clave privada
+    1. Cualquiera persona (eso incluye a Bob) puede conocer la clave pública de Alice y descifrar el hash
+    1. Si se encuentra un documento con un hash firmado por una clave pública, cualquier persona puede verificar que el autor del documento es el poseedor de la clave privada.
 
-(aún así, en los protocolos descritos, es muy poco probable que el atacante pueda cambiar el contenido de un mensaje por otro CON SENTIDO. Pero algunos protocolos son muy sensibles al cambio: hashes, repeticiones...)
--->
+> https://cryptobook.nakov.com/digital-signatures/rsa-signatures
 
 ---
-<!-- _class: with-info -->
+<!-- _class: with-success -->
 
-Si tengo la clave pública de Bob...
+Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
 
-- Puedo enviarle mensajes secretos: yo cifro con su clave pública, Bob descifra con su clave privada. Por ejemplo, puedo enviarle la clave AES que usaremos para el resto de las comunicaciones
-- Bob puede asegurar que es él: cifra "Soy Bob" con su clave privada, podemos descifrar el mensaje con su clave pública
+![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
 
-¿Cómo consigo la clave pública de Bob?
+Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
+
+## Protocolo Diffie-Hellman, autenticado
+<!-- _class: smallest-font -->
+
+Igual que el D-H que ya conocemos, pero firmando los mensajes:
+
+1. Alice y Bob tienen un par de claves RSA $(PK_A, SK_A)$ y $(PK_B, SK_B)$,  y se intercambian $PK_A$ y $PK_B$
+1. *Alice* y *Bob* acuerdan $g$ y $p$ primos entre sí
+1. Alice escoge $a$ y Bob escoge $b$ (en secreto)
+1. Se envían entre ellos:
+    - $Alice \rightarrow Bob: A=g^{a} \mod p, sign_A=E(A, SK_A)$
+    - $Bob \rightarrow Alice: B=g^{b} \mod p, sign_B=E(B, SK_B)$
+1. Verifican la firma de cada lado:
+    - Alice verifica que $B \equiv D(sign_B, PK_B)$
+    - Bob verifica que $A \equiv D(sign_A, PK_A)$
+    
+1. Calculan en secreto:
+    - $Alice$: $s = B^{a} \mod p = g^{ab} \mod p$
+    - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
+1. Y usan $s$ como clave de cifrado un algoritmo simétrico
+
+<!--
+En el paso 2, recuerda que, en la realidad, Alice y Bob no usarán g y p cualquiera sino números conocidos que están en los estándares actuales y que sabemos que funcionan correctamente
+
+Es decir: Alice y Bob firma los parámtros A y B y, si la firma verifica, Bob sabe que está hablando con Alice y al revés.
+
+Por supuesto, esto mismo se puede hacer con Diffie-Hellman sobre curvas elípticas
+-->
+
+## Cifrado híbrido: HTTPS
+
+1. Alice y Bob negocian los parámetros de seguridad
+1. Alice y Bob acuerdan una clave (**clave de sesión**) utilizando D-H autenticado con sus claves públicas
+1. Luego usan esa clave para cifrar las comunicaciones AES
+1. Periódicamente, renuevan la clave de sesión ejecutando de nuevo un D-H (**modo D-H efímero**)
+
+Esto es el [protocolo TLS](A2-protocolos.html)
+
+![bg right:50%](images/pki/ssl.gif)
+
+## Ejemplo configuración TLS (1)
+<!-- _class: center two-columns -->
+
+![](images/pki/tls-example1.png)
+
+- ECDHE: Elliptic Curve Diffie-Hellman, ephimeral
+- RSA: authentication usando RSA
+- AES_128_GCM: AES con claves de 128 bits en modo GCM
+- SHA256: algoritmo de hash usado
+
+## Ejemplo configuración TLS (2)
+<!-- _class: two-columns -->
+
+![](images/pki/tls-example2.png)
+
+- TLS: la clave la decide el servidor y la envía cifrada con RSA, no hay D-H
+- AES_128_GCM: AES con claves de 128 bits en modo GCM
+- SHA256: algoritmo de hash usado
+
+## Qué sabemos hacer
+
+- Sabemos enviar mensajes con confidencialidad: criptografía simétrica
+    - AES, ChaCha20
+- Para ello, necesitamos una clave simétrica compartida, y sabemos acordarla con alguien a quien no conocíamos previamente:
+    - Elliptic Curves Diffie-Hellman (ECDH)
+-  Para ello, necesitamos autenticar a la otra persona: obtenemos su clave pública y le pedimos que cifre algo con su clave privada
+    - Authenticated ECDH
+- HTTPS / TLS se encarga de gestionar hacer todo esto
+    
+---
+
+Una conexión HTTPS / TLS no quiere decir "confía en mí". Quiere decir "nadie más puede acceder". Podrías estar recibiendo la llamada de un atacante, y que fuese privada.
+
+- Scott Hanselman
+
+![bg right:60%](images/pki/scream.jpg)
 
 ---
 <!-- _class: center -->
@@ -126,23 +194,47 @@ por el de
 
 **cómo compartir claves públicas (asimétricas)**
 
+# Gestión de claves públicas
+<!-- _class: lead -->
+
+Certificados electrónicos
+
+## Ataque *man in the middle*
+
+![center w:28em](images/asimetrica/dh-maninthemiddle.png)
+
+<!--
+Durante un ataque man in the middle, un atacante se pone en medio de las comunicaciones. Cada una de las partes establece una conexión segura con el atacante: nadie de fuera sabe qué es está diciendo, pero no estamos hablando con quien queremos hablar.
+
+El atacante dejará pasar la mayoría de las comunicaciones, solo está interesado en participar una vez, cambiando la cuenta bancaria en la que se realiza un pago.
+
+Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de ataque!
+
+- No hemos dado autenticación: no sabemos con quién estamos hablando
+- No hemos dado integridad: un atacante podría cambiar el mensaje sin que nos enteremos
+
+(aún así, en los protocolos descritos, es muy poco probable que el atacante pueda cambiar el contenido de un mensaje por otro CON SENTIDO. Pero algunos protocolos son muy sensibles al cambio: hashes, repeticiones...)
+-->
+
 ## El problema de la confianza
 <!-- _class: smaller-font -->
 
 ¿Cómo conseguimos la clave pública de los demás?
 
-- **Sistema central de distribución**: base de datos de claves públicas compartida. Idea original de Diffie y Hellman el 1976
+- **Sistema central de distribución**: base de datos de **todas** las claves públicas necesarias.
+    - Idea original de Diffie y Hellman el 1976
+    - No es práctica en la actualidad
 - **Gestión manual**: guardamos una lista de claves públicas. Ejemplo: SSH
 - **Certificados**
     - PGP: gestión descentralizada (Web of trust)
     - PKI/X.509: gestión centralizada
 
-![bg right w:100%](images/pki/ssh-meme.png)
-
+![bg left:40%](images/auth/identities.png)
 
 ## Gestión manual: SSH
 <!-- _class: smaller-font -->
 
+- El cliente genera un par de claves pública/privda. Puede generar tantas como quiera
 - El cliente guarda cifrada la clave privada y la lista de claves públicas de los servidores en que confía
 
 ![center](images/pki/sshclient.png)
@@ -157,6 +249,51 @@ Este esquema es muy utilizado por los administradores de sistemas
 
 > https://jumpcloud.com/blog/how-to-manage-ssh-keys-linux
 
+---
+
+```bash
+juanvi@debian:~/.ssh$ ls
+juanvi@debian:~/.ssh$ ssh-keygen -f clave1 -t rsa
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in clave1
+Your public key has been saved in clave1.pub
+The key fingerprint is:
+SHA256:0tj5sJj1Iv6hqbgESj3DcoxONkWVxIg+3Wnyb5ucoRg juanvi@debian
+The key's randomart image is:
++---[RSA 3072]----+
+|  ..=o.          |
+| ... o           |
+|. ... .          |
+| o*o + + .       |
+|.B.B+ o S        |
+|*.+ o. = =       |
+|...E  =.+ o      |
+| . .o.o*+o       |
+|  oo.o=*o        |
++----[SHA256]-----+
+juanvi@debian:~/.ssh$ ls -l
+total 8
+-rw------- 1 juanvi juanvi 2602 Apr 18 17:00 clave1
+-rw-r--r-- 1 juanvi juanvi  567 Apr 18 17:00 clave1.pub
+juanvi@debian:~/.ssh$ ssh-copy-id -i clave1 user@server.com
+juanvi@debian:~/.ssh$ ssh -i clave1 user@server.com
+```
+
+<!--
+El penúltimo paso pedirá la contraseña del usuario en server.com
+
+También se podría añadir manualmente la clave1.pub al final del archivo ~/.ssh/authorized_keys en server.com
+
+Se puede configurar ssh (archivo: ~/.ssh/config) para que siempre que se acceda a server.com, se utilice un usuario y una clave determinada
+-->
+
+---
+
+![center w:20em](images/pki/ssh-meme.png)
+
+
 ## Gestión con certificados
 <!-- _class: with-success -->
 
@@ -166,14 +303,17 @@ $$
 \{identidad_{Alice}, PK_{Alice}\}
 $$
 
+Identidad de Alice: nombre, dirección de correo, URL del servidor HTTP...
 
-y para poder verificar la autenticidad **una tercera parte de confianza (TTP)** firma esta tupla:
+**Una tercera parte de confianza (TTP)** firma esta tupla:
 
 $$
 Certificado_{Alice} = \{identidad_{Alice}, PK_{Alice}, Sign(\{identidad_{Alice}, PK_{Alice}\}, SK_{TTP})
 $$
 
 Alice puede ahora distribuir su certificado, que incluye su identidad y clave pública $PK_{Alice}$ a todos los que confíen en esa TTP
+
+![bg right:40%](images/auth/DNI-3.jpg)
 
 <!--
 La identidad de Alice pueden ser muchas cosas:
@@ -182,37 +322,23 @@ La identidad de Alice pueden ser muchas cosas:
 - La URL de una página web, en el caso de servidores
 -->
 
----
+## TTP: Tercera parte de confianza
 
-![center w:20em](images/pki/google.png)
-
----
-
-Una conexión HTTPS / TLS con certificados no quiere decir "confía en mí". Quiere decir "es privada". Podrías estar recibiendo la llamada de Cthulhu, y que fuese privada.
-
-Scott Hanselman
-
-En Internet usamos terceras partes de confianza que garantizan las identidades presentes en los certificados
-
-![bg right:60%](images/pki/cthulhu.png)
-
-> https://www.deviantart.com/karosu-maker/art/The-Call-of-Cthulhu-288397181
-
-
-## Tercera parte de confianza
-
-Ya no tenemos que conseguir la clave pública de toda Internet, solo la de la TTP
+Ya no tenemos que conseguir la clave pública de cualquier persona, solo la de la TTP (*Trusted Third Party*) y verificar que las claves públicas de los certificados que nos presenten estén firmadas por la TTP
 
 La TTP puede ser:
 
+- un "igual": en el modelo "*web of trust*" (PGP)
 - una autoridad central: en una Infraestructura de Clave Pública (PKI)
-- un "igual": en el modelo "web of trust" (como en PGP)
 
-![bg right w:100%](images/pki/ttp.png)
+![bg right:40% w:100%](images/pki/ttp.png)
 
-> PGP: Pretty Good Privacy
-> PKI: Public Key Infrastructure
+<!--
 
+- PGP: Pretty Good Privacy
+- PKI: Public Key Infrastructure
+
+-->
 
 ## PGP: Pretty Good Privacy
 
@@ -226,13 +352,13 @@ Nota: PGP tiene una versión de libre distribución llamada GPG derivada de la r
 
 ![center](images/pki/mailvelope.png)
 
-> Esto es un ejemplo de la interfaz de Mailvelope (GMail, comercial)
+Esto es un ejemplo de la interfaz de Mailvelope (GMail, comercial)
 
 ---
 
 ![w:25em center](images/pki/kgpg.png)
 
-> Esto es un ejemplo de la interfaz de KGPG (Linux)
+Esto es un ejemplo de la interfaz de KGPG (Linux)
 
 ## PGP: grados de seguridad
 <!-- _class: with-warning -->
@@ -256,22 +382,29 @@ A partir de unos cuantos certificados el nivel de seguridad deja de ser aceptabl
 ## Problema de PGP
 <!-- _class: with-warning -->
 
-- Muy útil para grupos pequeños: amigos, empresa, universidad...
+- PGP / GPG aún se usa en entornos corportativos que pueden gestinar todas las claves públicas de sus empleados
 - No escala bien a Internet
 
-PGP / GPG aún se usa, pero no es universal
 
+## PKI: Public Key Infrastructure
+<!-- _class: with-warning -->
 
-## Public Key Infrastructure
+Idea: confiar en unas pocas TTPs que gestionen todos los certificados de Internet
 
-Idea: confiar en unas pocas TTPs (Trusted Third Party) que gestionen todos los certificados de Internet
+En PKI, las TTPs se llaman **Autoridades de Certificación / *Certification Authorities* (CAs)**
 
-Se llaman **Autoridades de Certificación / Certification Authorities (CAs)**
-
-Las claves pública de estas CAs vienen con:
+Las claves pública de estas CAs vienen integradas (compruébalo):
 
 - En el sistema operativo Windows, Linux, OSX...
 - En los navegadores de internet
+
+Instalar una nueva CA en un PC es un proceso excepcional
+
+<!--
+Las empresas sí que instalan CAs personalizadas en los PCs de los usuarios
+
+Por ejemplo, la CA del proxy/firewall de la empresa, para poder descifrar las comunicaciones de los empleados
+-->
 
 ## Cadena de confianza, intermediarios y raíces
 
@@ -282,14 +415,14 @@ Normalmente hay una "cadena de confianza" con varios eslabones
 > https://es.wikipedia.org/wiki/Cadena_de_confianza
 
 <!--
-La clave privada de un TTP es muy delicada: se protege en grandes edificios con una enorme seguridad física, en PCs desconoctados de Internet y dentro de cajas fuertes.
+La clave privada de una TTP es muy delicada: se protege en grandes edificios con una enorme seguridad física, en PCs desconectados de Internet y dentro de cajas fuertes.
 
 Por eso los certificados de usuarios no suelen estar firmados por una TTP final (llamada "Root CA") sino por otras terceras partes intermedias con capacidad para firmas certificados de usuarios. El certificados de estos intermediarios sí que está firmado por la Autoridad raíz
 -->
 
 ---
 
-![w:25em center](images/certificate-chain-example.png)
+![w:25em center](images/pki/certificate-chain-example.png)
 
 <!--
 Esto es el ejemplo de una cadena de certificados de campus.viu.es, que aparece al pinchar "en el candado" de la barra de direcciones.
@@ -309,7 +442,7 @@ Prueba también con otras páginas web
 ## Jerarquía de Autoridades de Certificación
 
 - CA raíz: sólo emite certificados para CA subordinadas y "revocaciones"
-    - está activa en momentos puntuales (off-line)
+    - está activa en momentos puntuales (*off-line)*
     - en caso de compromiso no hay protocolo definido
 - CA subordinada: emite certificados finalistas (usuarios, servidores)
     - está en línea constantemente, ya sea por red pública o privada
@@ -325,126 +458,24 @@ En la imagen, Root CAs instaladas en mi Firefox
 
 ## Revocación
 
-Los certificados tienen una validez limitada en el tiempo, pero es posible que su contenido deje de ser válido antes
+Los certificados tienen una validez limitada en el tiempo, pero es posible que su contenido deje de ser válido antes:
 
-Si esto pasa, hace falta comunicarlo a la RA (Autoridad de Registro) siguiendo los procedimientos que dictamine la Política de Certificación (o la Declaración de Prácticas de Certificación derivada)
+- Compromiso, o incluso sospecha de compromiso de la clave privada
+- Baja de la persona
+
+Si esto pasa, hace falta comunicarlo a la CA siguiendo sus procedimientos específicos
 
 ## ¿Cómo sabemos si un certificado ha sido revocado?
 
-- se publica una CRL: Certificate Revocation List
-- se publica en un servidor OCSP
+La CA se encarga de:
 
-# Juntando las piezas
-<!--
-_class: lead
-header: Criptografía híbrida
--->
+- Publicar en su web una CRL: *Certificate Revocation List*
+- Habilitar un servicio especial llamado OCSP al que se le puede preguntar si un certificado aún es válido
 
-Protocolo HTTPS
-
-## Criptografía híbrida
-
-* La criptografía simétrica permite cifrar **muy rápidamente**
-  * Pero no garantiza que el mensaje no haya cambiado, ni quién lo envía
-* Los hashes permiten calcular resúmenes **muy rápidamente**
-  * Pero no ofrece confidencialidad
-* La criptografía asimétrica permite cifrar cosas sin tener que intercambiar una clave privada...
-  * pero es lenta
-
----
-
-[Criptografía híbrida](https://es.wikipedia.org/wiki/Criptograf%C3%ADa_h%C3%ADbrida): aprovechar lo mejor de todos los mundos
-
-Mecanismo|Algorutmos|Descripción|Servicios
---|--|--|--
-**Cifrado híbrido**|RSA+AES|Usamos cifrado asimétrico para enviar la clave simétrica|Confidencialidad, autenticación
-**Message Code Authentication**|AES+Hash/AES en modo GCM|Calculamos hash y después cifrado simétrico|Confidencialidad, integridad
-**Firma digital**|Hash+RSA|Ciframos hash con clave privada|Integridad, autenticación
-
-## Firma digital: proceso
-
-* Los algoritmos como RSA solo cifran **números enteros** de una longitud igual a la clave. Por ejemplo, 4096 bits.
-* Alice podría dividir el documento en bloques de 4096b, pero eso no es eficiente
-* Solución: **hash cifrado con la clave privada**
-    - Alice calcula el hash de su documento de 10MB. El hash tiene 512 bytes
-    - Alice cifra el hash con su clave privada
-    - Cualquiera persona (eso incluye a Bob) puede conocer la clave pública de Alice y descifrar el hash
-    - Si se encuentra un documento con un hash firmado por una clave pública, cualquier persona puede verificar que el autor del documento es el poseedor de la clave privada.
-
-> https://cryptobook.nakov.com/digital-signatures/rsa-signatures
-
----
-<!-- _class: with-success -->
-
-Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
-
-![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
-
-Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
-
-## Protocolo Diffie-Hellman, autenticado
-<!-- _class: smaller-font -->
-
-Dos usuarios $Alice$ y $Bob$, cada uno tiene las claves públicas del otro
-
-1. Acuerdan $g$ y $p$ primos entre sí
-1. Escogen números en secreto $a$ y $b$
-1. Se envían entre ellos:
-    - $Alice \rightarrow Bob: A=g^{a} \mod p, sign(A, SK_A)$
-    - $Bob \rightarrow Alice: B=g^{b} \mod p, sign(A, SK_B)$
-1. Verifican la firma de cada lado
-1. Calculan en secreto:
-    - $Alice$: $s = B^{a} \mod p = g^{ab} \mod p$
-    - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
-1. Y usan $s$ como clave de cifrado un algoritmo simétrico
-
-![bg right:30% w:110%](https://www.pngall.com/wp-content/uploads/2016/05/Original-Stamp.png)
-
-<!--
-Es decir: Alice y Bob firma los parámtros A y B y, si la firma verifica, Bob sabe que está hablando con Alice y al revés.
--->
-
-## Cifrado híbrido: protocolo HTTPS
-
-1. Alice y Bob negocian los parámetros de seguridad
-1. Alice y Bob acuerdan una clave (**clave de sesión**) utilizando D-H autenticado con sus claves públicas
-1. Luego usan esa clave para cifrar las comunicaciones AES
-1. Periódicamente, renuevan la clave de sesión ejecutando de nuevo un D-H (**"D-H efímero"**)
-
-![bg right:50%](images/pki/ssl.gif)
-
----
-<!-- _class: center -->
-
-![](images/pki/tls-example1.png)
-
-Protocolo negociado: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-
-<!--
-- ECDEHE: Elliptic Curve Diffie-Hellman, ephimeral
-- RSA: authentication
-- AES_128_GCM: AES con claves de 128 bits en modo GCM. Este no lo hemos visto, añade un hash al cifrado.
-- SHA256: algoritmo de hash usado por el modo GCM
--->
-
----
-<!-- _class: center -->
-
-![](images/pki/tls-example2.png)
-
-Protocolo negociado: TLS_AES_128_GCM_SHA256
-
-<!--
-- TLS: la clave la decide el cliente, no hay D-H
-- AES_128_GCM: AES con claves de 128 bits en modo GCM. Este no lo hemos visto, añade un hash al cifrado.
-- SHA256: algoritmo de hash usado por el modo GCM
--->
+Es tu responsabilidad comprobar si los certificados son válidos
 
 # Resumen y referencias
-<!--
-_class: lead
-header: ""
--->
+<!-- _class: lead -->
 
 ## Resumen
 
@@ -470,7 +501,9 @@ header: ""
 ---
 <!-- _class: center -->
 
-Continúa en: [Ransomware](08-ransomware.html)
+Anexo recomendado: [Protocolo TLS](A2-protocolos.html)
+
+Continúa en: [Autenticación](05-autenticacion.html)
 
 # ¡Gracias!
 <!-- _class: last-slide -->
