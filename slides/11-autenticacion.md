@@ -49,9 +49,9 @@ Es decir, no repudio = autenticidad + integridad
 
 1. [Autenticación](#4)
 1. [Desafío - Respuesta](#26)
-1. [Autenticación por contraseña](#34)
-1. [Sesiones por tokens](#43)
-1. [Resumen y referencias](#65)
+1. [Autenticación por contraseña](#35)
+1. [Sesiones por tokens](#44)
+1. [Resumen y referencias](#66)
 
 # Autenticación
 <!-- _class: lead -->
@@ -408,35 +408,61 @@ En firma electrónica normalmente no hará falta que Alice haga un dasafío, **B
 
 Documento: cualquier mensaje que Bob quiera intercambiar. No es solo un .docx, es cualquier mensaje, cadena de texto, parámetro de seguridad...
 
-## Authenticated Diffie-Hellman
-<!-- _class: smaller-font -->
+## Protocolo Diffie-Hellman, autenticado
+<!-- _class: smallest-font -->
 
+Igual que el D-H que ya conocemos, pero firmando los mensajes:
 
-Dos usuarios $Alice$ y $Bob$, cada uno tiene las claves públicas del otro
-
-1. Acuerdan $g$ y $p$ primos entre sí
-1. Escogen números en secreto $a$ y $b$
+1. Alice y Bob tienen un par de claves RSA $(PK_A, SK_A)$ y $(PK_B, SK_B)$,  y se intercambian $PK_A$ y $PK_B$
+1. *Alice* y *Bob* acuerdan $g$ y $p$ primos entre sí
+1. Alice escoge $a$ y Bob escoge $b$ (en secreto)
 1. Se envían entre ellos:
-    - $Alice \rightarrow Bob: A=g^{a} \mod p, sign(A, SK_A)$
-    - $Bob \rightarrow Alice: B=g^{b} \mod p, sign(A, SK_B)$
-1. Verifican la firma de cada lado
+    - $Alice \rightarrow Bob: A=g^{a} \mod p, sign_A=E(A, SK_A)$
+    - $Bob \rightarrow Alice: B=g^{b} \mod p, sign_B=E(B, SK_B)$
+1. Verifican la firma de cada lado:
+    - Alice verifica que $B \equiv D(sign_B, PK_B)$
+    - Bob verifica que $A \equiv D(sign_A, PK_A)$
+    
 1. Calculan en secreto:
     - $Alice$: $s = B^{a} \mod p = g^{ab} \mod p$
     - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
 1. Y usan $s$ como clave de cifrado un algoritmo simétrico
 
-![bg right:30% w:110%](https://www.pngall.com/wp-content/uploads/2016/05/Original-Stamp.png)
-
 > [Authentication and Authenticated Key Exchanges](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.6682), Whitfield Diffie and Paul C. Van Oorschot and Michael J. Wiener, 1992.
 > [Protocols PK Encr. /Auth. PK Key Establishment Secure Comm. in Open Networks SSL/TLS Nicolas Protocols PK Encr. /Auth. PK Key Establishment Secure Comm. in Open Networks SSL/TLS Nicolas T. Courtois - University College London](https://present5.com/protocols-pk-encr-auth-pk-key-establishment-secure/)
 
 <!--
-Es un Diffie-Hellman tradicional, pero los mensajes van firmados con las claves privadas de cada parte
+En el paso 2, recuerda que, en la realidad, Alice y Bob no usarán g y p cualquiera sino números conocidos que están en los estándares actuales y que sabemos que funcionan correctamente
 
-De esta forma, si tenemos y confiamos en la clave pública de la otra parte (ver tema PKI), entonces sabemos que no se ha puesto nadie en medio de las comunicaciones
+Es decir: Alice y Bob firma los parámtros A y B y, si la firma verifica, Bob sabe que está hablando con Alice y al revés.
 
-Esta es la versión de D-H implementada en SSL/TLS
+Por supuesto, esto mismo se puede hacer con Diffie-Hellman sobre curvas elípticas
 -->
+
+## NTLM
+
+NTLMv1Protocolo utilizado para autenticar Windows hasta Windows 7. Ligeramente modificado con NTLMv2 y actualmente sustituido por Kerberos (lo veremos más adelante)
+
+Es un protocolo *desafío-respuesta*:
+
+1. Un usuario se conecta a un PC cliente con un dominio, usuario y contraseña
+1. El PC cliente crea un hash de la contraseña
+1. El PC cliente envía al servidor el nombre de usuario
+1. EL servidor crear un número aleatorio de 8B y se lo envía al cliente: el *desafío*
+1. EL cliente cifra el challenge con DES, usando como clave el hash de la contraseña: *respuesta*
+1. El servidor envía al controlador de dominio la respuesta para que la valide
+
+
+> https://www.calcomsoftware.com/ntlm-v1-and-v2-vs-kerberos/
+> https://learn.microsoft.com/en-us/windows-server/security/kerberos/ntlm-overview
+> https://blog.quest.com/ntlm-authentication-what-it-is-and-why-you-should-avoid-using-it/
+
+<!--
+Vemos NTLMv1 simplemente como ejemplo, Microsoft no recomienda seguir usándolo en la actualidad y debería ser sustituido por Kerneros
+
+Los Windows actuales aún soportan NTLM para dar servicio a PCs antiguos
+-->
+
 
 # Autenticación por contraseña
 <!-- _class: lead -->
@@ -861,6 +887,7 @@ Si fuerzas "reglas para las contraseñas"...
 - [What is OAuth really all about - OAuth tutorial - Java Brains](https://www.youtube.com/watch?v=t4-416mg6iU)
 - [Why We Hash Passwords](https://dzone.com/articles/why-we-hash-passwords)
 - [How SAML Authentication Works](https://auth0.com/blog/how-saml-authentication-works/#What-is-SAML)
+- [NTLM v1 and NTLM v2 vs Kerberos](https://www.calcomsoftware.com/ntlm-v1-and-v2-vs-kerberos/)
 
 ---
 <!-- _class: last-slide -->

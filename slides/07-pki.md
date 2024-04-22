@@ -29,7 +29,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Criptografía híbrida](#5)
 1. [Gestión de claves públicas](#16)
-1. [Resumen y referencias](#35)
+1. [Resumen y referencias](#37)
 
 ## Recordatorio: cifrado asimétrico
 <!-- _class: two-columns -->
