@@ -892,5 +892,3 @@ Si fuerzas "reglas para las contraseñas"...
 ---
 <!-- _class: last-slide -->
 
-
-

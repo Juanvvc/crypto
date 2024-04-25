@@ -179,7 +179,8 @@ Mística...
 - **Capa de aplicación**: MailTunnel, MsnShell, StegTorrent, g00gle Crewbots.
 - **SCAPY** (https://scapy.net/): manipulación de paquetes
 
-> [Evasión de antivirus y seguridad perimetral usando esteganografía. Alfonoso Muñoz, 2021](https://raw.githubusercontent.com/mindcrypt/libros/master/Libro%20Estegomalware%20-%20Evasi%C3%B3n%20de%20antivirus%20y%20seguridad%20perimetral%20usando%20esteganograf%C3%ADa%20v1%20-%20Dr.%20Alfonso%20Munoz%20-%20mindcrypt.pdf)
+> [Evasión de antivirus y seguridad perimetral usando esteganografía. Alfonoso Muñoz, 2021](https://github.com/mindcrypt/libros/blob/master/Libro%20Estegomalware%20-%20Evasi%C3%B3n%20de%20antivirus%20y%20seguridad%20perimetral%20usando%20esteganograf%C3%ADa%20-%20Dr.%20Alfonso%20Munoz%20-%20mindcrypt%2028-10-2023.pdf)
+> [Exfiltration Over Other Network Medium ](https://attack.mitre.org/techniques/T1011/)
 
 ## DNS tunneling
 
@@ -187,6 +188,8 @@ Mística...
 
 
 > https://help.zscaler.com/zia/about-dns-tunnel-detection
+> https://www.youtube.com/watch?v=YgZJ5z7Hmhw
+> https://github.com/IncideDigital/Mistica
 
 ## Malware en archivos
 
@@ -200,6 +203,10 @@ Mística...
 Con esta técnica, un archivo puede ser una cosa u otra según un contexto
 
 ![bg right](images/steg/../stego/escher-mce008.gif)
+
+> [What are polyglots and how to use them as a pentester ](https://dev.to/gpiechnik/what-are-polyglots-and-how-to-use-them-as-a-pentester-109o)
+> https://github.com/mindcrypt/polyglot
+> [Polyglots PoC apasamar INCIDE](https://www.youtube.com/watch?v=0S61uzx-Efk)
 
 ---
 
@@ -222,8 +229,9 @@ Viejo bug en Explorer: algunas imágenes podían visualizarse o ejecutarse:
 ```
 
 
-> https://www.blackhat.com/docs/eu-15/materials/eu-15-Shah-Stegosploit-Exploit-Delivery-With-Steganography-And-Polyglots.pdf
-> https://www.bleepingcomputer.com/news/security/attackers-use-svg-files-to-smuggle-qbot-malware-onto-windows-systems/
+> [STEGOSPLOIT](https://www.blackhat.com/docs/eu-15/materials/eu-15-Shah-Stegosploit-Exploit-Delivery-With-Steganography-And-Polyglots.pdf)
+> [Attackers use SVG files to smuggle QBot malware onto Windows systems](https://www.bleepingcomputer.com/news/security/attackers-use-svg-files-to-smuggle-qbot-malware-onto-windows-systems/)
+> [Smuggling HTML using SVG](https://blog.talosintelligence.com/html-smugglers-turn-to-svg-images/)
 
 ---
 
@@ -263,12 +271,13 @@ Viejo bug en Explorer: algunas imágenes podían visualizarse o ejecutarse:
 
 ![center](images/stego/entropy2.png)
 
-Ejemplo del archivo cifrado del primer ejericio. Fíjate: al principio y al final no tiene entropía, y esas son las partes "que estaban a cero"
+Ejemplo del archivo cifrado del primer ejercicio. Fíjate: al principio y al final no tiene entropía, y esas son las partes "que estaban a cero"
 
 ## Administradores web
 
-- Re-codifica las imágenes subidas por los usuarios
-- Monitoriza librerías JavaScript
+- [Re-codifica las imágenes subidas por los usuarios](https://github.com/mindcrypt/stegowiper)
+- Monitoriza librerías JavaScript usadas en la página web
+- Comprueba que los archivos son del tipo y tamaño esperado
 - Herramientas especializadas de detección: IDS/firewall/WAF...
 
 # Referencias
