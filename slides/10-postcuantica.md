@@ -48,39 +48,44 @@ Una introducción a vista de pájaro
 - Propuesta por Richard Feynman en la década de 1980, sugirió que las computadoras cuánticas podrían usarse para simular el comportamiento de sistemas cuánticos complejos, como moléculas o materiales, de manera más eficiente que las computadoras clásicas
 - Una misma tarea puede tener diferente complejidad en computación clásica comparada con la que tiene en computación cuántica
 
+> [¿Qué es y cómo funciona la COMPUTACIÓN CUÁNTICA?](https://www.youtube.com/watch?v=YpYuBEzfRlM)
+
 ## Q-bit
 
 ![bg left:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloch_sphere.svg)
 
-La unidad de la computación cuántica es el Q-bit. A diferencia de los bits clásicos, que solo pueden tomar los valores de 0 o 1, los Q-bit pueden existir en múltiples estados simultáneamente
+La unidad de la computación cuántica es el Q-bit, que puede existi en múltiples estados simultáneamente. 0 y 1 a la vez: *superposición*
 
-Cuando se miden los Q-bits, el resultado es probabilístico. **Las computadoras cuánticas son no-deterministas**
+Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
+
+> [Computación Cuántica: la Guía completa WIRED](https://es.wired.com/articulos/computacion-cuantica-la-guia-completa-wired-computadoras-qubits)
+
 
 ## Comparación con la computación tradicional
 
-- La computación tradicional y la cuántica resuelven los mismos problemas, pero la cuántica permite resolver [problemas complejos](04-complejidad.html) con una rapidez que no sabemos alcanzar con computación tradicional
+- La computación tradicional y la cuántica resuelven los mismos problemas, pero la cuántica permite resolver [problemas complejos](04-complejidad.html) con una rapidez que no sabemos alcanzar con computación tradicional: **supremacía cuántica**
 - [¡No todos los problemas son complejos!](https://en.wikipedia.org/wiki/Quantum_supremacy)
 - La computación cuántica da un **resultado probabilístico**. Es decir, "esto es una solución, probablemente". Repetir el algoritmo varias veces permite reducir la probabilidad de error
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/6/6e/Complexity_subsets_pspace.svg)
 
-## ¿Qué es lo que NO HACEN las computadoras cuánticas?
+## ¿Qué es lo que NO MEJORAN las computadoras cuánticas?
 <!-- _class: with-success -->
 
-- No traerán mejores gráficas a los juegos
+- No traerán juegos con mejores gráficas
 - No nos traerán mejores aplicaciones informáticas
-- No traerán una red Internet más rápida
+- No traerán una Internet más rápida
 
 ![bg right:40%](images/quantum/gamer.png)
 
 Es poco probable que tengamos una computadora cuántica en nuestros escritorios alguna vez
 
-## Las computadoras cuánticas NO HACEN criptografía cuántica
+## Criptografía cuántica
 <!-- _class: with-warning -->
 
-- La criptografía cuántica usa la física cuántica para crear un canal seguro
-- Cuidado: ¡no es necesario un computador cuántico para usar criptografía cuántica!
-- Ejemplo: [distribución de claves cuántica](https://www.drishtiias.com/daily-updates/daily-news-analysis/quantum-key-distribution) (QKD)
+- La **criptografía cuántica** usa la física cuántica para crear un canal seguro
+- Cuidado: **¡no es necesario un computador cuántico para usar criptografía cuántica!**
+- Ejemplo: [distribución de claves cuántica](https://www.cse.wustl.edu/~jain/cse571-07/ftp/quantum/) (QKD)
 
 ![center w:27em](images/quantum/q-key-distribution.png)
 
@@ -91,17 +96,19 @@ En esta clase no hablaremos de criptografía cuántica sinó post-cuántica, que
 <!--
 La criptografía cuántica utiliza los principios cuánticos para crear un canal de comunicaciones seguro. ¡No se necesita una computadora cuántica para usar la criptografía cuántica
 
-En el ejemplo, se usa un canal cuántico para distribuir una clave criptográfica tradicional que se puede usar, por ejemplo, para AES. En un canal cuántico, "el acto de medir cambia lo que se mide", así que Alice y Bob se darán cuanta si hay alguien escuchando el canal, y no usarán esa clave para cifrar
+En el ejemplo, se usa un canal cuántico para distribuir una clave criptográfica tradicional que se puede usar, por ejemplo, para AES. En un canal cuántico, "el acto de medir cambia lo que se mide" (principio de incertidumbre), así que Alice y Bob se darán cuanta si hay alguien escuchando el canal, y no usarán esa clave para cifrar
 
 En esta clase no hablaremos de criptografía cuántica
 -->
 
 ## Entonces, ¿qué hacen las computadores cuánticas?
 
-- Mejoras en los entrenamientos de inteligencia artificial
-- Mejoras en los sistemas de optimización
+La computación cuántica permite ejecutar algoritmos de búsquedas más rápidamente de la comutación tradicional
+
+- Entrenamientos de inteligencia artificial
+- Sistemas de optimización industrial
 - Sistemas de recomendación de compras y finanzas
-- **Resolver los problemas matemáticos en los que se basa la criptografía actual mucho más rápido de lo esperado**
+- **Resolve los problemas matemáticos en los que se basa la criptografía actual mucho más rápido de lo esperado**
 
 ![bg left:40%](images/quantum/ibm-q.jpg)
 
@@ -112,8 +119,8 @@ En esta clase no hablaremos de criptografía cuántica
 ## Algoritmos ejecutados por computadoras cuánticas
 <!-- _class: with-success -->
 
-- [Algoritmo de Grover](https://es.wikipedia.org/wiki/Algoritmo_de_Grover) (1996): búsqueda exahustiva en una secuencia no ordenada con mejora cuadrática. "Inversión de funciones". AES-128 en $O(2^{64})$
-- [Algoritmo de Shor](https://es.wikipedia.org/wiki/Algoritmo_de_Shor) (1999): permite encontrar factores de un número de una manera eficiente. RSA, ECC y D-H en $O(polinomimal)$
+- [Algoritmo de Grover](https://es.wikipedia.org/wiki/Algoritmo_de_Grover) (1996)
+- [Algoritmo de Shor](https://es.wikipedia.org/wiki/Algoritmo_de_Shor) (1999)
 
 Son algoritmos probabilísticos: dan la respuesta correcta con una cierta probabilidad, y la probabilidad de fallo puede ser disminuida repitiendo el algoritmo
 
@@ -121,18 +128,39 @@ Cuando se implementen estos algoritmos en una computadora cuántica, cambiarán 
 
 <!-- Observa: ya teníamos algoritmos antes de tener el primer computador cuántico! -->
 
-## ¿Cuánto tiempo llevará tener una computadora cuántica?
+## Algoritmo de Grover
+<!-- _class: with-warning -->
 
-![center w:25em](images/quantum/predicciones.png)
+ Búsqueda exahustiva en una secuencia no ordenada con mejora cuadrática. Mejora
+ 
+ Efecto: tarda "la raíz cuadrada de tiempo". AES-128 en $O(2^{64})$
 
-> [Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2022-quantum-threat-timeline-report/) Global Risk Institute, Noviembre 2022
+ ![center w:20em](images/quantum/grover.png)
 
-# Criptografía Post-cuántica
-<!-- _class: lead -->
+ El algoritmo de Grover debilita la criptografía de clave privada y hashes (AES, SHA256...). Defensa: doblar el tamaño de la clave
+
+> https://www.researchgate.net/figure/A-comparison-of-Grover-Long-algorithm-with-different-success-rates-1-d-2-The-query_fig3_356928043
+
+## Algoritmo de Shor
+<!-- _class: with-warning -->
+
+Permite encontrar factores de un número de una manera eficiente. RSA, ECC y D-H en $O(polinomimal)$
+
+![center w:20em](images/quantum/shor.png)
+
+El algoritmo de Shor rompe la criptografía de clave pública (D-H, RSA...)
+
+> https://www.researchgate.net/figure/Shors-algorithm-has-exponential-acceleration-effect-compared-with-classical-algorithm_fig1_359643607
+
+
+<!--
+Significa que da igual que aumentemos el tamaño de la clave: llega un momento en que resolver RSA se vuelve casi constante, independientemente de cuántos bits tenga la clave
+-->
+
 
 ## Efectos de la computación cuántica en criptografía clásica
 
-Algoritmo|Tipo|Algoritmo|Impacto
+Algoritmo|Tipo|Algoritmo|Defensa
 --|--|--|--
 AES|Simétrico|Grover|⚠ Tamaño de claves x2
 SHA|Función de hash|Grover|⚠ Tamaño de salida x1.5
@@ -151,12 +179,32 @@ Recuerda:
 Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptografía asimétrica
 -->
 
-## Criptografía post-cuántica
-<!-- _class: with-success bigger-font -->
 
+## ¿Cuánto tiempo llevará tener una computadora cuántica?
+
+![center w:25em](images/quantum/predicciones.png)
+
+> [Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2022-quantum-threat-timeline-report/) Global Risk Institute, Noviembre 2022
+
+## Store Now, Decrypt Later
+
+"Guarda ahora los datos, que los descifraremos cuando llegue la computación cuántica"
+
+- https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/harvest-now-decrypt-later-attacks-pose-security-concern-quantum-computing.html
+- https://www.siliconrepublic.com/enterprise/quantum-apocalypse-store-now-decrypt-later-encryption
+
+# Criptografía Post-cuántica
+<!-- _class: lead -->
+
+
+## Criptografía post-cuántica
+<!-- _class: with-success -->
+
+Estrategias que podemos seguir para defendernos cuando llegue la criptografía cuántica: 
+
+- Doblar las longitudes de la clave para simétrica y hash
 - Intercambio de claves post-cuántico, para sustituir a D-H y RSA
 - Esquemas de firma digital post-cuánticos, para sustituir a RSA, ECDSA
-- Doblar las longitudes de la clave para simétrica y hash
 
 Criptografía post-cuántica: sistemas criptográficos que usarán **las computadoras clásicas** cuando existan las computadoras cuánticas
 
@@ -200,6 +248,18 @@ EL intercambio de claves clásico podría hacerse acordando una clave (Diffie-He
 - Isogenias definidas sobre curvas elípticas
 
 ![bg right:40%](images/quantum/curves.png)
+
+---
+
+
+Familia|Ventajas|Inconvenientes
+--|--|--
+Retículos|Rápido y claves pequeñas|Son muy nuevas
+Isogenias|Claves pequeñas, texto cifrado pequeño|Muy lentas
+Códigos|Rápidas y texto cifrado pequeño, muy estudiadas|Claves muy grandes
+Basadas en hash|Clve pequeña, muy estudiadas|Firmas muy grandes, lentas
+Multivariante|Rápidas y claves privadas pequeñas|Clave pública muy grande
+
 
 ## Algoritmos
 <!-- _class: smallest-font -->
@@ -252,9 +312,15 @@ Los nuevos algoritmos son más complejos, y eso también significa que son más 
 
 ## Esquemas híbridos
 
-- Hash: incluir hash tradicional y post-cuántico
-- Firmas: incluir firma tradicional y post-cuántica
+Mientras llega la crptografía post-cuántica completa podemos usar esquemas híbridos
+
+- Hash: incluir dos valores, hash tradicional y post-cuántico
+- Firmas: incluir dos firmas, firma tradicional y post-cuántica
 - KEM: cascada de funciones de derivación de clave clásicas, post-cuánticas
+
+![bg right w:90%](images/quantum/hybrid-kem.png)
+
+> https://xiphera.com/hybrid-models-connect-the-post-quantum-with-the-classical-security/
 
 ## Plan de migración
 
@@ -283,6 +349,11 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 
 -->
 
+## Ejemplos de migración
+
+- Signal: https://signal.org/blog/pqxdh/
+- Amazon AWS: https://aws.amazon.com/security/post-quantum-cryptography/
+
 # Resumen y referencias
 <!-- _class: lead -->
 
@@ -300,6 +371,7 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 ## Referencias
 
 - "Computación Cuántica: Cómo afectará a la Criptografía actual y cómo podemos adaptarnos", TFM de Alicia Marybel Díaz Zea en la VIU, 2022-2023
+- [The Lord of the Keys The Return of Post Quantum Cryptography](https://www.youtube.com/watch?v=LTktugd5pkg) Sandra Guasch, Crytored 2024
 - [Quantum Computing 2023 Update](https://www.youtube.com/watch?v=dOBe5pES30k)
 - [What is a Qubit? - A Beginner's Guide to Quantum Computing](https://www.youtube.com/watch?v=90za6mazNps)
 - [Quantum computing for the determined](https://www.youtube.com/playlist?list=PL1826E60FD05B44E4)
