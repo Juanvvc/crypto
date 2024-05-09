@@ -18,23 +18,22 @@ theme: marp-viu
 
 
 # Cybersec and Ransomware
-<!-- _class: first-slide -->
+<!-- _class: first-slide -->1. [Examples: Venus, Conti, Babuk, LockBit](#3)
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Hoy hablamos de...
 <!-- _class: cool-list with-warning -->
 
-Cómo se usa la criptografía para atacar, y seguiremos explorando conceptos de criptografía simétrica y asimétrica
-
-1. [Cybersecurity domains](#3)
+1. [Incident Response](#3)
 1. [Ransomware](#11)
-1. [Examples](#3)
+1. [Examples: Venus, Conti, Babuk, LockBit](#20)
+1. [Managing an incident](#33)
 
 Las transparencias de esta sesión están en inglés
 
 
-# Cybersecurity domains and roles
+# Incident Response
 <!-- _class: lead -->
 
 ![bg left:30%](https://4.bp.blogspot.com/_zEu14PgjWqw/Scira1SKjnI/AAAAAAAAAEY/YB5HavzpxyI/s1600/kevin-mitnick4.jpg)
@@ -137,6 +136,7 @@ Skills: reading, detailed-oriented, kwowledge about a security product. No codin
 -->
 
 ## Incident Responders
+<!-- _class: with-info -->
 
 - Something happened!
 - Identify affected systems
@@ -170,6 +170,7 @@ Skills: very good communication skills and cold blood
 -->
 
 ## Forensic Analysts
+<!-- _class: with-info -->
 
 - Investigate special security events
 - What happened, in depth?
@@ -202,8 +203,9 @@ Forensic analysts, specially if they must act as Expert Witness, are external to
 
 ---
 
-[![](images/ransomware/ransomware3.png)](https://www.youtube.com/watch?v=6h9yh_A80fs)
+[![](images/ransomware/ransomware3.png)](https://www.youtube.com/watch?v=WqD-ATqw3js)
 
+> [John Oliver - Ransomware](https://www.youtube.com/watch?v=WqD-ATqw3js)
 > [Ransomware - Anatomy of an Attack](https://www.youtube.com/watch?v=6h9yh_A80fs) ESI & CISCO, 2018
 
 ## Ransomware: a definition
