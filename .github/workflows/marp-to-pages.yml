@@ -23,12 +23,19 @@ jobs:
           submodules: recursive
 
       - name: Copy images
-        run: mkdir build && cp -R slides/images build/images
+        run: mkdir build && mkdir build/crypto2 && cp -R slides/images build/images
 
       - name: Marp Build (slides folder)
         uses: docker://marpteam/marp-cli:v3.4.0
         with:
           args: -I slides/ -o build/ --no-config --theme marp-viu --theme-set slides-support/slides/themes --bespoke.progress true --bespoke.transition
+        env:
+          MARP_USER: root:root
+      
+      - name: Marp Build (slides/crypto2 folder)
+        uses: docker://marpteam/marp-cli:v3.4.0
+        with:
+          args: -I slides/crypto2 -o build/crypto2 --no-config --theme marp-viu --theme-set slides-support/slides/themes --bespoke.progress true --bespoke.transition
         env:
           MARP_USER: root:root
 

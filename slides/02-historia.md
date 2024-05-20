@@ -726,7 +726,7 @@ Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un 
 ## ¿A qué hora atacamos?
 
 
-![bg right:40% w:100%](https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png)
+![bg right:40% w:100%](../images/historia/byzantine_generals.png)
 
 Imagina que un ejército decide el siguiente mapeo, es decir, clave:
 

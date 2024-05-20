@@ -29,9 +29,9 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 ## Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Computación cuántica](#3)
-1. [Criptografía post-cuántica](#12)
-1. [Resumen y referencias](#24)
+1. [Computación Cuántica](#3)
+1. [Criptografía Post-cuántica](#16)
+1. [Resumen y referencias](#29)
 
 # Computación Cuántica
 <!-- _class: lead -->

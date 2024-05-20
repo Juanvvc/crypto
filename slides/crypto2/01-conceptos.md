@@ -25,8 +25,9 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 <!-- _class: cool-list toc -->
 
 1. [Servicios criptográficos](#3)
-1. [Estrategias de los sistemas seguros](#11)
-1. [Resumen y referencias](#27)
+1. [Estrategias de los sistemas seguros](#10)
+1. [Breve historia de la criptografía](#18)
+1. [Conclusiones](#34)
 
 # Servicios criptográficos
 <!--
@@ -41,7 +42,7 @@ header: 'Servicios criptográficos'
 
 Protección de la comunicaciones a través de **medios desprotegidos** entre un emisor y uno o varios destinatarios
 
-![bg right:40% w:100%](images/generic/pexels-cottonbro-7319077.jpg)
+![bg right:40% w:100%](../images/generic/pexels-cottonbro-7319077.jpg)
 
 ...y eso es mucho más que mantener un mensaje secreto...
 
@@ -103,7 +104,7 @@ Firma digital de un contrato entre dos empresas
 - Ninguna de las dos empresas puede cambiar unilateralmente el contrato
 - Ninguna de las empresas debe poder decir que no firmó el contrato
 
-![bg right:40%](images/generic/binding-contract-948442_1280.jpg)
+![bg right:40%](../images/generic/binding-contract-948442_1280.jpg)
 
 <!--
 Fondo: https://pixabay.com/photos/binding-contract-contract-secure-948442/ Uso comercial libre
@@ -158,25 +159,6 @@ También veremos, aunque a más alto nivel, los servicios de acuerdo de claves, 
 Otros servicios como la autorización, aunque sin duda son importantes para que un sistema sea seguro, quedan fuera de este curso por limitación de tiempo.
 -->
 
----
-
-[![w:33em center](images/conceptos/rely-attack.png)](https://www.youtube.com/watch?v=uxzm_6SYBFo)
-
-> https://www.youtube.com/watch?v=uxzm_6SYBFo
-
-<!--
-Aquí tenemos un ejemplo de un protocolo de comunicaciones donde el objetivo no es la confidencialidad.
-
-Estos son unos ladrones robando un coche, que se abre cuando la llave está cerca. La persona de la derecha está utilizando una antena enorme para "hacer relay" de la comunicaciones entre la llave (que se supone dentro de la casa, cerca de la pared) y el coche.
-
-Aquí el protocolo no tiene que proteger la confidencialidad del mensaje: todos sabemos que la llave envía "ABRETE". Fíjate que el protocolo tampoco está protegido con contraseñas, ni con una firma digital.
-
-Lo que se necesita en esta caso es detectar cuándo el atacante está accediendo a los mensajes y ampliando su radio de acción diseñado
-
-¿Se te ocurre alguna manera de proteger contra esta situación?
--->
-
-
 # Estrategias de los sistemas seguros
 <!--
 _class: lead
@@ -188,7 +170,7 @@ header: Estrategias de seguridad
 ## Modelo de sistema criptográfico
 <!-- _class: two-columns with-header -->
 
-![center w:25em](images/conceptos/cryptosystem.jpg)
+![center w:25em](../images/conceptos/cryptosystem.jpg)
 
 - **Mensaje o texto en claro**: $m$
 - **Texto cifrado**: $c = e(k_1, m)$
@@ -210,7 +192,7 @@ Imagen: https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg
 
 <https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle>
 
-![bg left:33%](images/conceptos/Auguste_Kerckhoffs.jpg)
+![bg left:33%](../images/conceptos/Auguste_Kerckhoffs.jpg)
 
 1. **Si el sistema no es teóricamente irrompible, al menos debe serlo en la práctica.**
 1. **La efectividad del sistema no debe depender de que su diseño permanezca en secreto.**
@@ -253,7 +235,7 @@ Pero son recomendaciones muy informadas.
 ## Máxima de Shannon
 <!-- _class: with-success -->
 
-![bg left:33%](images/conceptos/220px-ClaudeShannon_MFO3807.jpg)
+![bg left:33%](../images/conceptos/220px-ClaudeShannon_MFO3807.jpg)
 
 *El atacante conoce el sistema*
 
@@ -282,7 +264,7 @@ No bases tu seguridad en la oscuridad, pero añadir un poco de oscuridad siempre
 
 ## Gestión de claves
 
-![bg left:33% h:100%](images/conceptos/Lea_Kissner.jpeg)
+![bg left:33% h:100%](../images/conceptos/Lea_Kissner.jpeg)
 
 *La criptografía es una herramienta para convertir un montón de problemas diferentes en un problema de gestión de claves*
 
@@ -301,93 +283,7 @@ Una contraseña no es lo mismo que una clave criptográfica. Las contraseñas su
 En muchas ocasiones un sistema se romperá no por que la criptopgrafía sea débil, sino porque incluye un paso de control con contraseña que es habitualmente la parte más débil de un protocolo.
 -->
 
----
-
-![](images/conceptos/cta2296-fig-0002-m.jpg)
-
-<!--
-- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
-
-- **Clave simétrica**: misma clave $k$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
-
-- **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
--->
-
-## Primitivas: hash
-
-Calcula un resumen sobre un mensaje. Para validar el resumen, se vuelve a calcular y se compara
-
-```sh
-> cat test.mp3| sha256sum 
-71a3644f14bdd5d2ebf56aaca440ad3c2b76b13f6a0708a9918e6b8bfabaeff3  -
-```
-
-> Hablaremos del hash en el [tema 6](06-hashes.html)
-
-## Primitivas: clave simétrica
-<!-- _class: with-warning -->
-
-
-- El algoritmo de cifrado y el de descrifrado pueden ser el mismo
-- **Una sola clave** para cifrar y descifrar
-
-```
-> openssl aes-256-cbc -a -salt -in test.mp3 -out test.aes -pass pass:1234
-
-> openssl aes-256-cbc -d -a -salt -in test.aes -out test2.mp3 -pass pass:1234
-```
-
-> Hablaremos del cifrado simétrico en el [tema 3](06-simetrico.html)
-
-
-**AVISO**: pasar el password como argumento no es buena práctica. Solo se presenta aquí como ejemplo
-
-## Primitivas: clave asimétrica
-
-- Un algoritmo para cifrar y otro para descifrar
-- **Una clave para cifrar y otra para descrifrar**
-- La clave de cifrado suele ser conocida por todos, por eso se llama también "pareja de clave pública y privada".
-
-```sh
-# Generar par de claves
-> openssl genrsa -aes256 -out private.key 2048
-> openssl rsa -in private.key -pubout -out public.key
-> cat public.key
-
-> openssl rsautl -encrypt -pubin -inkey public.key -in test.mp3 -out test.rsa  
-RSA operation error
-4345576940:error:04FFF06E:rsa routines:CRYPTO_internal:data too large for key size
-```
-
-> Hablaremos del cifrado asimétrico en el [tema 5](05-asimetrico.html)
-
-
-<!--
-Aquí vemos un error provocado porque estamos usando la primitiva defectuosa. Las primitivas deben utilizarse en los contextos en que fueron diseñadas, y apoyarse entre ellas.
--->
-
-## Servicios de seguridad a primitivas
-
-Objetivo|Primitiva
---|--
-**confidencialidad**|cifrado simétrico, cifrado asimétrico
-**integridad**|hash, firma simétrica, firma asimétrica
-**autenticidad**|firma simétrica, firma asimétrica
-**no repudio / trazabilidad**|firma asimétrica
-**compartir clave**|clave simétrica, acuerdo de clave
-
-<!--
-Ya hemos visto unas pocas primitivas. ¿Qué servicios de seguridad ofrece cada una?
-
-Lo normal será que no queramos que el sistema ofrezca un solo servicio sino varios de ellos. Es decir, juntar primitivas criptográficas.
-
-La unión de primitivas criptográficas crea un protocolo criptográfico
--->
-
 ## Protocolos criptográficos
-
-*If A is a secure thingamajig, then B is a secure doohickey*
-
 
 La criptografía actual se basa en **composición** de técnicas primitivas:
 
@@ -397,84 +293,293 @@ La criptografía actual se basa en **composición** de técnicas primitivas:
 
 La composición es compleja y todo debe funcionar como un reloj.
 
-## Seguridad del protocolo de seguridad.
-
-La fortaleza (o debilidad) de la criptografía depende de todos los eslabones de la cadena:
-
-- **puertas criptográficas** (diseño, criptoanálisis)
-- **algoritmos** (dimensionado, longitud de claves, security strength)
-- **protocolos** (estructura, secuenciación)
-- **implementación** (condiciones de uso, abuso de buffers, abuso de la máquina de estados)
-- **gestión** (PKI, gestión de certificados...)
-
-## Composición de algoritmos
-
-Habitualmente no usamos una única primitiva/función criptográfica:
-
-- **objetivos múltiples**: me interesa confidencialidad, integridad y autenticidad simultáneamente para la transmisión del mensaje $m$
-- **eficiencia**: los algoritmos simétricos son varios órdenes de magnitud más rápidos que los asimétricos
-- **robustez**: muchas primitivas (individuales) no devuelven error en caso de que algo vaya mal (una firma asimétrica simplemente devuelve un mensaje firmado distinto)
-- **secuencias de mensajes**: nos interesa proteger secuencias de mensajes $\{m_1,m_2, ..., m_n\}$ o diálogos $\{m_{a_1},m_{b_1},m_{a_2},m_{b_2}, ...\}$ para que no llegen mensajes repetidos o desordenados.
-
-<!--
-# Ejemplo de composición: cifrado eficiente
-
-```sh
-# Generar par de claves
-> openssl genrsa -aes256 -out private.key 2048
-> openssl rsa -in private.key -pubout -out public.key
-> cat public.key
-
-# Generar clave simétrica y cifrar con ella
-> openssl rand -hex 64 -out key.bin
-> openssl aes-256-cbc -a -salt -in test.mp3 -out test.aes-rsa -pass file:./key.bin
-
-# Cifrar clave simétrica con clave pública
-> openssl rsautl -encrypt -inkey public.key -pubin -in key.bin -out key.bin.enc
-
-# Descrifrar clave simétrica con clave privada
-> openssl rsautl -decrypt -inkey private.key -in key.bin.enc -out key.bin
-
-# Descifrar archivo con clave simétrica
-> openssl aes-256-cbc -d -a -salt -in test.aes -out test2.mp3 -pass file:./key.bin
-
-```
-
-<!--
-Aquí vemos la manera correcta de usar la primitiva que dio error en el caso anterior:
-
-- Ciframos la información de gran tamaño con una clave simétrica
-- Usamos la primitiva de cifrado asimétrico para cifrar la clave simétrica, y solo ella
-- Enviamos a la otra parte el archivo cifrado y el cifrado de la clave simétrica
-- La otra parte primero descifra la clave simétrica y después con ella descifra el mensaje.
-- ->
-
-## Ejemplo de composición: secuencias
-
-La sesión protege de que los mensajes (integridad de sesión):
-
-- no se pierdan
-- no se dupliquen
-- no se desordenen
-
-Las primitivas criptográficas anteriores no cumplen con estos objetivos (e.g. un atacante borrando un mensaje no tiene contramedida); puede considerarse la sesión como una primitiva criptográfica adicional
 
 ---
 
-Se puede solucionar con:
-
-- añadiendo un identificador de secuencia ${1||m_1,2||m_2,...}$
-- añadiendo el hash del mensaje anterior {${1,2||hash(m_1),3||hash(m_2),...}$
+![](../images/conceptos/cta2296-fig-0002-m.jpg)
 
 <!--
-Es decir, los mensajes son eslabones de una cadena, cada mensaje tiene el hash del eslabón anterior.
+- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
 
-Casi, casi, hemos definido una blockchain como bitcoin
-- ->
+- **Clave simétrica**: misma clave $k$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
+
+- **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
+-->
+
+
+## Servicios de seguridad a primitivas
+
+Objetivo|Primitiva
+--|--
+**confidencialidad**|cifrado simétrico, cifrado asimétrico
+**integridad**|hash, firma simétrica, firma asimétrica
+**autenticidad**|firma simétrica, firma asimétrica
+**no repudio**|firma asimétrica
+**compartir**|clave simétrica, acuerdo de clave
+
+Esto es lo que iremos viendo a lo largo de este curso
+
+# Breve historia de la criptografía
+<!--
+_class: lead
+header: Historia de la criptografía
+-->
+
+Seguridad de un algoritmo, fuerza bruta y confidencialidad perfecta (*one time pad*)
+
+Encontrarás más detalles en: <https://juanvvc.github.io/crypto/02-historia.html>
+
+---
+
+![bg left:40% w:100%](../images/historia/the_imitation_game-824166913-large.jpg)
+
+Años 40: Alemania controla Europa y amenaza al resto del mundo
+
+Sus comunicaciones radio están protegidas con "la cifra indescifrable"
+
+¿Por qué pensaban que era indescifrable?
+
+¿Cómo se descifró?
+
+¿Qué hemos aprendido desde entonces?
+
+## Criptografía = cifrado
+
+Hasta los años 70 del siglo XX, la criptografía se usaba solo en el ámbito militar y solo ofrecía confidencialidad:
+
+**El enemigo no puede saber nuestros planes**
+
+El resultado debería ser un mensaje igual que el original
+
+![bg right:40% w:100%](../images/conceptos/cryptosystem.jpg)
+
+
+<!--
+
+¿Recordáis la máxima de Shanon y los principios de Kerckhoffs? "El adversario conoce el sistema". Es decir: los único que debe ser secreto (a parte del mensaje, claro) es la clave de cifrado/descifrado. Se tiene que asumir que el adversario conoce las funciones e() y d()
+
+Aún no estaban preocupados de identificar con quién estaban hablando: "si conoce la clave, será un interlocutor legítimo".
+
+Nota: ¿Cifrar o encriptar? En este curso llamaremos a la ciencia "criptogafía" y al acto "cifrado". Encontrarás gente que utiliza "encriptar" como sinónimo de "cifrar". La RAE ha aceptado recientemente el verbo "encriptar", pero la polémica sobre si usar o no ese verbo sigue abierta en nuestro sector.
+-->
+
+## Fortaleza de una algoritmo
+<!-- _class: center with-success -->
+
+
+![w:10em](../images/generic/lock-1929089_640.jpg) ![w:17.5em](../images/generic/money-256319_640.jpg)
+
+**Fuerza bruta**: probar todas las claves posibles una a una
+
+<!--
+Estos no son exactamente sistemas de cifrado, pero nos sirven para explicar lo que es la fuerza bruta.
+
+¿Cómo abrirías la cerradura de la puerta? ¿Cómo puede un ladrón utilizar una tarjeta de crédito robada? ¿Qué estrategias se usan en cada caso para proteger el sistema?
+
+Images: free for commercial use:
+
+- https://pixabay.com/photos/money-cards-business-credit-card-256319/
+- https://pixabay.com/photos/lock-combination-security-safety-1929089/
+-->
+
+---
+
+Podemos defendernos contra la fuerza bruta:
+
+
+- Tarjeta de crédito: que cada prueba sea costosa / limitar el número de pruebas
+- Cerradura física: que el atacante tenga que probar muchas claves
+
+Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente.
+
+La solución adoptada en la actualidad para sistemas criptográficos: "**obligar que el atacante tenga que probar muchas claves**"
+
+---
+<!-- _class: with-success -->
+
+Alquilando equipos en la nube por segundos, con un euro cada segundo podemos probar $10^{11}$ claves
+
+Si estimamos que nuestro "secreto" vale 1000 €: nos hacen falta un sistema criptográfico que permita escoger entre $10^{14}$ claves diferentes para guardar el secreto durante una hora. 
+
+Nota que $10^{14}\approx 2^{48}$. Se dice que este sistema tiene una fortaleza de 48 bits: un atacante tiene que probar $2^{48}$ claves si quiere romperlo por fuerza bruta
+
+Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años.
+
+**La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles que se tienen que probar para romperlo por fuerza bruta. Normalmente se expresa en bits.
+
+# Mejorando la fuerza bruta
+
+Ejemplo de cifrado por cambio de letras: ¿podemos encontrar un método más rápido que probar los cambios de letras una a una?
+
+**Hq** fulswrjudild, ho fliudgr Fhvdu, wdpelhq frqrflgr frpr fliudgr sru
+ghvsodcdplhqwr, frgljr **gh** Fhvdu **r** ghvsodcdplhqwr **gh** Fhvdu, hv xqd gh
+odv whfqlfdv gh fliudgr pdv vlpsohv b pdv xvdgdv. **Hv** xq wlsr gh
+fliudgr sru vxvwlwxflrq hq ho txh xqd ohwud **hq** ho whawr ruljlqdo hv
+uhhpsodcdgd sru rwud ohwud 
+
+https://www.dcode.fr/caesar-cipher
+
+- Mapeos posibles: $27!$ ($\approx 2^{88}$) Ese númejo es demasiado grande para romperlo por fuerza bruta
+- Pero si el mensaje es suficientemente largo, **podemos analizar la frecuencia de aparición de los carácteres**
+
+<!--
+
+Este es un ejemplo de cifrado clásico "tipo César aleatorio": cada letra del alfabeto se ha sustituido por otra letra del alfabeto. En este caso, el mapeo entre letras es la clave de cifrado, y en un alfabeto de 27 letras hay 27! posibles mapeos diferentes. Ese es un número enorme para descifrar por fuerza bruta INCLUSO para los PCs actuales. ¿Podemos descifrarlo por otros medios?
+
+No recuerdo qué cifré aquí, ni con que clave, pero no parece difícil descubrirlo.
+
+- Hay letras solas, que en castellano solo pueden ser a, y, o. También e, u, pero es muy improbable. Cualquier otra letra será aún más improbable. Por eso la criptografía clásica en realidad nunca ha usado espacios: da mucha información al adversario
+- Haciendo análisis de frecuencias, la h aparece muchas veces: es muy probable que sea a ó e
+- Los dígrafos hv gh (varias veces...) podrían ser es, el, me, le ó se
+
+**La información de contexto nos ayuda a descifrar (espacios, lenguaje...)**. Eso también pasa en una web actual: ¿qué es lo que tiene un mensaje cifrado a un banco inmediatamente después de visitar una tienda?
+-->
+
+## Rotura de algoritmos criptográficos
+<!-- _class: with-success -->
+
+El cifrado César, incluso con mapeos aleatorios, lleva roto como mínimo desde el siglo IX, cuando Al-Kindi describió por primera vez el análisis de frecuencia contra el cifrado César
+
+**Un algoritmo está roto desde el punto de vista criptográfico cuando se conoce un ataque más eficiente que la fuerza bruta**.
+
+## Confidencialidad perfecta
+
+![bg left:40%](https://upload.wikimedia.org/wikipedia/commons/4/4d/Lorenz-SZ42-2.jpg)
+
+**Seguridad perfecta o incondicional**: no se puede deducir ninguna propiedad del texto original en claro, incluso aunque el atacante tenga recursos infinitos (tiempo, dinero)
+
+- Gilbert Sandford Vernam inventó y patentó una máquina de cifrado en 1917
+- Shannon demostró en 1945 que esa máquina tenía cifrado perfecto
+
+> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
+
+<!-- 
+excepto la longitud... y el momento de enviarlo, ...y el número de mensajes
+
+Imagen: https://upload.wikimedia.org/wikipedia/commons/0/06/USpatent1310719.fig1.png
+ -->
+
+ ---
+<!-- _class: with-success -->
+
+Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF:
+
+- existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO"
+- existe otra clave que descifra "SE HA QUEDADO BUENA TARDE"
+- un atacante no sabe qué mensaje es el que realmente se cifró, así que nosabe si ha acertado la clave
+
+Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
+
+## ¿A qué hora atacamos?
+
+![bg right:40% w:100%](../images/historia/byzantine_generals.png)
+
+Imagina que un ejército decide el siguiente mapeo, es decir, clave:
+
+- A = 16
+- B = 7
+- C = 13
+- ...
+
+El enemigo captura este mensaje: "Atacamos a las F horas"
+
+¿Tiene alguna forma el enemigo de conocer a qué hora le atacarán?
+
+<!--
+Imagen: https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png
+-->
+
+---
+<!-- _class: smaller-font -->
+
+- Si el enemigo, que no conoce la clave no tiene forma saber a qué hora se atacará ni aunque pruebe todas las claves. **Este cifrado es perfecto**
+- Pero el enemigo puede aprovechar un mensaje para descifrar los siguientes que usen la misma clave:
+    - Si no le han atacado a la 1, F no es 1
+    - Si no le han atacado a las 2, F no es 2
+    - Si le atacan a las 3, F es 3
+- Solo se puede usar esta clave **una vez**. A la siguiente, el enemigo ya tendrá mucha información. **La clave no puede reutilizarse nunca más**
+- Fíjate: el mapeo tiene que ser de números completos. Si no y el enemigo intercepta un mensaje HK, sabe que H es 1 ó 2 porque no hay "hora 37": el mapeo tiene que ser completo (es decir: clave tan larga como el mensaje)
+- Hay que volver a enviar una nueva clave cada vez que queramos enviar un mensaje nuevo, con el riesgo de que el enemigo intercepte el mensaje de envío de clave
+
+<!--
+
+Un sistema tan sencillo como este se utilizó en la realidad: los espías tenían "libros de claves" de un colo uso que tenían que llevar escondidos.
+-->
+
+## One-time-pad
+
+Vernam patentó el *one-time-pad* de una manera similar:
+
+$c = e(k,m)=k \otimes m$
+$m' = d(k,c) = e(k,c)=k \otimes c$
+
+La longitud en bytes de $k$ es igual que la longitud en bytes de $m$.
+
+Las claves se guardaban en hojas de papel de un solo uso. Las dos partes tenían una colección de estas hojas y se destruía en cuanto se usaba.
+
+En 1972, la NSA tenía 86.000 *one-time-pads*
+
+![bg left:30%](../images/historia/cryptomuseum1.jpg)
+
+> Si lo necesitas, mira la operación XOR en [el glosario](A1-glosario.html)
+
+<!--
+El teléfono rojo entre Washington y Moscú fue en realidad un teletipo que usaba cifrado de bloque de un solo uso
+
+La clave $k$ se intercambiaba por valija diplomática en cinta perforada que se entregaba en ambos sentidos. Mientras no hacía falta, se guardaba protegida y  se destruía después de ser usada
+
+Además, el *one-time-pad* permitía trabajar de forma segura sin intercambiar ningún algoritmo secreto que diera ventaja técnica al enemigo
+
+Para poder usar un *one-time-pad*, la clave se prepara por adelantado para cuando haga falta enviar algún mensaje inmediatamente.
+
+Imagen: https://www.cryptomuseum.com/spy/r353/img/300148/191/full.jpg
+-->
+
+## Vulnerabilidades del one-time-pad
+<!-- _class: with-success -->
+
+Ninguna...
+
+...**mientras se cumplan las hipótesis de trabajo para la clave $k$**:
+
+- tan larga como el mensaje
+- que la clave solo se utilice una vez
+- que sea completamente aleatoria (i.e. uniformemente distribuida)
+
+Shanon demostró matemáticamente que cualquier cifrado perfecto tendrá estos mismos problemas
+
+> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
+
+
+---
+
+El principal problema es que la longitud en bytes de $k$ es igual a la longitud en bytes de $m$.
+
+Cuesta tanto enviar $k$ de forma segura como enviar directamente $m$ en claro por el mismo canal seguro
+
+> Más ejemplos: https://www.cryptomuseum.com/covert/conceal/index.htm
+
+![bg right:60%](../images/historia/cryptomuseum2.jpg)
+
+<!--
+
+- Al final de la segunda guerra mundial, EEUU descifró el *one-time-pad* usado por los diplomáticos alemanes porque utilizaban contraseñas no totalmente aleatorias y podían adivinarse.
+- 1944: EEUU descifró mensajes de la URSS a Australia... porque utilizaban el mismo *one-time-pad* que la URSS usaba con EEUU.
+- 1962 (ataque canal lateral): las máquinas usadas para cifrar eran eléctricas y emitían un campo magnético, que Japón podría haber aprovechado para captar qué cifraba la embajada de EEUU: [TEMPEST](https://www.governmentattic.org/18docs/Hist_US_COMSEC_Boak_NSA_1973u.pdf)
 
 -->
 
-# Resumen y referencias
+
+## Seguridad computacional
+
+Sabemos cómo hacer cifrado perfecto, pero no es práctico.
+
+Los sistemas actuales usan otro concepto: la seguridad computacional
+
+**Seguridad computacional**: romper un cifrado es posible, pero se necesitan mucho tiempo / recursos
+
+Lo veremos con más detalle en la siguiente sesión
+# Conclusiones
 <!--
 _class: lead
 header: ''
@@ -483,7 +588,11 @@ header: ''
 ---
 
 - Diseña el sistema pensando que el atacante lo conoce.
-- Servicios básicos de seguridad: **confidencialidad**, **integridad**, **autenticación**, **no repudio**.
+- Servicios básicos de seguridad: **confidencialidad**, **integridad**, **autenticación**, **no repudio**
+- Fuerza bruta: probar todas las claves una a una
+- Seguridad de un algoritmo: número de claves (en bits) que un atacante tiene que probar para romperlo por fuerza bruta
+- Sistema inseguro: se conoce un ataque mejor que la fuerza bruta
+- La seguridad de los protocolos actuales está basada en la seguridad computacional
 - Técnicas para ofrecer estos servicios: criptografía simétrica, criptografía asimétrica, intercambio de claves, firma digital, funciones de hash, protocolos (composisión de técnicas)
 - La seguridad del sistema depende de que todos los engranajes encajen totalmente: algoritmos escogidos, sus parámetros de configuración, los protocolos utilizados...
 
@@ -494,12 +603,8 @@ header: ''
 - Introducción del paper [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
 
 ---
-<!-- _class: center -->
 
 Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales
 
-Ejemplo de ejercicio. Lo resolvemos en clase, no es necesario presentarlo: <https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb#scrollTo=controversial-america>
-
 # ¡Gracias!
 <!-- _class: last-slide -->
-

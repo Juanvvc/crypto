@@ -38,8 +38,8 @@ Los hashes nos permiten calcular **una firma digital**
 
 1. [Funciones de hash](#4)
 1. [Ejemplos de aplicaciones](#23)
-1. [Aplicación: cadena de custodia](#35)
-1. [Resumen y referencias](#41)
+1. [Aplicación: cadena de custodia](#34)
+1. [Resumen y referencias](#40)
 
 # Funciones de hash
 <!-- _class: lead -->

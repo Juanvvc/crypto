@@ -39,7 +39,7 @@ En este tema veremos cómo usar la criptografía para ofrecer el servicio de ano
 1. [Comunicaciones anónimas](#4)
 1. [Enrutamiento onion](#16)
 1. [Servicios onion](#27)
-1. [Referencias](#37)
+1. [Referencias](#40)
 
 # Comunicaciones anónimas
 <!-- _class: lead -->

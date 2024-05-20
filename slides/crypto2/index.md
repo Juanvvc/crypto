@@ -13,7 +13,7 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Criptografía y teoría de códigos
+# Criptografía y autenticación
 <!-- _class: first-slide -->
 
 **Presentación**
@@ -22,35 +22,26 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 
 ## Temario
-<!-- _class: cool-list -->
+<!-- _class: cool-list smaller-font -->
 
 1. [Conceptos básicos](01-conceptos.html)
-1. [Criptografía clásica](02-historia.html)
-1. [Criptografía de clave simétrica: AES y ChaCha](03-simetrica.html)
-    - Anexo: [RNG y HSM](A2-rng.html)
-1. [Teoría complejidad y acuerdo Diffie-Hellman](04-complejidad.html)
-1. [Criptografía de clave pública: RSA](05-asimetrica.html)
+    - Anexo: [Glosario](../A1-glosario.html)
+1. [Sistemas de cifrado](02-cifrado.html)
+1. [Funciones de hash y Firma digital](../03-hashes.html)
+1. [TLS y Public Key Infrastructure](../04-pki.html)
+    - Anexo: [TLS en detalle](../A4-protocolos.html)
+1. [Sistemas de autenticación](../11-autenticacion.html)
+1. [Anonimato](../12-anonimato.html)
+1. [Business Email Compromise](../13-bec.html)
+1. [Blockchain](../A3-bec.html)
 
----
-<!-- _class: cool-list -->
-
-<style scoped>
-    ol { counter-reset: li 5; }
-</style>
-
-6. [Funciones de Hash](06-hashes.html)
-    - Anexo: [Blockchain](A3-blockchain.html)
-1. [TLS y Public Key Infrastructure](07-pki.html)
-1. [Ransomware](08-ransomware.html)
-1. [Esteganografía](09-esteganografia.html)
-1. [Criptografía post-cuántica](10-postcuantica.html)
 
 # Presentación
 <!-- _class: lead -->
 
 ## Sobre mí
 
-![bg left:45%](images/juanvi.jpg)
+![bg left:45%](../images/juanvi.jpg)
 
 Dr. Juan Vera (Juanvi)
 
@@ -73,7 +64,7 @@ Intereses:
 
 ## Intrucciones de uso de las transparencias
 
-- Acceso directo HTML: <http://juanvvc.github.io/crypto>
+- Acceso directo HTML: <http://juanvvc.github.io/crypto/crypto2>
     - Pulsa `p` para notas de presentación
     - Puedes "Imprimir a PDF" las presentaciones si usas Chrome o Edge, pero no en Firefox o Safari
 - Código Markdown: <https://github.com/juanvvc/crypto>
@@ -82,7 +73,7 @@ Es muy recomendable seguir los enlaces que aparecen en la presentación
 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
 
-![bg right:40% w:100%](images/guia-transparencias.png)
+![bg right:40% w:100%](../images/guia-transparencias.png)
 
 <!-- 
 Esto es un ejemplo de notas de profesor. Aquí habrá información adicional, aclaraciones, referencias o explicaciones más largas de los conceptos de la transparencia
@@ -119,8 +110,8 @@ Los ejercicios son notebook de Google Colab:
 ## Conocimientos recomendables
 
 - Álgebra básica, probabilidad
-- Conocimientos básicos de programación: ejemplos en Python
-- Conocimientos básicos de redes: cómo funciona la WWW.
+- Conocimientos básicos de programación. Los ejemplos se presentarán en Python, pero no se pedirá programar nada. Será suficiente con poder entenderlos.
+- Conocimientos básicos de redes: cómo funciona Internet.
 
 ## Bibliografía
 <!-- _class: smaller-font -->
