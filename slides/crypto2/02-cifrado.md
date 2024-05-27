@@ -41,9 +41,11 @@ Hoy hablaremos del primero, confidencialidad, y empezaremos a poner las bases pa
 <!-- _class: cool-list toc -->
 
 1. [Confidencialidad perfecta y computacional](#5)
-1. [Criptografía simétrica o de clave secreta](#19)
-1. [Criptografía asimétrica o de clave pública](#44)
-1. [Conclusiones](#70)
+1. [Algoritmos criptográficos de cifrado](#16)
+1. [Cifrado simétrico de flujo: ChaCha](#22)
+1. [Cifrado simétrico de bloque: AES](#32)
+1. [Criptografía asimétrica o de clave pública](#47)
+1. [Conclusiones](#74)
 
 ---
 <!-- _class: with-info -->
@@ -201,43 +203,17 @@ Cuando la comunidad criptográfica rompe un algoritmo, se sustituye por otro
 
 Un algoritmo está **criptográficamente roto** si se conoce un ataque más eficiente que la fuerza bruta
 
----
-
-![](images/conceptos/cta2296-fig-0002-m.jpg)
-
-<!--
-Estos son los algoritmos de seguridad computacional que utilizamos
-
-Esta sesión estudiaremos las dos primeras ramas: clave pública y clave secreta
-
-La próxima sesión estudiaremos los algoritmos de hash
--->
+# Algoritmos criptográficos de cifrado
+<!-- _class: lead-->
 
 ## Criptografía simétrica / clave secreta
 <!-- _class: two-columns -->
 
-![](images/simetrica/simetrica.svg)
+![](../images/simetrica/simetrica.svg)
 
 - Se usa la misma clave para cifrar que para descifrar
 - Problema: ¿Cómo dos personas que no se conocen de nada acaban teniendo la misma clave?
 - Usos: confidencialidad
-
-## Criptografía asimétrica / clave pública
-<!-- _class: two-columns -->
-
-![](images/asimetrica/asimetrica.svg)
-
-- Existe una clave para cifrar, y una clave diferente para descifrar
-- Problema:
-    - No supimos cómo hacerla hasta los años 70
-    - Es lenta y compleja
-- Usos: autenticación, firma digital, intercambio de claves simétricas
-
-
-# Criptografía simétrica o de clave secreta
-<!-- _class: lead -->
-
-AES y ChaCha
 
 ## Criptografía simétrica o de clave secreta
 
@@ -251,7 +227,7 @@ Ejemplos actuales: AES, ChaCha
 
 Ejemplos rotos y obsoletos: RC4, DES, TDES
 
-![bg right](images/generic/pexels-cottonbro-7319077.jpg)
+![bg right](../images/generic/pexels-cottonbro-7319077.jpg)
 
 > Fondo: <https://www.pexels.com/photo/photo-of-person-using-magnifying-glass-7319077/>
 
@@ -272,6 +248,35 @@ Nosotros veremos en detalle los algoritmos ChaCha20 y AES, que los dos más util
 - **Cifrado de bloque**. Heredero de "la tradición" Vigenère: el mensaje se divide en bloques que se cifran por separado
 
 -->
+
+## Criptografía asimétrica / clave pública
+<!-- _class: two-columns -->
+
+![](../images/asimetrica/asimetrica.svg)
+
+- Existe una clave para cifrar, y una clave diferente para descifrar
+- Problema:
+    - No supimos cómo hacerla hasta los años 70
+    - Es lenta y compleja
+- Usos: autenticación, firma digital, intercambio de claves simétricas
+
+
+
+---
+
+![](../images/conceptos/cta2296-fig-0002-m.jpg)
+
+<!--
+Estos son los algoritmos de seguridad computacional que utilizamos
+
+Esta sesión estudiaremos las dos primeras ramas: clave pública y clave secreta
+
+La próxima sesión estudiaremos los algoritmos de hash
+-->
+
+
+# Cifrado simétrico de flujo: ChaCha
+<!-- _class: lead -->
 
 ## Cifrado de flujo
 
@@ -295,11 +300,8 @@ $$
 c = k_{\text{generada}} \oplus m
 $$
 
----
+![bg right w:90%](../images/simetrica/symmetric-example.png)
 
-![w:25em center](images/simetrica/symmetric-example.png)
-
-PRNG: *Pseudo Random Number Generator*
 
 <!--
 PRNG: *Pseudo Random Number Generator* es un generador de bits que tiene como entrada una **semilla** (que será la clave de cifrado $k$) y tiene como salida el flujo de bits que aplicaremos sobre el mensaje para cifrarlo con *XOR*
@@ -398,24 +400,79 @@ El cifrado de flujo es tan seguro como:
 
 -->
 
-## Ejemplos
+## ChaCha
 <!-- _class: with-info -->
 
-- RC4 (histórico): obsoleto
-- **ChaCha**: derivado del Salsa20 y probablemente la única alternativa al AES en TLS 1.3
-    - $\|k\|=256\ bits$
-    - $\|nonce\|=64\ bits$
+Cifrado de flujo, derivado del Salsa20 y probablemente la única alternativa al AES en TLS 1.3
+
+- Tamaño de clave: $\|k\|=256\ bits$
+- Usa un $\|nonce\|=64\ bits$
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/4/47/Salsa_round_function.svg)
 
 ChaCha es el algoritmo de cifrado simétrico de flujo más usado
+
+---
+
+```c
+#define ROTL(a,b) (((a) << (b)) | ((a) >> (32 - (b))))
+#define QR(a, b, c, d) (			\
+	a += b,  d ^= a,  d = ROTL(d,16),	\
+	c += d,  b ^= c,  b = ROTL(b,12),	\
+	a += b,  d ^= a,  d = ROTL(d, 8),	\
+	c += d,  b ^= c,  b = ROTL(b, 7))
+#define ROUNDS 20
+ 
+void chacha_block(uint32_t out[16], uint32_t const in[16])
+{
+	int i;
+	uint32_t x[16];
+
+	for (i = 0; i < 16; ++i)	
+		x[i] = in[i];
+	// 10 loops × 2 rounds/loop = 20 rounds
+	for (i = 0; i < ROUNDS; i += 2) {
+		// Odd round
+		QR(x[0], x[4], x[ 8], x[12]); // column 0
+		QR(x[1], x[5], x[ 9], x[13]); // column 1
+		QR(x[2], x[6], x[10], x[14]); // column 2
+		QR(x[3], x[7], x[11], x[15]); // column 3
+		// Even round
+		QR(x[0], x[5], x[10], x[15]); // diagonal 1 (main diagonal)
+		QR(x[1], x[6], x[11], x[12]); // diagonal 2
+		QR(x[2], x[7], x[ 8], x[13]); // diagonal 3
+		QR(x[3], x[4], x[ 9], x[14]); // diagonal 4
+	}
+	for (i = 0; i < 16; ++i)
+		out[i] = x[i] + in[i];
+}
+```
+
+> Fuente: [Wikipedia](https://en.wikipedia.org/wiki/Salsa20#ChaCha_variant))
+
+<!-- ChaCha es tan sencillo que podemos meterlo en una sola página -->
+
+## Variantes de ChaCha
+
+... la comunidad aún no está segura de cómo usarlo ...
+
+Nonce length|Description|Max data|If random nonce and same key
+--|--|--|--
+8 bytes (default)|The original ChaCha20 designed by Bernstein.|No limitations|Max 200 000 mensajes, el contador limita
+12 bytes|The TLS ChaCha20 as defined in RFC7539.|256 GB|Max 13 billions messages
+24 bytes|XChaCha20, still in draft stage.|256 GB|No limitations
+
+> [The Salsa20 family of stream ciphers](https://cr.yp.to/snuffle/salsafamily-20071225.pdf), Daniel J. Bernstein, 2007
+
+# Cifrado simétrico de bloque: AES
+<!-- _class: lead -->
 
 ## Cifrado de bloque
 <!-- _class: with-info -->
 
 Alternativa al cifrado de flujo: cortar el texto en claro en bloques de la misma longitud de la clave y cifrar cada uno de los bloques
 
-![center w:30em](images/simetrica/ECB_encryption.svg)
+![center w:30em](../images/simetrica/ECB_encryption.svg)
 
 El cifrado de bloque es el muy utilizado: es rápido, no necesita exigentes o lentos algoritmos PRNG y ya tenemos hardware especializado en su cifrado/descifrado
 
@@ -449,7 +506,7 @@ Si acumulamos estado durante el cifrado, podemos utilizar este estado sobre el c
 
 ## ECB: Electronic Code-Book
 
-![center Wikipedia w:35em](images/simetrica/ECB_encryption.svg)
+![center Wikipedia w:35em](../images/simetrica/ECB_encryption.svg)
 
 ---
 <!-- _class: center with-info -->
@@ -464,15 +521,15 @@ No se debe usar un cifrado de bloque en modo ECB
 
 ## CBC: Cipher Block Chaining
 
-![center Wikipedia w:35em](images/simetrica/CBC_encryption.svg)
+![center Wikipedia w:35em](../images/simetrica/CBC_encryption.svg)
 
 ## OFB: Output Feedback
 
-![center Wikipedia w:35em](images/simetrica/OFB_encryption.svg)
+![center Wikipedia w:35em](../images/simetrica/OFB_encryption.svg)
 
 ## CTR: Counter
 
-![center Wikipedia w:35em](images/simetrica/CTR_encryption.svg)
+![center Wikipedia w:35em](../images/simetrica/CTR_encryption.svg)
 
 ## Vector de Inicialización (IV)
 
@@ -495,7 +552,7 @@ Desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el co
 - longitud de bloque: 128 bits (16 Bytes)
 - longitud de clave: 128, 192 ó 256 bits
 
-![bg left:40%](images/simetrica/leuven.jpg)
+![bg left:40%](../images/simetrica/leuven.jpg)
 
 > background: https://whatsupcourtney.com/wp-content/uploads/2017/10/Things-to-do-in-Leuven-52-e1560945504897.jpeg
 
@@ -532,7 +589,7 @@ RC4, **ChaCha20**|3DES, **AES**
 
 # Problema del cifrado simétrico
 
-![w:16em center](images/simetrica/symmetric-example.png)
+![w:20em center](../images/simetrica/simetrica.svg)
 
 El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros
 
@@ -558,7 +615,7 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 
 ¿Qué direcciones eran esas?
 
-![bg right:30%](images/asimetrica/signpost-giving-directions.jpg)
+![bg right:30%](../images/asimetrica/signpost-giving-directions.jpg)
 
 > Foto: https://www.publicdomainpictures.net/en/view-image.php?image=363738&picture=signpost-giving-directions (CC0)
 
@@ -567,32 +624,12 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 
 Diffie-Hellman, RSA y curvas elípticas
 
-## Firmado digital de contratos
-
-[New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) (Whitfield Diffie y Martin Hellman, 1976) exploraba qué se necesitaba para que dos empresas pudiesen firmar un contrato mercantil:
-
-1. **Confidencialidad**, sin tener una clave secreta común
-1. **Autenticación** de la identidad (llamada "autencidad de usuario" en el paper original)
-1. **Integridad** del contrato (llamada "autenticidad del mensaje")
-1. **No repudio** del contrato por ninguna de las partes
-
-Es la lista que conocemos como "los servicios básicos de seguridad" (tema 1)
-
----
-
-El primer punto, "confidencialidad", se resolvía con los cifrados que estaban apareciendo ese mismo año (DES)...
-
-...pero se necesitaba intercambiar primero una clave simétrica
-
-Propuesta: protocolo de intercambio de claves
-
-Y se dieron cuenta: se puede extender la misma idea para solucionar todo lo demás
-
-![bg right](https://upload.wikimedia.org/wikipedia/commons/4/4c/Public_key_shared_secret.svg)
-
 ## Criptografía asimétrica
 
 También conocida como **criptografía de clave pública**
+
+![center w:25em](../images/asimetrica/asimetrica.svg)
+
 
 Cada persona tiene dos claves:
 
@@ -601,34 +638,45 @@ Cada persona tiene dos claves:
 
 A veces son intercambiables: lo que se cifra con una se descifra con la otra
 
-![bg right:40% w:90%](images/asimetrica/asimetrica.svg)
-
 > Compara con criptografía simétrica: misma clave para cifrar y descifrar, Bob y Alice tienen que manetenarla en secreto
+
+## Usos de la criptografía asimétrica
+<!-- _class: with-success -->
+
+Según si usamos la clave pública o la privada para cifrar, podemos hacer dos cosas:
+
+- cifrar mensajes --> servicio de confidencialidad
+- firmar digitalmente mensajes --> servicio de autenticación
+
+Ejemplos: RSA, Diffie-Hellman, DSA...
+
+La criptografía simétrica también nos permitía cifrar, pero no firmar
+
+No supimos cómo conseguir criptografía simétrica hasta 1976
 
 ## Esquema de cifrado
 
-![w:20em center](images/asimetrica/IMG_0056.PNG)
+![w:20em center](../images/asimetrica/IMG_0055.PNG)
 
 - Todos conocen la clave $K_{pub}$ de Bob, solo Bob conoce la clave $K_{priv}$
 - **Cualquier puede cifrar un mensaje para Bob, solo Bob puede descifrarlo**: confidencialidad
 
 ## Esquema de firma electrónica
 
-![w:20em center](images/asimetrica/IMG_0055.PNG)
+![w:20em center](../images/asimetrica/IMG_0055.PNG)
 
 - Solo Bob puede cifrar con su clave $K_{priv}$ y cualquier puede descifrar con $K_{pub}$
 - Pero si pueden descifrar el mensaje, **todos saben que el mensaje solo puede haberlo enviado Bob: autenticación**
 
+## ¿En qué se base la criptografía simétrica?
 
-## *Trap door functions*, funciones trampa
-<!-- _class: with-success -->
+Funciones "trampa": son problemas difíciles de resolver, excepto si conoces "un atajo" (que será la clave privada)
 
-Las matemáticas de la criptografía asimétrica utilizan funciones trampa:
+Ejemplos:
 
-- Si conoces $a$, entonces calcular $A=f(a)$ es fácil (problema P, tiempo polinomial)
-- Si conoces $A$, entonces calcular $a=f^{-1}(A)$ es muy difícil (problema NP, tiempo exponencial)
-
-No encontramos una función trampa hasta 1976
+- Factorización de números primos
+- Problema del logaritmo discreto
+- Curvas elípticas
 
 ## Problema del Logaritmo Discreto
 <!-- _class: a-story -->
@@ -641,10 +689,12 @@ Resuelve la $x$:
 * Si te dan $n$ y $N$ y te preguntan $n^x=N$...
 * $x = \log_n N$
 
-> Para más detalles de este problema, consulta [tema 4](04-complejidad.html)
+> Para más detalles de este problema, consulta [Tema de complejidad](../04-complejidad.html)
 
 ---
 <!-- _class: a-story -->
+
+¿Qué sucede si metemos la operación módulo?
 
 Resuelve la $x$:
 
@@ -710,7 +760,7 @@ Luego, las soluciones se refinaron con curvas elípticas: ECDH (*Elliptic Curves
 
 ## RSA: claves públicas y privadas
 
-![bg left](images/asimetrica/rsa-creators.jpg)
+![bg left](../images/asimetrica/rsa-creators.jpg)
 
 Fue el primer método de cifrado conocido que usaba claves públicas y privadas
 
@@ -825,7 +875,7 @@ Dado un punto $A$, definimos una operación "proyección" $A+B = C$ como:
 
 $C$ es "la proyección de recta que une $A$ y $B$, reflejada al otro lado de la curva"
 
-![center w:20em](images/asimetrica/elliptic55-addition.png)
+![center w:20em](../images/asimetrica/elliptic55-addition.png)
 
 Usamos el símbolo "suma" por tradición, pero no es una "suma geométrica"
 
@@ -833,7 +883,7 @@ Usamos el símbolo "suma" por tradición, pero no es una "suma geométrica"
 
 Y lo volvemos a aplicar, varias veces, desde el mismo origen
 
-![center](images/asimetrica/elliptic55-addition2.png)
+![center](../images/asimetrica/elliptic55-addition2.png)
 
 ---
 
@@ -841,21 +891,9 @@ En vez de empezar con dos puntos, podemos empezar con uno solo, y la recta inici
 
 $$P=nA$$
 
-![center w:20em](images/asimetrica/elliptic.gif)
+![center w:20em](../images/asimetrica/elliptic.gif)
 
 > Fuente: https://medium.com/@icostan/animated-elliptic-curves-cryptography-122fff8fcae
-
----
-
-Esta es la *trap door function*:
-
-$$ P = nA$$
-
-Es la aplicación de $n$ veces la proyección sobre el punto $A$
-
-Dado $P$ y $A$... ¿cuánto vale $n$?
-
-**Eso es el problema difícil de las curvas elípticas:**
 
 ## Tamaño de clave
 
@@ -876,14 +914,39 @@ A cambio, son más complejas de entender y programar pero eso como usuarios no e
 
 -->
 
-
 ---
 
-![center](images/asimetrica/keysize-compare.png)
+![center](../images/asimetrica/keysize-compare.png)
 
 NOTA: RSA está basado en "factorización", DSA y D-H en "logaritmo discreto"
 
 > https://www.keylength.com/en/compare/
+
+## Adaptación a curvas elípticas
+
+Varios algoritmos clásicos se han adaptado a curvas elípticas:
+
+- DH (Diffie-Hellman) -> Elliptic Curces Diffie-Hellman (ECDH)
+- DSA (similar a RSA, no lo hemos visto en esa sesión) -> ECDSA
+- RSA no se ha adaptado a curvas elípticas
+
+## Usos de la criptografía asimétrica
+
+¿Por qué no la usamos para todo?
+
+- Es mucho más lenta que la ciptografía de clave privada como AES/ChaCha
+- Solo permite cifrar textos muy cortos, más cortos que la clave
+
+Pero tiene otras ventajas:
+
+- Es la única que nos permite firmas digitales
+- A través de las firmas podemos autenticar a la otra parte
+
+## Criptografía híbrida: lo mejor de los dos mundos
+
+1. Usamos criptografía asimétrica para intercambiar una clave: ECDH
+1. Una vez que tenemos la clave, seguimos cifrando en AES ó ChaCha
+
 # Conclusiones
 <!-- _class: lead -->
 
@@ -922,7 +985,7 @@ ECDH: Elliptic Curve Diffie-Hellman
 - Criptografía asimétrica: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es secreta
 - Muchísimo **más lenta** que el cifrado simétrico
 - Se utiliza para:
-    - intercambiar claves simétricas (Diffie-Hellman, ECDH)
+    - intercambiar claves simétricas (ECDH)
     - firmado e identidad digital (RSA, ECDSA)
 - Ejemplos clásicos: RSA, DSA, D-H. Están basados en el problema de la factorización de números primos y logaritmo discreto. Necesitan tamaños de clave grandes y eso dificulta su implementación
 - Las curvas elípticas (EC) permite claves mucho más pequeñas = más rápidos
@@ -951,9 +1014,7 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 
 <!-- _class: center -->
 
-Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto2/blob/main/ejercicios/02/Sistemas%20de%20cifrado.ipynb>
-
-Continúa en: [Funciones de Hash y firma digital](03-hashes.html)
+Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/02b/Sistemas%20de%20cifrado.ipynb>
 
 # ¡Gracias!
 <!-- _class: last-slide -->

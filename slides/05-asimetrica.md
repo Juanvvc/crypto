@@ -28,7 +28,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Como decíamos ayer...
 
-![w:16em center](images/simetrica/symmetric-example.png)
+![w:25em center](images/simetrica/simetrica.svg)
 
 El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros. Con Diffie-Hellman, dos personas que no se han conocido nunca pueden tener una clave común.
 
