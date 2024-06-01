@@ -126,10 +126,10 @@ La única forma de encontrar preimágenes o colisiones tiene que ser la fuerza b
 
 Los hashes se usan mucho en minería bitcoin, así que podemos utilizar sus tablas para conocer velocidades:
 
-- ARM1176JZ(F)-S (Raspberry): 0.2 MH/s
-- NVidia GTX1080: 222MH/s
-- Bitmain AntMiner D3: 19,3 GH/s
-- Avalon 6: 3.5 TH/s
+- ARM1176JZ(F)-S (Raspberry): 0.2 MH/s Scrypt (Litecoin)
+- NVidia GTX1080: 40MH/s Ethash (Ethereum)
+- Bitmain AntMiner D3: 19,3 GH/s X11 (Dash)
+- Avalon 6: 3.5 TH/s SHA-256 (Bitcoin)
 
 ![bg right:50%](images/hashes/avalon6.jpg)
 
