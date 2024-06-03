@@ -27,13 +27,14 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 1. [Conceptos básicos](01-conceptos.html)
     - Anexo: [Glosario](../A1-glosario.html)
 1. [Sistemas de cifrado](02-cifrado.html)
-1. [Funciones de hash y Firma digital](../03-hashes.html)
-1. [TLS y Public Key Infrastructure](../04-pki.html)
-    - Anexo: [TLS en detalle](../A4-protocolos.html)
+1. [Funciones de hash](../06-hashes.html)
+    - Anexo: [Firma digital](../A4-firmadigital.html)
+1. [TLS y Public Key Infrastructure](../07-pki.html)
+    - Anexo: [TLS en detalle](../A2-protocolos.html)
 1. [Sistemas de autenticación](../11-autenticacion.html)
 1. [Anonimato](../12-anonimato.html)
 1. [Business Email Compromise](../13-bec.html)
-1. [Blockchain](../A3-bec.html)
+1. [Blockchain](../A3-blockchain.html)
 
 
 # Presentación
