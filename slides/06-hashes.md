@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Funciones de Hash y Firma digital
+title: Criptografía - Funciones de Hash
 author: Juan Vera
 keywords: criptografía,hash,sha256,integridad,firma digital
 paginate: true
@@ -18,7 +18,7 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Funciones de Hash y Firma digital
+# Funciones de Hash
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
