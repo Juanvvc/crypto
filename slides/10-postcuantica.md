@@ -80,6 +80,7 @@ Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
 
 Es poco probable que tengamos una computadora cuántica en nuestros escritorios alguna vez
 
+
 ## Criptografía cuántica
 <!-- _class: with-warning -->
 
@@ -89,7 +90,7 @@ Es poco probable que tengamos una computadora cuántica en nuestros escritorios 
 
 ![center w:27em](images/quantum/q-key-distribution.png)
 
-En esta clase no hablaremos de criptografía cuántica sinó post-cuántica, que definiremos más adelante
+En esta clase no hablaremos de criptografía cuántica sinó de la post-cuántica, que definiremos más adelante
 
 > https://en.wikipedia.org/wiki/Quantum_cryptography
 
@@ -103,7 +104,7 @@ En esta clase no hablaremos de criptografía cuántica
 
 ## Entonces, ¿qué hacen las computadores cuánticas?
 
-La computación cuántica permite ejecutar algoritmos de búsquedas más rápidamente de la comutación tradicional
+La computación cuántica permite ejecutar algoritmos de búsquedas más rápidamente que la computación tradicional
 
 - Entrenamientos de inteligencia artificial
 - Sistemas de optimización industrial
@@ -112,9 +113,14 @@ La computación cuántica permite ejecutar algoritmos de búsquedas más rápida
 
 ![bg left:40%](images/quantum/ibm-q.jpg)
 
-> https://research.aimultiple.com/quantum-computing-applications/
+> [Top 20 Quantum Computing Use Cases & Applications in 2024](https://research.aimultiple.com/quantum-computing-applications/)
+> [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw)
 
-<!-- En la imagen, IBM-Q quantum computer en la conferencia Supercomputing 18 de Dallas, Texas  -->
+
+<!-- En la imagen, IBM-Q quantum computer en la conferencia Supercomputing 18 de Dallas, Texas
+
+Para pensar: ¿realmente necesitamos resolver algoritmos de optimización tan rápido? ¿No nos valen los algoritmos tradicionales?
+-->
 
 ## Algoritmos ejecutados por computadoras cuánticas
 <!-- _class: with-success -->
@@ -376,6 +382,8 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 - [What is a Qubit? - A Beginner's Guide to Quantum Computing](https://www.youtube.com/watch?v=90za6mazNps)
 - [Quantum computing for the determined](https://www.youtube.com/playlist?list=PL1826E60FD05B44E4)
 - [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
+- [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw)
+
 
 
 # ¡Gracias!
