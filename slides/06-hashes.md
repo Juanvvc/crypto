@@ -27,11 +27,18 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 # Como decíamos ayer...
 
 - **Confidencialidad**: AES/ChaCha20 + D-H
-- **Autenticidad**: RSA + firma digital
-- **No repudio**: RSA + firma digital
+- **Autenticidad**: firma digital
+- **No repudio**: firma digital
 - **Integridad**: firma digital
 
-Los hashes nos permiten calcular **una firma digital**
+Firma digital = cifrado asimétrico de un valor de hash
+
+<!--
+Hasta ahora hemos visto cómo ofrecer confidencialidad.
+La firma digital nos permite ofrecer el resto de servicios,
+pero para poder hacer firma digital tenemos que conocer qué son
+las funciones de hash
+-->
 
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
@@ -65,9 +72,9 @@ Da igual como sea la entrada, la salida siempre tiene el mismo número de bits
 
 ## Ejemplos no criptográficos
 
-- Bit de paridad un mensaje: número de "1" en el mensaje
-- CRC
-- Checksum
+- [Bit de paridad un mensaje](https://en.wikipedia.org/wiki/Parity_bit): número de "1" en el mensaje
+- [*Cyclic redundancy check* (CRC)](https://es.wikipedia.org/wiki/Verificaci%C3%B3n_de_redundancia_c%C3%ADclica)
+- [RAID 4](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_4) y [RAID 5](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_5)
 
 Todos estos son resúmenes, pero no son de utilidad en criptografía
 
@@ -79,16 +86,17 @@ Todos estos son resúmenes, pero no son de utilidad en criptografía
 <!--
 Los bits de paridad o los CRC se utilizan mucho con protocolos que esperan errores: RS232, lectura de CDs, la parte de paridad de un RAID... Un código de detección/corrección de errores se puede entender también como un "resumen" del mensaje: si el resumen no coincide con lo recibido, entonces sabemos ue ha habido un error.
 
-Pero estas funciones, en general, no sirven en criptografía: imagina que un atacante puede cambiar un mensaje y también su resumen. Entonces, ¡no nos sirve de nada validar que el resumen sea correcto!
+Pero estas funciones, en general, no sirven en criptografía: por ejemplo, la función del bloque de paridad de un RAID 4 es poder reconstruir el documento original, que es algo que no queremos que sea posible en criptografía
 -->
 
 ## Funciones de hash criptográficas
+<!-- _class: with-info -->
 
 Funciones hash criptográficas son aquellas que:
 
 - Son funciones resumen: comprimen la entrada a una salida de menor longitud
-- Son fáciles y rapidas de calcular
 - **Propiedades adicionales**:
+    - Son fáciles y rapidas de calcular
     - Dado un resumen, no es posible calcular el mensaje original
     - No es factible encontrar dos mensajes con el mismo resumen
 
@@ -110,7 +118,7 @@ Ejemplos de valores de hash:
 ¿Qué tenemos que cambiar en "The red fox jumps over the blue dog" para que tenga el mismo hash? Es decir, para que el hash no detecte el cambio. Ya que el texto es mayor de 256 bits, sabemos seguro que habrá otro texto que tendrá el mismo resumen. Pero lo único que podemos hacer es probar cambios uno y otro hasta tener suerte!
 -->
 
-## Requisitos de una función de hash criptográfica
+## Requisitos formales de una función de hash criptográfica
 
 - Que sea **rápida** de calcular
 
@@ -122,9 +130,9 @@ La única forma de encontrar preimágenes o colisiones tiene que ser la fuerza b
 
 > https://en.wikipedia.org/wiki/Cryptographic_hash_function#Properties
 
-## ¿Cuántos hashes podemos calcular por segundo?
+## Rápida de calcular
 
-Los hashes se usan mucho en minería bitcoin, así que podemos utilizar sus tablas para conocer velocidades:
+Las funciones de hash se usan mucho en criptomonedas, así que podemos utilizar sus tablas para conocer velocidades:
 
 - ARM1176JZ(F)-S (Raspberry): 0.2 MH/s Scrypt (Litecoin)
 - NVidia GTX1080: 40MH/s Ethash (Ethereum)
@@ -136,7 +144,7 @@ Los hashes se usan mucho en minería bitcoin, así que podemos utilizar sus tabl
 > Más ejemplos: https://miningchamp.com/
 > En la imagen, un Avalon 6, bloque especializado en calcular hashes
 
-## ¿Mensajes con el mismo resumen?
+## Colisión de valores de hash
 <!-- _class: with-success -->
 
 Obvio: no puede existir una aplicación inyectiva entre un conjunto de $m$ elementos y otro de $n$ elementos si $m>n$
@@ -239,11 +247,13 @@ Si calculas los valores de hash del archivo, verás que no coinciden. Eso es por
 
 ## ¿SHA-2 ó SHA-3?
 
-La familia SHA-2 está **diseñada** por la NSA, la familia SHA-3 fue **escogida** por el NIST después de organizar una competición para definir el siguiente hash a utilizar
+La familia SHA-2 fue **impuesta** por la NSA, la familia SHA-3 fue **escogida** por el NIST después de organizar una competición para definir el siguiente hash a utilizar
 
 El SHA-3 se ha desarrollado teniendo en cuenta la eficiencia y como backup en caso de encontrar vulnerabilidades en el SHA-2 (diseños totalmente diferentes)
 
 El SHA-2 hasta ahora ha sido sometido a un trabajo de análisis muy superior al SHA-3 y  no se han encontrado ninguna vulnerabilidad
+
+<!-- Para evitar dudas, en criptografía preferimos utilizar sistemas que han sido escogidos en vez de impuestos -->
 
 ## Construcción
 
@@ -306,7 +316,9 @@ En este curso no hacemos criptoanálisis, es decir, no rompemos cosas. Si estái
 
 Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
 
-![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
+![center w:10em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
+
+Tenemos una presentación dedicada a [firma digital](A4-firmadigital.html)
 
 Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
@@ -404,8 +416,7 @@ Hay modos de AES que utilizan estos esquemas: [AES-GCM](https://en.wikipedia.org
 - Usado en TLS
 - Vulnerable algún ataques de padding: [Padding Oracle, pentesterlab](https://book.hacktricks.xyz/crypto/padding-oracle-priv)
 
-## Merkle Hash tree
-<!-- _class: smaller-font -->
+<!-- ## Merkle Hash tree
 
 Si un archivo gran cambia a menudo y hay que calcular su hash cada vez, llevará mucho tiempo
 
@@ -414,12 +425,13 @@ Solución: calcular hash solo de los bloques que cambien, y agruparlos en un ár
 Permite firmar bases de datos, discos... de forma eficiente
 
 ![center w:35em](images/hashes/Hash_Tree.svg)
+-->
 
 ## Blockchain
 
 ![w:30em center](images/blockchain/bc-transactions.png)
 
-Tenemos todo un [tema para hablar de blockchain](03-blockchain.html)
+Tenemos todo un [tema para hablar de blockchain](A3-blockchain.html)
 
 ## Aplicación: cadena de custodia
 <!-- _class: lead -->
