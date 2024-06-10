@@ -155,6 +155,13 @@ SIGN|Algoritmo de firma
 CIPHER|Algoritmo de cifrado simétrico
 HASH|Algoritmo de hash
 
+## TLSv2 y TLSv3
+
+![center](images/pki/tlsv2v3.png)
+
+> https://www.a10networks.com/glossary/key-differences-between-tls-1-2-and-tls-1-3/
+> https://www.cloudflare.com/learning/ssl/why-use-tls-1.3/
+
 ## Algoritmos en TLS v1.3
 
 los siguientes cipher-suites son de obligada implementación (*MUST*):
@@ -183,7 +190,7 @@ y se recomienda la implementación de estos (*SHOULD*):
 
 ## Inicialización (caso general, PFS)
 
-Usando Diffie-Hellman sobre Curvas Elípticas (ECDH) genera el *MasterSecret*, del que se derivan 4 claves y 2 vectores de inicialización (IV, recuerda [Tema 2](02-cifrado.md)):
+Usando Diffie-Hellman sobre Curvas Elípticas (ECDH) genera el *MasterSecret*, del que se derivan 4 claves y 2 vectores de inicialización (IV):
 
 - clave de cifrado de cliente a servidor (y viceversa)
 - IV, para el cifrado de cliente a servidor (y viceversa)
