@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Protocolos
+title: Criptografía - Protocolo TLS
 author: Juan Vera
 keywords: criptografía,protocolos,tls
 paginate: true
@@ -98,7 +98,7 @@ Una conexión HTTPS / TLS no quiere decir "confía en mí". Quiere decir "nadie 
 
 - Scott Hanselman
 
-![bg right:60%](images/asimetrica/scream.jpg)
+![bg right:60%](images/pki/scream.jpg)
 
 ## Autenticación: gestión de la identidad
 
@@ -179,7 +179,7 @@ y se recomienda la implementación de estos (*SHOULD*):
 
 ---
 
-![center w:30em](images/tls-example1.png)
+![center w:30em](images/pki/tls-example1.png)
 
 ## Inicialización (caso general, PFS)
 
@@ -257,7 +257,16 @@ Se debe vigilar que RSA y DHE sean de 2048 bit o más, y que ECDSA y ECDH usen P
 
 ## Creación de una CA
 
-![center](images/A-2-layer-X509-certification-hierarchy.png)
+![center](https://upload.wikimedia.org/wikipedia/commons/d/d1/Chain_of_trust.svg)
+
+> https://es.wikipedia.org/wiki/Cadena_de_confianza
+
+<!--
+La clave privada de una TTP es muy delicada: se protege en grandes edificios con una enorme seguridad física, en PCs desconectados de Internet y dentro de cajas fuertes.
+
+Por eso los certificados de usuarios no suelen estar firmados por una TTP final (llamada "Root CA") sino por otras terceras partes intermedias con capacidad para firmas certificados de usuarios. El certificados de estos intermediarios sí que está firmado por la Autoridad raíz
+-->
+
 
 ## Creación de CA
 
