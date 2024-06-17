@@ -48,10 +48,10 @@ Es decir, no repudio = autenticidad + integridad
 <!-- _class: cool-list toc -->
 
 1. [Autenticación](#4)
-1. [Desafío - Respuesta](#26)
-1. [Autenticación por contraseña](#35)
-1. [Sesiones por tokens](#44)
-1. [Resumen y referencias](#66)
+1. [Desafío - Respuesta](#28)
+1. [Autenticación por contraseña](#37)
+1. [Sesiones por tokens](#48)
+1. [Resumen y referencias](#70)
 
 # Autenticación
 <!-- _class: lead -->
@@ -77,7 +77,7 @@ Man in the middle y impersonation son muy similares, y la defensa contra ambos e
 La diferencia es que en el caso de man in the middle malloy tiene algo más de ventaja: si Alice pregunta algo que solo puede responder Bob, Malloy podría preguntárselo a Bob y entonces le responde a Alice.
 -->
 
-## Escenarios
+## ¿Quién tiene que autenticar?
 
 - Personas autenticando a personas
 - Personas autenticando a sistemas
@@ -87,6 +87,12 @@ La diferencia es que en el caso de man in the middle malloy tiene algo más de v
 Cada uno de estos tipos requiere soluciones diferentes. En criptografía nos centramos en los dos últimos escenarios
 
 ![bg right:40%](images/auth/doorman.png)
+
+<!--
+Aunque nos centraremos en "sistemas autenticando personas/sistemas", a veces también necesitaremos que una personas nos autentique en algunos procesos criptográficos
+
+Por ejemplo, en Europa, para poder hacer una firma cualificada, es necesario tener un certificado digital que haya sido validado mediante un paso "persona autenticando persona": para un que un certificado sea válido tenemos que ir personalmente a algún sitio
+-->
 
 ## Diffie-Hellman y el ataque Man in the Middle
 
@@ -198,6 +204,12 @@ Usa siempre gestores de contraseñas: KeePass, 1Password, LogMeOnce, Bitwarden..
 
 Las preguntas personales no son un buen mecanismo de autenticación: baja fortaleza
 
+<!-- Las preguntas no son un buen método de autenticación:
+
+- Las mascotas suelen tener nombres parecidos en todo el mundo
+- Hay demasiada gente que conoce datos personales tuyos, como el nombre de tu familia o dónde estudiaste la secundaria
+
+-->
 
 ## Alto que *tenemos*
 <!-- _class: center -->
@@ -219,10 +231,13 @@ Vulnerabilidades de *algo que tenemos*:
     - Click hijacking
     - [Social engineering](https://bandaancha.eu/articulos/asi-han-robando-cuentas-whatsapp-10754)
     - Stealers: [Redline](https://www.genbeta.com/genbeta/redline-stealer-malware-que-te-dara-razon-para-dejar-utilizar-gestor-contrasenas-tu-navegador), [estadísticas](https://www.statista.com/statistics/1385123/info-stealers-used-for-credential-theft/)
+- Ingeniería social
+    - [Caso Activision](https://www.bleepingcomputer.com/news/security/activision-confirms-data-breach-exposing-employee-and-game-info/)
+    - [Vishing](https://www.verificat.cat/es/te-llama-tu-banco-pero-no-es-tu-banco-el-vishing-o-la-estafa-de-la-suplantacion-de-la-identidad-telefonica/)
 
 ![right bg w:90%](images/auth/activision-hacked.png)
 
-> https://www.bleepingcomputer.com/news/security/activision-confirms-data-breach-exposing-employee-and-game-info/
+> 
 
 <!--
 
@@ -233,6 +248,13 @@ El hackeo de 2022 a Activision se produjo así:
 - Un trabajador acabó harto de las inundaciones y envió su número de confirmación
 
 -->
+
+## Man in the middle, con 2FA
+
+![center w:30em](images/auth/mitm.png)
+
+> https://askleo.com/beware-the-middleman-how-your-2fa-could-be-compromised/
+> https://www.csoonline.com/article/570795/how-to-hack-2fa.html
 
 ## Algo que *somos*
 
@@ -310,6 +332,24 @@ En muchas webs nos podemos autenticar con nuestro usuario de **Google**, **Faceb
 - Si hay un equipo secuestrado y le enviamos credenciales, la hemos perdido en ese equipo y en todos los que usen la misma contraseña: redes windows, pass the hash...
 - Un atacante puede repetir exactamente lo que hemos hecho: replay attack
 - Un atacante puede obligarnos a hacer algo (sin que nos demos cuenta) aprovechando nuestas credenciales
+
+## Windows: Security Support Provider Interface (SSPI)
+
+![center w:30em](images/auth/sspi.png)
+
+> https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture
+
+<!--
+¿Las aplicaciones tienen que soportar todos estos sistemas de autenticación?
+
+El sistema operativo puede ayudarnos. Por ejemplo, en Windows, la autenticación se maneja a través de la SSPI, que escoge el servicio más adecuado
+
+- NTLM: hashes y desafío respuesta, para usuarios locales
+- Kerberos: tickets, cuando hay un AD
+- Digest: páginas web
+- Schannel: SSL, certificados
+- ...
+-->
 
 ## Vamos a ver tres soluciones
 <!-- _class: cool-list -->
@@ -458,7 +498,7 @@ Es un protocolo *desafío-respuesta*:
 > https://blog.quest.com/ntlm-authentication-what-it-is-and-why-you-should-avoid-using-it/
 
 <!--
-Vemos NTLMv1 simplemente como ejemplo, Microsoft no recomienda seguir usándolo en la actualidad y debería ser sustituido por Kerneros
+Vemos NTLMv1 simplemente como ejemplo, Microsoft no recomienda seguir usándolo en la actualidad y debería ser sustituido por Kerberos
 
 Los Windows actuales aún soportan NTLM para dar servicio a PCs antiguos
 -->
@@ -601,6 +641,39 @@ bcrypt_check(password, hpwd)
 Fijaos que ejecutar bcrypt sobre la misma contraseña "sesamo", da resultados diferentes. De esta forma se puede guardar las contraseñas repetidas sin que ndie pueda saber que son repetidas
 -->
 
+## Windows: contraseñas en c:\Windows\System32\SAM
+
+```
+# cmd as Admin
+.\PsExec.exe -i -s cmd.exe
+# cmd as system
+reg save hklm\sam dump_sam
+reg save hklm\system dump_system
+# Kali
+samdump2 dump_sam dump_system
+
+*disabled* Administrator:500:b3d39asfda90129099hksuu2js:b3d39asfda90129099hksuu2js:::
+*disabled* Guest:501:b3d39asfda90129099hksuu2js:b3d39asfda90129099hksuu2js:::
+*disabled* :503:b3d39asfda90129099hksuu2js:b3d39asfda90129099hksuu2js:::
+*disabled* :504:b3d39asfda90129099hksuu2js:b3d39asfda90129099hksuu2js:::
+Juan:1001:b3d39asfda90129099hksuu2js:b3d39asfda90129099hksuu2js:::
+```
+
+> https://www.windows-active-directory.com/windows-security-account-manager.html
+> https://medium.com/@petergombos/lm-ntlm-net-ntlmv2-oh-my-a9b235c58ed4
+
+## Linux: contraseñas en /etc/shadow
+
+```
+sudo cat /etc/shadow
+
+systemd-timesync:*:18111:0:99999:7:::
+systemd-network:*:18111:0:99999:7:::
+systemd-resolve:*:18111:0:99999:7:::
+juanvi:$6$NBwuq8iqV6NYjJz6$jUHQcX51818121212yKjklasfjksf871l120kskLkjsadslkfok11l210io0/.:18293:0:99999:7:::
+messagebus:*:18293:0:99999:7:::
+```
+
 # Sesiones por tokens
 <!-- _class: lead -->
 
@@ -727,7 +800,7 @@ Security Assertion Markup Language (SAML) es un estándar abierto de **autentica
 
 ![center w:40em](images/auth/SAML-flow-21.png)
 
-> https://bigdataanalyticsnews.com/how-does-saml-work/
+> https://learn.microsoft.com/en-us/entra/architecture/auth-saml?source=recommendations
 
 ## Beneficios de SAML
 
