@@ -346,7 +346,7 @@ El sistema operativo puede ayudarnos. Por ejemplo, en Windows, la autenticación
 
 - NTLM: hashes y desafío respuesta, para usuarios locales
 - Kerberos: tickets, cuando hay un AD
-- Digest: páginas web
+- Digest: antiguo sistema de autenticación de windos: contraseñas cifradas en RAM
 - Schannel: SSL, certificados
 - ...
 -->
