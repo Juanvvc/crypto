@@ -2,7 +2,7 @@
 marp: true
 title: Criptografía - Funciones de Hash
 author: Juan Vera
-keywords: criptografía,hash,sha256,integridad,firma digital
+keywords: criptografía,hash,sha256,integridad,firma digital,cadena de custodia
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
@@ -45,8 +45,8 @@ las funciones de hash
 
 1. [Funciones de hash](#4)
 1. [Ejemplos de aplicaciones](#23)
-1. [Aplicación: cadena de custodia](#34)
-1. [Resumen y referencias](#40)
+1. [Aplicación: cadena de custodia](#33)
+1. [Resumen y referencias](#41)
 
 # Funciones de hash
 <!-- _class: lead -->
@@ -309,7 +309,7 @@ En este curso no hacemos criptoanálisis, es decir, no rompemos cosas. Si estái
 # Ejemplos de aplicaciones
 <!-- _class: lead -->
 
-Árboles de Merkle, Integridad, Cadena de custodia...
+Integridad, Bitcoin, Cadena de custodia...
 
 ## Firma digital
 <!-- _class: with-success -->
@@ -433,8 +433,20 @@ Permite firmar bases de datos, discos... de forma eficiente
 
 Tenemos todo un [tema para hablar de blockchain](A3-blockchain.html)
 
-## Aplicación: cadena de custodia
+# Aplicación: cadena de custodia
 <!-- _class: lead -->
+
+## Evidencia digital
+
+Conjunto de datos en formato digital que pueden utilizarse en un tribunal para esclarecer los hechos de un delito: archivos, metadatos, logs de actividad, conexiones de tráfico en la red, discos duros, memorias USB....
+
+Características:
+
+- **Contextuales**: tienen que ser interpretados en su contexto. Ejemplo ¿Qué significa "fecha de creación de un archivo"? ¿Creación inicial o día de copia en el PC en el que se encuentra?
+- **Manipulables**: pueden ser alterada, dañada o eliminada con facilidad y a distancia
+- **Volátiles**: pueden eliminarse tanto automáticamente (cachés) como manualmente con el paso del tiempo
+
+> https://universidadeuropea.com/blog/evidencia-digital/
 
 ---
 
@@ -442,16 +454,36 @@ Cuando se investiga un crimen... ¿cómo se protegen las evidencias digitales co
 
 ![center w:25em](https://www.ealde.es/wp-content/uploads/2021/02/analisis-forense-digital-ealde.jpg)
 
----
+## Adquisición de evidencias digitales
 
-![center w:25em](images/hashes/dossier.png)
+![bg left h:100%](images/hashes/dossier.png)
 
+Objetivo:
+
+
+- **Licitud**: obtenida de forma que no vulneren ningún derecho fundamental
+- **Autenticidad**: disolver cualquier duda respecto a su veracidad.
+- **Integridad**: la prueba no ha sido manipulada, modificada o alterada desde el momento de la obtención hasta su aportación en un juicio: **cadena de custodia**
+
+> https://ciberpatrulla.com/evidencia-digital/
+
+## Metodología
+
+- Comprobación de la legitimación para obtener la evidencia
+- Planificación del proceso, incluidas alternativas
+- Captura y explicación de todas las acciones, acompañándose de fotografías, imágenes, capturas de pantalla, declaración de testigos...
+- Cálculo del valor de hash
+- Validación por tercero del valor de hash: notario, firma digital, tercera parte de confianza...
+
+> [SO/IEC 27037:2012: Guidelines for identification, collection, acquisition and preservation of digital evidence](https://www.iso.org/standard/44381.html)
+> https://www.iso27001security.com/html/27037.html
 
 ## Inicio de una cadena de custodia
 
 - Valor de hash en un acta notarial
 - Valor de hash en un informe que se presenta en juzgado
 - Valor de hash en una tercera parte de confianza. Ejemplo: eGarante
+- Firma digital con fecha
 
 Cuando llegue el jucio (o una investigación paralela) las evidencias digitales tienen que tener el mismo valor de hash que el inicial, lo que demuestra que la prueba no ha sido modificada
 
