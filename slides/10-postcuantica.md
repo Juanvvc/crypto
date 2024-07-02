@@ -365,7 +365,7 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 
 ## Resumen
 
-- La criptografía cuántica permite resolver ciertos problemas más rápidamente de lo que sabemos hacerlo con computación tradicional
+- La computación cuántica permite resolver ciertos problemas más rápidamente de lo que sabemos hacerlo con computación tradicional
 - Cuando llegue:
     - La criptografía simétrica actual deberá doblar el tamaño de las claves usadas
     - Las funciones de hash deberán casi doblar los bits de salida

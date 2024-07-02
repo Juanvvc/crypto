@@ -29,7 +29,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Criptografía híbrida](#5)
 1. [Gestión de claves públicas](#16)
-1. [Resumen y referencias](#37)
+1. [Resumen y referencias](#38)
 
 ## Recordatorio: cifrado asimétrico
 <!-- _class: two-columns -->
@@ -474,6 +474,31 @@ La CA se encarga de:
 
 Es tu responsabilidad comprobar si los certificados son válidos
 
+## Revocación de autoridades de certificación
+<!-- _class: with-info -->
+
+Ocasionalmente, incluso las autoridades de certificación tienen que recovarse
+
+Upcoming change in Chrome 127 and higher: TLS server authentication
+certificates validating to the following Entrust roots whose earliest Signed
+Certificate Timestamp (SCT) is dated after October 31, 2024, will no longer be
+trusted by default.
+
+
+> https://security.googleblog.com/2024/06/sustaining-digital-certificate-security.html
+
+<!--
+En ocasiones es necesario dejar de confiar en las terceras parte de confianza. Por ejemplo, Julio de 2024:
+Google anuncia que dejará de considerar a Entrust como tercera parte de confianza, y no aceptará certificados firmados por Entrust
+
+Los motivos:
+
+Over the past several years, publicly disclosed incident reports highlighted a pattern of concerning behaviors by Entrust that fall short of the above expectations, and has eroded confidence in their competence, reliability, and integrity as a publicly-trusted CA Owner.
+
+> incidentes relacionados con entrust: https://bugzilla.mozilla.org/buglist.cgi?o2=greaterthaneq&short_desc_type=casesubstring&o1=notequals&v1=Graveyard&classification=Client%20Software&classification=Developer%20Infrastructure&classification=Components&classification=Server%20Software&classification=Other&classification=Graveyard&v2=2015-11-01&f1=classification&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&short_desc=Entrust&f2=creation_ts&component=CA%20Certificate%20Compliance&query_format=advanced&list_id=17064895
+
+-->
+
 # Resumen y referencias
 <!-- _class: lead -->
 
@@ -494,7 +519,6 @@ Es tu responsabilidad comprobar si los certificados son válidos
 - Ejemplos de bases de datos de certificados:
     - [OpenPGPkeyserver](http://keys.gnupg.net/)
     - [debian.org Developers LDAP Search](https://db.debian.org/)
-- [IZENPE sustituirá los certificados electrónicos afectados por "ROCA", la amenaza mundial a los chips de algunas tarjetas de identificación](https://www.euskadi.eus/gobierno-vasco/-/noticia/2017/izenpe-sustituira-los-certificados-electronicos-afectados-por-roca-la-amenaza-mundial-a-los-chips-de-algunas-tarjetas-de-identificacion/)
 - [Diferencias entre firma digital, electronica, digitalizada y certificado digital. Autónomos y Pymes](https://www.youtube.com/watch?v=-_SARWc3ots)
 - [Create your own Certificate Authority (CA) using OpenSSL](https://arminreiter.com/2022/01/create-your-own-certificate-authority-ca-using-openssl/)
 
