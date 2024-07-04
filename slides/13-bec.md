@@ -470,25 +470,26 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=blackboard.com;
  s=sep2018; t=1670602715; bh=cS05YrQmiEH2S8VAGWK3wheZ287IPz+hfGXR1TsDY70=;
   h=Date:From:Subject:Reply-To; 
   b=gGHlf9eKK51Zw09JP98lOUgODgF61ZF7juJKDLjWLBxDDndvM8QMe4122XUO2wKgC
-	 4SkqQkabmXk66gUsKIge9Z2pjnabs9klfTgZcCT13wxAUsIQur4SIJ+8f3a1sBnGTT
-	 qSlMlB7ss5+0jIXVszWFtzkoHGPQ/UjVk9L24KGPwxRGyfGMI2JSgNHVWuP/61squO
-	 rpG03vHZxsGyegGuXYt4/AADov8yNL3KVGq42bGAb7XKgt8MrtZGWA8GR9iWYIm3V1
-	 6miGagayTXZANUbsdmtYtoPmxxdAuoOHiClnoXrdxhBFED8VrnhH8dMjd3ADZ1LaOA
-	 LVRFXW1djkSrg==
+    4SkqQkabmXk66gUsKIge9Z2pjnabs9klfTgZcCT13wxAUsIQur4SIJ+8f3a1sBnGTT
+    (...)
+    6miGagayTXZANUbsdmtYtoPmxxdAuoOHiClnoXrdxhBFED8VrnhH8dMjd3ADZ1LaOA
+    LVRFXW1djkSrg==
 ```
 
 - `d`: domain: `blackboard.com`
 - `s`: selector `sep2018`
-- `h`: headers fields: `Date:From:Subject:Reply-To;`.
+- `h`: headers fields: `Date:From:Subject:Reply-To;`
 - `bh`: body **hash**
-- `b`: **signature** of headers and body
+- `b`: `Base64(E_{RSA}(hash(Date:From:Subject:Reply-To:bh), DKIM_{key}))`
+
+<!-- El campo b es la firma digital -->
 
 ## Verification process
 
 - Get the body content, run canocalization algorithm `c`, calculate the hash value (`bh`). Check.
 - Concatenate the headers in `h` and the `dkim` header (removing `b` but not `bh`)
-- Download the server's public key from DNS using `d` and `s`
-- Check the signature
+- Download the server's public key from DNS using `d` and `s` (next slide)
+- Validate the digital signature
 
 ---
 
