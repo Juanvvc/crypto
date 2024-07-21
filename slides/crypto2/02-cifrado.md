@@ -1010,11 +1010,5 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 - [Elliptic Curve Cryptography Overview](https://www.youtube.com/watch?v=dCvB-mhkT0w), de John Wagnon. No asume conocimientos de álgebra.
 - [Elliptic Curve Diffie Hellman](https://www.youtube.com/watch?v=F3zzNa42-tQ): Vídeo sobre ECDH y curvas elípticas en general de Robert Pierce. Asume conocimientos de álgebra.
 
----
-
-<!-- _class: center -->
-
-Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/02b/Sistemas%20de%20cifrado.ipynb>
-
 # ¡Gracias!
 <!-- _class: last-slide -->

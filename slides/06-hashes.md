@@ -521,10 +521,5 @@ Cuando llegue el jucio (o una investigación paralela) las evidencias digitales 
 - [Hashing Algorithms and Security - Computerphile](https://www.youtube.com/watch?v=b4b8ktEV4Bg)
 - [The State of Hashing Algorithms — The Why, The How, and The Future](https://medium.com/@rauljordan/the-state-of-hashing-algorithms-the-why-the-how-and-the-future-b21d5c0440de)
 
----
-
-Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/06/Hashes.ipynb>
-
-
 # ¡Gracias!
 <!-- _class: last-slide -->

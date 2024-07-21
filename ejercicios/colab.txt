@@ -1,7 +1,0 @@
-# Tema 1
-
-- https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/01/01%20-%20seguridad%20por%20oscuridad.ipynb
-
-# Tema 3
-
-- https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/Tema%203%20-%20Cifrado%20de%20flujo%20con%20ChaCha20.ipynb

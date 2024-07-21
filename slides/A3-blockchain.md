@@ -205,16 +205,5 @@ En el registro de BlockChain / Ethereum y otros, a parte de transacciones econó
 - [Bitcoin: A Peer-to-Peer Electronic Cash System](https://bitcoin.org/bitcoin.pdf), Satoshi Nakamoto 2008
 - [Hashcash - A Denial of Service Counter-Measure](http://hashcash.org/papers/hashcash.pdf), Adam Back 2002
 
----
-
-Ejercicios: <https://colab.research.google.com/github/Juanvvc/crypto2/blob/main/ejercicios/03/Bitcoin.ipynb>
-
-- [Firma digital](03-firma.html)
-- [Blockchain](03-blockchain.html)
-
-Siguiente tema:
-
-- [TLS y Public Key Infrastructure](04-pki.html)
-
 # ¡Gracias!
 <!-- _class: last-slide -->
