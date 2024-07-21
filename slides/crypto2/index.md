@@ -81,20 +81,16 @@ Esto es un ejemplo de notas de profesor. Aquí habrá información adicional, ac
 -->
 
 ## Instrucciones de las actividades
-<!-- _class: with-warning smaller-font -->
-
-Los ejercicios son notebook de Google Colab:
+<!-- _class: with-info -->
 
 1. Después de los temas 2, 3 y 5 se incluirá el enlace a Google Colab en la zona de Actividades de la asignatura
-1. Comandos básicos:
+1. Los ejercicios son notebook de Google Colab. Comandos básicos:
     - INTRO: edita línea actual
     - SHIFT+INTRO: ejecuta línea actual
 1. Las actividades deben resolverse individualmente
 1. Aunque haya código, no es necesario saber programar: son preguntas de texto libre
 
-**Presenta las actividades como PDF: imprimir a PDF**
-
-<!-- Las actividades refuerzan el contenido de las clases e incluyen información adicional -->
+Las actividades incluyen información adicional que no está en las clases
 
 ## Evaluación
 

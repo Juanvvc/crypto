@@ -135,11 +135,13 @@ El primero que encuentre ese COUNTER se lleva un bitcoin
 
 ---
 
-https://blockchair.com/bitcoin?from=bitcoin.com
+https://blockchair.com/bitcoin/blocks#
 
 ![](images/blockchain/btccom.png)
 
-El número de ceros necesario se ajusta para que  más o menos cada 15 minutos alguien encuentre ese COUNTER: la dificultad es ajustable
+El número de ceros se ajusta para que cada ~15 minutos alguien encuentre ese COUNTER
+
+Actualmente (Julio de 2024) el número de ceros para aceptar un nuevo bitcoin es 20 ceros
 
 ---
 
