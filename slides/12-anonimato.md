@@ -37,9 +37,9 @@ En este tema veremos cómo usar la criptografía para ofrecer el servicio de ano
 <!-- _class: cool-list toc -->
 
 1. [Comunicaciones anónimas](#4)
-1. [Enrutamiento onion](#16)
-1. [Servicios onion](#27)
-1. [Referencias](#40)
+1. [Enrutamiento onion](#18)
+1. [Servicios onion](#29)
+1. [Referencias](#42)
 
 # Comunicaciones anónimas
 <!-- _class: lead -->
@@ -110,7 +110,7 @@ Todos estos actores tienen la posibilidad de saber con quién te conectas, pero.
 > https://www.eff.org/nsa-spying
 > https://ssd.eff.org/en
 
-# Anonimato en Internet, ¿sí o no?
+## Anonimato en Internet, ¿sí o no?
 <!-- _class: extra-slide smallest-font -->
 
 A favor del anonimato:
@@ -139,7 +139,26 @@ No es el objetivo de este curso no es evangelizar sobre la conveniencia del anon
 Vamos de describir unas tecnologías que pueden usarse para objetivos terriblemente perversos pero también para proteger la libertad de las personas y para saber cómo trabajan los ciberdelincuentes. El uso que les des es responsabilidad tuya
 -->
 
-# ¿Quién es el adversario?
+## Pero yo uso el modo incógnito del navegador...
+
+![center](images/anom/incognito-mode.png)
+
+---
+
+![bg left:40% width:100%](images/anom/incognito-mode2.png)
+
+En agosto de 2024, Google acuerda en una corte de EEUU que:
+
+- Informará a sus usuarios de que guarda datos de navegación también en el modo incógnito
+- Borrará los datos de navegación obtenidos hasta ahora
+- Bloqueará sus cookies incluso en el modo incógnito
+- Nada de esto afecta fuera de EEUU, o a otros navegadores
+
+> [Google Agrees to Delete Data Collected from Users Browsing in Incognito Mode Following Settlement](https://www.bitdefender.com/blog/hotforsecurity/google-agrees-to-delete-data-collected-from-users-browsing-in-incognito-mode-following-settlement/?srsltid=AfmBOopIFUlXXpxRpugi4LRgQBi9sb738R7n5tVMXjfIl5gj-rI993CQ%2F%2F)
+> https://storage.courtlistener.com/recap/gov.uscourts.cand.360374/gov.uscourts.cand.360374.1096.0_1.pdf
+
+
+## ¿Quién es el adversario?
 
 - No quiero que los malos sepan que les estoy investigando
 - No quiero que Google sepa que fumo
