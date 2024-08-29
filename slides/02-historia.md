@@ -40,9 +40,10 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 
 1. [Criptografía clásica](#4)
 1. [Cifrado César](#11)
-1. [Mejoras al cifrado César: sistemas polialfabéticos](#30)
-1. [Confidencialidad perfecta](#45)
-1. [Resumen y referencias](#58)
+1. [Atacando el cifrado César](#15)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#31)
+1. [Confidencialidad perfecta](#46)
+1. [Resumen y referencias](#59)
 
 # Criptografía clásica
 <!--
@@ -238,23 +239,24 @@ Esto pasará a menudo: la función de cifrado (o al menos algunos de los pasos d
 - si usamos hardware especializado, podemos reaprovecharlo en el envío y la recepción
 -->
 
-## Seguridad del cifrado del César: fuerza bruta
+# Atacando el cifrado César
+<!-- _class: lead -->
 
-`HOLAMUNDO`
-`ELIXJRKAL`
+Fuerza bruta y algoritmos rotos
 
-¿qué podemos hacer si solo tenemos el texto cifrado `ELIXJRKAL`?
+## Descifrar un texto probando todas las claves posibles
+
+**Ataque de fuerza bruta**: probar todas las  claves hasta que encontremos la "buena":
+
+![center](images/conceptos/bruteforce.png)
+
+En el sistema César clásico... solo tenemos que probar 26 posibles claves
 
 $0\leq k < 26$ , así que podemos probar las 26 claves una a una: **ataque de fuerza bruta**
 
-## Ataque de fuerza bruta
+> https://www.imperva.com/learn/application-security/brute-force-attack/
 
-Un ataque de fuerza bruta implica probar sobre el mensaje cifrado $c$ todas las posibles claves $k_i$ hasta que encontremos la "buena":
-
-- descifrar con la clave $m^?=d(c,k_i)$
-- y validar si $m^?$ es válido. Es decir, si $m=m^?$
-
-<!-- Observación: de media, tenemos que probar 13 claves: ¡la mitad! -->
+<!-- Observación en el César clásico, de media, tenemos que probar solo 13 claves: ¡la mitad! -->
 
 ---
 
@@ -278,7 +280,7 @@ Estas simplificaciones de letras dependen de la lengua original. Fíjate tambié
 Además, la forma del papel sugiere que estaba oculto en algún sitio y tenía esa forma para que no fuese reconocible. Sí que hay un rama de la criptografía moderna que estudia cómo ocultar un mensaje: la esteganografía.
 -->
 
----
+<!---
 
 ![bg left:50%](images/historia/voynich.jpg)
 
@@ -296,7 +298,7 @@ Imagen: https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%
 -->
 
 ## Contramedidas
-<!-- _class: center with-success -->
+<!-- _class: center -->
 
 ![w:10em](images/generic/lock-1929089_640.jpg) ![w:17.5em](images/generic/money-256319_640.jpg)
 
@@ -314,15 +316,68 @@ Images: free for commercial use:
 -->
 
 ---
+<!-- _class: with-success -->
 
-La defensa contra los ataques de fuerza bruta son:
+Posibles defensas contra la fuerza bruta:
 
-- Tarjeta de crédito: que la operación de descifrado sea costosa, o intentos limitados
-- Cerradura: que el descifrado sea sencillo, pero que el atacante tenga que realizar muchas operaciones de descifrado. Es decir, aumentar el tamaño de la clave
+- **Cerradura**: aumentando el tamaño de la clave, el atacante pasará más tiempo intentanto abrir la cerradura
+- **Tarjeta**: limitamos el número de intentos antes de bloquear la tarjeta, o hacemos que cada intento cueste dinero
 
-Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente. Actualmente no se recomienda
+Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente. Actualmente no se recomienda esta estrategia
 
-Queda por tanto "**que el adversario tenga que hacer muchas operaciones de descifrado**". Es decir: que el atacante tenga que probar muchas claves.
+Estrategia actual: **obligar al atacante a que tenga que probar muchas claves**
+
+<!--
+
+Por supuesto, el atacante puede intentar usar una llave maestra, o robar el PIN con ingeniería social. Ese tipo de ataques o bien es "romper un algoritmo" o bien "usar canales laterales". No vamos a considerarlos por ahora, vamos a considerar que los sistemas se usan cómo se han diseñado
+
+-->
+
+## Tamaños de clave
+<!-- _class: smallest-font with-success -->
+
+Contraseñas: podemos aumentar el tamaño de clave aumentando tanto el número como el tipo de caracteres
+
+Tipo|Ejemplo|# de claves diferentes|Tamaño en bits
+--|--|--|--
+PIN de 4 números|3659|9999|$log_2(1000)\approx13\ bits$|
+4 letras mayúsculas|CASA|614656|$log_2(614656)\approx\ 19 bits$
+4 letras + especiales|Ca*4|33362176|25 bits
+5 letras + especiales|Ca*4S|2535525376|32 bits
+41 letras + especiales|o18uIo=...9f89fdA!S|$10^{77}$|256 bits
+54 mayúsculas|KJASWE...SAJKSAJF|$10^{77}$|256 bits
+77 números|923821321...12998|$10^{77}$|256 bits
+
+En criptografía solemos medir la longitud de una clave con **la cantidad de bits que necesitamos para guardarla**
+
+Claves con el mismo tamaño en bits tienen "la misma seguridad": se necesitaría el mismo número de intentos para descifrarlas por fuerza bruta
+
+Medir las claves en bits nos permite comparar "su fortaleza"
+
+<!--
+
+Fíjate en estos casos:
+
+- a mismo número de caracteres, mayores posibilidades (números...) aumenta el tamaño en bits
+- a mismo número de posibilidades, aumentar el número de caracter aumenta el tamaño en bits
+- una contraseña de 54 letras mayúsculas tiene el mismo número de bits que una contraseña de letras minúsculas, mayúscuas, números y caracteres especiales: misma seguridad
+
+-->
+
+---
+
+Igual que en la leyenda del ajedrez...
+
+Cada vez que aumentamos un bit se dobla el número de claves posibles
+
+Eso tiene un crecimiento exponencial: rápidamente llegamos a números enormes
+
+Veremos que claves de 256 bits es el estándar actual para tamaño de clave
+
+
+![bg left](images/historia/rice.jpg)
+
+> https://www.pragatiedible.com/the-legend-of-rice-and-chess-exponential-growth/
 
 ## Fuerza bruta
 
@@ -341,22 +396,24 @@ Si tenemos capacidad de diseñar/fabricar $d()$ en hardware ([ASIC](https://en.w
 
 Alquilando equipos en la nube por segundos, con un euro cada segundo podemos probar $10^{11}$ claves
 
-Si estimamos que nuestro "secreto" vale 1000 €:
+Si estimamos que nuestro "secreto" vale 1000 €: nos hacen falta un sistema criptográfico que permita escoger entre $10^{14}$ claves diferentes para guardar el secreto durante una hora. 
 
-Nos hacen falta un sistema criptográfico que permita escoger entre $2·10^{14}$ claves diferentes ($\approx 2^{48}$) para guardar el secreto durante una hora.
+Nota que $10^{14}\approx 2^{48}$. Se dice que este sistema tiene una fortaleza de 48 bits: un atacante tiene que probar $2^{48}$ claves si quiere romperlo por fuerza bruta
 
-Este sistema tendría fortaleza 48 bits: un atacante tiene que probar $2^{48}$ claves si quiere romperlo por fuerza bruta
-
-Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años
+Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años.
 
 ## Fortaleza de un algoritmo
 <!-- _class: with-success -->
 
-¿Qué es más seguro, DES, AES o RSA? Para comparar la seguridad de los algoritmos usamos el concepto de **fortaleza**
+¿Qué algoritmo "es más seguro", DES, AES o RSA?
 
-En los algoritmos bien diseñados, su fortaleza depende solo del tamaño de la clave: claves más largas tienen una fortaleza mayor
+Para comparar la seguridad de los algoritmos usamos el concepto de **fortaleza**
 
-La fortaleza o seguridad de un algoritmo es **el número de claves que tienen que probar un atacante por fuerza bruta para romper un algoritmo**. Normalmente se expresa en bits.
+En los algoritmos bien diseñados, **su fortaleza depende solo del tamaño de la clave**: claves más largas tienen una fortaleza mayor
+
+**La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles que se tienen que probar para romperlo por fuerza bruta. Normalmente se expresa en bits.
+
+
 
 ---
 
@@ -715,48 +772,62 @@ Cosas que implica:
 ---
 <!-- _class: with-success -->
 
-Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF:
+Si tienes el texto cifrado "XHAJSJXXNFHFDOIOJUMNF" (21 caracteres):
 
-- existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO"
-- existe otra clave que descifra "SE HA QUEDADO BUENA TARDE"
-- un atacante no sabe qué mensaje es el que realmente se cifró, así que no sabe si ha acertado la clave
+- existe una clave de tamaño 21 que descifra "ATACADALASOCHOENPUNTO"
+    - Clave: [XOAHSGXMNNTDWAEBUAZUR](https://www.dcode.fr/vigenere-cipher)
+- existe otra clave de tamaño 21 que descifra "SEHAQUEDADOBUENATARDE"
+    - Clave: [FDTJCPTUNCTEJKVOQUVKB](https://www.dcode.fr/vigenere-cipher)
+- existe una clave de tamaño 21 que descifra cualquier otro mensaje que se te ocurra de 21 caracteres
+- un atacante no sabe qué mensaje es el que realmente se cifró, así que aunque pruebe las claves una a una no sabrá nunca si ha acertado con "la buena"
 
-Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
+**Definición informal**: un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los posibles mensajes falsos
 
 ## ¿A qué hora atacamos?
 
+![bg right:40% w:100%](images/historia/byzantine_generals.png)
 
-![bg right:40% w:100%](../images/historia/byzantine_generals.png)
+Imagina que unos atacantes acuerdan el siguiente mapeo, es decir, clave:
 
-Imagina que un ejército decide el siguiente mapeo, es decir, clave:
-
-- A = 16
-- B = 7
-- C = 13
+- A = 16 horas
+- B = 7 horas
+- C = 13 horas
 - ...
 
-El enemigo captura este mensaje: "Atacamos a las F horas"
+El castillo captura este mensaje: "Atacamos a las F"
 
-¿Tiene alguna forma el enemigo de conocer a qué hora le atacarán?
+¿El castillo tiene alguna forma de conocer a qué hora le atacarán?
 
 ---
-<!-- _class: smaller-font -->
 
-- Si el enemigo, que no conoce la clave no tiene forma saber a qué hora se atacará ni aunque pruebe todas las claves. **Este cifrado es perfecto**
-- Pero el enemigo puede aprovechar un mensaje para descifrar los siguientes que usen la misma clave:
-    - Si no le han atacado a la 1, F no es 1
-    - Si no le han atacado a las 2, F no es 2
-    - Si le atacan a las 3, F es 3
-- Solo se puede usar esta clave **una vez**. A la siguiente, el enemigo ya tendrá mucha información. **La clave no puede reutilizarse nunca más**
-- Fíjate: el mapeo tiene que ser de números completos. Si no y el enemigo intercepta un mensaje HK, sabe que H es 1 ó 2 porque no hay "hora 37": el mapeo tiene que ser completo (es decir: clave tan larga como el mensaje)
-- Hay que volver a enviar una nueva clave cada vez que queramos enviar un mensaje nuevo, con el riesgo de que el enemigo intercepte el mensaje de envío de clave
+- La primera vez, el castillo no tiene forma saber a qué hora le atacarán ni aunque pruebe todas las claves. **Este cifrado es perfecto**
+- Pero puede aprovechar el primer mensaje para descifrar los siguientes que usen la misma clave:
+    - Si no le han atacado a la 1, sabe que F no es 1
+    - Si no le han atacado a las 2, sabe que F no es 2
+    - Si le atacan a las 3, sabe que F es 3
+- Tras cada ataque, los atacantes tienen que cambiar qué significan las letras. **La clave solo puede usarse una vez**.
+- Si el castillo intercepta un mensaje tio HK, sabe que H es 1 ó 2 porque no existe la "hora 37": el mapeo tiene que ser completo. Es decir, **la clave tiene que ser tan larga como el mensaje**
+
+## Condiciones de la confidencialidad perfecta
+<!-- _class: with-warning -->
+
+Shanon (1949) demostró que para tener confidencialidad perfecta el sistema de cifrado tienen que cumplir obligatoriamente las siguientes características:
+
+- La clave debe tan larga como el mensaje
+- La clave solo se usa una vez
+- Totalmente aleatoria
+
+Problema: ¿cómo distribuimos estas claves tan largas?
+
+El cifrado perfecto no se puede descifrar, pero la necesidad de claves largas limita su uso
+
+> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
 
 <!--
-
-Un sistema tan sencillo como este se utilizó en la realidad: los espías tenían "libros de claves" de un colo uso que tenían que llevar escondidos.
+En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
 -->
 
-## Convirtiendo Vigènere en cifrado perfecto: cifrado Vernam
+## Convirtiendo Vigènere en cifrado perfecto: cifrado Vernam (*one time pad)*
 
 El cifrado de Vigenère sufría un problema similar al del César (aunque camuflado): manifestaba la estadística del mensaje en claro en el mensaje cifrado
 
@@ -795,25 +866,6 @@ El teléfono rojo entre Washington y Moscú fue un teletipo que usaba cifrado de
 La clave $k$ se intercambiaba por valija diplomática en cinta perforada que se entregaba en ambos sentidos. Mientras no hiciese falta, se guardaba protegida y  se destruía después de ser usada
 
 Además, el *one-time-pad* permitía trabajar de forma segura sin intercambiar ningún algoritmo secreto que diera ventaja técnica al enemigo
-
----
-<!-- _class: with-warning -->
-
-Shanon (1949) demostró que para tener confidencialidad perfecta el sistema de cifrado tienen que cumplir obligatoriamente las siguientes características:
-
-- La clave debe tan larga como el mensaje
-- No conocida por el atacante. Es decir: totalmente aleatoria
-- La clave no se usa nunca más
-
-Problema: ¿cómo distribuimos estas claves tan largas?
-
-El cifrado perfecto no se puede descifrar, pero la necesidad de claves largas limita su uso
-
-> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
-
-<!--
-En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
--->
 
 ## Vulnerabilidades
 

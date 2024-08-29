@@ -27,7 +27,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 1. [Servicios criptográficos](#3)
 1. [Estrategias de los sistemas seguros](#10)
 1. [Breve historia de la criptografía](#18)
-1. [Conclusiones](#34)
+1. [Conclusiones](#36)
 
 # Servicios criptográficos
 <!--
@@ -363,7 +363,7 @@ Aún no estaban preocupados de identificar con quién estaban hablando: "si cono
 Nota: ¿Cifrar o encriptar? En este curso llamaremos a la ciencia "criptogafía" y al acto "cifrado". Encontrarás gente que utiliza "encriptar" como sinónimo de "cifrar". La RAE ha aceptado recientemente el verbo "encriptar", pero la polémica sobre si usar o no ese verbo sigue abierta en nuestro sector.
 -->
 
-## Fortaleza de una algoritmo
+## Fuerza bruta
 <!-- _class: center with-success -->
 
 
@@ -383,18 +383,70 @@ Images: free for commercial use:
 -->
 
 ---
+<!-- _class: with-success -->
 
-Podemos defendernos contra la fuerza bruta:
+Posibles defensas contra la fuerza bruta:
 
+- **Cerradura**: aumentando el tamaño de la clave, el atacante pasará más tiempo intentanto abrir la cerradura
+- **Tarjeta**: limitamos el número de intentos antes de bloquear la tarjeta, o hacemos que cada intento cueste dinero
 
-- Tarjeta de crédito: que cada prueba sea costosa / limitar el número de pruebas
-- Cerradura física: que el atacante tenga que probar muchas claves
+Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente. Actualmente no se recomienda esta estrategia
 
-Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente.
+Estrategia actual: **obligar al atacante a que tenga que probar muchas claves**
 
-La solución adoptada en la actualidad para sistemas criptográficos: "**obligar que el atacante tenga que probar muchas claves**"
+<!--
+
+Por supuesto, el atacante puede intentar usar una llave maestra, o robar el PIN con ingeniería social. Ese tipo de ataques o bien es "romper un algoritmo" o bien "usar canales laterales". No vamos a considerarlos por ahora, vamos a considerar que los sistemas se usan cómo se han diseñado
+
+-->
+
+## Tamaños de clave
+<!-- _class: smallest-font with-success -->
+
+Contraseñas: podemos aumentar el tamaño de clave aumentando tanto el número como el tipo de caracteres
+
+Tipo|Ejemplo|# de claves diferentes|Tamaño en bits
+--|--|--|--
+PIN de 4 números|3659|9999|$log_2(1000)\approx13\ bits$|
+4 letras mayúsculas|CASA|614656|$log_2(614656)\approx\ 19 bits$
+4 letras + especiales|Ca*4|33362176|25 bits
+5 letras + especiales|Ca*4S|2535525376|32 bits
+41 letras + especiales|o18uIo=...9f89fdA!S|$10^{77}$|256 bits
+54 mayúsculas|KJASWE...SAJKSAJF|$10^{77}$|256 bits
+77 números|923821321...12998|$10^{77}$|256 bits
+
+En criptografía solemos medir la longitud de una clave con **la cantidad de bits que necesitamos para guardarla**
+
+Claves con el mismo tamaño en bits tienen "la misma seguridad": se necesitaría el mismo número de intentos para descifrarlas por fuerza bruta
+
+Medir las claves en bits nos permite comparar "su fortaleza"
+
+<!--
+
+Fíjate en estos casos:
+
+- a mismo número de caracteres, mayores posibilidades (números...) aumenta el tamaño en bits
+- a mismo número de posibilidades, aumentar el número de caracter aumenta el tamaño en bits
+- una contraseña de 54 letras mayúsculas tiene el mismo número de bits que una contraseña de letras minúsculas, mayúscuas, números y caracteres especiales: misma seguridad
+
+-->
 
 ---
+
+Igual que en la leyenda del ajedrez...
+
+Cada vez que aumentamos un bit se dobla el número de claves posibles
+
+Eso tiene un crecimiento exponencial: rápidamente llegamos a números enormes
+
+Veremos que claves de 256 bits es el estándar actual para tamaño de clave
+
+
+![bg left](../images/historia/rice.jpg)
+
+> https://www.pragatiedible.com/the-legend-of-rice-and-chess-exponential-growth/
+
+## Fortaleza de un algoritmo
 <!-- _class: with-success -->
 
 Alquilando equipos en la nube por segundos, con un euro cada segundo podemos probar $10^{11}$ claves
@@ -403,7 +455,7 @@ Si estimamos que nuestro "secreto" vale 1000 €: nos hacen falta un sistema cri
 
 Nota que $10^{14}\approx 2^{48}$. Se dice que este sistema tiene una fortaleza de 48 bits: un atacante tiene que probar $2^{48}$ claves si quiere romperlo por fuerza bruta
 
-Observa: aumentando el número de bits de la clave aumentamos exponencialmente el tiempo necesario para romper el sistema. Con 128 bits... necesitaríamos miles de años.
+Con 128 bits... necesitaríamos miles de años.
 
 **La fortaleza o seguridad de un algoritmo es el tamaño en bits de su espacio de claves.** Es decir, el número de claves diferentes posibles que se tienen que probar para romperlo por fuerza bruta. Normalmente se expresa en bits.
 
@@ -462,48 +514,59 @@ Imagen: https://upload.wikimedia.org/wikipedia/commons/0/06/USpatent1310719.fig1
  ---
 <!-- _class: with-success -->
 
-Si un cifado perfecto teórico cifra como XHAJSJXXNFHFDOIOJUMNFNNNF:
+Si tienes el texto cifrado "XHAJSJXXNFHFDOIOJUMNF" (21 caracteres):
 
-- existe una clave que descifra "ATACAREMOS A LAS 8 EN PUNTO"
-- existe otra clave que descifra "SE HA QUEDADO BUENA TARDE"
-- un atacante no sabe qué mensaje es el que realmente se cifró, así que nosabe si ha acertado la clave
+- existe una clave de tamaño 21 que descifra "ATACADALASOCHOENPUNTO"
+    - Clave: [XOAHSGXMNNTDWAEBUAZUR](https://www.dcode.fr/vigenere-cipher)
+- existe otra clave de tamaño 21 que descifra "SEHAQUEDADOBUENATARDE"
+    - Clave: [FDTJCPTUNCTEJKVOQUVKB](https://www.dcode.fr/vigenere-cipher)
+- existe una clave de tamaño 21 que descifra cualquier otro mensaje que se te ocurra de 21 caracteres
+- un atacante no sabe qué mensaje es el que realmente se cifró, así que aunque pruebe las claves una a una no sabrá nunca si ha acertado con "la buena"
 
-Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los mensajes falsos posibles
+Un cifrado perfecto no puede descifrarse ni siquiera por fuerza bruta porque un atacante no puede distinguir el mensaje real de todos los posibles mensajes falsos
 
 ## ¿A qué hora atacamos?
 
 ![bg right:40% w:100%](../images/historia/byzantine_generals.png)
 
-Imagina que un ejército decide el siguiente mapeo, es decir, clave:
+Imagina que unos atacantes acuerdan el siguiente mapeo, es decir, clave:
 
-- A = 16
-- B = 7
-- C = 13
+- A = 16 horas
+- B = 7 horas
+- C = 13 horas
 - ...
 
-El enemigo captura este mensaje: "Atacamos a las F horas"
+El castillo captura este mensaje: "Atacamos a las F"
 
-¿Tiene alguna forma el enemigo de conocer a qué hora le atacarán?
-
-<!--
-Imagen: https://upload.wikimedia.org/wikipedia/commons/f/fc/Byzantine_Generals.png
--->
+¿El castillo tiene alguna forma de conocer a qué hora le atacarán?
 
 ---
-<!-- _class: smaller-font -->
 
-- Si el enemigo, que no conoce la clave no tiene forma saber a qué hora se atacará ni aunque pruebe todas las claves. **Este cifrado es perfecto**
-- Pero el enemigo puede aprovechar un mensaje para descifrar los siguientes que usen la misma clave:
-    - Si no le han atacado a la 1, F no es 1
-    - Si no le han atacado a las 2, F no es 2
-    - Si le atacan a las 3, F es 3
-- Solo se puede usar esta clave **una vez**. A la siguiente, el enemigo ya tendrá mucha información. **La clave no puede reutilizarse nunca más**
-- Fíjate: el mapeo tiene que ser de números completos. Si no y el enemigo intercepta un mensaje HK, sabe que H es 1 ó 2 porque no hay "hora 37": el mapeo tiene que ser completo (es decir: clave tan larga como el mensaje)
-- Hay que volver a enviar una nueva clave cada vez que queramos enviar un mensaje nuevo, con el riesgo de que el enemigo intercepte el mensaje de envío de clave
+- La primera vez, el castillo no tiene forma saber a qué hora le atacarán ni aunque pruebe todas las claves. **Este cifrado es perfecto**
+- Pero puede aprovechar el primer mensaje para descifrar los siguientes que usen la misma clave:
+    - Si no le han atacado a la 1, sabe que F no es 1
+    - Si no le han atacado a las 2, sabe que F no es 2
+    - Si le atacan a las 3, sabe que F es 3
+- Tras cada ataque, los atacantes tienen que cambiar qué significan las letras. **La clave solo puede usarse una vez**.
+- Si el castillo intercepta un mensaje tio HK, sabe que H es 1 ó 2 porque no existe la "hora 37": el mapeo tiene que ser completo. Es decir, **la clave tiene que ser tan larga como el mensaje**
+
+## Condiciones de la confidencialidad perfecta
+<!-- _class: with-warning -->
+
+Shanon (1949) demostró que para tener confidencialidad perfecta el sistema de cifrado tienen que cumplir obligatoriamente las siguientes características:
+
+- La clave debe tan larga como el mensaje
+- La clave solo se usa una vez
+- Totalmente aleatoria
+
+Problema: ¿cómo distribuimos estas claves tan largas?
+
+El cifrado perfecto no se puede descifrar, pero la necesidad de claves largas limita su uso
+
+> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
 
 <!--
-
-Un sistema tan sencillo como este se utilizó en la realidad: los espías tenían "libros de claves" de un colo uso que tenían que llevar escondidos.
+En realidad esto ya se sabía antes de que Vernan inventase su máquina. Pero el invento de Vernan permitió usar este tipo de cifrado, y además Shannon acabó formalizando la teoría matemática que empezó la criptografía moderna
 -->
 
 ## One-time-pad
@@ -535,22 +598,6 @@ Para poder usar un *one-time-pad*, la clave se prepara por adelantado para cuand
 Imagen: https://www.cryptomuseum.com/spy/r353/img/300148/191/full.jpg
 -->
 
-## Vulnerabilidades del one-time-pad
-<!-- _class: with-success -->
-
-Ninguna...
-
-...**mientras se cumplan las hipótesis de trabajo para la clave $k$**:
-
-- tan larga como el mensaje
-- que la clave solo se utilice una vez
-- que sea completamente aleatoria (i.e. uniformemente distribuida)
-
-Shanon demostró matemáticamente que cualquier cifrado perfecto tendrá estos mismos problemas
-
-> [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
-
-
 ---
 
 El principal problema es que la longitud en bytes de $k$ es igual a la longitud en bytes de $m$.
@@ -576,7 +623,7 @@ Sabemos cómo hacer cifrado perfecto, pero no es práctico.
 
 Los sistemas actuales usan otro concepto: la seguridad computacional
 
-**Seguridad computacional**: romper un cifrado es posible, pero se necesitan mucho tiempo / recursos
+**Seguridad computacional**: romper un cifrado es posible, pero se necesita invertir mucho tiempo / recursos
 
 Lo veremos con más detalle en la siguiente sesión
 # Conclusiones

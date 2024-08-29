@@ -135,10 +135,11 @@ Lo importante es que relajamos el sistema lo suficiente como para que, por un ti
 La criptografía computacionalmente segura permite $\|k\| \ll \|m\|$
 
 - Es un cifrado práctico: la clave es mucho más pequeña que el mensaje y por tanto es fácil de distribuir
-- Pero si es muy pequeña, es posible hacer fuerza bruta
+- Pero si es demasiado pequeña, es posible hacer fuerza bruta
+- No es criptografía perfecta: en teoría será posible descifrar un mensaje, pero queremos que sea demasiado caro descifrarlo
 - **Fortaleza de un sistema criptográfico**: número de claves que hay que probar por fuerza bruta (en bits)
 
-Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
+Hay que usar una clave lo suficientemente grande como para que no sea posible hacer fuerza bruta pero lo suficientemente pequeña como para que el sistema sea práctico para usar
 
 <!-- Recordad: en el cifrado de Verman no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
 

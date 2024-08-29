@@ -26,12 +26,51 @@ transition: fade
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
+# Como decíamos ayer...
+
+La seguridad de la criptografía asimétrica se basa en que no conocemos algoritmos rápidos para resolver problemas matemáticos como la factorización de números primos:
+
+$15 = 5 \cdot 3$
+
+$3248 = 29 \cdot 7 \cdot 2^4$
+
+$8012012832918391238193192198219981928192889382938998982 = ?$
+
+El algoritmo conocido para los computadores actuales es [GNFS](https://en.wikipedia.org/wiki/General_number_field_sieve):
+
+$$
+O(2^{2,774·(b_n^{1/3})(ln(b_n)^{2/3})})
+$$
+
+---
+
+Factorizar este número con un computador actual lleva millones de años...
+
+```
+149802948092842184098210482184208402814092814092814902882314802
+840182098201895139476316917369371469130591039583109734876139819
+538591385031850135124214213434125103691373140750917604137601347
+603176031760317603176136913701364316013860319760193760931707097
+017436013760317460316703176031786136498314691376931763176931876
+981376938176931876931769137693187613768713867136873187513769316
+013463160316039187683714681397689713489671390486791837609138769
+013876089317693187690137691374603918768931769137631769137691301
+346871306871384761937693814708173468713689317693176814758134761
+376134786139671396731467318967348769831476837639176913476931763
+196731769317691384768931476831746083174687138671397613476317613
+769347476138976831769831746983176731976913876091376891376981376
+913476983174691347683476193769134769314769137693147691347691347
+691387683147693147683148761364706946013746013681141213083928139
+```
+
+Pero... ¿y si existiesen otro tipo de computadoras que lo factorizasen en horas?
+
 ## Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Computación Cuántica](#3)
-1. [Criptografía Post-cuántica](#16)
-1. [Resumen y referencias](#29)
+1. [Computación Cuántica](#5)
+1. [Criptografía Post-cuántica](#20)
+1. [Resumen y referencias](#34)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -45,8 +84,8 @@ Una introducción a vista de pájaro
 ![bg left:40%](images/quantum/computer.png)
 
 - La computación cuántica utiliza principios de la mecánica cuántica para realizar cálculos
-- Propuesta por Richard Feynman en la década de 1980, sugirió que las computadoras cuánticas podrían usarse para simular el comportamiento de sistemas cuánticos complejos, como moléculas o materiales, de manera más eficiente que las computadoras clásicas
-- Una misma tarea puede tener diferente complejidad en computación clásica comparada con la que tiene en computación cuántica
+- [Richard Feynman](https://es.wikipedia.org/wiki/Richard_Feynman) sugirió (~1980) que se podrían aprovechar comportamientos cuánticos para realizar cálculos de manera más eficiente que las computadoras clásicas
+- Ha sido un estudio solo teórico durante 50 años, pero ahora empezamos a poder construirlas
 
 > [¿Qué es y cómo funciona la COMPUTACIÓN CUÁNTICA?](https://www.youtube.com/watch?v=YpYuBEzfRlM)
 
@@ -58,16 +97,24 @@ La unidad de la computación cuántica es el Q-bit, que puede existi en múltipl
 
 Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
 
+Intuitivamente: podemos aprovechar la superposición para probar varias soluciones a la vez con un solo q-bit
+
 > [Computación Cuántica: la Guía completa WIRED](https://es.wired.com/articulos/computacion-cuantica-la-guia-completa-wired-computadoras-qubits)
 
 
 ## Comparación con la computación tradicional
 
-- La computación tradicional y la cuántica resuelven los mismos problemas, pero la cuántica permite resolver [problemas complejos](04-complejidad.html) con una rapidez que no sabemos alcanzar con computación tradicional: **supremacía cuántica**
-- [¡No todos los problemas son complejos!](https://en.wikipedia.org/wiki/Quantum_supremacy)
-- La computación cuántica da un **resultado probabilístico**. Es decir, "esto es una solución, probablemente". Repetir el algoritmo varias veces permite reducir la probabilidad de error
+- La computación cuántica permite resolver [problemas complejos](04-complejidad.html) con una rapidez que no sabemos alcanzar con computación tradicional: **supremacía cuántica**
+- Cuidado: [¡no todos los problemas son complejos!](https://en.wikipedia.org/wiki/Quantum_supremacy)
+- La computación cuántica da un **resultado probabilístico**. Es decir, "esto es una solución, probablemente". Repetir el algoritmo varias veces permite reducir la [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/6/6e/Complexity_subsets_pspace.svg)
+
+<!--
+Si un problema no es complejo, utilizar computación cuántica para solucionarlo en "matar moscas a cañonazos"
+
+Por eso es poco probable que veamos computadoras cuánticas en nuestros hogares: en nuestra vida diaria no necesitamos resolver problemas matemáticamente complejos
+-->
 
 ## ¿Qué es lo que NO MEJORAN las computadoras cuánticas?
 <!-- _class: with-success -->
@@ -75,20 +122,20 @@ Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
 - No traerán juegos con mejores gráficas
 - No nos traerán mejores aplicaciones informáticas
 - No traerán una Internet más rápida
+- Tardarán lo mismo en realizar la mayor parte de las tareas, pero son astronómicamente más caras
 
 ![bg right:40%](images/quantum/gamer.png)
 
-Es poco probable que tengamos una computadora cuántica en nuestros escritorios alguna vez
+Es poco probable que tengamos una computadora cuántica en nuestros escritorios
 
-
-## Criptografía cuántica
+## La computación cuántica NO ES criptografía cuántica
 <!-- _class: with-warning -->
 
 - La **criptografía cuántica** usa la física cuántica para crear un canal seguro
-- Cuidado: **¡no es necesario un computador cuántico para usar criptografía cuántica!**
+- ¡No es necesario tener un computador cuántico para usar criptografía cuántica!
 - Ejemplo: [distribución de claves cuántica](https://www.cse.wustl.edu/~jain/cse571-07/ftp/quantum/) (QKD)
 
-![center w:27em](images/quantum/q-key-distribution.png)
+![center w:25em](images/quantum/q-key-distribution.png)
 
 En esta clase no hablaremos de criptografía cuántica sinó de la post-cuántica, que definiremos más adelante
 
@@ -102,7 +149,7 @@ En el ejemplo, se usa un canal cuántico para distribuir una clave criptográfic
 En esta clase no hablaremos de criptografía cuántica
 -->
 
-## Entonces, ¿qué hacen las computadores cuánticas?
+## Entonces... ¿qué hacen las computadores cuánticas?
 
 La computación cuántica permite ejecutar algoritmos de búsquedas más rápidamente que la computación tradicional
 
@@ -137,13 +184,13 @@ Cuando se implementen estos algoritmos en una computadora cuántica, cambiarán 
 ## Algoritmo de Grover
 <!-- _class: with-warning -->
 
- Búsqueda exahustiva en una secuencia no ordenada con mejora cuadrática. Mejora
+ Búsqueda exahustiva en una secuencia no ordenada con mejora cuadrática. 
  
- Efecto: tarda "la raíz cuadrada de tiempo". AES-128 en $O(2^{64})$
+ Efecto: "raíz cuadrada de tiempo" de los algoritmos clásicos. AES-128 en $O(2^{64})$
 
  ![center w:20em](images/quantum/grover.png)
 
- El algoritmo de Grover debilita la criptografía de clave privada y hashes (AES, SHA256...). Defensa: doblar el tamaño de la clave
+ El algoritmo de Grover debilita la criptografía de clave privada y hashes (AES, SHA256...) diviendo su fortaleza entre 2
 
 > https://www.researchgate.net/figure/A-comparison-of-Grover-Long-algorithm-with-different-success-rates-1-d-2-The-query_fig3_356928043
 
@@ -154,15 +201,37 @@ Permite encontrar factores de un número de una manera eficiente. RSA, ECC y D-H
 
 ![center w:20em](images/quantum/shor.png)
 
-El algoritmo de Shor rompe la criptografía de clave pública (D-H, RSA...)
+El algoritmo de Shor **rompe** la criptografía de clave pública (D-H, RSA...)
 
 > https://www.researchgate.net/figure/Shors-algorithm-has-exponential-acceleration-effect-compared-with-classical-algorithm_fig1_359643607
 
 
 <!--
-Significa que da igual que aumentemos el tamaño de la clave: llega un momento en que resolver RSA se vuelve casi constante, independientemente de cuántos bits tenga la clave
+Fíjate: da igual que aumentemos el tamaño de la clave, llega un momento en que resolver RSA se vuelve casi constante, independientemente de cuántos bits tenga la clave
 -->
 
+---
+
+[![center w:30em](images/quantum/shor2.png)](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
+
+> [How Quantum Computers Break Encryption | Shor's Algorithm Explained ](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
+
+<!--
+
+El vídeo contiene detalles físicos y matemáticos de cómo funciona en algoritmo de Shor en sistemas cuánticos y es razonablemente sencillo
+
+-->
+
+## Supremacía cuántica
+<!-- _class: with-info -->
+
+Objetivo: que todo esto deje de ser teórico
+
+Supremacía cuántica: un computador cuántico que resuelva un problema real más rápidamente que un computador tradicional
+
+![bg right w:100%](images/quantum/supremacia.webp)
+
+Aún no hemos alcanzado la supremacía cuántica... y no está claro que algún día lo logremos
 
 ## Efectos de la computación cuántica en criptografía clásica
 
@@ -206,13 +275,13 @@ Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptogr
 ## Criptografía post-cuántica
 <!-- _class: with-success -->
 
-Estrategias que podemos seguir para defendernos cuando llegue la criptografía cuántica: 
+¿Qué haremos cuando llegue la criptogrfía cuántica?
 
 - Doblar las longitudes de la clave para simétrica y hash
-- Intercambio de claves post-cuántico, para sustituir a D-H y RSA
-- Esquemas de firma digital post-cuánticos, para sustituir a RSA, ECDSA
+- Nuevo intercambio de claves post-cuántico, para sustituir a D-H y RSA
+- Nuevo sistemas de firma digital post-cuánticos, para sustituir a RSA y ECDSA
 
-Criptografía post-cuántica: sistemas criptográficos que usarán **las computadoras clásicas** cuando existan las computadoras cuánticas
+Criptografía post-cuántica: sistemas criptográficos que tendrán que usar **las computadoras clásicas** cuando existan las computadoras cuánticas
 
 <!--
 Fíjate bien: llamamos criptografía post-cuántica a la criptografía que ejecutarán las computadoras clásicas, no las cuánticas
@@ -239,11 +308,21 @@ En 2016, el NIST (instituo de estandarización de EEUU), [convocó un concurso](
 Mechanism*)
 - Firmas digitales
 
-Estamos en la cuarta ronda de selección y se espera que sean estándares FIPS 204-205 en 2024
-
 <!--
 EL intercambio de claves clásico podría hacerse acordando una clave (Diffie-Hellman) o simplemente enviando una clave simétrica cifrada con RSA. Esto último es lo que se llama "encapsulamiento de clave"
 -->
+
+---
+
+El NIST ya ha publicado (agosto de 2024) los estándares post-cuánticos: 
+
+- **ML-KEM**: *Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf). Estándar de cifrado general basado en CRYSTALS-Kyber
+- **ML-DSA**: *Module-Lattice-Based Digital Signature Algorithm*. [FIPS 204](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf). Estándar principal para firmas digitales post-cuánticas. Usa el algoritmo CRYSTALS-Dilithium
+- **SLH-DSA**: *Stateless Hash-Based Digital Signature Algorithm*. [FIPS 205](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf). Basado en Sphincs+. Es un "backup" para ML-DSA
+
+![bg right:40% w:100%](images/quantum/nist-final.png)
+
+> https://www.linkedin.com/pulse/nist-releases-first-3-finalized-post-quantum-cryptography-fhpbe/
 
 ## Problemas matemáticos en los que se basa la criptografía post-cuántica
 
@@ -272,18 +351,16 @@ Multivariante|Rápidas y claves privadas pequeñas|Clave pública muy grande
 
 Tipo|Nombre|Problema matemático|Notas
 --|--|--|--
-KEM|CRYSTALS-Kyber|Retículo estructurado|Sigue en concurso del NIST
+KEM|CRYSTALS-Kyber|Retículo estructurado|**Seleccionado por el NIST: FIPS 203**
 KEM|FrodoKEM|Retículo no estructurado|⚠ Descartado por el NIST por lento, pero otras entidades aún lo recomiendan|Sigue en concurso del NIST
 KEM|BIKE|Códigos cuasi-ciclicos|No presentado en tercera ronda, pero será evaluado
 KEM|HQC|Códigos cuasi-ciclicos|No presentado en tercera ronda, pero será evaluado
 KEM|Classic McEliece|Códigos de Goppa|⚠ Clave demasiado grande
 KEM|SIKE|Isogenias|☠ [Roto con computación tradicional](https://eprint.iacr.org/2022/975) en 2022
-Firma|CRYSTALS-Dilithium|Retículo estructurado|Sigue en concurso del NIST
-Firma|Falcon|Retículo estructurado|Sigue en concurso del NIST
-Firma|SPHINCS|Funciones de hash|Sigue en concurso del NIST
+Firma|CRYSTALS-Dilithium|Retículo estructurado|**Seleccionado por el NIST: FIPS 204**
+Firma|Falcon|Retículo estructurado|⚠ Descartado por el NIST
+Firma|SPHINCS+|Funciones de hash|**Seleccionado por el NIST: FIPS 205**
 Firma|XMSS|Funciones de hash|⚠ Descartado por el NIST por no ser general, pero recomendado para aplicaciones específicas
-
-Tras la tercera ronda, el NIST parece preferir algoritmos no basados en retículos estructurados y ha abierto una nueva consulta para algoritmos de firma
 
 <!-- Todos estos algoritmos están bajo un estudio constante y se están descubriendo ataques existosos a algunos de ellos. Cada uno tiene ventajas y desventajas: manejo de estados, tiempos muy largos, claves largas...  -->
 
@@ -334,8 +411,8 @@ Mientras llega la crptografía post-cuántica completa podemos usar esquemas hí
     - Cifrado: largos periodos
     - Firma: hasta caducidad de certificado (unos 2 años)
 1. Realizar un inventario exhaustivo de productos y cifradores que empleo para proteger mi información y mis activos.
-1. Analizar con rigor si tales productos y cifradores son o no resistentes a la computación cuántica.
-1. Establecer un plan de migración a los soluciones híbridos
+1. Analizar si tales productos y cifradores son o no resistentes a la computación cuántica.
+1. Establecer un plan de migración a las soluciones híbridas
 1. Decidir qué nuevos productos necesito y cuánto tiempo requiero para su adquisición y despliegue.
 1. Determinar cuánto tiempo tengo disponible
 
@@ -357,8 +434,11 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 
 ## Ejemplos de migración
 
+AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía post-cuántica
+
 - Signal: https://signal.org/blog/pqxdh/
 - Amazon AWS: https://aws.amazon.com/security/post-quantum-cryptography/
+- Google: https://security.googleblog.com/2024/08/post-quantum-cryptography-standards.html
 
 # Resumen y referencias
 <!-- _class: lead -->
@@ -371,14 +451,14 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
     - Las funciones de hash deberán casi doblar los bits de salida
     - La criptografía asimétrica (intercambio de claves y firmado) estará obsoleta
 - **Criptografía post-cuántica**: sistemas criptográficos que usarán **las computadoras clásicas** cuando existan las computadoras cuánticas
-- Aún no se han estandarizado los algoritmos post-cuánticos que usaremos. El NIST está aún evaluando las propuestas
-- El periodo de transición puede ser muy largo, y se recomienda migrar inmediatamente a criptografía post-cuántica, empezando por aquellos algoritmos más sencillos de cambiar
+- Agosto de 2024: el NIST ya ha estandarizado los algoritmos post-cuánticos que recomienda, y se espera que el resto de agencias tengan opiniones similares
+- El periodo de transición puede ser muy largo, y se recomienda empezar ya la migración a criptografía post-cuántica
 
 ## Referencias
 
 - "Computación Cuántica: Cómo afectará a la Criptografía actual y cómo podemos adaptarnos", TFM de Alicia Marybel Díaz Zea en la VIU, 2022-2023
 - [The Lord of the Keys The Return of Post Quantum Cryptography](https://www.youtube.com/watch?v=LTktugd5pkg) Sandra Guasch, Crytored 2024
-- [Quantum Computing 2023 Update](https://www.youtube.com/watch?v=dOBe5pES30k)
+- [How Quantum Computers Break Encryption | Shor's Algorithm Explained ](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
 - [What is a Qubit? - A Beginner's Guide to Quantum Computing](https://www.youtube.com/watch?v=90za6mazNps)
 - [Quantum computing for the determined](https://www.youtube.com/playlist?list=PL1826E60FD05B44E4)
 - [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022

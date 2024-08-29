@@ -76,7 +76,7 @@ Selection|$O(n^2)$|$O(1)$
 Bubble|$O(n)$|$O(1)$
 Quick Sort|$O(n \log n)$|$O(n)$
 
-¿Cuánto tiempo le llevaría al menor algoritmo posible?
+¿Cuál es la velocidad máxima teórica a la que podemos ordenar?
 
 > https://www.geeksforgeeks.org/time-complexities-of-all-sorting-algorithms/
 
@@ -85,7 +85,9 @@ Dado un conjunto de datos, existen varios algoritmos que permiten ordenadores: q
 
 ¿Por qué hay varios algoritmos? Algunos son muy rápidos pero consumen más memoria, otros son muy rápidos si los datos ya están casi ordenados...
 
-¿Existe un algoritmo que sea "el mejor de todos?
+¿Existe un algoritmo que sea "el mejor de todos"?
+
+Igual que existe una velocidad máxima de la luz... ¿existe una velocidad máxima para ordenar un array?
 -->
 
 ## Teoría de la complejidad
@@ -94,13 +96,15 @@ Dado un conjunto de datos, existen varios algoritmos que permiten ordenadores: q
 
 Ciencia que estudia cuánto tiempo lleva resolver un problema **al algoritmo más rápido posible**
 
-**No dice cuál es el algoritmo más rápido posible**, simplemente calcula cuánto tiempo mínimo lleva resolver un problema
-
-Aplicación en criptografía: dado un mensaje cifrado con cierto algoritmo ¿existe aunque solo sea en toería un algoritmo más rápido que con fuerza bruta... aunque aún no sepamos cuál?
+**Criptografía**: dado un mensaje cifrado con cierto algoritmo ¿existe un algoritmo más rápido que la fuerza bruta... aunque aún no sepamos cuál?
 
 <!--
 
-Aviso 2: "el tiempo mínimo en resolver un problema" es para el problema general, puede haber algunos problemas que teóricamente sean sencillos pero que "con suerte" se puedan resolver, o que tienen características especiales que los hacen más sencillos
+No dice **cuál** es el algoritmo más rápido posible, solo calcula **cuánto tiempo** le llevará resolver el problema al mejor algoritmo posible. Si nuestro algoritmo tarda más... sabemos que aún podemos mejorar
+
+"el tiempo mínimo en resolver un problema" es para el problema general, puede haber algunos problemas que teóricamente son complejos pero que "con suerte o por las características concretas d eeste problema" se puede resolver fácilmente
+
+A veces no interesa resolver un problema "en el menor tiempo posible", sino que utilizando "la menor cantidad de memoria posible". Aquí solo he hablado del tiempo como criterio de "mejor", pero en ocasiones se buscará optimizar el uso de "memoria"
 
 -->
 
@@ -109,14 +113,14 @@ Aviso 2: "el tiempo mínimo en resolver un problema" es para el problema general
 
 ![center w:20em](images/complejidad/miracle-sudoku.png)
 
-- Normas comunes de Sudoku, y además...
-- Las casillas adyacentes no tienen números consecutivos. Ejemplo: no hay un 6 encima, debajo, a la izquierda o la derecha de un 5
-- Las casillas separadas por movimientos de ajedrez rey o caballo de ajedrez no tienen el mismo número
+- Normas normales de Sudoku, y además...
+- Las casillas separadas por movimientos de rey o caballo de ajedrez no pueden tener el mismo número
+- Las casillas directamente adyacentes no tienen números consecutivos. Ejemplo: no hay un 6 encima, debajo, a la izquierda o la derecha de un 5 (en diagonal sí se puede)
 - Pruébalo: [The Miracle, de Mitchell Lee](https://cracking-the-cryptic.web.app/sudoku/tjN9LtrrTL)
 - ¿Cuánto tiempo estimas que te llevará resolverlo?
 - ¿Cuánto tiempo le llevará a un algoritmo que sea el más rápido posible?
 
-"*It might have a unique solution but it's not gonna be findable by a human being*"
+Simon Anthony: "*It might have a unique solution but it's not gonna be findable by a human being*"
 
 <!--
 Una manera de resolver el sudoku es simplemente probar números uno a uno hasta que se verifique el resultado. Esto es fuerza bruta. ¿Hay algoritmos mejores?
@@ -162,6 +166,8 @@ Adelanto: razonable significa polinomial: el tiempo necesario para resolverlo cr
 ## ¿Cuánto tiempo tardarías en comprobar si ésta es la solución?
 
 [![w:30em center](images/complejidad/sudoku-solve.png)](https://www.youtube.com/watch?v=yKf9aUIxdb4)
+
+> https://www.youtube.com/watch?v=yKf9aUIxdb4
 
 <!--
 No es una pregunta trampa: tardamos pocos segundos. Mucho menos tiempo que en resolver el Sudoku
