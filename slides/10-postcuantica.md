@@ -105,12 +105,16 @@ Intuitivamente: podemos aprovechar la superposición para probar varias solucion
 ## Comparación con la computación tradicional
 
 - La computación cuántica permite resolver [problemas complejos](04-complejidad.html) con una rapidez que no sabemos alcanzar con computación tradicional: **supremacía cuántica**
-- Cuidado: [¡no todos los problemas son complejos!](https://en.wikipedia.org/wiki/Quantum_supremacy)
+- Cuidado: ¡no todos los problemas son complejos!
 - La computación cuántica da un **resultado probabilístico**. Es decir, "esto es una solución, probablemente". Repetir el algoritmo varias veces permite reducir la [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/6/6e/Complexity_subsets_pspace.svg)
 
 <!--
+Recordatorio: "problema complejo" no significa necesariamente problema difícil. Hay una rama de las matemáticas que estudia los problemas complejos, y tienen que ver con cuánto aumementan los recursos necesarios para resolver un problema (tiempo, memoria = dinero) cuando aumenta el tamaño del problema.
+
+Por ejemplo, factorizar números primos es un problema complejo. No porque sea difícil (no lo es), sino porque el tiempo necesario para factorizar un número aumenta exponencialmente con su tamaño
+
 Si un problema no es complejo, utilizar computación cuántica para solucionarlo en "matar moscas a cañonazos"
 
 Por eso es poco probable que veamos computadoras cuánticas en nuestros hogares: en nuestra vida diaria no necesitamos resolver problemas matemáticamente complejos
@@ -227,11 +231,13 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 
 Objetivo: que todo esto deje de ser teórico
 
-Supremacía cuántica: un computador cuántico que resuelva un problema real más rápidamente que un computador tradicional
+**Supremacía cuántica**: un computador cuántico que resuelva un problema real más rápidamente que un computador tradicional
+
+Cada poco tiempo alguien anuncia que ha alcanzado la supremacía cuántica... con muchas condiciones que no lo hacen práctico [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
+
+El consenso general es que aún no hemos alcanzado la supremacía cuántica real, pero ese día acabará llegando
 
 ![bg right w:100%](images/quantum/supremacia.webp)
-
-Aún no hemos alcanzado la supremacía cuántica... y no está claro que algún día lo logremos
 
 ## Efectos de la computación cuántica en criptografía clásica
 
@@ -255,11 +261,11 @@ Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptogr
 -->
 
 
-## ¿Cuánto tiempo llevará tener una computadora cuántica?
+## ¿Cuándo tendremos una computadora cuántica útil?
 
-![center w:25em](images/quantum/predicciones.png)
+[![center w:27em](images/quantum/predicciones.png)](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
 
-> [Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2022-quantum-threat-timeline-report/) Global Risk Institute, Noviembre 2022
+> [2023 Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/), Global Risk Institute, diciembre 2023
 
 ## Store Now, Decrypt Later
 
@@ -275,13 +281,13 @@ Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptogr
 ## Criptografía post-cuántica
 <!-- _class: with-success -->
 
-¿Qué haremos cuando llegue la criptogrfía cuántica?
+¿Qué haremos cuando llegue la criptografía cuántica?
 
 - Doblar las longitudes de la clave para simétrica y hash
 - Nuevo intercambio de claves post-cuántico, para sustituir a D-H y RSA
 - Nuevo sistemas de firma digital post-cuánticos, para sustituir a RSA y ECDSA
 
-Criptografía post-cuántica: sistemas criptográficos que tendrán que usar **las computadoras clásicas** cuando existan las computadoras cuánticas
+**Criptografía post-cuántica**: sistemas criptográficos que tendrán que usar **las computadoras clásicas** cuando existan las computadoras cuánticas
 
 <!--
 Fíjate bien: llamamos criptografía post-cuántica a la criptografía que ejecutarán las computadoras clásicas, no las cuánticas
@@ -290,8 +296,8 @@ Fíjate bien: llamamos criptografía post-cuántica a la criptografía que ejecu
 ## Tiempo de transición
 <!-- _class: with-success -->
 
-- Aún no existe una computadora cuántica con la potencia suficiente como para romper RSA, ni se sabe cuándo la tendremos
-- Existe una "carrera cuántica" que están llevando China, USA, Europa por ser los primeros en tener una tecnología útil
+- Aún no existe una computadora cuántica con la potencia suficiente como para romper RSA, ni se sabe cuándo la tendremos: [Quantum threat timeline report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
+- Existe una ["carrera cuántica"](https://www.wired.com/story/quantum-supremacy-google-china-us/) que están llevando China, USA, Europa por ser los primeros en tener una tecnología útil
 - Problema: *store now, decrypt later*
 - Históricamente, las transiciones son lentas: 3DES, MD5 aún están entre nosotros más de una década después de que no se recomiende su uso
 
