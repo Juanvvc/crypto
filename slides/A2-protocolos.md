@@ -120,6 +120,20 @@ Lo más habitual en Internet es utilizar TLS con solo autenticación de servidor
 
 Más información en el [Tema 5](05-autenticacion.html)
 
+## Cifrado: establecimiento de la clave
+
+Una vez que hemos establecido la identidad de la otra parte, acordamos qué clave AES vamos a utilizar. Opciones:
+
+1. [Elliptic Curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman), como hemos visto en temas anteriores
+1. [Protocolo de encapsulación de clave](https://en.wikipedia.org/wiki/Key_encapsulation_mechanism):
+    - "Escojo la clave de cifrado y la envío a la otra parte cifrada con su clave pública"
+
+![bg right:50% w:90%](images/asimetrica/keyencapsulation.png)
+
+<!--
+Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
+-->
+
 ## Acuerdos de los parámetros de la conexión
 
 Los clientes cuando se conectan acuerdan utilizar la versión más moderna que soporten ambos extremos:

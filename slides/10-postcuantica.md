@@ -69,8 +69,10 @@ Pero... ¿y si existiesen otro tipo de computadoras que lo factorizasen en horas
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#5)
-1. [Criptografía Post-cuántica](#20)
-1. [Resumen y referencias](#34)
+1. [Criptografía Post-cuántica](#17)
+1. [Ejemplo: ML-KEM](#25)
+1. [Otros sistemas](#31)
+1. [Resumen y referencias](#41)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -239,6 +241,9 @@ El consenso general es que aún no hemos alcanzado la supremacía cuántica real
 
 ![bg right w:100%](images/quantum/supremacia.webp)
 
+# Criptografía Post-cuántica
+<!-- _class: lead -->
+
 ## Efectos de la computación cuántica en criptografía clásica
 
 Algoritmo|Tipo|Algoritmo|Defensa
@@ -274,14 +279,8 @@ Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptogr
 - https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/harvest-now-decrypt-later-attacks-pose-security-concern-quantum-computing.html
 - https://www.siliconrepublic.com/enterprise/quantum-apocalypse-store-now-decrypt-later-encryption
 
-# Criptografía Post-cuántica
-<!-- _class: lead -->
-
-
-## Criptografía post-cuántica
+## ¿Qué haremos cuando llegue la computación cuántica?
 <!-- _class: with-success -->
-
-¿Qué haremos cuando llegue la criptografía cuántica?
 
 - Doblar las longitudes de la clave para simétrica y hash
 - Nuevo intercambio de claves post-cuántico, para sustituir a D-H y RSA
@@ -322,13 +321,116 @@ EL intercambio de claves clásico podría hacerse acordando una clave (Diffie-He
 
 El NIST ya ha publicado (agosto de 2024) los estándares post-cuánticos: 
 
-- **ML-KEM**: *Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf). Estándar de cifrado general basado en CRYSTALS-Kyber
+- **ML-KEM**: *Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf). Estándar de intercambio de clave basado en CRYSTALS-Kyber
 - **ML-DSA**: *Module-Lattice-Based Digital Signature Algorithm*. [FIPS 204](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf). Estándar principal para firmas digitales post-cuánticas. Usa el algoritmo CRYSTALS-Dilithium
 - **SLH-DSA**: *Stateless Hash-Based Digital Signature Algorithm*. [FIPS 205](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf). Basado en Sphincs+. Es un "backup" para ML-DSA
 
 ![bg right:40% w:100%](images/quantum/nist-final.png)
 
 > https://www.linkedin.com/pulse/nist-releases-first-3-finalized-post-quantum-cryptography-fhpbe/
+
+# Ejemplo: ML-KEM
+<!-- _class: lead -->
+
+*Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf)
+
+## ML-KEM GIPS 203
+
+- Nombre oficial: *Module-Lattice-Based Key-Encapsulation Mechanism*
+- Nombre común: Kyber
+- Mecanismo de encapsulación de clave. Es decir: sirve para que dos personas que no se han visto nunca pueda tener una clave común que luego usarán en AES (o similar)
+- "Sustituto" postcuántico de Diffie-Hellman / ECDH
+- Basado en el problema ["Aprendizaje con errores"](https://en.wikipedia.org/wiki/Learning_with_errors)
+
+> [CRYSTALS-Kyber](https://pq-crystals.org/kyber/data/kyber-specification-round3-20210804.pdf). Roberto Avanzi, Joppe Bos, Léo Ducas, Eike Kiltz, Tancrède Lepoint, Vadim Lyubashevsky, John M. Schanck, Peter Schwabe, Gregor Seiler, Damien Stehlé. Agosto 4, 2021
+> [Learning with errors: Encrypting with unsolvable equations](https://www.youtube.com/watch?v=K026C5YaB3A) Chalk Talk, 2023. Explicación sencilla
+> [CRYSTALS Kyber : The Key to Post-Quantum Encryption](https://medium.com/@hwupathum/crystals-kyber-the-key-to-post-quantum-encryption-3154b305e7bd), Udara Pathum, 2024. Explicación completa
+
+## Aprendizaje SIN errores
+<!-- _class: two-columns -->
+
+$$
+\begin{align}
+K_{priv} & = \lbrace x=10, y=82, z=50, w=5\rbrace \\
+K_{pub} & =
+\begin{cases}
+    77x+7y+28z+23w = 2859 \mod 89 = 11\\
+    21x+19y+30z+48w = 3508 \mod 89 = 37\\
+    4x+24y+33z+38w = 3848 \mod 89 = 21\\
+    8x+20y+84z+61w = 6225 \mod 89 = 84\\
+    6x+53y+1z+86w = 4886\mod 89 = 80\\
+    42x+86y+31z+8w = 9062 \mod 89 = 73\\
+    ...
+\end{cases}
+\end{align}
+$$
+
+- Observa que se usa también la aritmética del módulo
+- Es un sistema lineal y dada la clave pública cualquiera podría sacar la privada
+
+## Aprendizaje CON errores
+<!-- _class: two-columns -->
+
+$$
+\begin{align}
+K_{priv} & = \lbrace x=10, y=82, z=50, w=5\rbrace \\
+K_{pub} & =
+\begin{cases}
+    77x+7y+28z+23w = 2856 \mod 89 = 8\\
+    21x+19y+30z+48w = 3510 \mod 89 = 39\\
+    4x+24y+33z+38w = 3847 \mod 89 = 20\\
+    8x+20y+84z+61w = 6225 \mod 89 = 84\\
+    6x+53y+1z+86w = 4890\mod 89 = 84\\
+    42x+86y+31z+8w = 9061 \mod 89 = 72\\
+    ...
+\end{cases}
+\end{align}
+$$
+
+- Observa que ahora hemos introducido ligeros errores en la igualdad. Por ejemplo, la primera ecuación resulta en 8 en vez de 11
+- Ya no es un sistema lineal y obtener la clave privada a partir de la pública no es fácil, ni siquiera para un computador cuántico
+
+## Cifrado y descifrado
+<!-- _class: two-columns-list -->
+
+<style scoped>
+    ol { list-style-type: none; margin-left: -2em; font-size: 90%;}    
+    li ul { margin-top: 1em;}
+    li li { margin-left: -1em; ; width: 100%; font-size: 90%;}
+</style>
+
+1. Cifrar un 0: el emisor escoge varias ecuaciones de la clave pública al azar y las suma (recuerda: mod 89)
+    - $E(0) = \{ 30x + 67y + 53z + 24w = 19 \}$
+1. Cifrar un 1: el emisor escoge varias ecuaciones de la clave pública al azar, las suma y añade 44 (recuerda: mod 89, 44 es la mitad de 89)
+    - $E(1) = \{ 30x + 67y + 53z + 24w + 44 = 63 \}$
+
+1. Descifrar un 0: el receptor sustituye los valores de su clave privada y comprueba el error está "cerca" de 0
+    - $D(E(0), K_{priv}) =  81, real=79, error=2$
+1. Descifrar un 1: el receptor sustituye los valores de su clave privada y comprueba que el error está "cerca" de 44
+    - $D(E(1), K_{priv}) =  34, real=79, error=45$
+
+
+## Uso y comparación de D-H
+
+- De esta manera, bit a bit, un emisor puede enviar qué clave AES se utiliza el resto de la comunicación: encapsulación de clave
+- Valores reales: 256 variables, módulo 3329
+- Comparado con ECDH...
+    - Le lleva el doble de tiempo
+    - El triple de procesado / energía
+    - 70 veces más datos intercambiados
+    - Clave de tamaño comparable
+    - Resistente a la computación cuántica
+
+> https://en.wikipedia.org/wiki/Kyber
+
+![bg right:40%](images/asimetrica/keyencapsulation.png)
+
+<!--
+Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
+-->
+
+# Otros sistemas
+<!-- _class: lead -->
 
 ## Problemas matemáticos en los que se basa la criptografía post-cuántica
 
@@ -462,13 +564,18 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 
 ## Referencias
 
+Criptografía post-cuántica:
+
 - "Computación Cuántica: Cómo afectará a la Criptografía actual y cómo podemos adaptarnos", TFM de Alicia Marybel Díaz Zea en la VIU, 2022-2023
-- [The Lord of the Keys The Return of Post Quantum Cryptography](https://www.youtube.com/watch?v=LTktugd5pkg) Sandra Guasch, Crytored 2024
+- [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
 - [How Quantum Computers Break Encryption | Shor's Algorithm Explained ](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
+ - [Deep dive into a post-quantum key encapsulation algorithm](https://blog.cloudflare.com/post-quantum-key-encapsulation/), Goutam Tamvada, Sofía Celi, 2022
+
+Generales sobre computación cuántica:
+
 - [What is a Qubit? - A Beginner's Guide to Quantum Computing](https://www.youtube.com/watch?v=90za6mazNps)
 - [Quantum computing for the determined](https://www.youtube.com/playlist?list=PL1826E60FD05B44E4)
-- [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
-- [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw)
+- [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw), Sabine Hossenfelder 2024 
 
 
 

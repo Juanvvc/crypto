@@ -599,15 +599,17 @@ Do not whitelist emails "from mycompany.com" if mycompany.com has not configured
 <!-- _class: two-columns-list -->
 
 <style scoped>
-    ol { list-style-type: none;}
+    ol { list-style-type: none}
+    li ul { margin-top: 1em;}
+    li li { margin-left: -1em; ; width: 95%; }
 </style>
 
-1. Admins:
+1. **Admins**
     - Activate 2FA, disable legacy login
     - Activate mailbox auditing
     - Regularly, check rules
     - Train your users
-1. Users:
+1. **Users**
     - Check the address of the other participant in the communication
     - Be careful if the address changes
     - Be careful if the language of the other participants change
