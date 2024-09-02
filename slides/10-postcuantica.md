@@ -69,9 +69,9 @@ Pero... ¿y si existiesen otro tipo de computadoras que lo factorizase en horas?
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#5)
-1. [Criptografía Post-cuántica](#17)
+1. [Criptografía Post-cuántica](#18)
 1. [Ejemplo: ML-KEM](#24)
-1. [Implementación del a criptografía post-cuántica](#30)
+1. [Implementación de la criptografía post-cuántica](#30)
 1. [Resumen y referencias](#41)
 
 # Computación Cuántica
