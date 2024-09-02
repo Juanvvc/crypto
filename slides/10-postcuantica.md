@@ -44,7 +44,7 @@ $$
 
 ---
 
-Factorizar este número con un computador actual lleva millones de años...
+Factorizar este número con un computador actual lleva miles de años...
 
 ```
 149802948092842184098210482184208402814092814092814902882314802
@@ -63,15 +63,15 @@ Factorizar este número con un computador actual lleva millones de años...
 691387683147693147683148761364706946013746013681141213083928139
 ```
 
-Pero... ¿y si existiesen otro tipo de computadoras que lo factorizasen en horas?
+Pero... ¿y si existiesen otro tipo de computadoras que lo factorizase en horas?
 
 ## Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#5)
 1. [Criptografía Post-cuántica](#17)
-1. [Ejemplo: ML-KEM](#25)
-1. [Otros sistemas](#31)
+1. [Ejemplo: ML-KEM](#24)
+1. [Implementación del a criptografía post-cuántica](#30)
 1. [Resumen y referencias](#41)
 
 # Computación Cuántica
@@ -292,18 +292,6 @@ Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptogr
 Fíjate bien: llamamos criptografía post-cuántica a la criptografía que ejecutarán las computadoras clásicas, no las cuánticas
 -->
 
-## Tiempo de transición
-<!-- _class: with-success -->
-
-- Aún no existe una computadora cuántica con la potencia suficiente como para romper RSA, ni se sabe cuándo la tendremos: [Quantum threat timeline report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
-- Existe una ["carrera cuántica"](https://www.wired.com/story/quantum-supremacy-google-china-us/) que están llevando China, USA, Europa por ser los primeros en tener una tecnología útil
-- Problema: *store now, decrypt later*
-- Históricamente, las transiciones son lentas: 3DES, MD5 aún están entre nosotros más de una década después de que no se recomiende su uso
-
-La recomendación es empezar ya con la transición
-
-> [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
-
 ## Concurso del NIST
 
 En 2016, el NIST (instituo de estandarización de EEUU), [convocó un concurso](https://csrc.nist.gov/projects/post-quantum-cryptography) para evaluar los mejores algoritmos post-cuánticos que le presentasen:
@@ -334,11 +322,11 @@ El NIST ya ha publicado (agosto de 2024) los estándares post-cuánticos:
 
 *Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf)
 
-## ML-KEM GIPS 203
+## ML-KEM (CRISTALS Kyber) - FIPS 203
 
 - Nombre oficial: *Module-Lattice-Based Key-Encapsulation Mechanism*
-- Nombre común: Kyber
-- Mecanismo de encapsulación de clave. Es decir: sirve para que dos personas que no se han visto nunca pueda tener una clave común que luego usarán en AES (o similar)
+- Nombre común: CRISTALS Kyber
+- Mecanismo de encapsulación de clave: dos personas que no se han visto nunca pueda tener una clave común que luego usarán en AES (o similar)
 - "Sustituto" postcuántico de Diffie-Hellman / ECDH
 - Basado en el problema ["Aprendizaje con errores"](https://en.wikipedia.org/wiki/Learning_with_errors)
 
@@ -394,7 +382,8 @@ $$
 <!-- _class: two-columns-list -->
 
 <style scoped>
-    ol { list-style-type: none; margin-left: -2em; font-size: 90%;}    
+    ol { list-style-type: none; margin-left: -2em; font-size: 90%;}
+    ol > li { border: 1px solid black; padding: 0.5em;}
     li ul { margin-top: 1em;}
     li li { margin-left: -1em; ; width: 100%; font-size: 90%;}
 </style>
@@ -404,21 +393,23 @@ $$
 1. Cifrar un 1: el emisor escoge varias ecuaciones de la clave pública al azar, las suma y añade 44 (recuerda: mod 89, 44 es la mitad de 89)
     - $E(1) = \{ 30x + 67y + 53z + 24w + 44 = 63 \}$
 
-1. Descifrar un 0: el receptor sustituye los valores de su clave privada y comprueba el error está "cerca" de 0
+1. Descifrar un 0: el receptor sustituye los valores de su clave privada y comprueba si el error está "cerca" de 0
     - $D(E(0), K_{priv}) =  81, real=79, error=2$
-1. Descifrar un 1: el receptor sustituye los valores de su clave privada y comprueba que el error está "cerca" de 44
+1. Descifrar un 1: el receptor sustituye los valores de su clave privada y comprueba que si el error está "cerca" de 44
     - $D(E(1), K_{priv}) =  34, real=79, error=45$
 
+El receptor descifra "0" si el error está cerca de 0 y "1" si el error está cerca de la mitad del módulo. Hay una pequeña probabilidad de que el error sera mayor que la mitad del módulo y el descifrado sea incorrecto
 
 ## Uso y comparación de D-H
 
 - De esta manera, bit a bit, un emisor puede enviar qué clave AES se utiliza el resto de la comunicación: encapsulación de clave
 - Valores reales: 256 variables, módulo 3329
 - Comparado con ECDH...
+    - Hay una pequeña probabilidad de descifrar incorrectamente
     - Le lleva el doble de tiempo
     - El triple de procesado / energía
     - 70 veces más datos intercambiados
-    - Clave de tamaño comparable
+    - Clave de tamaño x4
     - Resistente a la computación cuántica
 
 > https://en.wikipedia.org/wiki/Kyber
@@ -429,7 +420,7 @@ $$
 Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
 -->
 
-# Otros sistemas
+# Implementación del a criptografía post-cuántica
 <!-- _class: lead -->
 
 ## Problemas matemáticos en los que se basa la criptografía post-cuántica
@@ -491,19 +482,33 @@ SPHINCS+128|x1|x100|x500|x7
 
 > Fuente: charla "Criptografía postcuántica: presente y futuro" de Adrián Ranea en Jornadas CCN-CERT 2023
 
-## Nuevos requisitos de implementación
+## Tiempo de transición
+<!-- _class: with-success -->
 
-Los nuevos algoritmos son más complejos, y eso también significa que son más difícil de implementar  y proteger
+- Aún no existe una computadora cuántica con la potencia suficiente como para romper RSA, ni se sabe cuándo la tendremos: [Quantum threat timeline report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
+- Existe una ["carrera cuántica"](https://www.wired.com/story/quantum-supremacy-google-china-us/) que están llevando China, USA, Europa por ser los primeros en tener una tecnología útil
+- Problema: *store now, decrypt later*
+- Históricamente, las transiciones son lentas: 3DES, MD5 aún están entre nosotros más de una década después de que no se recomiende su uso
+- **Ya sabemos qué algoritmos post-cuánticos vamos a utilizar**
 
-- Retículos: Fallos en el desencriptado
-- Retículos: Necesitan generadores aleatorios gaussianos
-- FALCON: aritmética en coma flotante
-- BIKE: descifra en tiempo variable
-- XMSS: necesita guardar estado entre firmas
+La recomendación es empezar ya con la transición
+
+> [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
+
+## Retos de implementación
+
+- Los nuevos algoritmos no están soportados por sistemas antiguos
+- No son tan eficientes como los algoritmos clásicos
+- Los nuevos algoritmos son más complejos, y eso también significa que son más difícil de implementar  y proteger
+    - Retículos: Fallos en el desencriptado
+    - Retículos: Necesitan generadores aleatorios gaussianos
+    - FALCON: aritmética en coma flotante
+    - BIKE: descifra en tiempo variable
+    - XMSS: necesita guardar estado entre firmas
 
 ## Esquemas híbridos
 
-Mientras llega la crptografía post-cuántica completa podemos usar esquemas híbridos
+Mientras implementamos la criptografía post-cuántica completa podemos usar esquemas híbridos
 
 - Hash: incluir dos valores, hash tradicional y post-cuántico
 - Firmas: incluir dos firmas, firma tradicional y post-cuántica
