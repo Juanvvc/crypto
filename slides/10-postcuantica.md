@@ -69,10 +69,10 @@ Pero... ¿y si existiesen otro tipo de computadoras que lo factorizase en horas?
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#5)
-1. [Criptografía Post-cuántica](#18)
-1. [Ejemplo: ML-KEM](#24)
-1. [Implementación de la criptografía post-cuántica](#30)
-1. [Resumen y referencias](#41)
+1. [Criptografía Post-cuántica](#19)
+1. [Ejemplo: ML-KEM](#25)
+1. [Implementación de la criptografía post-cuántica](#31)
+1. [Resumen y referencias](#42)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -99,7 +99,7 @@ La unidad de la computación cuántica es el Q-bit, que puede existi en múltipl
 
 Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
 
-Intuitivamente: podemos aprovechar la superposición para probar varias soluciones a la vez con un solo q-bit
+Intuitivamente: podemos aprovechar la superposición para probar muchas soluciones a la vez con un solo q-bit: trabajo en paralelo
 
 > [Computación Cuántica: la Guía completa WIRED](https://es.wired.com/articulos/computacion-cuantica-la-guia-completa-wired-computadoras-qubits)
 
@@ -177,12 +177,14 @@ Para pensar: ¿realmente necesitamos resolver algoritmos de optimización tan r�
 ## Algoritmos ejecutados por computadoras cuánticas
 <!-- _class: with-info -->
 
+Algoritmos de interés para criptogafía:
+
 - [Algoritmo de Grover](https://es.wikipedia.org/wiki/Algoritmo_de_Grover) (1996)
 - [Algoritmo de Shor](https://es.wikipedia.org/wiki/Algoritmo_de_Shor) (1999)
 
-Cuando se implementen estos algoritmos en una computadora cuántica, cambiarán totalmente la criptografía actual
+Estos algoritmos tienen el potencial de romper la criptografía que estamos utilizando actualmente
 
-Cuando tengamos un computador cuántico... ¡ya sabemos cómo usarlo!
+Cuando tengamos un computador cuántico... ¡los malos ya sabrán usarlo!
 
 <!-- Observa: ya teníamos algoritmos antes de tener el primer computador cuántico! -->
 
@@ -233,6 +235,7 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 - Es muy cara
 - Decoherencia: un qbit es muy sensible al entorno y puede perder sus propiedades cuánticas
 - Muchos qbits hacen el sistema inestable
+- Necesitan temperaturas cercanas al cero absoluto
 - La respuesta es probabilística: [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
 - No se ha demostrado que haya supremacía / ventaja cuántica
 
@@ -245,15 +248,42 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 
 Demostrar de forma práctica que un computador cuántico puede resolver un problema más rápidamente que un computador tradicional
 
-Cada poco tiempo alguien anuncia que ha alcanzado la [**supremacía cuántica**](https://es.wikipedia.org/wiki/Supremac%C3%ADa_cu%C3%A1ntica)... con condiciones [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
+Cada poco tiempo alguien anuncia que ha demostrado la [**supremacía cuántica**](https://es.wikipedia.org/wiki/Supremac%C3%ADa_cu%C3%A1ntica)... con condiciones [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
 
-Pero aún no se ha alcanzado para los algoritmos de Shor o Grover
+Pero aún no para los algoritmos de Shor o Grover
 
 El consenso general es que aún no se ha demostrado la supremacía cuántica, pero ese día acabará llegando
 
 ![bg right w:100%](images/quantum/supremacia.webp)
 
 > [It’s been 20 years since “15” was factored on quantum hardware](https://www.ibm.com/quantum/blog/factor-15-shors-algorithm), Robert Davis. Enero 2022
+
+<!--
+En 2024, 15 sigue siendo el número más grande que podemos factorizar con computación cuántica, y nos lleva 10 minutos
+
+ “You yourself could go and factor 15 on the IBM Quantum computer system over the cloud in 10 minutes,” he said. “That is incredible. To have reached that level of sophistication and control is testimony towards the type of system engineering ability that IBM Quantum has brought to us. We did not have that in 2001.”
+
+However, it’s also important to note that the ability to factor 15 on current quantum hardware assumes some amount of simplification of Shor’s algorithm. “There are different ways to write the factor 15 algorithm, and if you simplify it sufficiently, well, then you can run it, but it's not terribly meaningful,” Chuang said. “If you write it in a way that can scale such that not only could it factor 15, but also 21 and larger numbers, that is hard, and that's an extremely good test of the sophistication of a system.” 
+
+Sabemos que la computación cuántica es posible. Ahora, ¿es realmente más rápida que la tradicional?
+
+El consenso en la comunidad científica es que sí, que acabará teniendo ventaja/supremacía frente a la computación tradicional antes o después. Y tenemos que estar preparados para ello.
+-->
+
+## Estado actual
+
+- El computador [Google Sycamore](https://www.sciencealert.com/google-quantum-computer-is-47-years-faster-than-1-supercomputer) tiene 70 qubits. Agosto de 2023.
+- El procesador cuántico [IBM Osprey](https://en.wikipedia.org/wiki/IBM_Osprey) tiene 433 qbits y la empresa tiene previsto alcanzar los 4.000 qubits con su [procesador Kookaburra en 2025](https://www.popsci.com/technology/ibm-quantum-computing-roadmap/)
+- No neesitamos tenerlos en casa: empresas como [Google](https://cloud.google.com/blog/products/compute/ionq-quantum-computer-available-through-google-cloud), [IBM](https://quantum.ibm.com/), [Microsoft](https://azure.microsoft.com/es-es/products/quantum/) y [Amazon](https://aws.amazon.com/braket/) han anunciado computación cuántica como servicio disponible en la nube
+
+![center](images/quantum/amazon-braket.png)
+
+<!--
+Fíjate:
+
+- son anuncios, no demostraciones
+- segutamente estos números estarán obsoletos cuando leas esto
+-->
 
 # Criptografía Post-cuántica
 <!-- _class: lead -->
@@ -264,7 +294,7 @@ El consenso general es que aún no se ha demostrado la supremacía cuántica, pe
 Algoritmo|Tipo|Algoritmo|Defensa
 --|--|--|--
 AES|Simétrico|Grover|⚠ Tamaño de claves x2
-SHA|Función de hash|Grover|⚠ Tamaño de salida x1.5
+SHA2|Función de hash|Grover|⚠ Tamaño de salida x1.5
 RSA|Asimétrico, firmas|Shor|☠ Rota, reemplazar
 D-H|Asimétrico, intercambio de claves|Shor|☠ Rota, reemplazar
 Elípticas|ECDH, ECDSA...|Shor|☠ Rota, reemplazar
