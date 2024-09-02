@@ -42,8 +42,8 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 1. [Cifrado César](#11)
 1. [Atacando el cifrado César](#15)
 1. [Mejoras al cifrado César: sistemas polialfabéticos](#31)
-1. [Confidencialidad perfecta](#46)
-1. [Resumen y referencias](#59)
+1. [Confidencialidad perfecta](#45)
+1. [Resumen y referencias](#58)
 
 # Criptografía clásica
 <!--
@@ -334,7 +334,12 @@ Por supuesto, el atacante puede intentar usar una llave maestra, o robar el PIN 
 -->
 
 ## Tamaños de clave
-<!-- _class: smallest-font with-success -->
+<!-- _class: with-success -->
+
+<style scoped>
+table { font-size: 60%; }
+p {font-size: 75%; }
+</style>
 
 Contraseñas: podemos aumentar el tamaño de clave aumentando tanto el número como el tipo de caracteres
 
@@ -350,9 +355,7 @@ PIN de 4 números|3659|9999|$log_2(1000)\approx13\ bits$|
 
 En criptografía solemos medir la longitud de una clave con **la cantidad de bits que necesitamos para guardarla**
 
-Claves con el mismo tamaño en bits tienen "la misma seguridad": se necesitaría el mismo número de intentos para descifrarlas por fuerza bruta
-
-Medir las claves en bits nos permite comparar "su fortaleza"
+Medir las claves en bits nos permite comparar "su fortaleza": mismo número de bits, misma seguridad
 
 <!--
 
@@ -501,8 +504,7 @@ header: Vigenère y Enigma
 Vigenère y Enigma
 
 
-## Transponer y sustituir
-<!-- _class: smaller-font -->
+<!-- ## Transponer y sustituir
 
 Podemos añadir una transposición a la vez de una substitución:
 
@@ -702,7 +704,9 @@ Protocolo alemán de uso:
 - El texto era natural
 
 ---
-<!-- _class: smaller-font -->
+<style scoped>
+p, li {font-size: 90%; }
+</style>
 
 
 Se rompió más "por mal protocolo" que porque el sistema fuese defectuoso

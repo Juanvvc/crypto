@@ -309,13 +309,13 @@ La composición es compleja y todo debe funcionar como un reloj.
 
 ## Servicios de seguridad a primitivas
 
-Objetivo|Primitiva
---|--
-**confidencialidad**|cifrado simétrico, cifrado asimétrico
-**integridad**|hash, firma simétrica, firma asimétrica
-**autenticidad**|firma simétrica, firma asimétrica
-**no repudio**|firma asimétrica
-**compartir**|clave simétrica, acuerdo de clave
+Objetivo|Primitiva|Algoritmos
+--|--|--
+**Confidencialidad**|cifrado simétrico|AES, Chacha
+**Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
+**Autenticidad**|firma asimétrica|RSA, ECDSA
+**No repudio**|firma asimétrica|RSA, ECDSA
+**Acordar clave**|acuerdos de clave/encapsulación|ECDH
 
 Esto es lo que iremos viendo a lo largo de este curso
 
@@ -401,7 +401,12 @@ Por supuesto, el atacante puede intentar usar una llave maestra, o robar el PIN 
 -->
 
 ## Tamaños de clave
-<!-- _class: smallest-font with-success -->
+<!-- _class: with-success -->
+
+<style scoped>
+table { font-size: 60%; }
+p {font-size: 75%; }
+</style>
 
 Contraseñas: podemos aumentar el tamaño de clave aumentando tanto el número como el tipo de caracteres
 
@@ -417,9 +422,7 @@ PIN de 4 números|3659|9999|$log_2(1000)\approx13\ bits$|
 
 En criptografía solemos medir la longitud de una clave con **la cantidad de bits que necesitamos para guardarla**
 
-Claves con el mismo tamaño en bits tienen "la misma seguridad": se necesitaría el mismo número de intentos para descifrarlas por fuerza bruta
-
-Medir las claves en bits nos permite comparar "su fortaleza"
+Medir las claves en bits nos permite comparar "su fortaleza": mismo número de bits, misma seguridad
 
 <!--
 
@@ -651,7 +654,7 @@ header: ''
 
 ---
 
-Es muy recomendable tener a mano el [glosario](A1-glosario.html) para recordar los conceptos fundamentales
+Es muy recomendable tener a mano el [glosario](../A1-glosario.html) para recordar los conceptos fundamentales
 
 # ¡Gracias!
 <!-- _class: last-slide -->

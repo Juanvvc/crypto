@@ -368,13 +368,13 @@ Aquí vemos un error provocado porque estamos usando la primitiva defectuosa. La
 
 ## Servicios de seguridad a primitivas
 
-Objetivo|Primitiva
---|--
-**confidencialidad**|cifrado simétrico, cifrado asimétrico
-**integridad**|hash, firma simétrica, firma asimétrica
-**autenticidad**|firma simétrica, firma asimétrica
-**no repudio / trazabilidad**|firma asimétrica
-**compartir clave**|clave simétrica, acuerdo de clave
+Objetivo|Primitiva|Algoritmos
+--|--|--
+**Confidencialidad**|cifrado simétrico|AES, Chacha
+**Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
+**Autenticidad**|firma asimétrica|RSA, ECDSA
+**No repudio**|firma asimétrica|RSA, ECDSA
+**Acordar clave**|acuerdos de clave/encapsulación|ECDH
 
 <!--
 Ya hemos visto unas pocas primitivas. ¿Qué servicios de seguridad ofrece cada una?
