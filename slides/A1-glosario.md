@@ -82,10 +82,13 @@ Por tradición, cuando se describen protocolos criptográficos:
 - **PRNG** (Pseudo Random Number Generation): permite generar una secuencia aparentemente aleatoria para cualquiera que no conozca la semilla
 
 ## Primitivas criptográficas
+<!-- _class: smaller-font -->
 
-- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash. No hay clave.
-- **Clave simétrica**: misma clave $k=k_1=k_2$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
-- **Clave asimétrica**: claves diferentes para cifrar $k_1$ y descifrar $k_2$ un mensaje $m$. Si el emisor solo conoce $k_1$. puede cifrar pero no descifrar. Ejemplo: RSA
+Tipo|Descripción|Caracterísiticas|Uso|Ejemplos
+--|--|--|--|--
+**Sin clave**|El emisor usa sólo el mensaje $m$ como argumento de la función criptográfica|Algoritmos eficientes y muy rápidos|Integridad de los mensajes|SHA256
+**Clave simétrica/secreta**|Misma clave $k=k_1=k_2$ para cifrar y descifrar|Algoritmos eficientes y rápidos|Cifrado de las comunicaciones|AES, Chacha
+**Clave asimétrica/pública**|Claves diferentes para cifrar $k_1$ y descifrar $k_2$ un mensaje $m$|Algoritmos complejos y lentos|Firma digital, autenticación de las partes, acuerdo de claves|RSA, ECDSA, ECDH
 
 ---
 
@@ -93,21 +96,23 @@ Por tradición, cuando se describen protocolos criptográficos:
 
 ## Servicios de seguridad a primitivas
 
-Objetivo|Primitiva
---|--
-**confidencialidad**|cifrado simétrico, cifrado asimétrico
-**integridad**|hash, firma simétrica, firma asimétrica
-**autenticidad**|firma simétrica, firma asimétrica
-**no repudio**|firma asimétrica
-**compartir**|clave simétrica, acuerdo de clave
+Objetivo|Primitiva|Algoritmos
+--|--|--
+**Confidencialidad**|cifrado simétrico|AES, Chacha
+**Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
+**Autenticidad**|firma asimétrica|RSA, ECDSA
+**No repudio**|firma asimétrica|RSA, ECDSA
+**Acordar clave**|acuerdos de clave/encapsulación|ECDH
 
 ## Acrónimos
 
+- [AES](03-simetrica.html): Advanced Encrytion Standard, protocolo estándar de cifrado simétrico.
 - [D-H](04-complejidad.html): Protocolo de acuerdo de claves Diffie-Hellman 
-- [DLP](04-complejidad.html): Problema del logaritmo discreto
+- [ECDH](05-asimetrica.html): Diffie-Hellman sobre curvas elípticas
+- [RSA](05-asimetrica.html): Sistema de firma digital / cifrado asimétrico
+- [ECDSA](05-asimetrica.html): Otro istema de firma digital / cifrado asimétrico (no lo vemos en este curso)
+- [TLS](A2-protocolos.html). Transport Layer Security, protocolo de comunicación que combina en varias etapas cifrado simétrico y asimétrico
 - [HSM](A2-rng.html): Hardware Secure Module
-- [PRNG](03-simetrica.html): Pseudo Random Number Generator
-- [RNG](A2-rng.html): Random Number Generator
 
 # Matemáticas
 <!-- _class: lead -->
