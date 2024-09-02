@@ -108,7 +108,7 @@ Intuitivamente: podemos aprovechar la superposición para probar varias solucion
 
 - La computación cuántica permite resolver [problemas complejos](04-complejidad.html) con una rapidez que no sabemos alcanzar con computación tradicional: **supremacía cuántica**
 - Cuidado: ¡no todos los problemas son complejos!
-- La computación cuántica da un **resultado probabilístico**. Es decir, "esto es una solución, probablemente". Repetir el algoritmo varias veces permite reducir la [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
+- La computación cuántica da un **resultado probabilístico**. Es decir, "esto es una solución, probablemente"
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/6/6e/Complexity_subsets_pspace.svg)
 
@@ -167,7 +167,6 @@ La computación cuántica permite ejecutar algoritmos de búsquedas más rápida
 ![bg left:40%](images/quantum/ibm-q.jpg)
 
 > [Top 20 Quantum Computing Use Cases & Applications in 2024](https://research.aimultiple.com/quantum-computing-applications/)
-> [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw)
 
 
 <!-- En la imagen, IBM-Q quantum computer en la conferencia Supercomputing 18 de Dallas, Texas
@@ -176,19 +175,19 @@ Para pensar: ¿realmente necesitamos resolver algoritmos de optimización tan r�
 -->
 
 ## Algoritmos ejecutados por computadoras cuánticas
-<!-- _class: with-success -->
+<!-- _class: with-info -->
 
 - [Algoritmo de Grover](https://es.wikipedia.org/wiki/Algoritmo_de_Grover) (1996)
 - [Algoritmo de Shor](https://es.wikipedia.org/wiki/Algoritmo_de_Shor) (1999)
 
-Son algoritmos probabilísticos: dan la respuesta correcta con una cierta probabilidad, y la probabilidad de fallo puede ser disminuida repitiendo el algoritmo
-
 Cuando se implementen estos algoritmos en una computadora cuántica, cambiarán totalmente la criptografía actual
+
+Cuando tengamos un computador cuántico... ¡ya sabemos cómo usarlo!
 
 <!-- Observa: ya teníamos algoritmos antes de tener el primer computador cuántico! -->
 
 ## Algoritmo de Grover
-<!-- _class: with-warning -->
+<!-- _class: with-info -->
 
  Búsqueda exahustiva en una secuencia no ordenada con mejora cuadrática. 
  
@@ -228,23 +227,39 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 
 -->
 
-## Supremacía cuántica
+## Inconvenientes de las computación cuántica
+
+- Solo mejora algunos problemas, otros los calculará tan rápido como la tradicional
+- Es muy cara
+- Decoherencia: un qbit es muy sensible al entorno y puede perder sus propiedades cuánticas
+- Muchos qbits hacen el sistema inestable
+- La respuesta es probabilística: [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
+- No se ha demostrado que haya supremacía / ventaja cuántica
+
+> [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw) Sabine Hossenfelder, Junio 2024
+> [What Are The Remaining Challenges of Quantum Computing?](https://thequantuminsider.com/2023/03/24/quantum-computing-challenges/) Matt Swayne.  March 24, 2023	
+
+
+## Supremacía / ventaja cuántica
 <!-- _class: with-info -->
 
-Objetivo: que todo esto deje de ser teórico
+Demostrar de forma práctica que un computador cuántico puede resolver un problema más rápidamente que un computador tradicional
 
-**Supremacía cuántica**: un computador cuántico que resuelva un problema real más rápidamente que un computador tradicional
+Cada poco tiempo alguien anuncia que ha alcanzado la [**supremacía cuántica**](https://es.wikipedia.org/wiki/Supremac%C3%ADa_cu%C3%A1ntica)... con condiciones [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
 
-Cada poco tiempo alguien anuncia que ha alcanzado la supremacía cuántica... con muchas condiciones que no lo hacen práctico [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
+Pero aún no se ha alcanzado para los algoritmos de Shor o Grover
 
-El consenso general es que aún no hemos alcanzado la supremacía cuántica real, pero ese día acabará llegando
+El consenso general es que aún no se ha demostrado la supremacía cuántica, pero ese día acabará llegando
 
 ![bg right w:100%](images/quantum/supremacia.webp)
+
+> [It’s been 20 years since “15” was factored on quantum hardware](https://www.ibm.com/quantum/blog/factor-15-shors-algorithm), Robert Davis. Enero 2022
 
 # Criptografía Post-cuántica
 <!-- _class: lead -->
 
 ## Efectos de la computación cuántica en criptografía clásica
+<!-- _class: with-warning -->
 
 Algoritmo|Tipo|Algoritmo|Defensa
 --|--|--|--
@@ -253,6 +268,8 @@ SHA|Función de hash|Grover|⚠ Tamaño de salida x1.5
 RSA|Asimétrico, firmas|Shor|☠ Rota, reemplazar
 D-H|Asimétrico, intercambio de claves|Shor|☠ Rota, reemplazar
 Elípticas|ECDH, ECDSA...|Shor|☠ Rota, reemplazar
+
+Aunque no sepamos cuándo llegará el computador cuántico, ya tenemos que preparar los nuevos algoritmos criptográficos que usaremos
 
 <!--
 Recuerda:
@@ -265,32 +282,40 @@ Recuerda:
 Aunque la criptografía simétrica resistirá, necesitamos sustituir la criptografía asimétrica
 -->
 
+## Criptografía post-cuántica
 
-## ¿Cuándo tendremos una computadora cuántica útil?
+<style scoped>
+p:first-of-type {
+    border-radius: 0.15em;
+    border: 2px solid #73AD21aa;
+    background-color: #73AD2133;
+    padding: 0.5em 1em;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+</style>
 
-[![center w:27em](images/quantum/predicciones.png)](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
+Algoritmos criptográficos que tendrán que usar **las computadoras clásicas** cuando existan las computadoras cuánticas
 
-> [2023 Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/), Global Risk Institute, diciembre 2023
+Observa:
 
-## Store Now, Decrypt Later
-
-"Guarda ahora los datos, que los descifraremos cuando llegue la computación cuántica"
-
-- https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/harvest-now-decrypt-later-attacks-pose-security-concern-quantum-computing.html
-- https://www.siliconrepublic.com/enterprise/quantum-apocalypse-store-now-decrypt-later-encryption
-
-## ¿Qué haremos cuando llegue la computación cuántica?
-<!-- _class: with-success -->
-
-- Doblar las longitudes de la clave para simétrica y hash
-- Nuevo intercambio de claves post-cuántico, para sustituir a D-H y RSA
-- Nuevo sistemas de firma digital post-cuánticos, para sustituir a RSA y ECDSA
-
-**Criptografía post-cuántica**: sistemas criptográficos que tendrán que usar **las computadoras clásicas** cuando existan las computadoras cuánticas
+- Estos algoritmos criptográficos ya existen y **sustituirán** a RSA, ECDH o ECDSA
+- Los ejecutarán los computadores tradicionales, no las cuánticas
+- Los puedes usar ya en tus protocolos
+- Los tienes que empezar a usar antes de que llegue la computación cuántica
 
 <!--
 Fíjate bien: llamamos criptografía post-cuántica a la criptografía que ejecutarán las computadoras clásicas, no las cuánticas
 -->
+
+## ¿Cuándo tiempo nos queda?
+
+[![center w:25em](images/quantum/predicciones.png)](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
+
+En realidad, no nos queda tiempo: "Store now, decrypt later" [1](https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/harvest-now-decrypt-later-attacks-pose-security-concern-quantum-computing.html), [2](https://www.siliconrepublic.com/enterprise/quantum-apocalypse-store-now-decrypt-later-encryption)
+
+> [2023 Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/), Global Risk Institute, diciembre 2023
 
 ## Concurso del NIST
 
@@ -309,8 +334,8 @@ EL intercambio de claves clásico podría hacerse acordando una clave (Diffie-He
 
 El NIST ya ha publicado (agosto de 2024) los estándares post-cuánticos: 
 
-- **ML-KEM**: *Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf). Estándar de intercambio de clave basado en CRYSTALS-Kyber
-- **ML-DSA**: *Module-Lattice-Based Digital Signature Algorithm*. [FIPS 204](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf). Estándar principal para firmas digitales post-cuánticas. Usa el algoritmo CRYSTALS-Dilithium
+- **ML-KEM**: *Module-Lattice-Based Key-Encapsulation Mechanism*. [FIPS 203](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf). Estándar de intercambio de clave basado en CRYSTALS-Kyber. Reemplaza ECDH.
+- **ML-DSA**: *Module-Lattice-Based Digital Signature Algorithm*. [FIPS 204](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf). Estándar principal para firmas digitales post-cuánticas. Usa el algoritmo CRYSTALS-Dilithium. Reemplaza RSA, ECDSA
 - **SLH-DSA**: *Stateless Hash-Based Digital Signature Algorithm*. [FIPS 205](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf). Basado en Sphincs+. Es un "backup" para ML-DSA
 
 ![bg right:40% w:100%](images/quantum/nist-final.png)
@@ -333,6 +358,14 @@ El NIST ya ha publicado (agosto de 2024) los estándares post-cuánticos:
 > [CRYSTALS-Kyber](https://pq-crystals.org/kyber/data/kyber-specification-round3-20210804.pdf). Roberto Avanzi, Joppe Bos, Léo Ducas, Eike Kiltz, Tancrède Lepoint, Vadim Lyubashevsky, John M. Schanck, Peter Schwabe, Gregor Seiler, Damien Stehlé. Agosto 4, 2021
 > [Learning with errors: Encrypting with unsolvable equations](https://www.youtube.com/watch?v=K026C5YaB3A) Chalk Talk, 2023. Explicación sencilla
 > [CRYSTALS Kyber : The Key to Post-Quantum Encryption](https://medium.com/@hwupathum/crystals-kyber-the-key-to-post-quantum-encryption-3154b305e7bd), Udara Pathum, 2024. Explicación completa
+
+<!--
+A continuación vamos a explicar muy por encima en qué consiste el problema del aprendizaje con errores, dejándo detalles fuera.
+
+El primer enlace es la propuesta que se envió al NIST, el segundo enlace es una explicación sencilla en la que hemos basado esta sección, el tercer enlace incluye una versión más completa
+
+La intención de esta sección es introducir y entender aproximadamente en qué se basa este sistema, no entender todos los detalles
+-->
 
 ## Aprendizaje SIN errores
 <!-- _class: two-columns -->
@@ -420,7 +453,7 @@ El receptor descifra "0" si el error está cerca de 0 y "1" si el error está ce
 Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
 -->
 
-# Implementación del a criptografía post-cuántica
+# Implementación de la criptografía post-cuántica
 <!-- _class: lead -->
 
 ## Problemas matemáticos en los que se basa la criptografía post-cuántica
@@ -552,6 +585,7 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 - Signal: https://signal.org/blog/pqxdh/
 - Amazon AWS: https://aws.amazon.com/security/post-quantum-cryptography/
 - Google: https://security.googleblog.com/2024/08/post-quantum-cryptography-standards.html
+- Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
 
 # Resumen y referencias
 <!-- _class: lead -->
