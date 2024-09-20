@@ -14,11 +14,6 @@ transition: fade
     /* You can add custom style here. VSCode supports this.
     Other editor might need these custom code in
     the YAML header: section: | */
-	/* section header { display: none; } */
-	/* section footer { display: none; } */
-    section.bigger-font {
-        font-size: 300%
-    }
 </style>
 
 # Criptografía Post-cuántica
@@ -135,13 +130,13 @@ Por eso es poco probable que veamos computadoras cuánticas en nuestros hogares:
 Es poco probable que tengamos una computadora cuántica en nuestros escritorios
 
 ## La computación cuántica NO ES criptografía cuántica
-<!-- _class: with-warning -->
+<!-- _class: smaller-font, with-warning -->
 
 - La **criptografía cuántica** usa la física cuántica para crear un canal seguro
 - ¡No es necesario tener un computador cuántico para usar criptografía cuántica!
 - Ejemplo: [distribución de claves cuántica](https://www.cse.wustl.edu/~jain/cse571-07/ftp/quantum/) (QKD)
 
-![center w:25em](images/quantum/q-key-distribution.png)
+![center w:20em](images/quantum/q-key-distribution.png)
 
 En esta clase no hablaremos de criptografía cuántica sinó de la post-cuántica, que definiremos más adelante
 
@@ -243,8 +238,8 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 > [What Are The Remaining Challenges of Quantum Computing?](https://thequantuminsider.com/2023/03/24/quantum-computing-challenges/) Matt Swayne.  March 24, 2023	
 
 
-## Supremacía / ventaja cuántica
-<!-- _class: with-info -->
+## Supremacía/ventaja cuántica
+<!-- _class: smaller-font -->
 
 Demostrar de forma práctica que un computador cuántico puede resolver un problema más rápidamente que un computador tradicional
 
@@ -299,7 +294,7 @@ RSA|Asimétrico, firmas|Shor|☠ Rota, reemplazar
 D-H|Asimétrico, intercambio de claves|Shor|☠ Rota, reemplazar
 Elípticas|ECDH, ECDSA...|Shor|☠ Rota, reemplazar
 
-Aunque no sepamos cuándo llegará el computador cuántico, ya tenemos que preparar los nuevos algoritmos criptográficos que usaremos
+Aunque no sepamos cuándo llegará el computador cuántico, ya tenemos que estar preparados y cambiar los algoritmos actuales
 
 <!--
 Recuerda:
@@ -464,6 +459,7 @@ $$
 El receptor descifra "0" si el error está cerca de 0 y "1" si el error está cerca de la mitad del módulo. Hay una pequeña probabilidad de que el error sera mayor que la mitad del módulo y el descifrado sea incorrecto
 
 ## Uso y comparación de D-H
+<!-- _class: smaller-font -->
 
 - De esta manera, bit a bit, un emisor puede enviar qué clave AES se utiliza el resto de la comunicación: encapsulación de clave
 - Valores reales: 256 variables, módulo 3329
@@ -543,6 +539,8 @@ Dilithium2|x40|x40|x5|x0.5
 Falcon512|x30|x10|x8|x0.5
 SPHINCS+128|x1|x100|x500|x7
 
+Observa: buscamos las curvas elípticas para conseguir una criptografía asimétrica eficiente, y los nuevos protocolos son aún más ineficientes
+
 > Fuente: charla "Criptografía postcuántica: presente y futuro" de Adrián Ranea en Jornadas CCN-CERT 2023
 
 ## Tiempo de transición
@@ -560,7 +558,7 @@ La recomendación es empezar ya con la transición
 
 ## Retos de implementación
 
-- Los nuevos algoritmos no están soportados por sistemas antiguos
+- Los nuevos algoritmos no están soportados por sistemas antiguos: servidores, clientes, hardware...
 - No son tan eficientes como los algoritmos clásicos
 - Los nuevos algoritmos son más complejos, y eso también significa que son más difícil de implementar  y proteger
     - Retículos: Fallos en el desencriptado
@@ -609,6 +607,7 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 -->
 
 ## Ejemplos de migración
+<!-- _class: with-success -->
 
 AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía post-cuántica
 
@@ -616,22 +615,28 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 - Amazon AWS: https://aws.amazon.com/security/post-quantum-cryptography/
 - Google: https://security.googleblog.com/2024/08/post-quantum-cryptography-standards.html
 - Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
+- [Chrome soporta ML-KEM desde la versión 131](https://security.googleblog.com/2024/09/a-new-path-for-kyber-on-web.html) (noviembre 2024)
+
+No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica
 
 # Resumen y referencias
 <!-- _class: lead -->
 
 ## Resumen
+<!-- _class: smaller-font -->
 
 - La computación cuántica permite resolver ciertos problemas más rápidamente de lo que sabemos hacerlo con computación tradicional
-- Cuando llegue:
-    - La criptografía simétrica actual deberá doblar el tamaño de las claves usadas
-    - Las funciones de hash deberán casi doblar los bits de salida
-    - La criptografía asimétrica (intercambio de claves y firmado) estará obsoleta
-- **Criptografía post-cuántica**: sistemas criptográficos que usarán **las computadoras clásicas** cuando existan las computadoras cuánticas
+- Cuando llegue la computación cuántica:
+    - AES, ChaCha, criptografía simétrica: deberá **doblar el tamaño de las claves usadas**
+    - SHA, funciones de hash: deberán **casi doblar los bits de salida**
+    - RSA, D-H, curvas elípticas, criptografía asimétrica, intercambio de claves y firmado: **obsoleta**, hay que buscar alternativas
+- **Criptografía post-cuántica**: sistemas criptográficos que usarán **las computadoras clásicas** para protegerse de las hipotéticas computadoras cuánticas
 - Agosto de 2024: el NIST ya ha estandarizado los algoritmos post-cuánticos que recomienda, y se espera que el resto de agencias tengan opiniones similares
-- El periodo de transición puede ser muy largo, y se recomienda empezar ya la migración a criptografía post-cuántica
+- No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica
+- El periodo de transición puede ser muy largo y se recomienda empezar ya la migración a criptografía post-cuántica
 
 ## Referencias
+<!-- _class: smaller-font -->
 
 Criptografía post-cuántica:
 

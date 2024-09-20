@@ -104,14 +104,14 @@ Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese
 Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
 ## Protocolo Diffie-Hellman, autenticado
-<!-- _class: smallest-font -->
+<!-- _class: smaller-font -->
 
-Igual que el D-H que ya conocemos, pero firmando los mensajes:
+Igual que el D-H que ya conocemos pero firmando los mensajes:
 
 1. Alice y Bob tienen un par de claves RSA $(PK_A, SK_A)$ y $(PK_B, SK_B)$,  y se intercambian $PK_A$ y $PK_B$
 1. *Alice* y *Bob* acuerdan $g$ y $p$ primos entre sí
 1. Alice escoge $a$ y Bob escoge $b$ (en secreto)
-1. Se envían entre ellos:
+1. Se envían entre ellos mensajes firmados digitalmente:
     - $Alice \rightarrow Bob: A=g^{a} \mod p, sign_A=E(A, SK_A)$
     - $Bob \rightarrow Alice: B=g^{b} \mod p, sign_B=E(B, SK_B)$
 1. Verifican la firma de cada lado:
@@ -123,12 +123,16 @@ Igual que el D-H que ya conocemos, pero firmando los mensajes:
     - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
 1. Y usan $s$ como clave de cifrado un algoritmo simétrico
 
+> [Authentication and Authenticated Key Exchanges](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.59.6682), Whitfield Diffie and Paul C. Van Oorschot and Michael J. Wiener, 1992.
+
+
 <!--
 En el paso 2, recuerda que, en la realidad, Alice y Bob no usarán g y p cualquiera sino números conocidos que están en los estándares actuales y que sabemos que funcionan correctamente
 
 Es decir: Alice y Bob firma los parámtros A y B y, si la firma verifica, Bob sabe que está hablando con Alice y al revés.
 
 Por supuesto, esto mismo se puede hacer con Diffie-Hellman sobre curvas elípticas
+
 -->
 
 ## Cifrado híbrido: HTTPS
@@ -226,13 +230,13 @@ Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de at
     - No es práctica en la actualidad
 - **Gestión manual**: guardamos una lista de claves públicas. Ejemplo: SSH
 - **Certificados**
-    - PGP: gestión descentralizada (Web of trust)
+    - PGP: gestión descentralizada ([*web of trust*](https://en.wikipedia.org/wiki/Web_of_trust))
     - PKI/X.509: gestión centralizada
 
 ![bg left:40%](images/auth/identities.png)
 
 ## Gestión manual: SSH
-<!-- _class: smaller-font -->
+<!-- _class: smallest-font -->
 
 - El cliente genera un par de claves pública/privda. Puede generar tantas como quiera
 - El cliente guarda cifrada la clave privada y la lista de claves públicas de los servidores en que confía

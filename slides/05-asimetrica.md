@@ -241,7 +241,7 @@ Problema: resuelve $m$ dado $g$, $p$ y $c$ en la ecuación $g^m \mod p = c$
 $g$ también tiene restricciones, aunque normalmente $g=2$ ó $g=3$
 
 ## Protocolo Diffie-Hellman, revisitado
-<!-- _class: smaller-font -->
+<!-- _class: smallest-font -->
 
 Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
 
@@ -405,7 +405,7 @@ Teniendo en cuenta eso, para calcular $m$ a partir de $c$, tomando un atajo dand
 $$
 \begin{aligned}
 c & \equiv m^{e} \pmod n \\
-m & \equiv c^{\color{red}d} \pmod n \qquad \rightarrow m \equiv m^{e\color{red}d} \pmod n
+m & \equiv c^d \pmod n \qquad \rightarrow m \equiv m^{ed} \pmod n
 \end{aligned}
 $$
 
@@ -415,7 +415,7 @@ $$ed = t \phi(n) + 1$$
 $$ed \equiv 1 \bmod{\phi(n)}$$
 $$d \equiv e^{-1} \bmod{\phi(n)}$$
 
-Es decir, $d$ tiene que ser el inverso de $e$ en el anillo cíclico $\Z_{\phi(n)}$
+Es decir, $d$ tiene que ser el inverso de $e$ en el anillo cíclico $\mathbb{Z}_{\phi(n)}$
 
 $d$ solo existe si $e$ y $\phi(n)$ no tienen factores en común (son coprimos)
 
@@ -431,15 +431,14 @@ Cuando añadimos aritmética modular a los enteros, sí que pueden haber inverso
 $$3 \cdot 7 \mod 10 = 1$$
 $$9 \cdot 9 \mod 10 = 1$$
 
-3 es el inverso de 7 en el anillo cíclico $\Z_{10}$, 9 es inverso de sí mismo en el anillo cíclico $\Z_{10}$
+3 es el inverso de 7 en el anillo cíclico $\mathbb{Z}_{10}$, 9 es inverso de sí mismo en el anillo cíclico $\mathbb{Z}_{10}$
 
-6 no tiene inverso en el anillo cíclico $\Z_{10}$. Esto es porque 6 y 10 tienen factores comunes (no son coprimos)
+6 no tiene inverso en el anillo cíclico $\mathbb{Z}_{10}$. Esto es porque 6 y 10 tienen factores comunes (no son coprimos)
 
-[Existen algoritmos eficientes](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Modular_integers) para calcular el inverso de un número en un anillo cíclico $\Z_\phi$. Es decir, el cálculo de $d = e^{-1} \mod \phi$ dado $e$ y $\phi$ es posible y eficiente
+[Existen algoritmos eficientes](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Modular_integers) para calcular el inverso de un número en un anillo cíclico $\mathbb{Z}_\phi$. Es decir, el cálculo de $d = e^{-1} \mod \phi$ dado $e$ y $\phi$ es posible y eficiente
 
 
 ## El protocolo RSA: generación de par de claves
-<!-- _class: smaller-font -->
 
 1. Escoge dos números $p$, $q$ primos
 1. Calcula: $n = pq$. Su número de bits es el **tamaño de clave**
@@ -755,11 +754,9 @@ La situación quizá cambie en el futuro
 ## Computación cuántica
 <!-- _class: smaller-font -->
 
-- 1994: [algoritmo de Shor](https://es.wikipedia.org/wiki/Algoritmo_de_Shor): una máquina cuántica resuelve con eficacia la factorización de números enteros grandes.
-   - Recuerda: en el Tema 4, solo nos referíamos a los PCs "tradicionales", llamados "de Turing"
+- La computación cuántica no rompe la criptografía simétrica AES, ChaCha... aunque sí que exige que se usen claves el doble de largas: mínimo 256 bits para AES
 - La computación cuántica **impedirá utilizar todos los algoritmos asimétricos actuales**: RSA, DSA, D-H... y también sus versiones con curvas elípticas
-   - Recuerda: la computación cuántica no rompe la criptografía simétrica AES, ChaCha... aunque sí que exige que se usen claves el doble de largas: mínimo 256 bits para AES
-- Se están buscando algoritmos nuevos que sean resistentes a la computación cuántica: **criptografía post-cuántica**
+- Ya existen algoritmos nuevos para los sistemas actuales resistentes a una hipotética computación cuántica. Tema dedicado: [Criptografía post-cuántica](10-postcuantica.html)
 
 > https://cso.computerworld.es/cibercrimen/la-amenaza-cuantica-la-computacion-cuantica-y-la-criptografia
 > https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file
@@ -783,6 +780,7 @@ La situación quizá cambie en el futuro
 - Ejemplos modernos: ECDH, ECDSA, que son adaptaciones de D-H y DSA sobre curvas elípticas
 
 ## Referencias
+<!-- _class: smaller-font -->
 
 - [Nuevas direcciones en la criptografía](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) Whitfield Diffie y Martin Hellman, 1976
 - [Asymmetric Encryption - Simply explained](https://www.youtube.com/watch?v=AQDCe585Lnc)

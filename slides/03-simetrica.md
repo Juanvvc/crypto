@@ -268,7 +268,6 @@ Recordatorio: este es el esquema para hacer un cifrador de flujo.
 -->
 
 ## Generadores de números aleatorios
-<!-- _class: small-text -->
 
 La función *PRNG* (*Pseudo Random Number Generator*) es un generador de bits que tiene como entrada una **semilla** (que será la clave de cifrado $k$) y tiene como salida el flujo de bits que aplicaremos sobre el mensaje para cifrarlo con *XOR*
 

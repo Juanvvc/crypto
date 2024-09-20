@@ -339,17 +339,15 @@ Alice debería buscar relays en países bien diferenciados, y quizá aquellos en
 <!-- _class: smaller-font -->
 
 - Alice escoge un nodo $3$ para que reenvíe un mensaje a Bob, y lo cifra con la clave pública de $3$: $m_3=E_{pk3}(Bob|MSG)$
-    - Solo $3$ puede descifrar $m_3$, ya que solo $3$ tiene su clave privada.
-    - $3$ sabe que el mensaje es para Bob, y conoce el mensaje a menos que Alice use TLS para comunicarse con Bob, lo que es **obligatorio**.
-    - Si Alice le enviase $m_3$ directamente a Bob, Bob sabría que el mensaje viene de Alice
-- Para evitar que $3$ la identifique, Alice envía $m_3$ a $2$ diciendo que se lo reenvía a $3$: $m_2=E_{pk2}(3|m_3)=E_{pk2}(3|E_{pk3}(Bob|MSG))$
+    - Solo $3$ puede descifrar $m_3$
+    - $3$ sabe que el mensaje es para Bob así que se lo reenvía
+    - Bob recibe un mensaje de $3$ y no sabe quién lo envió
+- Para evitar que $3$ la identifique, Alice envía $m_3$ a $2$ pidiendo que se lo reenvíe a $3$: $m_2=E_{pk2}(3|m_3)=E_{pk2}(3|E_{pk3}(Bob|MSG))$
     - $2$ sabe que el mensaje viene de Alice, pero no sabe a dónde va: solo sabe que el siguiente paso es $3$
     - Nadie más que $2$ puede descifrar $m_2$
 - Alice puede hacer esto varias veces para mejorar su anonimato: Alice envía un mensaje $m_1=E_{pk1}(2|m_2)$ a $1$ para que lo abra y se lo reenvíe a $2$, que lo abrirá y lo reenviará a $3$, que lo abrirá y lo reenviará a Bob.
 
 ![bg right:30%](https://upload.wikimedia.org/wikipedia/commons/8/8e/Nina_Rusa._Mu%C3%B1eca_Rusa.JPG)
-
-> https://en.wikipedia.org/wiki/Onion_routing
 
 <!--
 Una explicación más detallada de la transparencia anterior: el enrutamiento onion es como un ogro, tiene capas. También es como las muñecas rusas, una dentro de otra.

@@ -368,9 +368,8 @@ Problema: encuentra $m$
 Vamos a ver con más detalles el problema del logaritmo discreto, porque es el que se usa en casi todos los sistemas que veremos a partir de ahora
 -->
 
-
 # $4=5^m \mod 17$
-<!-- _class: two-columns center smaller-font with-header center -->
+<!-- _class: two-columns center smallest-font center -->
 
 $m$|$c = 5 ^ m \mod 17$
 --|--
@@ -394,7 +393,7 @@ $m$|$c = 5 ^ m \mod 17$
 15|7
 16|1
 
-¿Cuánto vale $m$? Solo podemos hacerlo por fuerza brita, probando todos los valores de m
+¿Cuánto vale $m$? Solo podemos calcularlo por fuerza bruta, probando valores de m
 
 <!--
 Fijaos: se están mapeando todos los números de 1 a 17 en otros números de 1 a 17 de forma "aleatoria". Esto es un "grupo cíclico"
@@ -408,16 +407,16 @@ Eso se parece mucho a una permutación pseudoaleatoria, de las que usábamos en 
 La transparencia anterior muestra un ejemplo de grupo cíclico:
 
 $$
-\Z_{p}^{*} = \{g^m \mod p\}
+\mathbb{Z}_{p}^{*} = \{g^m \mod p\}
 $$
 
 - $p$ y $g$ tienen que ser primos relativos: no tienen factores comunes
 - Llamamos generador al número $g$, y $p$ es el orden
-- $\Z_{p}^{*}$ contiene todos los números entre 1 y $p$ una sola vez
+- $\mathbb{Z}_{p}^{*}$ contiene todos los números entre 1 y $p$ una sola vez
 
 El "aspecto" es el de una permutación pseudoaleatoria del cifrado de bloque, con $m$ el mensaje en claro y $c=g^m \mod p$ el cifrado
 
-Dado un mensaje cifrado $c \in \Z_{p}^{*}$ y conocido $g$ y $p$, decidir si el mensaje en claro $m'$ es el mensaje original es tan complejo como resolver el problema del logaritmo discreto.
+Dado un mensaje cifrado $c \in \mathbb{Z}_{p}^{*}$ y conocido $g$ y $p$, decidir si el mensaje en claro $m'$ es el mensaje original es tan complejo como resolver el problema del logaritmo discreto.
 
 > https://en.wikipedia.org/wiki/Cyclic_group
 
@@ -498,7 +497,7 @@ Se asume que $g^{ab}$ es computacionalmente difícil de calcular para el atacant
 Recuerda: sabemos que el problema del logaritmo discreto es NP, pero no sabemos si también es P y por tanto y fácil de resolver. Sospechamos muchísimo que no es P y que el algoritmo más rápido posible tomará un tiempo exponencial con el tamaño de la clave. Pero no estamos *matemáticamente* seguros. ¿es P=NP o no? No lo sabemos.
 -->
 
-## Protocolo
+## Protocolo D-H
 <!-- _class: smaller-font -->
 
 Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
@@ -582,7 +581,7 @@ D-H tiene cuatro parámetros: los secretos $a$, $b$ y los públicos $g$, $p$
 ¡Estas son muchas condiciones! ¿Cómo podemos escoger $g$ y $p$ bien?
 
 ---
-<!-- _class: smaller-font -->
+<!-- _class: smallest-font -->
 
 Afortunadamente no tenemos que escogerlos:
 
@@ -639,6 +638,7 @@ Compara, para AES: $\|k\| = 128$
 > https://www.keylength.com/en/3/
 
 ## Uso de la clave D-H con AES o Chacha: Función derivación de clave KDF
+<!-- _class: smaller-font -->
 
 El número secreto generado por el intercambio Diffie-Hellman no debe utilizarse como clave en protocolos de cifrado simétrico AES o Chacha ChaCha20: no es perfectamente uniforme
 

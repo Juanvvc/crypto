@@ -15,9 +15,7 @@ theme: marp-viu
 	/* section footer { display: none; } */
 </style>
 
-
-
-# Cybersec and Ransomware
+# Cybersecurity and Ransomware
 <!-- _class: first-slide -->1. [Examples: Venus, Conti, Babuk, LockBit](#3)
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
@@ -264,7 +262,7 @@ Notice:
 
 ## The infection chain
 
-![center](images/ransomware/infection-chain.png)
+![center w:35em](images/ransomware/infection-chain.png)
 
 > https://www.trendmicro.com/en_us/research/21/i/examining-the-cring-ransomware-techniques.html
 > Steps standarized in the Mitre Attack Matrix: https://attack.mitre.org/
@@ -272,7 +270,7 @@ Notice:
 ## Ransomware-as-a-service
 <!-- _class: smaller-font -->
 
-![center w:40em](images/ransomware/raas.png)
+![center w:35em](images/ransomware/raas.png)
 
 - Ransomware as a service (RaaS) is a subscription-based model that enables affiliates to use already-developed ransomware tools to execute ransomware attacks
 - Affiliates earn a percentage of each successful ransom payment
@@ -290,7 +288,7 @@ Por ejemplo: nosotros hemos detectado el "modus operandi" asociado a APT41 varia
 
 ![](https://documents.trendmicro.com/images/TEx/articles/RaaS9lgHDuB.jpg)
 
-- Ransomware is created by a central group of **developers**. They provide:
+- The ransomware is created by a central group of **developers**. They provide:
     - the "brand name"
     - "the infrastruture"
     - documentation
