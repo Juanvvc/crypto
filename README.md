@@ -1,26 +1,34 @@
 # Introducción a la criptografía
 
-Transparencias en
+Presentación en
 [juanvvc.github.io/crypto/](https://juanvvc.github.io/crypto/index.html),
 pero puedes acceder directamente a cada capítulo seleccionando los enlaces en
 el apartado "Contenido".
 
 ## Contenido
 
-- [Introducción](https://juanvvc.github.io/crypto/index.html)
-- [Principios básicos](https://juanvvc.github.io/crypto/01-conceptos.html)
+1. [Introducción](https://juanvvc.github.io/crypto/index.html)
+1. [Principios básicos](https://juanvvc.github.io/crypto/01-conceptos.html)
     - Anexo: [Glosario](https://juanvvc.github.io/crypto/A1-glosario.html) 
-- [Criptografía clásica](https://juanvvc.github.io/crypto/02-historia.html)
-- [Cifrado simétrico o de clave secreta: ChaCha y AES](https://juanvvc.github.io/crypto/03-simetrica.html)
+1. [Criptografía clásica](https://juanvvc.github.io/crypto/02-historia.html)
+1. [Cifrado simétrico o de clave secreta: ChaCha y AES](https://juanvvc.github.io/crypto/03-simetrica.html)
     - Anexo: [RNG y HSM](https://juanvvc.github.io/crypto/A2-rng.html)
-- [Teoría de la complejidad y Diffie-Hellman](https://juanvvc.github.io/crypto/04-complejidad.html)
-- [Cifrado asimétrico o de clave pública: RSA](https://juanvvc.github.io/crypto/05-asimetrica.html)
-- [Funciones de hash y *blockchain*](https://juanvvc.github.io/crypto/06-hashes.html)
-- [TLS y *Public Key Infrastructure*](https://juanvvc.github.io/crypto/07-pki.html)
-	- [Anexo: TLS en detalle](https://juanvvc.github.io/crypto2/A1-glosario.html)
-- [Ransomware](https://juanvvc.github.io/crypto/08-ransomware.html)
-- [Esteganografía](https://juanvvc.github.io/crypto/09-esteganografia.html)
-- [Criptografía Post-cuántica](https://juanvvc.github.io/crypto/10-postcuantica.html)
+1. Cifrado asimétrico o de clave pública
+    - [Teoría de la complejidad y Diffie-Hellman](https://juanvvc.github.io/crypto/04-complejidad.html)
+    - [RSA y Curvas elípticas](https://juanvvc.github.io/crypto/05-asimetrica.html)
+1. [Funciones de hash](https://juanvvc.github.io/crypto/06-hashes.html)
+	- Anexo: [Blockchain](https://juanvvc.github.io/crypto/A3-blockchain.html)
+1. [*Public Key Infrastructure*](https://juanvvc.github.io/crypto/07-pki.html)
+	- Anexo: [Firma digital](https://juanvvc.github.io/crypto/A4-firmadigital.html)
+    - Anexo: [TLS en detalle](https://juanvvc.github.io/crypto/A2-protocolos.html)
+1. [Autenticación](https://juanvvc.github.io/crypto/11-autenticacion.html)
+    
+1. [Comunicationes anónimas](https://juanvvc.github.io/crypto/12-anonimato.html)
+1. Criptografía ofensiva:
+    - [Business Email Compromise](https://juanvvc.github.io/crypto/08-ransomware.html)
+    - [Ransomware](https://juanvvc.github.io/crypto/08-ransomware.html)
+1. [Esteganografía](https://juanvvc.github.io/crypto/09-esteganografia.html)
+1. [Criptografía Post-cuántica](https://juanvvc.github.io/crypto/10-postcuantica.html)
 
 Puedes crear la versión PDF de las transparencias "imprimiendo a PDF" en Google Chrome.
 
@@ -77,6 +85,6 @@ Commons](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecomm
 
 Copyright © 2020-2024 [Juan Vera del Campo](https://github.com/juanvvc)
 
-Basado en transparencias Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig/crypto)
+Basado en curso Copyright © 2016-2017 [Jordi Íñigo Griera](https://github.com/jig/crypto)
 
 
