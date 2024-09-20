@@ -39,7 +39,7 @@ Use: ![center](image.png) */div#\:\$p>svg>foreignObject>section img[alt~=center]
 
 
 /* lead class: first slide in a section. Use h1 as header.
-Use: <!-- _class: lead --> */div#\:\$p>svg>foreignObject>section.lead{background-color:var(--main-color);text-align:left;color:white;padding-top:15em}div#\:\$p>svg>foreignObject>section.lead :is(h1,marp-h1),div#\:\$p>svg>foreignObject>section.lead :is(h2,marp-h2),div#\:\$p>svg>foreignObject>section.lead a,div#\:\$p>svg>foreignObject>section.lead p{color:white;padding:0.5em;background-color:rgba(17,138,207,0.8);margin-bottom:0}div#\:\$p>svg>foreignObject>section.lead footer,div#\:\$p>svg>foreignObject>section.lead header,div#\:\$p>svg>foreignObject>section.lead:after{
+Use: <!-- _class: lead --> */div#\:\$p>svg>foreignObject>section.lead{background-color:var(--main-color);text-align:left;color:white;padding-top:15em}div#\:\$p>svg>foreignObject>section.lead :is(h1,marp-h1),div#\:\$p>svg>foreignObject>section.lead :is(h2,marp-h2),div#\:\$p>svg>foreignObject>section.lead a,div#\:\$p>svg>foreignObject>section.lead p{color:white;padding:0.5em;background-color:var(--main-color);margin-bottom:0}div#\:\$p>svg>foreignObject>section.lead footer,div#\:\$p>svg>foreignObject>section.lead header,div#\:\$p>svg>foreignObject>section.lead:after{
     /* hide header, footer and pagination */display:none}div#\:\$p>svg>foreignObject>section.lead:before{
     /* logo in white */filter:sepia(100%) brightness(2) saturate(0)}
 
@@ -55,7 +55,7 @@ Use: <!-- _class: lead2 --> */div#\:\$p>svg>foreignObject>section.lead2 :is(h1,m
 
 
 /* first slide (main title). Use h1 as header.
-Use: <!-- _class: first-slide --> */div#\:\$p>svg>foreignObject>section.first-slide{text-align:center}div#\:\$p>svg>foreignObject>section.first-slide :is(h1,marp-h1),div#\:\$p>svg>foreignObject>section.first-slide :is(h2,marp-h2),div#\:\$p>svg>foreignObject>section.first-slide a{color:var(--darker-color)}div#\:\$p>svg>foreignObject>section.first-slide footer,div#\:\$p>svg>foreignObject>section.first-slide header,div#\:\$p>svg>foreignObject>section.first-slide:after{
+Use: <!-- _class: first-slide --> */div#\:\$p>svg>foreignObject>section.first-slide{text-align:center;color:white;background-color:var(--darker-color)}div#\:\$p>svg>foreignObject>section.first-slide :is(h1,marp-h1),div#\:\$p>svg>foreignObject>section.first-slide :is(h2,marp-h2),div#\:\$p>svg>foreignObject>section.first-slide a{color:white}div#\:\$p>svg>foreignObject>section.first-slide footer,div#\:\$p>svg>foreignObject>section.first-slide header,div#\:\$p>svg>foreignObject>section.first-slide:after{
     /* hide header, footer and pagination */display:none}div#\:\$p>svg>foreignObject>section.first-slide p{margin-bottom:1em}
 
 /******************* last-slide *****************************/
@@ -71,15 +71,19 @@ Use: <!-- _class: last-slide --> */div#\:\$p>svg>foreignObject>section.last-slid
 /* center class: center all text
 Use: <!-- _class: center --> */div#\:\$p>svg>foreignObject>section.center :is(h1,marp-h1),div#\:\$p>svg>foreignObject>section.center :is(h2,marp-h2),div#\:\$p>svg>foreignObject>section.center p{text-align:center}
 
-/******************* smaller-font and smallest-font *****************************/
-
-/* smaller-font class: texts are smaller than usual.
-Use: <!-- _class: smaller-font --> */div#\:\$p>svg>foreignObject>section.smaller-font{
-    /* In the default theme, texts are bigger than normal */font-size:150%}div#\:\$p>svg>foreignObject>section.smaller-font{--marpit-root-font-size:150%}
+/******************* bigger, smaller and smallest-font *****************************/
 
 /* smallest-font class: texts are smaller than usual.
-Use: <!-- _class: smallest-font --> */div#\:\$p>svg>foreignObject>section.smallest-font{
-    /* In the default theme, texts are bigger than normal */font-size:120%}div#\:\$p>svg>foreignObject>section.smallest-font{--marpit-root-font-size:120%}
+Use: <!-- _class: smallest-font --> */div#\:\$p>svg>foreignObject>section.bigger-font li,div#\:\$p>svg>foreignObject>section.bigger-font ol,div#\:\$p>svg>foreignObject>section.bigger-font p{
+    /* In the default theme, texts are bigger than normal */font-size:150%}
+
+/* smaller-font class: texts are smaller than usual.
+Use: <!-- _class: smaller-font --> */div#\:\$p>svg>foreignObject>section.smaller-font li,div#\:\$p>svg>foreignObject>section.smaller-font ol,div#\:\$p>svg>foreignObject>section.smaller-font p{font-size:0.9em}div#\:\$p>svg>foreignObject>section.smaller-font table td,div#\:\$p>svg>foreignObject>section.smaller-font table th{font-size:0.7em!important}div#\:\$p>svg>foreignObject>section.smaller-font table table,div#\:\$p>svg>foreignObject>section.smaller-font table td,div#\:\$p>svg>foreignObject>section.smaller-font table th,div#\:\$p>svg>foreignObject>section.smaller-font table tr:last-child{border:0!important;border-top:0!important;border-bottom:0!important}
+
+
+/* smallest-font class: texts are smaller than usual.
+Use: <!-- _class: smallest-font --> */div#\:\$p>svg>foreignObject>section.smallest-font li,div#\:\$p>svg>foreignObject>section.smallest-font ol,div#\:\$p>svg>foreignObject>section.smallest-font p{font-size:0.7em}div#\:\$p>svg>foreignObject>section.smallest-font table td,div#\:\$p>svg>foreignObject>section.smallest-font table th{font-size:0.55em!important}div#\:\$p>svg>foreignObject>section.smallest-font table table,div#\:\$p>svg>foreignObject>section.smallest-font table td,div#\:\$p>svg>foreignObject>section.smallest-font table th,div#\:\$p>svg>foreignObject>section.smallest-font table tr:last-child{border:0!important;border-top:0!important;border-bottom:0!important}
+
 
 /******************* two-columns *****************************/
 
