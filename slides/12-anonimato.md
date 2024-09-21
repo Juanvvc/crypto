@@ -37,9 +37,10 @@ En este tema veremos cómo usar la criptografía para ofrecer el servicio de ano
 <!-- _class: cool-list toc -->
 
 1. [Comunicaciones anónimas](#4)
-1. [Enrutamiento onion](#18)
-1. [Servicios onion](#29)
-1. [Referencias](#42)
+1. [Redes mix/onion: Tor](#22)
+1. [Servicios onion](#33)
+1. [Sistema de verificación de edad para el acceso a contenidos en línea](#46)
+1. [Referencias](#51)
 
 # Comunicaciones anónimas
 <!-- _class: lead -->
@@ -214,18 +215,70 @@ CROWDS fue un sistema teórico, nunca se ha implementado como tal. Pero esta ide
 Problema principal de CROWDS: no es posible predecir cuánto tiempo tardará un mensaje en salir de la red. ¡Un mensaje puede estar rebotando dentro de CROWDS para siempre!
 -->
 
-## Solución 3: Mix Networks y VPN
+## K-anonimato
+<!-- _class: smallest-font two-columns with-success -->
+
+Paciente|Razón de ingreso|Peso|Ciudad
+--|--|--|--
+Juan Pérez|Cáncer de próstata|120Kg|Madrid
+Juan Rodríguez|Cáncer de próstata|60Kg|Villadangos del Páramo
+Fátima Bouazza|Gripe|50Kg|Casablanca
+Karima Pérez|COVID|50Kg|Casablanca
+Isabel Pérez|Cáncer de mama|60Kg|Madrid
+Lucia Rodríguez|Embarazo|50Kg|Madrid
+
+- "El paciente con cáncer": 3 de 5 pacientes. 3-anonimato
+- "Cáncer de próstata": 2 de 5 pacientes: 2-anonimato
+- "Agrupar endermedades por ciudad": estás completamente identificado si eres de Villadangos
+- "Agrupar endermedades por país": 2-anonimato
+- "Agrupar endermedades por peso": estás completamente identificado si pesas 120Kg
+
+Anonimizar bases de datos no es sencillo
+
+---
+<!-- _class: two-columns-33 -->
+
+- ¿Cuántas personas viven en mi mismo código postal?
+- ¿Cuántas personas de mi rango de edad viven en mi mismo código postal?
+- ¿Cuántas personas tienen como serie favorita "Verano 1754"?
+
+![center](images/anom/kanonimato.png)
+
+
+> [Guía básica de anonimización](https://www.aepd.es/documento/guia-basica-anonimizacion.pdf) Agencia Española de Protección de datos, 2022
+
+<!-- En el ejemplo de la Agencia española de protección de datos, se muestra una base de datos de series favoritas anonimizadas con varios ejemplos de k-anonimatos -->
+
+---
+<!-- _class: with-success -->
+
+![center w:25em](images/anom/kanonimato2.png)
+
+- Hay que evitar que se puedan correlar los "atributos clave" y los "sensibles" (nombre con enfermedad)
+- Los "casi-identificadores" pueden dar suficiente información para identificar a una persona: hay que agruparlos en "clústeres de k-anonimato"
+
+La anonimización de bases de datos está fuera del área de estudio, pero usamos el mismo concepto: el anonimato no es absoluto, lo que buscamos es ser anónimos en un grupo de "k" personas
+
+## Solución 3: VPN
 <!-- _class: with-warning -->
 
 ![center](https://upload.wikimedia.org/wikipedia/commons/a/aa/Chaum_Mix.svg)
 
-1. Contrata los servicios de alguien que hace las peticiones por ti: [Mix Network](https://en.wikipedia.org/wiki/Mix_network). Por ejemplo: una VPN
-1. La VPN hace las peticiones en nombre de sus $k$ clientes: $k$-anonimato para un observador externo
-1. Ningún observador externo puede correlar peticiones que entran en el Mix y las que salen (¡siempre que haya suficientes entradas!)
+- Contrata los servicios de alguien que hace las peticiones por ti. Por ejemplo: una VPN
+- La VPN hace las peticiones en nombre de sus $k$ clientes: $k$-anonimato para un observador externo
+- Ningún observador externo puede correlar peticiones que entran en la VPN y las que salen (¡siempre que haya suficientes entradas!)
 
 Problema: ¿seguro que la VPN no está logueando qué hacemos?
 
-# Enrutamiento onion
+## Solución 4: Mix Networks
+
+![center w:20em](https://upload.wikimedia.org/wikipedia/commons/4/4f/Red_de_mezcla.png)
+
+- "Encadenar VPNs entre sí": [Mix Network](https://en.wikipedia.org/wiki/Mix_network)
+- Propuestas por [David Chaum](https://en.m.wikipedia.org/wiki/David_Chaum) en 1981: [Untraceable electronic mail, return addresses, and digital pseudonyms](https://doi.org/10.1145%2F358549.358563), Chaum, David L. Communications of the ACM. (1981)
+- Es lo que se usa en Tor, Freenet, I2P..
+
+# Redes mix/onion: Tor
 <!-- _class: lead -->
 
 Anonimato de cliente
@@ -481,6 +534,17 @@ Los nodos al final enrutaran mensajes que es muy posible que sean ilegales. ¿Qu
 
 No deberías fiarte de un nodo Tor. El sistema asume que los nodos Tor no son fiables. Si fuesen fiables, ¡serían suficientes circuitos de un solo relay!
 
+## Vulnerabilidades
+
+- En una red Tor no eres anónimo si anuncias quién eres: no las uses para acceder a Facebook
+- Un observador sabe que estás usando una red Tor: los nodos de entrada y salidas son públicos
+    - El emisor envía el primer paquete a un nodo Tor público
+    - El receptor sabe que la petición viene de un nodo Tor
+- *Timing attacks*: un adversario poderoso (estado) puede intentar correlar las entradas y salidas de la red: usa nodos en países diferentes
+- *Sybil attacks*: un adversario poderoso puede controlar muchos nodos Tor y por tanto atraer gran parte de su tráfico, debilitando el anonimato del sistema
+
+> https://github.com/Attacks-on-Tor/Attacks-on-Tor
+
 ## ¿Qué pasa si hay nodos Tor comprometidos?
 
 Imagina un circuito con tres nodos Tor 1-2-3:
@@ -507,19 +571,6 @@ Ejemplos de relays Tor existentes cuando preparaba estas transparencias. La mayo
 -->
 
 ## Recomendaciones de uso
-<!-- _class: two-columns-33 -->
-
-¡Tor no te protege de todo! El servidor destino aún sabe qué datos estás enviando... y eso puede ser suficiente para identificarte.
-
-![center w:22em](images/anom/tor-https-3-png)
-
-> https://www.eff.org/pages/tor-and-https
-
-<!--
-De nada sirve que tus comunicaciones sean perfectamente anónimas con Tor si al final te logueas en Facebook y vas dejando comentarios en Internet con tu usuario
--->
-
----
 
 1. No envíes información personal
     1. No uses Tor para conectarte a Facebook, Google, Twitter...: ¡te estás identificando!
@@ -530,16 +581,73 @@ De nada sirve que tus comunicaciones sean perfectamente anónimas con Tor si al 
     1. No instales plugins nuevos
     1. Borra cookies y otros datos
 
-![bg right:30%](images/generic/photo-1484480974693-6ca0a78fb36b.webp)
+![bg right:20%](images/generic/photo-1484480974693-6ca0a78fb36b.webp)
 
 > [The Web Never Forgets](https://www.esat.kuleuven.be/cosic/publications/article-2457.pdf) ACM SIGSAC Conference on Computer and Communications Security November 2014
-> Photo: https://unsplash.com/photos/RLw-UC03Gwc
 
 <!--
 Hay muchos sistemas para perfilar: no hay mucha gente en el mundo que tenga una pantalla de  800x600, con un navegador con soporte de AVI345 y que use Linux Debian 9. Un navegador envía toda esta información al servidor nada más presentarse!
 
 El navegador Tor intenta no enviar nada de esto, y utiliza un User-Agent cambiante. Pero eso no evita que la web pueda identificarte por los plugins que tengas instalados o el tamaño de tu ventana. ¡No cambies estas cosas!
+
+> Photo: https://unsplash.com/photos/RLw-UC03Gwc
 -->
+
+# Sistema de verificación de edad para el acceso a contenidos en línea
+<!-- _class: lead -->
+
+Usaremos el sistema propuesto en España como ejemplo, pero es similar al de otros países
+
+## Sistemas anónimo de verificación de edad
+
+En 2024, la AEPD propuso un [Decálogo de Principios](https://www.aepd.es/guias/decalogo-principios-verificacion-edad-proteccion-menores.pdf) con las siguientes características (seleccionadas)
+
+1. garantizar que no es posible la identificación, el seguimiento o la localización de menores a través de Internet
+1. anónima para los proveedores de servicios de Internet y terceras entidades
+1. garantizar la no vinculación de la actividad de una persona entre distintos servicios
+
+En julio de 2024, el gobierno de España [presentó el sistema OID4VP](https://digital.gob.es/dam/es/portalmtdfp/comunicacion/notas-de-prensa/20240701-NdP_verificacion_edad.pdf)
+
+![bg right:30%](images/anom/contenidosensible.png)
+
+<!--
+AEPD: Agencia Española de Protección de Datos personanales
+-->
+
+## Protocolo de Verificación de edad: OID4VP
+
+![center](images/anom/oid4vp.png)
+
+> [Protocolo de verificación de edad](https://digital.gob.es/dam/es/portalmtdfp/especificaciones_tecnicas/2024-06-30_Protocolo_de_verificacion_de_edad-v1_0.pdf.pdf) Ministerio para la Transformación Digital y de la Función Pública, Junio 2024
+
+<!--
+
+1. Para acceder al contenido restringido, el usario necesita previamente una "credencial de mayoría de edad" y un dispositivo móvil con una aplicación especial "Cartera Digital"
+2. Para cada credencial que quiera solicitar, "Cartera Digital" general un par de claves público/privada. La clave privada nunca sale del dispositivo
+3. Se solicita al emidor de credenciales (el gobierno) una credencial, y se envía la clave pública
+4. El emisor envía la credencial firmada con su propia clave privada, con un tiempo de validez
+5. El usuario acceder a un contenido protegido. El proveedor solicita prueba con un protocolo desafío/respuesta (tema autenticación)
+6. El dispositivo responde al desafío, y solo puede hacerlo si tiene la clave privada asociada a la clave pública
+7. El proveedor verifica la respuesta y da acceso
+
+-->
+
+---
+
+![center](images/anom/oid4vp-2.png)
+
+> [Protocolo de verificación de edad](https://digital.gob.es/dam/es/portalmtdfp/especificaciones_tecnicas/2024-06-30_Protocolo_de_verificacion_de_edad-v1_0.pdf.pdf) Ministerio para la Transformación Digital y de la Función Pública, Junio 2024
+
+## Análisis y asunciones
+
+- ¿Qué sabe cada participantes?
+    - El gobierno sabe cuántos certificados has pedido
+    - El gobierno no sabe dónde has usado los certificados
+    - El proveedor no tiene información de la identidad de la persona que le presenta el certificado
+    - Cada certificado es idealmente de un solo uso, así que no puede correlarse con otras peticiones otros días
+- ¿Qué asunciones se hacen?
+    - Que el proveedor de contenidos colabora y no permitirá el acceso si la evidencia no es verificable
+    - Que el gobierno no preguntará a los proveedores de contenidos qué certificados se han usado
 
 # Referencias
 <!-- _class: lead -->
@@ -551,6 +659,8 @@ El navegador Tor intenta no enviar nada de esto, y utiliza un User-Agent cambian
 - How Tor works?, by Hussein Nasser: https://www.youtube.com/watch?v=gIkzx7-s2RU
 - Is Tor Trustworthy and Safe? https://restoreprivacy.com/tor/
 - How do onion addresses exactly work? https://tor.stackexchange.com/questions/672/how-do-onion-addresses-exactly-work/674#674
+- [Guía básica de anonimización](https://www.aepd.es/documento/guia-basica-anonimizacion.pdf) Agencia Española de Protección de datos, 2022
+- [Protocolo de verificación de edad](https://digital.gob.es/dam/es/portalmtdfp/especificaciones_tecnicas/2024-06-30_Protocolo_de_verificacion_de_edad-v1_0.pdf.pdf) Ministerio para la Transformación Digital y de la Función Pública, Junio 2024
 
 # ¡Gracias!
 <!-- _class: last-slide -->

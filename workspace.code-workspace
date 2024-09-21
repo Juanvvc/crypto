@@ -9,7 +9,8 @@
 		"markdown.marp.themes": [
 			"slides-support/slides/themes/marp-viu.css",
 			"slides-support/slides/themes/marp-upc.css",
-			"slides-support/slides/themes/marp-base.css"
+			"slides-support/slides/themes/marp-base.css",
+			"slides-support/slides/themes/marp-base-green.css"
 		],
 		"pasteImage.path": "${currentFileDir}/images",
 		"pasteImage.showFilePathConfirmInputBox": true,
