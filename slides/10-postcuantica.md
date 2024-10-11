@@ -22,8 +22,20 @@ transition: fade
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Como decíamos ayer...
+<!-- _class: with-success -->
 
-La seguridad de la criptografía asimétrica se basa en que no conocemos algoritmos rápidos para resolver problemas matemáticos como la factorización de números primos:
+Fases de establecimiento de una sesión TLS (https). [Cifrado híbrido](A2-protocolos.html):
+
+1. **Autenticación** de servidor mediante intercambio de certificados (criptografía asimétrica, RSA/ECDSA)
+1. **Acuerdo** de los parámetros de seguridad
+1. **Establecimiento de clave compartida** mediante criptografía asimétrica. Opciones: Diffie-Hellman  o Encapsulación de clave (RSA, DSA)
+1. **Cifrado simétrico** de la comunicación AES/ChaCha con la clave anterior
+
+La criptografía asimétrica es fundamental para establecer una conexión segura
+
+---
+
+La seguridad de la [Criptografía asimétrica](05-asimetrica.html) se basa en que no conocemos algoritmos rápidos para resolver problemas matemáticos como la factorización de números primos:
 
 $15 = 5 \cdot 3$
 
@@ -36,6 +48,7 @@ El algoritmo conocido para los computadores actuales es [GNFS](https://en.wikipe
 $$
 O(2^{2,774·(b_n^{1/3})(ln(b_n)^{2/3})})
 $$
+
 
 ---
 
@@ -58,16 +71,20 @@ Factorizar este número con un computador actual lleva miles de años...
 691387683147693147683148761364706946013746013681141213083928139
 ```
 
-Pero... ¿y si existiesen otro tipo de computadoras que lo factorizase en horas?
+Pero... ¿y si existiesen otro tipo de computadoras que lo factorizasen en horas?
+
+<!--
+Una clave pública RSA tiene entre el doble y el cuadruple de esta longitud
+-->
 
 ## Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Computación Cuántica](#5)
-1. [Criptografía Post-cuántica](#19)
-1. [Ejemplo: ML-KEM](#25)
-1. [Implementación de la criptografía post-cuántica](#31)
-1. [Resumen y referencias](#42)
+1. [Computación Cuántica](#6)
+1. [Criptografía Post-cuántica](#20)
+1. [Ejemplo: ML-KEM](#26)
+1. [Implementación de la criptografía post-cuántica](#32)
+1. [Resumen y referencias](#43)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -469,7 +486,7 @@ El receptor descifra "0" si el error está cerca de 0 y "1" si el error está ce
     - El triple de procesado / energía
     - 70 veces más datos intercambiados
     - Clave de tamaño x4
-    - Resistente a la computación cuántica
+    - **Resistente a la computación cuántica**
 
 > https://en.wikipedia.org/wiki/Kyber
 

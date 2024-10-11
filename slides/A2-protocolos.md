@@ -33,7 +33,7 @@ Seguridad de la capa de transporte (en inglés: *Transport Layer Security* o TLS
 - Gestión de claves. Es decir: protocolo Diffie-Hellman
 - **Confidencialidad** de las comunicaciones. Es decir: criptografía simétrica
 
-![bg right:30% w:80%](images/tls-versiones.png)
+![bg right:30% w:80%](images/pki/tls-versiones.png)
 
 
 >  [The Transport Layer Security (TLS) Protocol Version 1.3, RFC8446 2018](https://tools.ietf.org/html/rfc8446)
@@ -47,7 +47,7 @@ El antecesar de TLS es SSL, que era igual en la práctica pero con colecciones d
 
 **TLS es el protocolo utilizado en cualquier conexión a Internet**
 
-![w:35em](images/tls-candado.png)
+![w:35em](images/pki/tls-candado.png)
 
 - La "s" de "https" es para pedir que se use TLS
 - El "candado" de los navegadores indica que se está usando TLS
@@ -83,7 +83,25 @@ Funcionalmente equivalente a un socket TCP aportándole:
 A veces no da tiempo a ver qué es MAC/HMAC en este curso: es un hash cifrado con una clave simétrica que asegura que un mensaje no ha cambiado durante la transmisión. La idea es similar a una firma digital: cifrado (con clave simétrica) del hash del mensaje. Pero las implicaciones tanto legales como operativas son diferentes: no garantiza autenticidad pero es mucho más rápido.
 -->
 
-## Autenticación
+## Fases de establecimiento de una sesión TLS
+
+1. **Autenticación** mútua (raro) o solo de servidor (habitual) mediante intercambio de certificados
+1. **Acuerdo** de los parámetros de seguridad y protocolos que se usarán en la comunicación
+1. **Establecimiento de clave compartida** con criptografía asimétrica. Opciones:
+    - Diffie-Hellman
+    - Encapsulación de clave (RSA, DSA)
+1. **Cifrado simétrico** de la comunicación AES/ChaCha con la clave establecida
+
+Veremos estos pasos uno a uno
+
+## Fases en TLSv2 y TLSv3
+
+![center](images/pki/tlsv2v3.png)
+
+> https://www.a10networks.com/glossary/key-differences-between-tls-1-2-and-tls-1-3/
+> https://www.cloudflare.com/learning/ssl/why-use-tls-1.3/
+
+## (1) Autenticación
 
 TLS tiene dos modos para garantizar la autenticación de las partes:
 
@@ -120,21 +138,9 @@ Lo más habitual en Internet es utilizar TLS con solo autenticación de servidor
 
 Más información en el [Tema 5](05-autenticacion.html)
 
-## Cifrado: establecimiento de la clave
 
-Una vez que hemos establecido la identidad de la otra parte, acordamos qué clave AES vamos a utilizar. Opciones:
 
-1. [Elliptic Curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman), como hemos visto en temas anteriores
-1. [Protocolo de encapsulación de clave](https://en.wikipedia.org/wiki/Key_encapsulation_mechanism):
-    - "Escojo la clave de cifrado y la envío a la otra parte cifrada con su clave pública"
-
-![bg right:50% w:90%](images/asimetrica/keyencapsulation.png)
-
-<!--
-Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
--->
-
-## Acuerdos de los parámetros de la conexión
+## (2) Acuerdos de los parámetros de la conexión
 
 Los clientes cuando se conectan acuerdan utilizar la versión más moderna que soporten ambos extremos:
 
@@ -169,12 +175,7 @@ SIGN|Algoritmo de firma
 CIPHER|Algoritmo de cifrado simétrico
 HASH|Algoritmo de hash
 
-## TLSv2 y TLSv3
 
-![center](images/pki/tlsv2v3.png)
-
-> https://www.a10networks.com/glossary/key-differences-between-tls-1-2-and-tls-1-3/
-> https://www.cloudflare.com/learning/ssl/why-use-tls-1.3/
 
 ## Algoritmos en TLS v1.3
 
@@ -201,6 +202,21 @@ y se recomienda la implementación de estos (*SHOULD*):
 ---
 
 ![center w:30em](images/pki/tls-example1.png)
+
+
+## (3) Cifrado: establecimiento de la clave de cifrado
+
+Una vez que hemos establecido la identidad de la otra parte, acordamos qué clave AES vamos a utilizar. Opciones:
+
+1. [Elliptic Curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman), como hemos visto en temas anteriores
+1. [Protocolo de encapsulación de clave](https://en.wikipedia.org/wiki/Key_encapsulation_mechanism):
+    - "Escojo la clave de cifrado y la envío a la otra parte cifrada con su clave pública"
+
+![bg right:50% w:90%](images/asimetrica/keyencapsulation.png)
+
+<!--
+Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
+-->
 
 ## Inicialización (caso general, PFS)
 

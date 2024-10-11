@@ -122,10 +122,14 @@ Normalmente, si cifras con una puedes descifrar con la otra. Y según la que use
 
 Según si usamos la clave pública o la privada para cifrar, podemos hacer dos cosas:
 
-- cifrar mensajes --> servicio de confidencialidad
-- firmar digitalmente mensajes --> servicio de autenticación
+- cifrar mensajes --> **servicio de confidencialidad/distribución de claves**
+- firmar digitalmente mensajes --> **servicio de autenticación**
 
 La criptografía simétrica también nos permitía cifrar, pero no firmar
+
+<!--
+Veremos que la criptografía asimétrica usa el cifrado principalmente para distribuir claves, pero el cifrado real de un mensaje se sigue haciendo con criptografía simétrica
+-->
 
 ## Esquema de cifrado
 
@@ -732,15 +736,21 @@ La situación quizá cambie en el futuro
 <!-- _class: lead -->
 
 ## Limitaciones
+<!-- _class: with-success -->
 
 - Los esquemas descritos no cifran bytes, sino números: tenemos que ser capaces de codificar nuestro mensaje en un número entero. **No ciframos "*hola*", sino el número "*0x686f6c61*"**
+
+- Los mensajes que se pueden cifrar con criptografía asimétrica son muy cortos, de tamaño similar al tamaño de la clave
 
 - En RSA, el número "5" siempre se cifrará igual (¡compruébalo!). Eso es mala idea: quizá el enemigo no sepa qué estamos cifrando, pero sabe que es lo mismo que antes. Otros cifrados asimétricos como DSA son naturalmente probabilísticos, no hace falta añadirlo como un extra
 
 - Todos ellos son **muchísimo más lentos** que la criptografía simétrica para cifrar. Tanto, que no se usan par cifrar, solo para distribuir claves o hformar digitalmente
 
-- En realidad suele usarse un **cifrado mixto**: con asimétrica se cifra la clave simétrica que es la que realmente se usa para cifrar
+En realidad suele usarse un **cifrado mixto**: con asimétrica se cifra la clave simétrica que es la que realmente se usa para cifrar
 
+<!--
+Veremos el cifrado mixto en las siguientes sesiones y en los ejercicios
+-->
 
 ## PKCS#1
 
@@ -770,7 +780,7 @@ La situación quizá cambie en el futuro
 <!-- _class: smaller-font -->
 
 - Criptografía asimétrica: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es secreta
-- Muchísimo **más lenta** que el cifrado simétrico
+- No se utiliza para cifrar mensajes: es muchísimo **más lenta** que el cifrado simétrico
 - Se utiliza para:
     - intercambiar claves simétricas
     - firmado digital
