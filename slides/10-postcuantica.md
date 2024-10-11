@@ -81,10 +81,10 @@ Una clave pública RSA tiene entre el doble y el cuadruple de esta longitud
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#6)
-1. [Criptografía Post-cuántica](#20)
-1. [Ejemplo: ML-KEM](#26)
-1. [Implementación de la criptografía post-cuántica](#32)
-1. [Resumen y referencias](#43)
+1. [Criptografía Post-cuántica](#21)
+1. [Ejemplo: ML-KEM](#27)
+1. [Implementación de la criptografía post-cuántica](#33)
+1. [Resumen y referencias](#44)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -251,44 +251,53 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 - La respuesta es probabilística: [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
 - No se ha demostrado que haya supremacía / ventaja cuántica
 
-> [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw) Sabine Hossenfelder, Junio 2024
 > [What Are The Remaining Challenges of Quantum Computing?](https://thequantuminsider.com/2023/03/24/quantum-computing-challenges/) Matt Swayne.  March 24, 2023	
 
 
 ## Supremacía/ventaja cuántica
-<!-- _class: smaller-font -->
 
 Demostrar de forma práctica que un computador cuántico puede resolver un problema más rápidamente que un computador tradicional
 
 Cada poco tiempo alguien anuncia que ha demostrado la [**supremacía cuántica**](https://es.wikipedia.org/wiki/Supremac%C3%ADa_cu%C3%A1ntica)... con condiciones [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
 
-Pero aún no para los algoritmos de Shor o Grover
+Pero aún no se ha alcanzado para los algoritmos de Shor o Grover
 
-El consenso general es que aún no se ha demostrado la supremacía cuántica, pero ese día acabará llegando
 
 ![bg right w:100%](images/quantum/supremacia.webp)
 
 > [It’s been 20 years since “15” was factored on quantum hardware](https://www.ibm.com/quantum/blog/factor-15-shors-algorithm), Robert Davis. Enero 2022
 
 <!--
-En 2024, 15 sigue siendo el número más grande que podemos factorizar con computación cuántica, y nos lleva 10 minutos
-
- “You yourself could go and factor 15 on the IBM Quantum computer system over the cloud in 10 minutes,” he said. “That is incredible. To have reached that level of sophistication and control is testimony towards the type of system engineering ability that IBM Quantum has brought to us. We did not have that in 2001.”
-
-However, it’s also important to note that the ability to factor 15 on current quantum hardware assumes some amount of simplification of Shor’s algorithm. “There are different ways to write the factor 15 algorithm, and if you simplify it sufficiently, well, then you can run it, but it's not terribly meaningful,” Chuang said. “If you write it in a way that can scale such that not only could it factor 15, but also 21 and larger numbers, that is hard, and that's an extremely good test of the sophistication of a system.” 
-
 Sabemos que la computación cuántica es posible. Ahora, ¿es realmente más rápida que la tradicional?
 
 El consenso en la comunidad científica es que sí, que acabará teniendo ventaja/supremacía frente a la computación tradicional antes o después. Y tenemos que estar preparados para ello.
 -->
 
+## ¿Número más grande factorizado con computación cuántica?
+<!-- _class: with-warning -->
+
+- En 2001, el número 15
+- En 2012, el número 143
+- En 2016, el número 200.099
+- En 2019, el número 1.099.551.473.989... pero usando computación tradicional para simplificar el problema a un tamaño manejable por los computadores cuánticos (3 qbits), y un número "con truco"
+- En 2024, el número 8.219.999... sin apoyarse en computación tradicional
+
+Hay interés y dinero en demostrar la supremacía cuántica, toma cualquier noticia con precaución
+
+> [Records for efforts by quantum computers](https://en.wikipedia.org/wiki/Integer_factorization_records#Records_for_efforts_by_quantum_computers) Wikipedia
+> [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw) Sabine Hossenfelder, Junio 2024
+
 ## Estado actual
+<!-- _class: with-success smaller-font -->
 
 - El computador [Google Sycamore](https://www.sciencealert.com/google-quantum-computer-is-47-years-faster-than-1-supercomputer) tiene 70 qubits. Agosto de 2023.
-- El procesador cuántico [IBM Osprey](https://en.wikipedia.org/wiki/IBM_Osprey) tiene 433 qbits y la empresa tiene previsto alcanzar los 4.000 qubits con su [procesador Kookaburra en 2025](https://www.popsci.com/technology/ibm-quantum-computing-roadmap/)
-- No neesitamos tenerlos en casa: empresas como [Google](https://cloud.google.com/blog/products/compute/ionq-quantum-computer-available-through-google-cloud), [IBM](https://quantum.ibm.com/), [Microsoft](https://azure.microsoft.com/es-es/products/quantum/) y [Amazon](https://aws.amazon.com/braket/) han anunciado computación cuántica como servicio disponible en la nube
+- El procesador cuántico [IBM Osprey](https://en.wikipedia.org/wiki/IBM_Osprey) tiene 433 qbits y tienen previsto alcanzar los 4.000 qubits con su [procesador Kookaburra en 2025](https://www.popsci.com/technology/ibm-quantum-computing-roadmap/)
+- [Google](https://cloud.google.com/blog/products/compute/ionq-quantum-computer-available-through-google-cloud), [IBM](https://quantum.ibm.com/), [Microsoft](https://azure.microsoft.com/es-es/products/quantum/) y [Amazon](https://aws.amazon.com/braket/) anuncian computación cuántica como servicio disponible en la nube
 
 ![center](images/quantum/amazon-braket.png)
+
+Es probable que se alcance la supremacía cuántica en un futuro cercano
+
 
 <!--
 Fíjate:
@@ -338,7 +347,7 @@ p:first-of-type {
 }
 </style>
 
-Algoritmos criptográficos que tendrán que usar **las computadoras clásicas** cuando existan las computadoras cuánticas
+Algoritmos criptográficos que tendrán que usar **las computadoras actuales/clásicas** cuando existan las computadoras cuánticas
 
 Observa:
 
@@ -566,7 +575,7 @@ Observa: buscamos las curvas elípticas para conseguir una criptografía asimét
 - Aún no existe una computadora cuántica con la potencia suficiente como para romper RSA, ni se sabe cuándo la tendremos: [Quantum threat timeline report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
 - Existe una ["carrera cuántica"](https://www.wired.com/story/quantum-supremacy-google-china-us/) que están llevando China, USA, Europa por ser los primeros en tener una tecnología útil
 - Problema: *store now, decrypt later*
-- Históricamente, las transiciones son lentas: 3DES, MD5 aún están entre nosotros más de una década después de que no se recomiende su uso
+- Históricamente, las transiciones son lentas: 3DES, MD5, TLSv1 aún están entre nosotros más de una década después de que no se recomiende su uso
 - **Ya sabemos qué algoritmos post-cuánticos vamos a utilizar**
 
 La recomendación es empezar ya con la transición
@@ -632,6 +641,7 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 - Amazon AWS: https://aws.amazon.com/security/post-quantum-cryptography/
 - Google: https://security.googleblog.com/2024/08/post-quantum-cryptography-standards.html
 - Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
+- Linux/OpenSSH: [Open Quantum Safe](https://openquantumsafe.org/)
 - [Chrome soporta ML-KEM desde la versión 131](https://security.googleblog.com/2024/09/a-new-path-for-kyber-on-web.html) (noviembre 2024)
 
 No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica
