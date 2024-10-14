@@ -81,10 +81,10 @@ Una clave pública RSA tiene entre el doble y el cuadruple de esta longitud
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#6)
-1. [Criptografía Post-cuántica](#21)
-1. [Ejemplo: ML-KEM](#27)
-1. [Implementación de la criptografía post-cuántica](#33)
-1. [Resumen y referencias](#44)
+1. [Criptografía Post-cuántica](#22)
+1. [Ejemplo: ML-KEM](#28)
+1. [Implementación de la criptografía post-cuántica](#34)
+1. [Resumen y referencias](#45)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -186,6 +186,17 @@ La computación cuántica permite ejecutar algoritmos de búsquedas más rápida
 Para pensar: ¿realmente necesitamos resolver algoritmos de optimización tan rápido? ¿No nos valen los algoritmos tradicionales?
 -->
 
+## Recordatorio: la seguridad actual está basada en la fuerza bruta
+
+- AES-128: fortaleza 128: hay que probar $2^{128}$ claves para encontrar la clave válida
+- Crecimiento exponencial de la fortaleza:
+    - Aumentar 1 bit el tamaño de clave dobla el número de claves a probar
+    - Aumentar 2 bits, número de claves x4
+    - Aumentar n bits, número de claves x$2^n$
+- En RSA, el equivalente son claves públicas de 2048 bits
+- ¿Aumenta la potencia de los PCs? No pasa nada, aumentamos el tamaño de la clave
+- Pero esto no nos sirve con computación cuántica: la dificultad de la fuerza bruta ya no crece exponencialmente con el tamaño de la clave
+
 ## Algoritmos ejecutados por computadoras cuánticas
 <!-- _class: with-info -->
 
@@ -285,6 +296,7 @@ El consenso en la comunidad científica es que sí, que acabará teniendo ventaj
 Hay interés y dinero en demostrar la supremacía cuántica, toma cualquier noticia con precaución
 
 > [Records for efforts by quantum computers](https://en.wikipedia.org/wiki/Integer_factorization_records#Records_for_efforts_by_quantum_computers) Wikipedia
+> [Chinese Scientists Report Using Quantum Computer to Hack Military-grade Encryption](https://thequantuminsider.com/2024/10/11/chinese-scientists-report-using-quantum-computer-to-hack-military-grade-encryption/) The Quantum Insider, Octubre 2024
 > [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw) Sabine Hossenfelder, Junio 2024
 
 ## Estado actual
@@ -587,8 +599,8 @@ La recomendación es empezar ya con la transición
 - Los nuevos algoritmos no están soportados por sistemas antiguos: servidores, clientes, hardware...
 - No son tan eficientes como los algoritmos clásicos
 - Los nuevos algoritmos son más complejos, y eso también significa que son más difícil de implementar  y proteger
-    - Retículos: Fallos en el desencriptado
-    - Retículos: Necesitan generadores aleatorios gaussianos
+    - Retículos: pequeña probabilidad de fallos en el descifrado
+    - Retículos: necesitan generadores aleatorios gaussianos
     - FALCON: aritmética en coma flotante
     - BIKE: descifra en tiempo variable
     - XMSS: necesita guardar estado entre firmas
