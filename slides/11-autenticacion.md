@@ -912,6 +912,38 @@ Esto no es tan raro: es la etapa *lateral movement* en cualquier ataque ciberné
 
 ![bg right w:100%](images/auth/lateralmovement.jpg)
 
+# Ataques contra el doble factor de autenticación
+<!-- _class: lead -->
+
+## Ataques
+
+- Captura de tokens con página *Adversary-in-the-middle*
+- Ataques de ingeniería social por SMS / mensajería / llamadas
+    - "Tengo que verificar su identidad: dígame el número que le han enviado por SMS"
+- Robo del dispositivo físico: *pass the coockie*
+- Soporte a protocolos antiguos que no necesitan 2FA
+- Códigos de recuperación en espacios no protegidos
+
+## Adversary-in-the-middle
+
+![center w:30em](images/auth/2fa-attack1.png)
+
+- El adversario presenta una falsa y tiene abierta una sesión con la legítima
+- Cuando la legítima pregunta por el 2FA... el adversario se lo pregunta la víctima
+
+> https://argonsys.com/microsoft-cloud/library/token-tactics-how-to-prevent-detect-and-respond-to-cloud-token-theft/
+> https://vimeo.com/308709275
+
+## Pass-the-cookie
+
+![center](images/auth/2fa-attack2.png)
+
+- El adversario compromete el dispositivo de la víctima y le roba el token de autenticación
+
+> https://argonsys.com/microsoft-cloud/library/token-tactics-how-to-prevent-detect-and-respond-to-cloud-token-theft/
+
+
+
 # Resumen y referencias
 <!-- _class: lead -->
 
