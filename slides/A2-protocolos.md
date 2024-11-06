@@ -374,7 +374,7 @@ Antes, los certificados se compraban
 - [Transport Layer Security, TLS 1.2 and 1.3 (Explained by Example)](https://www.youtube.com/watch?v=AlE5X1NlHgg)
 - [SSL/TLS handshake Protocol](https://www.youtube.com/watch?v=sEkw8ZcxtFk)
 - [What is TLS (Transport Layer Security)?](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/)
-- [Seguridad en el protocolo SSL-TLS. Ataques criptoanaliticos modernos. Dr. Alfonso Muñoz](https://github.com/mindcrypt/libros/blob/master/Book.%20Seguridad%20en%20el%20protocolo%20SSL-TLS.%20Ataques%20criptoanaliticos%20modernos.%20Dr.%20Alfonso%20Mu%C3%B1oz%20-%2027092020.pdf)
+- [Seguridad en el protocolo SSL-TLS. Ataques criptoanaliticos modernos](https://github.com/mindcrypt/libros/blob/master/Book_Seguridad_en_el_protocolo_SSL_TLS_Ataques_criptoanaliticos_modernos.%20Dr%20Alfonso%20Munoz%20mindcrypt%20-%2019102023.pdf)  Dr. Alfonso Muñoz, 2023
 - [A modern overview of SSL/TLS - TLS 1.2](https://www.paolotagliaferri.com/an-overview-of-ssl-tls-secure-sockets-layer-transport-layer-security-tls-1-2/). Hay una segunda parte en la que se habla de TLS 1.3
 
 # ¡Gracias!

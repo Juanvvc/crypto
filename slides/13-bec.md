@@ -532,10 +532,10 @@ X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
         bh=s7gErmNKwESPKSP6VW9kvRoEY/oQ8b6V1OFgRMqAjtU=;
         b=lB+wgPGej/d1HNLxj7oP1L9Mi56hwji5GA3hLrVYCRKohiAs3L7uI6fEq7sp7wBXKm
-         9mOGnbIrSXMeOfOa/YnAnJg/4x6U5gvVtoisigFMR/bGxoPQRO6LUqvunBhR3il6f+OX
+         9mOGnbIrSXMeOfOa/YnAnJgsmall/4x6U5gvVtoisigFMR/bGxoPQRO6LUqvunBhR3il6f+OX
          ZRJIsZsvigsesD1vZcarlVr5D0QL2Cw2l1o1T6zVNH3Z8cmZNTCpfzmD3YmVCm+Cgdz9
          RQgX/iL12TxzzOmx+8yInGYnL9ZyaNY6Wsbi7LOBp7kRNLWrMKVtUlwuS2WSzQ5Jvwkm
-         0SZ90S524hBquiF8WAzJI95AD/L5fr69sjaN/wM6pk8l6fTapm8+K6TsMPYrEhHtRFZ2
+         0SZ90S524hBquiF8WAzsmallJI95AD/L5fr69sjaN/wM6pk8l6fTapm8+K6TsMPYrEhHtRFZ2
          vLYQ==
 ```
 
@@ -623,7 +623,7 @@ Do not whitelist emails "from mycompany.com" if mycompany.com has not configured
 
 - [What is Business Email Compromise (BEC)? How Does it Work? ](https://www.tessian.com/blog/bec-business-email-compromise/), Tessian 2021
 - [Business Email Compromise](https://www.fbi.gov/scams-and-safety/common-scams-and-crimes/business-email-compromise) FBI 
-- [Business Email Compromise Guide for O365](https://github.com/PwC-IR/Business-Email-Compromise-Guide) - PwC 2021
+- [Business Email Compromise Guide for O365](https://github.com/PwC-IR/Business-Email-Compromise-Guide/tree/main) - PwC 2021
 - [Phishing investigation](https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-phishing) - Microsoft 2023
 - [Anatomy of a Business Email Compromise Investigation](https://www.magnetforensics.com/blog/anatomy-of-a-business-email-compromise-investigation/?utm_source=Pardot&utm_medium=Email&utm_campaign=2021_MonthlyNewsletterDecember) - Magnet Forensics 2021
 - [Awesome-BEC: repository of information](https://github.com/randomaccess3/Awesome-BEC/blob/main/README.md)
