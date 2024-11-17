@@ -23,6 +23,13 @@ transition: fade
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
+# Hoy hablamos de...
+<!-- _class: cool-list toc -->
+
+1. [Firma digital: ¿qué es?](#3)
+1. [Firma digital: en la realidad](#13)
+1. [Firma digital: punto de vista legal](#24)
+
 # Firma digital: ¿qué es?
 <!-- _class: lead -->
 
