@@ -90,7 +90,7 @@ $$
 <!-- _class: two-columns -->
 
 - Para firmar (Alice)
-    - Alice calcular el hash de un documento
+    - Alice calcula el hash de un documento
     - Alice cifra con su clave privada el hash del documento: la firma de Alice del documento
 <!-- -->
 - Para verificar la firma (Bob)
