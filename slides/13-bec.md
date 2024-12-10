@@ -151,12 +151,11 @@ There is movie about his life: Je Compte sur Vous
 
 ---
 
-- **The Bogus Invoice Scheme**: attackers pretend to be suppliers requesting payments to an account owned by fraudsters
-- **CEO Fraud**: Attackers pose as the company CEO or any executive, requesting them to "urgent and silently" transfer money to the account they control
+- [**The Bogus Invoice Scheme**](https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/business-email-compromise-bec-schemes): attackers pretend to be suppliers requesting payments to an account owned by fraudsters
+- [**CEO Fraud**](https://www.knowbe4.com/ceo-fraud): Attackers pose as the company CEO or any executive, requesting them to "urgent and silently" transfer money to the account they control
 - **Account Compromise**: An executive or employee's email account is hacked and used to request invoice payments to vendors listed in their email contacts
 - **Attorney Impersonation**: Attackers pretend to be a lawyer or someone from the law firm supposedly in charge of crucial and confidential matters
-- **Data Theft**: Employees in HR and book-keeping are targeted to obtain personally identifiable information (PII) or tax statements of employees and executives
-- **Pay-roll attack**: Attackers pretend to be an employee that just changed the bank account, and request the next payroll payment to be done in the new bank account
+- [**Pay-roll fraud**](https://www.proofpoint.com/us/blog/cybersecurity-essentials/understanding-bec-scams-payroll-diversion): Attackers pretend to be an employee that just changed the bank account, and request the next payroll payment to be done in the new bank account
 
 > https://www.trendmicro.com/vinfo/us/security/definition/business-email-compromise-(bec)
 
@@ -170,8 +169,8 @@ There is movie about his life: Je Compte sur Vous
 
 - The attacker impersonates a party sending a series of spoofed emails
     - Usually implies previous compromise to gain intelligence
-- The first email may be from a legitimate **email address**
-    - ... but not necessarily a legitimate **email server** 
+- The first email may be from a legit **email address**
+    - ... but not necessarily a legit **email server** 
 - `Reply-to` is changed
 - Addresses similar to real ones to distinguish themselves:
     - `worker@bigconnpany.com` instead of `worker@bigcompany.com`
@@ -353,11 +352,15 @@ Most of the times, they even hide this emails. His objective is that the victim 
 
 Attackers may use fake documents to "prove" their claims
 
-- Old invocices, modified with fake data
+- Old invoices, modified with fake data
 - "Digitally/Hand signed documents", that are actually not signed
 - Fake "Bank certificates"
 
 ![bg right](images/BEC/digitally-signed.pdf.png)
+
+<!--
+Notice: you MUST check digital signatures, is not not enough to see them: they can be a drawing!
+-->
 
 # Prevention
 <!-- _class: lead -->
@@ -518,7 +521,7 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=blackboard.com;
 - `bh`: body **hash**
 - `b`: `Base64(E_{RSA}(hash(Date:From:Subject:Reply-To:bh), DKIM_{key}))`
 
-<!-- El campo b es la firma digital -->
+<!-- "b" is the digital signature -->
 
 ## Verification process
 
@@ -621,7 +624,7 @@ Do not whitelist emails "from mycompany.com" if mycompany.com has not configured
 - PGP is rarely used in real life
 - Not all companies implement SPF or DKIM, but this is changing fast
 - These mechanisms do not protect against an email sent from `macdonalds.com`: the attackers can configure SPF and DKIM too!
-- SPF and DKIM only authenticate from the sending server to the receiving server! These technologies do not detect if a legitimate account is compromised
+- SPF and DKIM only authenticate from the sending server to the receiving server! These technologies do not detect if a legit account is compromised
 
 <!--
 - Los malos pueden configurar también sus servidores
@@ -641,9 +644,9 @@ Do not whitelist emails "from mycompany.com" if mycompany.com has not configured
 </style>
 
 1. **Admins**
-    - Activate 2FA, disable legacy login
-    - Activate mailbox auditing
-    - Regularly, check rules
+    - Enable 2FA, disable legacy login
+    - Enable mailbox auditing
+    - Regularly, check automatic rules
     - Train your users
 1. **Users**
     - Check the address of the other participant in the communication
