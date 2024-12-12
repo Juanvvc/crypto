@@ -75,7 +75,7 @@ Esta presentación está en inglés
 
 - You can google her name, she is involved in very important international operations
 - She knows what she is talking about
-- "Your company is in the middle of an urgen and confidential operation. We need your help. Your CEO will contact you, please check the email"
+- "Your company is in the middle of an urgent and confidential operation. We need your help. Your CEO will contact you, please check the email"
 
 ---
 <!-- _class: a-story -->
