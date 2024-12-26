@@ -700,7 +700,7 @@ Bernstein es el creador de Chacha20 del [tema 3](03-simetrica.html)
 
 Protocolo:
 
-1. Alice y Bob escogen una curva elíptica y un punto inicial $P$
+1. Alice y Bob usan la [Curve25519](https://en.wikipedia.org/wiki/Curve25519) y escogen un punto inicial $P$
 1. Alice escoge en secreto $a$ y Bob escoge en secreto $b$
 1. Se envían:
     - Alice a Bob: $A=aP$

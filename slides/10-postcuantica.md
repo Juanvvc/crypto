@@ -82,9 +82,9 @@ Una clave pública RSA tiene entre el doble y el cuadruple de esta longitud
 
 1. [Computación Cuántica](#6)
 1. [Criptografía Post-cuántica](#22)
-1. [Ejemplo: ML-KEM](#28)
-1. [Implementación de la criptografía post-cuántica](#34)
-1. [Resumen y referencias](#45)
+1. [Ejemplo: ML-KEM](#32)
+1. [Migración a criptografía post-cuántica](#38)
+1. [Resumen y referencias](#47)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -380,14 +380,34 @@ En realidad, no nos queda tiempo: "Store now, decrypt later" [1](https://www2.de
 
 > [2023 Quantum Threat Timeline Report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/), Global Risk Institute, diciembre 2023
 
+## Problemas matemáticos en los que se basa la criptografía post-cuántica
+
+- Códigos correctores de errores
+- Retículos
+- Funciones de hash con y sin estado
+- Polinomios multivariantes cuadráticos
+- Isogenias definidas sobre curvas elípticas
+
+![bg right:40%](images/quantum/curves.png)
+
+---
+
+
+Familia|Ventajas|Inconvenientes
+--|--|--
+Retículos|Rápido y claves pequeñas|Son muy nuevas
+Isogenias|Claves pequeñas, texto cifrado pequeño|Muy lentas
+Códigos|Rápidas y texto cifrado pequeño, muy estudiadas|Claves muy grandes
+Basadas en hash|Clve pequeña, muy estudiadas|Firmas muy grandes, lentas
+Multivariante|Rápidas y claves privadas pequeñas|Clave pública muy grande
+
 ## Concurso del NIST
 
-En 2016, el NIST (instituo de estandarización de EEUU), [convocó un concurso](https://csrc.nist.gov/projects/post-quantum-cryptography) para evaluar los mejores algoritmos post-cuánticos que le presentasen:
+En 2016, el NIST (instituo de estandarización de EEUU), [convocó un concurso](https://csrc.nist.gov/projects/post-quantum-cryptography) para evaluar los mejores algoritmos post-cuánticos que le presentasen. Se centró en:
 
-- Cifrado asimétrico
 - Mecanismos de encapsulación de claves o KEM (*Key Encapsulation
-Mechanism*)
-- Firmas digitales
+Mechanism*), para sustituir a Diffie-Hellman
+- Firmas digitales, para sustituir a RSA
 
 <!--
 EL intercambio de claves clásico podría hacerse acordando una clave (Diffie-Hellman) o simplemente enviando una clave simétrica cifrada con RSA. Esto último es lo que se llama "encapsulamiento de clave"
@@ -404,6 +424,46 @@ El NIST ya ha publicado (agosto de 2024) los estándares post-cuánticos:
 ![bg right:40% w:100%](images/quantum/nist-final.png)
 
 > https://www.linkedin.com/pulse/nist-releases-first-3-finalized-post-quantum-cryptography-fhpbe/
+
+## Algoritmos
+<!-- _class: smallest-font -->
+
+Tipo|Nombre|Problema matemático|Notas
+--|--|--|--
+KEM|CRYSTALS-Kyber|Retículo estructurado|**Seleccionado por el NIST: FIPS 203**. Ahora llamado **ML-KEM**
+KEM|FrodoKEM|Retículo no estructurado|⚠ Descartado por el NIST por lento, pero otras entidades aún lo recomiendan|Sigue en concurso del NIST
+KEM|BIKE|Códigos cuasi-ciclicos|No presentado en tercera ronda, pero será evaluado
+KEM|HQC|Códigos cuasi-ciclicos|No presentado en tercera ronda, pero será evaluado
+KEM|Classic McEliece|Códigos de Goppa|⚠ Clave demasiado grande
+KEM|SIKE|Isogenias|☠ [Roto con computación tradicional](https://eprint.iacr.org/2022/975) en 2022
+Firma|CRYSTALS-Dilithium|Retículo estructurado|**Seleccionado por el NIST: FIPS 204**
+Firma|Falcon|Retículo estructurado|⚠ Descartado por el NIST
+Firma|SPHINCS+|Funciones de hash|**Seleccionado por el NIST: FIPS 205**
+Firma|XMSS|Funciones de hash|⚠ Descartado por el NIST por no ser general, pero recomendado para aplicaciones específicas
+
+<!-- Todos estos algoritmos están bajo un estudio constante y se están descubriendo ataques existosos a algunos de ellos. Cada uno tiene ventajas y desventajas: manejo de estados, tiempos muy largos, claves largas...  -->
+
+## Comparativas
+<!-- _class: smaller-font -->
+
+Comparativa con RSA-2048: intercambio de claves
+
+Algoritmo|Tamaño clave|Tamaño cifrado|Tiempo cifrado|Tiempo KeyGen
+--|--|--|--|--
+Kyber512|x4|x4|x1|x4000
+
+Comparativa con [Ed25519 (ECDA)](https://en.wikipedia.org/wiki/EdDSA): firmas
+
+Algoritmo|Tamaño clave|Tamaño cifrado|Tiempo firmado|Tiempo verificar
+--|--|--|--|--
+Dilithium2|x40|x40|x5|x0.5
+Falcon512|x30|x10|x8|x0.5
+SPHINCS+128|x1|x100|x500|x7
+
+Observa: buscamos las curvas elípticas para conseguir una criptografía asimétrica eficiente, y los nuevos protocolos son aún más ineficientes
+
+> Fuente: charla "Criptografía postcuántica: presente y futuro" de Adrián Ranea en Jornadas CCN-CERT 2023
+
 
 # Ejemplo: ML-KEM
 <!-- _class: lead -->
@@ -517,78 +577,32 @@ El receptor descifra "0" si el error está cerca de 0 y "1" si el error está ce
 Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
 -->
 
-# Implementación de la criptografía post-cuántica
+# Migración a criptografía post-cuántica
 <!-- _class: lead -->
 
-## Problemas matemáticos en los que se basa la criptografía post-cuántica
+## ¿Qué tenemos que migrar?
 
-- Códigos correctores de errores
-- Retículos
-- Funciones de hash con y sin estado
-- Polinomios multivariantes cuadráticos
-- Isogenias definidas sobre curvas elípticas
+- Los mecanismos que firman firmware en los dispositivos físicos
+- Los mecanismos de intercambio de claves simétricas
+- Los mecanismos de firma digital
+- Cifrado simétrico: doblar el tamaño de la clave
 
-![bg right:40%](images/quantum/curves.png)
-
----
-
-
-Familia|Ventajas|Inconvenientes
---|--|--
-Retículos|Rápido y claves pequeñas|Son muy nuevas
-Isogenias|Claves pequeñas, texto cifrado pequeño|Muy lentas
-Códigos|Rápidas y texto cifrado pequeño, muy estudiadas|Claves muy grandes
-Basadas en hash|Clve pequeña, muy estudiadas|Firmas muy grandes, lentas
-Multivariante|Rápidas y claves privadas pequeñas|Clave pública muy grande
-
-
-## Algoritmos
-<!-- _class: smallest-font -->
-
-Tipo|Nombre|Problema matemático|Notas
---|--|--|--
-KEM|CRYSTALS-Kyber|Retículo estructurado|**Seleccionado por el NIST: FIPS 203**
-KEM|FrodoKEM|Retículo no estructurado|⚠ Descartado por el NIST por lento, pero otras entidades aún lo recomiendan|Sigue en concurso del NIST
-KEM|BIKE|Códigos cuasi-ciclicos|No presentado en tercera ronda, pero será evaluado
-KEM|HQC|Códigos cuasi-ciclicos|No presentado en tercera ronda, pero será evaluado
-KEM|Classic McEliece|Códigos de Goppa|⚠ Clave demasiado grande
-KEM|SIKE|Isogenias|☠ [Roto con computación tradicional](https://eprint.iacr.org/2022/975) en 2022
-Firma|CRYSTALS-Dilithium|Retículo estructurado|**Seleccionado por el NIST: FIPS 204**
-Firma|Falcon|Retículo estructurado|⚠ Descartado por el NIST
-Firma|SPHINCS+|Funciones de hash|**Seleccionado por el NIST: FIPS 205**
-Firma|XMSS|Funciones de hash|⚠ Descartado por el NIST por no ser general, pero recomendado para aplicaciones específicas
-
-<!-- Todos estos algoritmos están bajo un estudio constante y se están descubriendo ataques existosos a algunos de ellos. Cada uno tiene ventajas y desventajas: manejo de estados, tiempos muy largos, claves largas...  -->
-
-## Comparativas
-<!-- _class: smaller-font -->
-
-Comparativa con RSA-2048: intercambio de claves
-
-Algoritmo|Tamaño clave|Tamaño cifrado|Tiempo cifrado|Tiempo KeyGen
---|--|--|--|--
-Kyber512|x4|x4|x1|x4000
-
-Comparativa con [Ed25519 (ECDA)](https://en.wikipedia.org/wiki/EdDSA): firmas
-
-Algoritmo|Tamaño clave|Tamaño cifrado|Tiempo firmado|Tiempo verificar
---|--|--|--|--
-Dilithium2|x40|x40|x5|x0.5
-Falcon512|x30|x10|x8|x0.5
-SPHINCS+128|x1|x100|x500|x7
-
-Observa: buscamos las curvas elípticas para conseguir una criptografía asimétrica eficiente, y los nuevos protocolos son aún más ineficientes
-
-> Fuente: charla "Criptografía postcuántica: presente y futuro" de Adrián Ranea en Jornadas CCN-CERT 2023
+> [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
 
 ## Tiempo de transición
-<!-- _class: with-success -->
+
 
 - Aún no existe una computadora cuántica con la potencia suficiente como para romper RSA, ni se sabe cuándo la tendremos: [Quantum threat timeline report](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
 - Existe una ["carrera cuántica"](https://www.wired.com/story/quantum-supremacy-google-china-us/) que están llevando China, USA, Europa por ser los primeros en tener una tecnología útil
 - Problema: *store now, decrypt later*
 - Históricamente, las transiciones son lentas: 3DES, MD5, TLSv1 aún están entre nosotros más de una década después de que no se recomiende su uso
 - **Ya sabemos qué algoritmos post-cuánticos vamos a utilizar**
+
+---
+<!-- _class: with-success -->
+
+
+![center w:25em](images/quantum/calendario-ccncert.png)
 
 La recomendación es empezar ya con la transición
 
@@ -613,9 +627,13 @@ Mientras implementamos la criptografía post-cuántica completa podemos usar esq
 - Firmas: incluir dos firmas, firma tradicional y post-cuántica
 - KEM: cascada de funciones de derivación de clave clásicas, post-cuánticas
 
-![bg right w:90%](images/quantum/hybrid-kem.png)
+![bg right w:100%](images/quantum/hybrid-kem.png)
 
 > https://xiphera.com/hybrid-models-connect-the-post-quantum-with-the-classical-security/
+
+<!--
+En la figura, esquema híbrido de generación de clave: la clave es una combinación de generación tradicional y post-cuántica
+-->
 
 ## Plan de migración
 
@@ -628,13 +646,15 @@ Mientras implementamos la criptografía post-cuántica completa podemos usar esq
 1. Decidir qué nuevos productos necesito y cuánto tiempo requiero para su adquisición y despliegue.
 1. Determinar cuánto tiempo tengo disponible
 
-> [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
+> [Recomendaciones para una transición postcuántica segura](https://www.ccn-cert.cni.es/es/seguridad-al-dia/novedades-ccn-cert/12234-recomendaciones-para-una-transicion-postcuantica-segura-de-ccn-pytec.html). CCN-TEC 009. Diciembre 2022
 
 --- 
+<!-- _class: with-success -->
 
 ![center w:40em](images/quantum/migracion.png)
 
-> [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
+No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica
+
 
 <!--
 
@@ -645,7 +665,6 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 -->
 
 ## Ejemplos de migración
-<!-- _class: with-success -->
 
 AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía post-cuántica
 
@@ -655,8 +674,7 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 - Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
 - Linux/OpenSSH: [Open Quantum Safe](https://openquantumsafe.org/)
 - [Chrome soporta ML-KEM desde la versión 131](https://security.googleblog.com/2024/09/a-new-path-for-kyber-on-web.html) (noviembre 2024)
-
-No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica
+- Cloudflare: [se estima que el 10% del tráfico mundial de Internet](https://blog.cloudflare.com/pq-2024/) ya usa criptografía post-cuánticos
 
 # Resumen y referencias
 <!-- _class: lead -->
@@ -683,6 +701,8 @@ Criptografía post-cuántica:
 - [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
 - [How Quantum Computers Break Encryption | Shor's Algorithm Explained ](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
  - [Deep dive into a post-quantum key encapsulation algorithm](https://blog.cloudflare.com/post-quantum-key-encapsulation/), Goutam Tamvada, Sofía Celi, 2022
+ - [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
+
 
 Generales sobre computación cuántica:
 
