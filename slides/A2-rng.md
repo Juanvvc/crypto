@@ -26,7 +26,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 1. [Dispositivos ad-hoc para RNG](#10)
 1. [Hardware Secure Module](#16)
 
-# RNG
+# Random Number Generators (RNG)
 <!-- _class: lead -->
 
 *ó TRNG (True Random Number Generator)*
@@ -41,7 +41,7 @@ Muchos algoritmos criptográficos necesitan generar números realmente aleatorio
 
 La generación de números totalmente aleatorios (RNG) no se puede implementar con un algoritmo: los algoritmos son precedibles
 
-[![center](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)](https://dilbert.com/strip/2001-10-25)
+[![center](images/simetrica/dilbert.png)](https://dilbert.com/strip/2001-10-25)
 
 ## Generación
 
@@ -55,6 +55,7 @@ La generación de números totalmente aleatorios (RNG) no se puede implementar c
 <!-- La reducción de parámetros implica reducir el ancho de banda: generar
 números aleatorios es lento porque hay que esperar a tener datos de UI -->
 
+
 ## Fuentes de aletoriedad I/0
 
 Necesitamos **ruido**
@@ -67,6 +68,29 @@ Necesitamos **ruido**
 Esto limita la velocidad de cifrado: no podemos cifrar más rápido que la generación de números aleatorios
 
 ![bg left:40%](https://openclipart.org/image/800px/195965)
+
+## Genearadores de azar Pseudo-aleatorios
+
+Un Genearadores Pseudo-aleatorios PRNG es un algoritmo determinista que extiende una semilla realmente aleatoria, resultando en una secuencia que parece ser uniformemente aleatoria.
+
+Definición formal:
+
+**PRNG**: Dado $G$, un algoritmo determinista en tiempo polinomial que toma una semilla $s \in \{0,1\}^n$ y da como salida una cadena $G(s) \in \{0,1\}^{l(n)}$, donde $l()$ es un polinomio y $l(n) > n$ para todo $n \in \N$. $G$ es un PRGN si su salida no puede distinguirse de una función aleatoria uniforme en tiempo polinomial.
+
+<!-- Een lenguage comprensible: simplemente por inspección de la salida no podríamos saber si es un salida realmente al azar o fruto de un algoritmo determinista
+
+Fíjate que "en tiempo polinomial" siempre lo entendemos como "en un tiempo razonable"
+
+La confidencialidad perfecta decía que el algoritmo era seguro aunque el adversario tuviese recursos infonitos. La seguridad computacional, era segura ante adversarios con recursos limitados (de tiempo o de computación o de ambas). Ese requisito "recursos limitados" en matemática forma se exprea como "en tiempo polinomial" 
+
+-->
+
+---
+
+* Distribución uniforme: debe tender a tener el mismo número de 1's que de 0's, tender al mismo número de 00's, que de 01's, 10's...
+* Despúes de $n$ un atacante no debe poder predecir el $n+1$
+
+Con la semilla (la clave), la secuencia queda determinada en su totalidad, que es lo que nos interesa.
 
 ## Validación
 
@@ -226,6 +250,8 @@ PKCS: Public Key Cryptographic Standard. Estándares de facto publicados por RSA
 - des/ensobrado de claves (key un/wrap)
 - gestión de objetos
 
+<!--
+
 ## Partición de Secretos
 
 En claves importantes (e.g. la de una CA raíz) un HSM puede no ser suficiente (¿y si lo roban?)
@@ -244,5 +270,7 @@ Sí, pero el secreto ha estado "en claro" en la RAM del ordenador por tanto una 
 
 Pero en HSM es una propiedad habitual
 
-# ¡Gracias!
+-->
+
+---
 <!-- _class: last-slide -->

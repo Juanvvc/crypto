@@ -61,10 +61,10 @@ Hoy veremos como solucionarlo:
 
 1. [Confidencialidad computacional](#4)
 1. [Cifrado de flujo](#15)
-1. [ChaCha20](#33)
-1. [Cifrado de bloque](#44)
-1. [Cifrado AES](#52)
-1. [Resumen](#77)
+1. [ChaCha20](#31)
+1. [Cifrado de bloque](#42)
+1. [Cifrado AES](#50)
+1. [Resumen](#75)
 
 # Confidencialidad computacional
 <!-- _class: lead
@@ -125,6 +125,8 @@ Informalmente: un atacante no puede descifrar el mensaje:
 
 Con la seguridad computacional hay que definir el objetivo: "quiero un sistema criptográfico que mantenga este mensaje secreto durante los próximos 100 años"
 
+El parámetro $n$ suele estar relacionado con la **longitud en bits de la clave**
+
 <!-- Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano
 
 Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante con unos recursos razonables pueda descifrar el mensaje -->
@@ -132,7 +134,7 @@ Lo importante es que relajamos el sistema lo suficiente como para que, por un ti
 ## Ataques de fuerza bruta
 <!-- _class: with-success -->
 
-La criptografía computacionalmente segura permite $\|k\| \ll \|m\|$
+La criptografía computacionalmente segura permite $n \ll \|m\|$
 
 - Es un cifrado práctico: la clave es mucho más pequeña que el mensaje y por tanto es fácil de distribuir
 - Pero si es demasiado pequeña, es posible hacer fuerza bruta
@@ -277,54 +279,6 @@ La velocidad del cifrado depende totalmente de la velocidad del PRNG, porque el 
 
 ---
 
-Un PRNG es un algoritmo determinista que extiende una semilla realmente aleatoria, resultando en una secuencia que parece ser uniformemente aleatoria.
-
-Definición formal:
-
-**PRNG**: Dado $G$, un algoritmo determinista en tiempo polinomial que toma una semilla $s \in \{0,1\}^n$ y da como salida una cadena $G(s) \in \{0,1\}^{l(n)}$, donde $l()$ es un polinomio y $l(n) > n$ para todo $n \in \N$. $G$ es un PRGN si su salida no puede distinguirse de una función aleatoria uniforme en tiempo polinomial.
-
-<!-- Een lenguage comprensible: simplemente por inspección de la salida no podríamos saber si es un salida realmente al azar o fruto de un algoritmo determinista
-
-Fíjate que "en tiempo polinomial" siempre lo entendemos como "en un tiempo razonable"
-
-La confidencialidad perfecta decía que el algoritmo era seguro aunque el adversario tuviese recursos infonitos. La seguridad computacional, era segura ante adversarios con recursos limitados (de tiempo o de computación o de ambas). Ese requisito "recursos limitados" en matemática forma se exprea como "en tiempo polinomial" 
-
--->
-
-## PRNG: seguridad
-<!-- _class: with-warning -->
-
-Una función PRNG es realmente PRNG (es decir, útil en criptografía) si ningún atacante puede distingir entre las secuencia generada y una fuente aleatoria aleatoria uniforme RNG con una probabilidad diferente de $0.5$
-
-![center](images/simetrica/dilbert.png)
-
-Fuente aleatorio uniforme RNG: medios físicos, no algorítmicos. Por ejemplo, [generadores cuánticos](https://physicsworld.com/a/fast-quantum-random-number-generator-could-advance-cryptography-on-the-cheap/).
-
-Encontrarás más información en el [Anexo 2](A2-rng.html)
-
-> Información adicional: https://www.incibe-cert.es/blog/comprobando-aleatoriedad
-
-
-<!--
-Curiosidad: "un atacante no puede distinguir... con una probabilidad..." En análisis criptográfico, se analiza el protocolo como un juego. Los atacantes o los usuarios plantean un juego e intentan adivinar algo. Aquí el usuario le da al atacante un número y le pregunta "¿esto lo he sacado de un RNG o de un PRNG?". La pregunta se hace muchas veces. El atacante gana si puede adivinarlo más de la mitad de las veces.
-
-Seguimos.
-
-Los ordenadores no pueden generar números realmente aleatorios ya que solo usan algoritmos. Para generar números realmente aleatorios es necesaria ayuda externa: pulsaciones de teclado, movimiento de ratón...
-
-Fíjate que incluso las pulsaciones de teclado no son del todo aleatorias: después de una vocal es posible que venta una consonante. Por la noche habrá menos pulsaciones que durante el día... Son fuentes mejores de aletoriedad, pero no perfectas
-
--->
-
----
-
-* Distribución uniforme: debe tender a tener el mismo número de 1's que de 0's, tender al mismo número de 00's, que de 01's, 10's...
-* Despúes de $n$ un atacante no debe poder predecir el $n+1$
-
-Con la semilla (la clave), la secuencia queda determinada en su totalidad, que es lo que nos interesa.
-
----
-
 ![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/4/4d/Lorenz-SZ42-2.jpg)
 
 La seguridad del cifrado depende del generador PRNG utilizado...
@@ -460,6 +414,30 @@ Un comentario rápido sobre [RC4/ARC4/RCFOUR](https://en.wikipedia.org/wiki/RC4)
 - Hoy en día considerado roto y no se recomienda su uso.
 
 ![bg left:30%](https://upload.wikimedia.org/wikipedia/commons/7/79/Ronald_L_Rivest_photo.jpg)
+
+## PRNG: seguridad
+
+La seguridad del cifrado de flujo y de otros sistemas criptográficos está basada en que podamos general números aleatorios que un atacante no pueda adivinar... y esto no es sencillo
+
+Como los generadores aleatorios son importantes en criptografía, tenemos una anexo hablando de ellos:
+
+- [Anexo 2: Generación de números aleatorios](A2-rng.html)
+- [Ejercicios práctico](https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/03/4%20-%20Random%20numbers.ipynb)
+
+> Información adicional: https://www.incibe-cert.es/blog/comprobando-aleatoriedad
+
+
+<!--
+Curiosidad: "un atacante no puede distinguir... con una probabilidad..." En análisis criptográfico, se analiza el protocolo como un juego. Los atacantes o los usuarios plantean un juego e intentan adivinar algo. Aquí el usuario le da al atacante un número y le pregunta "¿esto lo he sacado de un RNG o de un PRNG?". La pregunta se hace muchas veces. El atacante gana si puede adivinarlo más de la mitad de las veces.
+
+Seguimos.
+
+Los ordenadores no pueden generar números realmente aleatorios ya que solo usan algoritmos. Para generar números realmente aleatorios es necesaria ayuda externa: pulsaciones de teclado, movimiento de ratón...
+
+Fíjate que incluso las pulsaciones de teclado no son del todo aleatorias: después de una vocal es posible que venta una consonante. Por la noche habrá menos pulsaciones que durante el día... Son fuentes mejores de aletoriedad, pero no perfectas
+
+-->
+
 
 # ChaCha20
 <!-- _class: lead
@@ -816,7 +794,7 @@ Parte de una matriz de estado que se va modificando durante 10, 12 o 14 rondas s
 
 ---
 
-![center](images/simetrica/aes-algorithm.png)
+![center w:25em](images/simetrica/aes-algorithm.png)
 
 <!--
 Fíjate:
@@ -827,13 +805,13 @@ Fíjate:
 
 ## SubBytes
 
-![center Wikipedia](images/simetrica/AES-SubBytes.svg)
+![center w:30em](images/simetrica/AES-SubBytes.svg)
 
 "sustitución de bytes en función de una tabla fija de 256 entradas"
 
 ## ShiftRows
 
-![center Wikipedia](images/simetrica/AES-ShiftRows.svg)
+![center w:30em](images/simetrica/AES-ShiftRows.svg)
 
 "transposición de bytes fija"
 
@@ -843,13 +821,13 @@ Añade **difusión**: los bits de salida dependerán de varios bits de entrada.
 
 ## MixColumns
 
-![center Wikipedia](images/simetrica/AES-MixColumns.svg)
+![center  w:30em](images/simetrica/AES-MixColumns.svg)
 
 "4 multiplicaciones modulares de 4 Byte, valores fijos"
 
 ## AddRoundKey
 
-![center w:20em Wikipedia](images/simetrica/AES-AddRoundKey.svg)
+![center w:20em](images/simetrica/AES-AddRoundKey.svg)
 
 "$\text{bloque} \oplus k_{i}$ (subclave $k_{i}$)"
 
@@ -870,7 +848,7 @@ Nota 2: hacen falta más etapas en los AES de clave larga para "aplicar" el mayo
 
 ---
 
-![center w:35em](images/simetrica/aes-keyexpansion.png)
+![center w:28em](images/simetrica/aes-keyexpansion.png)
 
 ## Vulnerabilidades
 
@@ -1037,6 +1015,7 @@ header: '' -->
 		- Se divide el mensaje en bloques, cada bloque se cifra por separado.
 		- Es necesario utilizar el modo de funcionamiento adecuado
         - Ejemplos: 3DES (no se usa en protocolos modernos), AES
+- Tamaños de clave recomendatos: a partir de 128 bits, siendo habitual 256 bits
 - Es necesario evitar cifrar dos mensajes diferentes con la misma clave
 
 
