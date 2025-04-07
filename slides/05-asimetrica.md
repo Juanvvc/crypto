@@ -807,9 +807,9 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 
 
 ---
-Ejercicios:
+Ejercicios: - [Cifrado asimétrico D-H y RSA](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/5%20-%20Cifrado%20asimetrico.ipynb)
 
-- https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/RSA.ipynb
+- 
 
 Continúa en: [Funciones de Hash y Blockchains](06-hashes.html)
 
