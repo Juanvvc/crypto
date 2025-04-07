@@ -810,7 +810,7 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 Ejercicios:
 
 - [Cifrado asimétrico D-H y RSA](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/5%20-%20Cifrado%20asimetrico.ipynb)
-- (Opcional) Curvas elipticas:
+- (**Opcional**) Curvas elipticas:
     - Parte 1: [sobre los números reales](https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/05/elliptic-curve.ipynb)
     - Parte 2: [sobre campos finitos](https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/05/elliptic-curve-on-finite-field.ipynb)
 
