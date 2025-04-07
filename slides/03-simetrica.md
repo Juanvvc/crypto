@@ -1032,9 +1032,8 @@ header: '' -->
 Ejercicios de profesor:
 
 - (Opcional) [Cifrando con XOR: los peligros de reutilizar claves](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb)
-- [Cifrado de flujo con Chacha20: ejemplos de uso de Chacha20](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2%20-%20Cifrado%20de%20flujo%20ChaCha20.ipynb)
 - (Opcional) [Creación de azar: creación de números aleatorios](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/4%20-%20Random%20numbers.ipynb)
-- [Modos de cifrado AES y gestión de bloques](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/3%20-%20Modos%20de%20cifrado%20AES.ipynb)
+- [Cifrado simétrico ChaCha20 y AES](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2 - Cifrado simetrico.ipynb)
 
 Alternativamente, podéis hacer los ejercicios de AES de <https://www.cryptohack.org>
 

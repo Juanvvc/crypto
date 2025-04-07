@@ -386,7 +386,7 @@ A partir de unos cuantos certificados el nivel de seguridad deja de ser aceptabl
 ## Problema de PGP
 <!-- _class: with-warning -->
 
-- PGP / GPG aún se usa en entornos corportativos que pueden gestinar todas las claves públicas de sus empleados
+- PGP / GPG aún se usa en entornos corporativos que pueden gestinar todas las claves públicas de sus empleados
 - No escala bien a Internet
 
 
