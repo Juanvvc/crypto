@@ -1033,7 +1033,7 @@ Ejercicios de profesor:
 
 - (Opcional) [Cifrando con XOR: los peligros de reutilizar claves](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/1%20-%20Cifrando%20con%20XOR.ipynb)
 - (Opcional) [Creación de azar: creación de números aleatorios](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/4%20-%20Random%20numbers.ipynb)
-- [Cifrado simétrico ChaCha20 y AES](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2 - Cifrado simetrico.ipynb)
+- [Cifrado simétrico ChaCha20 y AES](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/2%20-%20Cifrado%20simetrico.ipynb)
 
 Alternativamente, podéis hacer los ejercicios de AES de <https://www.cryptohack.org>
 

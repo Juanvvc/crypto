@@ -128,6 +128,14 @@ Images: https://blog.fastforwardlabs.com/images/2017/06/stego_images.jpg
 
 ![](images/stego/printer2.jpg)
 
+## Mapas: trap streets
+
+Calles falsas para marcar la propiedad intelectual e identificar copias
+
+![w:20em center](images/stego/trap-steet.png)
+
+> https://www.cabinetmagazine.org/issues/47/bridle.php
+
 ## Textos
 
 ![bg left:30%](images/stego/stego-julio.png)
