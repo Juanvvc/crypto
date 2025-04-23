@@ -44,7 +44,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 1. [Criptografía post-cuántica](10-postcuantica.html)
 1. [Ransomware](08-ransomware.html)
 1. [Esteganografía](09-esteganografia.html)
-1. [Cifrado de discos](14-disks.html)
+1. [Cifrado de discos](14-disk.html)
 
 # Presentación
 <!-- _class: lead -->
