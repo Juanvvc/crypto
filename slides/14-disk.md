@@ -47,7 +47,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
   - Requisito para normativas de cumplimiento. Ejemplo: [NIST SP 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final)
   - Permite compartir equipos con menos riesgos
   - *Backups* seguros
-  - Viajes con dispositicos con *dual-boot*
+  - Viajes con dispositivos con *dual-boot*
 2. *Desventajas*
   - Posible impacto en el rendimiento
   - Riesgo de pérdida de acceso si no se gestionan bien las claves
@@ -75,8 +75,8 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 Opcionales:
 
 - Permitir que cargue el sistema operativo aunque no se carguen los datos. Ver también: [08-ransomware.html]
-- Permitir acceso "random" a los archivos
-- ¿Negar que existan datos? [Esteganografía](09-esteganografia.html)
+- Permitir recuperación incluso si la clave se pierde
+- ¿Negar que existan datos? [Esteganografía](09-esteganografia.html), [Plausible denialability](https://veracrypt.eu/en/Plausible%20Deniability.html)
 
 > https://en.wikipedia.org/wiki/Disk_encryption_theory
 
@@ -98,7 +98,7 @@ Capacidades esperadas de los atacantes:
 
 | Tipo de Cifrado | Nivel | Ejemplos | Ventajas | Desventajas |
 |----------------|-------|----------|----------|-------------|
-| Disco completo | Físico | BitLocker, FileVault, LUKS | Protege todo el contenido, arranque seguro | Pérdida total si se corrompe el arranque |
+| Disco completo | Físico | BitLocker, FileVault, LUKS | Protege todo el contenido, arranque seguro | Pérdida total si se corrompe el arranque. Solo protege mientras el dispositivo esté apagado |
 | Volumen        | Lógico | VeraCrypt, LUKS en contenedor | Se puede mover entre dispositivos | Requiere montaje manual |
 | Archivo        | Individual | eCryptfs, fscrypt | Gran flexibilidad y control | No protege metadatos del archivo |
 
@@ -161,7 +161,7 @@ Vamos a ver como ejemplos:
 - LUKS: Linux
 - Pendrives y archivos individuales
 
-# Bitlocker
+# BitLocker
 <!-- _class: lead -->
 
 ## BitLocker (Windows)
@@ -188,6 +188,19 @@ Vamos a ver como ejemplos:
 - Desventajas:
   - Requiere versiones específicas de Windows
   - Dependencia de herramientas Microsoft
+
+## Clave de recuperación
+
+En caso de que se nos olvide el PIN de desbloqueo, aún podemos usar la *clave de recuperación*
+
+¿Dónde está esa clave?
+
+- Es un número largo que **hemos tenido que guardar externamente** (¡no en el mismo PC!) cuando hemos cifrado el disco
+- En entornos corporativos, se guarda en el *Active Directory*
+
+![w:20em center](images/disk/bitlocker-recovery.png)
+
+> https://support.microsoft.com/en-us/windows/find-your-bitlocker-recovery-key-6b71ad27-0b89-ea08-f143-056f5ab347d6
 
 ## BitLocker y Active Directory
 
@@ -222,6 +235,8 @@ Get-ADObject -Filter 'objectClass -eq "msFVE-RecoveryInformation"' -SearchBase "
 | Select-Object Name,'msFVE-RecoveryPassword','msFVE-KeyPackage','WhenCreated'
 ```
 
+> https://stackoverflow.com/questions/50411539/retrieving-bitlocker-recovery-keys-from-ad
+
 ---
 
 3. También puedes usar la interfaz gráfica:
@@ -229,9 +244,7 @@ Get-ADObject -Filter 'objectClass -eq "msFVE-RecoveryInformation"' -SearchBase "
    - Buscar el equipo (por ejemplo, PC-JFERNANDEZ)
    - Clic derecho > Propiedades > pestaña BitLocker Recovery
 
-```powershell
-Get-BitLockerRecoveryPassword -MountPoint "C:"
-```
+> https://support.microsoft.com/en-us/windows/find-your-bitlocker-recovery-key-6b71ad27-0b89-ea08-f143-056f5ab347d6
 
 # FileVault
 <!-- _class: lead -->
@@ -279,9 +292,11 @@ Get-BitLockerRecoveryPassword -MountPoint "C:"
   - Cifrado a nivel de partición
   - Compatible con `cryptsetup`
 - Otros métodos:
-  - eCryptfs (deprec*deprecated*iado*), fscrypt (para sistemas de archivos)
+  - eCryptfs (*deprecated*), fscrypt (para sistemas de archivos)
   - `dm-crypt`
 - Métodos de autenticación: contraseña, TPM, llave USB
+
+> https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
 
 ---
 
@@ -349,9 +364,9 @@ sudo cryptsetup luksOpen /dev/sdX secure_volume
 
 - Evaluar necesidades específicas (empresa, usuario individual)
 - Usar cifrado por defecto en todos los dispositivos
-- Integrar con herramientas de gestión (AD, MDM)
+- Integrar con herramientas de gestión centralizada en entornos corporativos (AD, MDM)
 - Capacitación de usuarios
-- Establecer políticas claras de recuperación de claves
+- **Establecer un proceso de recuperación de claves** para el caso de pérdida / olvido / salida del trabajador
 
 # ¡Gracias!
 <!-- _class: last-slide -->
