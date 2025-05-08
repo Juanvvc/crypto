@@ -29,11 +29,11 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 <!-- _class: cool-list toc -->
 
 1. [Introducción al cifrado de discos](#3)
-1. [BitLocker (Windows)](#15)
-1. [FileVault (MacOS)](#22)
-1. [LUKS (Linux)](#26)
-1. [Cifrado de archivos y pendrives](#30)
-1. [Recomendaciones](#34)
+1. [BitLocker (Windows)](#18)
+1. [FileVault (MacOS)](#28)
+1. [LUKS (Linux)](#32)
+1. [Cifrado de archivos y pendrives](#32)
+1. [Recomendaciones](#42)
 
 # Introducción al cifrado de discos
 <!-- _class: lead -->
@@ -88,11 +88,29 @@ Imagina que se utilice AES-CBC sobre un disco entero y queremos descifrar un arc
 
 ---
 
-Capacidades esperadas de los atacantes:
+Capacidades esperadas de los atacantes (adversarios):
 
 - Podrían leer cualquier bloque del disco
 - Podrían copiar cualquier bloque del disco en otra posición del disco
 - Podrían modificar cualquier bloque del disco y pedir que se cifre
+
+## ¿Qué es un ataque de reubicación de bloques?
+
+- Es un tipo de ataque en el que el atacante copia bloques cifrados de una parte del disco a otra sin necesidad de descifrarlos
+- Si el modo de cifrado no está bien diseñado, podría alterar el comportamiento del sistema sin modificar los datos descifrados directamente
+    - Ejemplo: mover un archivo cifrado de configuración desde un usuario con menos privilegios a una zona del sistema donde sea interpretado como un archivo legítimo
+
+## Ejemplo 1: el adversario es un usuario legítimo del disco
+
+1. Un usuario legítimo con acceso físico al PC, puede sacar el disco, mover datos y volver a poner el disco en el PC
+1. Podría copiar el bloque de un archivo de otro usuario en un bloque de un archivo suyo
+1. Al volver a poner el disco en el PC, pide al sistema descifrar "su archivo"
+
+## Ejemplo 2: el adversario puede copiar archivos entre directorios
+
+1. Un atacajte con acceso físico al PC, puede sacar el disco, mover datos y volver a poner el disco en el PC
+1. Podría copiar un archivo de configuración en el directorio de un usuario al directorio del sistema
+1. Al volver a poner el disco en el PC, el sistema arranca con la nueva configuración
 
 ## Cifrado de Disco, Volumen y Archivo
 
@@ -100,7 +118,12 @@ Capacidades esperadas de los atacantes:
 |----------------|-------|----------|----------|-------------|
 | Disco completo | Físico | BitLocker, FileVault, LUKS | Protege todo el contenido, arranque seguro | Pérdida total si se corrompe el arranque. Solo protege mientras el dispositivo esté apagado |
 | Volumen        | Lógico | VeraCrypt, LUKS en contenedor | Se puede mover entre dispositivos | Requiere montaje manual |
-| Archivo        | Individual | eCryptfs, fscrypt | Gran flexibilidad y control | No protege metadatos del archivo |
+| Archivo        | Individual | eCryptfs, fscrypt | Muy sencillo de implementar | No protege metadatos del archivo |
+
+## ¿Podemos usar los modos clásicos de AES?
+
+- Si usamos un modo AES como OFB en el que unos bloques dependen de los anteriores... si queremos descifrar un archivo que esté al final del disco ¡tenemos que descifrar todo el disco!
+- Si usamos un modo como CBC que no puede resincronizarse si se pierde un bloque... un solo bloque defectuoso borra gran parte del contenido del disco
 
 ## Estándar de Cifrado: XTS-AES
 
@@ -108,10 +131,12 @@ Capacidades esperadas de los atacantes:
   - Específico para cifrado de discos
   - Mejora seguridad frente a manipulación de bloques
 - Ventajas:
-  - Alta seguridad y eficiencia
-  - Adaptado a almacenamiento en bloques
+  - No ocupe espacio extra en el disco
+  - La velocidad de cifrado/descifrado no depende de la posición del bloque en el disco
+  - Resistente a ataques de reubicación de bloques
 - Desventajas:
   - No protege la integridad del contenido
+
 
 ---
 
@@ -142,15 +167,7 @@ El uso de este modo también un cifrado rápido y eficiente de bloques consecuti
 - Proporciona protección contra ataques de reubicación de bloques
 - No protege integridad, solo confidencialidad.
 
-XTS-AES es el estándar recomendado por [IEEE P1619](https://en.wikipedia.org/wiki/IEEE_P1619) para proteger discos duros y SSDs.
-
-
-## ¿Qué es un ataque de reubicación de bloques?
-
-- Es un tipo de ataque en el que el atacante copia bloques cifrados de una parte del disco a otra sin necesidad de descifrarlos
-- Si el modo de cifrado no está bien diseñado, podría alterar el comportamiento del sistema sin modificar los datos descifrados directamente
-    - Ejemplo: mover un archivo cifrado de configuración desde un usuario con menos privilegios a una zona del sistema donde sea interpretado como un archivo legítimo
-- XTS-AES evita estos ataques al incorporar la dirección del bloque como parte del proceso de cifrado
+XTS-AES es el estándar recomendado por [IEEE P1619](https://en.wikipedia.org/wiki/IEEE_P1619) y [NIST SP 800-38E](https://csrc.nist.gov/pubs/sp/800/38/e/final) para proteger discos duros y SSDs.
 
 ---
 
@@ -188,6 +205,22 @@ Vamos a ver como ejemplos:
 - Desventajas:
   - Requiere versiones específicas de Windows
   - Dependencia de herramientas Microsoft
+
+## Trusted Platform Module
+
+![bg right w:40em](https://upload.wikimedia.org/wikipedia/commons/e/eb/TPM_1.2_diagram.svg)
+
+- [Chip obligatorio a partir de Windows 11](https://support.microsoft.com/en-us/windows/enable-tpm-2-0-on-your-pc-1fd5a332-360d-4f46-a1e7-ae6b0c90645c)
+- Generador de números aleatorios seguro
+- Algoritmos de generación de claves RSA
+- Gestión de claves inicial cuando el usuario se autentica
+
+> https://en.wikipedia.org/wiki/Trusted_Platform_Module
+---
+
+![center w:28em](images/disk/bitlocker-tpm.png)
+
+> https://blog.elcomsoft.com/2021/01/understanding-bitlocker-tpm-protection/
 
 ## Clave de recuperación
 
@@ -255,6 +288,7 @@ Get-ADObject -Filter 'objectClass -eq "msFVE-RecoveryInformation"' -SearchBase "
 - Utiliza XTS-AES-128 con clave de 256 bits
 - Autenticación con cuenta de usuario o clave de recuperación
 - Integración con iCloud para recuperación
+- También usa TPM, en este caso [el chip T2 de Apple](https://en.wikipedia.org/wiki/Apple_T2)
 
 ![bg right](images/disk/filevault.png)
 
@@ -322,8 +356,10 @@ sudo cryptsetup luksOpen /dev/sdX secure_volume
 - Riesgos de pérdida y robo
 - Soluciones de cifrado:
   - BitLocker To Go (Windows)
-  - VeraCrypt (multiplataforma)
+  - VeraCrypt: cifrado de archivos in)
   - Cifrado de volúmenes con LUKS o APFS
+  - Cifrado a nivel "hardware"
+  - Cifrar archivos uno a uno
 - Buenas prácticas:
   - Contraseñas fuertes
   - Políticas de uso
@@ -342,6 +378,17 @@ sudo cryptsetup luksOpen /dev/sdX secure_volume
 
 > https://www.veracrypt.fr/en/Home.html
 > https://www.redeszone.net/tutoriales/seguridad/veracrypt-cifra-archivos-gratis/
+
+## Cifrado a nivel hardware
+
+![bg right](images/disk/secure-pendrive.png)
+
+- Dispositivos con hardware que solo permite acceso con contraseña
+- Totalmente transparentes para el usuario
+- Ejemplos:
+  - https://securedrive.com.au/
+  - https://apricorn.com
+  - https://www.kingston.com/en/usb-flash-drives/encrypted
 
 
 ## Cifrado de archivos individuales
