@@ -26,7 +26,8 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 1. [Incident Response](#3)
 1. [Ransomware](#11)
 1. [Examples: Venus, Conti, Babuk, LockBit](#20)
-1. [Managing an incident](#33)
+1. [Managing an incident](#34)
+1. [Recommendations and references](#43)
 
 Las transparencias de esta sesión están en inglés
 
@@ -220,7 +221,7 @@ Forensic analysts, specially if they must act as Expert Witness, are external to
 
 ![center w:30em](images/ransomware/Ransom+Payments.png)
 
-> https://www.coveware.com/blog/2023/10/27/scattered-ransomware-attribution-blurs-focus-on-ir-fundamentals
+> https://www.coveware.com/blog/2025/4/29/the-organizational-structure-of-ransomware-threat-actor-groups-is-evolving-before-our-eyes
 
 <!--
 El ransomware es uno de los mayores peligros para una compañía, y también uno de los ataques más lucrativos...
@@ -262,7 +263,7 @@ Notice:
 
 ## The infection chain
 
-![center w:35em](images/ransomware/infection-chain.png)
+![center w:30em](images/ransomware/infection-chain.png)
 
 > https://www.trendmicro.com/en_us/research/21/i/examining-the-cring-ransomware-techniques.html
 > Steps standarized in the Mitre Attack Matrix: https://attack.mitre.org/
@@ -305,10 +306,10 @@ Por ejemplo: nosotros hemos detectado el "modus operandi" asociado a APT41 varia
 
 ---
 
-![center w:35em](images/ransomware/ransomware-type.png)
+![center w:32em](images/ransomware/ransomware-type.png)
 
-> https://www.coveware.com/blog/2023/4/28/big-game-hunting-is-back-despite-decreasing-ransom-payment-amounts
-> [Main groups in 2023](https://www.blackfog.com/the-top-10-ransomware-groups-of-2023/)
+> [The organizational structure of ransomware threat actor groups is evolving before our eyes](https://www.coveware.com/blog/2025/4/29/the-organizational-structure-of-ransomware-threat-actor-groups-is-evolving-before-our-eyes)
+> [The New Ransomware Groups Shaking Up 2025](https://thehackernews.com/2025/03/the-new-ransomware-groups-shaking-up.html)
 
 <!--
 Fijaos que no hay tantas variantes de ransomware: solo unas pocas familias. Fijas también en que cambian muy rápidamente: de las 10 variantes más usadas, 5 han aparecido en los últimos 3 meses y otras 5 han desaparecido. Es un mundo que cambia MUY RAPIDAMENTE
@@ -422,31 +423,47 @@ Steps:
 
 ---
 
-![center](images/ransomware/lockbitweb.png)
+![center w:25em](images/ransomware/lockbitweb.png)
 
 The blog is in the Dark Web (onion) and the address changes frequently
 
-> https://ransomwatch.telemetry.ltd/#/profiles?id=lockbit3_fs
+> https://ransomwatch.telemetry.ltd/#/INDEX
 
 ---
 
 May 2024: lockbit defaced, again
 
-![center w:30em](images/ransomware/lockbit-deface.png)
+![center w:25em](images/ransomware/lockbit-deface.png)
 
 The mastermind behind LockBit, one of the most prolific and damaging ransomware groups in history, is a 31-year-old Russian named Dmitry Yuryevich Khoroshev, aka “LockbitSupp.”: https://www.wired.com/story/lockbitsupp-lockbit-ransomware/
+
+## Current situation (2025)
+
+- Poor quality of decryption tools. Declining rate of payments. Less skilled programmers.
+- Cyber extortion is less anonymous:
+    - [Black Basta exposed: A look at a cybercrime data leak](https://intel471.com/blog/black-basta-exposed-a-look-at-a-cybercrime-data-leak)
+    - [NCA published the identities of key Lockbit affiliates](https://www.nationalcrimeagency.gov.uk/news/lockbit-leader-unmasked-and-sanctioned)
+    - [Snowfake was identified and arrested in October](https://www.wired.com/story/connor-moucka-snowflake-hack-arrest-extradition/)
+- Supply chain is under constant threat of disturbance.
+
+> https://www.coveware.com/blog/2025/4/29/the-organizational-structure-of-ransomware-threat-actor-groups-is-evolving-before-our-eyes
 
 # Managing an incident
 <!-- _class: lead -->
 
 ---
 
-1. **Identification**: gain an idea of what the attacker did
-1. **Containment**: perform short-term containment, for example by isolating the network segment that is under attack. Then focus on long-term containment, which involves temporary fixes to allow systems to be used in production, while rebuilding clean systems.
-1. **Eradication**: remove malware from all affected systems, identify the root cause of the attack, and take action to prevent similar attacks in the future.
-1. **Recovery**: bring affected production systems back online carefully, to prevent additional attacks. Test, verify and monitor affected systems to ensure they are back to normal activity
+1. **Identification**: what happened?
+1. **Containment**: Examples: isolate the network segment that is under attack; temporary fixes to allow systems to be used in production; rebuild clean systems
+1. **Eradication**: remove malware from all affected systems; change passwords
+1. **Recovery**: bring affected production systems back online carefully
 
-## Gain a better idea of what the attacker did
+![bg right:40% w:90%](images/ransomware/incident-management.png)
+
+> https://www.eccouncil.org/cybersecurity-exchange/incident-handling/what-is-incident-response-life-cycle/
+> https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-61r2.pdf
+
+## What happened?
 
 **Initial detection rarely tells a complete story**
 
@@ -468,7 +485,19 @@ Image: https://s3-us-west-2.amazonaws.com/courses-images-archive-read-only/wp-co
 
 ![center w:25em](images/ransomware/entrypoint.png)
 
-> https://www.coveware.com/blog/2023/10/27/scattered-ransomware-attribution-blurs-focus-on-ir-fundamentals
+> https://www.coveware.com/blog/2025/4/29/the-organizational-structure-of-ransomware-threat-actor-groups-is-evolving-before-our-eyes
+
+## Techniques
+
+![center w:35em](images/ransomware/objectives.png)
+
+<!--
+- Exfiltration of data
+- Lateral movement to other PCs
+- Evasion
+- Impact: ransomware
+- C&C
+-->
 
 ---
 
@@ -497,6 +526,7 @@ Image: https://s3-us-west-2.amazonaws.com/courses-images-archive-read-only/wp-co
 ![center](images/ransomware/unplanned-backup.png)
 
 > https://www.sentinelone.com/cybersecurity-101/what-is-triple-extortion/
+> https://news.sky.com/story/who-are-scattered-spider-the-infamous-young-hacking-group-linked-to-mands-cyber-attack-13358559    
 
 <!--
 Dado que los atacantes han visto que se reducen sus ganancias porque las empresas están usando sus backups...
@@ -528,6 +558,9 @@ Reduce the money request
 
 ![bg saturate:0.5](https://www.openside.group/wp-content/uploads/2015/05/236.jpg)
 
+# Recommendations and references
+<!-- _class: lead -->
+
 ## Recommendations
 
 - Ransomware is only the last step of the attack:
@@ -542,12 +575,12 @@ Reduce the money request
 
 ## References
 
+- [John Oliver - Ransomware](https://www.youtube.com/watch?v=WqD-ATqw3js)
+- [Ransomware - Anatomy of an Attack](https://www.youtube.com/watch?v=6h9yh_A80fs) ESI & CISCO, 2018
 - [Reverse engineering of PLAY ransomware](https://chuongdong.com/reverse%20engineering/2022/09/03/PLAYRansomware/)
-- [The Most Prolific Ransomware Families: 2023 Edition](https://www.domaintools.com/resources/blog/the-most-prolific-ransomware-families-2023-edition/)
-- [2023 CrowdStrike Global Threat Report](https://www.crowdstrike.com/resources/reports/global-threat-report/). This year’s highlights include:
-    - Nation-state adversaries engaged in relentless computer network operations throughout 2022, emphasizing the integral role these operations play in supporting state goals
-    - After some of the biggest and most notorious ransomware enterprise shutdowns, ransomware affiliates moved to new ransomware-as-a-service (RaaS) operations
-    - Increase in social engineering using human interaction, such as vishing, to successfully download malware or circumvent multifactor authentication (MFA)
+- [The organizational structure of ransomware threat actor groups is evolving before our eyes](https://www.coveware.com/blog/2025/4/29/the-organizational-structure-of-ransomware-threat-actor-groups-is-evolving-before-our-eyes)
+- [The New Ransomware Groups Shaking Up 2025](https://thehackernews.com/2025/03/the-new-ransomware-groups-shaking-up.html)
+
 
 # ¡Gracias!
 <!-- _class: last-slide -->
