@@ -26,7 +26,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Conceptos básicos](01-conceptos.html)
 1. [Criptografía clásica](02-historia.html)
-1. [Criptografía de clave simétrica: AES y ChaCha](03-simetrica.html)
+1. [Criptografía de clave simétrica: ChaCha y AES](03-simetrica.html)
     - Anexo: [RNG y HSM](A2-rng.html)
 1. [Teoría complejidad y acuerdo Diffie-Hellman](04-complejidad.html)
 1. [Criptografía de clave pública: RSA](05-asimetrica.html)
@@ -92,7 +92,7 @@ Esto es un ejemplo de notas de profesor. Aquí habrá información adicional, ac
 ## Instrucciones de las actividades
 <!-- _class: with-info -->
 
-1. Después de los temas 3 (AES), 5 (RSA) y 6 (hashes) se incluirá enlaces a Google Colab en la zona de Actividades de la asignatura
+1. Después de las sesiones de AES, RSA hashes se incluirán enlaces a Google Colab en la zona de Actividades de la asignatura
 1. Los ejercicios son notebook de Google Colab. Comandos básicos:
     - INTRO: edita línea actual
     - SHIFT+INTRO: ejecuta línea actual
@@ -117,8 +117,8 @@ Las actividades incluyen información adicional que no está en las clases
 ## Conocimientos recomendables
 
 - Álgebra básica, probabilidad
-- Conocimientos básicos de programación: ejemplos en Python
-- Conocimientos básicos de redes: cómo funciona la WWW.
+- Conocimientos básicos de programación. Los ejemplos se presentarán en Python, pero no se pedirá programar nada. Será suficiente con poder entenderlos.
+- Conocimientos básicos de redes: cómo funciona Internet.
 
 ## Bibliografía
 <!-- _class: smaller-font -->

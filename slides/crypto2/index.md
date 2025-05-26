@@ -24,18 +24,14 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 ## Temario
 <!-- _class: cool-list smaller-font -->
 
-1. [Conceptos básicos](01-conceptos.html)
-    - Anexo: [Glosario](../A1-glosario.html)
 1. [Sistemas de cifrado](02-cifrado.html)
-1. [Funciones de hash](../06-hashes.html)
-    - Anexo: [Firma digital](../A4-firmadigital.html)
-1. [TLS y Public Key Infrastructure](../07-pki.html)
-    - Anexo: [TLS en detalle](../A2-protocolos.html)
+1. [Firma digital](../A4-firmadigital.html)
 1. [Sistemas de autenticación](../11-autenticacion.html)
 1. [Anonimato](../12-anonimato.html)
-1. [Business Email Compromise](../13-bec.html)
-1. [Blockchain](../A3-blockchain.html)
-
+1. *Estudio de casos prácticos (2 sesiones)*
+    - [Business Email Compromise](../13-bec.html)
+    - [Cifrado de discos](../14-disk.html)
+    - [Otros casos](A5-casospracticos.html)
 
 # Presentación
 <!-- _class: lead -->
@@ -56,10 +52,10 @@ Intereses:
 
 ## Objetivos
 
-- Introducción a la criptografía moderna, para qué se usa y por qué es tan complicada
-  - Confidencialidad
-  - Autenticación
+- Criptografía moderna
+  - Para qué se usa y por qué es tan complicada
   - Firma digital
+  - Sistemas de autenticación
 - Que te convenzas de que la mejor estrategia para evitar errores de seguridad son los protocolos y algoritmos abiertos
 - Descubrir otros usos de la criptografía: ransomware, bitcoin...
 
@@ -83,12 +79,13 @@ Esto es un ejemplo de notas de profesor. Aquí habrá información adicional, ac
 ## Instrucciones de las actividades
 <!-- _class: with-info -->
 
-1. Después de los temas 2, 3 y 5 se incluirá el enlace a Google Colab en la zona de Actividades de la asignatura
+1. Después de las algunas sesiones se incluirán enlaces a Google Colab en la zona de Actividades de la asignatura
 1. Los ejercicios son notebook de Google Colab. Comandos básicos:
     - INTRO: edita línea actual
     - SHIFT+INTRO: ejecuta línea actual
 1. Las actividades deben resolverse individualmente
-1. Aunque haya código, no es necesario saber programar: son preguntas de texto libre
+1. No es necesario saber programar: son preguntas de texto libre
+1. Entregad en un documento separado en formato PDF que sólo incluya el texto de las preguntas y su respuesta
 
 Las actividades incluyen información adicional que no está en las clases
 

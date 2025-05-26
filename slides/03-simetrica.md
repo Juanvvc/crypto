@@ -166,6 +166,14 @@ La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenad
 
 -->
 
+---
+
+La criptografía es una de las ramas más pesimistas de la ciencia. Asume la existencia de adversarios con capacidad ilimitada de ataque, los cuales pueden leer todos tus mensajes, generar información ilegítima o modificar tus claves aleatorias a su antojo.
+
+Curiosamente, también es una de las ramas más optimistas, mostrando cómo incluso en el peor escenario inimaginable el poder de las matemáticas y la algoritmia puede sobreponerse a cualquier dificultad.
+
+[Alfonso Muñoz, Evasión de antivirus y seguridad perimetral usando esteganografía, 2021](https://github.com/mindcrypt/libros/blob/master/Libro%20Estegomalware%20-%20Evasi%C3%B3n%20de%20antivirus%20y%20seguridad%20perimetral%20usando%20esteganograf%C3%ADa%20-%20Dr.%20Alfonso%20Munoz%20-%20mindcrypt%2028-10-2023.pdf)
+
 ## Tamaños recomendados de clave
 <!-- _class: with-success -->
 
@@ -892,7 +900,7 @@ Si acumulamos estado durante el cifrado, podemos utilizar este estado sobre el c
 ![center Wikipedia w:35em](images/simetrica/ECB_encryption.svg)
 
 ---
-<!-- _class: center, with-warning -->
+<!-- _class: center with-warning -->
 
 Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
@@ -900,7 +908,7 @@ Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg) ![](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg)
 
-**No se debe usar AES en modo ECB**
+No se debe usar un cifrado de bloque en modo ECB
 
 ## CBC: Cipher Block Chaining
 

@@ -41,11 +41,9 @@ Hoy hablaremos del primero, confidencialidad, y empezaremos a poner las bases pa
 <!-- _class: cool-list toc -->
 
 1. [Confidencialidad perfecta y computacional](#5)
-1. [Tipos de algoritmos de cifrado](#12)
-1. [Cifrado simétrico de flujo: ChaCha](#16)
-1. [Cifrado simétrico de bloque: AES](#24)
-1. [Criptografía asimétrica o de clave pública](#40)
-1. [Conclusiones](#63)
+1. [Cifrado simétrico de bloque: AES](#12)
+1. [Criptografía asimétrica o de clave pública](#26)
+1. [Resumen y referencias](#63)
 
 ---
 <!-- _class: with-info -->
@@ -71,16 +69,36 @@ $$
 P[m|c] = P[m]
 $$
 
-Ejemplos (explicaciones en el [tema 1](01-conceptos.html). ):
-
-- "Atacaremos a las X"
-- *One time pad*
-
-Sistema con confidencialidad perfecta: un atacante no podría descifrarlo nunca, invierta el dinero que invierta e independientemente de por cuántos siglos lo intente
+**Sistema con confidencialidad perfecta**: un atacante no podría descifrarlo nunca, invierta el dinero que invierta e independientemente de por cuántos siglos lo intente
 
 <!--
 Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano. Esta definición matemática está puesta para mostraros que hay una teoría matemática detrás de todo lo que decimos, pero en este curso no entraremos en las matemáticas de la criptografía
 
+-->
+
+## ¿A qué hora atacamos?
+
+![bg right:40% w:100%](../images/historia/byzantine_generals.png)
+
+Imagina que unos atacantes acuerdan el siguiente mapeo, es decir, clave:
+
+- A = 16 horas
+- B = 7 horas
+- C = 13 horas
+- ...
+
+El castillo captura este mensaje: "Atacamos a las F"
+
+¿El castillo tiene alguna forma de conocer a qué hora le atacarán?
+
+<!--
+- La primera vez, el castillo no tiene forma saber a qué hora le atacarán ni aunque pruebe todas las claves. **Este cifrado es perfecto**
+- Pero puede aprovechar el primer mensaje para descifrar los siguientes que usen la misma clave:
+    - Si no le han atacado a la 1, sabe que F no es 1
+    - Si no le han atacado a las 2, sabe que F no es 2
+    - Si le atacan a las 3, sabe que F es 3
+- Tras cada ataque, los atacantes tienen que cambiar qué significan las letras. **La clave solo puede usarse una vez**.
+- Si el castillo intercepta un mensaje tio HK, sabe que H es 1 ó 2 porque no existe la "hora 37": el mapeo tiene que ser completo. Es decir, **la clave tiene que ser tan larga como el mensaje**
 -->
 
 ## La confidencialidad perfecta no es práctica
@@ -104,7 +122,7 @@ Un sistema es seguro computacionalmente si cualquier algoritmo probabilístico e
 
 Con la seguridad computacional hay que definir el objetivo: "quiero un sistema criptográfico que mantenga este mensaje secreto durante los próximos 100 años"
 
-Confidencialidad computacional: un atacante puede romper el cifrado, pero necesitará gastar una cantidad desproporcionada de recursos para el valor del mensaje
+**Seguridad computacional**: un atacante puede romper el cifrado, pero necesitará gastar una cantidad desproporcionada de recursos para el valor del mensaje
 
 > Introducción más detallada y matemática: https://intensecrypto.org/public/lec_02_computational-security.html
 
@@ -112,23 +130,15 @@ Confidencialidad computacional: un atacante puede romper el cifrado, pero necesi
 
 Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante con unos recursos razonables pueda descifrar el mensaje -->
 
----
-
-La criptografía es una de las ramas más pesimistas de la ciencia. Asume la existencia de adversarios con capacidad ilimitada de ataque, los cuales pueden leer todos tus mensajes, generar información ilegítima o modificar tus claves aleatorias a su antojo.
-
-Curiosamente, también es una de las ramas más optimistas, mostrando cómo incluso en el peor escenario inimaginable el poder de las matemáticas y la algoritmia puede sobreponerse a cualquier dificultad.
-
-[Alfonso Muñoz, Evasión de antivirus y seguridad perimetral usando esteganografía, 2021](https://github.com/mindcrypt/libros/blob/master/Libro%20Estegomalware%20-%20Evasi%C3%B3n%20de%20antivirus%20y%20seguridad%20perimetral%20usando%20esteganograf%C3%ADa%20-%20Dr.%20Alfonso%20Munoz%20-%20mindcrypt%2028-10-2023.pdf)
-
 ## Ataques de fuerza bruta
 <!-- _class: with-info -->
 
-La criptografía computacionalmente segura permite tamaño de la clave mucho menores que el tamaño del mensaje $\|k\| \ll \|m\|$. Esto impone un compromiso:
+La criptografía coputacionalmense segura:
 
-- Es un cifrado práctico: la clave es fácil de distribuir
+- Es un cifrado práctico: las claves pequeñas son fácil de distribuir
 - Pero si es demasiado pequeña, es posible hacer fuerza bruta: probar todas las posibles claves una a una hasta que encontremos la que es
 
-Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible hacer fuerza bruta **hoy en día**, y lo suficientemente pequeño como para que sea práctico
+**Compromiso**: Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible probarlas todas **hoy en día**, y lo suficientemente pequeño como para que sea práctico
 
 <!-- Recordad: en el cifrado de one-time-pad del tipo "atacaremos a las X" no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
 
@@ -143,7 +153,9 @@ La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenad
 
 
 ---
-<!-- _class: with-success -->
+<!-- _class: with-info -->
+
+Ataque de fuerza bruta: probar todas las posibles claves una a una
 
 - podemos probar $10^6$ clave/CPU/s $\approx 2^{20}$ clave/CPU/s
 - ó $10^{13}$ clave/CPU/año $\approx 2^{43}$ clave/CPU/año
@@ -154,214 +166,51 @@ La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenad
 (Números calculados en 2020). Cada año podremos probar más claves por segundo
 
 
-**Fortaleza de un cifrado**: números de pruebas (en bits) que tiene que hacer un atacante para descifrar un mensaje
+**Fortaleza de un cifrado**: números de pruebas (en bits) que tiene que hacer un atacante por fuerza bruta para descifrar un mensaje
 
 
 <!-- algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
-
-# Tipos de algoritmos de cifrado
-<!-- _class: lead-->
-
-## Criptografía simétrica o de clave secreta (SKC)
-<!-- _class: two-columns -->
-
-![w:20em](../images/simetrica/simetrica.svg)
-
-- Usa la misma clave para cifrar que para descifrar
-- Ambas partes tienen que conocer la clave
-- Rapido y sencillo
-- Ejemplos actuales: AES, ChaCha
-- Ejemplos rotos y obsoletos: RC4, DES, TDES
-
-
-## Criptografía asimétrica / clave pública (PKC)
-<!-- _class: two-columns -->
-
-![](../images/asimetrica/asimetrica.svg)
-
-- Existe una clave para cifrar, y una clave diferente para descifrar
-- Normalmente, una de las dos claves es pública (todos la conocen)
-- Problema:
-    - No supimos cómo hacerla hasta los años 70
-    - Es lenta y compleja
-- Usos: autenticación, firma digital, intercambio de claves simétricas
-
----
-
-![](../images/conceptos/cta2296-fig-0002-m.jpg)
-
-<!--
-Estos son los algoritmos de seguridad computacional que utilizamos
-
-Esta sesión estudiaremos las dos primeras ramas: clave pública y clave secreta. Observa que las algoritmos de cifrado de clave secreta/simétrica se dividen a su vez en bloque y flujo
-
-La próxima sesión estudiaremos los algoritmos de hash
--->
-
-
-# Cifrado simétrico de flujo: ChaCha
-<!-- _class: lead -->
-
-
-## Criptografía simétrica: tipos
-
-Flujo|Bloque
---|--
-Cifra un stream continúo de datos|Divide los datos en bloques, que se cifran separadamente
-Más rápido|Más lento (a menos que exista ayuda del hardware)
-Fácil de programar: pequeños dispositivos|Más complejo
-Implementado en software|Implementado en hardware
-RC4, **ChaCha20**|3DES, **AES**
-
-<!--
-Nosotros veremos en detalle los algoritmos ChaCha20 y AES, que los dos más utilizados actualmente
-
-- **Cifrado de flujo**. Heredero de "la idea" *one-time-pad*: el mensaje llega como un flujo de bytes que se cifra según va llegando.
-- **Cifrado de bloque**. Heredero de "la tradición" Vigenère: el mensaje se divide en bloques que se cifran por separado
-
--->
-
-## Cifrado de flujo
-
-Basado en los bloques de una solo uso (*one-time-pad*)
-
-Idea: crea una clave tan larga como el mensaje:
-
-$$
-\|k_{\text{generada}}\| = \|m\|
-$$
-
-...a partir de una clave $k$ de longitud corta...
-
-$$
-k \overset{PRNG}{\longrightarrow} k_{\text{generada}}
-$$
-
-para después hacer:
-
-$$
-c = k_{\text{generada}} \oplus m
-$$
-
-![bg right w:90%](../images/simetrica/symmetric-example.png)
-
-
-<!--
-PRNG: *Pseudo Random Number Generator* es un generador de bits que tiene como entrada una **semilla** (que será la clave de cifrado $k$) y tiene como salida el flujo de bits que aplicaremos sobre el mensaje para cifrarlo con *XOR*
-
-La velocidad del cifrado depende totalmente de la velocidad del PRNG, porque el XOR es instantáneo
- -->
- 
- ---
-
-![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/4/4d/Lorenz-SZ42-2.jpg)
-
-La seguridad del cifrado depende del generador PRNG utilizado...
-
-...**y de que nunca se envíen dos mensajes cifrados con la misma clave**
-
-(vamos a repetir esto muchas veces en el curso)
-
-[Lorenz SZ](https://en.wikipedia.org/wiki/Lorenz_cipher#Cryptanalysis) fue una máquina alemana de cifrado de flujo, rota porque un operador envió dos mensajes diferentes seguidos sin cambiar la clave.
-
-## *Nonce*: *number used only once*
-
-Para evitar enviar dos mensajes con la misma clave, podemos usar una contador que se añade a la clave
-
-SESAMO_1, SESAMO_2, SESAMO_3...
-
-El contador va a ser conocido por el atancante, pero  **¡esto es correcto!**: la seguridad que añade el uso de un contador contrarrestra la pérdida de seguridad porque el atacante lo conozca
-
-
-
-Este elemento se conoce como *nonce* y forma parte de muchos algoritmos criptográficos
-
-![bg w:90% right:50%](https://upload.wikimedia.org/wikipedia/commons/4/4f/Nonce-cnonce-uml.svg)
-
-## ChaCha
-<!-- _class: with-info -->
-
-Cifrado de flujo, derivado del Salsa20 y probablemente la única alternativa al AES en TLS 1.3
-
-- Tamaño de clave: $\|k\|=256\ bits$
-- Usa un $\|nonce\|=64\ bits$
-
-![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/4/47/Salsa_round_function.svg)
-
-ChaCha es el algoritmo de cifrado simétrico de flujo más usado
-
-
-<!--
-
-**Nota**: hasta hace poco, un buen algoritmo PRNG no es sencillo de hacer, o no es rápido. Hasta la aparición de Salsa20, la falta de buenos algoritmos PRNG hacían preferir el cifrado simétrico de bloque que veremos en un momento.
-
--->
-
----
-
-```c
-#define ROTL(a,b) (((a) << (b)) | ((a) >> (32 - (b))))
-#define QR(a, b, c, d) (			\
-	a += b,  d ^= a,  d = ROTL(d,16),	\
-	c += d,  b ^= c,  b = ROTL(b,12),	\
-	a += b,  d ^= a,  d = ROTL(d, 8),	\
-	c += d,  b ^= c,  b = ROTL(b, 7))
-#define ROUNDS 20
- 
-void chacha_block(uint32_t out[16], uint32_t const in[16])
-{
-	int i;
-	uint32_t x[16];
-
-	for (i = 0; i < 16; ++i)	
-		x[i] = in[i];
-	// 10 loops × 2 rounds/loop = 20 rounds
-	for (i = 0; i < ROUNDS; i += 2) {
-		// Odd round
-		QR(x[0], x[4], x[ 8], x[12]); // column 0
-		QR(x[1], x[5], x[ 9], x[13]); // column 1
-		QR(x[2], x[6], x[10], x[14]); // column 2
-		QR(x[3], x[7], x[11], x[15]); // column 3
-		// Even round
-		QR(x[0], x[5], x[10], x[15]); // diagonal 1 (main diagonal)
-		QR(x[1], x[6], x[11], x[12]); // diagonal 2
-		QR(x[2], x[7], x[ 8], x[13]); // diagonal 3
-		QR(x[3], x[4], x[ 9], x[14]); // diagonal 4
-	}
-	for (i = 0; i < 16; ++i)
-		out[i] = x[i] + in[i];
-}
-```
-
-> Fuente: [Wikipedia](https://en.wikipedia.org/wiki/Salsa20#ChaCha_variant))
-
-<!-- ChaCha es tan sencillo que podemos meterlo en una sola página -->
-
-## Variantes de ChaCha
-
-... la comunidad aún no está segura de cómo usarlo ...
-
-Nonce length|Description|Max data|If random nonce and same key
---|--|--|--
-8 bytes (default)|The original ChaCha20 designed by Bernstein.|No limitations|Max 200 000 mensajes, el contador limita
-12 bytes|The TLS ChaCha20 as defined in RFC7539.|256 GB|Max 13 billions messages
-24 bytes|XChaCha20, still in draft stage.|256 GB|No limitations
-
-> [The Salsa20 family of stream ciphers](https://cr.yp.to/snuffle/salsafamily-20071225.pdf), Daniel J. Bernstein, 2007
 
 # Cifrado simétrico de bloque: AES
 <!-- _class: lead -->
 
 Y sus "modos" de cifrado
 
-## Cifrado de bloque
+## Criptografía simétrica o de clave secreta (SKC)
+
+![center w:20em](../images/simetrica/simetrica.svg)
+
+- Usa la misma clave para cifrar que para descifrar
+- **Ambas partes tienen que conocer la clave**
+- Rapido y sencillo
+- Ejemplos actuales: AES, ChaCha
+- Ejemplos rotos y obsoletos: RC4, DES, TDES
+
+Vamos a ver AES como ejemplo de cifrado simétrico
+
+## Advanced Encryption System (AES)
 <!-- _class: with-info -->
 
-Alternativa al cifrado de flujo: cortar el texto en claro en bloques de la misma longitud de la clave y cifrar cada uno de los bloques
+[AES (FIPS 197, 2001)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf) es un cifrado de bloque desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001.
+
+![bg left:40%](../images/simetrica/leuven.jpg)
+
+AES: sistema de cifrado simétrico por bloques y dos variantes: claves de 128 ó 256 bits
+
+<!--
+AES fue desarrollado por Vincent Rijmen y Joan Daemen en el COSIC de la KU Leuven, Bélgica.
+
+Es totalmente ubicuo en la seguridad actual: se usa para todo, en todos lados. ChaCha20 es el único algoritmo que puee hacerle sombra.
+
+Hay hardware especializado en cifrar y descifrar AES, entre ellas las CPUs de computadora de sobremesa.
+-->
+
+
+## AES: Cifrado de bloque
+
+Divide el mensaje a cifrar en bloques de 128bits (16B) y cifra cada bloque por separado
 
 ![center w:30em](../images/simetrica/ECB_encryption.svg)
-
-El cifrado de bloque es el muy utilizado: es rápido, no necesita exigentes o lentos algoritmos PRNG y ya tenemos hardware especializado en su cifrado/descifrado
 
 <!--
 Nota importante: la figura muestra un cifrado de bloque totalmente inseguro, como veremos en un momento
@@ -369,23 +218,35 @@ Nota importante: la figura muestra un cifrado de bloque totalmente inseguro, com
 Fíjate: los bloques no tienen memoria, al contrario de lo que pasaba en el cifrado de flujo. Veremos que esto es una de sus debilidades.
 -->
 
+## Vector de Inicialización (IV)
+
+Si siempre ciframos igual el mismo mensaje, ¡un atacante sabrá que estamos repitiendo lo mismo que antes!
+
+**Vector de inicialización**: valor al azar **no secreto** que añadimos al mensaje para hacerlo diferente cada vez
+
+Los mensaje siguientes dependen de los anteriores: **modos de operación** 
+
+![bg right](../images/simetrica/loro.png)
+
+
+
 ## Modos de operación
 <!-- _class: with-warning -->
 
-Los cifrados de bloque se organizan como "modos de operación": como ordenamos las cajas de cifrados y descifrados. Tener modos permite paralelizar el cifrado/descifrado, o añadir autenticación, o protegerse ante ciertos ataques, o resistir canales ruidosos...
+Ordenación de los bloques de cifrado para evitar repeticiones, añadir autenticación, eficiencia en el cifrado o descifrado...
 
 En la imagen, modo GCM
 
 ![bg right w:90%](https://upload.wikimedia.org/wikipedia/commons/2/25/GCM-Galois_Counter_Mode_with_IV.svg)
 
-Además de escoger un cifrado de bloque, hay que decidir cómo organizamos los bloques: modos. Cada modo de operación tiene ventajas y desventajas según para qué queremos usar el sistema
+Cada modo de operación tiene ventajas y desventajas según para qué queremos usar el sistema
 
 ## Ejemplo: modo ECB (Electronic Code-Book)
 
 ![center Wikipedia w:35em](../images/simetrica/ECB_encryption.svg)
 
 ---
-<!-- _class: center with-info -->
+<!-- _class: center with-warning -->
 
 Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
@@ -399,27 +260,20 @@ No se debe usar un cifrado de bloque en modo ECB
 
 ![center Wikipedia w:35em](../images/simetrica/CBC_encryption.svg)
 
+Rápido para descifrar, no tanto para cifrar
+
 ## Ejemplo: modo OFB (Output Feedback)
 
 ![center Wikipedia w:35em](../images/simetrica/OFB_encryption.svg)
+
+Rápido para cifrar, no tanto para descifrar
+
 
 ## Ejemplo: modo CTR (Counter)
 
 ![center Wikipedia w:35em](../images/simetrica/CTR_encryption.svg)
 
-## Vector de Inicialización (IV)
-
-Los distintos encadenados requieren de una semilla inicial para empezar el encadenado: vector de inicialización (IV), que cumple la misma función que un *nonce*
-
-Se envía al principio de la comunicación así que los atacantes pueden conocer el IV
-
-Esto hace que en lugar de transmitir $n$ bloques como en ECB, haga falta transmitir $n+1$
-
-- IV en CBC: es el hipotético bloque cifrado $−1$
-- IV en OFB: es el bloque que se cifra constantmente $e(e(e(...e(IV))))$ y se aplica sobre los bloques en claro (con $\otimes$)
-- IV en CTR: es el valor inicial del contador que se cifra ECB, y se aplica sobre los bloques en claro (con $\otimes$)
-
-`AES_128_CTR` es efectivamente un cifrado de flujo, siendo $k$ la semilla, y el IV el *nonce*
+Rápido para cifrar y descifrar
 
 ## Cómo escoger el modo adecuado
 
@@ -434,47 +288,9 @@ Ahora veremos con más detalle cada una de esas cajas de cifrado: AES
 
 > https://stackoverflow.com/questions/1220751/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb
 
-## Advanced Encryption System (AES)
-
-Desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001.
-
-[AES (FIPS 197, 2001)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf) es un cifrado de bloque:
-
-- longitud de bloque: 128 bits (16 Bytes)
-- longitud de clave: 128, 192 ó 256 bits
-
-![bg left:40%](../images/simetrica/leuven.jpg)
-
-> background: https://whatsupcourtney.com/wp-content/uploads/2017/10/Things-to-do-in-Leuven-52-e1560945504897.jpeg
-
-<!--
-AES fue desarrollado por Vincent Rijmen y Joan Daemen en el COSIC de la KU Leuven, Bélgica.
-
-Es totalmente ubicuo en la seguridad actual: se usa para todo, en todos lados. ChaCha20 es el único algoritmo que puee hacerle sombra.
-
-Hay hardware especializado en cifrar y descifrar AES, entre ellas las CPUs de computadora de sobremesa.
--->
-
-## Algoritmo de "cada caja" AES
-
-![center w:25em](../images/simetrica/aes-algorithm.png)
-
-No es tan sencillo como ChaCha...
-
-## Comparación flujo y bloque
-<!-- _class: center -->
-
- 
-Flujo|Bloque
---|--
-Más rápido|Más lento (a menos que exista ayuda del hardware)
-Fácil de programar: pequeños dispositivos|Más complejo
-Implementado en software|Implementado en hardware, mucho soporte ya desplegado
-RC4, **ChaCha20**|3DES, **AES**
-
 ## Tamaños recomendados de clave para impedir fuerza bruta
 
-![center w:20em](../images/simetrica/recomendados.png)
+![center w:15em](../images/simetrica/recomendados.png)
 
 Tamaños recomendados de clave en bits según varios institutos internacionales. Nota: NIST y NSA son de EEUU, ECRYPT de Europa
 
@@ -485,7 +301,7 @@ Tamaños recomendados de clave en bits según varios institutos internacionales.
 
 ![w:20em center](../images/simetrica/simetrica.svg)
 
-El cifrados de flujo (ej. ChaCha) y de bloque  (ej. AES) permiten enviar mensajes computacionalmente seguros
+El cifrado simétrico permite enviar mensajes computacionalmente seguros
 
 Solo necesitamos que las dos partes tenga una clave secreta en común
 
@@ -500,18 +316,6 @@ Este es el problema de intercambio de clave. No fue resuelto hasta 1976 con una 
 
 Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 -->
-
----
-
-El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez en la historia que dos personas cualquiera que no se conocían mantuviesen una conversación confidencial por medios dgitales...
-
-...pero su artículo no se llamó "Solución al problema de intercambio de claves". Tenía un título mucho más ambicioso: [Nuevas direcciones en la criptografía](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720)
-
-¿Qué direcciones eran esas?
-
-![bg right:30%](../images/asimetrica/signpost-giving-directions.jpg)
-
-> Foto: https://www.publicdomainpictures.net/en/view-image.php?image=363738&picture=signpost-giving-directions (CC0)
 
 # Criptografía asimétrica o de clave pública
 <!-- _class: lead -->
@@ -606,7 +410,7 @@ en realidad no sabemos si el DLP es difícil: solo lo sospechamos muy fuertement
 
 ## Protocolo Diffie-Hellman: intercambio de claves simétricas
 
-Utilizado para acordar una clave simétrica entres dos personas antes de las comunicaciones
+Utilizado para **acordar una clave simétrica entres dos personas antes de las comunicaciones**
 
 Idea básica:
 
@@ -644,14 +448,6 @@ Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
 4|$g^{ab}$|$g^{ab}$|
 
 Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
-
-## Nuevas direcciones
-
-El DLP, en la versión D-H de 1976, no una solución completa: permite hacer acuerdo de claves, pero no cifrado
-
-En pocos años aparecieron nuevas funciones basadas en esas ideas: **RSA**, ElGammal, DSA, Pailier...
-
-Luego, las soluciones se refinaron con curvas elípticas: ECDH (*Elliptic Curves Diffie-Hellman*), ECDSA (*Elliptic Curves DSA*)...
 
 ## RSA: claves públicas y privadas
 
@@ -802,7 +598,7 @@ Pero tiene otras ventajas:
 1. Usamos criptografía asimétrica para intercambiar una clave: ECDH
 1. Una vez que tenemos la clave, seguimos cifrando en AES ó ChaCha
 
-# Conclusiones
+# Resumen y referencias
 <!-- _class: lead -->
 
 ---
@@ -812,7 +608,7 @@ Característica|Cifrado simétrico|Cifrado asimétrico
 Eficiencia|Muy rápido|Lento
 Claves|1 (secreta, compartida)|2 (una pública y otra privada)
 Tamaño de clave|256 bits|15360 bits (RSA), 512 bits (curvas elípticas)
-Servicios|Confidencialidad|Autenticación, integridad, intercambio de claves simétricas (Diffie-Hellman)
+Servicios|Confidencialidad|Intercambio de claves simétricas (Diffie-Hellman), firma digital (RSA)
 Ejemplos|AES, ChaCha|RSA, ECDSA, ECDH
 
 <!--
