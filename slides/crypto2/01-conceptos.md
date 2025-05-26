@@ -125,17 +125,6 @@ La composición es compleja y todo debe funcionar como un reloj.
 - **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
 -->
 
-
-## Servicios de seguridad a primitivas
-
-Objetivo|Primitiva|Algoritmos
---|--|--
-**Confidencialidad**|cifrado simétrico|AES, Chacha
-**Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
-**Autenticidad**|firma asimétrica|RSA, ECDSA
-**No repudio**|firma asimétrica|RSA, ECDSA
-**Acordar clave**|acuerdos de clave/encapsulación|ECDH
-
 ## Gestión de claves
 
 ![bg left:33% h:100%](../images/conceptos/Lea_Kissner.jpeg)

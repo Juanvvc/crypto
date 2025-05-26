@@ -24,6 +24,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 ## Temario
 <!-- _class: cool-list smaller-font -->
 
+1. [Conceptos básicos](01-conceptos.html)
 1. [Sistemas de cifrado](02-cifrado.html)
 1. [Firma digital](../A4-firmadigital.html)
 1. [Sistemas de autenticación](../11-autenticacion.html)
@@ -100,12 +101,6 @@ Las actividades incluyen información adicional que no está en las clases
     - Las actividades no presentados se puntúan como 0
     - Se pueden presentar las actividades hasta el día del examen correspondiente
 - En segunda convocatoria, se mantiene la nota de aquella parte que fue superada en primera convocatoria
-
-## Conocimientos recomendables
-
-- Álgebra básica, probabilidad
-- Conocimientos básicos de programación. Los ejemplos se presentarán en Python, pero no se pedirá programar nada. Será suficiente con poder entenderlos.
-- Conocimientos básicos de redes: cómo funciona Internet.
 
 ## Bibliografía
 <!-- _class: smaller-font -->

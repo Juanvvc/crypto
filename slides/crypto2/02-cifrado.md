@@ -43,7 +43,7 @@ Hoy hablaremos del primero, confidencialidad, y empezaremos a poner las bases pa
 1. [Confidencialidad perfecta y computacional](#5)
 1. [Cifrado simétrico de bloque: AES](#12)
 1. [Criptografía asimétrica o de clave pública](#26)
-1. [Resumen y referencias](#63)
+1. [Resumen y referencias](#50)
 
 ---
 <!-- _class: with-info -->
@@ -180,13 +180,13 @@ Y sus "modos" de cifrado
 
 ![center w:20em](../images/simetrica/simetrica.svg)
 
-- Usa la misma clave para cifrar que para descifrar
-- **Ambas partes tienen que conocer la clave**
-- Rapido y sencillo
-- Ejemplos actuales: AES, ChaCha
+- Una sola clave cifra y descifra. **Ambas partes tienen que conocer la clave**
+- Ventajas: muy rápido
+- Desventajas: ¿cómo compartimos la clave?
+- Ejemplos actuales: **AES** (es el que veremos en detalle), ChaCha
 - Ejemplos rotos y obsoletos: RC4, DES, TDES
 
-Vamos a ver AES como ejemplo de cifrado simétrico
+<!-- Se llama cifrado simétrico o de clave secreta porque cifrar y descifrar es lo mismo, y con la misma clave, que tiene que permanecer secreta para todas las personas que no estén en la conversación -->
 
 ## Advanced Encryption System (AES)
 <!-- _class: with-info -->
@@ -241,7 +241,7 @@ En la imagen, modo GCM
 
 Cada modo de operación tiene ventajas y desventajas según para qué queremos usar el sistema
 
-## Ejemplo: modo ECB (Electronic Code-Book)
+## Ejemplo: modo ECB (Electronic Code-Book). El loro que repite
 
 ![center Wikipedia w:35em](../images/simetrica/ECB_encryption.svg)
 
@@ -298,6 +298,7 @@ Tamaños recomendados de clave en bits según varios institutos internacionales.
 
 
 ## Problema del cifrado simétrico
+<!-- _class: with-info -->
 
 ![w:20em center](../images/simetrica/simetrica.svg)
 
@@ -331,8 +332,8 @@ También conocida como **criptografía de clave pública**
 
 Cada persona tiene dos claves:
 
-- $pk$: clave pública, todos la conocen
-- $sk$: clave secreta, **nadie más la conoce**
+- $pk$: clave pública de una persona, todos la conocen
+- $sk$: clave secreta. Solo el propietario la conoce, **nadie más, ni siquiera las personas con las que habla**
 
 A veces son intercambiables: lo que se cifra con una se descifra con la otra
 
@@ -349,9 +350,7 @@ Según si usamos la clave pública o la privada para cifrar, podemos hacer dos c
 
 Ejemplos: RSA, Diffie-Hellman, DSA...
 
-La criptografía simétrica también nos permitía cifrar, pero no firmar
-
-No supimos cómo conseguir criptografía simétrica hasta 1976
+> La criptografía simétrica también nos permitía cifrar, pero no firmar
 
 ## Esquema de cifrado
 
@@ -486,6 +485,40 @@ Fundaron la empresa RSA Security LLC, que sigue siendo uno de los mayores provee
     - $pk=\{e, n\}$
 1. Se descartan $p$, $q$, $\phi$
 
+---
+
+```
+Pública
+(n=2630603903462120558125809399396223450806040372680184917638400134004105630494370342493606659294555239865975926870363332336960041351773437802844996
+2255029778102289989887357059605220044360970230381740652986600375646373696626242320610515650620076120340628081660475500146892077996033767236927270182
+8537602215507414332799741425399475043531193746968563077377733376432359188825062279559903677141193673153091026840234999533292241421899721978869014020
+8976283873838133577327435068449969167496626845188284509563364587386450894233747711870685037802983577824461259620598113905244407969412571310155268827
+7552820737028751605315371203,
+e=65537,
+)
+
+Privada = (
+ d=65966797154963181580662243579012213409634054816077176295723464611273744 5784209368657570206786645224675792016267924778145044323047983895563893008
+ 3840888153077224847625063240552390082229128053637009883905401282841148183 7313880619813772290479521644222050476532200834210308353422618818019634896
+ 5958329069626433396024443191332697619398764123276960421002286251863686698 7965253240001168546075012919946518601626499930973209433719541266102718357
+ 0159396494300709365681041634009027640598440177603208560540166080774664796 4863173392223008002189330713551460482658358006754041112981200147901797910
+ 7023936819256886594902951886215961,
+ p=15822697433369222355195074603863028629561696669534834883621867737110843 4794283515182294734634893277974643854046993128130398000368136353140552823
+ 7493745905709679206798571773440040727909231340545918102174124482089157401 5605088840535382614556806210730724645276338593685838358134428454905802529
+ 9034018350606553019,
+ q=16625508479447490830085422502172652004940406193549490218563143957880705 6440258428473283984392352130053211679280853003187348953863348572315206383
+ 2212176953714405103622793546369616228204678810506794297563950807636241311 2894942897951312307129681995544553786274227219646959297229170241434933080
+ 0995119347515600537,
+ u=30088390481144180897480895140640860431430673453228981590701663357531214 5271086939508602764777052098733559342685009059287845166869379637330760407
+ 3641229883757561839424495924348864139753204431984483442776861335698636851 0894818412987303676062484214645876169072495669175070328712630890572849776
+ 0624230899012969)
+```
+
+Observa:
+
+- Las claves RSA son números muy largos
+- Hay una relación entre la clave pública y la privada, pero si un atacante tiene la clave pública solo podría obtener la privada por fuerza bruta
+
 
 ## El protocolo: cifrado y descifrado
 
@@ -496,6 +529,27 @@ $$c=m^e \mod n$$
 Descifrado: Alice utiliza su clave privada $sk_A=\{d, n\}$
 
 $$m'=c^d \mod n$$
+
+---
+
+```
+- Mensaje: 15
+['- Cifrado: 11383802449161344350546832178226978312769309764351458181932',
+ '5884150859852715868196703424496486345974985183893431270220618898117243',
+ '4074085942357664667616949933359742818670009369869295239555869272197041',
+ '7020148341206050989756453017030709933803245840985556605690245075625974',
+ '4824619122348481566547445114274307863274834976209360938117505178524351',
+ '8625517598374787237599491455109425834142763325667103578756108900333176',
+ '9469681010573259781173212314493268678653351108939467583746792211641767',
+ '9369248678561075313076494330212825885965313134794742288632771011791982',
+ '96868029138582228042383220689872478270738650868856170833992652968076']
+```
+
+Observa:
+
+- En RSA solo podemos cifrar números. Si queremos cifrar un mensaje de texto, primero lo convertimos a un número
+- El resultado también es un número
+- RSA puede cifrar como máximo números tan largos como la clave
 
 ## Velocidad de proceso
 <!-- _class: with-info -->
@@ -582,6 +636,7 @@ Varios algoritmos clásicos se han adaptado a curvas elípticas:
 - RSA no se ha adaptado a curvas elípticas
 
 ## Usos de la criptografía asimétrica
+<!-- _class: with-info -->
 
 ¿Por qué no la usamos para todo?
 
@@ -590,8 +645,11 @@ Varios algoritmos clásicos se han adaptado a curvas elípticas:
 
 Pero tiene otras ventajas:
 
+- La otra parte solo tiene que conocer nuestra clave pública para poder comunicarse, y la clave pública no es secreta
 - Es la única que nos permite firmas digitales
 - A través de las firmas podemos autenticar a la otra parte
+
+Problema de la criptografía de clave pública: ¿cómo hacemos llegar nuestra clave pública a nuestros interlocutores sin que un atacante pueda cambiarla y hacerse pasar por notrosos?
 
 ## Criptografía híbrida: lo mejor de los dos mundos
 
@@ -615,6 +673,16 @@ Ejemplos|AES, ChaCha|RSA, ECDSA, ECDH
 ECDSA: Elliptic Curve DSA
 ECDH: Elliptic Curve Diffie-Hellman
 -->
+
+## Servicios de seguridad a primitivas
+
+Objetivo|Primitiva|Algoritmos
+--|--|--
+**Confidencialidad**|cifrado simétrico|AES, Chacha
+**Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
+**Autenticidad**|firma asimétrica|RSA, ECDSA
+**No repudio**|firma asimétrica|RSA, ECDSA
+**Acordar clave**|acuerdos de clave/encapsulación|ECDH
  
 ## Resumen
 <!-- _class: smaller-font -->
