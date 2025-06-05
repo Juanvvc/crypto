@@ -18,10 +18,13 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
+
+
 # Firma Digital
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
+
 
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
@@ -67,7 +70,7 @@ Problema: los documentos a firmar pueden ser muy grandes
 
 Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
 
-![center w:15em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
+![center w:10em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
 
 Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
