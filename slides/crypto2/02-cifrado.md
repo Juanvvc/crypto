@@ -333,7 +333,7 @@ También conocida como **criptografía de clave pública**
 Cada persona tiene dos claves:
 
 - $pk$: clave pública de una persona, todos la conocen
-- $sk$: clave secreta. Solo el propietario la conoce, **nadie más, ni siquiera las personas con las que habla**
+- $sk$: clave privada. Solo el propietario la conoce, **nadie más puede conocer mi clave privada, ni siquiera las personas con las que hablo**
 
 A veces son intercambiables: lo que se cifra con una se descifra con la otra
 
@@ -436,7 +436,7 @@ Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
 
 **Observa**: para que un atacante que solo conoce $g$, $p$, $A$ y $B$ (claves públicas) pueda calcular $s=A^b$, tiene que resolver $B=g^b \mod p$, que se supone difícil
 
-## Claves secretas y claves públicas
+## Claves privadas y claves públicas
 <!-- _class: with-info -->
 
 Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
@@ -701,7 +701,7 @@ Objetivo|Primitiva|Algoritmos
 
 ---
 
-- Criptografía asimétrica: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es secreta
+- Criptografía asimétrica: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es privada
 - Muchísimo **más lenta** que el cifrado simétrico
 - Se utiliza para:
     - intercambiar claves simétricas (ECDH)
