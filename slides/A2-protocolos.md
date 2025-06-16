@@ -120,12 +120,12 @@ Una conexión HTTPS / TLS no quiere decir "confía en mí". Quiere decir "nadie 
 
 ## Autenticación: gestión de la identidad
 
-- **Servidor**: clave privada habitualmente en fichero en claro protegido únicamente por el SO (ACL) o en HSM con activación automática
+- **Servidor**: certificdo y clave privada
 - **Cliente**:
     - sin autenticación de cliente: anónimo, usuario y contraseña, etc.
     - con autenticación de cliente: fichero PKCS #12, o accediendo a un HSM en forma de SmartCard o de token USB vía librería PKCS #11
 
-![bg right:40%](https://www.internautas.org/graficos/clave_logo.jpg)
+![bg left:50%](images/auth/identities.png)
 
 ---
 
