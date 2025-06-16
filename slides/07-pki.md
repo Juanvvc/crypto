@@ -29,7 +29,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Criptografía híbrida](#5)
 1. [Gestión de claves públicas](#16)
-1. [Resumen y referencias](#38)
+1. [Resumen y referencias](#41)
 
 ## Recordatorio: cifrado asimétrico
 <!-- _class: two-columns -->
@@ -410,6 +410,79 @@ Las empresas sí que instalan CAs personalizadas en los PCs de los usuarios
 Por ejemplo, la CA del proxy/firewall de la empresa, para poder descifrar las comunicaciones de los empleados
 -->
 
+## Certificados X.509
+
+[Estándar internacional](https://www.itu.int/rec/T-REC-X.509) que siguen los certificados de la PKI. Elementos:
+
+- Certificado:
+    - Versión, número de serio, ID de algoritmos...
+    - Nombre de la persona que lo emite (*issuer*): autoridad de confianza
+    - Periodo de validez: desde una fecha hasta una fecha
+    - Nombre del identidad (*subject*)
+    - Clave pública de la identidad
+    - Extensiones opcionales. Ejemplos: usos válidos de la clave, nombres alternativos de la identidad (usado para dominios de internet)
+- Firma digital del certificado por la autoridad de confianza
+
+---
+
+```
+Certificate:
+   Data:
+       Version: 3 (0x2)
+       Serial Number:
+           10:e6:fc:62:b7:41:8a:d5:00:5e:45:b6
+       Signature Algorithm: sha256WithRSAEncryption
+       Issuer: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Organization Validation CA - SHA256 - G2
+       Validity
+           Not Before: Nov 21 08:00:00 2016 GMT
+           Not After : Nov 22 07:59:59 2017 GMT
+       Subject: C=US, ST=California, L=San Francisco, O=Wikimedia Foundation, Inc., CN=*.wikipedia.org
+       Subject Public Key Info:
+           Public Key Algorithm: id-ecPublicKey
+               Public-Key: (256 bit)
+           pub: 
+                   00:c9:22:69:31:8a:d6:6c:ea:da:c3:7f:2c:ac:a5:
+                   af:c0:02:ea:81:cb:65:b9:fd:0c:6d:46:5b:c9:1e:
+                   9d:3b:ef
+               ASN1 OID: prime256v1
+               NIST CURVE: P-256
+(sigue en la página siguiente)
+```
+
+---
+
+```
+Certificate: (continúa de la página anterior)
+       X509v3 extensions:
+           X509v3 Key Usage: critical
+               Digital Signature, Key Agreement
+           Authority Information Access: 
+               CA Issuers - URI:http://secure.globalsign.com/cacert/gsorganizationvalsha2g2r1.crt
+               OCSP - URI:http://ocsp2.globalsign.com/gsorganizationvalsha2g2
+           X509v3 Certificate Policies: 
+               Policy: 1.3.6.1.4.1.4146.1.20
+                 CPS: https://www.globalsign.com/repository/
+               Policy: 2.23.140.1.2.2
+           X509v3 Basic Constraints: 
+               CA:FALSE
+           X509v3 CRL Distribution Points: 
+               Full Name:
+                 URI:http://crl.globalsign.com/gs/gsorganizationvalsha2g2.crl
+           X509v3 Subject Alternative Name: 
+               DNS:*.wikipedia.org, DNS:*.m.mediawiki.org ...
+           X509v3 Extended Key Usage: 
+               TLS Web Server Authentication, TLS Web Client Authentication
+           X509v3 Subject Key Identifier: 
+               28:2A:26:2A:57:8B:3B:CE:B4:D6:AB:54:EF:D7:38:21:2C:49:5C:36
+           X509v3 Authority Key Identifier: 
+               keyid:96:DE:61:F1:BD:1C:16:29:53:1C:C0:CC:7D:3B:83:00:40:E6:1A:7C
+
+   Signature Algorithm: sha256WithRSAEncryption
+        8b:c3:ed:d1:9d:39:6f:af:40:72:bd:1e:18:5e:30:54:23:35:
+        ...
+
+```
+
 ## Cadena de confianza, intermediarios y raíces
 
 Normalmente hay una "cadena de confianza" con varios eslabones
@@ -425,6 +498,10 @@ Por eso los certificados de usuarios no suelen estar firmados por una TTP final 
 -->
 
 ---
+
+```
+openssl s_client -showcerts -connect localhost:5000 < /dev/null    2> /dev/null | openssl x509 -noout -text
+```
 
 ![w:25em center](images/pki/certificate-chain-example.png)
 

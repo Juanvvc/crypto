@@ -136,7 +136,7 @@ Lo más habitual en Internet es utilizar TLS con solo autenticación de servidor
 - Usuario y contraseñas
 - Sistemas Cl@ve, firma electrónica en momentos puntuales, 2FA...
 
-Más información en el [Tema 5](05-autenticacion.html)
+Más información en el [la sesión de autenticación](11-autenticacion.html)
 
 
 
@@ -250,6 +250,46 @@ MasterSecret: PBKservidor(MasterSecretcliente)
 
 En este caso (no-PFS) una revelación de la clave privada del servidor en cualquier momento, permite descifrar el tráfico futuro y también el tráfico pasado
 
+## Ejemplo
+
+```
+$ curl -v https://www.google.com -o salida
+
+* Connected to www.google.com (142.250.200.100) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [15 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [3813 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [80 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=www.google.com
+*  start date: May 19 08:43:37 2025 GMT
+*  expire date: Aug 11 08:43:36 2025 GMT
+*  subjectAltName: host "www.google.com" matched cert's "www.google.com"
+*  issuer: C=US; O=Google Trust Services; CN=WR2
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+```
+
 ## Transporte
 
 los datos se fragmentan en bloques de hasta 16 kB
@@ -284,10 +324,45 @@ Se debe vigilar que RSA y DHE sean de 2048 bit o más, y que ECDSA y ECDH usen P
 
 ## Seguridad: condiciones de uso
 
-- claves protegidas (sólo) por el S.O.
-- las claves en claro están expuestas (ataques, aparición en backups, scripts de despliegue)
-- (históricamente) los certificados han sido caros (…)
-- (actualmente) deben regenerarse frecuentemente (certificados de corta duración)
+- Las claves privadas está protegidas directamente por el S.O.
+- Los certificados deben recrearse frecuentemente:
+    - Automatización del proceso
+- Let's Encrypt para proteger nuestras webs
+
+## Let's encrypt
+
+[![center](images/pki/letsencrypt.png)](https://letsencrypt.org/)
+
+Hasta 2014, los certificados de las webs tenía que comprarse a VeriSign o similares.
+
+En 2014, la EFF democratizó la seguridad en Internet: todos los servidores públicos deben poder usar HTTPS sin tener que pagar a nadie
+
+"Desventajas":
+
+- Solo válido para páginas web públicas, no es válido ni para certificados de personas, ni para sistemas de la intranet que no sean públicos
+- hay que renovarlos cada 3 meses, aunque el proceso puede automatizarse: <https://certbot.eff.org/instructions>
+
+---
+
+Paso 1 y 2:
+
+- Le envías a Let's Encrypt la clave pública de un dominio
+- Let's encrypt te pide que pongas un *nonce* en un lugar determinado por ellos de tu web, y que lo firmes que la clave privada del dominio
+
+![center](images/pki/letsencrypt-nonce.png)
+
+> https://letsencrypt.org/how-it-works/
+
+
+---
+
+Paso 3:
+
+- Let's Encrypt visita la página que espera encontrar. Si el *nonce* y la firma son correcta, emite el certificado para esa web
+
+![center](images/pki/letsencrypt-challenge.png)
+
+> https://letsencrypt.org/how-it-works/
 
 # Prácticas
 <!-- _class: lead -->
@@ -348,17 +423,6 @@ openssl x509 -noout -text -in certs/www.example.com.cert.pem
 ```
 
 - Guardamos: `certs/www.example.com.cert.pem` Este archivo incluye nuestra clave pública y es lo que podemos darle a cualquier persona
-
-
-## Let's encrypt
-
-Proyecto de la EFF: ofrecer certificados a cualquier persona **con un servidor publico** (es decir, accesible desde Internet)
-
-Antes, los certificados se compraban
-
-"Desventaja": hay que renovarlos cada 3 meses, aunque el proceso puede automatizarse
-
-<https://certbot.eff.org/instructions>
 
 # Conclusiones
 <!-- _class: lead -->
