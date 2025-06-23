@@ -110,14 +110,6 @@ TLS tiene dos modos para garantizar la autenticación de las partes:
 
 Utilizar TLS solo con autenticación de servidor es lo más habitual en Internet
 
----
-
-Una conexión HTTPS / TLS no quiere decir "confía en mí". Quiere decir "nadie más puede acceder". Podrías estar recibiendo la llamada de un atacante, y que fuese privada.
-
-- Scott Hanselman
-
-![bg right:60%](images/pki/scream.jpg)
-
 ## Autenticación: gestión de la identidad
 
 - **Servidor**: certificdo y clave privada

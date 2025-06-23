@@ -180,8 +180,23 @@ Vulnerabilidades de *algo que sabemos*:
 - A veces es posible "adivinar contraseñas", si tienen una estructura
 - A veces, el administrador de sistemas no cambia la contraseña por defecto
 - Los usuarios se confunden fácilmente: ataques de phishing
+- ¿Hay que forzar cambios periódicos de contraseñas? [El NIST no lo recomienda](https://community.spiceworks.com/t/you-should-periodically-change-your-password/812118)
 
 > https://expertinsights.com/insights/50-identity-and-access-security-stats-you-should-know/
+
+---
+
+[![center w:25em](images/auth/xkcd.png)](https://xkcd.com/936/)
+
+## Números PIN más usados
+
+![bg left](images/auth/pin-number.png)
+
+- Línea diagonal con los números repetidos 1111, 2222, 3333
+- Esquina inferior izquierda con fechas
+- Línea horizontal con años 19xx y 20xx
+
+> http://datagenetics.com/blog/september32012/index.html
 
 ## The password Game
 
@@ -193,7 +208,7 @@ Usa siempre gestores de contraseñas: KeePass, 1Password, LogMeOnce, Bitwarden..
 
 ![bg right](images/auth/password-game.png)
 
-## El juego de las preguntas
+## Recuperar contraseñas usando preguntas
 <!-- _class: with-warning -->
 
 - ¿cuántos nombres de mascota son comunes?
@@ -221,7 +236,7 @@ Las preguntas personales no son un buen mecanismo de autenticación: baja fortal
 - SMS de validación
 
 ---
-
+<!-- _class: smaller-font -->
 Vulnerabilidades de *algo que tenemos*:
 
 - Que nos roben el dispositivo
@@ -235,7 +250,7 @@ Vulnerabilidades de *algo que tenemos*:
     - [Caso Activision](https://www.bleepingcomputer.com/news/security/activision-confirms-data-breach-exposing-employee-and-game-info/)
     - [Vishing](https://www.verificat.cat/es/te-llama-tu-banco-pero-no-es-tu-banco-el-vishing-o-la-estafa-de-la-suplantacion-de-la-identidad-telefonica/)
 
-![right bg w:90%](images/auth/activision-hacked.png)
+![right:40% bg w:100%](images/auth/activision-hacked.png)
 
 > 
 
@@ -325,7 +340,17 @@ En muchas webs nos podemos autenticar con nuestro usuario de **Google**, **Faceb
 
 [Microsoft](https://www.microsoft.com/en-us/security/business/identity-access-management/passwordless-authentication) y [Google](https://androidcommunity.com/google-planning-on-a-more-secure-no-password-future-20210506/) proponen que nos autentiquemos en sus sistemas solo con nuestro móvil: en el futuro próximo, ¡puede que no usemos contraseñas!
 
-![center w:25em](https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4MHhB?ver=3b34&q=0&m=6&h=771&w=1619&b=%23FFFFFFFF&u=t&l=f&f=jpg&o=t&aim=true)
+---
+
+![bg right w:100%](images/auth/sso.png)
+
+Idea: separar el proveedor de identidades del proveedor de servicios
+
+Ejemplos de proveedors de identidaded: Google, Facebook, Microsoft, Okta...
+
+Los usuarios se autentican contra el proveedor de identidades, que les devuelve un **token** que puede usarse en el proveedor de servicios
+
+> https://www.miniorange.com/blog/what-is-single-sign-on-sso/
 
 ## Vulnerabilidades generales
 
@@ -478,6 +503,12 @@ Es decir: Alice y Bob firma los parámtros A y B y, si la firma verifica, Bob sa
 
 Por supuesto, esto mismo se puede hacer con Diffie-Hellman sobre curvas elípticas
 -->
+
+---
+
+Let's encrypt ([sesión protocolos](A2-protocolos.html)) también usar desafío-respuesta para comprabar la identidad
+
+![center](images/pki/letsencrypt-challenge.png)
 
 ## NTLM
 
