@@ -104,7 +104,7 @@ Image: https://static.bhphotovideo.com/explora/sites/default/files/proof.jpg
 
 ---
 
-![](https://blog.fastforwardlabs.com/images/2017/06/stego_images.jpg)
+![center](images/stego/stego-beach.jpg)
 
 <!--
 ¿Se mantiene la marca después de convertir la imagen?
@@ -114,7 +114,7 @@ Images: https://blog.fastforwardlabs.com/images/2017/06/stego_images.jpg
 
 ---
 
-![](images/stego/scanned.jpg)
+![center](images/stego/scanned.jpg)
 
 > [Look Scanned](https://lookscanned.io/)
 
