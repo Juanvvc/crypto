@@ -13,7 +13,7 @@ theme: marp-viu
     the YAML header: section: | */
 </style>
 
-# Casos prácticos (2 sesiones)
+# Criptografía y autenticación - Casos Prácticos
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
@@ -21,18 +21,40 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Bambu Labs](#7)
-1. [Supernote](#27)
+1. [Bambu Labs](#4)
+1. [Supernote](#26)
+
+---
+
+**Advertencia**:
+
+En esta presentación vamos a hablar de productos comerciales para explorar sus capacidades y problemas de seguridad si los hubiera
+
+Esta presentación no está apoyada por ninguno de estos productos comerciales, ni los respalda, ni los critica
+
+Toma tus propias decisiones
+
+# Bambu Labs
+<!-- _class: lead -->
+
+Reinventar la rueda, comunicación de la seguridad, actualizaciones de dispositivos
 
 ## Impresoras 3D
 
 ![bg right](../images/cases/printer.jpg.png)
 
-Existen varias marcas: Anycubic, Elegoo, Bambu...
+Existen varias marcas: Anycubic, Elegoo, BambuLabs...
 
-Vamos ver un caso que sucedió en Enero de 2025 con BambuLabs
+Vamos ver un caso que sucedió en enero de 2025 con el ecosistema de BambuLabs
 
 ---
+<!-- _class: two-columns-33 -->
+
+- **Ecosistema original**
+- Acceso preferente a través de la cloud
+- Aplicaciones de terceros
+- Filamento de terceros
+- Periféricos de terceros
 
 ![center w:30em](../images/cases/BambuEcosystem.png)
 
@@ -62,15 +84,19 @@ Puedes conectar a la la impresora:
 > [Firmware Update Introducing New Authorization Control System](https://blog.bambulab.com/firmware-update-introducing-new-authorization-control-system-2/)
 
 ---
+<!-- _class: two-columns-33 -->
+
+- Acceso a través de cloud
+- Otras aplicaciones: necesidad de un puente "Bambu Connect" que se ejecuta en local
+- Todo firmado digitalmente por la cloud o Bambu Connect
+- Filamento de terceros aún permitido
 
 ![center w:30em](../images/cases/BambuEcosystem2.png)
-
-Fíjate: se añade autenticación mediante firma digital en todas las conexiones
 
 ## El anuncio provocó "una revuelta" en la comunidad
 
 - 16 de enero de 2025: [Anuncio inicial de Bambu](https://blog.bambulab.com/firmware-update-introducing-new-authorization-control-system-2/)
-    - Actualización de firmware que exigirá control de acceso mediante firma gitial para el uso de la impresora
+    - Actualización de firmware que exigirá control de acceso mediante firma digital para el uso de la impresora
 - 17 de enero: [Why you should care about Bambu Labs removing third-party printer access, and what you can do about it ](https://www.reddit.com/r/BambuLab/comments/1i3gq1t/why_you_should_care_about_bambu_labs_removing/)
     - Llamadas a "boicot" / "desactiva actualizaciones" / "este es el primero paso hacia el modelo de impresión en papel de HP"
 - 20 de enero, [respuesta de Bambu](https://blog.bambulab.com/updates-and-third-party-integration-with-bambu-connect/)
@@ -86,7 +112,7 @@ Fíjate: se añade autenticación mediante firma digital en todas las conexiones
 - Los usuarios temen:
     - "Bambu quiere que todo pase por sus servidores"
     - Bambu quiere evitar que se use filamento / software / interfaces de terceros
-    - ¿Se puede imprimir sin conexión a Internet?
+    - ¿Se puede imprimir sin conexión a Internet? La nube de BambuLabs falla a veces
 
 ## Problemas
 <!-- _class: with-warning -->
@@ -102,13 +128,14 @@ No te quedes en el detalle de impresoras 3D. Todos estos problemas se pueden apl
 
 O cómo tener un problema reputacional cuando intentas solucionar un problema de seguridad
 
-- Los usuarios no perciben que sea una necesidad... incluso persiben que están perdiendo funcionalidad
+- Los usuarios no notaban que fuese una necesidad... incluso percibían que están perdiendo funcionalidad
 - No hubo comunicación previa con terceros afectados: [Panda](https://biqu3d.com/blogs/news/pandas-love-bamboo), [Orca](https://github.com/SoftFever/OrcaSlicer/pull/8103#issuecomment-2612855023)
-- Comunicación definiciente: [Bambu's Gaslighting Masterclass: Denying their own documented restrictions ](https://www.youtube.com/watch?v=W6MybDJfmmY)
+- Comunicación deficiente: [Bambu's Gaslighting Masterclass: Denying their own documented restrictions ](https://www.youtube.com/watch?v=W6MybDJfmmY)
 
 ![bg right:15% h:100%](../images/cases/youtubers-rant.png)
 
 ---
+<!-- _class: smaller-font -->
 
 Los equipos de seguridad necesitamos comunicar conceptos complejos a gente que no tiene ningún interés en ellos
 
@@ -123,32 +150,62 @@ Los equipos de seguridad necesitamos comunicar conceptos complejos a gente que n
 
 > [The myth of "soft skills": Why intelligence teams need strong communicators](https://redcanary.com/blog/threat-intelligence/strong-communicators/)
 > [The Essential Soft Skills that Cybersecurity Professionals Need to Succeed](https://www.eccu.edu/blog/cybersecurity/soft-skills-cybersecurity-professionals/   )
-> [Essential Soft Skills in Cyber Security for Beginners](https://www.institutedata.com/blog/essential-soft-skills-in-cyber-security/)
+> [Mind the Tech Gap Addressing the Conflicts between IT and Security Teams](https://www.routledge.com/Mind-the-Tech-Gap-Addressing-the-Conflicts-between-IT-and-Security-Teams/Robinson/p/book/9781032206172)
 
 ## ¿Reamente es necesario?
 
 [![center w:40em](../images/cases/printing-penises.png)](https://www.reddit.com/r/BambuLab/comments/1i3euzi/comment/m7m6ar2/)
 
 ---
+![center](../images/cases/anycubic-hacked.png)
+
+> [Someone is hacking 3D printers to warn owners of a security flaw ](https://www.bitdefender.com/en-au/blog/hotforsecurity/someone-is-hacking-3d-printers-to-warn-owners-of-a-security-flaw)
+> [Over 3,700 exposed 3D printers open to remote attackers](https://www.csoonline.com/article/566223/over-3700-exposed-3d-printers-open-to-remote-attackers.html?ref=blog.bambulab.com)
+> [ 30 million unauthorized requests per day to Bambu Cloud](https://wiki.bambulab.com/en/security-incidents-cloud-traffic)
+
+---
+<!-- _class: smaller-font -->
 
 - La seguridad de tu casa / oficina es tan fuerte como el eslabón más débil
 - Peligro de [movimiento lateral](https://www.crowdstrike.com/en-us/cybersecurity-101/cyberattacks/lateral-movement/)
 - Riesgo de [redes de bots](https://www.a10networks.com/glossary/what-is-a-botnet-iot-botnet/)
-- [Consumo excesivo de recursos](https://wiki.bambulab.com/en/security-incidents-cloud-traffic)
+- Consumo excesivo de recursos, para el usuario y para el operador de la nube
 - Problemas de reputación de Bambu por hardware / software de terceros
 - Necesidad de sistemas robustos para controlar [granjas de impresión](https://www.reddit.com/r/BambuLab/comments/1an244o/i_was_told_you_guys_might_think_my_bambu_farm_is/)
-- [Ya](https://www.bitdefender.com/en-au/blog/hotforsecurity/someone-is-hacking-3d-printers-to-warn-owners-of-a-security-flaw) [ha](https://www.csoonline.com/article/566223/over-3700-exposed-3d-printers-open-to-remote-attackers.html?ref=blog.bambulab.com) [pasado](https://wiki.bambulab.com/en/security-incidents-cloud-traffic)
+
+> [What are Internet of Things (IoT) attacks?](https://www.paubox.com/blog/what-are-internet-of-things-iot-attacks)
+> [The Rise of IoT Attacks: Endpoint Protection Via Trending Technologies](https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/the-rise-of-iot-attacks-endpoint-protection-via-trending-technologies/)
 
 
 ![bg left](../images/cases/smarthome.png)
 
-> background: https://www.investopedia.com/terms/s/smart-home.asp
+<!-- background: https://www.investopedia.com/terms/s/smart-home.asp -->
+
+---
+
+Riesgos:
+
+- Protección de la propiedad intelectual
+- Robo de propiedad intelectual
+- Defectos intencionales en los modelos a imprimir
+- Availability: dejar sin servicio una granja de impresión
+
+Propuestas:
+
+- Evaluación de riesgos
+- Inspeccionar la seguridad de los sistemas
+- Usar segmentación de red
+- Protocolos de seguridad y autenticación
+- Cifrado
+
+
+> [Cybersecurity Best Practices for 3D Printing Operations](https://3dprint.com/306615/cybersecurity-best-practices-for-3d-printing-operations/)
 
 ## ¿Cómo se actualiza un hardware?
 
 **Problema**: ecosistemas con muchos dispositivos diseñados para durar décadas: [IoT](https://es.wikipedia.org/wiki/Internet_de_las_cosas), pero también redes [SCADA](https://es.wikipedia.org/wiki/SCADA) e [infrastructuras críticas](https://es.wikipedia.org/wiki/Infraestructura_cr%C3%ADtica)   
 
-**Problema**: ¿cómo evitar que un atacante "actualizar" un dispositivo (luz de iluminación / router / impresora...) con un firmware comprometido?
+**Problema**: ¿cómo evitar que un atacante "actualizar" un dispositivo (iluminación / router / impresora...) con un firmware comprometido?
 
 **Solución**: firma digital de las actualizaciones de firmware
 
@@ -178,9 +235,9 @@ La recomendación del CCN/CERT es acabar la fase 1 **durante 2025**
 
 ## ¿Bambu Connect es una solución?
 
-* Bambu Connect solo se autentica a sí mismo, no al usuario
-* Bambu Connect (una aplicación que instalas en tu PC) **incluye la clave privada de Bambu** para poder hacer firmas digitales
-* Al día siguiente de presentar Bambu Connect... [Bambu Connect’s Authentication X.509 Certificate And Private Key Extracted](https://hackaday.com/2025/01/19/bambu-connects-authentication-x-509-certificate-and-private-key-extracted/)
+- Bambu Connect solo se autentica a sí mismo, no al usuario
+- Bambu Connect (una aplicación que instalas en tu PC) **incluye la clave privada de Bambu** para poder hacer firmas digitales
+- Al día siguiente de presentar Bambu Connect... [Bambu Connect’s Authentication X.509 Certificate And Private Key Extracted](https://hackaday.com/2025/01/19/bambu-connects-authentication-x-509-certificate-and-private-key-extracted/)
 
 [![center](../images/cases/bambu-private.png)](https://hackaday.com/2025/01/19/bambu-connects-authentication-x-509-certificate-and-private-key-extracted/)
 
@@ -192,7 +249,7 @@ Cuidado: hemos visto mecanismos de autenticación de entidades diferentes
     - Todas esas opciones usan exactamente la misma tecnología (clave pública y certificados)
     - Pero la firma es para personas físicas, el sello para personas jurídicas y la firma cualificada es una firma electrónica que sigue los requisitos legales para probar la identidad
 - En la sesión de BEC, vimos que el DKIM es una firma electrónica que se añade a los correos electrónicos e identifica al proveedor de correo, no al remitente
-- En la sesión de autenticación, vimos el OAuth son unos tokens para delegar autorizaciones y autenticación a al aplicación, no al usuario
+- En la sesión de autenticación, vimos el OAuth son unos tokens para delegar autorizaciones y autenticación de aplicación, no de usuario
 - La solución de Bambu Connect... solo identifica al propio Bambu Connect frente a la impresora, no al usuario
 
 ---
@@ -203,7 +260,7 @@ Cuidado: hemos visto mecanismos de autenticación de entidades diferentes
 -  Cifrado extremo a extremo (desde el cliente a la impresora) de los comandos que se envían, de forma que la cloud no pueda leerlos: [modelo WhatsApp](https://faq.whatsapp.com/820124435853543)
 - API estable y comunicación con todas las partes involucradas
 
-No implementes la seguridad, usa mecanismos conocidos
+No reinventes la rueda con la seguridad, usa mecanismos conocidos
 
 > [The Best Architecture Design to Solve All Those Security Issues](https://www.reddit.com/r/BambuLab/comments/1i5t1fy/the_best_architecture_design_to_solve_all_those/)
 
@@ -225,6 +282,8 @@ Estado actual de la situación... uso de un modo desarrollador sin seguridad
 
 # Supernote
 <!-- _class: lead -->
+
+Seguridad física de dispositivos, DRM, DLP
 
 ## Libretas en sistemas de tinta electrónica
 
@@ -330,11 +389,11 @@ Finalmente, es habitual que los documentos incluyan marcas invisibles (*watermar
 
 Supernote permite sincronizar documentos en su propia nube, en Dropbox, en Google o en OneDrive
 
-Para uso particular, decide si es adecuado para ti. Para uso empresarial, las políticas de uso de dispositivos informáticos decidirán por ti
+Para uso empresarial, puede que las políticas de uso impidan sincronización con nubes en China o EEUU
 
-¿Cómo pueden las empresas identificar si se están compartiendo datos?
+¿Pueden las empresas identificar si se estás compartiendo datos?
 
-## Data Loss Precention: técnicas
+## Data Loss Prevention: técnicas
 <!-- _class: smaller-font  -->
 
 Técnica|Descripción
