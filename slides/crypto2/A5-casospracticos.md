@@ -1,7 +1,8 @@
 ---
 marp: true
-title: Criptografía - Índice
+title: Criptografía - Casos Prácticos
 paginate: true
+keywords: casos prácticos,autenticación,drm,dlp,supernote,bambu,bambulabs
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu

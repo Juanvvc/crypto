@@ -2,7 +2,7 @@
 marp: true
 title: Criptografía - Sistemas de cifrado
 author: Juan Vera
-keywords: seguridad computacinal,cifrado,confidencialidad,criptografía,simétrica,aes,chacha,asimétrica,rsa,dsa,curvas,elípticas
+keywords: cifrado,confidencialidad,criptografía,simétrica,aes,chacha,asimétrica,rsa,dsa,curvas,elípticas
 paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
