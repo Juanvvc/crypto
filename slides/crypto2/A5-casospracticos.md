@@ -358,8 +358,8 @@ El proceso finciona de una forma similar en el streaming de video: el video est�
 
 - Prueba que el cliente ha pagado por acceder al documento
 - Que el cliente está utilizando una aplicación visora permitida
-- Que solo se pueden realizar las acciones que se han contratado (lectura, escritura, impresión...)
-- En caso de que el documento aparezca online, permite identificar qué cliente lo ha publicado: watermarking
+- Que solo se pueden realizar las acciones que se han contratado (lectura, escritura, impresión, por un periodo de tiempo...)
+- Watermarking: en caso de que el documento aparezca online, permite identificar qué cliente lo ha publicado
 
 > [How Does DRM Work? A Comprehensive Guide to DRM Protection](https://www.vitrium.com/blog/how-does-drm-work-comprehensive-guide-drm-protection)
 
@@ -378,6 +378,17 @@ Diferentes documentos del mismo usuario y dentro del mismo dispositivo tendrán 
 > [EPUB 3.3. W3C Recommendation 27 March 2025](https://www.w3.org/TR/epub-33/#sec-container-metainf-encryption.xml)
 
 ![bg right:40% w:100%](../images/cases/epub-drm.png)
+
+---
+
+[Adobe ADEPT DRM](https://en.wikipedia.org/wiki/Adobe_Digital_Editions) protege archivos ePUB y PDF
+
+1. Cuando compras un ePUB protegido, el servidor DRM genera una clave de licencia única asociada a tu cuenta o dispositivo autorizado.
+2. El archivo ePUB se cifra usando un algoritmo simétrico, típicamente AES-128-CBC con clave *Content Encryption Key* o (CEK)
+3. La CEK se cifra con una clave pública del usuario o del dispositivo autorizado y se incluyen en un archivo auxiliar `rights.xml`
+4. Al abrir el ePUB, el lector lee la configuració de seguridad en `encryption.xml` y se comunica con el servidor DRM para autenticar al usuario.
+5. Si la autenticación es válida, se usa la clave RSA privada para descifrar la CEK.
+6. Con la CEK descifrada, el lector puede descifrar el contenido del ePUB en tiempo real para su visualización.
 
 ---
 
