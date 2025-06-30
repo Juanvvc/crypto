@@ -387,8 +387,10 @@ Diferentes documentos del mismo usuario y dentro del mismo dispositivo tendrán 
 2. El archivo ePUB se cifra usando un algoritmo simétrico, típicamente AES-128-CBC con clave *Content Encryption Key* o (CEK)
 3. La CEK se cifra con una clave pública del usuario o del dispositivo autorizado y se incluyen en un archivo auxiliar `rights.xml`
 4. Al abrir el ePUB, el lector lee la configuració de seguridad en `encryption.xml` y se comunica con el servidor DRM para autenticar al usuario.
-5. Si la autenticación es válida, se usa la clave RSA privada para descifrar la CEK.
-6. Con la CEK descifrada, el lector puede descifrar el contenido del ePUB en tiempo real para su visualización.
+5. Si la autenticación es válida, se usa la clave RSA privada para descifrar la CEK
+6. Con la CEK descifrada, el lector puede descifrar el contenido del ePUB en tiempo real para su visualización
+
+<!-- El proceso en amazon kindle es similar, aunque diferente -->
 
 ---
 
