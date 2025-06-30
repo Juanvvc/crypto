@@ -21,35 +21,12 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Cifrado de discos](#3)
-1. [Business Email Compromise](#5)
 1. [Bambu Labs](#7)
 1. [Supernote](#27)
 
-# Cifrado de discos
-<!-- _class: lead -->
-
----
-
-Visita: [Cifrado de discos](../14-disk.html)
-
-¡Luego volveremos aquí!
-
-# Business Email Compromise
-<!-- _class: lead -->
-
----
-
-Visita: [Business Email Compromise](../13-bec.html)
-
-¡Luego volveremos aquí!
-
-# Bambu Labs
-<!-- _class: lead -->
-
 ## Impresoras 3D
 
-![bg right](images/cases/printer.jpg.png)
+![bg right](../images/cases/printer.jpg.png)
 
 Existen varias marcas: Anycubic, Elegoo, Bambu...
 
@@ -57,7 +34,7 @@ Vamos ver un caso que sucedió en Enero de 2025 con BambuLabs
 
 ---
 
-![center w:30em](images/cases/BambuEcosystem.png)
+![center w:30em](../images/cases/BambuEcosystem.png)
 
 <!--
 
@@ -86,7 +63,7 @@ Puedes conectar a la la impresora:
 
 ---
 
-![center w:30em](images/cases/BambuEcosystem2.png)
+![center w:30em](../images/cases/BambuEcosystem2.png)
 
 Fíjate: se añade autenticación mediante firma digital en todas las conexiones
 
@@ -129,7 +106,7 @@ O cómo tener un problema reputacional cuando intentas solucionar un problema de
 - No hubo comunicación previa con terceros afectados: [Panda](https://biqu3d.com/blogs/news/pandas-love-bamboo), [Orca](https://github.com/SoftFever/OrcaSlicer/pull/8103#issuecomment-2612855023)
 - Comunicación definiciente: [Bambu's Gaslighting Masterclass: Denying their own documented restrictions ](https://www.youtube.com/watch?v=W6MybDJfmmY)
 
-![bg right:15% h:100%](images/cases/youtubers-rant.png)
+![bg right:15% h:100%](../images/cases/youtubers-rant.png)
 
 ---
 
@@ -141,7 +118,7 @@ Los equipos de seguridad necesitamos comunicar conceptos complejos a gente que n
 - Comunicar sin alarmar
 - Dificultades añadidas en entornos internacionales
 
-![bg left](images/cases/softskills.png)
+![bg left](../images/cases/softskills.png)
 
 
 > [The myth of "soft skills": Why intelligence teams need strong communicators](https://redcanary.com/blog/threat-intelligence/strong-communicators/)
@@ -150,7 +127,7 @@ Los equipos de seguridad necesitamos comunicar conceptos complejos a gente que n
 
 ## ¿Reamente es necesario?
 
-[![center w:40em](images/cases/printing-penises.png)](https://www.reddit.com/r/BambuLab/comments/1i3euzi/comment/m7m6ar2/)
+[![center w:40em](../images/cases/printing-penises.png)](https://www.reddit.com/r/BambuLab/comments/1i3euzi/comment/m7m6ar2/)
 
 ---
 
@@ -163,7 +140,7 @@ Los equipos de seguridad necesitamos comunicar conceptos complejos a gente que n
 - [Ya](https://www.bitdefender.com/en-au/blog/hotforsecurity/someone-is-hacking-3d-printers-to-warn-owners-of-a-security-flaw) [ha](https://www.csoonline.com/article/566223/over-3700-exposed-3d-printers-open-to-remote-attackers.html?ref=blog.bambulab.com) [pasado](https://wiki.bambulab.com/en/security-incidents-cloud-traffic)
 
 
-![bg left](images/cases/smarthome.png)
+![bg left](../images/cases/smarthome.png)
 
 > background: https://www.investopedia.com/terms/s/smart-home.asp
 
@@ -179,7 +156,7 @@ Los equipos de seguridad necesitamos comunicar conceptos complejos a gente que n
 
 ---
 
-![bg left:60% w:100%](images/cases/firmware-update.png)
+![bg left:60% w:100%](../images/cases/firmware-update.png)
 
 - Integridad y autenticidad... con y sin un atacante con capacidades cuánticas
 - Posibilidad de volver atrás
@@ -205,7 +182,7 @@ La recomendación del CCN/CERT es acabar la fase 1 **durante 2025**
 * Bambu Connect (una aplicación que instalas en tu PC) **incluye la clave privada de Bambu** para poder hacer firmas digitales
 * Al día siguiente de presentar Bambu Connect... [Bambu Connect’s Authentication X.509 Certificate And Private Key Extracted](https://hackaday.com/2025/01/19/bambu-connects-authentication-x-509-certificate-and-private-key-extracted/)
 
-[![center](images/cases/bambu-private.png)](https://hackaday.com/2025/01/19/bambu-connects-authentication-x-509-certificate-and-private-key-extracted/)
+[![center](../images/cases/bambu-private.png)](https://hackaday.com/2025/01/19/bambu-connects-authentication-x-509-certificate-and-private-key-extracted/)
 
 ---
 
@@ -257,7 +234,7 @@ Varias marcas: reMarkable, Supernote, Boox, Kindle...
 
 Vamos a estudiar el caso de Supernote
 
-![bg right](images/cases/supernote.png)
+![bg right](../images/cases/supernote.png)
 
 ## Problemas de seguridad
 
@@ -304,13 +281,13 @@ High-Bandwidth Digital Content Protection (HDCP) funciona cifrando la señal dig
 
 ---
 
-![center w:35em](images/cases/hdcp.png)
+![center w:35em](../images/cases/hdcp.png)
 
 > https://www.cablematters.com/Blog/HDMI/what-is-hdcp-the-complete-guide
 
 ---
 
-![bg left](images/cases/streaming.png)
+![bg left](../images/cases/streaming.png)
 
 El proceso finciona de una forma similar en el streaming de video: el video está cifrado, y como cliente pides de clave de descifrado al gestor de derechos (DRM), y solo te devolverá la clave de descifrado después de comprobar tu identidad y permisos
 
@@ -318,7 +295,7 @@ El proceso finciona de una forma similar en el streaming de video: el video est�
 
 ## DRM en documentos
 
-![center w:20em](images/cases/drm.png)
+![center w:20em](../images/cases/drm.png)
 
 - Prueba que el cliente ha pagado por acceder al documento
 - Que el cliente está utilizando una aplicación visora permitida
@@ -341,7 +318,7 @@ Diferentes documentos del mismo usuario y dentro del mismo dispositivo tendrán 
 > [Complete guide on ePUB DRM security](https://kitaboo.com/epub-drm-security-guide/#adobes-drm)
 > [EPUB 3.3. W3C Recommendation 27 March 2025](https://www.w3.org/TR/epub-33/#sec-container-metainf-encryption.xml)
 
-![bg right:40% w:100%](images/cases/epub-drm.png)
+![bg right:40% w:100%](../images/cases/epub-drm.png)
 
 ---
 
@@ -393,7 +370,7 @@ Si las comunicaciones van cifradas... ¿cómo sabe la empresa qué documentos es
 ## SSL inspection
 <!-- _class: smaller-font  -->
 
-![center w:25em](images/cases/ssl-inspection.png)
+![center w:25em](../images/cases/ssl-inspection.png)
 
 - Es, literalmente, un ataque man-in-the-middle: el firewall empresarial se pone entre tú y el banco y se hace pasar por el banco
     - La empresa ha instalado en tu PC su propio certificado como Root-CA
