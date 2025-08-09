@@ -26,9 +26,9 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 Fases de establecimiento de una sesión TLS (https). [Cifrado híbrido](A2-protocolos.html):
 
-1. **Autenticación** de servidor mediante intercambio de certificados (criptografía asimétrica, RSA/ECDSA)
+1. **Autenticación** de servidor mediante intercambio de certificados y firma digital (criptografía de clave pública, RSA/ECDSA)
 1. **Acuerdo** de los parámetros de seguridad
-1. **Establecimiento de clave compartida** mediante criptografía asimétrica. Opciones: Diffie-Hellman  o Encapsulación de clave (RSA, DSA)
+1. **Establecimiento de clave compartida** mediante criptografía asimétrica. Opciones: [Diffie-Hellman](05-asimetrica.html) o [Encapsulación de clave](https://www.williamhaks.com/es/glosario/palabra/kem-key-encapsulation-mechanism) (RSA, DSA)
 1. **Cifrado simétrico** de la comunicación AES/ChaCha con la clave anterior
 
 La criptografía asimétrica es fundamental para establecer una conexión segura
@@ -107,13 +107,14 @@ Una introducción a vista de pájaro
 
 ![bg left:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloch_sphere.svg)
 
-La unidad de la computación cuántica es el Q-bit, que puede existi en múltiples estados simultáneamente. 0 y 1 a la vez: *superposición*
+La unidad de la computación cuántica es el Q-bit, que puede existir en múltiples estados simultáneamente. 0 y 1 a la vez: *superposición*
 
 Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
 
 Intuitivamente: podemos aprovechar la superposición para probar muchas soluciones a la vez con un solo q-bit: trabajo en paralelo
 
 > [Computación Cuántica: la Guía completa WIRED](https://es.wired.com/articulos/computacion-cuantica-la-guia-completa-wired-computadoras-qubits)
+> [Quantum Computing explained](https://www.nist.gov/quantum-information-science/quantum-computing-explained) NIST, 2025
 
 
 ## Comparación con la computación tradicional
@@ -193,9 +194,9 @@ Para pensar: ¿realmente necesitamos resolver algoritmos de optimización tan r�
     - Aumentar 1 bit el tamaño de clave dobla el número de claves a probar
     - Aumentar 2 bits, número de claves x4
     - Aumentar n bits, número de claves x$2^n$
-- En RSA, el equivalente son claves públicas de 2048 bits
-- ¿Aumenta la potencia de los PCs? No pasa nada, aumentamos el tamaño de la clave
-- Pero esto no nos sirve con computación cuántica: la dificultad de la fuerza bruta ya no crece exponencialmente con el tamaño de la clave
+- En RSA, se usan claves de al menos 2048 bits
+- "¿Aumenta la potencia de los PCs tradicionales? No pasa nada, aumentamos el tamaño de la clave"
+- ...pero esto no nos sirve con computación cuántica: la dificultad de la fuerza bruta ya no crece exponencialmente con el tamaño de la clave
 
 ## Algoritmos ejecutados por computadoras cuánticas
 <!-- _class: with-info -->
@@ -207,7 +208,7 @@ Algoritmos de interés para criptogafía:
 
 Estos algoritmos tienen el potencial de romper la criptografía que estamos utilizando actualmente
 
-Cuando tengamos un computador cuántico... ¡los malos ya sabrán usarlo!
+Cuando tengamos un computador cuántico... ¡ya sabremos usarlo!
 
 <!-- Observa: ya teníamos algoritmos antes de tener el primer computador cuántico! -->
 
@@ -248,7 +249,7 @@ Fíjate: da igual que aumentemos el tamaño de la clave, llega un momento en que
 
 <!--
 
-El vídeo contiene detalles físicos y matemáticos de cómo funciona en algoritmo de Shor en sistemas cuánticos y es razonablemente sencillo
+El vídeo contiene detalles físicos y matemáticos de cómo funciona en algoritmo de Shor en sistemas cuánticos y es razonablemente sencillo de seguir
 
 -->
 
@@ -256,14 +257,15 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 
 - Solo mejora algunos problemas, otros los calculará tan rápido como la tradicional
 - Es muy cara
-- Decoherencia: un qbit es muy sensible al entorno y puede perder sus propiedades cuánticas
-- Muchos qbits hacen el sistema inestable
+- Hacer un qbit no es difícil, lo difícil es tener **muchos** sin errores:
+  - Ruido: un qbit es muy sensible al entorno y puede perder sus propiedades cuánticas (decoherencia)
+  - El ruido aumenta con el número de qbits: muchos qbits hacen el sistema inestable
+  - Soluciones: usar tecnologías de qbits robustos, o usar más qbits que se corrijan entre sí.
 - Necesitan temperaturas cercanas al cero absoluto
-- La respuesta es probabilística: [probabilidad de error](https://es.wikipedia.org/wiki/Correcci%C3%B3n_de_errores_cu%C3%A1ntica)
-- No se ha demostrado que haya supremacía / ventaja cuántica
+- Se estima (2025) que se necesitan [un millón de qbits para romper RSA en una semana](https://thequantuminsider.com/2025/05/24/google-researcher-lowers-quantum-bar-to-crack-rsa-encryption/)
+- Lo más importante: no se ha demostrado que haya supremacía / ventaja cuántica
 
 > [What Are The Remaining Challenges of Quantum Computing?](https://thequantuminsider.com/2023/03/24/quantum-computing-challenges/) Matt Swayne.  March 24, 2023	
-
 
 ## Supremacía/ventaja cuántica
 
@@ -272,7 +274,6 @@ Demostrar de forma práctica que un computador cuántico puede resolver un probl
 Cada poco tiempo alguien anuncia que ha demostrado la [**supremacía cuántica**](https://es.wikipedia.org/wiki/Supremac%C3%ADa_cu%C3%A1ntica)... con condiciones [1](https://www.nature.com/articles/s41586-019-1666-5), [2](https://arxiv.org/abs/2109.03494), [3](https://www.nature.com/articles/d41586-022-01402-x)
 
 Pero aún no se ha alcanzado para los algoritmos de Shor o Grover
-
 
 ![bg right w:100%](images/quantum/supremacia.webp)
 
@@ -303,19 +304,21 @@ Hay interés y dinero en demostrar la supremacía cuántica, toma cualquier noti
 <!-- _class: with-success smaller-font -->
 
 - El computador [Google Sycamore](https://www.sciencealert.com/google-quantum-computer-is-47-years-faster-than-1-supercomputer) tiene 70 qubits. Agosto de 2023.
-- El procesador cuántico [IBM Osprey](https://en.wikipedia.org/wiki/IBM_Osprey) tiene 433 qbits y tienen previsto alcanzar los 4.000 qubits con su [procesador Kookaburra en 2025](https://www.popsci.com/technology/ibm-quantum-computing-roadmap/)
+- El procesador cuántico [IBM Osprey](https://en.wikipedia.org/wiki/IBM_Osprey) tiene 433 qbits y tienen previsto alcanzar [los 1000 qbits en 2027](https://www.ibm.com/roadmaps/quantum/)
 - [Google](https://cloud.google.com/blog/products/compute/ionq-quantum-computer-available-through-google-cloud), [IBM](https://quantum.ibm.com/), [Microsoft](https://azure.microsoft.com/es-es/products/quantum/) y [Amazon](https://aws.amazon.com/braket/) anuncian computación cuántica como servicio disponible en la nube
+- Se estima (2025) que se necesitan [un millón de qbits para romper RSA en una semana](https://thequantuminsider.com/2025/05/24/google-researcher-lowers-quantum-bar-to-crack-rsa-encryption/)
 
 ![center](images/quantum/amazon-braket.png)
 
 Es probable que se alcance la supremacía cuántica en un futuro cercano
 
-
 <!--
 Fíjate:
 
-- son anuncios, no demostraciones
-- segutamente estos números estarán obsoletos cuando leas esto
+- son anuncios y estimaciones, no demostraciones
+- seguramente estos números estarán obsoletos cuando leas esto
+- Durante 2025, todos los fabricantes redujeron las expectativas. Por ejemplo, en 2022, IBM planeaba alcanzar 4000 qbits para 2025. Ahora (2025), IBM planea alcanzar 1000 qbits en 2027.
+
 -->
 
 # Criptografía Post-cuántica
@@ -332,12 +335,12 @@ RSA|Asimétrico, firmas|Shor|☠ Rota, reemplazar
 D-H|Asimétrico, intercambio de claves|Shor|☠ Rota, reemplazar
 Elípticas|ECDH, ECDSA...|Shor|☠ Rota, reemplazar
 
-Aunque no sepamos cuándo llegará el computador cuántico, ya tenemos que estar preparados y cambiar los algoritmos actuales
+Aunque no sepamos cuándo llegará el computador cuántico, ya tenemos que estar preparados para cambiar los algoritmos actuales
 
 <!--
 Recuerda:
 
-- el cifrado simétrico (AES, ChaCha hash) se puede romper simplemente buscando qué texto original daría un cifrado. Eso es una búsqueda exhaustiva, y la computación cuántica puede hacer más rápidamente que la tradicional
+- El cifrado simétrico (AES, ChaCha) y el hash se puede romper simplemente buscando qué texto original daría un cifrado/hash. Eso es una búsqueda exhaustiva, y la computación cuántica puede hacer más rápidamente que la tradicional
 - La seguridad de RSA se basa en que no sabemos hacer factorización de números primos rápidamente con computadoras clásicas, pero sí que sabremos resolverlo muy rápidamente con computadoras cuánticas
 - D-H se basa en el problema del logaritmo discreto y tiene el mismo problema
 - Los sistemas de curvas elípticas también tendrán el mismo problema
@@ -391,7 +394,6 @@ En realidad, no nos queda tiempo: "Store now, decrypt later" [1](https://www2.de
 ![bg right:40%](images/quantum/curves.png)
 
 ---
-
 
 Familia|Ventajas|Inconvenientes
 --|--|--
@@ -510,7 +512,8 @@ K_{pub} & =
 $$
 
 - Observa que se usa también la aritmética del módulo
-- Es un sistema lineal y dada la clave pública cualquiera podría sacar la privada
+- Clave privada: la solución a un conjunto de ecuaciones lineales
+- Observa: el problema sin errores es un sistema lineal y dada la clave pública cualquiera puede calcular la privada
 
 ## Aprendizaje CON errores
 <!-- _class: two-columns -->
@@ -531,7 +534,7 @@ K_{pub} & =
 \end{align}
 $$
 
-- Observa que ahora hemos introducido ligeros errores en la igualdad. Por ejemplo, la primera ecuación resulta en 8 en vez de 11
+- Hemos introducido ligeros errores en la igualdad. Por ejemplo, la primera ecuación resulta en 8 en vez de 11
 - Ya no es un sistema lineal y obtener la clave privada a partir de la pública no es fácil, ni siquiera para un computador cuántico
 
 ## Cifrado y descifrado
@@ -674,7 +677,8 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 - Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
 - Linux/OpenSSH: [Open Quantum Safe](https://openquantumsafe.org/)
 - [Chrome soporta ML-KEM desde la versión 131](https://security.googleblog.com/2024/09/a-new-path-for-kyber-on-web.html) (noviembre 2024)
-- Cloudflare: [se estima que el 10% del tráfico mundial de Internet](https://blog.cloudflare.com/pq-2024/) ya usa criptografía post-cuánticos
+- Cloudflare: [Conventional cryptography is under threat. Upgrade to post-quantum cryptography with Cloudflare Zero Trust](https://blog.cloudflare.com/post-quantum-zero-trust/)
+- [Se estima que el 35% del tráfico mundial de Internet](https://radar.cloudflare.com/adoption-and-usage#post-quantum-encryption-adoption) (Cloudflare, 2025) ya usa criptografía post-cuánticos
 
 # Resumen y referencias
 <!-- _class: lead -->
@@ -700,16 +704,18 @@ Criptografía post-cuántica:
 - "Computación Cuántica: Cómo afectará a la Criptografía actual y cómo podemos adaptarnos", TFM de Alicia Marybel Díaz Zea en la VIU, 2022-2023
 - [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
 - [How Quantum Computers Break Encryption | Shor's Algorithm Explained ](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
- - [Deep dive into a post-quantum key encapsulation algorithm](https://blog.cloudflare.com/post-quantum-key-encapsulation/), Goutam Tamvada, Sofía Celi, 2022
- - [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
+- [Deep dive into a post-quantum key encapsulation algorithm](https://blog.cloudflare.com/post-quantum-key-encapsulation/), Goutam Tamvada, Sofía Celi, 2022
+- [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
+- [A look at the latest post-quantum signature standardization candidates](https://blog.cloudflare.com/another-look-at-pq-signatures/), Bas Westerbaan, Luke Valenta. Noviembre 2024
 
+---
 
 Generales sobre computación cuántica:
 
+- [Quantum Computing explained](https://www.nist.gov/quantum-information-science/quantum-computing-explained) NIST, 2025
 - [What is a Qubit? - A Beginner's Guide to Quantum Computing](https://www.youtube.com/watch?v=90za6mazNps)
 - [Quantum computing for the determined](https://www.youtube.com/playlist?list=PL1826E60FD05B44E4)
-- [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw), Sabine Hossenfelder 2024 
-
+- [How to Detect Quantum Bullshit](https://www.youtube.com/watch?v=uKVJEuVkPvw), Sabine Hossenfelder 2024 
 
 
 # ¡Gracias!
