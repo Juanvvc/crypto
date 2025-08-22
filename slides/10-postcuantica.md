@@ -52,7 +52,7 @@ $$
 
 ---
 
-Factorizar este número con un computador actual lleva miles de años...
+Factorizar este número con un computador actual lleva miles de años
 
 ```
 149802948092842184098210482184208402814092814092814902882314802
@@ -219,7 +219,7 @@ Cuando tengamos un computador cuántico... ¡ya sabremos usarlo!
  
  Efecto: "raíz cuadrada de tiempo" de los algoritmos clásicos. AES-128 en $O(2^{64})$
 
- ![center w:20em](images/quantum/grover.png)
+ ![center w:17em](images/quantum/grover.png)
 
  El algoritmo de Grover debilita la criptografía de clave privada y hashes (AES, SHA256...) diviendo su fortaleza entre 2
 
@@ -230,7 +230,7 @@ Cuando tengamos un computador cuántico... ¡ya sabremos usarlo!
 
 Permite encontrar factores de un número de una manera eficiente. RSA, ECC y D-H en $O(polinomimal)$
 
-![center w:20em](images/quantum/shor.png)
+![center w:19em](images/quantum/shor.png)
 
 El algoritmo de Shor **rompe** la criptografía de clave pública (D-H, RSA...)
 
@@ -260,12 +260,15 @@ El vídeo contiene detalles físicos y matemáticos de cómo funciona en algorit
 - Hacer un qbit no es difícil, lo difícil es tener **muchos** sin errores:
   - Ruido: un qbit es muy sensible al entorno y puede perder sus propiedades cuánticas (decoherencia)
   - El ruido aumenta con el número de qbits: muchos qbits hacen el sistema inestable
-  - Soluciones: usar tecnologías de qbits robustos, o usar más qbits que se corrijan entre sí.
+  - Soluciones: [usar tecnologías que permita qbits robustos](https://azure.microsoft.com/en-us/blog/quantum/2025/02/19/microsoft-unveils-majorana-1-the-worlds-first-quantum-processor-powered-by-topological-qubits/), o [usar más qbits sencillos pero redundantes que se corrijan entre sí](https://1qbit.com/blog/quantum-computing/building-better-qubits/).
 - Necesitan temperaturas cercanas al cero absoluto
-- Se estima (2025) que se necesitan [un millón de qbits para romper RSA en una semana](https://thequantuminsider.com/2025/05/24/google-researcher-lowers-quantum-bar-to-crack-rsa-encryption/)
 - Lo más importante: no se ha demostrado que haya supremacía / ventaja cuántica
 
 > [What Are The Remaining Challenges of Quantum Computing?](https://thequantuminsider.com/2023/03/24/quantum-computing-challenges/) Matt Swayne.  March 24, 2023	
+
+<!--
+¿Cuántos qbits necsitamos? Se estima (2025) que se necesitan un millón de qbits para romper RSA en una semana: https://thequantuminsider.com/2025/05/24/google-researcher-lowers-quantum-bar-to-crack-rsa-encryption/
+-->
 
 ## Supremacía/ventaja cuántica
 
@@ -377,7 +380,7 @@ Fíjate bien: llamamos criptografía post-cuántica a la criptografía que ejecu
 
 ## ¿Cuándo tiempo nos queda?
 
-[![center w:25em](images/quantum/predicciones.png)](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
+[![center w:22em](images/quantum/predicciones.png)](https://globalriskinstitute.org/publication/2023-quantum-threat-timeline-report/)
 
 En realidad, no nos queda tiempo: "Store now, decrypt later" [1](https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/harvest-now-decrypt-later-attacks-pose-security-concern-quantum-computing.html), [2](https://www.siliconrepublic.com/enterprise/quantum-apocalypse-store-now-decrypt-later-encryption)
 
@@ -592,6 +595,12 @@ Imagen: https://blog.cloudflare.com/content/images/2022/10/image3.png
 
 > [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
 
+<!--
+El firmaware de los dispositivos físicos como hardware de red (routers, por ejemplo) tiene que poder actualizarse de forma segura por décadas... y se solaparán con la (probable) llegada de la computación cuántica
+
+El principal ataque es "guarda ahora, descifra después": quizá los atacantes están guardando ahora las comunicaciones, esperando a que llegue la computación cuántica
+-->
+
 ## Tiempo de transición
 
 
@@ -677,7 +686,6 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 - Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
 - Linux/OpenSSH: [Open Quantum Safe](https://openquantumsafe.org/)
 - [Chrome soporta ML-KEM desde la versión 131](https://security.googleblog.com/2024/09/a-new-path-for-kyber-on-web.html) (noviembre 2024)
-- Cloudflare: [Conventional cryptography is under threat. Upgrade to post-quantum cryptography with Cloudflare Zero Trust](https://blog.cloudflare.com/post-quantum-zero-trust/)
 - [Se estima que el 35% del tráfico mundial de Internet](https://radar.cloudflare.com/adoption-and-usage#post-quantum-encryption-adoption) (Cloudflare, 2025) ya usa criptografía post-cuánticos
 
 # Resumen y referencias
@@ -686,15 +694,14 @@ AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía
 ## Resumen
 <!-- _class: smaller-font -->
 
-- La computación cuántica permite resolver ciertos problemas más rápidamente de lo que sabemos hacerlo con computación tradicional
+- La computación cuántica resuelve unos problemas muy concretos más rápidamente que la computación tradicional
 - Cuando llegue la computación cuántica:
     - AES, ChaCha, criptografía simétrica: deberá **doblar el tamaño de las claves usadas**
     - SHA, funciones de hash: deberán **casi doblar los bits de salida**
     - RSA, D-H, curvas elípticas, criptografía asimétrica, intercambio de claves y firmado: **obsoleta**, hay que buscar alternativas
 - **Criptografía post-cuántica**: sistemas criptográficos que usarán **las computadoras clásicas** para protegerse de las hipotéticas computadoras cuánticas
 - Agosto de 2024: el NIST ya ha estandarizado los algoritmos post-cuánticos que recomienda, y se espera que el resto de agencias tengan opiniones similares
-- No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica
-- El periodo de transición puede ser muy largo y se recomienda empezar ya la migración a criptografía post-cuántica
+- No sabemos cuándo llegará la computación cuántica, pero **ya podemos usar** criptografía post-cuántica. El periodo de transición puede ser muy largo y se recomienda empezar ya la migración a criptografía post-cuántica
 
 ## Referencias
 <!-- _class: smaller-font -->
@@ -707,6 +714,8 @@ Criptografía post-cuántica:
 - [Deep dive into a post-quantum key encapsulation algorithm](https://blog.cloudflare.com/post-quantum-key-encapsulation/), Goutam Tamvada, Sofía Celi, 2022
 - [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
 - [A look at the latest post-quantum signature standardization candidates](https://blog.cloudflare.com/another-look-at-pq-signatures/), Bas Westerbaan, Luke Valenta. Noviembre 2024
+- [Conventional cryptography is under threat. Upgrade to post-quantum cryptography with Cloudflare Zero Trust](https://blog.cloudflare.com/post-quantum-zero-trust/). Cloudflare, Marzo 2025
+
 
 ---
 
