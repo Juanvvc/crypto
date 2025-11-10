@@ -80,14 +80,15 @@ Desde que los matemáticos entraron en la criptografía, existe definiciones de 
 
 ![bg right:40% w:100%](../images/historia/byzantine_generals.png)
 
-Imagina que unos atacantes acuerdan el siguiente mapeo, es decir, clave:
+Imagina que unos atacantes acuerdan el siguiente mapeo, es decir, clave: A = 1 horas, B = 7 horas, C = 13 horas, ...
 
-- A = 16 horas
-- B = 7 horas
-- C = 13 horas
-- ...
+El castillo captura estos mensajes:
 
-El castillo captura este mensaje: "Atacamos a las F"
+* Atacamos a las F
+* Atacamos a las B
+* Atacamos a las AD
+* Atacamos a las F
+
 
 ¿El castillo tiene alguna forma de conocer a qué hora le atacarán?
 
@@ -130,13 +131,16 @@ Con la seguridad computacional hay que definir el objetivo: "quiero un sistema c
 
 Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante con unos recursos razonables pueda descifrar el mensaje -->
 
+
 ## Ataques de fuerza bruta
 <!-- _class: with-info -->
 
 La criptografía coputacionalmense segura:
 
 - Es un cifrado práctico: las claves pequeñas son fácil de distribuir
-- Pero si es demasiado pequeña, es posible hacer fuerza bruta: probar todas las posibles claves una a una hasta que encontremos la que es
+- Pero si es demasiado pequeña, es posible hacer fuerza bruta: probar todas las posibles claves una a una hasta que encontremos la que descifra el mensaje
+- **Fortaleza de un cifrado**: números de pruebas (en bits) que tiene que hacer un atacante por fuerza bruta para descifrar un mensaje
+
 
 **Compromiso**: Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible probarlas todas **hoy en día**, y lo suficientemente pequeño como para que sea práctico
 
@@ -149,27 +153,9 @@ Recordad: los ordenadores mejoran constantemente.
 Los algoritmos se diseñan para que, con la tecnología actual, se tarde miles de años en hacer fuerza bruta. Pero la tecnología mejora con el tiempo, y eso también se tiene en cuenta: aunque "se venda" que un cifrado "no puede romperse en miles de años", en realidad eso es relativo a la tecnología actual y el algoritmo tiene una caducidad de unas pocas décadas.
 
 La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenador que haga esa misma fuerza bruta de forma instantánea
--->
 
+algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
 
----
-<!-- _class: with-info -->
-
-Ataque de fuerza bruta: probar todas las posibles claves una a una
-
-- podemos probar $10^6$ clave/CPU/s $\approx 2^{20}$ clave/CPU/s
-- ó $10^{13}$ clave/CPU/año $\approx 2^{43}$ clave/CPU/año
-- ó $10^{19}$ clave/año con $10^6$ CPU $\approx 2^{63}$ clave/año
-- ó $10^{25}$ claves con $10^6$ CPU un millón de años $\approx 2^{83}$ 
-- ó $10^{29}$ claves con $10^6$ CPU desde el Big Bang $\approx 2^{96}$ 
-
-(Números calculados en 2020). Cada año podremos probar más claves por segundo
-
-
-**Fortaleza de un cifrado**: números de pruebas (en bits) que tiene que hacer un atacante por fuerza bruta para descifrar un mensaje
-
-
-<!-- algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
 
 # Cifrado simétrico de bloque: AES
 <!-- _class: lead -->
@@ -217,6 +203,12 @@ Nota importante: la figura muestra un cifrado de bloque totalmente inseguro, com
 
 Fíjate: los bloques no tienen memoria, al contrario de lo que pasaba en el cifrado de flujo. Veremos que esto es una de sus debilidades.
 -->
+
+---
+
+Práctica:
+
+<https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/Demo_AES.ipynb>
 
 ## Vector de Inicialización (IV)
 
