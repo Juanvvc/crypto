@@ -288,12 +288,10 @@ header: ''
 
 ---
 
-- Diseña el sistema pensando que el atacante lo conoce.
 - Servicios básicos de seguridad: **confidencialidad**, **integridad**, **autenticación**, **no repudio**
 - Fuerza bruta: probar todas las claves una a una
 - Seguridad de un algoritmo: número de claves (en bits) que un atacante tiene que probar para romperlo por fuerza bruta
 - Sistema inseguro: se conoce un ataque mejor que la fuerza bruta
-- La seguridad de los protocolos actuales está basada en la seguridad computacional
 - Técnicas para ofrecer estos servicios: criptografía simétrica, criptografía asimétrica, intercambio de claves, firma digital, funciones de hash, protocolos (composisión de técnicas)
 - La seguridad del sistema depende de que todos los engranajes encajen totalmente: algoritmos escogidos, sus parámetros de configuración, los protocolos utilizados...
 
