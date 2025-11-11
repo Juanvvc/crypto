@@ -23,7 +23,7 @@ theme: marp-viu
 # Confidencialidad: sistemas de cifrado
 <!-- _class: first-slide -->
 
-**Seguridad computacional, cifrado asimétrico y cifrado asimétrico**
+**Seguridad computacional, cifrado simétrico y cifrado de clave pública**
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
@@ -41,7 +41,7 @@ Hoy hablaremos del primero, confidencialidad, y empezaremos a poner las bases pa
 
 1. [Confidencialidad perfecta y computacional](#5)
 1. [Cifrado simétrico de bloque: AES](#12)
-1. [Criptografía asimétrica o de clave pública](#26)
+1. [Criptografía de clave pública / asimétrica](#26)
 1. [Resumen y referencias](#50)
 
 ---
@@ -54,7 +54,7 @@ Esta sesión es un resumen de la asignatura "Criptografía y teoría de códigos
 - <https://juanvvc.github.io/crypto/04-complejidad.html>
 - <https://juanvvc.github.io/crypto/05-asimetrica.html>
 
-Este tema es denso pero no se pretende aprender los detalles. Objetivo de la sesión: saber qué son los sistemas de cifrado simétrico y asimétrico, por qué son necesarios los tipos y cuándo se usa cada uno. **Fíjate en estos cuadros azules**
+Este tema es denso pero no se pretende aprender los detalles. Objetivo de la sesión: saber qué son los sistemas de cifrado simétrico y de clave pública, por qué son necesarios los tipos y cuándo se usa cada uno. **Fíjate en estos cuadros azules**
 
 # Confidencialidad perfecta y computacional
 <!-- _class: lead -->
@@ -153,7 +153,7 @@ Los algoritmos se diseñan para que, con la tecnología actual, se tarde miles d
 
 La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenador que haga esa misma fuerza bruta de forma instantánea
 
-algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
+algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas de clave pública, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
 
 
 # Cifrado simétrico de bloque: AES
@@ -309,14 +309,12 @@ Este es el problema de intercambio de clave. No fue resuelto hasta 1976 con una 
 Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 -->
 
-# Criptografía asimétrica o de clave pública
+# Criptografía de clave pública / asimétrica
 <!-- _class: lead -->
 
 Diffie-Hellman, RSA y curvas elípticas
 
-## Criptografía asimétrica
-
-También conocida como **criptografía de clave pública**
+## Criptografía de clave pública / asimétrica
 
 ![center w:25em](../images/asimetrica/asimetrica.svg)
 
@@ -329,8 +327,9 @@ Cada persona tiene dos claves:
 A veces son intercambiables: lo que se cifra con una se descifra con la otra
 
 > Compara con criptografía simétrica: misma clave para cifrar y descifrar, Bob y Alice tienen que manetenarla en secreto
+> Nota: para no confundirnos al hablar, usaremos siempre "de clave pública" y no "asimétrica", pero son sinónimos
 
-## Usos de la criptografía asimétrica
+## Usos de la criptografía de clave pública
 <!-- _class: with-success -->
 
 Según si usamos la clave pública o la privada para cifrar, podemos hacer dos cosas:
@@ -345,7 +344,7 @@ Ejemplos: RSA, Diffie-Hellman, DSA...
 
 ## Esquema de cifrado
 
-![w:20em center](../images/asimetrica/IMG_0055.PNG)
+![w:20em center](../images/asimetrica/IMG_0056.PNG)
 
 - Todos conocen la clave $K_{pub}$ de Bob, solo Bob conoce la clave $K_{priv}$
 - **Cualquier puede cifrar un mensaje para Bob, solo Bob puede descifrarlo**: confidencialidad
@@ -553,9 +552,9 @@ Para crear el par de claves hay que buscar:
 
 Es decir: la elección de un par de claves **es un proceso muy lento**. Segundos, minutos, horas si las claves son grandes
 
-A cambio: el cifrado y descifrado **son relativamente rápidos** comparados con otros sistemas de cifrado asimétrico
+A cambio: el cifrado y descifrado **son relativamente rápidos** comparados con otros sistemas de cifrado de clave pública
 
-El cifrado asimétrico es muy lento comparado con cualquier proceso de cifrado simétrico
+El cifrado de clave pública es muy lento comparado con cualquier proceso de cifrado simétrico
 
 ## Tamaño de claves
 <!-- _class: with-info -->
@@ -570,7 +569,7 @@ Ejemplo: hay $\approx\ln(2^{4096})=2839$ números primos menores de $2^{4096}$
 
 "Son pocos primos"
 
-La criptografía asimétrica necesita claves mucho más largas que la criptografía simétrica
+La criptografía de clave pública necesita claves mucho más largas que la criptografía simétrica
 
 > Fuente: https://en.wikipedia.org/wiki/Prime_number_theorem
 > Gráfico: https://en.wikipedia.org/wiki/Ulam_spiral
@@ -585,7 +584,7 @@ Propuestas como *trap door function* en 1987 por Neal Koblitz y Victor S. Miller
 
 ![bg right:40% w:100%](https://upload.wikimedia.org/wikipedia/commons/d/db/EllipticCurveCatalog.svg)
 
-Necesitan claves **más cortas** que la criptografía asimétrica basadas en DLP o RSAP para ofrecer una **seguridad equivalente**
+Necesitan claves **más cortas** que la criptografía de clave pública basadas en DLP o RSAP para ofrecer una **seguridad equivalente**
 
 ## Tamaño de clave
 <!-- _class: smaller-font -->
@@ -601,7 +600,7 @@ Es decir: para intercambiar una clave AES-256 aprovechando todos sus bits, neces
 
 Si usamos tamaños de clave RSA de 4096 bits (tamaño típico), podremos intercambiar una clave simétrica equivalente a AES-128
 
-La gran ventaja de las curvas elípticas en criptografía (EEC) es que nos permiten utilizar criptografía asimétrica con una clave **mucho más pequeña** y pone la criptografía asimétrica al alcance de pequeños dispositivos
+La gran ventaja de las curvas elípticas en criptografía (EEC) es que nos permiten utilizar criptografía de clave pública con una clave **mucho más pequeña** y pone la criptografía de clave pública al alcance de pequeños dispositivos
 
 <!--
 Nota: podemos intercambiar claves AES-256 con un D-H de 1024 bits. Solo que, de forma efectiva, solo estaremos escogiendo 80 bits de la clave AES-256. Es decir, sería equivalente a un (no existente) AES-80
@@ -626,7 +625,7 @@ Varios algoritmos clásicos se han adaptado a curvas elípticas:
 - DSA (similar a RSA, no lo hemos visto en esa sesión) -> ECDSA
 - RSA no se ha adaptado a curvas elípticas
 
-## Usos de la criptografía asimétrica
+## Usos de la criptografía de clave pública
 <!-- _class: with-info -->
 
 ¿Por qué no la usamos para todo?
@@ -644,7 +643,7 @@ Problema de la criptografía de clave pública: ¿cómo hacemos llegar nuestra c
 
 ## Criptografía híbrida: lo mejor de los dos mundos
 
-1. Usamos criptografía asimétrica para intercambiar una clave: ECDH
+1. Usamos criptografía de clave pública para intercambiar una clave: ECDH
 1. Una vez que tenemos la clave, seguimos cifrando en AES ó ChaCha
 
 # Resumen y referencias
@@ -652,7 +651,7 @@ Problema de la criptografía de clave pública: ¿cómo hacemos llegar nuestra c
 
 ---
 
-Característica|Cifrado simétrico|Cifrado asimétrico
+Característica|Cifrado simétrico|Cifrado de clave pública
 --|--|--
 Eficiencia|Muy rápido|Lento
 Claves|1 (secreta, compartida)|2 (una pública y otra privada)
@@ -671,8 +670,8 @@ Objetivo|Primitiva|Algoritmos
 --|--|--
 **Confidencialidad**|cifrado simétrico|AES, Chacha
 **Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
-**Autenticidad**|firma asimétrica|RSA, ECDSA
-**No repudio**|firma asimétrica|RSA, ECDSA
+**Autenticidad**|firma digital|RSA, ECDSA
+**No repudio**|firma digital|RSA, ECDSA
 **Acordar clave**|acuerdos de clave/encapsulación|ECDH
  
 ## Resumen
@@ -680,19 +679,14 @@ Objetivo|Primitiva|Algoritmos
 
 - Confidencialidad computacional: hoy en día no es práctico romperla (en 30 años, quizá sí)
 - Fortaleza de un algoritmo: "esfuerzo" necesario para romper un sistema. Relacionado con la longitud de la clave.
-- Cifrados simétricos: misma clave para cifrar y descifrar
-	- Cifrado de flujo:
-		- A partir de una clave corta, generamos un flujo "pseudoaleatorio" tan largo como el mensaje. cifrado y descifrado=`RANDOM XOR MENSAJE`.
-		- Ejemplos: RC4 (antiguo), ChaCha20
-	- Cifrado de bloque:
-		- Se divide el mensaje en bloques, cada bloque se cifra por separado.
-		- Es necesario utilizar el modo de funcionamiento adecuado
-        - Ejemplos: 3DES (no se usa en protocolos modernos), AES
-- Es necesario evitar cifrar dos mensajes diferentes con la misma clave
+- Cifrados simétricos: misma clave para cifrar y descifrar. Ejemples: AES, ChaCha
+- Cifrado simétrico de bloque (AES):
+    - Se divide el mensaje en bloques, cada bloque se cifra por separado.
+    - Es necesario utilizar el modo de funcionamiento más conveniente
 
 ---
 
-- Criptografía asimétrica: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es privada
+- Criptografía de clave pública: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es privada
 - Muchísimo **más lenta** que el cifrado simétrico
 - Se utiliza para:
     - intercambiar claves simétricas (ECDH)

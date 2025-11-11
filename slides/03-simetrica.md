@@ -18,7 +18,7 @@ transition: fade
 	/* section footer { display: none; } */
 </style>
 
-# Cifrado simétrico o de clave privada
+# Cifrado simétrico o de clave secreta
 <!-- _class: first-slide -->
 
 **AES y ChaCha**
@@ -873,6 +873,12 @@ Ahora los bloques son de 16 B, no de 1 B por tanto la estadística es menos impo
 Un cifrado debe parecerse a esto:
 
 ![center](images/simetrica/bio-c.png)
+
+---
+
+Práctica:
+
+<https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/Demo_AES.ipynb>
 
 ## Modos de operación
 

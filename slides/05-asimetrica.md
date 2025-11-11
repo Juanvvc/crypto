@@ -1,6 +1,6 @@
 ---
 marp: true
-title: Criptografía - Cifrado asimétrico
+title: Criptografía - Criptografía asimétrica
 author: Juan Vera
 keywords: criptografía,asimétrica,rsa,dsa,diffie-hellman
 paginate: true
@@ -19,7 +19,7 @@ transition: fade
     }
 </style>
 
-# Cifrado asimétrico o de clave pública
+# Criptografía de clave pública / asimétrica
 <!-- _class: first-slide -->
 
 **RSA y curvas elípticas**
@@ -59,19 +59,19 @@ El protocolo de intercambio de claves Diffie-Hellman permitió por primera vez e
 <!--
 Atención: este tema es matemáticamente denso, pero no es necesario seguir todos los detalles. Si tienes interés en los detalles, por favor, consulta los papers y libros especilizados.
 
-Los objetivos del tema es conocer la base de la criptografía asimétrica, cómo funciona y cómo se usa.
+Los objetivos del tema es conocer la base de la criptografía de clave pública, cómo funciona y cómo se usa.
 -->
 
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Criptografía asimétrica](#5)
+1. [Criptografía de clave pública](#5)
 1. [RSA](#27)
 1. [Curvas elípticas](#41)
-1. [Los límites de la criptografía asimétrica](#58)
+1. [Los límites de la criptografía de clave pública](#58)
 1. [Conclusiones](#62)
 
-# Criptografía asimétrica
+# Criptografía de clave pública / asimétrica
 <!-- _class: lead -->
 
 ## Firmado digital de contratos
@@ -97,9 +97,7 @@ Y se dieron cuenta: se puede extender la misma idea para solucionar todo lo dem�
 
 ![bg right](https://upload.wikimedia.org/wikipedia/commons/4/4c/Public_key_shared_secret.svg)
 
-## Criptografía asimétrica o de clave pública
-
-También conocida como **criptografía de clave pública**
+## Criptografía de clave pública / asimétrica
 
 Cada persona tiene dos claves:
 
@@ -110,6 +108,8 @@ Hay una relación matemática entre ambas: no las puedes escogerlas al azar. Per
 
 ![bg right:40% w:90%](https://upload.wikimedia.org/wikipedia/commons/f/f9/Public_key_encryption.svg)
 
+> Nota: usaremos "criptografía de clave pública" siempre en vez de "asimétrica", para no confundirnos con la "criptografía simétrica"
+
 <!--
 
 Fíjate que no estoy diciendo que la pública se use para cifrar y la privada para descifrar o viceversa
@@ -118,7 +118,7 @@ Normalmente, si cifras con una puedes descifrar con la otra. Y según la que use
 
 -->
 
-## Usos de la criptografía asimétrica
+## Usos de la criptografía de clave pública
 
 Según si usamos la clave pública o la privada para cifrar, podemos hacer dos cosas:
 
@@ -128,7 +128,7 @@ Según si usamos la clave pública o la privada para cifrar, podemos hacer dos c
 La criptografía simétrica también nos permitía cifrar, pero no firmar
 
 <!--
-Veremos que la criptografía asimétrica usa el cifrado principalmente para distribuir claves, pero el cifrado real de un mensaje se sigue haciendo con criptografía simétrica
+Veremos que la criptografía de clave pública usa el cifrado principalmente para distribuir claves, pero el cifrado real de un mensaje se sigue haciendo con criptografía simétrica
 -->
 
 ## Esquema de cifrado
@@ -149,7 +149,7 @@ Veremos que la criptografía asimétrica usa el cifrado principalmente para dist
 ## *Trap door functions*, funciones trampa
 <!-- _class: with-success -->
 
-Las matemáticas de la criptografía asimétrica utilizan funciones trampa:
+Las matemáticas de la criptografía de clave pública utilizan funciones trampa:
 
 - Si conoces $a$, entonces calcular $A=f(a)$ es fácil (problema P, tiempo polinomial)
 - Si conoces $A$, entonces calcular $a=f^{-1}(A)$ es muy difícil (problema NP, tiempo exponencial)
@@ -502,7 +502,7 @@ Para crear el par de claves hay que buscar:
 
 Es decir: la elección de un par de claves **es un proceso muy lento**. Segundos, minutos, horas si las claves son grandes
 
-A cambio: el cifrado y descifrado **son relativamente rápidos** comparados con otros sistemas de cifrado asimétrico
+A cambio: el cifrado y descifrado **son relativamente rápidos** comparados con otros sistemas de criptografía asimétrica
 
 En cualquier caso, es **muy lento comparado con cualquier proceso de cifrado simétrico**
 
@@ -551,7 +551,7 @@ Nota: podemos intercambiar claves AES-256 con un D-H de 1024 bits. Solo que, de 
 
 Propuestas como *trap door function* en 1987 por Neal Koblitz y Victor S. Miller de forma independiente
 
-Necesitan claves **más cortas** que la criptografía asimétrica basadas en DLP o RSAP para ofrecer una **seguridad equivalente**
+Necesitan claves **más cortas** que la criptografía de clave pública basadas en DLP o RSAP para ofrecer una **seguridad equivalente**
 
 - **Ventaja**: necesitan menos proceso y memoria, se pueden implementar en máquinas pequeñas: móviles, tarjetas inteligentes...
 - **Problema**: teoría matemática compleja
@@ -648,7 +648,7 @@ Ejemplo de proyección sobre los enteros
 
 ## Tamaño de clave
 
-La gran ventaja de las curvas elípticas en criptografía (EEC) es que nos permiten utilizar criptografía asimétrica con una clave **mucho más pequeña**
+La gran ventaja de las curvas elípticas en criptografía (EEC) es que nos permiten utilizar criptografía de clave pública con una clave **mucho más pequeña**
 
 Simétrica|RSA|D-H ($p$, $q$)|EEC
 --|--|--|--
@@ -657,7 +657,7 @@ Simétrica|RSA|D-H ($p$, $q$)|EEC
 192|7680|7680, 384|384
 256|15360|15360, 512|512
 
-Es decir, pone la criptografía asimétrica al alcance de pequeños dispositivos
+Es decir, pone la criptografía de clave pública al alcance de pequeños dispositivos
 
 <!--
 
@@ -732,21 +732,21 @@ La situación quizá cambie en el futuro
 - [RSA and ECC: A Comparative Analysis](https://www.ripublication.com/ijaer17/ijaerv12n19_140.pdf) D. Mahto y D. K. Yadav, 2017
 
 
-# Los límites de la criptografía asimétrica
+# Los límites de la criptografía de clave pública
 <!-- _class: lead -->
 
 ## Limitaciones
-<!-- _class: with-success -->
+<!-- _class: with-success, smaller-font -->
 
 - Los esquemas descritos no cifran bytes, sino números: tenemos que ser capaces de codificar nuestro mensaje en un número entero. **No ciframos "*hola*", sino el número "*0x686f6c61*"**
 
-- Los mensajes que se pueden cifrar con criptografía asimétrica son muy cortos, de tamaño similar al tamaño de la clave
+- Los mensajes que se pueden cifrar con criptografía de clave pública son muy cortos, de tamaño similar al tamaño de la clave
 
-- En RSA, el número "5" siempre se cifrará igual (¡compruébalo!). Eso es mala idea: quizá el enemigo no sepa qué estamos cifrando, pero sabe que es lo mismo que antes. Otros cifrados asimétricos como DSA son naturalmente probabilísticos, no hace falta añadirlo como un extra
+- En RSA, el número "5" siempre se cifrará igual (¡compruébalo!). Eso es mala idea: quizá el enemigo no sepa qué estamos cifrando, pero sabe que es lo mismo que antes. Otros cifrados como DSA son naturalmente probabilísticos, no hace falta añadirlo como un extra
 
 - Todos ellos son **muchísimo más lentos** que la criptografía simétrica para cifrar. Tanto, que no se usan par cifrar, solo para distribuir claves o hformar digitalmente
 
-En realidad suele usarse un **cifrado mixto**: con asimétrica se cifra la clave simétrica que es la que realmente se usa para cifrar
+En realidad suele usarse un **cifrado mixto**: con criptografía de clave pública se cifra la clave simétrica que es la que realmente se usa para cifrar
 
 <!--
 Veremos el cifrado mixto en las siguientes sesiones y en los ejercicios
@@ -765,7 +765,7 @@ Veremos el cifrado mixto en las siguientes sesiones y en los ejercicios
 <!-- _class: smaller-font -->
 
 - La computación cuántica no rompe la criptografía simétrica AES, ChaCha... aunque sí que exige que se usen claves el doble de largas: mínimo 256 bits para AES
-- La computación cuántica **impedirá utilizar todos los algoritmos asimétricos actuales**: RSA, DSA, D-H... y también sus versiones con curvas elípticas
+- La computación cuántica **impedirá utilizar todos los algoritmos de clave pública actuales**: RSA, DSA, D-H... y también sus versiones con curvas elípticas
 - Ya existen algoritmos nuevos para los sistemas actuales resistentes a una hipotética computación cuántica. Tema dedicado: [Criptografía post-cuántica](10-postcuantica.html)
 
 > https://cso.computerworld.es/cibercrimen/la-amenaza-cuantica-la-computacion-cuantica-y-la-criptografia
@@ -779,7 +779,7 @@ Veremos el cifrado mixto en las siguientes sesiones y en los ejercicios
 ## Resumen
 <!-- _class: smaller-font -->
 
-- Criptografía asimétrica: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es secreta
+- Criptografía de clave pública: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es secreta
 - No se utiliza para cifrar mensajes: es muchísimo **más lenta** que el cifrado simétrico
 - Se utiliza para:
     - intercambiar claves simétricas
@@ -809,7 +809,7 @@ Las curvas elípticas son un concepto complejo. Esto son algunas propuestas expl
 ---
 Ejercicios:
 
-- [Cifrado asimétrico D-H y RSA](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/5%20-%20Cifrado%20asimetrico.ipynb)
+- [Criptografía de clave pública D-H y RSA](https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/05/5%20-%20Cifrado%20asimetrico.ipynb)
 - (**Opcional**) Curvas elipticas:
     - Parte 1: [sobre los números reales](https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/05/elliptic-curve.ipynb)
     - Parte 2: [sobre campos finitos](https://colab.research.google.com/github/Juanvvc/crypto/blob/main/ejercicios/05/elliptic-curve-on-finite-field.ipynb)
