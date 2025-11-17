@@ -7,7 +7,6 @@ paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
-transition: fade
 ---
 
 <style>
