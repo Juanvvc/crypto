@@ -229,9 +229,9 @@ Lucia Rodríguez|Embarazo|50Kg|Madrid
 
 - "El paciente con cáncer": 3 de 5 pacientes. 3-anonimato
 - "Cáncer de próstata": 2 de 5 pacientes: 2-anonimato
-- "Agrupar endermedades por ciudad": estás completamente identificado si eres de Villadangos
-- "Agrupar endermedades por país": 2-anonimato
-- "Agrupar endermedades por peso": estás completamente identificado si pesas 120Kg
+- "Agrupar enfermedades por ciudad": estás completamente identificado si eres de Villadangos
+- "Agrupar enfermedades por país": 2-anonimato
+- "Agrupar enfermedades por peso": estás completamente identificado si pesas 120Kg
 
 Anonimizar bases de datos no es sencillo
 

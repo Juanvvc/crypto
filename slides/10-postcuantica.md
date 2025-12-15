@@ -103,18 +103,44 @@ Una introducción a vista de pájaro
 
 > [¿Qué es y cómo funciona la COMPUTACIÓN CUÁNTICA?](https://www.youtube.com/watch?v=YpYuBEzfRlM)
 
-## Q-bit
+## Qubit
 
 ![bg left:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloch_sphere.svg)
 
-La unidad de la computación cuántica es el Q-bit, que puede existir en múltiples estados simultáneamente. 0 y 1 a la vez: *superposición*
+La unidad de la computación cuántica es el Qubit, que puede existir en múltiples estados simultáneamente. 0 y 1 a la vez: *superposición*, hasta que el sistema colapsa
 
-Pueden empaquetar más información: $10^{48} bits \equiv 160 qbits$
-
-Intuitivamente: podemos aprovechar la superposición para probar muchas soluciones a la vez con un solo q-bit: trabajo en paralelo
+Intuitivamente: podemos aprovechar la superposición "para probar muchas soluciones a la vez con un solo Qubit"
 
 > [Computación Cuántica: la Guía completa WIRED](https://es.wired.com/articulos/computacion-cuantica-la-guia-completa-wired-computadoras-qubits)
 > [Quantum Computing explained](https://www.nist.gov/quantum-information-science/quantum-computing-explained) NIST, 2025
+
+---
+John Clarke, Michel H. Devoret y John M. Martinis ganaron [el premio Nobel de física de 2025](https://francis.naukas.com/2025/10/07/premio-nobel-de-fisica-2025-john-clarke-michel-h-devoret-y-john-m-martinis-por-el-efecto-tunel-cuantico-macroscopico-y-la-cuantizacion-de-la-energia-en-circuitos-electricos/) por sus trabajos en los años 80 que definieron cómo construir un computador cuántico
+
+
+
+[![center w:25em](images/quantum/efectotunel.png)](https://www.youtube.com/watch?v=9jE4eaP9K7Q)
+
+> [El Gato de Schrödinger pero DE VERDAD: El Nobel 2025 EXPLICADO](https://www.youtube.com/watch?v=9jE4eaP9K7Q)
+
+---
+
+![bg right:50%](https://upload.wikimedia.org/wikipedia/commons/1/1c/6sided_dice_%28cropped%29.jpg)
+
+La probabilidad de sacar un 3 en un dado de 6 es 1/6
+
+Pero una vez está en la mesa, el dado no cambia: el sistema ha colapsado
+
+A los computadores cuánticos les pasa lo mismo: una vez colapsados, ya no hay incertidumbre
+
+---
+
+<!-- _class: center -->
+
+[![](images/quantum/qbit2.png)](https://www.youtube.com/watch?v=RQWpF2Gb-gU
+)
+
+> [But what is quantum computing?](https://www.youtube.com/watch?v=RQWpF2Gb-gU)
 
 
 ## Comparación con la computación tradicional
@@ -541,7 +567,7 @@ $$
 - Ya no es un sistema lineal y obtener la clave privada a partir de la pública no es fácil, ni siquiera para un computador cuántico
 
 ## Cifrado y descifrado
-<!-- _class: two-columns-list -->
+<!-- _class: two-columns-list smaller-font -->
 
 <style scoped>
     ol { list-style-type: none; margin-left: -2em; font-size: 90%;}
