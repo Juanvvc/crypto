@@ -174,7 +174,8 @@ El cifrado con XOR es un tipo de cifrado polialfabético
 
 - Dos varas del mismo grosor
 - Envío: se enrolla una cinta de forma espiral a uno de los bastones y se escribía el mensaje longitudinalmente.
-- Recepción: se enrollaba la cinta en la vara gemela para leer el mensaje original.
+- Recepción: se enrollaba la cinta en la vara gemela para leer el mensaje original
+- https://es.wikipedia.org/wiki/Esc%C3%ADtala
 
 <!-- 
 Recordad: la criptografía quiere mejorar la dispersión y la difusión del mensaje original. La transposición simple como la de la escítala ayuda en ambos casos.
@@ -189,7 +190,7 @@ Imagen: https://upload.wikimedia.org/wikipedia/commons/5/51/Skytale.png
 ![bg left:40% w:90%](images/historia/Caesar3.svg)
 
 - Es un cifrado **monoalfabético**: "sustituimos una letra por otra que viene $k$ posiciones detrás"
-- Es más antiguo que los romanos: incluso la Biblia hebrea incluye palabras con cifrado de sustitución y evitar así escribir la palabra real.
+- Es más antiguo que los romanos: incluso [la Biblia](https://es.wikipedia.org/wiki/Atbash) incluye palabras con cifrado de sustitución
 
 <!--
 Desde tiempos de los romanos, el cifrado por excelencia hasta la década de los '70  ha sido algún tipo de cifrado por sustitución más o menos complejo. Los estudiaremos a continuación con más detalle en el resto de capítulos
@@ -992,12 +993,6 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 - https://www.cryptomuseum.com/, con fotografías de aparatos criptográficos históricos.
 - Película: <https://en.wikipedia.org/wiki/The_Imitation_Game>
 - [The Cryptograhic Mathematics of Enigma](https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/wwii/CryptoMathEnigma_Miller.pdf) Dr. A. Ray Miller, NSA 2019
-
----
-Ejercicios opcionales pero muy recomendables:
-
-- Del profesor: <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/01/Seguridad%20por%20oscuridad.ipynb>
-- "Introducción a cryptohack" en <https://cryptohack.org/>
 
 # ¡Gracias!
 <!-- _class: last-slide -->

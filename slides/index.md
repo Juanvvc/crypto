@@ -133,7 +133,13 @@ Las actividades incluyen información adicional que no está en las clases
 - "[*A Course in Cryptography*](https://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf)" Rafael Pass & Abhi Shelat. Más ligero que el anterior.
 - "[*Handbook of Applied Cryptography*](http://cacr.uwaterloo.ca/hac/)" Alfred J. Menezes. Un clásico para conceptos fundamentales.
 - "A Course in Cryptography" Heiko Knospe.
-- "Criptografía Ofensiva. Atacando y defendiendo organizaciones". Dr. Alfonso Muñoz.
+- "Criptografía Ofensiva. Atacando y defendiendo organizaciones". Dr. Alfonso Muñoz
+
+---
+Ejercicios opcionales pero muy recomendables:
+
+- Del profesor: <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/01/Seguridad%20por%20oscuridad.ipynb>
+- "Introducción a cryptohack" en <https://cryptohack.org/>
 
 # ¡Gracias!
 <!-- _class: last-slide -->
