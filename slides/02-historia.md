@@ -56,25 +56,28 @@ Aunque lo parezca
 
 ## El lenguaje de los petisos carambanales
 
-![center](images/historia/petisos.png)
+![center w:20em](images/historia/petisos.png)
 
 Los petisos carambanales en realidad hablan en español, pero usan su propio sistema de ortografía
 
-## Textos Aljamariyados
+## Textos Aljamiados
 
 ![bg left:60%](https://upload.wikimedia.org/wikipedia/commons/8/83/Poema_de_Yusuf.jpg)
 
-- La [aljamía o alyamía](https://es.wikipedia.org/wiki/Aljam%C3%ADa) es la escritura con caracteres árabes de una lengua no árabe
-- En español este nombre se aplica casi siempre a los documentos romances escritos con alfabeto árabe. 
+La [aljamía o alyamía](https://es.wikipedia.org/wiki/Aljam%C3%ADa) es la escritura con caracteres árabes de una lengua no árabe
+
+En español este nombre se aplica a los documentos romances escritos con alfabeto árabe. 
 
 ## Manuscrito Voynich
 
 ![bg left:50%](images/historia/voynich.jpg)
 
-- El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado.
-- ¿Está cifrado?
+El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado
+
+- ¿Está realmente cifrado?
 - ¿Es una broma?
-- Buen cifrado: no podemos distinguirlo de una broma
+
+Decimos que un cifrado es bueno si no podemos distinguirlo de una broma
 
 <!--
 
@@ -369,7 +372,7 @@ Contraseñas: podemos aumentar el tamaño de clave aumentando tanto el número c
 
 Tipo|Ejemplo|# de claves diferentes|Tamaño en bits
 --|--|--|--
-PIN de 4 números|3659|9999|$log_2(1000)\approx13\ bits$|
+PIN de 4 números|3659|10000|$log_2(10000)\approx13\ bits$|
 4 letras mayúsculas|CASA|614656|$log_2(614656)\approx\ 19 bits$
 4 letras + especiales|Ca*4|33362176|25 bits
 5 letras + especiales|Ca*4S|2535525376|32 bits
@@ -576,7 +579,7 @@ $k=\{23,8,3\}$
 
 Es decir: la primera letra se desplaza 23 posiciones, la segunda 8, la tercera 3, luego 23 otra vez, luego 8, luego 3...
 
-Habitualmente se escriben las letras que cifran el texto "AAA":
+Habitualmente "la clave" son las letras que cifran una letra "índice", normalmente A:
 
 $k=e(\{23,8,3\}, AAA) =XID$
 
@@ -606,11 +609,13 @@ EWO XUX KLR
 
 ---
 
-![h:18em](images/historia/crypto-disk-us-ww1-front.jpg) ![h:18em](images/historia/crypto-disk-us-ww1-back.jpg) 
+![h:13em](images/historia/crypto-disk-us-ww1-front.jpg) ![h:13em](images/historia/crypto-disk-us-ww1-back.jpg) 
 
-"*Le chiffre indéchiffrable*" se utilizó desde el siglo XVI hasta bien entrado el siglo XX.
+["*Le chiffre indéchiffrable*"](https://en.wikipedia.org/wiki/Cipher_disk) se utilizó desde el siglo XVI hasta bien entrado el siglo XX.
 
-...aunque ya había expertos en romperlo en el siglo XIX.
+...aunque ya había expertos en romperlo en el siglo XIX
+
+Ejemplo de uso: https://www.youtube.com/watch?v=cAN9ll_XolQ (Nota: en el video usa "X" como índice, en las dispositiva anterior usábamos "A")
 
 <!--
 Images: https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-front.jp
@@ -674,7 +679,9 @@ Vigenère está también roto. Su análisis es más laborioso que César, pero n
 
 - Inventada por Arthur Scherbius y usada a partir de los años 20 del siglo XX
 - Existía versión comercial y versión militar
-- Finalmente "vencida" por Alan Turing.
+    - Militar: más rotores, cableado
+    - La versión comercial se usó durante la guerra civil española y los ingleses sabían descifrarla
+- Finalmente "vencida" por Alan Turing
 - [Ejemplo de uso](https://www.101computing.net/enigma-machine-emulator/)
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_Scherbius_1.jpg)
@@ -694,12 +701,15 @@ La clave era: posición de los rotores, letras iniciales en los rotores, posici�
 Además, para evitar que todos los alemanes usasen cada día la misma clave en todos sus mensajes, había al inicio un pequeño paso adicional de anuncio de "clave de sesión".
 
 -->
+
 ---
 <!-- _class: center -->
 
-![w:20em](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg/800px-Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg) ![h:20em](https://upload.wikimedia.org/wikipedia/commons/6/6c/Enigma-action.svg)
+![w:18em](images/historia/maquina-enigma.jpg) ![h:20em](https://upload.wikimedia.org/wikipedia/commons/6/6c/Enigma-action.svg)
 
 <!-- 
+
+https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg/800px-Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg
 
 https://res.cloudinary.com/practicaldev/image/fetch/s--2qwhwBZd--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://raw.githubusercontent.com/maxime1992/my-dev.to/master/blog-posts/enigma-part-1/assets/enigma-schema.jpg
 
@@ -743,6 +753,12 @@ Se rompió más "por mal protocolo" que porque el sistema fuese defectuoso
 
 ![bg left:30%](https://upload.wikimedia.org/wikipedia/commons/f/f5/Turing-statue-Bletchley_14.jpg)
 
+<!--
+
+En la película, se dice que "hitler" es la palabra que siempre que se repetía. En realidad, "nada que reportar" e "informe metereológico" eran las frases más habituales, y las que se utilizaron para romper el cifrado
+
+-->
+
 ---
 ![bg left:50%](https://upload.wikimedia.org/wikipedia/commons/5/5c/Bombe-rebuild.jpg)
 
@@ -753,6 +769,17 @@ Una vez reducido el espacio de clave, identificados qué textos es probable que 
 La "Bombe" fue una de las primeras máquinas de procesado binario.
 
 El descifrado de Enigma fue una de las claves que permitió a los aliados ganar la Segunda Guerra Mundial
+
+<!--
+
+Fíjate:
+
+- La máquina Enigma para cifrado y descifrado era sencilla y transportable
+- Las Bombe eran máquinas enormes que ocupaban salas enteras
+
+Esta diferencia seguimos viéndola en la criptografía actual: necesitamos poder cifrar fácilmente con pequeños dispositivos muy baratos, pero las máquinas que rompen los cifrados son mucho más grandes, caras y complejas
+
+-->
 
 # Confidencialidad perfecta
 <!--
