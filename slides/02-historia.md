@@ -38,12 +38,51 @@ Sus comunicaciones radio están protegidas con "la cifra indescifrable"
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Criptografía clásica](#4)
-1. [Cifrado César](#11)
-1. [Atacando el cifrado César](#15)
-1. [Mejoras al cifrado César: sistemas polialfabéticos](#31)
-1. [Confidencialidad perfecta](#45)
-1. [Resumen y referencias](#58)
+1. [Cosas que no son criptografía](#4)
+1. [Criptografía clásica](#8)
+1. [Cifrado César](#15)
+1. [Atacando el cifrado César](#19)
+1. [Mejoras al cifrado César: sistemas polialfabéticos](#35)
+1. [Confidencialidad perfecta](#49)
+1. [Resumen y referencias](#62)
+
+# Cosas que no son criptografía
+<!--
+_class: lead
+header: Criptografía clásica
+-->
+
+Aunque lo parezca
+
+## El lenguaje de los petisos carambanales
+
+![center](images/historia/petisos.png)
+
+Los petisos carambanales en realidad hablan en español, pero usan su propio sistema de ortografía
+
+## Textos Aljamariyados
+
+![bg left:60%](https://upload.wikimedia.org/wikipedia/commons/8/83/Poema_de_Yusuf.jpg)
+
+- La [aljamía o alyamía](https://es.wikipedia.org/wiki/Aljam%C3%ADa) es la escritura con caracteres árabes de una lengua no árabe
+- En español este nombre se aplica casi siempre a los documentos romances escritos con alfabeto árabe. 
+
+## Manuscrito Voynich
+
+![bg left:50%](images/historia/voynich.jpg)
+
+- El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado.
+- ¿Está cifrado?
+- ¿Es una broma?
+- Buen cifrado: no podemos distinguirlo de una broma
+
+<!--
+
+El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos parecen hacer descartado que el manuscrito Voynich tenga un cifrado simple como el César. Aún así, han analizado los textos y han encontrado que siguen pautas estadísticas de un lenguaje real. El misterio sigue abierto.
+
+Imagen: https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg
+
+-->
 
 # Criptografía clásica
 <!--
@@ -280,22 +319,7 @@ Estas simplificaciones de letras dependen de la lengua original. Fíjate tambié
 Además, la forma del papel sugiere que estaba oculto en algún sitio y tenía esa forma para que no fuese reconocible. Sí que hay un rama de la criptografía moderna que estudia cómo ocultar un mensaje: la esteganografía.
 -->
 
-<!---
 
-![bg left:50%](images/historia/voynich.jpg)
-
-Pero no siempre es posible saber si un mensaje se ha descifrado correctamente:
-
-- El [manuscrito Voynich](https://es.wikipedia.org/wiki/Manuscrito_Voynich) aún no ha sido descifrado. Suponiendo que use César, no se sabe en qué lengua está escrito originalmente.
-- Imagina que solo está cifrada la hora "atacamos a las X"... Si una clave descifra "a las 5" y otra "a las 7" ¿cómo validamos qué hora es correcta? 
-
-<!--
-
-El manuscrito Voynich podría ser una broma de textos sin sentido. Los expertos parecen hacer descartado que el manuscrito Voynich tenga un cifrado simple como el César. Aún así, han analizado los textos y han encontrado que siguen pautas estadísticas de un lenguaje real. El misterio sigue abierto.
-
-Imagen: https://upload.wikimedia.org/wikipedia/commons/9/93/Voynich_Manuscript_%2832%29.jpg
-
--->
 
 ## Contramedidas
 <!-- _class: center -->
