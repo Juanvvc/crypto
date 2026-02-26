@@ -56,9 +56,9 @@ Aunque lo parezca
 
 ## El lenguaje de los petisos carambanales
 
-![center w:20em](images/historia/petisos.png)
+![center w:30em](images/historia/petisos.png)
 
-Los petisos carambanales en realidad hablan en español, pero usan su propio sistema de ortografía
+Los petisos en realidad hablan en español, pero usan su propio sistema de ortografía
 
 ## Textos Aljamiados
 
@@ -615,7 +615,7 @@ EWO XUX KLR
 
 ...aunque ya había expertos en romperlo en el siglo XIX
 
-Ejemplo de uso: https://www.youtube.com/watch?v=cAN9ll_XolQ (Nota: en el video usa "X" como índice, en las dispositiva anterior usábamos "A")
+Ejemplo de uso: https://www.youtube.com/watch?v=cAN9ll_XolQ Nota: en el video usa "X" como índice, en la dispositiva anterior usábamos "A"
 
 <!--
 Images: https://people.duke.edu/~ng46/collections/crypto-disk-us-ww1-front.jp
