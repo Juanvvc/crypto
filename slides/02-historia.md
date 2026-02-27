@@ -58,7 +58,7 @@ Aunque lo parezca
 
 ![center w:30em](images/historia/petisos.png)
 
-Los petisos en realidad hablan en español, pero usan su propio sistema de ortografía
+Los petisos en realidad hablan en español, pero usan su propio sistema de escritura
 
 ## Textos Aljamiados
 
@@ -66,7 +66,7 @@ Los petisos en realidad hablan en español, pero usan su propio sistema de ortog
 
 La [aljamía o alyamía](https://es.wikipedia.org/wiki/Aljam%C3%ADa) es la escritura con caracteres árabes de una lengua no árabe
 
-En español este nombre se aplica a los documentos romances escritos con alfabeto árabe. 
+En español este nombre se aplica a los documentos romances escritos con alfabeto árabe
 
 ## Manuscrito Voynich
 
@@ -100,7 +100,7 @@ Hasta los años 70 del siglo XX, la criptografía se usaba solo en el ámbito mi
 
 **El enemigo no puede saber nuestros planes**
 
-El resultado debería ser un mensaje igual que el original
+Existe una clave que es la que protege el mensaje. Idealmente: el mensaje no puede descifrarse sin la clave
 
 ![bg right:40% w:100%](images/conceptos/cryptosystem.jpg)
 
@@ -678,11 +678,11 @@ Vigenère está también roto. Su análisis es más laborioso que César, pero n
 
 ## Máquina Enigma
 
-- Inventada por Arthur Scherbius y usada a partir de los años 20 del siglo XX
+- [Inventada por Arthur Scherbius](https://es.wikipedia.org/wiki/Enigma_(m%C3%A1quina)#) y usada a partir de los años 20 del siglo XX
 - Existía versión comercial y versión militar
     - Militar: más rotores, cableado
     - La versión comercial se usó durante la guerra civil española y los ingleses sabían descifrarla
-- Finalmente "vencida" por Alan Turing
+- Muy sencilla de transportar y operar
 - [Ejemplo de uso](https://www.101computing.net/enigma-machine-emulator/)
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/3/36/Arthur_Scherbius_1.jpg)
@@ -724,7 +724,7 @@ Los aliados tenían copias de la versión comercial pero no la versión militar.
 
 - Sistema polialfabético como Vigenère, con una clave muy larga que se define con la posición inicial de los rotores
 - Con la tecnología de la época no era posible hacer fuerza bruta antes de que cambiase la clave (cada día)
-- "Indescifrable" según casi todos los expertos.
+- Usada para comunicaciones "de batalla", mensajes que solo necesitan ser secretos por un tiempo corto
 
 > Información adicional: <https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma>
 
@@ -739,20 +739,19 @@ Protocolo alemán de uso:
 - El texto era natural
 
 ---
-<style scoped>
-p, li {font-size: 90%; }
-</style>
 
 
-Se rompió más "por mal protocolo" que porque el sistema fuese defectuoso
+Se rompió "por mal uso", no porque el sistema fuese inseguro:
 
-- Los rotores se cambiaban cada día para que no coincidiesen las letras: A no podía cifrarse como A, ni igual que ayer. Eso limitaba el espacio de claves: ya no hay que probar nada que se parezca a la configuración de ayer.
+- Los rotores se cambiaban cada día: no hace falta probar nada de la configuración de ayer.
 - Parte de la clave la escogían los operadores de radio:
     - se enviaba por ondas radio al inicio... **dos veces** (aunque esto cambió en 1940)
     - Los operadores en medio de una guerra no siempre escogían claves perfectamente aleatorias. A veces era AAA, ó ABC...
 - El texto era natural: *nada que reportar*, *hitler*, *meteorología*... aparecían con mucha frecuencia
 
 ![bg left:30%](https://upload.wikimedia.org/wikipedia/commons/f/f5/Turing-statue-Bletchley_14.jpg)
+
+> [Errores humanos, la razón por la cual la máquina Enigma no era impenetrable](https://www.unocero.com/ciencia/errores-humanos-la-razon-por-la-cual-la-maquina-enigma-no-era-impenetrable/)
 
 <!--
 
@@ -765,11 +764,12 @@ En la película, se dice que "hitler" es la palabra que siempre que se repetía.
 
 Una vez reducido el espacio de clave, identificados qué textos es probable que apareciesen y otros atajos...
 
-...el cifrado del día se podía romper por fuerza bruta en 20 minutos, cada mañana, utilizando una batería de máquinas llamada "Bombe"
+...el cifrado del día se podía romper por fuerza bruta en 20 minutos, cada mañana, utilizando una batería de máquinas llamada ["Bombe"](https://www.youtube.com/watch?v=6178TGqHkH0)
 
-La "Bombe" fue una de las primeras máquinas de procesado binario.
+La Bombe fue creada por [el equipo de Alan Turing](https://en.wikipedia.org/wiki/Bombe) basándose en trabajos previos de [Marian Rejewski](https://en.wikipedia.org/wiki/Bomba_(cryptography))
 
-El descifrado de Enigma fue una de las claves que permitió a los aliados ganar la Segunda Guerra Mundial
+La historia se cuenta muy simplificada en la película ["The Imitation Game"](https://es.wikipedia.org/wiki/The_Imitation_Game)
+
 
 <!--
 
@@ -796,15 +796,16 @@ One-time-pad (cifrado Vernam)
 
 **Seguridad perfecta o incondicional**: no se puede deducir ninguna propiedad del texto original en claro, incluso aunque el atacante tenga recursos infinitos (tiempo, dinero)
 
-- Gilbert Sandford Vernam inventó y patentó una máquina de cifrado en 1917
+- [Gilbert Vernam](https://es.wikipedia.org/wiki/Gilbert_Vernam) inventó y patentó una máquina de cifrado en 1917
 - Shannon demostró en 1945 que esa máquina tenía cifrado perfecto
+- En la foto, [la máquina de Lorenz](https://es.wikipedia.org/wiki/C%C3%B3digo_Lorenz), usada por los alemanes para secretos de alto nivel
 
 > [Communication Theory of Secrecy Systems](http://netlab.cs.ucla.edu/wiki/files/shannon1949.pdf), Claude E. Shannon, Bell System Technical Journal, vol.28-4, page 656--715, Oct. 1949.
 
 <!-- 
 excepto la longitud... y el momento de enviarlo, ...y el número de mensajes
 
-La fotogradía no es la máquina patentada por Vernam, si la máquina de Lorentz, usada en la Segunda Guerra mundial por los alemanes para mensajes que necesitaban permanecer secretos mucho tiempo (comunicaciones dipomáticas, por ejemplo). La máquina de Lorentz era similar al a de Vernam: https://en.wikipedia.org/wiki/Lorenz_cipher
+La fotogradía no es la máquina patentada por Vernam, sino la máquina de Lorenz, usada en la Segunda Guerra mundial por los alemanes para mensajes que necesitaban permanecer secretos mucho tiempo (comunicaciones dipomáticas, por ejemplo). La máquina de Lorentz era similar a la de Vernam
 -->
 
 ---
@@ -988,8 +989,8 @@ descubrió la criptogradía asimétrica que permitía publicar parte de la clave
 ## Referencias
 
 - <https://www.youtube.com/watch?v=ncL2Fl6prH8>: resumen de criptografía clásica y máquina Enigma.
-- <https://www.bbvaopenmind.com/tecnologia/innovacion/los-fallos-humanos-que-derrotaron-a-enigma/>
-- <https://www.ugr.es/~aquiran/cripto/enigma/boletin_enigma_18.htm#1>, y siguientes, con la historia de la criptografía en la Segunda Guerra Mundial.
+- <https://www.unocero.com/ciencia/errores-humanos-la-razon-por-la-cual-la-maquina-enigma-no-era-impenetrable/>
+- La contribución polaca al descifrado de Enigma se encuentra en los boletines 18, 24, 28 del [Boletín Enigma](https://www.ugr.es/~aquiran/cripto/enigma.htm), junto con muchas otras historias de la criptografía
 - https://www.cryptomuseum.com/, con fotografías de aparatos criptográficos históricos.
 - Película: <https://en.wikipedia.org/wiki/The_Imitation_Game>
 - [The Cryptograhic Mathematics of Enigma](https://www.nsa.gov/portals/75/documents/about/cryptologic-heritage/historical-figures-publications/publications/wwii/CryptoMathEnigma_Miller.pdf) Dr. A. Ray Miller, NSA 2019
