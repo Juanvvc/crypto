@@ -154,6 +154,12 @@ Ambas fuentes de ruido generan valores aleatorios **pero no uniformes**
 - RNG térmico: limitado por el ancho de banda (señal)
 - RNG cuántico: limitado por la precisión del espejo (semireflectancia del 50% exacta)
 
+## Lavarand
+
+[![center w:30em](images/random/lavarand.png)](https://www.youtube.com/watch?v=1cUUfMeOijg)
+
+> https://en.wikipedia.org/wiki/Lavarand
+
 ## Reducción
 
 - Se descartan las secuencias seguidas de '1' y de '0' y sólo se genera un bit random en los cambios. Por ejemplo:

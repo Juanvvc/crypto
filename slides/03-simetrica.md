@@ -27,11 +27,13 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 # Como decíamos ayer...
 
-Sabemos conseguir **confidencialidad perfecta** que nadie puede descifrar (tema 2)
+Sabemos conseguir **confidencialidad perfecta** que nadie puede descifrar 
 
 Pero implica claves de un solo uso tan grandes como el mensaje: $\|k\|=\|m\|$
 
-Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica". A partir de 1976:
+Hasta los '70 la criptografía o era "muy imperfecta" o no era "práctica"
+
+A partir de 1976:
 
 - **Criptografía simétrica**: es "casi perfecta" con claves cortas
 - **Criptografía asimétrica**: distribución de claves de cualquier tamaño
@@ -70,18 +72,8 @@ Hoy veremos como solucionarlo:
 <!-- _class: lead
 header: Confidencialidad computacional -->
 
-## Relajando la perfección
-
-- **Confidencialidad perfecta**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional infinita**
-- **Confidencialidad computacional**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional razonable**
-
-![bg right:35% w:80%](https://www.researchgate.net/profile/Dominique-Elser/publication/288713921/figure/fig1/AS:614285285802002@1523468433568/Color-online-Computational-vs-Information-theoretic-security-The-four-ciphers-data.png)
-
->  Imagen: Nitin Jain, Birgit Stiller, Imran Khan, Dominique Elser, Christoph Marquardt & Gerd Leuchs (2016) "Attacks on practical quantum key distribution systems (and how to prevent them)". [DOI: 10.1080/00107514.2016.1148333](https://www.tandfonline.com/doi/abs/10.1080/00107514.2016.1148333)
-
 ---
-
-<!-- _class: extra-slide -->
+<!-- _class: with-warning -->
 
 **Confidencialidad perfecta** (*perfect secrecy*): un sistema es perfectamente seguro si y solo si para cualquier distribución de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de $m$ dado $c$ y la probabilidad de $m$ coinciden:
 
@@ -95,7 +87,7 @@ Puede demostrarse matemáticamete que es necesario:
 - Que la clave sea totalmente aleatoria
 - Que la clave se use solo una vez, y después se descarte
 
-**La confidencialidad prerfecta no es práctica**
+La confidencialidad prerfecta no es práctica
 
 <!--
 Transparencia recordatorio
@@ -111,6 +103,19 @@ Si el cifrado es XHAJSJXXNFHFDOIOJUMNFNNNF existe una clave que descifra "ATACAR
 
 Es decir: ni siquiera por fuerza bruta podemos atacar el sistema de cifrado, porque no sabremos si el mensaje que hemos obtenido es el bueno
 -->
+
+
+## Relajando la perfección
+
+<!-- _class: with-success -->
+
+- **Confidencialidad perfecta**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional infinita**
+- **Confidencialidad computacional**: a partir del texto cifrado no es posible deducir ninguna propiedad del texto en claro aunque el atacante tenga **capacidad computacional razonable**
+
+![bg right:35% w:80%](https://www.researchgate.net/profile/Dominique-Elser/publication/288713921/figure/fig1/AS:614285285802002@1523468433568/Color-online-Computational-vs-Information-theoretic-security-The-four-ciphers-data.png)
+
+>  Imagen: Nitin Jain, Birgit Stiller, Imran Khan, Dominique Elser, Christoph Marquardt & Gerd Leuchs (2016) "Attacks on practical quantum key distribution systems (and how to prevent them)". [DOI: 10.1080/00107514.2016.1148333](https://www.tandfonline.com/doi/abs/10.1080/00107514.2016.1148333)
+
 
 ---
 
@@ -141,7 +146,7 @@ La criptografía computacionalmente segura permite $n \ll \|m\|$
 - No es criptografía perfecta: en teoría será posible descifrar un mensaje, pero queremos que sea demasiado caro descifrarlo
 - **Fortaleza de un sistema criptográfico**: número de claves que hay que probar por fuerza bruta (en bits)
 
-Hay que usar una clave lo suficientemente grande como para que no sea posible hacer fuerza bruta pero lo suficientemente pequeña como para que el sistema sea práctico para usar
+Hay que usar una clave lo suficientemente grande como para que no sea posible hacer fuerza bruta pero lo suficientemente pequeña como para que el sistema sea práctico
 
 <!-- Recordad: en el cifrado de Verman no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
 
@@ -188,9 +193,27 @@ Es decir: con una clave de 128 bits podemos cifrar un mensaje de **cualquier lon
 
 En cifrado simétrico, el tamaño en bits de su clave es igual a la **fortaleza** del sistema
 
-> Otras recomendaciones: <https://www.keylength.com/en/compare/>
+---
+
+![bg left:60%](images/simetrica/clave-recomendada.png)
+
+Diferentes institutos de estandarización recomiendan longitudes diferentes (pero similares)
+
+Observa que las recomendaciones tienen una fecha de caducidad
+
+> <https://www.keylength.com/en/compare/>
 
 <!-- algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas asimétricos, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
+
+## Rompiendo algoritmos
+
+Recuerda: definimos un que un algoritmo está **criptográficamente roto** si se conoce un ataque más eficiente que la fuerza bruta
+
+Para la criptografía simétrica, buscaremos **algoritmos computacionalmente seguros y que no estén rotos**
+
+Cuando la comunidad criptográfica rompe un algoritmo, se sustituye por otro
+
+... pero es mejor prevenir: los algoritmos caducan y se cambian antes de que estén rotos
 
 ---
 
@@ -206,16 +229,6 @@ La amenaza conocida que puede modificar el calendario es la **computación cuán
 https://csrc.nist.gov/projects/post-quantum-cryptography
 
 -->
-
-## Rompiendo algoritmos
-
-Recuerda: definimos un que un algoritmo está **criptográficamente roto** si se conoce un ataque más eficiente que la fuerza bruta
-
-Para la criptografía simétrica, buscaremos **algoritmos computacionalmente seguros y que no estén rotos**
-
-Cuando la comunidad criptográfica rompe un algoritmo, se sustituye por otro
-
-... pero es mejor prevenir: los algoritmos caducan y se cambian antes de que estén rotos
 
 ## Criptografía simétrica: tipos
 
@@ -271,7 +284,9 @@ $c = k_{\text{generada}} \oplus m$
 
 ## Cifrado de flujo: algoritmo
 
-![w:25em center](images/simetrica/symmetric-example.png)
+![w:20em center](images/simetrica/symmetric-example.png)
+
+Idea de diseño: generamos un flujo pseudo-aleatorio de bytes tan largo como el mensaje a cifrar y haces un XOR
 
 <!--
 Recordatorio: este es el esquema para hacer un cifrador de flujo.
@@ -301,9 +316,9 @@ La seguridad del cifrado depende del generador PRNG utilizado...
 
 ![w:25em center](images/simetrica/symmetric-example.png)
 
-En las próximas transparencias, exploraremos cómo podemos diseñar un cifrado de flujo a partir de un PRNG, y cómo la solución más obvia... no funciona
+¿Cómo generamos un flujo pseudo-aleatorio a partir de una clave corta que podamos reutilizar varias veces?
 
-## Intento 1
+## Intento 1: mismo flujo para cada mensaje
 <!-- _class: smaller-font with-success -->
 
 Supongamos que tenemos una función PRNG, y usamos una clave k como semilla del PRNG para cifrar un flujo de datos en una conexión
@@ -340,13 +355,13 @@ Los algotitmos se diseñan para ser resistenentes a ciertos problemas. Por ejemp
 Mira el ejemplo de ataque japonés en el Pacífico de wikipedia
 -->
 
-## Intento 2
+## Intento 2: clave diferente para cada mensaje
 
 Cambiamos la clave (la semilla del PRNG) en cada transmisión
 
 Esto es correcto pero costoso, y volvemos a los problemas de la confidencilidad perfecta: cómo distribuimos una clave diferente para cada mensaje
 
-## Intento 3
+## Intento 3: la clave tiene una parte constante y otra variable
 
 Generar **variaciones de las claves en cada transmisión**
 
@@ -403,8 +418,8 @@ El cifrado de flujo es tan seguro como:
 
 - RC4 (histórico): obsoleto
 - ChaCha: derivado del Salsa20 y probablemente la única alternativa al AES en TLS 1.3
-    - $\|k\|=256\ bits$
-    - $\|nonce\|=64\ bits$
+    - Parte constante: $\|k\|=256\ bits$
+    - Parte variable: $\|nonce\|=64\ bits$
 
 ![bg right:40%](https://upload.wikimedia.org/wikipedia/commons/4/47/Salsa_round_function.svg)
 
@@ -425,7 +440,7 @@ Un comentario rápido sobre [RC4/ARC4/RCFOUR](https://en.wikipedia.org/wiki/RC4)
 
 ## PRNG: seguridad
 
-La seguridad del cifrado de flujo y de otros sistemas criptográficos está basada en que podamos general números aleatorios que un atacante no pueda adivinar... y esto no es sencillo
+La seguridad del cifrado de flujo y de otros sistemas criptográficos está basada en que podamos generar números aleatorios que un atacante no pueda adivinar... y esto no es sencillo
 
 Como los generadores aleatorios son importantes en criptografía, tenemos una anexo hablando de ellos:
 
