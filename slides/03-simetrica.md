@@ -62,11 +62,11 @@ Hoy veremos como solucionarlo:
 <!-- _class: cool-list toc -->
 
 1. [Confidencialidad computacional](#4)
-1. [Cifrado de flujo](#15)
-1. [ChaCha20](#31)
-1. [Cifrado de bloque](#42)
-1. [Cifrado AES](#50)
-1. [Resumen](#75)
+1. [Cifrado de flujo](#17)
+1. [ChaCha20](#33)
+1. [Cifrado de bloque](#44)
+1. [Cifrado AES](#52)
+1. [Resumen](#77)
 
 # Confidencialidad computacional
 <!-- _class: lead
@@ -509,27 +509,15 @@ result = json.dumps({'nonce':nonce, 'ciphertext':ct})
 {"nonce": "IZScZh28fDo=", "ciphertext": "ZatgU1f30WDHriaN8ts="}
 ```
 
-<!-- Cosas para fijarse: la salida se codifica en Base64 y el nonce se envía con la comunicación -->
-
-## (inciso: Base64 no es un cifrado)
-
-[Base64](https://es.wikipedia.org/wiki/Base64) se utiliza para representar información binaria como cadena imprimible
-
-```bas
-> echo '¡Qué tal estás!' | base64
-wqFRdcOpIHRhbCBlc3TDoXMhCg==
-> dd count=1 bs=16 if=/dev/random 2>/dev/null 
-???n??????;N%  
-> dd count=1 bs=16 if=/dev/random 2>/dev/null | base64
-D87WM0+4j5vYzLpHhJFMTA==
-```
+<!-- Cosas para fijarse: la salida se codifica en Base64 y el nonce se envía con la comunicación
 
 Base64 **NO ES UN CIFRADO**. Es una **CODIFICACIÓN** para representar cadenas binarias como texto. A veces se usa también para representar texto (ej: correos electrónicos) y ahorrar problemas con letras acentuadas.
 
-Recuerda:
 
 - Encontrar Base64 no significa que algo esté cifrado
 - Pero es común cifrar algo y después enviarlo codificado como Base64
+
+-->
 
 ## Descifrado con Python
 
@@ -657,11 +645,23 @@ Ninguna conocida, siempre que se cumplan las condiciones de uso: no se puede rep
 <!-- _class: lead
 header: Cifrado de bloque -->
 
+## Criptografía moderna
+
+Combinación de varias capas de sustitución (s-boxes) y permutación (p-boxes)
+
+![center](images/historia/modern-algorithms.png)
+
+Neceistamos cortar el mensaje en **bloques**
+
+<!--
+Gracias a la ayuda de los computadores modernos podemos hacer redes complejas pero, en esencia, seguimos haciendo permutaciones y sustituciones
+-->
+
 ---
 <style scoped>{font-size: 180%}</style>
 
 
-El cifrado de bloque es lo que hacía el cifrado Vignère: cortar el texto en claro en bloques de la misma longitud de la clave y cifrar cada uno de los bloques
+Cada caja es un cifrado de bloque, una combinación de sustituci´n y permutación
 
 Si tenemos mensajes más largos que $n$ deberemos de segmentarlos en bloques de tamaño $n$
 
@@ -686,9 +686,7 @@ Hay dos clases de cifrado de bloque. Es decir, dos maneras de implementar PRP:
 
 Fijate: igual que los cifrados clásicos.
 
-Por si solas, las 2 clases básicas de cifrado de bloque son inseguras pero combinándolas podemos obtener seguridad creciente.
-
-A partir de ahora utilizaremos $e()$ y $d()$ en lugar de las $f$ y $f^{−1}$ utilizadas hasta ahora
+Por sí solas, las 2 clases básicas de cifrado de bloque son inseguras pero combinándolas podemos obtener seguridad creciente.
 
 ## Sustitución polialfabética
 <!-- _class: center -->
@@ -815,24 +813,13 @@ Parte de una matriz de estado que se va modificando durante 10, 12 o 14 rondas s
 	- `MixColumns`: 4 multiplicaciones modulares de 4 Bytes, valores fijos
 	- `AddRoundKey`: $bloque \otimes k_i$ (subclave $k_i$ )
 
----
-
-![center w:25em](images/simetrica/aes-algorithm.png)
-
-<!--
-Fíjate:
-
-- el algoritmo de cifrado es diferente el algoritmo de descifrado. Se diseñó para optimizar el cifrado.
-- Hay una etapa de expación de clave: de una clave con un tamaño determinado sacamos "subclaves" para cada una de las etapas.
--->
-
-## SubBytes
+## Fase 1 de una etapa: SubBytes
 
 ![center w:30em](images/simetrica/AES-SubBytes.svg)
 
 "sustitución de bytes en función de una tabla fija de 256 entradas"
 
-## ShiftRows
+## Fase 2 de una etapa: ShiftRows
 
 ![center w:30em](images/simetrica/AES-ShiftRows.svg)
 
@@ -842,13 +829,13 @@ Fíjate:
 Añade **difusión**: los bits de salida dependerán de varios bits de entrada.
 -->
 
-## MixColumns
+## Fase 3 de una etapa: MixColumns
 
 ![center  w:30em](images/simetrica/AES-MixColumns.svg)
 
 "4 multiplicaciones modulares de 4 Byte, valores fijos"
 
-## AddRoundKey
+## Fase 4 de una etapa: AddRoundKey
 
 ![center w:20em](images/simetrica/AES-AddRoundKey.svg)
 
@@ -857,6 +844,20 @@ Añade **difusión**: los bits de salida dependerán de varios bits de entrada.
 <!--
 Aquí es donde entran las subclaves, diferentes en cada una de las etapas, y la operación XOR que finalmente cifra el bloque. El nuevo estado se pasa entonces a la siguiente etapa.
 -->
+
+## Etapas: repite todo lo anterior varias veces
+
+![center w:20em](images/simetrica/aes-algorithm.png)
+
+En total 10, 12 or 14 etapas según el tamaño de la clave (128, 192 o 256 bits)
+
+<!--
+Fíjate:
+
+- el algoritmo de cifrado es diferente el algoritmo de descifrado. Se diseñó para optimizar el cifrado.
+- Hay una etapa de expación de clave: de una clave con un tamaño determinado sacamos "subclaves" para cada una de las etapas.
+-->
+
 
 ## Expansión de clave
 
@@ -868,10 +869,6 @@ Cada una de les subclaves $k_i$ [se deriva](https://en.wikipedia.org/wiki/Rijnda
 Nota 1: las subclaves se aplican ($\otimes$) "alrededor" de las etapas por tanto hace falta una subclave más que etapas hay (11|13|15)
 
 Nota 2: hacen falta más etapas en los AES de clave larga para "aplicar" el mayor espacio de claves sobre el mensaje en claro
-
----
-
-![center w:28em](images/simetrica/aes-keyexpansion.png)
 
 ## Vulnerabilidades
 
