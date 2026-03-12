@@ -26,7 +26,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 # Como decíamos ayer...
 <!-- _class: with-info -->
 
-![w:18em center](images/simetrica/symmetric-example.png)
+![w:15em center](images/simetrica/symmetric-example.png)
 
 El cifrados de flujo y de bloque permiten enviar mensajes computacionalmente seguros
 
@@ -76,7 +76,9 @@ Selection|$O(n^2)$|$O(1)$
 Bubble|$O(n)$|$O(1)$
 Quick Sort|$O(n \log n)$|$O(n)$
 
-¿Cuál es la velocidad máxima teórica a la que podemos ordenar?
+- ¿Cuál es la velocidad máxima teórica a la que podemos ordenar?
+- ¿Cuál es la velocidad media máxima a la que podemos ordenar?
+- ¿Cuál necesita menos memoria?
 
 > https://www.geeksforgeeks.org/time-complexities-of-all-sorting-algorithms/
 
@@ -97,6 +99,8 @@ Igual que existe una velocidad máxima de la luz... ¿existe una velocidad máxi
 Ciencia que estudia cuánto tiempo lleva resolver un problema **al algoritmo más rápido posible**
 
 **Criptografía**: dado un mensaje cifrado con cierto algoritmo ¿existe un algoritmo más rápido que la fuerza bruta... aunque aún no sepamos cuál?
+
+> Nota: tiempo... o memoria. En el resto de esta sesión solo hablaré de tiempo para simplificar, pero se podría decir lo mismo de la memoria
 
 <!--
 
@@ -195,7 +199,7 @@ Casi todos los problemas se pueden replantear como una pregunta SI/NO.
 
 ## ¿Cuánto tiempo tardas en colorear este mapa con 9 colores diferentes?
 
-![w:25em center](images/complejidad/fourcolors.svg)
+![w:20em center](images/complejidad/fourcolors.svg)
 
 <!--
 El problema tradicional es "con 4 colores", que resulta ser el mínimo posible con cualquier mapa. Pero vamos a exigir 9 colores para poder hacer una observación interesante a continuación.
@@ -345,7 +349,7 @@ $8012012832918391238193192198219981928192889382938998982 = ?$
 
 Es un problema NP y probablemente ni P ni NP-Completo
 
-El algoritno conocido más rápido es [GNFS](https://en.wikipedia.org/wiki/General_number_field_sieve):
+El algoritmo conocido más rápido es [GNFS](https://en.wikipedia.org/wiki/General_number_field_sieve):
 
 $$
 O(2^{2,774·(b_n^{1/3})(ln(b_n)^{2/3})})
@@ -393,7 +397,7 @@ $m$|$c = 5 ^ m \mod 17$
 15|7
 16|1
 
-¿Cuánto vale $m$? Solo podemos calcularlo por fuerza bruta, probando valores de m
+¿Cuánto vale $m$? Solo sabemos calcularlo por fuerza bruta, probando valores de m
 
 <!--
 Fijaos: se están mapeando todos los números de 1 a 17 en otros números de 1 a 17 de forma "aleatoria". Esto es un "grupo cíclico"
@@ -613,7 +617,7 @@ g = 2
 
 ¿Qué sucede si Malloy se pone en medio de un D-H?
 
-![center](images/asimetrica/dh-maninthemiddle.png)
+![center w:15em](images/asimetrica/dh-maninthemiddle.png)
 
 Alice y Bob están hablando en secreto... con el atacante
 
@@ -677,10 +681,6 @@ header: Hash
 
 - [New Directions in Cryptography](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720), Whitfield Diffie y Martin E. Hellman, 1976. El paper describe parte de la teoría de la complejidad que hemos estudiado aquí y describe el intercambio de claves Diffie-Hellman
 - [NP-Hardness](https://jeffe.cs.illinois.edu/teaching/algorithms/book/12-nphard.pdf), capítulo 12 del libro [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/) de Jeff Erickson. Aunque no está enfocado a la criptografía, es una buena explicación de los problemas P y NP.
-
-# Ejercicios
-
-<https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/04/T4%20-%20Acuerdo%20de%20claves%20D-H.ipynb>
 
 # ¡Gracias!
 <!-- _class: last-slide -->
