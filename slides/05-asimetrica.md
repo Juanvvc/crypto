@@ -676,7 +676,7 @@ NOTA: RSA está basado en "factorización", DSA y D-H en "logaritmo discreto"
 
 ## Elección de la curva
 
-No se suele escoger "cualquier curva elíptica", sino alguna de las ya existentes. Cada una tiene propiedades ligeramente diferentes, [algunas están patentadas](https://en.wikipedia.org/wiki/ECC_patents) y otras provocan dudas ([parte de las revelaciones de Snowden, 2013](https://en.wikipedia.org/wiki/Dual_EC_DRBG))
+No se escoge "cualquier curva elíptica", sinó alguna de las ya existentes. Cada una tiene propiedades ligeramente diferentes, [algunas están patentadas](https://en.wikipedia.org/wiki/ECC_patents) y otras [se pensó que tenían *backdoor*](https://www.nist.gov/news-events/news/2014/04/nist-removes-cryptography-algorithm-random-number-generator-recommendations).
 
 La [Curve25519](https://en.wikipedia.org/wiki/Curve25519), [propuesta por  Daniel J. Bernstein en 2005](https://cr.yp.to/ecdh.html), se considera segura:
 
@@ -688,8 +688,9 @@ Tiene un tamaño de clave de 256 bits, equivalente a 128 bits en clave simétric
 
 Aceptada por varios estándares
 
-- [FIPS 186-5, 2019 (aún borrador)](https://csrc.nist.gov/publications/detail/fips/186/5/draft)
+- [FIPS 186-5, 2023](https://csrc.nist.gov/pubs/fips/186-5/final)
 - [TLS Protocol Version 1.3 (RFC8446, 2018)](https://tools.ietf.org/html/rfc8446)
+- [Usada en Elliptic Curve Diffie-Hellman: ECDH](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman)
 
 <!--
 Bernstein es el creador de Chacha20 del [tema 3](03-simetrica.html)
@@ -760,6 +761,8 @@ Veremos el cifrado mixto en las siguientes sesiones y en los ejercicios
 - Añade random padding al inicio de un mensaje, de forma que dos mensajes iguales se cifren de forma diferente cada vez... pero se descifren igual
 - Diferencias de implementación de  RSA en esquemas de cifrado y firmado
 - Cómo hacer correctamente la conversión entre mensajes (cadenas de bytes) y enteros (que es lo que cifra RSA)
+
+> https://es.wikipedia.org/wiki/PKCS
 
 ## Computación cuántica
 <!-- _class: smaller-font -->
