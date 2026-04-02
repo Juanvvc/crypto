@@ -45,8 +45,8 @@ las funciones de hash
 
 1. [Funciones de hash](#4)
 1. [Ejemplos de aplicaciones](#23)
-1. [Aplicación: cadena de custodia](#33)
-1. [Resumen y referencias](#41)
+1. [Aplicación: cadena de custodia](#36)
+1. [Resumen y referencias](#44)
 
 # Funciones de hash
 <!-- _class: lead -->
@@ -311,14 +311,33 @@ En este curso no hacemos criptoanálisis, es decir, no rompemos cosas. Si estái
 
 Integridad, Bitcoin, Cadena de custodia...
 
+## Esquema de firma electrónica
+
+![w:20em center](images/asimetrica/IMG_0055.PNG)
+
+- Solo Bob puede cifrar con su clave $K_{priv}$ y cualquier puede descifrar con $K_{pub}$
+- Pero si pueden descifrar el mensaje, **todos saben que el mensaje solo puede haberlo enviado Bob: autenticación**
+
+---
+
+Problema: los documentos a firmar pueden ser muy grandes
+
+* Los algoritmos como RSA solo cifran **números enteros** de una longitud igual a la clave. Por ejemplo, 4096 bits.
+* Bob podría dividir el documento en bloques de 4096B, pero eso no es eficiente
+* Solución: **hash cifrado con la clave privada**
+    - Bob calcula el hash de su documento de 10MB. El hash tiene 512 bytes
+    - Bob cifra el hash con su clave privada
+    - Cualquiera persona (eso incluye a Alice) puede conocer la clave pública de Bob y descifrar el hash
+    - Si se encuentra un documento con un hash firmado por una clave pública, cualquier persona puede verificar que el autor del documento es el poseedor de la clave privada.
+
+> https://cryptobook.nakov.com/digital-signatures/rsa-signatures
+
 ## Firma digital
 <!-- _class: with-success -->
 
 Cifrando **el hash de un mensaje** con nuestra clave privada, aseguramos que ese mensaje lo hemos enviado nosotros y cualquier puede verificarlo
 
 ![center w:10em](https://upload.wikimedia.org/wikipedia/commons/7/78/Private_key_signing.svg)
-
-Tenemos una presentación dedicada a [firma digital](A4-firmadigital.html)
 
 Firma digital de un mensaje = cifrado del hash de un mensaje con mi clave privada
 
@@ -338,7 +357,7 @@ Un atacante realizar un "diccionario" con el hash de todas las palabras, nombres
 
 ## Almacenamiento de contraseñas: *salt* y bcrypt
 
-1. Añadir un valor aleatorio o $salt$ y tamibén lo guardamos: $hash(salt\|contraseña)$
+1. Añadir un valor aleatorio o $salt$ y también lo guardamos: $hash(salt\|contraseña)$
 1. Hashear varias veces o implementar un hash "costoso":
 
 $$hash(hash(hash(...hash(salt\|contraseña))))$$
@@ -432,6 +451,23 @@ Permite firmar bases de datos, discos... de forma eficiente
 ![w:30em center](images/blockchain/bc-transactions.png)
 
 Tenemos todo un [tema para hablar de blockchain](A3-blockchain.html)
+
+## Cálculo de similitud entre documentos: differential hash
+<!-- _class: with-warning -->
+
+dHash, pHash, wHash... crean "huellas digitales" de los documentos que pueden usarse para comprobar su similitud
+
+![right:40% h:100% bg](images/hashes/dhash.png)
+
+Este tipo de funciones también se usan para guardar huellas digitales biométricas
+
+
+Esto no es un hash criptográfico
+
+
+> https://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html
+> https://www.researchgate.net/figure/Similar-images-have-similar-robust-block-based-hashes-The-mid-column-shows-a_fig1_338824771
+> https://fullstackml.com/wavelet-image-hash-in-python-3504fdd282b5
 
 # Aplicación: cadena de custodia
 <!-- _class: lead -->
