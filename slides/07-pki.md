@@ -7,7 +7,6 @@ paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
-transition: fade
 ---
 
 <style>
@@ -29,7 +28,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Criptografía híbrida](#5)
 1. [Gestión de claves públicas](#16)
-1. [Resumen y referencias](#41)
+1. [Resumen y referencias](#40)
 
 ## Recordatorio: cifrado asimétrico
 <!-- _class: two-columns -->
@@ -66,7 +65,10 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 Hoy veremos las soluciones para estos problemas: cifrado híbrido y certificados
 
 # Criptografía híbrida
-<!-- _class: lead -->
+<!--
+_class: lead
+header: 'Criptografía híbrida'
+-->
 
 O cómo combinar los ladrillos que ya hemos visto para construir protocolos
 
@@ -192,33 +194,19 @@ Una conexión HTTPS / TLS no quiere decir "confía en mí". Quiere decir "nadie 
 
 Hemos cambiado el problema de
 
-**cómo compartir claves simétricas**
+**cómo compartir claves secretas**
 
 por el de
 
 **cómo compartir claves públicas (asimétricas)**
 
 # Gestión de claves públicas
-<!-- _class: lead -->
+<!--
+_class: lead
+header: 'Gestión de claves públicas'
+-->
 
 Certificados electrónicos
-
-## Ataque *man in the middle*
-
-![center w:28em](images/asimetrica/dh-maninthemiddle.png)
-
-<!--
-Durante un ataque man in the middle, un atacante se pone en medio de las comunicaciones. Cada una de las partes establece una conexión segura con el atacante: nadie de fuera sabe qué es está diciendo, pero no estamos hablando con quien queremos hablar.
-
-El atacante dejará pasar la mayoría de las comunicaciones, solo está interesado en participar una vez, cambiando la cuenta bancaria en la que se realiza un pago.
-
-Fíjate: no hemos decrito ningún protocolo que nos proteja ante este tipo de ataque!
-
-- No hemos dado autenticación: no sabemos con quién estamos hablando
-- No hemos dado integridad: un atacante podría cambiar el mensaje sin que nos enteremos
-
-(aún así, en los protocolos descritos, es muy poco probable que el atacante pueda cambiar el contenido de un mensaje por otro CON SENTIDO. Pero algunos protocolos son muy sensibles al cambio: hashes, repeticiones...)
--->
 
 ## El problema de la confianza
 <!-- _class: smaller-font -->
@@ -500,7 +488,7 @@ Por eso los certificados de usuarios no suelen estar firmados por una TTP final 
 ---
 
 ```
-openssl s_client -showcerts -connect localhost:5000 < /dev/null    2> /dev/null | openssl x509 -noout -text
+openssl s_client -showcerts -connect campus.viu.es:443 2> /dev/null | openssl x509 -noout -text
 ```
 
 ![w:25em center](images/pki/certificate-chain-example.png)
@@ -581,7 +569,10 @@ Over the past several years, publicly disclosed incident reports highlighted a p
 -->
 
 # Resumen y referencias
-<!-- _class: lead -->
+<!--
+_class: lead
+header: 'Resumen y referencias'
+-->
 
 ## Resumen
 
@@ -607,8 +598,6 @@ Over the past several years, publicly disclosed incident reports highlighted a p
 <!-- _class: center -->
 
 Anexo recomendado: [Protocolo TLS](A2-protocolos.html)
-
-Continúa en: [Autenticación](05-autenticacion.html)
 
 # ¡Gracias!
 <!-- _class: last-slide -->

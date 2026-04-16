@@ -7,7 +7,6 @@ paginate: true
 footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
-transition: fade
 ---
 
 <style>
@@ -221,7 +220,7 @@ Problema principal de CROWDS: no es posible predecir cuánto tiempo tardará un 
 Paciente|Razón de ingreso|Peso|Ciudad
 --|--|--|--
 Juan Pérez|Cáncer de próstata|120Kg|Madrid
-Juan Rodríguez|Cáncer de próstata|60Kg|Villadangos del Páramo
+Juan Rodríguez|Cáncer de próstata|60Kg|Villadangos del Páramgo
 Fátima Bouazza|Gripe|50Kg|Casablanca
 Karima Pérez|COVID|50Kg|Casablanca
 Isabel Pérez|Cáncer de mama|60Kg|Madrid

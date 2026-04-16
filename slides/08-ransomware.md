@@ -2,7 +2,7 @@
 marp: true
 title: Criptografía - Ransomware
 paginate: true
-footer:
+footer: '[Inicio](index.html)'
 headingDivider: 2
 theme: marp-viu
 ---
