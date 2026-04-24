@@ -27,9 +27,9 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
 1. [Esteganografía](#3)
 1. [Ejemplos](#9)
-1. [Esteganografía para atacantes](#19)
-1. [Ataques y detección](#27)
-1. [Referencias](#33)
+1. [Esteganografía para atacantes](#23)
+1. [Ataques y detección](#32)
+1. [Referencias](#38)
 
 # Esteganografía
 <!-- _class: lead -->
@@ -77,13 +77,17 @@ Si la imagen se imprime, ¿el mensaje oculto se mantiene?
 
 - Que no pueda ser detectado
 - Que no pueda quitarse con facilidad
+- Resistente a modificaciones del documento
 - Que pueda ser verificable: criptografía
 - Coste computacional para poner / quitar
 
+## Watermarking y fingerprinting
+
+- Watermarking: se introduce un código en el documento (visible o no)
+- Fingerprinting: se identifica alguna caracterísitica única del documento
+
 # Ejemplos
 <!-- _class: lead -->
-
-Watermarking y fingerprinting
 
 ## Imágenes
 
@@ -162,6 +166,18 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 
 ![center w:30em](images/stego/stego-text2.png)
 
+## Audio
+
+![center w:30em](images/stego/audio.png)
+
+> https://sokaudiowm.github.io/
+
+## Inteligencia artificial : SynthID
+
+![center w:30em](images/stego/synthid.png)
+
+> https://deepmind.google/models/synthid/
+
 # Esteganografía para atacantes
 <!-- _class: lead -->
 
@@ -170,6 +186,13 @@ Los de shadow.io dicen que pueden mantener la marca incluso después de imprimir
 - Evasión de antivirus: Ocultar el malware dentro de archivos/protocolos aparentemente legitimos
 - Evasión de cortafuegos: comunicaciones prohibidas a través de protocolos permitidos
 - Ocultar la exfiltración de información a los sistemas de seguridad
+- Quitar las marcas para evitr detecciones
+
+## Quitar marcas
+
+![center](images/stego/attacks.png)
+
+> https://www.azoai.com/news/20241205/Enhancing-AI-Transparency-Researchers-Develop-Advanced-Watermarking-Techniques.aspx
 
 ## Network steganography
 
