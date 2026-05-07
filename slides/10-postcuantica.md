@@ -80,10 +80,10 @@ Una clave pública RSA tiene entre el doble y el cuadruple de esta longitud
 <!-- _class: cool-list toc -->
 
 1. [Computación Cuántica](#6)
-1. [Criptografía Post-cuántica](#22)
-1. [Ejemplo: ML-KEM](#32)
-1. [Migración a criptografía post-cuántica](#38)
-1. [Resumen y referencias](#47)
+1. [Criptografía Post-cuántica](#27)
+1. [Ejemplo: ML-KEM](#37)
+1. [Migración a criptografía post-cuántica](#43)
+1. [Resumen y referencias](#52)
 
 # Computación Cuántica
 <!-- _class: lead -->
@@ -102,6 +102,16 @@ Una introducción a vista de pájaro
 
 > [¿Qué es y cómo funciona la COMPUTACIÓN CUÁNTICA?](https://www.youtube.com/watch?v=YpYuBEzfRlM)
 
+## Premio Nobel de Física 2025
+
+John Clarke, Michel H. Devoret y John M. Martinis ganaron [el premio Nobel de física de 2025](https://francis.naukas.com/2025/10/07/premio-nobel-de-fisica-2025-john-clarke-michel-h-devoret-y-john-m-martinis-por-el-efecto-tunel-cuantico-macroscopico-y-la-cuantizacion-de-la-energia-en-circuitos-electricos/) por sus trabajos en los años 80 que definieron cómo construir un computador cuántico
+
+
+
+[![center w:25em](images/quantum/efectotunel.png)](https://www.youtube.com/watch?v=9jE4eaP9K7Q) Puntos relevantes: [11:05](https://youtu.be/9jE4eaP9K7Q?t=665) y [12:05](https://youtu.be/9jE4eaP9K7Q?t=725)
+
+> [El Gato de Schrödinger pero DE VERDAD: El Nobel 2025 EXPLICADO](https://www.youtube.com/watch?v=9jE4eaP9K7Q)
+
 ## Qubit
 
 ![bg left:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloch_sphere.svg)
@@ -112,15 +122,6 @@ Intuitivamente: podemos aprovechar la superposición "para probar muchas solucio
 
 > [Computación Cuántica: la Guía completa WIRED](https://es.wired.com/articulos/computacion-cuantica-la-guia-completa-wired-computadoras-qubits)
 > [Quantum Computing explained](https://www.nist.gov/quantum-information-science/quantum-computing-explained) NIST, 2025
-
----
-John Clarke, Michel H. Devoret y John M. Martinis ganaron [el premio Nobel de física de 2025](https://francis.naukas.com/2025/10/07/premio-nobel-de-fisica-2025-john-clarke-michel-h-devoret-y-john-m-martinis-por-el-efecto-tunel-cuantico-macroscopico-y-la-cuantizacion-de-la-energia-en-circuitos-electricos/) por sus trabajos en los años 80 que definieron cómo construir un computador cuántico
-
-
-
-[![center w:25em](images/quantum/efectotunel.png)](https://www.youtube.com/watch?v=9jE4eaP9K7Q)
-
-> [El Gato de Schrödinger pero DE VERDAD: El Nobel 2025 EXPLICADO](https://www.youtube.com/watch?v=9jE4eaP9K7Q)
 
 ---
 
@@ -136,11 +137,18 @@ A los computadores cuánticos les pasa lo mismo: una vez colapsados, ya no hay i
 
 <!-- _class: center -->
 
-[![](images/quantum/qbit2.png)](https://www.youtube.com/watch?v=RQWpF2Gb-gU
+[![center](images/quantum/qbit2.png)](https://www.youtube.com/watch?v=RQWpF2Gb-gU
 )
 
 > [But what is quantum computing?](https://www.youtube.com/watch?v=RQWpF2Gb-gU)
 
+## Programar un computador cuántico
+
+No se parece en nada a la programación tradicional... Ejemplo: circuito cuántico que representa el algoritmo de estimación de fase.
+
+![center w:25em](https://upload.wikimedia.org/wikipedia/commons/5/57/Phase_estimation.png)
+
+> https://es.wikipedia.org/wiki/Algoritmo_cu%C3%A1ntico_de_estimaci%C3%B3n_de_fase
 
 ## Comparación con la computación tradicional
 
@@ -193,7 +201,7 @@ En el ejemplo, se usa un canal cuántico para distribuir una clave criptográfic
 En esta clase no hablaremos de criptografía cuántica
 -->
 
-## Entonces... ¿qué hacen las computadores cuánticas?
+## Entonces... ¿qué hacen las computadoras cuánticas?
 
 La computación cuántica permite ejecutar algoritmos de búsquedas más rápidamente que la computación tradicional
 
@@ -348,6 +356,16 @@ Fíjate:
 - Durante 2025, todos los fabricantes redujeron las expectativas. Por ejemplo, en 2022, IBM planeaba alcanzar 4000 qbits para 2025. Ahora (2025), IBM planea alcanzar 1000 qbits en 2027.
 
 -->
+
+---
+
+Dos referencias recientes, "una de cal y otra de arena":
+
+- Propuesta de algoritmo con menos circuitos de los estimados (<1450 logical qubits) [Securing Elliptic Curve Cryptocurrencies against Quantum Vulnerabilities: Resource Estimates and Mitigations](https://scholar.google.com//citations?view_op=view_citation&hl=en&user=7M3eap4AAAAJ&pagesize=100&sortby=pubdate&citation_for_view=7M3eap4AAAAJ:gVv57TyPmFsC) R Babbush, A Zalcman, C Gidney, M Broughton… - arXiv preprint arXiv:2603.28846, 2026. **El descifrado de RSA puede estar más cerca de los estimado.**
+- A lo mejor 128 bits son suficientes: [Quantum Computers Are Not a Threat to 128-bit Symmetric Keys](https://words.filippo.io/128-bits/) **La criptografía cuántica podría no afectar al cifrado simétrico**
+
+Nota: "podría", "se estima"... en realidad no hay consenso
+
 
 # Criptografía Post-cuántica
 <!-- _class: lead -->
