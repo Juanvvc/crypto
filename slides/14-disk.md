@@ -29,10 +29,10 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 <!-- _class: cool-list toc -->
 
 1. [Introducción al cifrado de discos](#3)
-1. [BitLocker (Windows)](#18)
-1. [FileVault (MacOS)](#28)
-1. [LUKS (Linux)](#32)
-1. [Cifrado de archivos y pendrives](#32)
+1. [BitLocker](#18)
+1. [FileVault](#28)
+1. [LUKS](#32)
+1. [Dispositivos USB y Pendrives](#36)
 1. [Recomendaciones](#42)
 
 # Introducción al cifrado de discos

@@ -64,7 +64,7 @@ Los objetivos del tema es conocer la base de la criptografía de clave pública,
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Criptografía de clave pública](#5)
+1. [Criptografía de clave pública / asimétrica](#5)
 1. [RSA](#27)
 1. [Curvas elípticas](#41)
 1. [Los límites de la criptografía de clave pública](#58)

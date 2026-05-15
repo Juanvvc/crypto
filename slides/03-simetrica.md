@@ -63,7 +63,7 @@ Hoy veremos como solucionarlo:
 1. [Confidencialidad computacional](#4)
 1. [Cifrado de flujo](#17)
 1. [ChaCha20](#33)
-1. [Cifrado de bloque](#44)
+1. [Cifrado de bloque](#43)
 1. [Cifrado AES](#52)
 1. [Resumen](#77)
 

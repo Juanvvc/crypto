@@ -40,7 +40,7 @@ Hoy hablaremos del primero, confidencialidad, y empezaremos a poner las bases pa
 <!-- _class: cool-list toc -->
 
 1. [Confidencialidad perfecta y computacional](#5)
-1. [Cifrado simétrico de bloque: AES](#12)
+1. [Cifrado simétrico de bloque: AES](#11)
 1. [Criptografía de clave pública / asimétrica](#26)
 1. [Resumen y referencias](#50)
 

@@ -26,7 +26,7 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 <!-- _class: cool-list toc -->
 
 1. [Esteganografía](#3)
-1. [Ejemplos](#9)
+1. [Ejemplos](#10)
 1. [Esteganografía para atacantes](#23)
 1. [Ataques y detección](#32)
 1. [Referencias](#38)

@@ -47,10 +47,11 @@ Es decir, no repudio = autenticidad + integridad
 <!-- _class: cool-list toc -->
 
 1. [Autenticación](#4)
-1. [Desafío - Respuesta](#28)
-1. [Autenticación por contraseña](#37)
-1. [Sesiones por tokens](#48)
-1. [Resumen y referencias](#70)
+1. [Desafío - Respuesta](#31)
+1. [Autenticación por contraseña](#41)
+1. [Sesiones por tokens](#52)
+1. [Ataques contra el doble factor de autenticación](#74)
+1. [Resumen y referencias](#78)
 
 # Autenticación
 <!-- _class: lead -->
