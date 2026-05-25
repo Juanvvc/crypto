@@ -24,15 +24,14 @@ Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 ## Temario
 <!-- _class: cool-list smaller-font -->
 
-1. [Conceptos básicos](01-conceptos.html)
-1. [Sistemas de cifrado](02-cifrado.html)
+1. [Cifrado](02-cifrado.html)
+1. *Protocolos*
+   - [PKI](../07-pki.html)
+   - [TLS](../A2-protocolos.html)
 1. [Firma digital](../A4-firmadigital.html)
-1. [Sistemas de autenticación](../11-autenticacion.html)
+1. [Sistemas de autenticación (2 sesiones)](../11-autenticacion.html)
 1. [Anonimato](../12-anonimato.html)
-1. *Estudio de casos prácticos (2 sesiones)*
-    - [Business Email Compromise](../13-bec.html)
-    - [Cifrado de discos](../14-disk.html)
-    - [Otros casos](A5-casospracticos.html)
+1. [Business Email Compromise](../13-bec.html)
 
 # Presentación
 <!-- _class: lead -->
