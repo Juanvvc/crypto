@@ -20,26 +20,17 @@ theme: marp-viu
  	}
 </style>
 
-# Confidencialidad: sistemas de cifrado
+# Sistemas de cifrado
 <!-- _class: first-slide -->
 
-**Seguridad computacional, cifrado simétrico y cifrado de clave pública**
+**Cifrado simétrico y cifrado de clave pública**
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
-
-## Recordatorio: servicios de seguridad
-
-- **Confidencialidad**: solo el legítimo destinatario debe poder ser capaz de leer el contenido del contrato o cualquier información asociada.
-- **Integridad**: el destinatario debe ser capaz de verificar que el contenido del contrato no ha sido modificado por el camino... ni en el futuro
-- **Autenticidad**: el destinatario debe ser capaz de verificar que el emisor es realmente el autor del contrato
-- **No repudio**: nadie puede decir que ese no es el contrato que ha firmado
-
-Hoy hablaremos del primero, confidencialidad, y empezaremos a poner las bases para los demás
 
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Confidencialidad perfecta y computacional](#5)
+1. [Servicios de seguridad](#5)
 1. [Cifrado simétrico de bloque: AES](#11)
 1. [Criptografía de clave pública / asimétrica](#26)
 1. [Resumen y referencias](#50)
@@ -56,61 +47,8 @@ Esta sesión es un resumen de la asignatura "Criptografía y teoría de códigos
 
 Este tema es denso pero no se pretende aprender los detalles. Objetivo de la sesión: saber qué son los sistemas de cifrado simétrico y de clave pública, por qué son necesarios los tipos y cuándo se usa cada uno. **Fíjate en estos cuadros azules**
 
-# Confidencialidad perfecta y computacional
+# Confidencialidad
 <!-- _class: lead -->
-
-## Confidencialidad perfecta (perfect secrecy)
-<!-- _class: with-info -->
-
-Un sistema es perfectamente seguro **si y solo si** para cualquier distribución de probabilidad sobre el espacio de mensajes en claro, y para todos los mensajes en claro y para todos los textos cifrados posibles, la probabilidad condicionada de $m$ dado $c$ y la probabilidad de $m$ coinciden:
-
-$$
-P[m|c] = P[m]
-$$
-
-**Sistema con confidencialidad perfecta**: un atacante no podría descifrarlo nunca, invierta el dinero que invierta e independientemente de por cuántos siglos lo intente
-
-<!--
-Desde que los matemáticos entraron en la criptografía, existe definiciones de todos los términos tan exactas y formales como incomprensibles para un profano. Esta definición matemática está puesta para mostraros que hay una teoría matemática detrás de todo lo que decimos, pero en este curso no entraremos en las matemáticas de la criptografía
-
--->
-
-## ¿A qué hora atacamos?
-
-![bg right:40% w:100%](../images/historia/byzantine_generals.png)
-
-Imagina que unos atacantes acuerdan el siguiente mapeo, es decir, clave: A = 1 horas, B = 7 horas, C = 13 horas, ...
-
-El castillo captura estos mensajes:
-
-* Atacamos a las F
-* Atacamos a las B
-* Atacamos a las AD
-* Atacamos a las F
-
-
-¿El castillo tiene alguna forma de conocer a qué hora le atacarán?
-
-<!--
-- La primera vez, el castillo no tiene forma saber a qué hora le atacarán ni aunque pruebe todas las claves. **Este cifrado es perfecto**
-- Pero puede aprovechar el primer mensaje para descifrar los siguientes que usen la misma clave:
-    - Si no le han atacado a la 1, sabe que F no es 1
-    - Si no le han atacado a las 2, sabe que F no es 2
-    - Si le atacan a las 3, sabe que F es 3
-- Tras cada ataque, los atacantes tienen que cambiar qué significan las letras. **La clave solo puede usarse una vez**.
-- Si el castillo intercepta un mensaje tio HK, sabe que H es 1 ó 2 porque no existe la "hora 37": el mapeo tiene que ser completo. Es decir, **la clave tiene que ser tan larga como el mensaje**
--->
-
-## La confidencialidad perfecta no es práctica
-
-Tenemos confidencialidad perfecta **si y solo si** usamos un cifrado con clave tan larga como el mensaje y que no se vuelva a usar nunca jamás ("*one time pad*")
-
-Actualmente preferimos sistemas:
-
-- Que usen claves pequeñas
-- Que nos permitan resusar la misma clave muchas veces
-
-Es imposible con estos requitos crear un sistemas con confidencialidad perfecta, pero ¿puede ser lo suficientemente seguro? Hay que definir qué es "suficientemente seguro"
 
 ## Seguridad computacional (*computational secrecy*)
 <!-- _class: with-info -->
@@ -130,53 +68,131 @@ Con la seguridad computacional hay que definir el objetivo: "quiero un sistema c
 
 Lo importante es que relajamos el sistema lo suficiente como para que, por un tiempo determinado, ningún atacante con unos recursos razonables pueda descifrar el mensaje -->
 
+## Fuerza bruta
+<!-- _class: center with-info -->
 
-## Ataques de fuerza bruta
+
+![w:10em](../images/generic/lock-1929089_640.jpg) ![w:17.5em](../images/generic/money-256319_640.jpg)
+
+**Fuerza bruta**: probar todas las claves posibles una a una
+
+<!--
+Estos no son exactamente sistemas de cifrado, pero nos sirven para explicar lo que es la fuerza bruta.
+
+¿Cómo abrirías la cerradura de la puerta? ¿Cómo puede un ladrón utilizar una tarjeta de crédito robada? ¿Qué estrategias se usan en cada caso para proteger el sistema?
+
+Images: free for commercial use:
+
+- https://pixabay.com/photos/money-cards-business-credit-card-256319/
+- https://pixabay.com/photos/lock-combination-security-safety-1929089/
+-->
+
+---
+<!-- _class: with-success -->
+
+Posibles defensas contra la fuerza bruta:
+
+- **Cerradura**: aumentando el tamaño de la clave, el atacante pasará más tiempo intentanto abrir la cerradura
+- **Tarjeta**: limitamos el número de intentos antes de bloquear la tarjeta, o hacemos que cada intento cueste dinero
+
+Que el descifrado sea costoso tiene el problema de que también le costará al receptor, que descifra legítimamente. Actualmente no se recomienda esta estrategia
+
+Estrategia actual: **obligar al atacante a que tenga que probar muchas claves**
+
+<!--
+
+Por supuesto, el atacante puede intentar usar una llave maestra, o robar el PIN con ingeniería social. Ese tipo de ataques o bien es "romper un algoritmo" o bien "usar canales laterales". No vamos a considerarlos por ahora, vamos a considerar que los sistemas se usan cómo se han diseñado
+
+-->
+
+## Tamaños de clave
 <!-- _class: with-info -->
 
-La criptografía coputacionalmense segura:
+<style scoped>
+table { font-size: 60%; }
+p {font-size: 75%; }
+</style>
 
-- Es un cifrado práctico: las claves pequeñas son fácil de distribuir
-- Pero si es demasiado pequeña, es posible hacer fuerza bruta: probar todas las posibles claves una a una hasta que encontremos la que descifra el mensaje
-- **Fortaleza de un cifrado**: números de pruebas (en bits) que tiene que hacer un atacante por fuerza bruta para descifrar un mensaje
+Contraseñas: podemos aumentar el tamaño de clave aumentando tanto el número como el tipo de caracteres
+
+Tipo|Ejemplo|# de claves diferentes|Tamaño en bits
+--|--|--|--
+PIN de 4 números|3659|9999|$log_2(1000)\approx13\ bits$|
+4 letras mayúsculas|CASA|614656|$log_2(614656)\approx\ 19 bits$
+4 letras + especiales|Ca*4|33362176|25 bits
+5 letras + especiales|Ca*4S|2535525376|32 bits
+41 letras + especiales|o18uIo=...9f89fdA!S|$10^{77}$|256 bits
+54 mayúsculas|KJASWE...SAJKSAJF|$10^{77}$|256 bits
+77 números|923821321...12998|$10^{77}$|256 bits
+
+En criptografía solemos medir la longitud de una clave con **la cantidad de bits que necesitamos para guardarla**
+
+Medir las claves en bits nos permite comparar "su fortaleza": mismo número de bits, misma seguridad
+
+<!--
+
+Fíjate en estos casos:
+
+- a mismo número de caracteres, mayores posibilidades (números...) aumenta el tamaño en bits
+- a mismo número de posibilidades, aumentar el número de caracter aumenta el tamaño en bits
+- una contraseña de 54 letras mayúsculas tiene el mismo número de bits que una contraseña de letras minúsculas, mayúscuas, números y caracteres especiales: misma seguridad
+
+-->
+
+---
+
+Igual que en la leyenda del ajedrez...
+
+Cada vez que aumentamos un bit se dobla el número de claves posibles
+
+Eso tiene un crecimiento exponencial: rápidamente llegamos a números enormes
+
+Veremos que claves de 256 bits es el estándar actual para tamaño de clave
 
 
-**Compromiso**: Hay que usar un espacio de claves lo suficientemente grande como para que no sea posible probarlas todas **hoy en día**, y lo suficientemente pequeño como para que sea práctico
+![bg left](../images/historia/rice.jpg)
 
-<!-- Recordad: en el cifrado de one-time-pad del tipo "atacaremos a las X" no sabíamos si habíamos encontrado una clave porque, dado un mensaje cifrado, existe una clave que puede dar cualquier mensaje imaginable con la misma longitud que el original
+> https://www.pragatiedible.com/the-legend-of-rice-and-chess-exponential-growth/
 
-Ahora no sucede así: si al descifrar por fuerza bruta encontramos algo con sentido, con gran probabilidad hemos encontrado la clave y el mensaje es el original
+---
 
-Recordad: los ordenadores mejoran constantemente.
+![w:30em center](../images/conceptos/cta2296-fig-0002-m.jpg)
 
-Los algoritmos se diseñan para que, con la tecnología actual, se tarde miles de años en hacer fuerza bruta. Pero la tecnología mejora con el tiempo, y eso también se tiene en cuenta: aunque "se venda" que un cifrado "no puede romperse en miles de años", en realidad eso es relativo a la tecnología actual y el algoritmo tiene una caducidad de unas pocas décadas.
+<!--
+- **Sin clave**: el emisor usa sólo el mensaje $m$ como argumento de la función criptográfica. Ejemplo: hash.
 
-La mejor estrategia puede ser simplemente esperar 20 años para tener un ordenador que haga esa misma fuerza bruta de forma instantánea
+- **Clave simétrica**: misma clave $k$ para cifrar y descifrar un mensaje $m$. Emisor y receptor deben tener la misma clave. Ejemplo: AES, ChaCha...
 
-algunos sistemas necesitan claves mucho más largas que la media de claves que tiene que probar un atacante para descifrarlos. Esto sucede en los sistemas de clave pública, por ejemplo. La fortaleza en estos sistemas es menor que la longitud de la clave -->
+- **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
+-->
 
 
-# Cifrado simétrico de bloque: AES
+# Cifrado simétrico: AES
 <!-- _class: lead -->
 
 Y sus "modos" de cifrado
 
 ## Criptografía simétrica o de clave secreta (SKC)
+<!-- _class: with-info -->
 
 ![center w:20em](../images/simetrica/simetrica.svg)
 
-- Una sola clave cifra y descifra. **Ambas partes tienen que conocer la clave**
 - Ventajas: muy rápido
 - Desventajas: ¿cómo compartimos la clave?
 - Ejemplos actuales: **AES** (es el que veremos en detalle), ChaCha
 - Ejemplos rotos y obsoletos: RC4, DES, TDES
+
+Una sola clave cifra y descifra. **Ambas partes tienen que conocer la clave**
+
 
 <!-- Se llama cifrado simétrico o de clave secreta porque cifrar y descifrar es lo mismo, y con la misma clave, que tiene que permanecer secreta para todas las personas que no estén en la conversación -->
 
 ## Advanced Encryption System (AES)
 <!-- _class: with-info -->
 
-[AES (FIPS 197, 2001)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf) es un cifrado de bloque desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001.
+Es un **cifrado simétrico**: misma clave para cifrar y descifrar
+
+[AES (FIPS 197, 2001)](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf) desarrollado por Vincent Rijmen y Joan Daemen (aka: Rijndael), que ganaron el concurso celebrado por el NIST para sustituir a DES en 2001
 
 ![bg left:40%](../images/simetrica/leuven.jpg)
 
@@ -209,18 +225,6 @@ Práctica:
 
 <https://colab.research.google.com/github/Juanvvc/crypto/blob/master/ejercicios/03/Demo_AES.ipynb>
 
-## Vector de Inicialización (IV)
-
-Si siempre ciframos igual el mismo mensaje, ¡un atacante sabrá que estamos repitiendo lo mismo que antes!
-
-**Vector de inicialización**: valor al azar **no secreto** que añadimos al mensaje para hacerlo diferente cada vez
-
-Los mensaje siguientes dependen de los anteriores: **modos de operación** 
-
-![bg right](../images/simetrica/loro.png)
-
-
-
 ## Modos de operación
 <!-- _class: with-warning -->
 
@@ -237,15 +241,14 @@ Cada modo de operación tiene ventajas y desventajas según para qué queremos u
 ![center Wikipedia w:35em](../images/simetrica/ECB_encryption.svg)
 
 ---
-<!-- _class: center with-warning -->
 
-Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
+Si siempre ciframos igual el mismo mensaje, ¡un atacante sabrá que estamos repitiendo lo mismo que antes!
 
-**Eso nunca se puede hacer.**
+**Vector de inicialización**: valor al azar **no secreto** que añadimos al mensaje para hacerlo diferente cada vez
 
-![](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg) ![](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg)
+Los mensaje siguientes dependen de los anteriores: **modos de operación** 
 
-No se debe usar un cifrado de bloque en modo ECB
+![bg right](../images/simetrica/loro.png)
 
 ## Ejemplo: modo CBC (Cipher Block Chaining)
 
@@ -258,35 +261,6 @@ Rápido para descifrar, no tanto para cifrar
 ![center Wikipedia w:35em](../images/simetrica/OFB_encryption.svg)
 
 Rápido para cifrar, no tanto para descifrar
-
-
-## Ejemplo: modo CTR (Counter)
-
-![center Wikipedia w:35em](../images/simetrica/CTR_encryption.svg)
-
-Rápido para cifrar y descifrar
-
-## Cómo escoger el modo adecuado
-
-- Rápido para descifrar, no tanto para cifrar: CBC
-- Simula un "cifrado de flujo": CTR, OFB, CFB
-- Cifrados de discos: XEX, XTS (bitlocker)
-- Con autenticación de mensajes: GCM (quizá el más usado en la actualidad), OCB
-
-![center Wikipedia w:20em](../images/simetrica/OFB_encryption.svg)
-
-Ahora veremos con más detalle cada una de esas cajas de cifrado: AES
-
-> https://stackoverflow.com/questions/1220751/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb
-
-## Tamaños recomendados de clave para impedir fuerza bruta
-
-![center w:15em](../images/simetrica/recomendados.png)
-
-Tamaños recomendados de clave en bits según varios institutos internacionales. Nota: NIST y NSA son de EEUU, ECRYPT de Europa
-
-> OFuente: <https://www.keylength.com/en/compare/>
-
 
 ## Problema del cifrado simétrico
 <!-- _class: with-info -->
@@ -315,6 +289,7 @@ Antes de empezar necesitaremos un poco de teoría de complejidad. Vamos allá.
 Diffie-Hellman, RSA y curvas elípticas
 
 ## Criptografía de clave pública / asimétrica
+<!-- _class: with-info -->
 
 ![center w:25em](../images/asimetrica/asimetrica.svg)
 
@@ -324,78 +299,25 @@ Cada persona tiene dos claves:
 - $pk$: clave pública de una persona, todos la conocen
 - $sk$: clave privada. Solo el propietario la conoce, **nadie más puede conocer mi clave privada, ni siquiera las personas con las que hablo**
 
-A veces son intercambiables: lo que se cifra con una se descifra con la otra
+Una clave para cifrar y otra diferente para cifrar (relacionadas entre sí)
 
 > Compara con criptografía simétrica: misma clave para cifrar y descifrar, Bob y Alice tienen que manetenarla en secreto
 > Nota: para no confundirnos al hablar, usaremos siempre "de clave pública" y no "asimétrica", pero son sinónimos
 
-## Usos de la criptografía de clave pública
-<!-- _class: with-success -->
-
-Según si usamos la clave pública o la privada para cifrar, podemos hacer dos cosas:
-
-- acuerdo de la clave secreta a usar por un algoritmo simétrico
-- cifrar mensajes --> servicio de confidencialidad
-- firmar digitalmente mensajes --> servicio de autenticación
-
-Ejemplos: RSA, Diffie-Hellman, DSA...
-
-> La criptografía simétrica también nos permitía cifrar, pero no firmar
-
 ## Esquema de cifrado
 
-![w:20em center](../images/asimetrica/IMG_0056.PNG)
+![w:17em center](../images/asimetrica/IMG_0056.PNG)
 
 - Todos conocen la clave $K_{pub}$ de Bob, solo Bob conoce la clave $K_{priv}$
 - **Cualquier puede cifrar un mensaje para Bob, solo Bob puede descifrarlo**: confidencialidad
+- Cuidado: con este tipo de cifrado solo podemos cifrar mensajes pequeños
 
 ## Esquema de firma electrónica
 
-![w:20em center](../images/asimetrica/IMG_0055.PNG)
+![w:17em center](../images/asimetrica/IMG_0055.PNG)
 
 - Solo Bob puede cifrar con su clave $K_{priv}$ y cualquier puede descifrar con $K_{pub}$
 - Pero si pueden descifrar el mensaje, **todos saben que el mensaje solo puede haberlo enviado Bob: autenticación**
-
-## ¿En qué se base la criptografía simétrica?
-
-Funciones "trampa": son problemas difíciles de resolver, excepto si conoces "un atajo" (que será la clave privada)
-
-Ejemplos:
-
-- Factorización de números primos
-- Problema del logaritmo discreto
-- Curvas elípticas
-
-## Problema del Logaritmo Discreto
-<!-- _class: a-story -->
-
-Resuelve la $x$:
-
-- $$2^x = 1024$$
-* $$x = \log_2(1024) = 10$$
-* Eso es fácil y se puede extender a cualquier problema similar:
-* Si te dan $n$ y $N$ y te preguntan $n^x=N$...
-* $x = \log_n N$
-
-> Para más detalles de este problema, consulta [Tema de complejidad](../04-complejidad.html)
-
----
-<!-- _class: a-story -->
-
-¿Qué sucede si metemos la operación módulo?
-
-Resuelve la $x$:
-
-- $2^x \mod 19 = 13$
-* Ten en cuenta: $0 \le x \lt 19$. Puedes probar los números uno a uno
-* Solución: $x = 5$
-* Si no has podido resolverlo, no es porque no tengas suficientes conocimientos... es que no sabemos hacerlo rápidamente: [Problema del Logaritmo Discreto](https://es.wikipedia.org/wiki/Logaritmo_discreto) (DLP)
-* ...pero calcular  $2^5 \mod 19 = 13$ es rápido
-* El DLP es una *trap door function*
-
-<!--
-en realidad no sabemos si el DLP es difícil: solo lo sospechamos muy fuertemente
--->
 
 ## Protocolo Diffie-Hellman: intercambio de claves simétricas
 
@@ -407,36 +329,7 @@ Idea básica:
 1. Alice envía a Bob una parte de la clave simétrica que usarán, cifrándola con la clave pública de Bob.
 1. La clave final es la combinación de ambas partes, que solo las conocen Alice y Bob
 
----
-<!-- _class: smaller-font -->
-
-Dos usuarios $Alice$ y $Bob$ que no se han visto nunca:
-
-1. Acuerdan $g$ y $p$ primos entre sí
-1. Escogen números en secreto $a$ y $b$
-1. Se envían entre ellos:
-    - $Alice \rightarrow Bob: A=g^{a} \mod p$
-    - $Bob \rightarrow Alice: B=g^{b} \mod p$
-1. Calculan en secreto:
-    - $Alice$: $s = B^{a} \mod p = g^{ab} \mod p$
-    - $Bob$: $s = A^{b} \mod p = g^{ab} \mod p$
-1. Y usan $s$ como clave de cifrado un algoritmo simétrico  
-
 ![bg right:40% w:80%](https://upload.wikimedia.org/wikipedia/commons/4/46/Diffie-Hellman_Key_Exchange.svg)
-
-**Observa**: para que un atacante que solo conoce $g$, $p$, $A$ y $B$ (claves públicas) pueda calcular $s=A^b$, tiene que resolver $B=g^b \mod p$, que se supone difícil
-
-## Claves privadas y claves públicas
-<!-- _class: with-info -->
-
-Paso 1 |Qué sabe Alice|Qué sabe Bob|Qué es público
---|--|--|--
-1|$g$, $p$|$g$, $p$|$g$, $p$
-2|$a$, $g^a$|$b$, $g^b$|
-3|$g^b$|$g^a$|$g^a$, $g^b$
-4|$g^{ab}$|$g^{ab}$|
-
-Alice y Bob, que no se habían visto nunca antes, puede utilizar $s=g^{ab}$ como clave de un cifrado simétrico de flujo o bloque como ChaCha20 ó AES
 
 ## RSA: claves públicas y privadas
 
@@ -574,27 +467,15 @@ La criptografía de clave pública necesita claves mucho más largas que la crip
 > Fuente: https://en.wikipedia.org/wiki/Prime_number_theorem
 > Gráfico: https://en.wikipedia.org/wiki/Ulam_spiral
 
-## Curvas elípticas
-<!-- _class: with-info -->
-
-Propuestas como *trap door function* en 1987 por Neal Koblitz y Victor S. Miller de forma independiente
-
-- **Ventaja**: necesitan menos proceso y memoria, se pueden implementar en máquinas pequeñas: móviles, tarjetas inteligentes...
-- **Problema**: teoría matemática compleja
-
-![bg right:40% w:100%](https://upload.wikimedia.org/wikipedia/commons/d/db/EllipticCurveCatalog.svg)
-
-Necesitan claves **más cortas** que la criptografía de clave pública basadas en DLP o RSAP para ofrecer una **seguridad equivalente**
-
 ## Tamaño de clave
 <!-- _class: smaller-font -->
 
-Simétrica|RSA|D-H ($p$, $q$)|Curvas elípticas
---|--|--|--
-80|1024|1024, 160|160
-128|3072|3072, 224|256
-192|7680|7680, 384|384
-256|15360|15360, 512|512
+Simétrica|RSA|D-H ($p$, $q$)
+--|--|--
+80|1024|1024, 160
+128|3072|3072, 224
+192|7680|7680, 384
+256|15360|15360, 512
 
 Es decir: para intercambiar una clave AES-256 aprovechando todos sus bits, necesitamos claves RSA de 15360 bits
 
@@ -602,28 +483,15 @@ Si usamos tamaños de clave RSA de 4096 bits (tamaño típico), podremos interca
 
 La gran ventaja de las curvas elípticas en criptografía (EEC) es que nos permiten utilizar criptografía de clave pública con una clave **mucho más pequeña** y pone la criptografía de clave pública al alcance de pequeños dispositivos
 
+> https://www.keylength.com/en/compare/
+
+
 <!--
 Nota: podemos intercambiar claves AES-256 con un D-H de 1024 bits. Solo que, de forma efectiva, solo estaremos escogiendo 80 bits de la clave AES-256. Es decir, sería equivalente a un (no existente) AES-80
 
 A cambio, las curvas elípticas son más complejas de entender y programar pero eso como usuarios no es algo que importe
 
 -->
-
----
-
-![center](../images/asimetrica/keysize-compare.png)
-
-NOTA: RSA está basado en "factorización", DSA y D-H en "logaritmo discreto"
-
-> https://www.keylength.com/en/compare/
-
-## Adaptación a curvas elípticas
-
-Varios algoritmos clásicos se han adaptado a curvas elípticas:
-
-- DH (Diffie-Hellman) -> Elliptic Curces Diffie-Hellman (ECDH)
-- DSA (similar a RSA, no lo hemos visto en esa sesión) -> ECDSA
-- RSA no se ha adaptado a curvas elípticas
 
 ## Usos de la criptografía de clave pública
 <!-- _class: with-info -->
@@ -643,11 +511,42 @@ Problema de la criptografía de clave pública: ¿cómo hacemos llegar nuestra c
 
 ## Criptografía híbrida: lo mejor de los dos mundos
 
-1. Usamos criptografía de clave pública para intercambiar una clave: ECDH
-1. Una vez que tenemos la clave, seguimos cifrando en AES ó ChaCha
+1. Usamos **criptografía de clave pública** para:
+    - Identificar con quién estamos hablando: RSA
+    - Intercambiar una clave secreta: Diffie-Hellman (y su versión moderna ECDH)
+1. Una vez que tenemos la clave, seguimos cifrando con **cifrando simétrico** AES
+
+![bg right:50%](images/https.png)
+
+> https://blog.bytebytego.com/p/how-https-works-youtube-diagram-as
 
 # Resumen y referencias
 <!-- _class: lead -->
+
+## Criptografía simétrica o de clave secreta (SKC)
+
+![center w:20em](../images/simetrica/simetrica.svg)
+
+- Una sola clave cifra y descifra. **Ambas partes tienen que conocer la clave**
+- Ventajas: muy rápido
+- Desventajas: ¿cómo compartimos la clave?
+- Cifrado simétrico de bloque (AES):
+    - Se divide el mensaje en bloques, cada bloque se cifra por separado.
+    - Es necesario utilizar el modo de funcionamiento más conveniente
+
+<!-- Se llama cifrado simétrico o de clave secreta porque cifrar y descifrar es lo mismo, y con la misma clave, que tiene que permanecer secreta para todas las personas que no estén en la conversación -->
+
+## Criptografía de clave pública / asimétrica
+
+![center w:25em](../images/asimetrica/asimetrica.svg)
+
+
+Cada persona tiene dos claves:
+
+- $pk$: clave pública de una persona, todos la conocen
+- $sk$: clave privada. Solo el propietario la conoce, **nadie más puede conocer mi clave privada, ni siquiera las personas con las que hablo**
+- Desventaja: mucho más lento que la criptografía simétrica
+- Ejemplos: RSA, ECDSA, Diffie-Hellman (DH) y sus versiones sobre curvas elípticas
 
 ---
 
@@ -673,46 +572,16 @@ Objetivo|Primitiva|Algoritmos
 **Autenticidad**|firma digital|RSA, ECDSA
 **No repudio**|firma digital|RSA, ECDSA
 **Acordar clave**|acuerdos de clave/encapsulación|ECDH
- 
-## Resumen
-<!-- _class: smaller-font -->
-
-- Confidencialidad computacional: hoy en día no es práctico romperla (en 30 años, quizá sí)
-- Fortaleza de un algoritmo: "esfuerzo" necesario para romper un sistema. Relacionado con la longitud de la clave.
-- Cifrados simétricos: misma clave para cifrar y descifrar. Ejemples: AES, ChaCha
-- Cifrado simétrico de bloque (AES):
-    - Se divide el mensaje en bloques, cada bloque se cifra por separado.
-    - Es necesario utilizar el modo de funcionamiento más conveniente
-
----
-
-- Criptografía de clave pública: cada persona tiene dos claves, una para cifrar y otra para descifrar. Una de esas claves es pública (es decir, cualquiera puede conocer la clave pública de otra persona) y la otra es privada
-- Muchísimo **más lenta** que el cifrado simétrico
-- Se utiliza para:
-    - intercambiar claves simétricas (ECDH)
-    - firmado e identidad digital (RSA, ECDSA)
-- Ejemplos clásicos: RSA, DSA, D-H. Están basados en el problema de la factorización de números primos y logaritmo discreto. Necesitan tamaños de clave grandes y eso dificulta su implementación
-- Las curvas elípticas (EC) permite claves mucho más pequeñas = más rápidos
-- Ejemplos modernos: ECDH, ECDSA, que son adaptaciones de D-H y DSA sobre curvas elípticas
 
 ## Referencias
 
-- [The Salsa20 family of stream cipher](https://cr.yp.to/snuffle/salsafamily-20071225.pdf), Daniel J. Bernstein, 2017
 - [Block Cipher Techniques](https://csrc.nist.gov/projects/block-cipher-techniques), NIST
 - [Recommendation for Key Establishment Using Symmetric Block Ciphers](https://csrc.nist.gov/CSRC/media/Publications/sp/800-71/draft/documents/sp800-71-draft.pdf), NIST 800-71, 2018
 - [Algorithms, key size and parameters report 2014](https://www.enisa.europa.eu/publications/algorithms-key-size-and-parameters-report-2014), ENISA, 2014
-
----
-
 - [Nuevas direcciones en la criptografía](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9720) Whitfield Diffie y Martin Hellman, 1976
 - [Asymmetric Encryption - Simply explained](https://www.youtube.com/watch?v=AQDCe585Lnc)
 - [Diffie-Hellman Key Exchange explained (Python)](https://medium.com/@sadatnazrul/diffie-hellman-key-exchange-explained-python-8d67c378701c)
 
-Las curvas elípticas son un concepto complejo. Esto son algunas propuestas explicativas:
-
-- [¿Por qué pueden utilizarse las curvas elípticas para cifrar?](https://www.youtube.com/watch?v=vi2wvAQsy-A), píldoras CriptoRED
-- [Elliptic Curve Cryptography Overview](https://www.youtube.com/watch?v=dCvB-mhkT0w), de John Wagnon. No asume conocimientos de álgebra.
-- [Elliptic Curve Diffie Hellman](https://www.youtube.com/watch?v=F3zzNa42-tQ): Vídeo sobre ECDH y curvas elípticas en general de Robert Pierce. Asume conocimientos de álgebra.
 
 # ¡Gracias!
 <!-- _class: last-slide -->

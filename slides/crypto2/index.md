@@ -117,5 +117,62 @@ Las actividades incluyen información adicional que no está en las clases
 - "A Course in Cryptography" Heiko Knospe.
 - "Criptografía Ofensiva. Atacando y defendiendo organizaciones". Dr. Alfonso Muñoz.
 
+# Conceptos básicos
+<!-- _class: lead -->
+
+## El problema que queremos resolver
+
+Firma digital de un contrato entre dos empresas
+
+- El contrato tiene que ser secreto para cualquiera que no participe en la comunicación
+- Las empresas tienen que estar seguras de con quién están hablando
+- Ninguna de las dos empresas puede cambiar unilateralmente el contrato
+- Ninguna de las empresas debe poder decir que no firmó el contrato
+
+![bg right:40%](../images/generic/binding-contract-948442_1280.jpg)
+
+<!--
+Fondo: https://pixabay.com/photos/binding-contract-contract-secure-948442/ Uso comercial libre
+-->
+
+## Servicios de seguridad
+
+- **Confidencialidad**: solo el legítimo destinatario debe poder ser capaz de leer el contenido del contrato o cualquier información asociada.
+- **Integridad**: el destinatario debe ser capaz de verificar que el contenido del contrato no ha sido modificado por el camino... ni en el futuro
+- **Autenticidad**: el destinatario debe ser capaz de verificar que el emisor es realmente el autor del contrato
+- **No repudio**: nadie puede decir que ese no es el contrato que ha firmado
+
+## Protocolos criptográficos
+
+La criptografía actual se basa en **composición** de técnicas primitivas:
+
+- Composición de **operaciones matemáticas** que crean "**puertas criptográficas**" (*cryptographic gates*).
+- Composición de puertas que crean **algoritmos**.
+- Composición de algoritmos que crean **protocolos de seguridad**.
+
+La composición es compleja y todo debe funcionar como un reloj.
+
+
+## Gestión de claves
+
+![bg left:33% h:100%](../images/conceptos/Lea_Kissner.jpeg)
+
+*La criptografía es una herramienta para convertir un montón de problemas diferentes en un problema de gestión de claves*
+
+Lea Kissner, antigua ingeniera principal de seguridad de Google
+
+- **Contraseña**: palabra que utilizamos para entrar en un sistema. "Sesamo"
+- **Clave criptográfica**: conjunto de números que dan seguridad a un sistema: "82198329382371291821201"
+
+<!--
+Si la clave es lo único que tiene que ser secreto, tenemos que protegerla a toda costa.
+
+En este curso no estudiaremos cómo proteger las claves, pero tened en cuenta que, al ser la pieza central de la seguridad de un sistema, es necesario que los usuarios de criptografía dispongan de algún modo de gestión segura de claves criptogrtáficas
+
+Una contraseña no es lo mismo que una clave criptográfica. Las contraseñas suelen ser mucho más inseguras que una clave (a veces no son aleatorias o están pensadas para que las pueda recordar un humano) A veces las contraseñas serán el primer paso para entrar en un sistema seguro, pero **no son buenas claves criptográficas**
+
+En muchas ocasiones un sistema se romperá no por que la criptopgrafía sea débil, sino porque incluye un paso de control con contraseña que es habitualmente la parte más débil de un protocolo.
+-->
+
 # ¡Gracias!
 <!-- _class: last-slide -->

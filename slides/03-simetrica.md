@@ -927,6 +927,16 @@ Fallo obvio: está usando la misma clave para cifrar mensajes diferentes.
 
 No se debe usar un cifrado de bloque en modo ECB
 
+## Elemento aleatorio: vector de inicialización
+
+Si siempre ciframos igual el mismo mensaje, ¡un atacante sabrá que estamos repitiendo lo mismo que antes!
+
+**Vector de inicialización**: valor al azar **no secreto** que añadimos al mensaje para hacerlo diferente cada vez
+
+Los mensaje siguientes dependen de los anteriores: **modos de operación** 
+
+![bg right](images/simetrica/loro.png)
+
 ## CBC: Cipher Block Chaining
 
 ![center Wikipedia w:35em](images/simetrica/CBC_encryption.svg)
@@ -945,6 +955,7 @@ Ventaja: puede preparse el cifrado antes de necesitarlo
 
 Ventaja: perder bloques no afecta a la capacidad de descifrado
 
+
 ## Vector de Inicialización (IV)
 
 Vector de inicialización (IV) cumple la misma función que un *nonce*: semilla inicial
@@ -958,6 +969,7 @@ Se tiene que transmitir al receptor, y no hace falta que sea secreto: puede envi
 - IV en CTR: es el valor inicial del contador que se cifra ECB, y se aplica sobre los bloques en claro (con $\otimes$)
 
 `AES_128_CTR` es efectivamente un cifrado de flujo, siendo $k$ la semilla, y el IV el *nonce*
+
 
 ## Otros modos
 
