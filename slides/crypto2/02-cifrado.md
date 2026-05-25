@@ -571,7 +571,7 @@ Objetivo|Primitiva|Algoritmos
 **Integridad**|hash, firma simétrica|SHA256, algunos modos de AES
 **Autenticidad**|firma digital|RSA, ECDSA
 **No repudio**|firma digital|RSA, ECDSA
-**Acordar clave**|acuerdos de clave/encapsulación|ECDH
+**Acordar clave**|acuerdos de clave/encapsulación|ECDH (Diffie-Hellman)
 
 ## Referencias
 
