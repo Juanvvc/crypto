@@ -396,7 +396,7 @@ En la imagen, un Avalon 6, bloque especializado en calcular hashes</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" data-footer="[Inicio](index.html)" data-class="with-warning" data-heading-divider="2" data-theme="marp-viu" lang="en-US" class="with-warning" data-marpit-pagination="16" style="--paginate:true;--footer:[Inicio](index.html);--class:with-warning;--heading-divider:2;--theme:marp-viu;" data-marpit-pagination-total="48">
 <p>Ejemplos de valores de hash MD5, SHA256 y SHA512 de esta presentación:</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code>&gt; ms5sum 03-hashes.md
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code>&gt; md5sum 03-hashes.md
 c99fe5e1ec0f637d77dddb32b1679c21  03-hashes.md
 
 &gt; sha256sum 03-hashes.md
@@ -492,7 +492,7 @@ b12ee96400fa19e7909a48f1727d3c81f6af71178209b58b612b5d2e75bf2d13  -
 <li data-marpit-fragment="2">Bob podría dividir el documento en bloques de 4096B, pero eso no es eficiente</li>
 <li data-marpit-fragment="3">Solución: <strong>hash cifrado con la clave privada</strong>
 <ul>
-<li>Bob calcula el hash de su documento de 10MB. El hash tiene 512 bytes</li>
+<li>Bob calcula el hash de su documento de 10MB. El hash tiene 512 bits</li>
 <li>Bob cifra el hash con su clave privada</li>
 <li>Cualquiera persona (eso incluye a Alice) puede conocer la clave pública de Bob y descifrar el hash</li>
 <li>Si se encuentra un documento con un hash firmado por una clave pública, cualquier persona puede verificar que el autor del documento es el poseedor de la clave privada.</li>
