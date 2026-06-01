@@ -110,7 +110,7 @@ Los hashes recomendados en la actualidad son el SHA-2 (cualquier de las dos vari
 Ejemplos de valores de hash MD5, SHA256 y SHA512 de esta presentación:
 
 ```
-> ms5sum 03-hashes.md
+> md5sum 03-hashes.md
 c99fe5e1ec0f637d77dddb32b1679c21  03-hashes.md
 
 > sha256sum 03-hashes.md

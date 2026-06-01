@@ -223,7 +223,7 @@ Los hashes recomendados en la actualidad son el SHA-2 (cualquier de las dos vari
 Ejemplos de valores de hash MD5, SHA256 y SHA512 de esta presentación:
 
 ```
-> ms5sum 03-hashes.md
+> md5sum 03-hashes.md
 c99fe5e1ec0f637d77dddb32b1679c21  03-hashes.md
 
 > sha256sum 03-hashes.md
@@ -324,7 +324,7 @@ Problema: los documentos a firmar pueden ser muy grandes
 * Los algoritmos como RSA solo cifran **números enteros** de una longitud igual a la clave. Por ejemplo, 4096 bits.
 * Bob podría dividir el documento en bloques de 4096B, pero eso no es eficiente
 * Solución: **hash cifrado con la clave privada**
-    - Bob calcula el hash de su documento de 10MB. El hash tiene 512 bytes
+    - Bob calcula el hash de su documento de 10MB. El hash tiene 512 bits
     - Bob cifra el hash con su clave privada
     - Cualquiera persona (eso incluye a Alice) puede conocer la clave pública de Bob y descifrar el hash
     - Si se encuentra un documento con un hash firmado por una clave pública, cualquier persona puede verificar que el autor del documento es el poseedor de la clave privada.
