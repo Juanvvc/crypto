@@ -549,7 +549,6 @@ Cuando llegue el jucio (o una investigación paralela) las evidencias digitales 
     - Bitcoin
     - Cadena de custodia
     - HMAC (integridad)
-- Firma digital = cifrado con clave privada del hash de un documento
 
 ## Referencias
 

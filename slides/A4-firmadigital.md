@@ -19,18 +19,109 @@ theme: marp-viu
 
 
 
-# Firma Digital
+# Hash y firma Digital
 <!-- _class: first-slide -->
 
 Juan Vera del Campo - <juan.vera@professor.universidadviu.com>
 
+# Como decíamos ayer...
+<!-- _class: with-info -->
+
+- **Confidencialidad**: AES/ChaCha20 + D-H
+- **Autenticidad**: firma digital
+- **No repudio**: firma digital
+- **Integridad**: firma digital
+
+Firma digital = cifrado asimétrico de un valor de hash
+
+<!--
+Hasta ahora hemos visto cómo ofrecer confidencialidad.
+La firma digital nos permite ofrecer el resto de servicios,
+pero para poder hacer firma digital tenemos que conocer qué son
+las funciones de hash
+-->
 
 # Hoy hablamos de...
 <!-- _class: cool-list toc -->
 
-1. [Firma digital: ¿qué es?](#3)
-1. [Firma digital: en la realidad](#13)
-1. [Firma digital: punto de vista legal](#24)
+1. [Funciones de hash](#4)
+1. [Firma digital: ¿qué es?](#10)
+1. [Firma digital: en la realidad](#20)
+1. [Firma digital: punto de vista legal](#31)
+1. [Resumen](#41)
+
+# Funciones de hash
+<!-- _class: lead -->
+
+## Funciones de hash criptográficas
+<!-- _class: with-info -->
+
+Funciones hash criptográficas son aquellas que:
+
+- Son funciones resumen: comprimen la entrada a una salida de menor longitud
+- **Propiedades adicionales**:
+    - Son fáciles y rapidas de calcular
+    - Dado un resumen, no es posible calcular el mensaje original
+    - No es factible encontrar dos mensajes con el mismo resumen
+
+Fíjate: un hash no incluye información del documento de entrada, no puede deshacerse y no depende de una clave criptografíca
+
+> https://en.wikipedia.org/wiki/Cryptographic_hash_function
+
+
+## Ejemplos de valores de hash
+
+![center w:25em](https://upload.wikimedia.org/wikipedia/commons/2/2b/Cryptographic_Hash_Function.svg)
+
+<!--
+Ejemplos de valores de hash:
+
+- el primero "resume" un texto "Fox" en otro más largo: la función de hash siempre tiene la misma longitud, incluso si el texto es corto: SHA-256 siempre dará un resumen de 256 bits sea como sea el texto de entrada.
+- Los demás son variaciones del mismo texto de entrada. Fíjate: pequeñas variaciones dan un hash diferente a simple vista
+
+¿Qué tenemos que cambiar en "The red fox jumps over the blue dog" para que tenga el mismo hash? Es decir, para que el hash no detecte el cambio. Ya que el texto es mayor de 256 bits, sabemos seguro que habrá otro texto que tendrá el mismo resumen. Pero lo único que podemos hacer es probar cambios uno y otro hasta tener suerte!
+-->
+
+## Requisitos formales de una función de hash criptográfica
+
+- Que sea **rápida** de calcular
+
+- **Resistencia a la preimagen**: dado un hash, encontrar el mensaje exacto que tiene ese hash tiene que ser difícil. Son funciones en un solo sentido
+- **Resistencia a la colisión**: encontrar dos mensajes diferentes con el mismo hash tiene que ser difícil
+- **Sensibilidad** / efecto avalancha: un cambio mínimo en el mensaje produce un valor hash completamente diferente
+
+La única forma de encontrar preimágenes o colisiones tiene que ser la fuerza bruta
+
+> https://en.wikipedia.org/wiki/Cryptographic_hash_function#Properties
+
+## Ejemplos de funciones de hash
+
+
+- MD5: utilizado mucho tiempo. [No es resistente a colisión desde 2008](https://www.win.tue.nl/hashclash/rogue-ca/). Es decir, está roto y **no hay que usarlo**
+- SHA-1: 160 bits. [En la actualidad se considera roto](https://empresas.blogthinkbig.com/nuevo-ataque-sha-1-explicacion/)
+- SHA-2: longitudes de 256 y 512 bits. Son conocidos como **SHA-256 y SHA-512**.
+- SHA-3: longitudes entre 224 y 512 bits.
+
+Los hashes recomendados en la actualidad son el SHA-2 (cualquier de las dos variantes) y el SHA-3
+
+---
+<!-- _class: with-warning -->
+
+Ejemplos de valores de hash MD5, SHA256 y SHA512 de esta presentación:
+
+```
+> ms5sum 03-hashes.md
+c99fe5e1ec0f637d77dddb32b1679c21  03-hashes.md
+
+> sha256sum 03-hashes.md
+06efc998ac8ad6867b4f1a9ee94d903503c0c52e6f1184a9561000eb303844ec  03-hashes.md
+
+> sha512sum 03-hashes.md 
+64b378a66da3714e723ac8469525ac7b460d7ad7ff348b9453d177907a14fd4a
+445a11c07206b7df599bcf3ec70475a6e89b4bbfe605c928c36494ff1a31311d  03-hashes.md
+```
+
+Si calculas los valores de hash del archivo, verás que no coinciden. Eso es porque no se puede calcular el hash de un archivo, meter el hash en el propio archivo, volver a calcular el hash ¡y que dé lo mismo! Recuerda: cualquier cambio (como por ejemplo meter el hash) cambia totalmente el hash
 
 # Firma digital: ¿qué es?
 <!-- _class: lead -->
@@ -279,7 +370,7 @@ Fíjate en el ejemplo:
 
 ## Firma cualificada
 
-Firma electrónica aceptada por la administración
+Firma electrónica aceptada por la administración como equivalente a la firma manuscrita
 
 ¡No tiene por qué ser la mejor!
 
@@ -297,6 +388,14 @@ Además del contenido del documento, es necesario asegurar cuándo se ha realiza
 - Que la firma era válida en el momento del firmado
 
 Veremos más detalles técnicos en el tema de certificados
+
+## ¿Firma en varias páginas?
+
+Observa: una firma digital valida el documento completo, no las páginas separadas
+
+Aún así, es posible mostrar una "prueba de firma digital" en todas las páginas
+
+![bg left](images/firma/varias-paginas.png)
 
 ## Usos
 
@@ -333,6 +432,17 @@ The time complexity and cost for the selected key lengths (Intel E5-2650 v3@3GHz
 - Declaración electrónica que vincula los datos de validación de un sello con una persona jurídica y confirma el nombre de esa persona
 - Declaración que permite autenticar un sitio web y vincula el sitio web con la persona física o jurídica a quien se ha expedido el certificado
 - La norma exige que se gestione el ciclo de vida de un certificado. Revocaciones, cambios de estado...
+
+# Resumen
+<!-- _class: lead -->
+
+---
+
+- Las funciones de hash reducen un mensaje de cualquier tamaño (pocos bits o gigas de información) en un conjunto de pocos bytes
+- SHA-2 (SHA-256 ó SHA-512) es el más usado. Debe evitarse MD5 o SHA-1
+- Firma digital: cifrado con clave asimétrica del hash de un mensaje, para probar autoría e integridad
+- Firma cualificada: la administración la considera equivalente a la firma manuscrita
+- Problema por resolver: ¿cómo publicamos nuestras claves públicas?
 
 # ¡Gracias!
 <!-- _class: last-slide -->
