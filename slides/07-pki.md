@@ -149,9 +149,8 @@ Esto es el [protocolo TLS](A2-protocolos.html)
 ![bg right:50%](images/pki/ssl.gif)
 
 ## Ejemplo configuración TLS (1)
-<!-- _class: center two-columns -->
 
-![](images/pki/tls-example1.png)
+![left bg w:35em](images/pki/tls-example1.png)
 
 - ECDHE: Elliptic Curve Diffie-Hellman, ephimeral
 - RSA: authentication usando RSA
@@ -159,9 +158,8 @@ Esto es el [protocolo TLS](A2-protocolos.html)
 - SHA256: algoritmo de hash usado
 
 ## Ejemplo configuración TLS (2)
-<!-- _class: two-columns -->
 
-![](images/pki/tls-example2.png)
+![left bg w:35em](images/pki/tls-example2.png)
 
 - TLS: la clave la decide el servidor y la envía cifrada con RSA, no hay D-H
 - AES_128_GCM: AES con claves de 128 bits en modo GCM
@@ -403,7 +401,7 @@ Por ejemplo, la CA del proxy/firewall de la empresa, para poder descifrar las co
 [Estándar internacional](https://www.itu.int/rec/T-REC-X.509) que siguen los certificados de la PKI. Elementos:
 
 - Certificado:
-    - Versión, número de serio, ID de algoritmos...
+    - Versión, número de serie, ID de algoritmos...
     - Nombre de la persona que lo emite (*issuer*): autoridad de confianza
     - Periodo de validez: desde una fecha hasta una fecha
     - Nombre del identidad (*subject*)
