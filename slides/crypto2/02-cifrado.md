@@ -516,7 +516,7 @@ Problema de la criptografía de clave pública: ¿cómo hacemos llegar nuestra c
     - Intercambiar una clave secreta: Diffie-Hellman (y su versión moderna ECDH)
 1. Una vez que tenemos la clave, seguimos cifrando con **cifrando simétrico** AES
 
-![bg right:50%](images/https.png)
+![bg right:50%](../images/conceptos/https.png)
 
 > https://blog.bytebytego.com/p/how-https-works-youtube-diagram-as
 
