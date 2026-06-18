@@ -60,8 +60,8 @@ Es decir, no repudio = autenticidad + integridad
 
 **En Internet, es fácil hacerse pasar por otra persona**
 
-- Man in the middle
-- Impersonation
+- *Man in the middle*
+- *Impersonation*
 
 Autenticación: proceso de confirmar que alguien es quien dice ser
 
@@ -133,7 +133,7 @@ Image ![label](https://technofaq.org/wp-content/uploads/2015/06/idtheft830-1024x
 ## Certificados
 <!-- _class: with-info -->
 
-[Certificado](04-pki.md). Incluye: (1) Identidad, (2) Clave pública de la indentidad, (3) posibles roles, (4) firmado por una autoridad de certificación
+[Certificado](04-pki.md). Incluye: (1) Identidad, (2) Clave pública de la identidad, (3) posibles roles, (4) firmado por una autoridad de certificación
 
 Esto funciona bien en servidores: [HTTPS](A2-protocolos.html) siempre autentica servidores con certificados
 
@@ -227,9 +227,8 @@ Las preguntas personales no son un buen mecanismo de autenticación: baja fortal
 -->
 
 ## Alto que *tenemos*
-<!-- _class: center -->
 
-![ w:15em](https://cdn.mos.cms.futurecdn.net/gQod8s5hcRCyuY4XnXWXuf-970-80.jpg) ![ w:15em](https://www.androidguys.com/wp-content/uploads/2016/05/google-authenticator-696x522.jpg)
+![center w:15em](https://cdn.mos.cms.futurecdn.net/gQod8s5hcRCyuY4XnXWXuf-970-80.jpg) ![ w:15em](https://www.androidguys.com/wp-content/uploads/2016/05/google-authenticator-696x522.jpg)
 
 - USB Keys
 - Google Authenticator instalado en un teléfono
@@ -281,13 +280,11 @@ Vulnerabilidades de *algo que somos*:
 
 - Durante el proces de registro de datos biométricos, puede estar registrándose un atacante
 - [La biometría no sea una ciencia exacta](https://www.ncsc.gov.uk/collection/biometrics/how-biometrics-are-attacked)
-
-![center](https://www.idrnd.ai/wp-content/uploads/2021/05/Liveness-Presentation-Attacks-e1619997533456.jpg.webp)
-
 - Si algo va mal... **no podemos cambiar nuestros datos biométricos**
-- Deepfakes y simulación de voces
+- [Deepfakes](https://noticias.bidcom.com.ar/deepfakes-con-ia-que-es-y-como-distinguir-lo-real-de-lo-falso-en-internet/) y simulación de voces
 
 > https://www.idrnd.ai/can-biometric-data-be-stolen/
+> https://insights2techinfo.com/deepfake-a-deep-learning-approach-in-artificial-content-generation/
 
 ## Localización y otras anomalías
 
