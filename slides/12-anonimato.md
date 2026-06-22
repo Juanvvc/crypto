@@ -36,10 +36,10 @@ En este tema veremos cómo usar la criptografía para ofrecer el servicio de ano
 <!-- _class: cool-list toc -->
 
 1. [Comunicaciones anónimas](#4)
-1. [Redes mix/onion: Tor](#22)
-1. [Servicios onion](#33)
-1. [Sistema de verificación de edad para el acceso a contenidos en línea](#46)
-1. [Referencias](#51)
+1. [Redes mix/onion: Tor](#23)
+1. [Servicios onion](#34)
+1. [Sistema de verificación de edad para el acceso a contenidos en línea](#47)
+1. [Referencias](#52)
 
 # Comunicaciones anónimas
 <!-- _class: lead -->
@@ -89,7 +89,7 @@ Muchos de estos cables submarinos [son propiedad de Google](https://cloud.google
 
 ---
 
-![bg right](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/640px-BalticServers_data_center.jpg)
+![bg right h:80%](images/anom/dataserver2.png)
 
 Gran parte de la *cloud* pertenece a Amazon (AWS), o a Microsoft (Azure), o a Google (GCP), o Alibaba
 
@@ -269,9 +269,33 @@ La anonimización de bases de datos está fuera del área de estudio, pero usamo
 
 Problema: ¿seguro que la VPN no está logueando qué hacemos?
 
+## Mullvad, anonimato dentro y fuera de la red
+<!-- _class: two-columns-33 -->
+
+![h:15em](images/anom/mullvad.png)
+
+
+- VPN, usuarios identificados solo con un número
+- No guardan información de usuario, ni siquiera facturación
+- No hay tipos de usuarios
+- No se guardan datos de pagos:
+    - Prepagos: se paga antes del servicio
+    - Sistemas de pago anónimos: bitcoin o incluso moneda real por correo
+    - No guardan logs (aunque esto lo dicen todos...)
+
+> https://mullvad.net/en/vpn Es la que se usa en Firefox VPN
+
+<!-- 
+
+¡Esto no es publicidad de esta VPN! Simplemente la estoy usando como ejemplo
+
+Fíjate: los usuarios pueden saber que realmente son anónimos porque cuando envían dinero lo hacen simplemente con su número de usuario
+
+-->
+
 ## Solución 4: Mix Networks
 
-![center w:20em](https://upload.wikimedia.org/wikipedia/commons/4/4f/Red_de_mezcla.png)
+![center w:18em](https://upload.wikimedia.org/wikipedia/commons/4/4f/Red_de_mezcla.png)
 
 - "Encadenar VPNs entre sí": [Mix Network](https://en.wikipedia.org/wiki/Mix_network)
 - Propuestas por [David Chaum](https://en.m.wikipedia.org/wiki/David_Chaum) en 1981: [Untraceable electronic mail, return addresses, and digital pseudonyms](https://doi.org/10.1145%2F358549.358563), Chaum, David L. Communications of the ACM. (1981)
