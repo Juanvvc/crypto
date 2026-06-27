@@ -1,0 +1,38 @@
+name: Build release
+
+on:
+  push:
+    tags:
+      - '[0-9][0-9][0-9][0-9]*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout all the submodules
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Create output directory
+        run: mkdir release
+
+      - name: Marp Build PDF (slides folder)
+        uses: docker://marpteam/marp-cli:v3.4.0
+        with:
+          args: -I slides/ -o release/ --no-config --theme marp-viu --theme-set slides-support/slides/themes -pdf --allow-local-files --html --pdf-notes
+        env:
+          MARP_USER: root:root
+
+      - name: Create zip file
+        run: cd release && zip "$GITHUB_REF_NAME-cripto.zip" *pdf
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME presentación en PDF" \
+            --notes "Presentación en formato PDF de Criptografía, version $GITHUB_REF_NAME" \
+            "release/$GITHUB_REF_NAME-securecoding.zip"
