@@ -51,7 +51,7 @@ Esta presentación está en inglés
 1. [Types of Business Email Compromise (BEC)](#13)
 1. [Investigating a BEC](#22)
 1. [Prevention](#33)
-1. [References](#53)
+1. [References](#52)
 
 # Business Email Compromise (BEC)
 <!-- _class: lead -->
@@ -374,18 +374,6 @@ Notice: you MUST check digital signatures, is not not enough to see them: they c
 - Tell your bank to check the identity of international money transfers
 
 ![bg left](images/BEC/training.png)
-
-## External confirmation
-
-You can check the reputation of a domain in several sites:
-
-- https://emailrep.io
-- https://email-checker.net
-- https://tools.emailhippo.com
-- https://hunter.io/email-verifier
-- https://trumail.io
-
-Warning: the response from these services is just a suggestion!
 
 ## Threat intelligence
 

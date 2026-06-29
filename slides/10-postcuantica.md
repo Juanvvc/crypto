@@ -337,16 +337,13 @@ Hay interés y dinero en demostrar la supremacía cuántica, toma cualquier noti
 > [How to Detect Quantum Bullshit ](https://www.youtube.com/watch?v=uKVJEuVkPvw) Sabine Hossenfelder, Junio 2024
 
 ## Estado actual
-<!-- _class: with-success smaller-font -->
 
-- El computador [Google Sycamore](https://www.sciencealert.com/google-quantum-computer-is-47-years-faster-than-1-supercomputer) tiene 70 qubits. Agosto de 2023.
-- El procesador cuántico [IBM Osprey](https://en.wikipedia.org/wiki/IBM_Osprey) tiene 433 qbits y tienen previsto alcanzar [los 1000 qbits en 2027](https://www.ibm.com/roadmaps/quantum/)
-- [Google](https://cloud.google.com/blog/products/compute/ionq-quantum-computer-available-through-google-cloud), [IBM](https://quantum.ibm.com/), [Microsoft](https://azure.microsoft.com/es-es/products/quantum/) y [Amazon](https://aws.amazon.com/braket/) anuncian computación cuántica como servicio disponible en la nube
-- Se estima (2025) que se necesitan [un millón de qbits para romper RSA en una semana](https://thequantuminsider.com/2025/05/24/google-researcher-lowers-quantum-bar-to-crack-rsa-encryption/)
+[Google](https://cloud.google.com/blog/products/compute/ionq-quantum-computer-available-through-google-cloud), [IBM](https://quantum.ibm.com/), [Microsoft](https://azure.microsoft.com/es-es/products/quantum/) y [Amazon](https://aws.amazon.com/braket/) anuncian computación cuántica como servicio disponible en la nube
 
-![center](images/quantum/amazon-braket.png)
+![center w:20em](images/quantum/2026.png)
 
-Es probable que se alcance la supremacía cuántica en un futuro cercano
+
+> https://www.spinquanta.com/news-detail/quantum-computers-the-revolutionary-technology-transforming-computing-in-2026
 
 <!--
 Fíjate:
@@ -358,6 +355,11 @@ Fíjate:
 -->
 
 ---
+<!-- _class: with-success -->
+
+
+Se estima (2025) que se necesitan [un millón de qbits para romper RSA en una semana](https://thequantuminsider.com/2025/05/24/google-researcher-lowers-quantum-bar-to-crack-rsa-encryption/)
+
 
 Dos referencias recientes, "una de cal y otra de arena":
 
@@ -365,6 +367,8 @@ Dos referencias recientes, "una de cal y otra de arena":
 - A lo mejor 128 bits son suficientes: [Quantum Computers Are Not a Threat to 128-bit Symmetric Keys](https://words.filippo.io/128-bits/) **La criptografía cuántica podría no afectar al cifrado simétrico**
 
 Nota: "podría", "se estima"... en realidad no hay consenso
+
+Es probable que se alcance la supremacía cuántica en un futuro cercano
 
 
 # Criptografía Post-cuántica
@@ -723,13 +727,13 @@ Los sitemas híbridos utilizan tanto criptografía cuánticas como post-cuántic
 
 AWS, Signal y otros ya permiten conectarse a sus servidores usando criptografía post-cuántica
 
-- Signal: https://signal.org/blog/pqxdh/
+- Cloudflare: [100% post-cuántico para 2029](https://blog.cloudflare.com/post-quantum-roadmap/)
 - Amazon AWS: https://aws.amazon.com/security/post-quantum-cryptography/
 - Google: https://security.googleblog.com/2024/08/post-quantum-cryptography-standards.html
 - Microsoft: https://www.microsoft.com/en-us/research/project/post-quantum-tls/
 - Linux/OpenSSH: [Open Quantum Safe](https://openquantumsafe.org/)
 - [Chrome soporta ML-KEM desde la versión 131](https://security.googleblog.com/2024/09/a-new-path-for-kyber-on-web.html) (noviembre 2024)
-- [Se estima que el 35% del tráfico mundial de Internet](https://radar.cloudflare.com/adoption-and-usage#post-quantum-encryption-adoption) (Cloudflare, 2025) ya usa criptografía post-cuánticos
+- [Se estima que el 70% del tráfico mundial de Internet](https://radar.cloudflare.com/post-quantum) (Cloudflare, 2026) ya usa criptografía post-cuántica
 
 # Resumen y referencias
 <!-- _class: lead -->
@@ -755,9 +759,9 @@ Criptografía post-cuántica:
 - [Recomendaciones para una transición postcuántica segura](https://www.ccn.cni.es/index.php/es/docman/documentos-publicos/boletines-pytec/495-ccn-tec-009-recomendaciones-transicion-postcuantica-segura/file). CCN-TEC 009. Diciembre 2022
 - [How Quantum Computers Break Encryption | Shor's Algorithm Explained ](https://www.youtube.com/watch?v=lvTqbM5Dq4Q)
 - [Deep dive into a post-quantum key encapsulation algorithm](https://blog.cloudflare.com/post-quantum-key-encapsulation/), Goutam Tamvada, Sofía Celi, 2022
-- [The state of the post-quantum Internet](https://blog.cloudflare.com/pq-2024/), Bas Westerbaan. Marzo 2024
 - [A look at the latest post-quantum signature standardization candidates](https://blog.cloudflare.com/another-look-at-pq-signatures/), Bas Westerbaan, Luke Valenta. Noviembre 2024
 - [Conventional cryptography is under threat. Upgrade to post-quantum cryptography with Cloudflare Zero Trust](https://blog.cloudflare.com/post-quantum-zero-trust/). Cloudflare, Marzo 2025
+- [Cloudflare targets 2029 for full post-quantum security](https://blog.cloudflare.com/post-quantum-roadmap/)
 
 
 ---
@@ -767,7 +771,9 @@ Generales sobre computación cuántica:
 - [Quantum Computing explained](https://www.nist.gov/quantum-information-science/quantum-computing-explained) NIST, 2025
 - [What is a Qubit? - A Beginner's Guide to Quantum Computing](https://www.youtube.com/watch?v=90za6mazNps)
 - [Quantum computing for the determined](https://www.youtube.com/playlist?list=PL1826E60FD05B44E4)
-- [How to Detect Quantum Bullshit](https://www.youtube.com/watch?v=uKVJEuVkPvw), Sabine Hossenfelder 2024 
+- [How to Detect Quantum Bullshit](https://www.youtube.com/watch?v=uKVJEuVkPvw), Sabine Hossenfelder 2024
+- [Quantum Computers: The Revolutionary Technology Transforming Computing in 2026](https://www.spinquanta.com/news-detail/quantum-computers-the-revolutionary-technology-transforming-computing-in-2026)
+
 
 
 # ¡Gracias!
