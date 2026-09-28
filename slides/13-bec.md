@@ -165,6 +165,18 @@ There is movie about his life: Je Compte sur Vous
 - Some of the sample email messages have subjects containing words such as request, payment, transfer, and urgent, among others
 -->
 
+## How it happens
+
+- **Phishing emails**:
+    - Employee Awareness gaps
+- **Direct account compromise**:
+    - Weak passwords
+    - No MFA
+    - Legacy protocols
+- **Audit issues**:
+    - Mailbox takeover
+    - Unmonitored Accounts
+
 ## BEC process
 
 - The attacker impersonates a party sending a series of spoofed emails
@@ -189,7 +201,6 @@ Question: this only work in a very precise moment: near the end of the service, 
 If the attacker infiltrates the infrastructure, most probably, all real emails between the two parties are going to "disappear". Check for automatic mail rules!. Beware: the compromised infrastructure maybe the victim's infrastructure or the other end of the communication!
 
 -->
-
 
 ## Mail in the middle
 
@@ -434,11 +445,33 @@ Image source: > https://statics.esputnik.com/photos/shares/Blog/images/AMP/image
 
 -->
 
+## Envelopes and emails
+
+![bg left w:100%](images/BEC/email-headers.png)
+
+The email protocol is SMTP
+
+There is an envelope, many headers and the body (ww or w/o attachments)
+
+Most email clients only show the body and some headers, but not the envelope
+
+Notice: the sender and receivers in the envelope are real, the ones in the header maybe not
+
+Impersonation: setting any fake address in the header is "easy"
+
+> https://www.mybluelinux.com/what-is-email-envelope-and-email-header/
+
+<!--
+
+Legitimate reasons for not matching addresses in the header and envelope: https://stackoverflow.com/questions/1750194/why-does-email-need-an-envelope-and-what-does-the-envelope-mean   
+
+-->
+
 ## SPF
 
 Sender: the DNS includes **the list of IP addresses of email servers** allowed to send emails "from" the domain
 
-Receiver: check if the IP of the server that sent an email is authorized
+Receiver: check in the DNS if the IP of the email sender is authorized to send emails on behalf of the sender (**envelope**)
 
 ![bg right:60% w:100%](https://miro.medium.com/max/700/1*sfV9EFiQJ_1v7FWu9uvF8A.png)
 
@@ -448,7 +481,9 @@ Receiver: check if the IP of the server that sent an email is authorized
 
 ---
 
-![](images/BEC/dns-txt-universidadviu.jpg)
+![center w:30em](images/BEC/dns-txt-universidadviu.jpg)
+
+> https://mxtoolbox.com/SuperTool.aspx?action=mx%3auniversidadviu.com&run=toolpage
 
 <!--
 
@@ -462,7 +497,7 @@ Command line: dig universidadviu.com TXT
 <!-- _class: with-warning -->
 
 ```
-> dig universidadviu.TXT
+> dig universidadviu.com TXT
 ...
 universidadviu.com. TXT "v=spf1 mx ip4:5.57.227.88 include:spf.planeta.es include:_spf.explore-blue.com ~all"
 ...
@@ -570,12 +605,12 @@ Google uses another DKIM signature that uses other headers. This is probably a s
 
 > https://mailarchive.ietf.org/arch/msg/apps-discuss/_blROpC5GpEPk96nBqKoNUaO5rg/
 
-## Domain-based Message Authentication, Reporting & Conformance
+## DMRC: Domain-based Message Authentication, Reporting & Conformance
 
 ![center](https://dmarc.org/wp-content/uploads/2015/02/DMARC-2015-logo-small-202x110.png)
 
 - An email authentication, policy, and reporting protocol
-- It **builds on the widely deployed SPF and DKIM protocols**
+- SPF + DKIM + check envelope and from header match
 - With DMARC you can tell the world how to handle the unauthorized use of your email domains by instituting a policy in your DNS
     - `p=none`: monitors your email traffic. No further actions are taken.
     - `p=quarantine`: sends unauthorized emails to the spam folder.
@@ -589,14 +624,22 @@ Google uses another DKIM signature that uses other headers. This is probably a s
 
 > https://www.agari.com/blog/pros-cons-dmarc-reject-vs-quarantine
 
+## BIMI: Brand Indicators for Message Identification
+
+Graphically shows to the user that the email passes DMARC
+
+It is configured in the DNS, fter a certification process
+
+![center w:30em](images/BEC/BIMI.png)
+
 ## Email authentication: summary
 <!-- _class: smaller-font -->
 
 Technology|Use|If not configured...
 --|--|--
-SPF|Check if the IP is authorized to send an email from the domain|Anyone in the Internet can send an email "from" mycompany.com
-DKIM|Digital signature of emails sent from a domain|Anyone in the middle could change emails sent from mycompany.com
-DMARC|Inform receivers about the recommended actions|Receivers "don't know what to do" if a email from mycompany.com doesn't pass SPF or DKIM
+SPF|Check the IP of the sender is allowed to send emails from this domain (envelope)|Anyone in the Internet can send an email "from" mycompany.com
+DKIM|Digital signature of emails sent from a domain (headers)|Anyone in the middle could change emails sent from mycompany.com
+DMARC|Check headers=envelope. Inform receivers about the recommended actions|Receivers "don't know what to do" if a email from mycompany.com doesn't pass SPF or DKIM
 -|-|Emails from mydomain.com are going to be classified as "spam" or "suspicious" automatically
 
 List of authorized IPs, public key and policies are announced in the domain's DNS entry
@@ -610,16 +653,30 @@ Do not whitelist emails "from mycompany.com" if mycompany.com has not configured
 ## The bad news...
 
 - PGP is rarely used in real life
-- Not all companies implement SPF or DKIM, but this is changing fast
 - These mechanisms do not protect against an email sent from `macdonalds.com`: the attackers can configure SPF and DKIM too!
-- SPF and DKIM only authenticate from the sending server to the receiving server! These technologies do not detect if a legit account is compromised
+- "*SPF passed*" means the envelope is allowed to send on behalf of that domain, **not the header**
+- "*DMARC passed*" means that all headers are ok, but it says nothing about the body: **the email can still contain malware**
+
+```
+Delivered-To: juan.vera@professor.universidadviu.com
+(...)
+Received: from out208-194.dm.aliyun.com (...)
+Received-SPF: pass (google.com: domain of prod@aliyun.com designates 340.505.208.394 as permitted sender)
+...
+From: "Paul" <prod@kairo.com>
+Return-Path: "Paul" <prod@aliyun.com>
+To: <juan.vera@professor.universidadviu.com>
+```
 
 <!--
+
 - Los malos pueden configurar también sus servidores
 - estos mecanismos no te protegerán contra direcciones "parecidas"
 - SPF y DKIM solo autentican desde el servidor. ¿Quién estaba realmente escribiendo el mensaje?
     - Si el atacante ha conseguido crear cuentas: b0ss@company.com también pasará el DKIM de company.com
     - Si el atacante ha conseguido las credenciales de boss@company.com pasará el DKIM de company.com
+
+Notice: the envelope is not shown by most email clients, we have to check directly in the SMTP server of inspect some of the headers that the server added. The SPF checks the envelope, and we can find the domain of the envelope there. Notice that, in the example, envelope and from header do not match
 -->
 
 ## Recommendations
