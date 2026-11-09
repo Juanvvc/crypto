@@ -166,6 +166,21 @@ Veremos que claves de 256 bits es el estándar actual para tamaño de clave
 - **Clave asimétrica**: claves diferentes para cifrar (pública) y descifrar (privada) un mensaje $m$. El emisor debe conoce la clave pública del receptor. Ejemplo: RSA
 -->
 
+---
+
+Característica|Cifrado de clave secreta|Cifrado de clave pública
+--|--|--
+Eficiencia|Muy rápido|Lento
+Claves|1 (secreta, compartida)|2 (una pública y otra privada)
+Tamaño de clave|256 bits|15360 bits (RSA), 512 bits (curvas elípticas)
+Servicios|Confidencialidad|Intercambio de claves simétricas (Diffie-Hellman), firma digital (RSA)
+Ejemplos|**AES**, ChaCha|**RSA**, ECDSA, ECDH
+
+<!--
+ECDSA: Elliptic Curve DSA
+ECDH: Elliptic Curve Diffie-Hellman
+-->
+
 
 # Cifrado simétrico: AES
 <!-- _class: lead -->
@@ -550,13 +565,14 @@ Cada persona tiene dos claves:
 
 ---
 
-Característica|Cifrado simétrico|Cifrado de clave pública
+Característica|Cifrado de clave secreta|Cifrado de clave pública
 --|--|--
 Eficiencia|Muy rápido|Lento
 Claves|1 (secreta, compartida)|2 (una pública y otra privada)
 Tamaño de clave|256 bits|15360 bits (RSA), 512 bits (curvas elípticas)
 Servicios|Confidencialidad|Intercambio de claves simétricas (Diffie-Hellman), firma digital (RSA)
-Ejemplos|AES, ChaCha|RSA, ECDSA, ECDH
+Ejemplos|**AES**, ChaCha|**RSA**, ECDSA, ECDH
+
 
 <!--
 ECDSA: Elliptic Curve DSA
